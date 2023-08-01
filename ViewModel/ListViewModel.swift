@@ -26,7 +26,7 @@ class ListViewModel: ObservableObject {
         self.isLoadingPage = true
             
      
-        var apiParams: [String: Any] = [:]
+        let apiParams: [String: Any] = [:]
 
         // If the list is not empty and the pagination identifier is nil then return as there is no more data to fetch
         if(self.listData.ids_array.count > 0 && apiParams["pagination_identifier"] == nil) {
