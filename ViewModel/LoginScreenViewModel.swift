@@ -7,7 +7,6 @@
 
 
 import Foundation
-import SwiftUI
 
 // A struct that represents the meta data of the list
 struct LoginStruct: Codable {
