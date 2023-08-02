@@ -11,30 +11,32 @@ import SwiftUI
 struct TermsBottomStrip: View {
     @Environment(\.openURL) var openURL
     
+    
     var body: some View {
-        HStack{
-            Text("By continuing, you're agreeing to the truesparrow's ")
-                .foregroundColor(Color("T&CPrimary"))
-                .font(.custom("Nunito-SemiBold" ,size: 12))
-            + Text("Terms and Conditions")
-                .foregroundColor(Color("T&CHighlight"))
-                .font(.custom("Nunito-SemiBold" ,size: 12))
-                .underline()
-            //                .onTapGesture{
-            //                    openURL(URL(string: "www.truesparrow.com")!)
-            //                }
-            + Text(" and ")
-                .foregroundColor(Color("T&CPrimary"))
-                .font(.custom("Nunito-SemiBold" ,size: 12))
-            + Text("Privacy Policy")
-                .foregroundColor(Color("T&CHighlight"))
-                .font(.custom("Nunito-SemiBold" ,size: 12))
-                .underline()
-            //                .onTapGesture{
-            //                    openURL(URL(string: "www.truesparrow.com")!)
-            //                }
-        }
+        let termsText = Text("[Terms and Conditions](https://truesparrow.com)")
+            .font(.custom("Nunito-SemiBold" ,size: 12))
+            .underline()
+            .foregroundColor(Color("TermsHighlight"))
+            .accessibilityLabel(Text("txt_terms"))
         
+        let privacyText = Text("[Privacy Policy](https://truesparrow.com)")
+            .font(.custom("Nunito-SemiBold" ,size: 12))
+            .underline()
+            .foregroundColor(Color("TermsHighlight"))
+            .accessibilityLabel(Text("txt_privacy"))
+        
+        
+        let agreementText = Text("By continuing, you're agreeing to the truesparrow's ")
+            .foregroundColor(Color("TermsPrimary"))
+            .font(.custom("Nunito-SemiBold" ,size: 12))
+        
+        let andText = Text(" and ")
+            .foregroundColor(Color("TermsPrimary"))
+            .font(.custom("Nunito-SemiBold" ,size: 12))
+
+        return HStack{
+            agreementText + termsText + andText + privacyText
+        }
     }
 }
 

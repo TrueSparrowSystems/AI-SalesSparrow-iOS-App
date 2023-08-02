@@ -31,6 +31,18 @@ final class SalesSparrowUITests: XCTestCase {
 
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
+    
+    func testLoginScreen() throws {
+        let app = XCUIApplication()
+        app.launchArguments = ["isRunningUITests"]
+        app.launch()
+        
+        let timeout = 2
+        let addButton = app.buttons["btn_connect_salesforce-btn_connect_salesforce"]
+        XCTAssertTrue(addButton.waitForExistence(timeout: TimeInterval(timeout)))
+        addButton.tap()
+        
+    }
 
     func testLaunchPerformance() throws {
         if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {

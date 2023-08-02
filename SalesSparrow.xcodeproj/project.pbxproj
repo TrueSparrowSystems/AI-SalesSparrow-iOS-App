@@ -58,6 +58,8 @@
 		6DBB50732A77A69100B58F88 /* BaseRepositortTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBB50722A77A69100B58F88 /* BaseRepositortTests.swift */; };
 		6DBB507A2A77C58300B58F88 /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBB50782A77C05800B58F88 /* LoginScreen.swift */; };
 		6DC43C4B2A78EC01002162FE /* TermsBottomStrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC43C4A2A78EC01002162FE /* TermsBottomStrip.swift */; };
+		6DC43C4D2A7A4ADE002162FE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6DC43C4C2A7A4ADE002162FE /* GoogleService-Info.plist */; };
+		6DC43C502A7A4B86002162FE /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 6DC43C4F2A7A4B86002162FE /* FirebaseCrashlytics */; };
 		A97561513E5508D62A2D5E4C /* Pods_SalesSparrow_SalesSparrowUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A561769BF628419998C917E /* Pods_SalesSparrow_SalesSparrowUITests.framework */; };
 		C437CE5A3DFBB0B0D45D330A /* Pods_SalesSparrow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 216D9F06D488828BC1022AFD /* Pods_SalesSparrow.framework */; };
 /* End PBXBuildFile section */
@@ -140,6 +142,7 @@
 		6DBB50722A77A69100B58F88 /* BaseRepositortTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRepositortTests.swift; sourceTree = "<group>"; };
 		6DBB50782A77C05800B58F88 /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		6DC43C4A2A78EC01002162FE /* TermsBottomStrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsBottomStrip.swift; sourceTree = "<group>"; };
+		6DC43C4C2A7A4ADE002162FE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		884DE3337F29F734C43B6ED4 /* Pods-SalesSparrowTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SalesSparrowTests.release.xcconfig"; path = "Target Support Files/Pods-SalesSparrowTests/Pods-SalesSparrowTests.release.xcconfig"; sourceTree = "<group>"; };
 		AD2704B5DE5C503B42A9F4E3 /* Pods-SalesSparrow.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SalesSparrow.debug.xcconfig"; path = "Target Support Files/Pods-SalesSparrow/Pods-SalesSparrow.debug.xcconfig"; sourceTree = "<group>"; };
 		CCFD66DA5D9BD43B8402F504 /* Pods_SalesSparrowTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SalesSparrowTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -152,6 +155,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C437CE5A3DFBB0B0D45D330A /* Pods_SalesSparrow.framework in Frameworks */,
+				6DC43C502A7A4B86002162FE /* FirebaseCrashlytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -250,6 +254,7 @@
 			isa = PBXGroup;
 			children = (
 				6DBB50692A77A41600B58F88 /* SalesSparrow.entitlements */,
+				6DC43C4C2A7A4ADE002162FE /* GoogleService-Info.plist */,
 				6DBB50682A77A30500B58F88 /* Info.plist */,
 				6D8C7CD92A779A97005D597E /* SalesSparrowApp.swift */,
 			);
@@ -413,6 +418,9 @@
 			dependencies = (
 			);
 			name = SalesSparrow;
+			packageProductDependencies = (
+				6DC43C4F2A7A4B86002162FE /* FirebaseCrashlytics */,
+			);
 			productName = SalesSparrow;
 			productReference = 6D8C7CD62A779A97005D597E /* SalesSparrow.app */;
 			productType = "com.apple.product-type.application";
@@ -487,6 +495,9 @@
 				Base,
 			);
 			mainGroup = 6D8C7CCD2A779A97005D597E;
+			packageReferences = (
+				6DC43C4E2A7A4B86002162FE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = 6D8C7CD72A779A97005D597E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -523,6 +534,7 @@
 				6D2CB5132A77CF570057C73F /* Nunito-BoldItalic.ttf in Resources */,
 				6D2CB5172A77CF570057C73F /* Nunito-Italic.ttf in Resources */,
 				6D2CB51A2A77CF570057C73F /* Nunito-BlackItalic.ttf in Resources */,
+				6DC43C4D2A7A4ADE002162FE /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -981,6 +993,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		6DC43C4E2A7A4B86002162FE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = exactVersion;
+				version = 10.13.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		6DC43C4F2A7A4B86002162FE /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6DC43C4E2A7A4B86002162FE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		6D8C7CE42A779A99005D597E /* SalesSparrow.xcdatamodeld */ = {

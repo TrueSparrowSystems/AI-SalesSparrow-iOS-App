@@ -12,6 +12,7 @@ struct LoginScreen: View {
     @EnvironmentObject var loginScreenViewModel : LoginScreenViewModel
     @Environment(\.openURL) var openURL
     @State var isLoginInProgress = false
+    @State var showError = false
     @EnvironmentObject var environment: Environments
     
     var body: some View {
@@ -76,30 +77,36 @@ struct LoginScreen: View {
                     
                     Button(action: {
                         isLoginInProgress = true
+                        showError = false
                         loginScreenViewModel.fetchSalesforceConnectUrl(onSuccess: {url in
                             openURL(URL(string: url)!)
                         }, onFailure: {
                             isLoginInProgress = false
+                            showError = true
                         })
                     }, label:{
                         HStack(alignment: .center, spacing: 0){
-                            Image("SalesforceIcon")
-                                .resizable()
-                                .frame(width: 26, height: 18)
-                            Text("Continue with Salesforce")
-                                .padding()
-                                .foregroundStyle(.white)
-                                .font(.custom("Nunito-Medium", size: 16))
-                            
+                            if(isLoginInProgress){
+                                ProgressView()
+                            }else{
+                                Image("SalesforceIcon")
+                                    .resizable()
+                                    .frame(width: 26, height: 18)
+                                Text("Continue with Salesforce")
+                                    .padding()
+                                    .foregroundStyle(.white)
+                                    .font(.custom("Nunito-Medium", size: 16))
+                            }
                             
                         }
-                        .padding(.horizontal, 24)
+                        .frame(maxWidth: .infinity, maxHeight: 46)
                         .background(
                             
                             LinearGradient(gradient: Gradient(stops: [.init(color: Color("LoginButtonSecondary"), location: 0), .init(color: Color("LoginButtonPrimary"), location: 4)]), startPoint: .top, endPoint: .bottom)
                             
                         )
                         .clipShape(RoundedRectangle(cornerRadius: 5))
+                        .accessibilityIdentifier("btn_connect_salesforce")
                     }
                     )
                     .disabled($isLoginInProgress.wrappedValue)
@@ -121,7 +128,12 @@ struct LoginScreen: View {
         }
         .onChange(of: environment.vars?["auth_code"], perform: { _ in
             print("in Login Screen on change : \(environment.vars?["auth_code"])")
-            loginScreenViewModel.authenticateUser(authCode: environment.vars?["auth_code"], onSuccess: {}, onFailure: {})
+            loginScreenViewModel.authenticateUser(authCode: environment.vars?["auth_code"], onSuccess: {
+                isLoginInProgress = false
+            }, onFailure: {
+                isLoginInProgress = false
+                showError = true
+            })
         })
         
     }
