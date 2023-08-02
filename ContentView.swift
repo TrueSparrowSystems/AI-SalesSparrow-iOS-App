@@ -11,11 +11,9 @@ import CoreData
 /// The main view of the app,
 struct ContentView: View {
     
-    // The managed object context for Core Data
     @Environment(\.managedObjectContext) private var viewContext
-    
+    @EnvironmentObject var userStateViewModel : UserStateViewModel
     @EnvironmentObject var environment: Environments
-    
     
     // The text entered by the user in the text field
     @State var text: String = ""
@@ -30,11 +28,16 @@ struct ContentView: View {
     @StateObject var loginScreenViewModel = LoginScreenViewModel()
     
     
-    
     /// The body of the view
     var body: some View {
         VStack{
-            LoginScreen()
+            if(!userStateViewModel.isUserLoggedIn){
+                LoginScreen()
+            }else{
+                NavigationView{
+                    CreateNoteScreen()
+                }
+            }
         }
         .onOpenURL { incomingURL in
             handleIncomingURL(incomingURL)

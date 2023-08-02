@@ -51,11 +51,12 @@ class LoginScreenViewModel: ObservableObject {
     func authenticateUser(authCode: String?, onSuccess : @escaping()-> Void, onFailure : @escaping()-> Void){
         
         guard !self.isLoginInProgress else {
-            //TODO: Remove this once the login api is implemented
-            onSuccess()
-            self.isLoginInProgress = false
             return
         }
+        //TODO: Remove this once the login api is implemented
+        onSuccess()
+        self.isLoginInProgress = false
+        
         self.isLoginInProgress = true
         
         ApiService().get(type: LoginStruct.self, endpoint: ""){
