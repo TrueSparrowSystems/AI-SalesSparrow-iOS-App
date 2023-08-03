@@ -12,6 +12,9 @@ struct AccountSearchView: View {
     @State private var searchText = ""
     var forAccountSearch: Bool = false
     
+    @Binding var isPresented: Bool // This binding will control the presentation of the sheet
+    var onAccountSelected: ((Account, Bool) -> Void)? // Callback function to handle account selection
+    
     var body: some View {
         VStack(spacing: 0) {
             // Top Bar
@@ -19,7 +22,7 @@ struct AccountSearchView: View {
                 Image(systemName: "magnifyingglass")
                 
                 TextField("Search Accounts", text: $searchText)
-                    .font(.custom("Nunito-Regular",size: 16))
+                    .font(.custom("Nunito-Regular", size: 16).weight(.regular))
                     .foregroundColor(Color("SearchPrimary"))
                     .opacity(0.8)
             }
@@ -46,7 +49,15 @@ struct AccountSearchView: View {
                                 .font(.custom("Nunito-Regular",size: 16))
                                 .foregroundColor(Color("LoginButtonPrimary"))
                                 .frame(width: 72.0, height: 28.0)
+                                .onTapGesture {
+                                    isPresented = false // Dismiss the sheet
+                                    onAccountSelected?(account, true) // Call the callback function with the selected account
+                                }
                         }
+                    }
+                    .onTapGesture {
+                        isPresented = false // Dismiss the sheet
+                        onAccountSelected?(account, false) // Call the callback function with the selected account
                     }
                 }
             }
@@ -58,8 +69,17 @@ struct AccountSearchView: View {
     }
 }
 
-struct AccountSearchView_Previews: PreviewProvider {
-    static var previews: some View {
-        AccountSearchView()
+struct CreateNoteView: View {
+    var account: Account?
+    
+    var body: some View {
+        VStack {
+            Text("Account Details page for \(account?.name ?? " ")")
+                .font(.custom("Nunito-Regular", size: 24))
+                .fontWeight(.bold)
+                .padding()
+            
+            // Add the rest of your content for the Create Note screen here...
+        }
     }
 }
