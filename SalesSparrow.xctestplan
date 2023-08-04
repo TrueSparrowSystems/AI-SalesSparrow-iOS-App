@@ -1,0 +1,35 @@
+{
+  "configurations" : [
+    {
+      "id" : "7DF2D845-4BDA-4CA7-A372-646F6BA8BE71",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:SalesSparrow.xcodeproj",
+      "identifier" : "6D8C7CD52A779A97005D597E",
+      "name" : "SalesSparrow"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:SalesSparrow.xcodeproj",
+        "identifier" : "6D8C7CEA2A779A9A005D597E",
+        "name" : "SalesSparrowTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:SalesSparrow.xcodeproj",
+        "identifier" : "6D8C7CF42A779A9A005D597E",
+        "name" : "SalesSparrowUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

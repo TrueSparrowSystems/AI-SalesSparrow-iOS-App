@@ -1,0 +1,31 @@
+{
+  "configurations" : [
+    {
+      "id" : "C1F1D36B-C5E4-414F-A74E-8F5A8F082259",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:SalesSparrow.xcodeproj",
+        "identifier" : "6D8C7CEA2A779A9A005D597E",
+        "name" : "SalesSparrowTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:SalesSparrow.xcodeproj",
+        "identifier" : "6D8C7CF42A779A9A005D597E",
+        "name" : "SalesSparrowUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

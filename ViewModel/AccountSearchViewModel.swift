@@ -7,20 +7,20 @@
 
 import Foundation
 
-struct Account: Identifiable {
+struct Account: Identifiable, Codable {
     let id: Int
     let name: String
 }
 
-class SearchAccountViewModel: ObservableObject {
+class AccountSearchViewModel: ObservableObject {
     @Published var listData: [Account] = []
     @Published var isLoadingPage = false
-
+    
     // A function that fetches the data for the list
     func fetchData() {
         guard !self.isLoadingPage else { return }
         self.isLoadingPage = true
-
+        
         // Simulate asynchronous data fetching with a delay
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.listData = [
@@ -82,6 +82,67 @@ class SearchAccountViewModel: ObservableObject {
     // A function that resets the data for the list
     func resetData() {
         self.listData.removeAll()
+    }
+    
+    // A function that handles search text changes and triggers an API call for search
+    func searchTextDidChange(_ searchText: String) {
+        // Filter the list based on the search text
+        if searchText.isEmpty {
+//            resetData() // If search text is empty, reset the list to show all accounts
+        } else {
+            searchAccounts(withText: searchText)
+        }
+    }
+    
+    private func searchAccounts(withText searchText: String) {
+        // Perform the API call for searching accounts
+        let searchUrl = "/api/v1/accounts"
+        let params: [String: Any] = ["q": searchText]
+
+        ApiService().get(type: [Account].self, endpoint: searchUrl, params: params) { [weak self] result, statusCode in
+            switch result {
+            case .success(let accounts):
+                DispatchQueue.main.async {
+                    self?.listData = accounts
+                }
+                
+            case .failure(let error):
+                self?.listData = [
+                    Account(id: 100, name: "Acme Corp"),
+                    Account(id: 200, name: "Tech Solutions Inc"),
+                    Account(id: 300, name: "Global Enterprises"),
+                    Account(id: 400, name: "Innovative Labs"),
+                    Account(id: 500, name: "Alpha Services"),
+                    Account(id: 600, name: "Dynamic Systems"),
+                    Account(id: 700, name: "Pioneer Tech"),
+                    Account(id: 800, name: "Swift Innovations"),
+                    Account(id: 900, name: "Fusion Technologies"),
+                    Account(id: 1000, name: "Apex Solutions"),
+                    Account(id: 1100, name: "Vanguard Inc"),
+                    Account(id: 1200, name: "Eagle Enterprises"),
+                    Account(id: 1300, name: "Matrix Corp"),
+                    Account(id: 1400, name: "Horizon Systems"),
+                    Account(id: 1500, name: "Orbit Technologies"),
+                    Account(id: 1600, name: "Stellar Services"),
+                    Account(id: 1700, name: "Venture Labs"),
+                    Account(id: 1800, name: "Infinite Innovations"),
+                    Account(id: 1900, name: "Nexa Solutions"),
+                    Account(id: 2000, name: "Futura Enterprises"),
+                    Account(id: 2100, name: "Synergy Tech"),
+                    Account(id: 2200, name: "Nova Systems"),
+                    Account(id: 2300, name: "Horizon Labs"),
+                    Account(id: 2400, name: "Equinox Technologies"),
+                    Account(id: 2500, name: "Galaxy Innovations"),
+                    Account(id: 2600, name: "Voyager Corp"),
+                    Account(id: 2700, name: "Eclipse Services"),
+                    Account(id: 2800, name: "Innova Solutions"),
+                    Account(id: 2900, name: "Apex Enterprises"),
+                    Account(id: 3000, name: "Swift Labs")
+                ]
+                print("Error loading data: \(error)")
+                // Handle error if needed
+            }
+        }
     }
 }
 

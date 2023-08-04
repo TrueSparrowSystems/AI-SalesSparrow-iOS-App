@@ -11,6 +11,12 @@
 		4B393FED2A7A890100572F66 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B393FEC2A7A890100572F66 /* HomeScreen.swift */; };
 		4B393FF22A7AAA2D00572F66 /* AccountSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B393FF12A7AAA2D00572F66 /* AccountSearch.swift */; };
 		4B393FF42A7AAAF600572F66 /* AccountSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B393FF32A7AAAF600572F66 /* AccountSearchViewModel.swift */; };
+		4B583BD82A7BBEF2005B97D0 /* TopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B583BD72A7BBEF2005B97D0 /* TopBar.swift */; };
+		4B583BDC2A7BE818005B97D0 /* AccountList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B583BDB2A7BE818005B97D0 /* AccountList.swift */; };
+		4B583BDE2A7BEB11005B97D0 /* BottomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B583BDD2A7BEB11005B97D0 /* BottomBar.swift */; };
+		4B5D36A12A7D0BAB002A6DB0 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 4B5D36A02A7D0BAB002A6DB0 /* FirebaseCrashlytics */; };
+		4B5D36A32A7D0BBD002A6DB0 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 4B5D36A22A7D0BBD002A6DB0 /* FirebaseCrashlytics */; };
+		4B5D36A52A7D0D1B002A6DB0 /* SalesSparrow.xctestplan in Resources */ = {isa = PBXBuildFile; fileRef = 4B5D36A42A7D0D1B002A6DB0 /* SalesSparrow.xctestplan */; };
 		6CCA3BABA0A693EB92C9B4C2 /* Pods_SalesSparrowTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCFD66DA5D9BD43B8402F504 /* Pods_SalesSparrowTests.framework */; };
 		6D2CB50B2A77CF570057C73F /* Nunito-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D2CB4FB2A77CF560057C73F /* Nunito-ExtraLightItalic.ttf */; };
 		6D2CB50C2A77CF570057C73F /* Nunito-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D2CB4FC2A77CF560057C73F /* Nunito-MediumItalic.ttf */; };
@@ -90,8 +96,12 @@
 		2B4F1FDE360243CED55CFB69 /* Pods-SalesSparrow.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SalesSparrow.release.xcconfig"; path = "Target Support Files/Pods-SalesSparrow/Pods-SalesSparrow.release.xcconfig"; sourceTree = "<group>"; };
 		4B393FE92A7A755100572F66 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4B393FEC2A7A890100572F66 /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
-		4B393FF12A7AAA2D00572F66 /* AccountSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSearch.swift; sourceTree = "<group>"; };
+		4B393FF12A7AAA2D00572F66 /* AccountSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSearch.swift; sourceTree = "<group>"; wrapsLines = 1; };
 		4B393FF32A7AAAF600572F66 /* AccountSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSearchViewModel.swift; sourceTree = "<group>"; };
+		4B583BD72A7BBEF2005B97D0 /* TopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBar.swift; sourceTree = "<group>"; };
+		4B583BDB2A7BE818005B97D0 /* AccountList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountList.swift; sourceTree = "<group>"; };
+		4B583BDD2A7BEB11005B97D0 /* BottomBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBar.swift; sourceTree = "<group>"; };
+		4B5D36A42A7D0D1B002A6DB0 /* SalesSparrow.xctestplan */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SalesSparrow.xctestplan; sourceTree = "<group>"; };
 		53DA3CE34E5D5B9A7563E443 /* Pods-SalesSparrow-SalesSparrowUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SalesSparrow-SalesSparrowUITests.debug.xcconfig"; path = "Target Support Files/Pods-SalesSparrow-SalesSparrowUITests/Pods-SalesSparrow-SalesSparrowUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		6A561769BF628419998C917E /* Pods_SalesSparrow_SalesSparrowUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SalesSparrow_SalesSparrowUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D2CB4FB2A77CF560057C73F /* Nunito-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
@@ -170,6 +180,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6CCA3BABA0A693EB92C9B4C2 /* Pods_SalesSparrowTests.framework in Frameworks */,
+				4B5D36A32A7D0BBD002A6DB0 /* FirebaseCrashlytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -178,6 +189,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A97561513E5508D62A2D5E4C /* Pods_SalesSparrow_SalesSparrowUITests.framework in Frameworks */,
+				4B5D36A12A7D0BAB002A6DB0 /* FirebaseCrashlytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,6 +214,9 @@
 			children = (
 				4B393FEC2A7A890100572F66 /* HomeScreen.swift */,
 				4B393FF12A7AAA2D00572F66 /* AccountSearch.swift */,
+				4B583BD72A7BBEF2005B97D0 /* TopBar.swift */,
+				4B583BDB2A7BE818005B97D0 /* AccountList.swift */,
+				4B583BDD2A7BEB11005B97D0 /* BottomBar.swift */,
 			);
 			path = HomeScreen;
 			sourceTree = "<group>";
@@ -232,6 +247,7 @@
 		6D8C7CCD2A779A97005D597E = {
 			isa = PBXGroup;
 			children = (
+				4B5D36A42A7D0D1B002A6DB0 /* SalesSparrow.xctestplan */,
 				6D2CB4FA2A77CF410057C73F /* Fonts */,
 				6DBB50772A77C04200B58F88 /* Screen */,
 				6DBB506E2A77A49400B58F88 /* CONTRIBUTING.md */,
@@ -457,6 +473,9 @@
 				6D8C7CED2A779A9A005D597E /* PBXTargetDependency */,
 			);
 			name = SalesSparrowTests;
+			packageProductDependencies = (
+				4B5D36A22A7D0BBD002A6DB0 /* FirebaseCrashlytics */,
+			);
 			productName = SalesSparrowTests;
 			productReference = 6D8C7CEB2A779A9A005D597E /* SalesSparrowTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -476,6 +495,9 @@
 				6D8C7CF72A779A9A005D597E /* PBXTargetDependency */,
 			);
 			name = SalesSparrowUITests;
+			packageProductDependencies = (
+				4B5D36A02A7D0BAB002A6DB0 /* FirebaseCrashlytics */,
+			);
 			productName = SalesSparrowUITests;
 			productReference = 6D8C7CF52A779A9A005D597E /* SalesSparrowUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
@@ -534,6 +556,7 @@
 				6D2CB50C2A77CF570057C73F /* Nunito-MediumItalic.ttf in Resources */,
 				6D2CB5102A77CF570057C73F /* Nunito-ExtraBoldItalic.ttf in Resources */,
 				6DBB506B2A77A45F00B58F88 /* LICENSE in Resources */,
+				4B5D36A52A7D0D1B002A6DB0 /* SalesSparrow.xctestplan in Resources */,
 				6D2CB50B2A77CF570057C73F /* Nunito-ExtraLightItalic.ttf in Resources */,
 				6D8C7CDE2A779A99005D597E /* Assets.xcassets in Resources */,
 				6D2CB50F2A77CF570057C73F /* Nunito-Bold.ttf in Resources */,
@@ -646,12 +669,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				6D8C7CE32A779A99005D597E /* Persistence.swift in Sources */,
+				4B583BDC2A7BE818005B97D0 /* AccountList.swift in Sources */,
 				6D8C7D262A77A0EE005D597E /* BaseEntity.swift in Sources */,
 				6D8C7D312A77A1C5005D597E /* Tasks+CoreDataProperties.swift in Sources */,
 				4B393FF42A7AAAF600572F66 /* AccountSearchViewModel.swift in Sources */,
 				6DC43C4B2A78EC01002162FE /* TermsBottomStrip.swift in Sources */,
 				6D8C7CDC2A779A97005D597E /* ContentView.swift in Sources */,
 				6D8C7D352A77A22F005D597E /* ApiHelper.swift in Sources */,
+				4B583BD82A7BBEF2005B97D0 /* TopBar.swift in Sources */,
 				6DBB507A2A77C58300B58F88 /* LoginScreen.swift in Sources */,
 				6D8C7D382A77A254005D597E /* ApiError.swift in Sources */,
 				6D8C7CDA2A779A97005D597E /* SalesSparrowApp.swift in Sources */,
@@ -663,6 +688,7 @@
 				6D8C7D2A2A77A12B005D597E /* BaseRepository.swift in Sources */,
 				6D8C7D182A779F37005D597E /* ListElementView.swift in Sources */,
 				6D8C7D1C2A77A057005D597E /* DateTimePicker.swift in Sources */,
+				4B583BDE2A7BEB11005B97D0 /* BottomBar.swift in Sources */,
 				6D8C7D1F2A77A07F005D597E /* BasicHelper.swift in Sources */,
 				6D8C7CE62A779A99005D597E /* SalesSparrow.xcdatamodeld in Sources */,
 				6D3E84802A77E83E00E9FB83 /* LoginScreenViewModel.swift in Sources */,
@@ -1026,6 +1052,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		4B5D36A02A7D0BAB002A6DB0 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6DC43C4E2A7A4B86002162FE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+		4B5D36A22A7D0BBD002A6DB0 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6DC43C4E2A7A4B86002162FE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
 		6DC43C4F2A7A4B86002162FE /* FirebaseCrashlytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 6DC43C4E2A7A4B86002162FE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct AccountSearchView: View {
-    @StateObject private var viewModel = SearchAccountViewModel()
+    @StateObject private var accountSearchViewModel = AccountSearchViewModel()
     @State private var searchText = ""
-    var forAccountSearch: Bool = false
     
     @Binding var isPresented: Bool // This binding will control the presentation of the sheet
-    var onAccountSelected: ((Account, Bool) -> Void)? // Callback function to handle account selection
+    
+    var isCreateNoteFlow: Bool = false
+    var onAccountSelected: ((Account.ID) -> Void)? // Callback function to handle account selection
+    var onNoteCreateSelected: ((Account) -> Void)?  // Callback function to handle note creation selection
     
     var body: some View {
         VStack(spacing: 0) {
@@ -29,6 +31,10 @@ struct AccountSearchView: View {
             .frame(height: 66)
             .padding()
             .opacity(0.6)
+            .onChange(of: searchText) { newValue in
+                // Call the function from the view model whenever searchText changes
+                accountSearchViewModel.searchTextDidChange(newValue)
+            }
             
             // Divider Line
             Divider()
@@ -36,7 +42,7 @@ struct AccountSearchView: View {
                 .opacity(0.6)
             
             // List of Accounts
-            List(viewModel.listData.filter { searchText.isEmpty ? true : $0.name.localizedStandardContains(searchText) }) { account in
+            List(accountSearchViewModel.listData.filter { searchText.isEmpty ? true : $0.name.localizedStandardContains(searchText) }) { account in
                 VStack() {
                     HStack{
                         Text(account.name)
@@ -44,37 +50,46 @@ struct AccountSearchView: View {
                             .foregroundColor(Color("SearchPrimary"))
                         
                         Spacer()
-                        if forAccountSearch {
+                        
+                        if !isCreateNoteFlow {
                             Text("Add Note")
                                 .font(.custom("Nunito-Regular",size: 16))
                                 .foregroundColor(Color("LoginButtonPrimary"))
                                 .frame(width: 72.0, height: 28.0)
                                 .onTapGesture {
                                     isPresented = false // Dismiss the sheet
-                                    onAccountSelected?(account, true) // Call the callback function with the selected account
+                                    onNoteCreateSelected?(account) // Call the note creation callback function with the selected account // Call the callback function with the selected account
                                 }
                         }
                     }
+                    .padding(.horizontal) // Add horizontal padding to the content inside the row
                     .onTapGesture {
                         isPresented = false // Dismiss the sheet
-                        onAccountSelected?(account, false) // Call the callback function with the selected account
+                        if isCreateNoteFlow {
+                            onNoteCreateSelected?(account) // Call the note creation callback function with the selected account // Call the callback function with the selected account
+                        } else {
+                            onAccountSelected?(account.id) // Call the account selection callback function with the selected account
+                        }
                     }
                 }
             }
+            .listRowInsets(EdgeInsets())
             .listStyle(PlainListStyle())
             .onAppear {
-                viewModel.fetchData()
+                accountSearchViewModel.fetchData()
             }
         }
     }
 }
 
 struct CreateNoteView: View {
-    var account: Account?
+    @Binding var pushActive: Bool
+    var accountId: Int
+    var accountName: String
     
     var body: some View {
         VStack {
-            Text("Account Details page for \(account?.name ?? " ")")
+            Text("Create note page for \(accountName) + \(accountId)")
                 .font(.custom("Nunito-Regular", size: 24))
                 .fontWeight(.bold)
                 .padding()
