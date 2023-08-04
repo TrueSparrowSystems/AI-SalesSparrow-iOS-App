@@ -16,13 +16,13 @@ struct TermsBottomStrip: View {
         let termsText = Text("[Terms and Conditions](https://truesparrow.com)")
             .font(.custom("Nunito-SemiBold" ,size: 12))
             .underline()
-            .foregroundColor(Color("TermsHighlight"))
+            .foregroundColor(Color("RedHighlight"))
             .accessibilityLabel(Text("txt_terms"))
         
         let privacyText = Text("[Privacy Policy](https://truesparrow.com)")
             .font(.custom("Nunito-SemiBold" ,size: 12))
             .underline()
-            .foregroundColor(Color("TermsHighlight"))
+            .foregroundColor(Color("RedHighlight"))
             .accessibilityLabel(Text("txt_privacy"))
         
         
