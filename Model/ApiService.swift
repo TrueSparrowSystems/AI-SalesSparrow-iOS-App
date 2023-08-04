@@ -78,7 +78,7 @@ class ApiService {
      - params: The body parameters to include in the request.
      - completion: A closure to call with the decoded response and the HTTP status code of the response.
      */
-    func post<T: Decodable>(type: T.Type, endpoint: String, params: [String: Any?], completion:
+    func post<T: Decodable>(type: T.Type, endpoint: String, params: [String: Any?] = [:], completion:
                             @escaping(Result<T,APIError>, Int?) -> Void){
         guard let urlApiEndpoint = URL(string: "\(apiEndpoint)\(endpoint)") else {
             let error = APIError.badURL
@@ -151,20 +151,14 @@ class ApiService {
     func callApi<T: Decodable>(type: T.Type, requestUrl: URLRequest, completion: @escaping(Result<T,APIError>, Int?) -> Void) {
         
         var requestUrl = requestUrl
+        var deviceHeaderParams = DeviceSettingManager.shared.deviceHeaderParams
+        
         // Add request headers for authentication and content type to the request object
-        // TODO: replace all request headers based on requirement
         requestUrl.setValue("application/json, text/plain, */*", forHTTPHeaderField: "Accept")
-        requestUrl.setValue("60.0", forHTTPHeaderField: "x-salessparrow-build-number")
-        requestUrl.setValue("1.1.2", forHTTPHeaderField: "x-salessparrow-app-version")
-        requestUrl.setValue("16.2", forHTTPHeaderField: "x-salessparrow-device-os-version")
-        requestUrl.setValue("Asia/Kolkata", forHTTPHeaderField: "x-salessparrow-device-timezone")
-        requestUrl.setValue("5541F68C-E4BE-4E7D-B6F7-05C90436D124", forHTTPHeaderField: "x-salessparrow-device-uuid")
-        requestUrl.setValue("iPhone15,2", forHTTPHeaderField: "x-salessparrow-device-id")
-        requestUrl.setValue("iOS", forHTTPHeaderField: "x-salessparrow-device-os")
-        requestUrl.setValue("Handset", forHTTPHeaderField: "x-salessparrow-device-type")
-        requestUrl.setValue("Apple", forHTTPHeaderField: "x-salessparrow-device-manufacturer")
-        requestUrl.setValue("true", forHTTPHeaderField: "x-salessparrow-device-has-notch")
-        requestUrl.setValue("iPhone 14 Pro", forHTTPHeaderField: "x-salessparrow-device-name")
+        
+        for (key, value) in deviceHeaderParams {
+            requestUrl.setValue(BasicHelper.toString(value), forHTTPHeaderField: key)
+        }
         
         URLSession.shared.dataTask(with: requestUrl) { data, response, error in
             

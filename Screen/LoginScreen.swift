@@ -10,6 +10,7 @@ import SwiftUI
 
 struct LoginScreen: View {
     @EnvironmentObject var loginScreenViewModel : LoginScreenViewModel
+    @EnvironmentObject var userStateViewModel : UserStateViewModel
     @Environment(\.openURL) var openURL
     @State var isLoginInProgress = false
     @State var showError = false
@@ -127,9 +128,11 @@ struct LoginScreen: View {
             loginScreenViewModel.fetchSalesforceConnectUrl(onSuccess: {_ in}, onFailure: {})
         }
         .onChange(of: environment.vars?["auth_code"], perform: { _ in
-            print("in Login Screen on change : \(environment.vars?["auth_code"])")
+//            print("in Login Screen on change : \(environment.vars?["auth_code"])")
             loginScreenViewModel.authenticateUser(authCode: environment.vars?["auth_code"], onSuccess: {
                 isLoginInProgress = false
+                print("calling set user logged in")
+                userStateViewModel.setIsUserLoggedIn()
             }, onFailure: {
                 isLoginInProgress = false
                 showError = true
@@ -143,6 +146,7 @@ struct LoginScreen_Previews: PreviewProvider {
     static var previews: some View {
         LoginScreen()
             .environmentObject(LoginScreenViewModel())
+            .environmentObject(UserStateViewModel())
             .environmentObject(Environments(target: BuildTarget.staging))
     }
 }

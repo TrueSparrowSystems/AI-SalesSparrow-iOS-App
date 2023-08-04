@@ -13,6 +13,7 @@ struct SalesSparrowApp: App {
     // The Core Data context for the app
     let persistenceController = PersistenceController.shared
     let environment = Environments(target: BuildTarget.production)
+    @StateObject var userStateViewModel = UserStateViewModel()
     
     
     // The app delegate
@@ -24,6 +25,7 @@ struct SalesSparrowApp: App {
             ContentView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .environmentObject(environment)
+                .environmentObject(userStateViewModel)
         }
     }
 }
