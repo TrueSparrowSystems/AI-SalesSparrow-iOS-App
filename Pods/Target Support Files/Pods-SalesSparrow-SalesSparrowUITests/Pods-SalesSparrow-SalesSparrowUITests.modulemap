@@ -1,0 +1,6 @@
+framework module Pods_SalesSparrow_SalesSparrowUITests {
+  umbrella header "Pods-SalesSparrow-SalesSparrowUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
