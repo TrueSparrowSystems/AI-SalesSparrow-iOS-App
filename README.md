@@ -111,12 +111,12 @@ The project is organized into the following directories:
 
 ### License
 
-This project is licensed under the MIT License. See the [LICENSE] (https://github.com/TrueSparrowSystems/salessparrow/blob/master/LICENSE) file for details.
+This project is licensed under the MIT License. See the [LICENSE](https://github.com/TrueSparrowSystems/salessparrow/blob/master/LICENSE) file for details.
 
 ### Contributing
 
-Contributions to the project are welcome! If you would like to contribute, please follow the guidelines in the [CONTRIBUTING] (https://github.com/TrueSparrowSystems/salessparrow/blob/master/CONTRIBUTING.md) file.
+Contributions to the project are welcome! If you would like to contribute, please follow the guidelines in the [CONTRIBUTING](https://github.com/TrueSparrowSystems/salessparrow/blob/master/CONTRIBUTING.md) file.
 
 ### Code of Conduct
 
-This project has a code of conduct that outlines expected behavior for contributors and users. Please read the [CODE_OF_CONDUCT] (https://github.com/TrueSparrowSystems/salessparrow/blob/master/CODE_OF_CONDUCT.md) file before getting involved.
+This project has a code of conduct that outlines expected behavior for contributors and users. Please read the [CODE_OF_CONDUCT](https://github.com/TrueSparrowSystems/salessparrow/blob/master/CODE_OF_CONDUCT.md) file before getting involved.

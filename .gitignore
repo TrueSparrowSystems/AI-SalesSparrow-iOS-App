@@ -9,3 +9,4 @@ Manifest.lock
 Podfile.lock
 Package.resolved
 Constants/Environments.swift
+SalesSparrow/GoogleService-Info.plist

@@ -27,23 +27,21 @@ final class SalesSparrowUITests: XCTestCase {
         let app = XCUIApplication()
         app.launchArguments = ["isRunningUITests"]
         app.launch()
-        let timeout = 2
-        let addButton = app.buttons["AddButton"]
-        XCTAssertTrue(addButton.waitForExistence(timeout: TimeInterval(timeout)))
-        addButton.tap()
-
-        let item = app.buttons["item1"]
-        XCTAssertTrue(item.waitForExistence(timeout: TimeInterval(timeout)))
-        let itemLabel = item.label
-        item.tap()
-        
-        let pageText = app.staticTexts["PageText"]
-        XCTAssertTrue(pageText.waitForExistence(timeout: TimeInterval(timeout)))
-        
-        XCTAssertTrue(pageText.label == "Item at \(itemLabel)")
         
 
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+    }
+    
+    func testLoginScreen() throws {
+        let app = XCUIApplication()
+        app.launchArguments = ["isRunningUITests"]
+        app.launch()
+        
+        let timeout = 2
+        let addButton = app.buttons["btn_connect_salesforce-btn_connect_salesforce"]
+        XCTAssertTrue(addButton.waitForExistence(timeout: TimeInterval(timeout)))
+        addButton.tap()
+        
     }
 
     func testLaunchPerformance() throws {

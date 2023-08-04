@@ -8,16 +8,17 @@
 
 import UIKit
 import UserNotifications
-//import FirebaseCore
-//import FirebaseCrashlytics
+import FirebaseCore
+import FirebaseCrashlytics
 
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     
     //In this method, you can perform any setup tasks that need to be done before the app is ready to use.
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-//        FirebaseApp.configure()
-//        let userId = UUID().uuidString
-//        Crashlytics.crashlytics().setUserID(userId)
+        FirebaseApp.configure()
+        let uuid = UIDevice.current.identifierForVendor?.uuidString
+        let userId = uuid
+        Crashlytics.crashlytics().setUserID(userId)
         registerForRemoteNotifications()
         return true
     }
@@ -62,7 +63,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     // This method is called when the app receives a remote notification while it is running in the foreground. In this method, you can present a local notification to the user to alert them of the incoming notification.
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        print("Notification Received")
         // Customize the presentation options based on your requirements
         completionHandler([.banner, .sound, .badge, .list])
     }
@@ -70,7 +70,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     // This method is called when the user taps on a remote notification. In this method, you can present a local notification to the user to alert them of the incoming notification.
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         // Handle the notification payload here
-        print("Notification Click and Viewed")
         let payload = response.notification.request.content
         print(payload)
         // Process the payload as needed
