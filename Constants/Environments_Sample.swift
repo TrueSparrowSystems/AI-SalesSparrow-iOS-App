@@ -14,22 +14,45 @@ enum _BuildTarget {
 }
 
 class Environments_Sample : ObservableObject {
-    var vars : [String: String]?
+    var target = _BuildTarget.production
+    static let shared = Environments_Sample()
+    var vars: [String: String] = [:]
+
     
-    init(target: _BuildTarget){
-        switch target {
+    
+    private init(){
+        setVars()
+    }
+    
+    func setVars() {
+        switch self.target {
         case .development:
-            vars =  [
+            self.vars = [
                 "API_ENDPOINT": "abc.com",
             ]
         case .staging:
-            vars =  [
+            self.vars =  [
                 "API_ENDPOINT": "abc.com",
             ]
         case .production:
-            vars =  [
+            self.vars =   [
                 "API_ENDPOINT": "abc.com",
             ]
         }
     }
+    
+    func getVars() -> [String: String]{
+        return self.vars
+    }
+    
+    func setAuthToken(authToken: String){
+        self.vars["auth_code"] = authToken
+        
+    }
+    
+    func setTarget(target: _BuildTarget){
+        self.target = target
+        setVars()
+    }
 }
+
