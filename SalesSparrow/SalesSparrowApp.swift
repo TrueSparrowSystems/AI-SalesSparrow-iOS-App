@@ -18,6 +18,12 @@ struct SalesSparrowApp: App {
     // The app delegate
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
+    init() {
+        let isRunningUITests = ProcessInfo.processInfo.arguments.contains("isRunningUITests")
+        DependencyContainer.shared.setApiService(isRunningUITests: isRunningUITests)
+    }
+    
+    
     // The main view of the app
     var body: some Scene {
         WindowGroup {
@@ -25,5 +31,16 @@ struct SalesSparrowApp: App {
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .environmentObject(environment)
         }
+    }
+}
+
+class DependencyContainer: ObservableObject {
+    static let shared = DependencyContainer()
+    var apiService: ApiService = ApiService()
+    
+    private init() {}
+    
+    func setApiService(isRunningUITests: Bool = false) {
+        apiService = isRunningUITests ? MockAPIService() : ApiService()
     }
 }

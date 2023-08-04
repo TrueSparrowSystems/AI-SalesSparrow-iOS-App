@@ -26,13 +26,20 @@ struct AnyEncodable: Encodable {
     }
 }
 
+class MockAPIService: ApiService {
+    
+    override func callApi<T: Decodable>(type: T.Type, requestUrl: URLRequest, completion: @escaping(Result<T,APIError>, Int?) -> Void) {
+        
+    }
+}
+
 /**
  A class that provides methods for making API requests and handling responses. The class includes a base API endpoint, and methods for making GET requests with query parameters and decoding the response into a specified type.
  */
 class ApiService {
     // The base API endpoint
     // TODO: replace API endpoint
-    var apiEndpoint = "Some Endpoint"
+    var apiEndpoint = "abc.com"
     
     
     
