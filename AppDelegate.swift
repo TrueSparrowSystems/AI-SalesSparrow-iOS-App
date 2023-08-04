@@ -16,7 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     //In this method, you can perform any setup tasks that need to be done before the app is ready to use.
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
-        let userId = UUID().uuidString
+        let uuid = UIDevice.current.identifierForVendor?.uuidString
+        let userId = uuid
         Crashlytics.crashlytics().setUserID(userId)
         registerForRemoteNotifications()
         return true

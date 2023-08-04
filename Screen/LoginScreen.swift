@@ -10,6 +10,7 @@ import SwiftUI
 
 struct LoginScreen: View {
     @EnvironmentObject var loginScreenViewModel : LoginScreenViewModel
+    @EnvironmentObject var userStateViewModel : UserStateViewModel
     @Environment(\.openURL) var openURL
     @State var isLoginInProgress = false
     @State var showError = false
@@ -28,7 +29,7 @@ struct LoginScreen: View {
                         .padding(.bottom, 16)
                         .font(.custom("Nunito-Regular", size: 16))
                         .multilineTextAlignment(.center)
-                        .foregroundColor(Color("TextPrimary"))
+                        .foregroundColor(Color("LoginScreenText"))
                     
                     HStack{
                         Image("NoteIcon")
@@ -37,7 +38,7 @@ struct LoginScreen: View {
                             .padding(.horizontal, 2)
                         Text("Notes")
                             .font(.custom("Nunito-Regular",size: 14))
-                            .foregroundColor(Color("NotesText"))
+                            .foregroundColor(Color("TextPrimary"))
                         
                         Image("TasksIcon")
                             .resizable()
@@ -45,7 +46,7 @@ struct LoginScreen: View {
                             .padding(.horizontal, 2)
                         Text("Tasks")
                             .font(.custom("Nunito-Regular",size: 14))
-                            .foregroundColor(Color("NotesText"))
+                            .foregroundColor(Color("TextPrimary"))
                         
                         Image("EventsIcon")
                             .resizable()
@@ -53,7 +54,7 @@ struct LoginScreen: View {
                             .padding(.horizontal, 2)
                         Text("Events")
                             .font(.custom("Nunito-Regular",size: 14))
-                            .foregroundColor(Color("NotesText"))
+                            .foregroundColor(Color("TextPrimary"))
                         
                         Image("OpportunitiesIcon")
                             .resizable()
@@ -61,7 +62,7 @@ struct LoginScreen: View {
                             .padding(.horizontal, 2)
                         Text("Opportunities")
                             .font(.custom("Nunito-Regular",size: 14))
-                            .foregroundColor(Color("NotesText"))
+                            .foregroundColor(Color("TextPrimary"))
                             .lineLimit(1)
                         
                     }
@@ -73,7 +74,7 @@ struct LoginScreen: View {
                     
                     Text("Create Account")
                         .font(.custom("Nunito-SemiBold", size: 18))
-                        .foregroundColor(Color("TextPrimary"))
+                        .foregroundColor(Color("LoginScreenText"))
                     
                     Button(action: {
                         isLoginInProgress = true
@@ -106,10 +107,11 @@ struct LoginScreen: View {
                             
                         )
                         .clipShape(RoundedRectangle(cornerRadius: 5))
-                        .accessibilityIdentifier("btn_connect_salesforce")
+                       
                     }
                     )
                     .disabled($isLoginInProgress.wrappedValue)
+                    .accessibilityIdentifier("btn_connect_salesforce")
                 }
                 .padding(.horizontal, 20)
                 .padding(.vertical, 40)
@@ -126,10 +128,10 @@ struct LoginScreen: View {
         .onAppear{
             loginScreenViewModel.fetchSalesforceConnectUrl(onSuccess: {_ in}, onFailure: {})
         }
-        .onChange(of: environment.vars?["auth_code"], perform: { _ in
-            print("in Login Screen on change : \(environment.vars?["auth_code"])")
-            loginScreenViewModel.authenticateUser(authCode: environment.vars?["auth_code"], onSuccess: {
+        .onChange(of: environment.vars["auth_code"], perform: { _ in
+            loginScreenViewModel.authenticateUser(authCode: environment.vars["auth_code"], onSuccess: {
                 isLoginInProgress = false
+                userStateViewModel.setIsUserLoggedIn()
             }, onFailure: {
                 isLoginInProgress = false
                 showError = true
@@ -143,6 +145,7 @@ struct LoginScreen_Previews: PreviewProvider {
     static var previews: some View {
         LoginScreen()
             .environmentObject(LoginScreenViewModel())
-            .environmentObject(Environments(target: BuildTarget.staging))
+            .environmentObject(UserStateViewModel.shared)
+            .environmentObject(Environments.shared)
     }
 }
