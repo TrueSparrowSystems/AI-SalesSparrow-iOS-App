@@ -69,9 +69,11 @@ class LoginScreenViewModel: ObservableObject {
                 }
                 
             case .failure(let error):
-                print("error loading data: \(error)")
-                onFailure()
-                self?.isLoginInProgress = false
+                DispatchQueue.main.async {
+                    print("error loading data: \(error)")
+                    onFailure()
+                    self?.isLoginInProgress = false
+                }
             }
             
         }

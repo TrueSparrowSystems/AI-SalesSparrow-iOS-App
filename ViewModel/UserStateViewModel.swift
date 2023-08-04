@@ -12,6 +12,9 @@ struct LogoutStruct: Codable {}
 class UserStateViewModel: ObservableObject {
     @Published var isUserLoggedIn = false
     @Published var isLogOutInProgress = false
+    static let shared = UserStateViewModel()
+    
+    private init(){}
     
     func setIsUserLoggedIn() {
         print("setting logged in user")
@@ -20,21 +23,26 @@ class UserStateViewModel: ObservableObject {
     
     func logOut()  {
         guard !self.isLogOutInProgress else {return}
-        self.isLogOutInProgress = true
-        ApiService().post(type: LogoutStruct.self, endpoint: ""){
-            [weak self]  result, statusCode in
-            switch result {
-            case .success(_):
+        DispatchQueue.main.async {
+            self.isLogOutInProgress = true
+            
+            ApiService().post(type: LogoutStruct.self, endpoint: ""){
+                [weak self]  result, statusCode in
+                
                 DispatchQueue.main.async {
-                    self?.isUserLoggedIn = false
-                    self?.isLogOutInProgress = false
+                    switch result {
+                    case .success(_):
+                        self?.isUserLoggedIn = false
+                        self?.isLogOutInProgress = false
+                        
+                        
+                    case .failure(let error):
+                        print("error loading data in logout: \(error)")
+                        self?.isLogOutInProgress = false
+                    }
                 }
                 
-            case .failure(let error):
-                print("error loading data: \(error)")
-                self?.isLogOutInProgress = false
             }
-            
         }
     }
 }

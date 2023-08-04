@@ -35,7 +35,7 @@ struct ContentView: View {
                 LoginScreen()
             }else{
                 NavigationView{
-                    CreateNoteScreen()
+                    HomeScreen()
                 }
             }
         }
@@ -56,9 +56,12 @@ struct ContentView: View {
             
             return
         }
-  
-        environment.vars?["auth_code"] = components.queryItems?.first(where: { $0.name == "code" })?.value
+        let authToken = components.queryItems?.first(where: { $0.name == "code" })?.value
         
+        if((authToken) != nil){
+            environment.setAuthToken(authToken: authToken ?? "")
+        }
+    
     }
 }
 
