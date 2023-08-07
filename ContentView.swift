@@ -33,10 +33,8 @@ struct ContentView: View {
         VStack{
             if(!userStateViewModel.isUserLoggedIn){
                 LoginScreen()
-            }else{
-                NavigationView{
-                    HomeScreen()
-                }
+            }else {
+                HomeScreen()
             }
         }
         .onOpenURL { incomingURL in
@@ -61,7 +59,7 @@ struct ContentView: View {
         if((authToken) != nil){
             environment.setAuthToken(authToken: authToken ?? "")
         }
-    
+        
     }
 }
 

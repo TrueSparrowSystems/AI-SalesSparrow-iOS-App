@@ -10,19 +10,24 @@ import SwiftUI
 struct BottomBar: View {
     @State private var showAccountSearchView2: Bool = false
     @State var createNoteScreenActivated = false
-    @State var selectedAccountId: Int? = nil
+    @State var selectedAccountId: String? = nil
     @State var selectedAccountName: String? = nil
     
     var body: some View {
         ZStack() {
             Color("Background")
                 .frame(height: 27) // Set the height of the bottom 27px to be similar to Rectangle()
+                .overlay(
+                    RoundedRectangle(cornerRadius: 0)
+                        .stroke(Color("Background"), lineWidth: 0.5)
+                        .opacity(0.2)
+                )
             
             // Button for headerIcon at the middle of the nave bar
             Button(action: {
                 showAccountSearchView2 = true
             }) {
-                Image("HeaderIcons")
+                Image("CreateNoteIcon")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 44.0, height: 44.0)
@@ -46,10 +51,10 @@ struct BottomBar: View {
             Group {
                 if self.createNoteScreenActivated && selectedAccountId != nil{
                     NavigationLink(
-                        destination: CreateNoteView(pushActive: $createNoteScreenActivated, accountId: selectedAccountId!, accountName: selectedAccountName!),
+                        destination: CreateNoteScreen(accountId: selectedAccountId!, accountName: selectedAccountName!, isAccountSelectable: true),
                         isActive: self.$createNoteScreenActivated
                     ) {
-                        Text("WTF ROOR")
+                        EmptyView()
                     }
                     .hidden()
                 }
@@ -58,8 +63,9 @@ struct BottomBar: View {
     }
 }
 
-//struct BottomBar_Previews: PreviewProvider {
-//    static var previews: some View {
-//        BottomBar()
-//    }
-//}
+struct BottomBar_Previews: PreviewProvider {
+    static var previews: some View {
+        BottomBar()
+            .previewLayout(.sizeThatFits)
+    }
+}

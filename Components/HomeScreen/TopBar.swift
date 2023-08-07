@@ -12,7 +12,7 @@ struct TopBar: View {
     @EnvironmentObject var AcccountSearchViewModelObject: AccountSearchViewModel
     @State var accountDetailScreenActivated = false
     @State var createNoteScreenActivated = false
-    @State var selectedAccountId: Int? = nil
+    @State var selectedAccountId: String? = nil
     @State var selectedAccountName: String? = nil
     
     var body: some View {
@@ -60,15 +60,15 @@ struct TopBar: View {
                         destination: AccountDetailScreen(pushActive: $accountDetailScreenActivated, accountId: selectedAccountId!),
                         isActive: self.$accountDetailScreenActivated
                     ) {
-                        Text("WTF ROOR")
+                        EmptyView()
                     }
                     .hidden()
                 } else if self.createNoteScreenActivated && selectedAccountId != nil{
                     NavigationLink(
-                        destination: CreateNoteView(pushActive: $createNoteScreenActivated, accountId: selectedAccountId!, accountName: selectedAccountName!),
+                        destination: CreateNoteScreen(accountId: selectedAccountId!, accountName: selectedAccountName!),
                         isActive: self.$createNoteScreenActivated
                     ) {
-                        Text("WTF ROOR")
+                        EmptyView()
                     }
                     .hidden()
                 }
@@ -83,7 +83,7 @@ struct AccountDetailScreen: View {
     
     var body: some View {
         VStack{
-            Text("Pushed the view in into the stack with \(accountId)")
+            Text("Pushed the view in into the stack with AccountID - \(accountId)")
                 .navigationBarBackButtonHidden(true)
                 .navigationBarItems(leading: backButton)
                 .onTapGesture {

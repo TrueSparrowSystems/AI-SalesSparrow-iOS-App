@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeScreen: View {
     @State private var showCreateNoteAccountSearchView: Bool = false
-    @ObservedObject private var AcccountSearchViewModelObject = AccountSearchViewModel()
+    @ObservedObject private var acccountSearchViewModelObject = AccountSearchViewModel()
     
     var body: some View {
         NavigationView {
@@ -18,19 +18,15 @@ struct HomeScreen: View {
                 TopBar()
                 
                 // List of Accounts
-//                AccountList()
-                Spacer()
-//
+                AccountList()
+                
                 // Bottom Bar with + Button
                 BottomBar()
             }
             .background(Color("Background"))
             
         }
-        .environmentObject(AcccountSearchViewModelObject)
-        .onAppear {
-            AcccountSearchViewModelObject.fetchData()
-        }
+        .environmentObject(acccountSearchViewModelObject)
     }
 }
 

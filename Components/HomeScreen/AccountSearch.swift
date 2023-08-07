@@ -55,7 +55,7 @@ struct AccountSearchView: View {
                             Text("Add Note")
                                 .font(.custom("Nunito-Regular",size: 16))
                                 .foregroundColor(Color("LoginButtonPrimary"))
-                                .frame(width: 72.0, height: 28.0)
+//                                .frame(width: 72.0, height: 28.0)
                                 .onTapGesture {
                                     isPresented = false // Dismiss the sheet
                                     onNoteCreateSelected?(account) // Call the note creation callback function with the selected account // Call the callback function with the selected account
@@ -81,20 +81,20 @@ struct AccountSearchView: View {
         }
     }
 }
-
-struct CreateNoteView: View {
-    @Binding var pushActive: Bool
-    var accountId: Int
-    var accountName: String
-    
-    var body: some View {
-        VStack {
-            Text("Create note page for \(accountName) + \(accountId)")
-                .font(.custom("Nunito-Regular", size: 24))
-                .fontWeight(.bold)
-                .padding()
-            
-            // Add the rest of your content for the Create Note screen here...
-        }
-    }
-}
+//
+//struct CreateNoteView: View {
+//    @Binding var pushActive: Bool
+//    var accountId: Int
+//    var accountName: String
+//    
+//    var body: some View {
+//        VStack {
+//            Text("Create note page for \(accountName) + \(accountId)")
+//                .font(.custom("Nunito-Regular", size: 24))
+//                .fontWeight(.bold)
+//                .padding()
+//            
+//            // Add the rest of your content for the Create Note screen here...
+//        }
+//    }
+//}
