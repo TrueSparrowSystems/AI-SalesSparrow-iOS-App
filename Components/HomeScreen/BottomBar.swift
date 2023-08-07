@@ -37,11 +37,11 @@ struct BottomBar: View {
                 // Clear data
                 print("Sheet dismissed - Clear Search data from View model")
             }) {
-                AccountSearchView(isPresented: $showAccountSearchView2, isCreateNoteFlow: true, onNoteCreateSelected: { account in
-                    print("Create Note for \(account.name) \(account.id)")
+                AccountSearchView(isPresented: $showAccountSearchView2, isCreateNoteFlow: true, onNoteCreateSelected: { accountId, accountName in
+                    print("Create Note for \(accountName) \(accountId)")
                     
-                    selectedAccountId = account.id
-                    selectedAccountName = account.name
+                    selectedAccountId = accountId
+                    selectedAccountName = accountName
                     self.createNoteScreenActivated = true
                 })
             }

@@ -29,7 +29,7 @@ struct AnyEncodable: Encodable {
 class MockAPIService: ApiService {
 
     override func callApi<T: Decodable>(type: T.Type, requestUrl: URLRequest, completion: @escaping(Result<T,APIError>, Int?) -> Void) {
-
+        
     }
 }
 

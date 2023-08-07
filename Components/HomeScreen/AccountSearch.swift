@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct AccountSearchView: View {
-    @StateObject private var accountSearchViewModel = AccountSearchViewModel()
+    @EnvironmentObject var accountSearchViewModel: AccountSearchViewModel
     @State private var searchText = ""
     
     @Binding var isPresented: Bool // This binding will control the presentation of the sheet
     
     var isCreateNoteFlow: Bool = false
-    var onAccountSelected: ((Account.ID) -> Void)? // Callback function to handle account selection
-    var onNoteCreateSelected: ((Account) -> Void)?  // Callback function to handle note creation selection
+    var onAccountSelected: ((String) -> Void)? // Callback function to handle account selection
+    var onNoteCreateSelected: ((String,String) -> Void)?  // Callback function to handle note creation selection
     
     var body: some View {
         VStack(spacing: 0) {
@@ -33,7 +33,7 @@ struct AccountSearchView: View {
             .opacity(0.6)
             .onChange(of: searchText) { newValue in
                 // Call the function from the view model whenever searchText changes
-                accountSearchViewModel.searchTextDidChange(newValue)
+                accountSearchViewModel.fetchData(newValue)
             }
             
             // Divider Line
@@ -42,45 +42,67 @@ struct AccountSearchView: View {
                 .opacity(0.6)
             
             // List of Accounts
-            List(accountSearchViewModel.listData.filter { searchText.isEmpty ? true : $0.name.localizedStandardContains(searchText) }) { account in
-                VStack() {
-                    HStack{
-                        Text(account.name)
-                            .font(.custom("Nunito-Regular",size: 16))
-                            .foregroundColor(Color("SearchPrimary"))
-                        
-                        Spacer()
-                        
-                        if !isCreateNoteFlow {
-                            Text("Add Note")
-                                .font(.custom("Nunito-Regular",size: 16))
-                                .foregroundColor(Color("LoginButtonPrimary"))
-//                                .frame(width: 72.0, height: 28.0)
-                                .onTapGesture {
-                                    isPresented = false // Dismiss the sheet
-                                    onNoteCreateSelected?(account) // Call the note creation callback function with the selected account // Call the callback function with the selected account
-                                }
+            AccountListView(
+                listData: accountSearchViewModel.accountListData,
+                accountIds: accountSearchViewModel.accountListData.account_ids,
+                isCreateNoteFlow: isCreateNoteFlow,
+                onNoteCreateSelected: onNoteCreateSelected,
+                onAccountSelected: onAccountSelected,
+                isPresented: $isPresented
+            )
+        }
+    }
+}
+
+struct AccountListView: View {
+    var listData: SearchAccountStruct
+    var accountIds: [String]
+    var isCreateNoteFlow: Bool
+    var onNoteCreateSelected: ((String, String) -> Void)?
+    var onAccountSelected: ((String) -> Void)?
+    @Binding var isPresented: Bool
+    
+    var body: some View {
+        List {
+            ForEach(accountIds, id: \.self) { accountId in
+                if let account = listData.account_map_by_id[accountId] {
+                    VStack {
+                        HStack {
+                            Text(account.name)
+                                .font(.custom("Nunito-Regular", size: 16))
+                                .foregroundColor(Color("SearchPrimary"))
+                            
+                            Spacer()
+                            
+                            if !isCreateNoteFlow {
+                                Text("Add Note")
+                                    .font(.custom("Nunito-Regular", size: 16))
+                                    .foregroundColor(Color("LoginButtonPrimary"))
+                                    .onTapGesture {
+                                        isPresented = false // Dismiss the sheet
+                                        onNoteCreateSelected?(accountId, account.name)
+                                    }
+                            }
                         }
-                    }
-                    .padding(.horizontal) // Add horizontal padding to the content inside the row
-                    .onTapGesture {
-                        isPresented = false // Dismiss the sheet
-                        if isCreateNoteFlow {
-                            onNoteCreateSelected?(account) // Call the note creation callback function with the selected account // Call the callback function with the selected account
-                        } else {
-                            onAccountSelected?(account.id) // Call the account selection callback function with the selected account
+                        .padding(.horizontal)
+                        .onTapGesture {
+                            isPresented = false // Dismiss the sheet
+                            if isCreateNoteFlow {
+                                onNoteCreateSelected?(accountId, account.name)
+                            } else {
+                                onAccountSelected?(accountId)
+                            }
                         }
                     }
                 }
             }
             .listRowInsets(EdgeInsets())
             .listStyle(PlainListStyle())
-            .onAppear {
-                accountSearchViewModel.fetchData()
-            }
         }
     }
 }
+
+
 //
 //struct CreateNoteView: View {
 //    @Binding var pushActive: Bool

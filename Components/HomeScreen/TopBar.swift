@@ -9,7 +9,6 @@ import SwiftUI
 
 struct TopBar: View {
     @State private var showAccountSearchView: Bool = false
-    @EnvironmentObject var AcccountSearchViewModelObject: AccountSearchViewModel
     @State var accountDetailScreenActivated = false
     @State var createNoteScreenActivated = false
     @State var selectedAccountId: String? = nil
@@ -41,11 +40,11 @@ struct TopBar: View {
                         // Use ID to push view to navigation link
                         selectedAccountId = accountId
                         self.accountDetailScreenActivated = true
-                    }, onNoteCreateSelected: { account in
-                        print("Create Note for \(account.name) \(account.id)")
+                    }, onNoteCreateSelected: { accountId, accountName in
+                        print("Create Note for \(accountName) \(accountId)")
                         
-                        selectedAccountId = account.id
-                        selectedAccountName = account.name
+                        selectedAccountId = accountId
+                        selectedAccountName = accountName
                         self.createNoteScreenActivated = true
                     })
                 }

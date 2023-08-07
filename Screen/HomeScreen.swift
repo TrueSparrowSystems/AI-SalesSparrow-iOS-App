@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeScreen: View {
     @State private var showCreateNoteAccountSearchView: Bool = false
-    @ObservedObject private var acccountSearchViewModelObject = AccountSearchViewModel()
+    @StateObject var acccountSearchViewModelObject = AccountSearchViewModel()
     
     var body: some View {
         NavigationView {
@@ -18,7 +18,8 @@ struct HomeScreen: View {
                 TopBar()
                 
                 // List of Accounts
-                AccountList()
+//                AccountList()
+                Spacer()
                 
                 // Bottom Bar with + Button
                 BottomBar()
