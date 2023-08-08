@@ -31,7 +31,7 @@ struct ContentView: View {
     /// The body of the view
     var body: some View {
         VStack{
-            if(!userStateViewModel.isUserLoggedIn){
+            if(userStateViewModel.isUserLoggedIn){
                 LoginScreen()
             }else{
                 NavigationView{
