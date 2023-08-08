@@ -26,6 +26,7 @@ struct ContentView: View {
     let maxHeight: CGFloat = 200
     
     @StateObject var loginScreenViewModel = LoginScreenViewModel()
+    @StateObject var createNoteViewModel = CreateNoteScreenViewModel()
     
     
     /// The body of the view
@@ -41,6 +42,7 @@ struct ContentView: View {
             handleIncomingURL(incomingURL)
         }
         .environmentObject(loginScreenViewModel)
+        .environmentObject(createNoteViewModel)
     }
     
     

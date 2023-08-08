@@ -8,7 +8,7 @@ Before using the "salessparrow" iOS app, make sure your development environment 
 
 1. Xcode: The app requires Xcode version 14.3 or newer to build and run.
 
-2. Minimum iOS Version: 15.0
+2. Minimum iOS Version: 16.0
 
 3. Apple Developer Account: You need a valid Apple Developer account to run the app on a physical device or distribute it to the App Store.
 
@@ -31,11 +31,11 @@ pod install
 
 ##### Specific Requirements for Each Target:
 
-- salessparrow: Requires a minimum iOS version of 15.0.
+- salessparrow: Requires a minimum iOS version of 16.0.
 
-- salessparrowTests: Requires a minimum iOS version of 15.0.
+- salessparrowTests: Requires a minimum iOS version of 16.0.
 
-- salessparrowUITests: Requires a minimum iOS version of 16.4.
+- salessparrowUITests: Requires a minimum iOS version of 16.0.
 
 Ensure that you have met these prerequisites and system requirements before working with the "salessparrow" iOS app.
 

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CreateNoteScreen : View {
     @EnvironmentObject var createNoteScreenViewModel : CreateNoteScreenViewModel
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @State var text: String = ""
     @State var isSaveInProgress = false
@@ -17,6 +18,7 @@ struct CreateNoteScreen : View {
     @State var accountName = "SMagic"
     @State var showError = false
     @State var isAccountSelectable = true
+    @State var showAccountSearchView = false
     
     var body: some View {
         VStack{
@@ -24,7 +26,10 @@ struct CreateNoteScreen : View {
                 Text(isNoteSaved ? "Done" : "Cancel")
                     .font(.custom("Nunito-Bold", size: 14))
                     .foregroundColor(Color("CancelText"))
-                    .accessibilityIdentifier("btn_cancel_create_note")
+                    .accessibilityIdentifier(isNoteSaved ? "btn_done_create_note" : "btn_cancel_create_note")
+                    .onTapGesture {
+                        self.presentationMode.wrappedValue.dismiss()
+                    }
                 Spacer()
                 Button(action: {
                     isSaveInProgress = true
@@ -66,9 +71,10 @@ struct CreateNoteScreen : View {
                         Color(hex: "SaveButtonBackground")
                     )
                     .clipShape(RoundedRectangle(cornerRadius: 5))
-                    .accessibilityIdentifier("btn_save_note")
-                    .disabled(isNoteSaved)
                 })
+                .accessibilityIdentifier("btn_save_note")
+                .disabled(isNoteSaved || isSaveInProgress || accountId == "" || text == "")
+                
             }
             .padding(.vertical, 12)
             
@@ -79,7 +85,7 @@ struct CreateNoteScreen : View {
                 Text("Account")
                     .foregroundColor(Color("TextPrimary"))
                     .font(.custom("Nunito-Regular", size: 12))
-                if(isAccountSelectable){
+                if(isAccountSelectable && !(isNoteSaved || isSaveInProgress)){
                     HStack(alignment: .center){
                         Text(accountId == "" ? "Select": accountName)
                             .padding(.vertical, 8)
@@ -93,10 +99,14 @@ struct CreateNoteScreen : View {
                     .background(Color("SelectAccountDropdownBG"))
                     .clipShape(RoundedRectangle(cornerRadius: 4))
                     .onTapGesture {
-                        //TODO: Update once Search Account is available
-                        print("open search note")
-                        accountName = "abc"
-                        accountId = "12"
+                        showAccountSearchView = true
+                    }
+                    .sheet(isPresented: $showAccountSearchView, onDismiss: {
+                    }) {
+                        AccountSearchView(isPresented: $showAccountSearchView, isCreateNoteFlow: true, onNoteCreateSelected: { _accountId, _accountName in
+                            accountId = _accountId
+                            accountName = _accountName
+                        })
                     }
                     
                 }else{
@@ -113,27 +123,21 @@ struct CreateNoteScreen : View {
                 Spacer()
             }
             .padding(.top, 12)
-            if text.isEmpty {
-                VStack {
-                    Text("Add Note")
-                        .padding(.top, 10)
-                        .padding(.leading, 6)
-                        .opacity(0.6)
-                    Spacer()
-                }
-            }
             
-            VStack {
-                TextEditor(text: $text)
-                    .frame(minHeight: 150)
-                    .opacity(text.isEmpty ? 0.85 : 1)
-                Spacer()
+            if(isNoteSaved || isSaveInProgress){
+                Text(text)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .font(.custom("Nunito-SemiBold", size: 18))
+                
+            }else{
+                TextField("Add Note ...",text: $text, axis: .vertical)
+                    .font(.custom("Nunito-SemiBold", size: 18))
             }
-            .background(Color("Background"))
-        Spacer()
-    }
+            Spacer()
+        }
         .padding(.horizontal, 12)
-}
+        .navigationBarBackButtonHidden(true)
+    }
 }
 
 struct CreateNoteScreen_Previews: PreviewProvider {

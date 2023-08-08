@@ -64,7 +64,7 @@ struct TopBar: View {
                     .hidden()
                 } else if self.createNoteScreenActivated && selectedAccountId != nil{
                     NavigationLink(
-                        destination: CreateNoteScreen(accountId: selectedAccountId!, accountName: selectedAccountName!),
+                        destination: CreateNoteScreen(accountId: selectedAccountId!, accountName: selectedAccountName!, isAccountSelectable: false),
                         isActive: self.$createNoteScreenActivated
                     ) {
                         EmptyView()

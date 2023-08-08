@@ -18,12 +18,13 @@ struct HomeScreen: View {
                 TopBar()
                 
                 // List of Accounts
-//                AccountList()
+                //                AccountList()
                 Spacer()
                 
                 // Bottom Bar with + Button
                 BottomBar()
             }
+            .navigationBarBackButtonHidden(true)
             .background(Color("Background"))
             
         }

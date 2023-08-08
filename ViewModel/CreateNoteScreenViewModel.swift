@@ -22,13 +22,14 @@ class CreateNoteScreenViewModel: ObservableObject {
         guard !self.isCreateNoteInProgress else {
             return
         }
+        self.isCreateNoteInProgress = true
+        
         //TODO: Remove this once the login api is implemented
         onSuccess()
         self.isCreateNoteInProgress = false
         
-        self.isCreateNoteInProgress = true
         
-        ApiService().get(type: LoginStruct.self, endpoint: "accounts/\(accountId)/notes"){
+        ApiService().get(type: CreateNoteStruct.self, endpoint: "accounts/\(accountId)/notes"){
             [weak self]  result, statusCode in
             switch result {
             case .success(_):
@@ -38,9 +39,11 @@ class CreateNoteScreenViewModel: ObservableObject {
                 }
                 
             case .failure(let error):
-                print("error loading data: \(error)")
-                onFailure()
-                self?.isCreateNoteInProgress = false
+                DispatchQueue.main.async {
+                    print("error loading data: \(error)")
+                    onFailure()
+                    self?.isCreateNoteInProgress = false
+                }
             }
             
         }
