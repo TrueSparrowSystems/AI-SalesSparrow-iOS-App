@@ -35,6 +35,11 @@ class AccountSearchViewModel: ObservableObject {
         print("Query String--> \(searchText)")
         let searchUrl = "/api/v1/accounts"
         let params: [String: Any] = ["q": searchText]
+        
+        //TODO: Remove this dummy data once api is available
+        self.accountListData.account_ids = ["1","2","3"]
+        self.accountListData.account_map_by_id = ["1": Account(id: "1", name: "Abc"), "2":Account(id: "2", name: "acd"), "3":Account(id: "3", name: "bad")]
+        
 
         ApiService().get(type: SearchAccountStruct.self, endpoint: searchUrl, params: params) { [weak self] result, statusCode in
             switch result {
@@ -46,7 +51,8 @@ class AccountSearchViewModel: ObservableObject {
                 
             case .failure(let error):
                 DispatchQueue.main.async {
-                    self?.accountListData = .init(account_ids: [], account_map_by_id: [:])
+                    //TODO: Uncomment this line once api is available
+//                    self?.accountListData = .init(account_ids: [], account_map_by_id: [:])
                 }
                 print("Error loading data: \(error)")
                 // Handle error if needed
