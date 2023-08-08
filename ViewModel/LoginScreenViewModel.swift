@@ -10,39 +10,41 @@ import Foundation
 
 // A struct that represents the meta data of the list
 struct LoginStruct: Codable {
-    var salesforce_connect_url: String
+    var url: String
 }
 
 // A class that represents the view model of the LoginScreen
 class LoginScreenViewModel: ObservableObject {
-    @Published var loginData = LoginStruct(salesforce_connect_url: "")
+    @Published var loginData = LoginStruct(url: "")
     @Published var isfetchUrlInProgress = false
     @Published var isLoginInProgress = false
     var apiService = DependencyContainer.shared.apiService
     
     func fetchSalesforceConnectUrl(onSuccess : @escaping(String)-> Void, onFailure : @escaping()-> Void) {
-        self.loginData.salesforce_connect_url = "https://login.salesforce.com/services/oauth2/authorize?response_type=code&client_id=3MVG9ZUGg10Hh227MLPM3wiLMlm14912oDqdl4sBAgV3rUL880XmgYEXzKDYkuelHPJaxNtcjpXvY0bMjUSZZ&redirect_uri=salessparrow://oauth/success"
+        self.loginData.url = "https://login.salesforce.com/services/oauth2/authorize?response_type=code&client_id=3MVG9ZUGg10Hh227MLPM3wiLMlm14912oDqdl4sBAgV3rUL880XmgYEXzKDYkuelHPJaxNtcjpXvY0bMjUSZZ&redirect_uri=salessparrow://oauth/success"
         
         guard !self.isfetchUrlInProgress else {return}
-        guard self.loginData.salesforce_connect_url == "" else {
-            onSuccess(self.loginData.salesforce_connect_url)
+        guard self.loginData.url == "" else {
+            onSuccess(self.loginData.url)
             return
         }
         self.isfetchUrlInProgress = true
-        apiService.get(type: LoginStruct.self, endpoint: ""){
+        apiService.get(type: LoginStruct.self, endpoint: "/salesForce-connect-uri"){
             [weak self]  result, statusCode in
             switch result {
             case .success(let results):
                 DispatchQueue.main.async {
-                    self?.loginData.salesforce_connect_url = results.salesforce_connect_url
-                    onSuccess(results.salesforce_connect_url)
+                    self?.loginData.url = results.url
+                    onSuccess(results.url)
                     self?.isfetchUrlInProgress = false
                 }
                 
             case .failure(let error):
-                print("error loading data: \(error)")
-                onFailure()
-                self?.isfetchUrlInProgress = false
+                DispatchQueue.main.async {
+                    print("error loading data: \(error)")
+                    onFailure()
+                    self?.isfetchUrlInProgress = false
+                }
             }
             
         }

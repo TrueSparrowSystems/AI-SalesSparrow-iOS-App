@@ -38,9 +38,10 @@ final class SalesSparrowUITests: XCTestCase {
         app.launch()
         
         let timeout = 2
-        let addButton = app.buttons["btn_connect_salesforce"]
-        XCTAssertTrue(addButton.waitForExistence(timeout: TimeInterval(timeout)))
-        addButton.tap()
+        let salesforceConnectButton = app.buttons["btn_connect_salesforce"]
+        XCTAssertTrue(salesforceConnectButton.waitForExistence(timeout: TimeInterval(timeout)))
+        salesforceConnectButton.tap()
+        app.activate()
         
     }
     

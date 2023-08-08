@@ -21,6 +21,10 @@ struct SalesSparrowApp: App {
     
     init() {
         let isRunningUITests = ProcessInfo.processInfo.arguments.contains("isRunningUITests")
+        if(isRunningUITests && ProcessInfo.processInfo.arguments.count > 2){
+            let errorArgument = ProcessInfo.processInfo.arguments[2]
+            Environments.shared.vars["argument"] = errorArgument
+        }
         DependencyContainer.shared.setApiService(isRunningUITests: isRunningUITests)
     }
     
