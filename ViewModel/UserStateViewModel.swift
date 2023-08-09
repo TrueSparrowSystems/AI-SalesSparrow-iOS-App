@@ -23,6 +23,8 @@ class UserStateViewModel: ObservableObject {
     
     func logOut()  {
         guard !self.isLogOutInProgress else {return}
+        // TODO: remove this line once API is available
+        self.isUserLoggedIn = false
         DispatchQueue.main.async {
             self.isLogOutInProgress = true
             

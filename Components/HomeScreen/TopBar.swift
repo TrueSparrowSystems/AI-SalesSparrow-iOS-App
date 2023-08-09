@@ -13,6 +13,7 @@ struct TopBar: View {
     @State var createNoteScreenActivated = false
     @State var selectedAccountId: String? = nil
     @State var selectedAccountName: String? = nil
+    @EnvironmentObject var userStateViewModel : UserStateViewModel
     
     var body: some View {
         HStack {
@@ -49,6 +50,16 @@ struct TopBar: View {
                         self.createNoteScreenActivated = true
                     })
                 }
+            Text("AB")
+                .frame(width: 22, height:22)
+                .font(.custom("Nunito-Bold", size: 7))
+                .foregroundColor(.black)
+                .background(Color(hex: "#C5B8FA"))
+                .clipShape(RoundedRectangle(cornerRadius: 11))
+                .onTapGesture {
+                    userStateViewModel.logOut()
+                }
+                 
         }
         .foregroundColor(Color("TextPrimary"))
         .padding(EdgeInsets(top: 50, leading: 20, bottom: 0, trailing: 20))
@@ -77,8 +88,8 @@ struct TopBar: View {
     }
 }
 
-//struct TopBar_Previews: PreviewProvider {
-//    static var previews: some View {
-//        TopBar()
-//    }
-//}
+struct TopBar_Previews: PreviewProvider {
+    static var previews: some View {
+        TopBar()
+    }
+}
