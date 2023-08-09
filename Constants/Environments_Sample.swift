@@ -29,14 +29,17 @@ class Environments_Sample : ObservableObject {
         case .development:
             self.vars = [
                 "API_ENDPOINT": "https://sales.quick-poc.com/",
+                "redirect_uri": "salessparrowdev://oauth/success",
             ]
         case .staging:
             self.vars =  [
                 "API_ENDPOINT": "https://sales.quick-poc.com/",
+                "redirect_uri": "salessparrowdev://oauth/success",
             ]
         case .production:
             self.vars =   [
                 "API_ENDPOINT": "abc.com",
+                "redirect_uri": "salessparrow://oauth/success",
             ]
         }
     }

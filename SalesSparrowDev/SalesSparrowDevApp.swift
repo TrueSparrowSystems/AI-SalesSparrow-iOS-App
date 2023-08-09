@@ -1,5 +1,5 @@
 //
-//  SalesSparrowApp.swift
+//  SalesSparrowDevApp.swift
 //  SalesSparrow
 //
 //  Created by Mohit Charkha on 31/07/23.
@@ -8,11 +8,11 @@
 import SwiftUI
 
 @main
-struct SalesSparrowApp: App {
+struct SalesSparrowDevApp: App {
     
     // The Core Data context for the app
     let persistenceController = PersistenceController.shared
-    var environments: () = Environments.shared.setTarget(target: BuildTarget.production)
+    var environments: () = Environments.shared.setTarget(target: BuildTarget.development)
     @StateObject var userStateViewModel = UserStateViewModel.shared
     
     // The app delegate
@@ -41,3 +41,4 @@ class DependencyContainer: ObservableObject {
         apiService = isRunningUITests ? MockAPIService() : ApiService()
     }
 }
+

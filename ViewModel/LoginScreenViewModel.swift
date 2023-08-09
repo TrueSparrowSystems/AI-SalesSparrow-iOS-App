@@ -21,7 +21,7 @@ class LoginScreenViewModel: ObservableObject {
     var apiService = DependencyContainer.shared.apiService
 
     func fetchSalesforceConnectUrl(onSuccess : @escaping(String)-> Void, onFailure : @escaping()-> Void) {
-        self.loginData.url = "https://login.salesforce.com/services/oauth2/authorize?response_type=code&client_id=3MVG9ZUGg10Hh227MLPM3wiLMlm14912oDqdl4sBAgV3rUL880XmgYEXzKDYkuelHPJaxNtcjpXvY0bMjUSZZ&redirect_uri=salessparrow://oauth/success"
+        self.loginData.url = "https://test.salesforce.com/services/oauth2/authorize?response_type=code&client_id=3MVG9ZUGg10Hh227MLPM3wiLMlm14912oDqdl4sBAgV3rUL880XmgYEXzKDYkuelHPJaxNtcjpXvY0bMjUSZZ&redirect_uri=\(Environments.shared.vars["redirect_uri"] ?? "")"
 
         guard !self.isfetchUrlInProgress else {return}
         guard self.loginData.url == "" else {
@@ -29,7 +29,7 @@ class LoginScreenViewModel: ObservableObject {
             return
         }
         self.isfetchUrlInProgress = true
-        let params: [String: Any] = ["redirect_uri": "salessparrow://oauth/success"]
+        let params: [String: Any] = ["redirect_uri": Environments.shared.vars["redirect_uri"] ?? ""]
         apiService.get(type: LoginStruct.self, endpoint: "/v1/auth/salesforce/redirect-url", params: params){
             [weak self]  result, statusCode in
             switch result {

@@ -8,6 +8,74 @@
 
 /* Begin PBXBuildFile section */
 		01069F182A83641C0003F8F5 /* AccountDetailsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01069F172A83641C0003F8F5 /* AccountDetailsScreen.swift */; };
+		019595BB2A83CD76008425AD /* SalesSparrowDevApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019595BA2A83CD76008425AD /* SalesSparrowDevApp.swift */; };
+		019595C62A83CDDF008425AD /* Nunito-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D2CB5092A77CF570057C73F /* Nunito-Black.ttf */; };
+		019595C72A83CDE4008425AD /* Nunito-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D2CB50A2A77CF570057C73F /* Nunito-BlackItalic.ttf */; };
+		019595C82A83CDEE008425AD /* Nunito-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D2CB4FF2A77CF560057C73F /* Nunito-Bold.ttf */; };
+		019595C92A83CDF2008425AD /* Nunito-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D2CB5032A77CF560057C73F /* Nunito-BoldItalic.ttf */; };
+		019595CA2A83CDF5008425AD /* Nunito-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D2CB4FD2A77CF560057C73F /* Nunito-ExtraBold.ttf */; };
+		019595CB2A83CDF7008425AD /* Nunito-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D2CB5002A77CF560057C73F /* Nunito-ExtraBoldItalic.ttf */; };
+		019595CC2A83CDFA008425AD /* Nunito-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D2CB5052A77CF570057C73F /* Nunito-ExtraLight.ttf */; };
+		019595CD2A83CDFD008425AD /* Nunito-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D2CB4FB2A77CF560057C73F /* Nunito-ExtraLightItalic.ttf */; };
+		019595CE2A83CE00008425AD /* Nunito-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D2CB5072A77CF570057C73F /* Nunito-Italic.ttf */; };
+		019595CF2A83CE03008425AD /* Nunito-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D2CB5042A77CF560057C73F /* Nunito-Light.ttf */; };
+		019595D02A83CE06008425AD /* Nunito-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D2CB5012A77CF560057C73F /* Nunito-LightItalic.ttf */; };
+		019595D12A83CE08008425AD /* Nunito-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D2CB5022A77CF560057C73F /* Nunito-Medium.ttf */; };
+		019595D22A83CE0B008425AD /* Nunito-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D2CB4FC2A77CF560057C73F /* Nunito-MediumItalic.ttf */; };
+		019595D32A83CE0D008425AD /* Nunito-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D2CB5082A77CF570057C73F /* Nunito-Regular.ttf */; };
+		019595D42A83CE10008425AD /* Nunito-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D2CB5062A77CF570057C73F /* Nunito-SemiBold.ttf */; };
+		019595D52A83CE12008425AD /* Nunito-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D2CB4FE2A77CF560057C73F /* Nunito-SemiBoldItalic.ttf */; };
+		019595D62A83CE20008425AD /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBB50782A77C05800B58F88 /* LoginScreen.swift */; };
+		019595D72A83CE23008425AD /* CreateNoteScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC43C552A7A909E002162FE /* CreateNoteScreen.swift */; };
+		019595D82A83CE26008425AD /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC43C572A7B802D002162FE /* HomeScreen.swift */; };
+		019595D92A83CE2A008425AD /* AccountDetailsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01069F172A83641C0003F8F5 /* AccountDetailsScreen.swift */; };
+		019595DA2A83CE61008425AD /* Tasks+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8C7D2E2A77A196005D597E /* Tasks+CoreDataClass.swift */; };
+		019595DB2A83CE63008425AD /* Tasks+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8C7D302A77A1C5005D597E /* Tasks+CoreDataProperties.swift */; };
+		019595DC2A83CE68008425AD /* BaseRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8C7D292A77A12B005D597E /* BaseRepository.swift */; };
+		019595DD2A83CE6A008425AD /* TaskRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8C7D2B2A77A142005D597E /* TaskRepository.swift */; };
+		019595DE2A83CE6D008425AD /* BaseEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8C7D252A77A0EE005D597E /* BaseEntity.swift */; };
+		019595DF2A83CE6F008425AD /* MetaEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8C7D272A77A111005D597E /* MetaEntity.swift */; };
+		019595E02A83CE71008425AD /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8C7D322A77A1E5005D597E /* ApiService.swift */; };
+		019595E12A83CE74008425AD /* ApiHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8C7D342A77A22F005D597E /* ApiHelper.swift */; };
+		019595E22A83CE76008425AD /* ApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8C7D372A77A254005D597E /* ApiError.swift */; };
+		019595E32A83CE7E008425AD /* BasicHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8C7D1E2A77A07F005D597E /* BasicHelper.swift */; };
+		019595E42A83CE81008425AD /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8C7D202A77A09F005D597E /* ColorExtension.swift */; };
+		019595E52A83CE83008425AD /* DeviceSettingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC43C512A7A69E0002162FE /* DeviceSettingManager.swift */; };
+		019595E62A83CE85008425AD /* UIScreenExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE11C8B2A8361F000D27006 /* UIScreenExtension.swift */; };
+		019595E72A83CE8C008425AD /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE11C832A8283AE00D27006 /* Toast.swift */; };
+		019595E82A83CE8E008425AD /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE11C852A8283EF00D27006 /* ToastView.swift */; };
+		019595E92A83CE91008425AD /* ToastModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE11C872A82842100D27006 /* ToastModifier.swift */; };
+		019595EA2A83CE93008425AD /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE11C892A82845B00D27006 /* ViewExtension.swift */; };
+		019595EB2A83CE97008425AD /* AccountSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B393FF12A7AAA2D00572F66 /* AccountSearch.swift */; };
+		019595EC2A83CE9A008425AD /* TopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B583BD72A7BBEF2005B97D0 /* TopBar.swift */; };
+		019595ED2A83CE9C008425AD /* AccountList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B583BDB2A7BE818005B97D0 /* AccountList.swift */; };
+		019595EE2A83CE9E008425AD /* BottomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B583BDD2A7BEB11005B97D0 /* BottomBar.swift */; };
+		019595EF2A83CEA5008425AD /* TermsBottomStrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC43C4A2A78EC01002162FE /* TermsBottomStrip.swift */; };
+		019595F02A83CEAA008425AD /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8C7D152A779F0C005D597E /* ListView.swift */; };
+		019595F12A83CEAD008425AD /* ListElementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8C7D172A779F37005D597E /* ListElementView.swift */; };
+		019595F22A83CEAF008425AD /* ExpandableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8C7D192A779F95005D597E /* ExpandableTextView.swift */; };
+		019595F32A83CEB1008425AD /* DateTimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8C7D1B2A77A057005D597E /* DateTimePicker.swift */; };
+		019595F42A83CEB7008425AD /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8C7D112A779ECD005D597E /* ListViewModel.swift */; };
+		019595F52A83CEBA008425AD /* LoginScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E847F2A77E83E00E9FB83 /* LoginScreenViewModel.swift */; };
+		019595F62A83CEBC008425AD /* AccountSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B393FF32A7AAAF600572F66 /* AccountSearchViewModel.swift */; };
+		019595F72A83CEBE008425AD /* UserStateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC43C532A7A8CF8002162FE /* UserStateViewModel.swift */; };
+		019595F82A83CEC1008425AD /* CreateNoteScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC43C592A7B8A68002162FE /* CreateNoteScreenViewModel.swift */; };
+		019595F92A83CEC3008425AD /* ToastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE11C8D2A836E5900D27006 /* ToastViewModel.swift */; };
+		019595FA2A83CEC9008425AD /* Environments_Sample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8C7D0A2A779CE0005D597E /* Environments_Sample.swift */; };
+		019595FB2A83CECC008425AD /* Environments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8C7D0C2A779D14005D597E /* Environments.swift */; };
+		019595FC2A83CED0008425AD /* MockResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD618B12A80E504007FA929 /* MockResponse.swift */; };
+		019595FD2A83CED8008425AD /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8C7CE22A779A99005D597E /* Persistence.swift */; };
+		019595FE2A83CEDB008425AD /* SalesSparrow.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6D8C7CE42A779A99005D597E /* SalesSparrow.xcdatamodeld */; };
+		019595FF2A83CEDD008425AD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8C7CDB2A779A97005D597E /* ContentView.swift */; };
+		019596002A83CEE0008425AD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8C7D0E2A779E97005D597E /* AppDelegate.swift */; };
+		019596012A83CEE7008425AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6D8C7CDD2A779A99005D597E /* Assets.xcassets */; };
+		019596022A83CEEA008425AD /* CONTRIBUTING.md in Resources */ = {isa = PBXBuildFile; fileRef = 6DBB506E2A77A49400B58F88 /* CONTRIBUTING.md */; };
+		019596032A83CEED008425AD /* CODE_OF_CONDUCT.md in Resources */ = {isa = PBXBuildFile; fileRef = 6DBB506C2A77A47200B58F88 /* CODE_OF_CONDUCT.md */; };
+		019596042A83CEF1008425AD /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 6DBB506A2A77A45E00B58F88 /* LICENSE */; };
+		019596072A83D394008425AD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 019596062A83D394008425AD /* GoogleService-Info.plist */; };
+		019596102A83D77C008425AD /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 0195960F2A83D77C008425AD /* FirebaseCrashlytics */; };
+		019596122A83D7B4008425AD /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 019596112A83D7B4008425AD /* FirebaseCrashlytics */; };
+		019596142A83D7D8008425AD /* Pods_SalesSparrow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 019596132A83D7D8008425AD /* Pods_SalesSparrow.framework */; };
 		4B393FEA2A7A755100572F66 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4B393FE92A7A755100572F66 /* GoogleService-Info.plist */; };
 		4B393FF22A7AAA2D00572F66 /* AccountSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B393FF12A7AAA2D00572F66 /* AccountSearch.swift */; };
 		4B393FF42A7AAAF600572F66 /* AccountSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B393FF32A7AAAF600572F66 /* AccountSearchViewModel.swift */; };
@@ -64,10 +132,7 @@
 		6DBB506F2A77A49400B58F88 /* CONTRIBUTING.md in Resources */ = {isa = PBXBuildFile; fileRef = 6DBB506E2A77A49400B58F88 /* CONTRIBUTING.md */; };
 		6DBB50732A77A69100B58F88 /* BaseRepositortTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBB50722A77A69100B58F88 /* BaseRepositortTests.swift */; };
 		6DBB507A2A77C58300B58F88 /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBB50782A77C05800B58F88 /* LoginScreen.swift */; };
-		6DC332C52A7CE3FA00FD5767 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 6DC332C42A7CE3FA00FD5767 /* FirebaseCrashlytics */; };
-		6DC332C72A7CE40400FD5767 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 6DC332C62A7CE40400FD5767 /* FirebaseCrashlytics */; };
 		6DC43C4B2A78EC01002162FE /* TermsBottomStrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC43C4A2A78EC01002162FE /* TermsBottomStrip.swift */; };
-		6DC43C502A7A4B86002162FE /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 6DC43C4F2A7A4B86002162FE /* FirebaseCrashlytics */; };
 		6DC43C522A7A69E1002162FE /* DeviceSettingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC43C512A7A69E0002162FE /* DeviceSettingManager.swift */; };
 		6DC43C542A7A8CF8002162FE /* UserStateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC43C532A7A8CF8002162FE /* UserStateViewModel.swift */; };
 		6DC43C562A7A909E002162FE /* CreateNoteScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC43C552A7A909E002162FE /* CreateNoteScreen.swift */; };
@@ -107,6 +172,12 @@
 
 /* Begin PBXFileReference section */
 		01069F172A83641C0003F8F5 /* AccountDetailsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailsScreen.swift; sourceTree = "<group>"; };
+		019595B82A83CD76008425AD /* SalesSparrowDev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SalesSparrowDev.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		019595BA2A83CD76008425AD /* SalesSparrowDevApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalesSparrowDevApp.swift; sourceTree = "<group>"; };
+		019596052A83CF97008425AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		019596062A83D394008425AD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		019596132A83D7D8008425AD /* Pods_SalesSparrow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_SalesSparrow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		019596172A83DDB9008425AD /* SalesSparrowDev.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SalesSparrowDev.entitlements; sourceTree = "<group>"; };
 		11C28B9A7C622812E3FDFC07 /* Pods-SalesSparrowTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SalesSparrowTests.debug.xcconfig"; path = "Target Support Files/Pods-SalesSparrowTests/Pods-SalesSparrowTests.debug.xcconfig"; sourceTree = "<group>"; };
 		216D9F06D488828BC1022AFD /* Pods_SalesSparrow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SalesSparrow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B4F1FDE360243CED55CFB69 /* Pods-SalesSparrow.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SalesSparrow.release.xcconfig"; path = "Target Support Files/Pods-SalesSparrow/Pods-SalesSparrow.release.xcconfig"; sourceTree = "<group>"; };
@@ -192,12 +263,21 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		019595B52A83CD76008425AD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				019596142A83D7D8008425AD /* Pods_SalesSparrow.framework in Frameworks */,
+				019596102A83D77C008425AD /* FirebaseCrashlytics in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6D8C7CD32A779A97005D597E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				C437CE5A3DFBB0B0D45D330A /* Pods_SalesSparrow.framework in Frameworks */,
-				6DC43C502A7A4B86002162FE /* FirebaseCrashlytics in Frameworks */,
+				019596122A83D7B4008425AD /* FirebaseCrashlytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,7 +286,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6CCA3BABA0A693EB92C9B4C2 /* Pods_SalesSparrowTests.framework in Frameworks */,
-				6DC332C72A7CE40400FD5767 /* FirebaseCrashlytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -215,13 +294,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				A97561513E5508D62A2D5E4C /* Pods_SalesSparrow_SalesSparrowUITests.framework in Frameworks */,
-				6DC332C52A7CE3FA00FD5767 /* FirebaseCrashlytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		019595B92A83CD76008425AD /* SalesSparrowDev */ = {
+			isa = PBXGroup;
+			children = (
+				019596172A83DDB9008425AD /* SalesSparrowDev.entitlements */,
+				019596062A83D394008425AD /* GoogleService-Info.plist */,
+				019596052A83CF97008425AD /* Info.plist */,
+				019595BA2A83CD76008425AD /* SalesSparrowDevApp.swift */,
+			);
+			path = SalesSparrowDev;
+			sourceTree = "<group>";
+		};
 		28E3D4ECA8B04D775986C988 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -287,6 +376,7 @@
 				6DBB506C2A77A47200B58F88 /* CODE_OF_CONDUCT.md */,
 				6DBB506A2A77A45E00B58F88 /* LICENSE */,
 				6D8C7CD82A779A97005D597E /* SalesSparrow */,
+				019595B92A83CD76008425AD /* SalesSparrowDev */,
 				6D8C7CEE2A779A9A005D597E /* SalesSparrowTests */,
 				6D8C7CF82A779A9A005D597E /* SalesSparrowUITests */,
 				6D8C7CD72A779A97005D597E /* Products */,
@@ -301,6 +391,7 @@
 				6D8C7CD62A779A97005D597E /* SalesSparrow.app */,
 				6D8C7CEB2A779A9A005D597E /* SalesSparrowTests.xctest */,
 				6D8C7CF52A779A9A005D597E /* SalesSparrowUITests.xctest */,
+				019595B82A83CD76008425AD /* SalesSparrowDev.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -309,8 +400,8 @@
 			isa = PBXGroup;
 			children = (
 				4B393FE92A7A755100572F66 /* GoogleService-Info.plist */,
-				6DBB50692A77A41600B58F88 /* SalesSparrow.entitlements */,
 				6DBB50682A77A30500B58F88 /* Info.plist */,
+				6DBB50692A77A41600B58F88 /* SalesSparrow.entitlements */,
 				6D8C7CD92A779A97005D597E /* SalesSparrowApp.swift */,
 			);
 			path = SalesSparrow;
@@ -472,6 +563,7 @@
 		DD0CC12E1C80EEB530D405BD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				019596132A83D7D8008425AD /* Pods_SalesSparrow.framework */,
 				216D9F06D488828BC1022AFD /* Pods_SalesSparrow.framework */,
 				6A561769BF628419998C917E /* Pods_SalesSparrow_SalesSparrowUITests.framework */,
 				CCFD66DA5D9BD43B8402F504 /* Pods_SalesSparrowTests.framework */,
@@ -482,6 +574,26 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		019595B72A83CD76008425AD /* SalesSparrowDev */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 019595C52A83CD77008425AD /* Build configuration list for PBXNativeTarget "SalesSparrowDev" */;
+			buildPhases = (
+				019595B42A83CD76008425AD /* Sources */,
+				019595B52A83CD76008425AD /* Frameworks */,
+				019595B62A83CD76008425AD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SalesSparrowDev;
+			packageProductDependencies = (
+				0195960F2A83D77C008425AD /* FirebaseCrashlytics */,
+			);
+			productName = SalesSparrowDev;
+			productReference = 019595B82A83CD76008425AD /* SalesSparrowDev.app */;
+			productType = "com.apple.product-type.application";
+		};
 		6D8C7CD52A779A97005D597E /* SalesSparrow */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6D8C7CFF2A779A9A005D597E /* Build configuration list for PBXNativeTarget "SalesSparrow" */;
@@ -497,7 +609,7 @@
 			);
 			name = SalesSparrow;
 			packageProductDependencies = (
-				6DC43C4F2A7A4B86002162FE /* FirebaseCrashlytics */,
+				019596112A83D7B4008425AD /* FirebaseCrashlytics */,
 			);
 			productName = SalesSparrow;
 			productReference = 6D8C7CD62A779A97005D597E /* SalesSparrow.app */;
@@ -519,7 +631,6 @@
 			);
 			name = SalesSparrowTests;
 			packageProductDependencies = (
-				6DC332C62A7CE40400FD5767 /* FirebaseCrashlytics */,
 			);
 			productName = SalesSparrowTests;
 			productReference = 6D8C7CEB2A779A9A005D597E /* SalesSparrowTests.xctest */;
@@ -541,7 +652,6 @@
 			);
 			name = SalesSparrowUITests;
 			packageProductDependencies = (
-				6DC332C42A7CE3FA00FD5767 /* FirebaseCrashlytics */,
 			);
 			productName = SalesSparrowUITests;
 			productReference = 6D8C7CF52A779A9A005D597E /* SalesSparrowUITests.xctest */;
@@ -557,6 +667,9 @@
 				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
+					019595B72A83CD76008425AD = {
+						CreatedOnToolsVersion = 14.3;
+					};
 					6D8C7CD52A779A97005D597E = {
 						CreatedOnToolsVersion = 14.3;
 					};
@@ -580,7 +693,7 @@
 			);
 			mainGroup = 6D8C7CCD2A779A97005D597E;
 			packageReferences = (
-				6DC43C4E2A7A4B86002162FE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				0195960E2A83D77C008425AD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 6D8C7CD72A779A97005D597E /* Products */;
 			projectDirPath = "";
@@ -589,11 +702,40 @@
 				6D8C7CD52A779A97005D597E /* SalesSparrow */,
 				6D8C7CEA2A779A9A005D597E /* SalesSparrowTests */,
 				6D8C7CF42A779A9A005D597E /* SalesSparrowUITests */,
+				019595B72A83CD76008425AD /* SalesSparrowDev */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		019595B62A83CD76008425AD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				019595C92A83CDF2008425AD /* Nunito-BoldItalic.ttf in Resources */,
+				019595CD2A83CDFD008425AD /* Nunito-ExtraLightItalic.ttf in Resources */,
+				019596032A83CEED008425AD /* CODE_OF_CONDUCT.md in Resources */,
+				019596022A83CEEA008425AD /* CONTRIBUTING.md in Resources */,
+				019595CF2A83CE03008425AD /* Nunito-Light.ttf in Resources */,
+				019596012A83CEE7008425AD /* Assets.xcassets in Resources */,
+				019595D42A83CE10008425AD /* Nunito-SemiBold.ttf in Resources */,
+				019595D22A83CE0B008425AD /* Nunito-MediumItalic.ttf in Resources */,
+				019595CE2A83CE00008425AD /* Nunito-Italic.ttf in Resources */,
+				019595D12A83CE08008425AD /* Nunito-Medium.ttf in Resources */,
+				019595C82A83CDEE008425AD /* Nunito-Bold.ttf in Resources */,
+				019595CC2A83CDFA008425AD /* Nunito-ExtraLight.ttf in Resources */,
+				019595CB2A83CDF7008425AD /* Nunito-ExtraBoldItalic.ttf in Resources */,
+				019595D32A83CE0D008425AD /* Nunito-Regular.ttf in Resources */,
+				019595D52A83CE12008425AD /* Nunito-SemiBoldItalic.ttf in Resources */,
+				019596042A83CEF1008425AD /* LICENSE in Resources */,
+				019595D02A83CE06008425AD /* Nunito-LightItalic.ttf in Resources */,
+				019595C62A83CDDF008425AD /* Nunito-Black.ttf in Resources */,
+				019595C72A83CDE4008425AD /* Nunito-BlackItalic.ttf in Resources */,
+				019595CA2A83CDF5008425AD /* Nunito-ExtraBold.ttf in Resources */,
+				019596072A83D394008425AD /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6D8C7CD42A779A97005D597E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -708,6 +850,57 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		019595B42A83CD76008425AD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				019595EB2A83CE97008425AD /* AccountSearch.swift in Sources */,
+				019595E82A83CE8E008425AD /* ToastView.swift in Sources */,
+				019596002A83CEE0008425AD /* AppDelegate.swift in Sources */,
+				019595FD2A83CED8008425AD /* Persistence.swift in Sources */,
+				019595D82A83CE26008425AD /* HomeScreen.swift in Sources */,
+				019595FC2A83CED0008425AD /* MockResponse.swift in Sources */,
+				019595E52A83CE83008425AD /* DeviceSettingManager.swift in Sources */,
+				019595E92A83CE91008425AD /* ToastModifier.swift in Sources */,
+				019595DB2A83CE63008425AD /* Tasks+CoreDataProperties.swift in Sources */,
+				019595DF2A83CE6F008425AD /* MetaEntity.swift in Sources */,
+				019595DC2A83CE68008425AD /* BaseRepository.swift in Sources */,
+				019595DD2A83CE6A008425AD /* TaskRepository.swift in Sources */,
+				019595E42A83CE81008425AD /* ColorExtension.swift in Sources */,
+				019595F22A83CEAF008425AD /* ExpandableTextView.swift in Sources */,
+				019595F52A83CEBA008425AD /* LoginScreenViewModel.swift in Sources */,
+				019595FB2A83CECC008425AD /* Environments.swift in Sources */,
+				019595ED2A83CE9C008425AD /* AccountList.swift in Sources */,
+				019595E12A83CE74008425AD /* ApiHelper.swift in Sources */,
+				019595EC2A83CE9A008425AD /* TopBar.swift in Sources */,
+				019595DA2A83CE61008425AD /* Tasks+CoreDataClass.swift in Sources */,
+				019595FE2A83CEDB008425AD /* SalesSparrow.xcdatamodeld in Sources */,
+				019595F82A83CEC1008425AD /* CreateNoteScreenViewModel.swift in Sources */,
+				019595E22A83CE76008425AD /* ApiError.swift in Sources */,
+				019595E02A83CE71008425AD /* ApiService.swift in Sources */,
+				019595F12A83CEAD008425AD /* ListElementView.swift in Sources */,
+				019595FA2A83CEC9008425AD /* Environments_Sample.swift in Sources */,
+				019595DE2A83CE6D008425AD /* BaseEntity.swift in Sources */,
+				019595F92A83CEC3008425AD /* ToastViewModel.swift in Sources */,
+				019595D92A83CE2A008425AD /* AccountDetailsScreen.swift in Sources */,
+				019595EF2A83CEA5008425AD /* TermsBottomStrip.swift in Sources */,
+				019595BB2A83CD76008425AD /* SalesSparrowDevApp.swift in Sources */,
+				019595EE2A83CE9E008425AD /* BottomBar.swift in Sources */,
+				019595F62A83CEBC008425AD /* AccountSearchViewModel.swift in Sources */,
+				019595D62A83CE20008425AD /* LoginScreen.swift in Sources */,
+				019595FF2A83CEDD008425AD /* ContentView.swift in Sources */,
+				019595F72A83CEBE008425AD /* UserStateViewModel.swift in Sources */,
+				019595E32A83CE7E008425AD /* BasicHelper.swift in Sources */,
+				019595F32A83CEB1008425AD /* DateTimePicker.swift in Sources */,
+				019595EA2A83CE93008425AD /* ViewExtension.swift in Sources */,
+				019595F02A83CEAA008425AD /* ListView.swift in Sources */,
+				019595E72A83CE8C008425AD /* Toast.swift in Sources */,
+				019595D72A83CE23008425AD /* CreateNoteScreen.swift in Sources */,
+				019595E62A83CE85008425AD /* UIScreenExtension.swift in Sources */,
+				019595F42A83CEB7008425AD /* ListViewModel.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6D8C7CD22A779A97005D597E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -797,6 +990,66 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		019595C32A83CD77008425AD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SalesSparrowDev/SalesSparrowDev.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 98TLCMN66P;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SalesSparrowDev/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.truesparrowsystemspvtltd.SalesSparrowDev;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		019595C42A83CD77008425AD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SalesSparrowDev/SalesSparrowDev.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 98TLCMN66P;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SalesSparrowDev/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.truesparrowsystemspvtltd.SalesSparrowDev;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		6D8C7CFD2A779A9A005D597E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1060,6 +1313,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		019595C52A83CD77008425AD /* Build configuration list for PBXNativeTarget "SalesSparrowDev" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				019595C32A83CD77008425AD /* Debug */,
+				019595C42A83CD77008425AD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		6D8C7CD12A779A97005D597E /* Build configuration list for PBXProject "SalesSparrow" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1099,7 +1361,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		6DC43C4E2A7A4B86002162FE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+		0195960E2A83D77C008425AD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
 			requirement = {
@@ -1110,19 +1372,14 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		6DC332C42A7CE3FA00FD5767 /* FirebaseCrashlytics */ = {
+		0195960F2A83D77C008425AD /* FirebaseCrashlytics */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6DC43C4E2A7A4B86002162FE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = 0195960E2A83D77C008425AD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseCrashlytics;
 		};
-		6DC332C62A7CE40400FD5767 /* FirebaseCrashlytics */ = {
+		019596112A83D7B4008425AD /* FirebaseCrashlytics */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6DC43C4E2A7A4B86002162FE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseCrashlytics;
-		};
-		6DC43C4F2A7A4B86002162FE /* FirebaseCrashlytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 6DC43C4E2A7A4B86002162FE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = 0195960E2A83D77C008425AD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseCrashlytics;
 		};
 /* End XCSwiftPackageProductDependency section */

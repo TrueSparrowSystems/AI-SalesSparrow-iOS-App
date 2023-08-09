@@ -49,9 +49,6 @@ struct ContentView: View {
     
     /// Handle incoming URLs from deep links with the custom URL scheme registered in the app's Info.plist
     private func handleIncomingURL(_ url: URL) {
-        guard url.scheme == "salessparrow" else {
-            return
-        }
         guard let components = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
             print("Invalid URL")
             
