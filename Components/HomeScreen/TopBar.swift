@@ -57,7 +57,7 @@ struct TopBar: View {
             Group {
                 if self.accountDetailScreenActivated && selectedAccountId != nil {
                     NavigationLink(
-                        destination: AccountDetailScreen(pushActive: $accountDetailScreenActivated, accountId: selectedAccountId!),
+                        destination: AccountDetailScreen(accountId: selectedAccountId!),
                         isActive: self.$accountDetailScreenActivated
                     ) {
                         EmptyView()
@@ -78,25 +78,21 @@ struct TopBar: View {
 }
 
 struct AccountDetailScreen: View {
-    @Binding var pushActive: Bool
     var accountId: Account.ID
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
         VStack{
             Text("Pushed the view in into the stack with AccountID - \(accountId)")
                 .navigationBarBackButtonHidden(true)
                 .navigationBarItems(leading: backButton)
-                .onTapGesture {
-                    pushActive = false
-                }
         }
     }
     
     private var backButton: some View {
         Button(action: {
-            // Pop the view from the navigation stack by setting pushActive to false
             // This will dismiss the AccountDetailScreen and go back to the previous view
-            pushActive = false
+            self.presentationMode.wrappedValue.dismiss()
         }) {
             Image(systemName: "chevron.left")
                 .font(.title2)

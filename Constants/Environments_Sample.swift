@@ -17,7 +17,7 @@ class Environments_Sample : ObservableObject {
     var target = _BuildTarget.production
     static let shared = Environments_Sample()
     var vars: [String: String] = [:]
-
+    var testVars: [String: Array<String>] = [:]
     
     
     private init(){

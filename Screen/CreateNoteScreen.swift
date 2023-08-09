@@ -20,22 +20,26 @@ struct CreateNoteScreen : View {
     @State var isAccountSelectable = true
     @State var showAccountSearchView = false
     @State private var toast: Toast? = nil
+    @FocusState private var focused: Bool
     
     var body: some View {
         VStack{
             HStack(alignment: .center){
                 Text(isNoteSaved ? "Done" : "Cancel")
                     .font(.custom("Nunito-Bold", size: 14))
+                    .padding(.vertical, 10)
                     .foregroundColor(Color("CancelText"))
                     .accessibilityIdentifier(isNoteSaved ? "btn_done_create_note" : "btn_cancel_create_note")
                     .onTapGesture {
                         self.presentationMode.wrappedValue.dismiss()
                     }
+                
                 Spacer()
+                
                 Button(action: {
                     isSaveInProgress = true
                     createNoteScreenViewModel.createNote(text: text,accountId: accountId, onSuccess: {
-                        toast = Toast(style: .success, message: "Note is saved to your Salesforce Account")
+                        ToastViewModel.shared.showToast(_toast: Toast(style: .success, message: "Note is saved to your Salesforce Account"))
                         isSaveInProgress = false
                         isNoteSaved = true
                     }, onFailure: {
@@ -66,7 +70,6 @@ struct CreateNoteScreen : View {
                                 .foregroundColor(.white)
                                 .font(.custom("Nunito-Medium", size: 12))
                         }
-                        
                     }
                     .frame(width: 68, height: 32)
                     .background(
@@ -76,7 +79,6 @@ struct CreateNoteScreen : View {
                 })
                 .accessibilityIdentifier("btn_save_note")
                 .disabled(isNoteSaved || isSaveInProgress || accountId == "" || text == "")
-                
             }
             .padding(.vertical, 12)
             
@@ -84,6 +86,7 @@ struct CreateNoteScreen : View {
                 Image("AccountIcon")
                     .resizable()
                     .frame(width: 14, height: 14)
+                
                 Text("Account")
                     .foregroundColor(Color("TextPrimary"))
                     .font(.custom("Nunito-Regular", size: 12))
@@ -126,20 +129,29 @@ struct CreateNoteScreen : View {
             }
             .padding(.top, 12)
             
-            if(isNoteSaved || isSaveInProgress){
-                Text(text)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .font(.custom("Nunito-SemiBold", size: 18))
-                
-            }else{
-                TextField("Add Note",text: $text, axis: .vertical)
-                    .font(.custom("Nunito-SemiBold", size: 18))
+            HStack{
+                if(isNoteSaved || isSaveInProgress){
+                    Text(text)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .font(.custom("Nunito-SemiBold", size: 18))
+                    
+                }else{
+                    TextField("Add Note",text: $text, axis: .vertical)
+                        .font(.custom("Nunito-SemiBold", size: 18))
+                        .focused($focused)
+                }
             }
             Spacer()
+            
         }
         .padding(.horizontal, 12)
         .navigationBarBackButtonHidden(true)
-        .toastView(toast: $toast)
+        .onAppear {
+            // Adding a delay for view to render
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05){
+                focused = true
+            }
+        }
     }
 }
 

@@ -27,13 +27,12 @@ struct ContentView: View {
     
     @StateObject var loginScreenViewModel = LoginScreenViewModel()
     @StateObject var createNoteViewModel = CreateNoteScreenViewModel()
-    
+    @StateObject var toastViewModel = ToastViewModel.shared
     
     /// The body of the view
     var body: some View {
         VStack{
             if(!userStateViewModel.isUserLoggedIn){
-//                HomeScreen()
                 LoginScreen()
             }else {
                 HomeScreen()
@@ -44,6 +43,7 @@ struct ContentView: View {
         }
         .environmentObject(loginScreenViewModel)
         .environmentObject(createNoteViewModel)
+        .toastView(toast: $toastViewModel.toast)
     }
     
     
