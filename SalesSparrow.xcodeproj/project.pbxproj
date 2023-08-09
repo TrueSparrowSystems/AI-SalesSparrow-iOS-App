@@ -75,7 +75,6 @@
 		019596102A83D77C008425AD /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 0195960F2A83D77C008425AD /* FirebaseCrashlytics */; };
 		019596122A83D7B4008425AD /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 019596112A83D7B4008425AD /* FirebaseCrashlytics */; };
 		019596142A83D7D8008425AD /* Pods_SalesSparrow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 019596132A83D7D8008425AD /* Pods_SalesSparrow.framework */; };
-		0195961B2A83ECAF008425AD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0195961A2A83ECAF008425AD /* GoogleService-Info.plist */; };
 		4B393FEA2A7A755100572F66 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4B393FE92A7A755100572F66 /* GoogleService-Info.plist */; };
 		4B393FF22A7AAA2D00572F66 /* AccountSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B393FF12A7AAA2D00572F66 /* AccountSearch.swift */; };
 		4B393FF42A7AAAF600572F66 /* AccountSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B393FF32A7AAAF600572F66 /* AccountSearchViewModel.swift */; };
@@ -83,6 +82,7 @@
 		4B583BDC2A7BE818005B97D0 /* AccountList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B583BDB2A7BE818005B97D0 /* AccountList.swift */; };
 		4B583BDE2A7BEB11005B97D0 /* BottomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B583BDD2A7BEB11005B97D0 /* BottomBar.swift */; };
 		6CCA3BABA0A693EB92C9B4C2 /* Pods_SalesSparrowTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCFD66DA5D9BD43B8402F504 /* Pods_SalesSparrowTests.framework */; };
+		6D0286B12A83ED3F002656ED /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6D0286B02A83ED3F002656ED /* GoogleService-Info.plist */; };
 		6D2CB50B2A77CF570057C73F /* Nunito-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D2CB4FB2A77CF560057C73F /* Nunito-ExtraLightItalic.ttf */; };
 		6D2CB50C2A77CF570057C73F /* Nunito-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D2CB4FC2A77CF560057C73F /* Nunito-MediumItalic.ttf */; };
 		6D2CB50D2A77CF570057C73F /* Nunito-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D2CB4FD2A77CF560057C73F /* Nunito-ExtraBold.ttf */; };
@@ -177,7 +177,6 @@
 		019596052A83CF97008425AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		019596132A83D7D8008425AD /* Pods_SalesSparrow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_SalesSparrow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		019596172A83DDB9008425AD /* SalesSparrowDev.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SalesSparrowDev.entitlements; sourceTree = "<group>"; };
-		0195961A2A83ECAF008425AD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		11C28B9A7C622812E3FDFC07 /* Pods-SalesSparrowTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SalesSparrowTests.debug.xcconfig"; path = "Target Support Files/Pods-SalesSparrowTests/Pods-SalesSparrowTests.debug.xcconfig"; sourceTree = "<group>"; };
 		216D9F06D488828BC1022AFD /* Pods_SalesSparrow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SalesSparrow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B4F1FDE360243CED55CFB69 /* Pods-SalesSparrow.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SalesSparrow.release.xcconfig"; path = "Target Support Files/Pods-SalesSparrow/Pods-SalesSparrow.release.xcconfig"; sourceTree = "<group>"; };
@@ -189,6 +188,7 @@
 		4B583BDD2A7BEB11005B97D0 /* BottomBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBar.swift; sourceTree = "<group>"; };
 		53DA3CE34E5D5B9A7563E443 /* Pods-SalesSparrow-SalesSparrowUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SalesSparrow-SalesSparrowUITests.debug.xcconfig"; path = "Target Support Files/Pods-SalesSparrow-SalesSparrowUITests/Pods-SalesSparrow-SalesSparrowUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		6A561769BF628419998C917E /* Pods_SalesSparrow_SalesSparrowUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SalesSparrow_SalesSparrowUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6D0286B02A83ED3F002656ED /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6D2CB4FB2A77CF560057C73F /* Nunito-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
 		6D2CB4FC2A77CF560057C73F /* Nunito-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-MediumItalic.ttf"; sourceTree = "<group>"; };
 		6D2CB4FD2A77CF560057C73F /* Nunito-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-ExtraBold.ttf"; sourceTree = "<group>"; };
@@ -303,7 +303,7 @@
 		019595B92A83CD76008425AD /* SalesSparrowDev */ = {
 			isa = PBXGroup;
 			children = (
-				0195961A2A83ECAF008425AD /* GoogleService-Info.plist */,
+				6D0286B02A83ED3F002656ED /* GoogleService-Info.plist */,
 				019596172A83DDB9008425AD /* SalesSparrowDev.entitlements */,
 				019596052A83CF97008425AD /* Info.plist */,
 				019595BA2A83CD76008425AD /* SalesSparrowDevApp.swift */,
@@ -732,7 +732,7 @@
 				019595C62A83CDDF008425AD /* Nunito-Black.ttf in Resources */,
 				019595C72A83CDE4008425AD /* Nunito-BlackItalic.ttf in Resources */,
 				019595CA2A83CDF5008425AD /* Nunito-ExtraBold.ttf in Resources */,
-				0195961B2A83ECAF008425AD /* GoogleService-Info.plist in Resources */,
+				6D0286B12A83ED3F002656ED /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
