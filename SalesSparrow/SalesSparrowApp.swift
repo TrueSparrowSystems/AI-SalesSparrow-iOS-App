@@ -15,19 +15,10 @@ struct SalesSparrowApp: App {
     var environments: () = Environments.shared.setTarget(target: BuildTarget.production)
     @StateObject var userStateViewModel = UserStateViewModel.shared
     
-    
     // The app delegate
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
-    init() {
-        let isRunningUITests = ProcessInfo.processInfo.arguments.contains("isRunningUITests")
-        if(isRunningUITests && ProcessInfo.processInfo.arguments.count > 2){
-            let errorArgument = ProcessInfo.processInfo.arguments[2]
-            Environments.shared.vars["argument"] = errorArgument
-        }
-        DependencyContainer.shared.setApiService(isRunningUITests: isRunningUITests)
-    }
-    
+    init() {}
     
     // The main view of the app
     var body: some Scene {

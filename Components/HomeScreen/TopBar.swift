@@ -30,6 +30,7 @@ struct TopBar: View {
                 .onTapGesture {
                     showAccountSearchView = true
                 }
+                .accessibilityIdentifier("btn_search_account")
                 .sheet(isPresented: $showAccountSearchView, onDismiss: {
                     // Clear data
                     print("Clear Search data from View model")

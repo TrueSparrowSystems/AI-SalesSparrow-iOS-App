@@ -30,18 +30,16 @@ class MockAPIService: ApiService {
     
     override func callApi<T: Decodable>(type: T.Type, requestUrl: URLRequest, endpoint: String, completion: @escaping(Result<T, ErrorStruct>, Int?) -> Void) {
         do{
-            if((MockResponse.responseObj[endpoint]?.keys.contains(Environments.shared.vars["argument"] ?? "")) as Bool? ?? false){
-                let response = MockResponse.responseObj[endpoint]?[Environments.shared.vars["argument"] ?? ""]
-                if(response?["statusCode"] as! Int == 401){
-                    UserStateViewModel.shared.logOut()
+            var caseIdentifierFound: String = "default"
+            Environments.shared.testVars["testCaseIdentifiers"]?.forEach { testCaseIdentifier in
+                if let response = MockResponse.responseObj[endpoint]?[testCaseIdentifier] {
+                    caseIdentifierFound = testCaseIdentifier
                 }
-                let errorData = try JSONSerialization.data(withJSONObject: response?["error"]! as Any, options: [])
-                
-                let error = try JSONDecoder().decode(ErrorStruct.self, from: errorData)
-                completion(Result.failure(error), (response?["statusCode"] as! Int))
-            } else{
+            }
+            let response = MockResponse.responseObj[endpoint]?[caseIdentifierFound]
+            
+            if(response?["statusCode"] as! Int == 200) {
                 do{
-                    let response = MockResponse.responseObj[endpoint]?["default"]
                     let responseData = try JSONSerialization.data(withJSONObject: response?["data"]! as Any, options: [])
                     let decodedData = try JSONDecoder().decode(T.self, from: responseData)
                     
@@ -52,6 +50,14 @@ class MockAPIService: ApiService {
                 } catch let decodingError {
                     completion(Result.failure(APIError().decodingError(error: (decodingError as! DecodingError))), 0)
                 }
+            } else {
+                if(response?["statusCode"] as! Int == 401){
+                    UserStateViewModel.shared.logOut()
+                }
+                let errorData = try JSONSerialization.data(withJSONObject: response?["error"]! as Any, options: [])
+                
+                let error = try JSONDecoder().decode(ErrorStruct.self, from: errorData)
+                completion(Result.failure(error), (response?["statusCode"] as! Int))
             }
         }catch let decodingError {
             completion(Result.failure(APIError().decodingError(error: (decodingError as! DecodingError))), 0)
