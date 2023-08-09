@@ -101,6 +101,7 @@ struct CreateNoteScreen : View {
                             .frame(width: 7, height: 4)
                             .padding(.trailing, 6)
                     }
+                    .accessibilityIdentifier("btn_select_account")
                     .background(Color("SelectAccountDropdownBG"))
                     .clipShape(RoundedRectangle(cornerRadius: 4))
                     .onTapGesture {
@@ -139,6 +140,7 @@ struct CreateNoteScreen : View {
                     TextField("Add Note",text: $text, axis: .vertical)
                         .font(.custom("Nunito-SemiBold", size: 18))
                         .focused($focused)
+                        .accessibilityIdentifier("et_create_note")
                 }
             }
             Spacer()

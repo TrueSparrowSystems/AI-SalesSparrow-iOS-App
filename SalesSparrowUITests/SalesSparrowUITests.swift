@@ -113,6 +113,60 @@ final class SalesSparrowUITests: XCTestCase {
         
     }
     
+    func testCreateNoteScreen(){
+        let app = XCUIApplication()
+        app.launchArguments = ["isRunningUITests"]
+        app.launch()
+        
+        let timeout = 2
+        // there should be add note button in it
+        let createNoteBtn = app.buttons["btn_create_note"]
+        XCTAssertTrue(createNoteBtn.waitForExistence(timeout: TimeInterval(timeout)))
+        // add note should be clickable
+        XCTAssertTrue(createNoteBtn.isEnabled)
+        createNoteBtn.tap()
+        
+        //Check if cancel button exists
+        let cancelButton = app.staticTexts["btn_cancel_create_note"]
+        XCTAssertTrue(cancelButton.waitForExistence(timeout: TimeInterval(timeout)))
+        // cancel should be clickable
+        XCTAssertTrue(cancelButton.isEnabled)
+        
+        let saveButton = app.buttons["btn_save_note"]
+        XCTAssertTrue(saveButton.waitForExistence(timeout: TimeInterval(timeout)))
+        // save should not be clickable
+        XCTAssertTrue(!saveButton.isEnabled)
+        
+        let selectAccount = app.staticTexts["btn_select_account"]
+        XCTAssertTrue(selectAccount.waitForExistence(timeout: TimeInterval(timeout)))
+        // select should be clickable
+        XCTAssertTrue(selectAccount.isEnabled)
+        selectAccount.tap()
+        
+        let accountName = "Test Data 1"
+        let searchAccountBtn = app.buttons["btn_search_account_name_\(accountName)"]
+        XCTAssertTrue(searchAccountBtn.waitForExistence(timeout: TimeInterval(timeout)))
+        // Account row should be clickable
+        XCTAssertTrue(searchAccountBtn.isEnabled)
+        searchAccountBtn.tap()
+        
+        //Check for Create Note text field
+        let addNoteTextField = app.textViews["et_create_note"]
+        XCTAssertTrue(addNoteTextField.waitForExistence(timeout: TimeInterval(timeout)))
+        addNoteTextField.tap()
+        //Type Text into the the text field
+        addNoteTextField.typeText("Create A New Note")
+        
+        //Check if the save button is enabled
+        XCTAssertTrue(saveButton.isEnabled)
+        saveButton.tap()
+        
+        let doneButton = app.staticTexts["btn_done_create_note"]
+        XCTAssertTrue(doneButton.waitForExistence(timeout: TimeInterval(timeout)))
+        // cancel should be clickable
+        XCTAssertTrue(doneButton.isEnabled)
+    }
+    
     func testLaunchPerformance() throws {
         if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
             // This measures how long it takes to launch your application.
