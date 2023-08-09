@@ -36,11 +36,12 @@ struct TopBar: View {
                     // Clear data
                     print("Clear Search data from View model")
                 }) {
-                    AccountSearchView(isPresented: $showAccountSearchView, onAccountSelected: { accountId in
+                    AccountSearchView(isPresented: $showAccountSearchView, onAccountSelected: { accountId, accountName in
                         print("\(accountId) Search deatail Account")
                         
                         // Use ID to push view to navigation link
                         selectedAccountId = accountId
+                        selectedAccountName = accountName
                         self.accountDetailsScreenActivated = true
                     }, onNoteCreateSelected: { accountId, accountName in
                         print("Create Note for \(accountName) \(accountId)")
@@ -68,7 +69,7 @@ struct TopBar: View {
             Group {
                 if self.accountDetailsScreenActivated && selectedAccountId != nil {
                     NavigationLink(
-                        destination: AccountDetailsScreen(accountId: selectedAccountId!),
+                        destination: AccountDetailsScreen(accountId: selectedAccountId!, accountName: selectedAccountName!),
                         isActive: self.$accountDetailsScreenActivated
                     ) {
                         EmptyView()

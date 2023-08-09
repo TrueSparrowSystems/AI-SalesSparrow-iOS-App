@@ -14,7 +14,7 @@ struct AccountSearchView: View {
     @Binding var isPresented: Bool // This binding will control the presentation of the sheet
 
     var isCreateNoteFlow: Bool = false
-    var onAccountSelected: ((String) -> Void)? // Callback function to handle account selection
+    var onAccountSelected: ((String, String) -> Void)? // Callback function to handle account selection
     var onNoteCreateSelected: ((String,String) -> Void)?  // Callback function to handle note creation selection
 
     var body: some View {
@@ -63,7 +63,7 @@ struct AccountListView: View {
     var accountIds: [String]
     var isCreateNoteFlow: Bool
     var onNoteCreateSelected: ((String, String) -> Void)?
-    var onAccountSelected: ((String) -> Void)?
+    var onAccountSelected: ((String, String) -> Void)?
     @Binding var isPresented: Bool
 
     var body: some View {
@@ -86,7 +86,7 @@ struct AccountListView: View {
                                 if isCreateNoteFlow {
                                     onNoteCreateSelected?(accountId, account.name)
                                 } else {
-                                    onAccountSelected?(accountId)
+                                    onAccountSelected?(accountId, account.name)
                                 }
                             }
 
