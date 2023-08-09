@@ -28,11 +28,11 @@ class Environments_Sample : ObservableObject {
         switch self.target {
         case .development:
             self.vars = [
-                "API_ENDPOINT": "abc.com",
+                "API_ENDPOINT": "https://sales.quick-poc.com/",
             ]
         case .staging:
             self.vars =  [
-                "API_ENDPOINT": "abc.com",
+                "API_ENDPOINT": "https://sales.quick-poc.com/",
             ]
         case .production:
             self.vars =   [
