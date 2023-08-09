@@ -10,13 +10,13 @@
 //struct AccountList: View {
 //    // TODO: Replace Below View Model with actual VM and other logic
 //    @EnvironmentObject var accountSearchListViewModel : AccountSearchViewModel
-//    @State var accountDetailScreenActivated = false
+//    @State var accountDetailsScreenActivated = false
 //    
 //    var body: some View {
 //        let account_ids = accountSearchListViewModel.accountListData.account_ids
 //        
 //        List(account_ids) { account in
-//            NavigationLink(destination: AccountDetailScreen(pushActive: $accountDetailScreenActivated,accountId: account.id)) {
+//            NavigationLink(destination: AccountDetailsScreen(pushActive: $accountDetailsScreenActivated,accountId: account.id)) {
 //                AccountRowView(account: account)
 //                    .onTapGesture {
 //                        print(account.name)

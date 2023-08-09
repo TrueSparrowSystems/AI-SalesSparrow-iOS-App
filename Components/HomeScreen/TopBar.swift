@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TopBar: View {
     @State private var showAccountSearchView: Bool = false
-    @State var accountDetailScreenActivated = false
+    @State var accountDetailsScreenActivated = false
     @State var createNoteScreenActivated = false
     @State var selectedAccountId: String? = nil
     @State var selectedAccountName: String? = nil
@@ -40,7 +40,7 @@ struct TopBar: View {
                         
                         // Use ID to push view to navigation link
                         selectedAccountId = accountId
-                        self.accountDetailScreenActivated = true
+                        self.accountDetailsScreenActivated = true
                     }, onNoteCreateSelected: { accountId, accountName in
                         print("Create Note for \(accountName) \(accountId)")
                         
@@ -55,10 +55,10 @@ struct TopBar: View {
         .background(Color.clear) // Make the top 23px transparent]
         .background(
             Group {
-                if self.accountDetailScreenActivated && selectedAccountId != nil {
+                if self.accountDetailsScreenActivated && selectedAccountId != nil {
                     NavigationLink(
-                        destination: AccountDetailScreen(accountId: selectedAccountId!),
-                        isActive: self.$accountDetailScreenActivated
+                        destination: AccountDetailsScreen(accountId: selectedAccountId!),
+                        isActive: self.$accountDetailsScreenActivated
                     ) {
                         EmptyView()
                     }
@@ -74,29 +74,6 @@ struct TopBar: View {
                 }
             }
         )
-    }
-}
-
-struct AccountDetailScreen: View {
-    var accountId: Account.ID
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    
-    var body: some View {
-        VStack{
-            Text("Pushed the view in into the stack with AccountID - \(accountId)")
-                .navigationBarBackButtonHidden(true)
-                .navigationBarItems(leading: backButton)
-        }
-    }
-    
-    private var backButton: some View {
-        Button(action: {
-            // This will dismiss the AccountDetailScreen and go back to the previous view
-            self.presentationMode.wrappedValue.dismiss()
-        }) {
-            Image(systemName: "chevron.left")
-                .font(.title2)
-        }
     }
 }
 
