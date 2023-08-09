@@ -19,6 +19,7 @@ struct CreateNoteScreen : View {
     @State var showError = false
     @State var isAccountSelectable = true
     @State var showAccountSearchView = false
+    @State private var toast: Toast? = nil
     
     var body: some View {
         VStack{
@@ -34,6 +35,7 @@ struct CreateNoteScreen : View {
                 Button(action: {
                     isSaveInProgress = true
                     createNoteScreenViewModel.createNote(text: text,accountId: accountId, onSuccess: {
+                        toast = Toast(style: .success, message: "Note is saved to your Salesforce Account")
                         isSaveInProgress = false
                         isNoteSaved = true
                     }, onFailure: {
@@ -130,13 +132,14 @@ struct CreateNoteScreen : View {
                     .font(.custom("Nunito-SemiBold", size: 18))
                 
             }else{
-                TextField("Add Note ...",text: $text, axis: .vertical)
+                TextField("Add Note",text: $text, axis: .vertical)
                     .font(.custom("Nunito-SemiBold", size: 18))
             }
             Spacer()
         }
         .padding(.horizontal, 12)
         .navigationBarBackButtonHidden(true)
+        .toastView(toast: $toast)
     }
 }
 
