@@ -5,9 +5,6 @@
       location = "group:SalesSparrowTestPlan.xctestplan">
    </FileRef>
    <FileRef
-      location = "group:SalesSparrow.xctestplan">
-   </FileRef>
-   <FileRef
       location = "group:SalesSparrow.xcodeproj">
    </FileRef>
    <FileRef
