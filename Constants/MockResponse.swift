@@ -9,7 +9,7 @@ import Foundation
 
 class MockResponse {
     static let responseObj = [
-        "/salesForce-connect-uri": [
+        "/v1/auth/salesforce/redirect-url": [
             "default":[
                 "success": "true",
                 "statusCode": 200,

@@ -12,7 +12,8 @@ struct SalesSparrowApp: App {
     
     // The Core Data context for the app
     let persistenceController = PersistenceController.shared
-    var environments: () = Environments.shared.setTarget(target: BuildTarget.production)
+    // Todo: target should not be according to build and not hard coded
+    var environments: () = Environments.shared.setTarget(target: BuildTarget.development)
     @StateObject var userStateViewModel = UserStateViewModel.shared
     
     // The app delegate
