@@ -45,6 +45,74 @@ final class SalesSparrowUITests: XCTestCase {
         
     }
     
+    func testSearchAccountOnHomeScreen() throws {
+        let app = XCUIApplication()
+        app.launchArguments = ["isRunningUITests", "userLoggedIn"]
+        app.launch()
+        
+        let timeout = 2
+        // click on search icon home page
+        let searchAccountButton = app.images["btn_search_account"]
+        XCTAssertTrue(searchAccountButton.waitForExistence(timeout: TimeInterval(timeout)))
+        searchAccountButton.tap()
+        // modal should open with empty text box
+        let textFieldSearchAccount = app.textFields["text_field_search_account"]
+        XCTAssertTrue(textFieldSearchAccount.waitForExistence(timeout: TimeInterval(timeout)))
+        let textFieldSearchAccountVal = textFieldSearchAccount.value as? String
+        XCTAssertTrue(((textFieldSearchAccountVal?.isEmpty) != nil))
+        
+        // modal should open with default data
+        let accountName = "Test Data 1"
+        let btnSearchAccountNameBtn = app.buttons["btn_search_account_name_\(accountName)"]
+        XCTAssertTrue(btnSearchAccountNameBtn.waitForExistence(timeout: TimeInterval(timeout)))
+        // Account row should be clickable
+        XCTAssertTrue(btnSearchAccountNameBtn.isEnabled)
+        
+        // there should be add note button in it
+        let btnSearchAddNoteBtn = app.buttons["btn_search_add_note_\(accountName)"]
+        XCTAssertTrue(btnSearchAddNoteBtn.waitForExistence(timeout: TimeInterval(timeout)))
+        // add note should be clickable
+        XCTAssertTrue(btnSearchAddNoteBtn.isEnabled)
+                
+        app.activate()
+        
+    }
+    
+    func testSearchAccountWithQueryOnHomeScreen() throws {
+        let app = XCUIApplication()
+        app.launchArguments = ["isRunningUITests", "userLoggedIn", "searchResponseWithQuery"]
+        app.launch()
+        
+        let timeout = 2
+        // click on search icon home page
+        let searchAccountButton = app.images["btn_search_account"]
+        XCTAssertTrue(searchAccountButton.waitForExistence(timeout: TimeInterval(timeout)))
+        searchAccountButton.tap()
+        // modal should open with empty text box
+        let textFieldSearchAccount = app.textFields["text_field_search_account"]
+        XCTAssertTrue(textFieldSearchAccount.waitForExistence(timeout: TimeInterval(timeout)))
+        textFieldSearchAccount.tap()
+        textFieldSearchAccount.typeText("Mock Account")
+        XCTAssertEqual(textFieldSearchAccount.value as! String, "Mock Account")
+        
+        // modal should open with default data
+        let accountName = "Mock Account 1"
+        let btnSearchAccountNameBtn = app.buttons["btn_search_account_name_\(accountName)"]
+        XCTAssertTrue(btnSearchAccountNameBtn.waitForExistence(timeout: TimeInterval(timeout)))
+        // Account row should be clickable
+        XCTAssertTrue(btnSearchAccountNameBtn.isEnabled)
+        
+        // there should be add note button in it
+        let btnSearchAddNoteBtn = app.buttons["btn_search_add_note_\(accountName)"]
+        XCTAssertTrue(btnSearchAddNoteBtn.waitForExistence(timeout: TimeInterval(timeout)))
+        // add note should be clickable
+        XCTAssertTrue(btnSearchAddNoteBtn.isEnabled)
+                
+        
+        app.activate()
+        
+    }
+    
     func testLaunchPerformance() throws {
         if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
             // This measures how long it takes to launch your application.

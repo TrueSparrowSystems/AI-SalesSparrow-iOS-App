@@ -33,6 +33,7 @@ struct ContentView: View {
     var body: some View {
         VStack{
             if(!userStateViewModel.isUserLoggedIn){
+//                HomeScreen()
                 LoginScreen()
             }else {
                 HomeScreen()

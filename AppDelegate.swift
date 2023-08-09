@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     //In this method, you can perform any setup tasks that need to be done before the app is ready to use.
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
+        bootService()
         let uuid = UIDevice.current.identifierForVendor?.uuidString
         let userId = uuid
         Crashlytics.crashlytics().setUserID(userId)
@@ -23,6 +24,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         return true
     }
     
+    func bootService() {
+        let isRunningUITests = ProcessInfo.processInfo.arguments.contains("isRunningUITests")
+        if(isRunningUITests && ProcessInfo.processInfo.arguments.count > 2){
+            let launchArgs = ProcessInfo.processInfo.arguments
+            let testArgs: ArraySlice<String> = launchArgs[2...(launchArgs.count-1)]
+            let testCaseIdentifiers: Array<String> = [] + testArgs
+            
+            Environments.shared.testVars["testCaseIdentifiers"] = testCaseIdentifiers
+        }
+        DependencyContainer.shared.setApiService(isRunningUITests: isRunningUITests)
+        // Todo: Fetch current user here.
+        UserStateViewModel.shared.setIsUserLoggedIn()
+    }
     /**
      Registers the app for remote notifications with Apple Push Notification service (APNs).
      
