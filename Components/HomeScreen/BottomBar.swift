@@ -30,8 +30,10 @@ struct BottomBar: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 44.0, height: 44.0)
+                                    
             }
             .padding(.bottom, 30) // Center the button in the middle of the 27px area
+            .accessibilityIdentifier("btn_create_note")
         }
         .frame(height: 27) // Set the total height of the bottom nav bar to 50px
         .background(
