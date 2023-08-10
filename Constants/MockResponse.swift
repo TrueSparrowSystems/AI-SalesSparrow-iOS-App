@@ -14,7 +14,7 @@ class MockResponse {
                 "success": "true",
                 "statusCode": 200,
                 "data":[
-                    "url": ""
+                    "url": "https://test.salesforce.com"
                 ],
             ] ,
             "login-error":[

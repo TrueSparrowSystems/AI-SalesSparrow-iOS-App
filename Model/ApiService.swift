@@ -128,22 +128,8 @@ class ApiService {
         print("urlApiEndpoint: \(urlApiEndpoint)")
         var requestUrl = URLRequest(url: urlApiEndpoint)
         
-        // Encode parameters to JSON data
-        let encoder = JSONEncoder()
-        //              encoder.outputFormatting = .prettyPrinted
-        
-        var encodedDictionary = [String: AnyEncodable]()
-        
-        for (key, value) in params {
-            if let value = value {
-                encodedDictionary[key] = AnyEncodable(value)
-            } else {
-                encodedDictionary[key] = AnyEncodable(NSNull())
-            }
-        }
-        
         do {
-            let jsonData = try encoder.encode(encodedDictionary)
+            let jsonData = try? JSONSerialization.data(withJSONObject: params)
             requestUrl.httpBody = jsonData
         }
         catch let decodingError {
@@ -198,21 +184,38 @@ class ApiService {
         
         // Add request headers for authentication and content type to the request object
         requestUrl.setValue("application/json, text/plain, */*", forHTTPHeaderField: "Accept")
+        requestUrl.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
         for (key, value) in deviceHeaderParams {
             requestUrl.setValue(BasicHelper.toString(value), forHTTPHeaderField: key)
         }
         
         URLSession.shared.dataTask(with: requestUrl) { data, response, error in
-            
+            print("---------------response----------\(response)")
+            print("---------------error----------\(error)")
             if let error = error as? URLError {
                 completion(Result.failure(APIError().urlSession(error: error)), 0)
             }
             else if let response = response as? HTTPURLResponse, !(200...299).contains(response.statusCode) {
-                if(response.statusCode == 401){
-                    UserStateViewModel.shared.logOut()
+                var errorData: ErrorStruct
+                
+                do {
+                    if(response.statusCode == 401){
+                        UserStateViewModel.shared.logOut()
+                    }
+                    
+                    let dataStr = String(decoding: data!, as: UTF8.self)
+                    print("---------------dataStr----2222------\(dataStr)")
+                    
+                    errorData = try JSONDecoder().decode(ErrorStruct.self, from: data!)
+                    print("---------------errorData----111------\(errorData)")
+                    
+                } catch let decodingError {
+                    errorData = APIError().internalServerError()
                 }
-                completion(Result.failure(APIError().badResponse(statusCode: response.statusCode)), response.statusCode)
+                
+                print("---------------errorData----------\(errorData)")
+                completion(Result.failure(errorData), response.statusCode)
                 
             } else if let data = data {
                 
