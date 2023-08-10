@@ -42,15 +42,21 @@ struct AccountSearchView: View {
                 .background(Color("SearchPrimary"))
                 .opacity(0.6)
 
-            // List of Accounts
-            AccountListView(
-                listData: accountSearchViewModel.accountListData,
-                accountIds: accountSearchViewModel.accountListData.account_ids,
-                isCreateNoteFlow: isCreateNoteFlow,
-                onNoteCreateSelected: onNoteCreateSelected,
-                onAccountSelected: onAccountSelected,
-                isPresented: $isPresented
-            )
+            if(accountSearchViewModel.accountListData.account_ids.count > 0){
+                // List of Accounts
+                AccountListView(
+                    listData: accountSearchViewModel.accountListData,
+                    accountIds: accountSearchViewModel.accountListData.account_ids,
+                    isCreateNoteFlow: isCreateNoteFlow,
+                    onNoteCreateSelected: onNoteCreateSelected,
+                    onAccountSelected: onAccountSelected,
+                    isPresented: $isPresented
+                )
+            }
+            else{
+                Text("No Result Found")
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+            }
         }
         .onAppear {
             accountSearchViewModel.fetchData("")

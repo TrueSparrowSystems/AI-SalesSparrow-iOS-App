@@ -15,11 +15,9 @@ struct CreateNoteScreen : View {
     @State var isSaveInProgress = false
     @State var isNoteSaved = false
     @State var accountId = ""
-    @State var accountName = "SMagic"
-    @State var showError = false
+    @State var accountName = ""
     @State var isAccountSelectable = true
     @State var showAccountSearchView = false
-    @State private var toast: Toast? = nil
     @FocusState private var focused: Bool
     
     var body: some View {
@@ -39,12 +37,10 @@ struct CreateNoteScreen : View {
                 Button(action: {
                     isSaveInProgress = true
                     createNoteScreenViewModel.createNote(text: text,accountId: accountId, onSuccess: {
-                        ToastViewModel.shared.showToast(_toast: Toast(style: .success, message: "Note is saved to your Salesforce Account"))
                         isSaveInProgress = false
                         isNoteSaved = true
                     }, onFailure: {
                         isSaveInProgress = false
-                        showError = true
                     })
                 }, label:{
                     HStack(alignment: .center, spacing: 0){

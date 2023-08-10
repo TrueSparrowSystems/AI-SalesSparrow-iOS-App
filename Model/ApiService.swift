@@ -79,6 +79,9 @@ class ApiService {
      - params: The query parameters to include in the request.
      - completion: A closure to call with the decoded response and the HTTP status code of the response.
      */
+    
+    let dev = false
+    
     func get<T: Decodable>(type: T.Type, endpoint: String, params: [String: Any] = [:], completion: @escaping(Result<T, ErrorStruct>, Int?) -> Void) {
         let envVars = Environments.shared.getVars()
         let apiBaseEndpoint: String = envVars["API_ENDPOINT"] ?? ""
@@ -98,8 +101,9 @@ class ApiService {
         urlComponents?.queryItems = queryParams
         urlApiEndpoint = urlComponents?.url ?? urlApiEndpoint
         
-        print("urlApiEndpoint---\(urlApiEndpoint)")
-        
+        if(dev){
+            print("urlApiEndpoint---\(urlApiEndpoint)")
+        }
         var requestUrl = URLRequest(url: urlApiEndpoint)
         requestUrl.httpMethod = "GET"
         
@@ -125,7 +129,9 @@ class ApiService {
             completion(Result.failure(error), 0)
             return
         }
-        print("urlApiEndpoint: \(urlApiEndpoint)")
+        if(dev){
+            print("urlApiEndpoint: \(urlApiEndpoint)")
+        }
         var requestUrl = URLRequest(url: urlApiEndpoint)
         
         do {
@@ -181,7 +187,9 @@ class ApiService {
         
         var requestUrl = requestUrl
         let deviceHeaderParams = DeviceSettingManager.shared.deviceHeaderParams
-        
+        if(dev){
+            print(HTTPCookieStorage.shared.cookies)
+        }
         // Add request headers for authentication and content type to the request object
         requestUrl.setValue("application/json, text/plain, */*", forHTTPHeaderField: "Accept")
         requestUrl.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -191,8 +199,10 @@ class ApiService {
         }
         
         URLSession.shared.dataTask(with: requestUrl) { data, response, error in
-            print("---------------response----------\(response)")
-            print("---------------error----------\(error)")
+            if(self.dev){
+                print("---------------response----------\(response)")
+                print("---------------error----------\(error)")
+            }
             if let error = error as? URLError {
                 completion(Result.failure(APIError().urlSession(error: error)), 0)
             }
@@ -204,17 +214,19 @@ class ApiService {
                         UserStateViewModel.shared.logOut()
                     }
                     
-                    let dataStr = String(decoding: data!, as: UTF8.self)
-                    print("---------------dataStr----2222------\(dataStr)")
-                    
+                    if(self.dev){
+                        let errorDataStr = String(decoding: data!, as: UTF8.self)
+                        print("---------------errorDataStr-----------\(errorDataStr)")
+                    }
                     errorData = try JSONDecoder().decode(ErrorStruct.self, from: data!)
-                    print("---------------errorData----111------\(errorData)")
                     
-                } catch let decodingError {
+                } catch {
                     errorData = APIError().internalServerError()
                 }
                 
-                print("---------------errorData----------\(errorData)")
+                if(self.dev){
+                    print("---------------errorData----------\(errorData)")
+                }
                 completion(Result.failure(errorData), response.statusCode)
                 
             } else if let data = data {

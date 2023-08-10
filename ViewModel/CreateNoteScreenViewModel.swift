@@ -16,6 +16,7 @@ struct CreateNoteStruct: Codable {
 class CreateNoteScreenViewModel: ObservableObject {
     @Published var createNoteData = CreateNoteStruct(note_id: "")
     @Published var isCreateNoteInProgress = false
+    var apiService = DependencyContainer.shared.apiService
     
     func createNote(text: String?, accountId: String, onSuccess : @escaping()-> Void, onFailure : @escaping()-> Void){
         
@@ -28,14 +29,16 @@ class CreateNoteScreenViewModel: ObservableObject {
         onSuccess()
         self.isCreateNoteInProgress = false
         
+        let params: [String: Any] = ["text": text ?? ""]
         
-        ApiService().get(type: CreateNoteStruct.self, endpoint: "accounts/\(accountId)/notes"){
+        apiService.post(type: CreateNoteStruct.self, endpoint: "accounts/\(accountId)/notes", params: params){
             [weak self]  result, statusCode in
             switch result {
             case .success(_):
                 DispatchQueue.main.async {
                     onSuccess()
                     self?.isCreateNoteInProgress = false
+                    ToastViewModel.shared.showToast(_toast: Toast(style: .success, message: "Note is saved to your Salesforce Account"))
                 }
                 
             case .failure(let error):
@@ -43,6 +46,7 @@ class CreateNoteScreenViewModel: ObservableObject {
                     print("error loading data: \(error)")
                     onFailure()
                     self?.isCreateNoteInProgress = false
+                    ToastViewModel.shared.showToast(_toast: Toast(style: .error, message: error.message))
                 }
             }
             

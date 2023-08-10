@@ -23,7 +23,7 @@ class LoginScreenViewModel: ObservableObject {
     @Published var isfetchUrlInProgress = false
     @Published var isLoginInProgress = false
     var apiService = DependencyContainer.shared.apiService
-
+    
     func fetchSalesforceConnectUrl(onSuccess : @escaping(String)-> Void, onFailure : @escaping()-> Void) {
         guard !self.isfetchUrlInProgress else {return}
         guard self.loginData.url == "" else {
@@ -41,26 +41,25 @@ class LoginScreenViewModel: ObservableObject {
                     onSuccess(results.url)
                     self?.isfetchUrlInProgress = false
                 }
-
+                
             case .failure(let error):
                 DispatchQueue.main.async {
-                    print("error loading data: \(error)")
                     onFailure()
                     self?.isfetchUrlInProgress = false
                     ToastViewModel.shared.showToast(_toast: Toast(style: .error, message: error.message))
                 }
             }
-
+            
         }
     }
-
+    
     func salesforceConnect(authCode: String?, onSuccess : @escaping()-> Void, onFailure : @escaping()-> Void){
-
+        
         guard !self.isLoginInProgress else {
             return
         }
         self.isLoginInProgress = true
-
+        
         let params: [String: Any] = [
             "code": authCode ?? "",
             "redirect_uri": Environments.shared.vars["redirect_uri"] ?? ""
@@ -74,15 +73,15 @@ class LoginScreenViewModel: ObservableObject {
                     onSuccess()
                     self?.isLoginInProgress = false
                 }
-
+                
             case .failure(let error):
                 DispatchQueue.main.async {
-                    print("error loading data: \(error)")
                     onFailure()
                     self?.isLoginInProgress = false
+                    ToastViewModel.shared.showToast(_toast: Toast(style: .error, message: error.message))
                 }
             }
-
+            
         }
     }
 }
