@@ -13,7 +13,6 @@ struct LoginScreen: View {
     @EnvironmentObject var userStateViewModel : UserStateViewModel
     @Environment(\.openURL) var openURL
     @State var isLoginInProgress = false
-    @State var showError = false
     @EnvironmentObject var environment: Environments
     
     var body: some View {
@@ -78,12 +77,10 @@ struct LoginScreen: View {
                     
                     Button(action: {
                         isLoginInProgress = true
-                        showError = false
                         loginScreenViewModel.fetchSalesforceConnectUrl(onSuccess: {url in
                             openURL(URL(string: url)!)
                         }, onFailure: {
                             isLoginInProgress = false
-                            showError = true
                         })
                     }, label:{
                         HStack(alignment: .center, spacing: 0){
@@ -107,7 +104,7 @@ struct LoginScreen: View {
                             
                         )
                         .clipShape(RoundedRectangle(cornerRadius: 5))
-                       
+                        
                     }
                     )
                     .disabled($isLoginInProgress.wrappedValue)
@@ -130,7 +127,6 @@ struct LoginScreen: View {
                 isLoginInProgress = false
             }, onFailure: {
                 isLoginInProgress = false
-                showError = true
             })
         })
         

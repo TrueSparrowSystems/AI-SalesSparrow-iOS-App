@@ -74,7 +74,6 @@
 		019596042A83CEF1008425AD /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 6DBB506A2A77A45E00B58F88 /* LICENSE */; };
 		019596102A83D77C008425AD /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 0195960F2A83D77C008425AD /* FirebaseCrashlytics */; };
 		019596122A83D7B4008425AD /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 019596112A83D7B4008425AD /* FirebaseCrashlytics */; };
-		019596142A83D7D8008425AD /* Pods_SalesSparrow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 019596132A83D7D8008425AD /* Pods_SalesSparrow.framework */; };
 		0195961D2A84CBD9008425AD /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 0195961C2A84CBD9008425AD /* FirebaseCrashlytics */; };
 		0195961F2A84CBE5008425AD /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 0195961E2A84CBE5008425AD /* FirebaseCrashlytics */; };
 		4B393FEA2A7A755100572F66 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4B393FE92A7A755100572F66 /* GoogleService-Info.plist */; };
@@ -177,7 +176,6 @@
 		019595B82A83CD76008425AD /* SalesSparrowDev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SalesSparrowDev.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		019595BA2A83CD76008425AD /* SalesSparrowDevApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalesSparrowDevApp.swift; sourceTree = "<group>"; };
 		019596052A83CF97008425AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		019596132A83D7D8008425AD /* Pods_SalesSparrow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_SalesSparrow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		019596172A83DDB9008425AD /* SalesSparrowDev.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SalesSparrowDev.entitlements; sourceTree = "<group>"; };
 		11C28B9A7C622812E3FDFC07 /* Pods-SalesSparrowTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SalesSparrowTests.debug.xcconfig"; path = "Target Support Files/Pods-SalesSparrowTests/Pods-SalesSparrowTests.debug.xcconfig"; sourceTree = "<group>"; };
 		216D9F06D488828BC1022AFD /* Pods_SalesSparrow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SalesSparrow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -269,7 +267,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				019596142A83D7D8008425AD /* Pods_SalesSparrow.framework in Frameworks */,
 				019596102A83D77C008425AD /* FirebaseCrashlytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -567,7 +564,6 @@
 		DD0CC12E1C80EEB530D405BD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				019596132A83D7D8008425AD /* Pods_SalesSparrow.framework */,
 				216D9F06D488828BC1022AFD /* Pods_SalesSparrow.framework */,
 				6A561769BF628419998C917E /* Pods_SalesSparrow_SalesSparrowUITests.framework */,
 				CCFD66DA5D9BD43B8402F504 /* Pods_SalesSparrowTests.framework */,

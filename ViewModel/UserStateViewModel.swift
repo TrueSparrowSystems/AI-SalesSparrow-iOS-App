@@ -21,6 +21,7 @@ class UserStateViewModel: ObservableObject {
     @Published var isUserLoggedIn = false
     @Published var isLogOutInProgress = false
     @Published var currentUser = CurrentUserStruct(id: "", name: "", email: "")
+    var apiService = DependencyContainer.shared.apiService
     
     static let shared = UserStateViewModel()
     
@@ -35,25 +36,18 @@ class UserStateViewModel: ObservableObject {
     
     func logOut()  {
         guard !self.isLogOutInProgress else {return}
-        // TODO: remove this line once API is available
-        self.isUserLoggedIn = false
+        
         DispatchQueue.main.async {
             self.isLogOutInProgress = true
             
-            ApiService().post(type: LogoutStruct.self, endpoint: ""){
+            self.apiService.post(type: LogoutStruct.self, endpoint: "/v1/auth/logout"){
                 [weak self]  result, statusCode in
                 
                 DispatchQueue.main.async {
-                    switch result {
-                    case .success(_):
-                        self?.isUserLoggedIn = false
-                        self?.isLogOutInProgress = false
-                        
-                        
-                    case .failure(let error):
-                        print("error loading data in logout: \(error)")
-                        self?.isLogOutInProgress = false
-                    }
+                    self?.isLogOutInProgress = false
+                    self?.isUserLoggedIn = false
+                    HTTPCookieStorage.shared.cookies?.forEach(HTTPCookieStorage.shared.deleteCookie)
+                    
                 }
                 
             }
@@ -62,14 +56,14 @@ class UserStateViewModel: ObservableObject {
     
     func getCurrentUser() {
         DispatchQueue.main.async {
-            ApiService().get(type: CurrentUserRespStruct.self, endpoint: "/v1/users/current"){
+            self.apiService.get(type: CurrentUserRespStruct.self, endpoint: "/v1/users/current"){
                 [weak self]  result, statusCode in
                 
                 DispatchQueue.main.async {
                     switch result {
                     case .success(let results):
                         self?.setLoggedInUser(currentUser: results.current_user)
-                                                
+                        
                     case .failure(let error):
                         print("error loading data in getCurrentUser: \(error)")
                     }
