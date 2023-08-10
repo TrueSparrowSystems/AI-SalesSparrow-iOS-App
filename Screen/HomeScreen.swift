@@ -10,6 +10,7 @@ import SwiftUI
 struct HomeScreen: View {
     @State private var showCreateNoteAccountSearchView: Bool = false
     @StateObject var acccountSearchViewModelObject = AccountSearchViewModel()
+    @StateObject var acccountDetailScreenViewModelObject = AccountDetailViewScreenViewModel()
     
     var body: some View {
         NavigationView {
@@ -29,6 +30,7 @@ struct HomeScreen: View {
             
         }
         .environmentObject(acccountSearchViewModelObject)
+        .environmentObject(acccountDetailScreenViewModelObject)
     }
 }
 
