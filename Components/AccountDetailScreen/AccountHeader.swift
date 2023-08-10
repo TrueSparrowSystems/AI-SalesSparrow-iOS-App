@@ -1,0 +1,45 @@
+//
+//  AccountHeader.swift
+//  SalesSparrow
+//
+//  Created by Kartik Kapgate on 10/08/23.
+//
+
+import SwiftUI
+
+struct AccountDetailsHeaderComp: View {
+    var accountId: String
+    var accountName: String
+    
+    var body: some View {
+        HStack{
+            Image("Buildings")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 25.0, height: 25.0)
+            
+            Text("Account Details")
+            
+            Spacer()
+        }
+        VStack(spacing: 5) {
+            HStack {
+                Text("ACCOUNT")
+                    .font(.custom("Nunito-Regular",size: 14))
+                Spacer()
+            }
+            HStack {
+                Text(accountName)
+                    .font(.custom("Nunito-Regular",size: 22))
+                Spacer()
+            }
+        }
+        .padding()
+        .background(.white)
+        .cornerRadius(5) /// make the background rounded
+        .overlay( /// apply a rounded border
+            RoundedRectangle(cornerRadius: 5)
+                .stroke(Color("BorderColor"), lineWidth: 1)
+        )
+    }
+}
