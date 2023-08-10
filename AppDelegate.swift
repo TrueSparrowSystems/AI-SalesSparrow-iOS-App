@@ -34,8 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             Environments.shared.testVars["testCaseIdentifiers"] = testCaseIdentifiers
         }
         DependencyContainer.shared.setApiService(isRunningUITests: isRunningUITests)
-        // Todo: Fetch current user here.
-        UserStateViewModel.shared.setIsUserLoggedIn()
+        UserStateViewModel.shared.getCurrentUser()
     }
     /**
      Registers the app for remote notifications with Apple Push Notification service (APNs).

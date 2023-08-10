@@ -35,7 +35,7 @@ class AccountSearchViewModel: ObservableObject {
     private func searchAccounts(withText searchText: String) {
         // Perform the API call for searching accounts
         print("Query String--> \(searchText)")
-        let searchUrl = "/api/v1/accounts"
+        let searchUrl = "/v1/accounts"
         let params: [String: Any] = ["q": searchText]
         
         //TODO: Remove this dummy data once api is available

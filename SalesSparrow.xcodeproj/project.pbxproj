@@ -75,6 +75,8 @@
 		019596102A83D77C008425AD /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 0195960F2A83D77C008425AD /* FirebaseCrashlytics */; };
 		019596122A83D7B4008425AD /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 019596112A83D7B4008425AD /* FirebaseCrashlytics */; };
 		019596142A83D7D8008425AD /* Pods_SalesSparrow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 019596132A83D7D8008425AD /* Pods_SalesSparrow.framework */; };
+		0195961D2A84CBD9008425AD /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 0195961C2A84CBD9008425AD /* FirebaseCrashlytics */; };
+		0195961F2A84CBE5008425AD /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 0195961E2A84CBE5008425AD /* FirebaseCrashlytics */; };
 		4B393FEA2A7A755100572F66 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4B393FE92A7A755100572F66 /* GoogleService-Info.plist */; };
 		4B393FF22A7AAA2D00572F66 /* AccountSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B393FF12A7AAA2D00572F66 /* AccountSearch.swift */; };
 		4B393FF42A7AAAF600572F66 /* AccountSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B393FF32A7AAAF600572F66 /* AccountSearchViewModel.swift */; };
@@ -286,6 +288,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6CCA3BABA0A693EB92C9B4C2 /* Pods_SalesSparrowTests.framework in Frameworks */,
+				0195961F2A84CBE5008425AD /* FirebaseCrashlytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,6 +297,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A97561513E5508D62A2D5E4C /* Pods_SalesSparrow_SalesSparrowUITests.framework in Frameworks */,
+				0195961D2A84CBD9008425AD /* FirebaseCrashlytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -631,6 +635,7 @@
 			);
 			name = SalesSparrowTests;
 			packageProductDependencies = (
+				0195961E2A84CBE5008425AD /* FirebaseCrashlytics */,
 			);
 			productName = SalesSparrowTests;
 			productReference = 6D8C7CEB2A779A9A005D597E /* SalesSparrowTests.xctest */;
@@ -652,6 +657,7 @@
 			);
 			name = SalesSparrowUITests;
 			packageProductDependencies = (
+				0195961C2A84CBD9008425AD /* FirebaseCrashlytics */,
 			);
 			productName = SalesSparrowUITests;
 			productReference = 6D8C7CF52A779A9A005D597E /* SalesSparrowUITests.xctest */;
@@ -1378,6 +1384,16 @@
 			productName = FirebaseCrashlytics;
 		};
 		019596112A83D7B4008425AD /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0195960E2A83D77C008425AD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+		0195961C2A84CBD9008425AD /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0195960E2A83D77C008425AD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+		0195961E2A84CBE5008425AD /* FirebaseCrashlytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 0195960E2A83D77C008425AD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseCrashlytics;
