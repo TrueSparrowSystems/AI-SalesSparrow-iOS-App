@@ -1,5 +1,5 @@
 //
-//  NoteSection.swift
+//  NoteList.swift
 //  SalesSparrow
 //
 //  Created by Kartik Kapgate on 10/08/23.
@@ -7,65 +7,68 @@
 
 import SwiftUI
 
-struct NotesListComp: View {
+struct NotesList: View {
     let accountId: String
     let accountName: String
-
+    
     @EnvironmentObject var acccountDetailScreenViewModelObject: AccountDetailViewScreenViewModel
     @State private var showOverlay = false
+    @State var createNoteScreenActivated = false
     
     
     var body: some View {
-        NavigationView{
-            VStack(spacing: 10) {
-                HStack{
-                    Image("NoteIcon")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 20.0, height: 20.0)
-                    
-                    Text("Notes")
-                    
-                    Spacer()
-                    
-                    NavigationLink(destination: CreateNoteScreen(accountId: accountId, accountName: accountName, isAccountSelectable: false)) {
+        VStack(spacing: 0) {
+            HStack{
+                Image("NoteIcon")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 20.0, height: 20.0)
+                
+                Text("Notes")
+                
+                Spacer()
+                
+                NavigationLink(destination: CreateNoteScreen(accountId: accountId, accountName: accountName, isAccountSelectable: false)
+                ){
+                    HStack{
                         Image("CreateNoteIcon")
+                            .resizable()
                             .frame(width: 20.0, height: 20.0)
-                            .onTapGesture {
-                                print("pressed")
-                            }
                     }
-                }
-                if showOverlay {
-                    VStack(spacing: 5) {
-                        HStack {
-                            Spacer()
-                            Text("Add notes and sync with your salesforce account")
-                                .font(.custom("Nunito-Regular",size: 12))
-                            Spacer()
-                        }
-                    }
-                    .padding()
-                    .cornerRadius(5) /// make the background rounded
-                    .overlay( /// apply a rounded border
-                        RoundedRectangle(cornerRadius: 5)
-                        //                    .stroke(Color("BorderColor"), lineWidth: 1)
-                            .strokeBorder(style: StrokeStyle(lineWidth: 1, dash: [1,5]))
-                    )
-                } else {
+                    .frame(width: 40, height: 30, alignment: .bottomLeading)
+                    .padding(.bottom, 10)
                     
-                    ScrollView {
-                        VStack{
-                            ForEach(self.acccountDetailScreenViewModelObject.NotesData.note_ids, id: \.self){ id in
-                                NoteCardView(NoteId: id)
-                            }
-                            // Add more NoteCardView instances as needed
+                }
+            }
+            if showOverlay {
+                VStack(spacing: 5) {
+                    HStack {
+                        Spacer()
+                        Text("Add notes and sync with your salesforce account")
+                            .font(.custom("Nunito-Regular",size: 12))
+                        Spacer()
+                    }
+                }
+                .padding()
+                .cornerRadius(5) /// make the background rounded
+                .overlay( /// apply a rounded border
+                    RoundedRectangle(cornerRadius: 5)
+                    //                    .stroke(Color("BorderColor"), lineWidth: 1)
+                        .strokeBorder(style: StrokeStyle(lineWidth: 1, dash: [1,5]))
+                )
+            } else {
+                VStack{
+                    ForEach(self.acccountDetailScreenViewModelObject.NotesData.note_ids, id: \.self){ id in
+                        NavigationLink(destination: CreateNoteScreen(isAccountSelectable: true)
+                        ){
+                            NoteCardView(NoteId: id)
                         }
                     }
                 }
-            }.onAppear {
-                acccountDetailScreenViewModelObject.fetchNotes(accountId: accountId)
+                .padding(.trailing)
             }
+        }.onAppear {
+            acccountDetailScreenViewModelObject.fetchNotes(accountId: accountId)
         }
     }
 }

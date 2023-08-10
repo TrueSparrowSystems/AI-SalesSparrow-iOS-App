@@ -13,17 +13,20 @@ struct AccountDetailsScreen: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
-        VStack(spacing: 20) {
-            
-            AccountDetailsHeaderComp(accountId: accountId, accountName: accountName)
-            
-            // Contact list component
-            
-            NotesListComp(accountId: accountId, accountName: accountName)
-            
-            Spacer()
+        ScrollView{
+            VStack(spacing: 20) {
+                
+                AccountDetailsHeader(accountId: accountId, accountName: accountName)
+                
+                // Contact list component
+                
+                NotesList(accountId: accountId, accountName: accountName)
+                
+                Spacer()
+            }
         }
-        .padding()
+        .padding(.vertical)
+        .padding(.leading)
         .background(Color("Background"))
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: backButton)
