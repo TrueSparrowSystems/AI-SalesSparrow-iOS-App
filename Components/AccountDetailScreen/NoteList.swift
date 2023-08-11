@@ -25,6 +25,7 @@ struct NotesList: View {
                     .frame(width: 20.0, height: 20.0)
                 
                 Text("Notes")
+                    .foregroundColor(Color("TextPrimary"))
                 
                 Spacer()
                 
@@ -59,7 +60,7 @@ struct NotesList: View {
             } else {
                 VStack{
                     ForEach(self.acccountDetailScreenViewModelObject.NotesData.note_ids, id: \.self){ id in
-                        NavigationLink(destination: CreateNoteScreen(isAccountSelectable: true)
+                        NavigationLink(destination: NoteDetailScreen(noteId: id, accountId: accountId, accountName: accountName)
                         ){
                             NoteCardView(NoteId: id)
                         }

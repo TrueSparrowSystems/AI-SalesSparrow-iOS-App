@@ -11,6 +11,8 @@ struct HomeScreen: View {
     @State private var showCreateNoteAccountSearchView: Bool = false
     @StateObject var acccountSearchViewModelObject = AccountSearchViewModel()
     @StateObject var acccountDetailScreenViewModelObject = AccountDetailViewScreenViewModel()
+    @StateObject var createNoteViewModel = CreateNoteScreenViewModel()
+    @StateObject var noteDetailScreenViewModel = NoteDetailScreenViewModel()
     
     var body: some View {
         NavigationView {
@@ -29,8 +31,11 @@ struct HomeScreen: View {
             .background(Color("Background"))
             
         }
+        .navigationViewStyle(.stack)
         .environmentObject(acccountSearchViewModelObject)
         .environmentObject(acccountDetailScreenViewModelObject)
+        .environmentObject(createNoteViewModel)
+        .environmentObject(noteDetailScreenViewModel)
     }
 }
 

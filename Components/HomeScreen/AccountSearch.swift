@@ -10,19 +10,19 @@ import SwiftUI
 struct AccountSearchView: View {
     @EnvironmentObject var accountSearchViewModel: AccountSearchViewModel
     @State private var searchText = ""
-
+    
     @Binding var isPresented: Bool // This binding will control the presentation of the sheet
-
+    
     var isCreateNoteFlow: Bool = false
     var onAccountSelected: ((String, String) -> Void)? // Callback function to handle account selection
     var onNoteCreateSelected: ((String,String) -> Void)?  // Callback function to handle note creation selection
-
+    
     var body: some View {
         VStack(spacing: 0) {
             // Top Bar
             HStack {
                 Image(systemName: "magnifyingglass")
-
+                
                 TextField("Search Accounts", text: $searchText)
                     .font(.custom("Nunito-Regular", size: 16).weight(.regular))
                     .foregroundColor(Color("SearchPrimary"))
@@ -36,12 +36,12 @@ struct AccountSearchView: View {
                 // Call the function from the view model whenever searchText changes
                 accountSearchViewModel.fetchData(newValue)
             }
-
+            
             // Divider Line
             Divider()
                 .background(Color("SearchPrimary"))
                 .opacity(0.6)
-
+            
             if(accountSearchViewModel.accountListData.account_ids.count > 0){
                 // List of Accounts
                 AccountListView(
@@ -61,6 +61,7 @@ struct AccountSearchView: View {
         .onAppear {
             accountSearchViewModel.fetchData("")
         }
+        .background(Color("Background"))
     }
 }
 
@@ -71,7 +72,7 @@ struct AccountListView: View {
     var onNoteCreateSelected: ((String, String) -> Void)?
     var onAccountSelected: ((String, String) -> Void)?
     @Binding var isPresented: Bool
-
+    
     var body: some View {
         ScrollView {
             VStack(spacing: 0){
@@ -95,7 +96,7 @@ struct AccountListView: View {
                                     onAccountSelected?(accountId, account.name)
                                 }
                             }
-
+                            
                             if !isCreateNoteFlow {
                                 HStack {
                                     Button(action: {
@@ -107,18 +108,18 @@ struct AccountListView: View {
                                             .foregroundColor(Color("LoginButtonPrimary"))
                                     }
                                     .accessibilityIdentifier("btn_search_add_note_\(account.name)")
-
+                                    
                                 }
                             }
                         }
                         .padding()
                         .frame(maxWidth: .infinity)
-
+                        
                         // Divider Line
                         Divider()
                             .background(Color("SearchPrimary"))
                             .opacity(0.6)
-
+                        
                     }
                 }
             }

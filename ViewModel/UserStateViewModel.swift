@@ -67,7 +67,7 @@ class UserStateViewModel: ObservableObject {
                     case .failure(let error):
                         print("error loading data in getCurrentUser: \(error)")
                         // TODO: Remove once current user API is available
-                        // self?.setLoggedInUser(currentUser: CurrentUserStruct(id: "1", name:"a", email: "A"))
+                        self?.setLoggedInUser(currentUser: CurrentUserStruct(id: "1", name:"a", email: "A"))
                     }
                 }
             }

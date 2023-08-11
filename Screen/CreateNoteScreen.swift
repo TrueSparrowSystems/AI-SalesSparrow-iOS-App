@@ -129,11 +129,13 @@ struct CreateNoteScreen : View {
             HStack{
                 if(isNoteSaved || isSaveInProgress){
                     Text(text)
+                        .foregroundColor(Color("TextPrimary"))
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .font(.custom("Nunito-SemiBold", size: 18))
                     
                 }else{
                     TextField("Add Note",text: $text, axis: .vertical)
+                        .foregroundColor(Color("TextPrimary"))
                         .font(.custom("Nunito-SemiBold", size: 18))
                         .focused($focused)
                         .accessibilityIdentifier("et_create_note")
@@ -144,6 +146,7 @@ struct CreateNoteScreen : View {
         }
         .padding(.horizontal, 12)
         .navigationBarBackButtonHidden(true)
+        .background(Color("Background"))
         .onAppear {
             // Adding a delay for view to render
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.05){

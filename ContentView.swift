@@ -26,7 +26,6 @@ struct ContentView: View {
     let maxHeight: CGFloat = 200
     
     @StateObject var loginScreenViewModel = LoginScreenViewModel()
-    @StateObject var createNoteViewModel = CreateNoteScreenViewModel()
     @StateObject var toastViewModel = ToastViewModel.shared
     
     /// The body of the view
@@ -42,7 +41,6 @@ struct ContentView: View {
             handleIncomingURL(incomingURL)
         }
         .environmentObject(loginScreenViewModel)
-        .environmentObject(createNoteViewModel)
         .toastView(toast: $toastViewModel.toast)
     }
     

@@ -145,6 +145,10 @@
 		6DC43C562A7A909E002162FE /* CreateNoteScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC43C552A7A909E002162FE /* CreateNoteScreen.swift */; };
 		6DC43C582A7B802D002162FE /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC43C572A7B802D002162FE /* HomeScreen.swift */; };
 		6DC43C5A2A7B8A68002162FE /* CreateNoteScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC43C592A7B8A68002162FE /* CreateNoteScreenViewModel.swift */; };
+		6DCF64E52A85FEC60084F809 /* NoteDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DCF64E42A85FEC60084F809 /* NoteDetailScreen.swift */; };
+		6DCF64E62A85FEC60084F809 /* NoteDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DCF64E42A85FEC60084F809 /* NoteDetailScreen.swift */; };
+		6DCF64E82A8600D50084F809 /* NoteDetailScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DCF64E72A8600D50084F809 /* NoteDetailScreenViewModel.swift */; };
+		6DCF64E92A8600D50084F809 /* NoteDetailScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DCF64E72A8600D50084F809 /* NoteDetailScreenViewModel.swift */; };
 		6DD618B22A80E504007FA929 /* MockResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD618B12A80E504007FA929 /* MockResponse.swift */; };
 		6DD618B32A80E504007FA929 /* MockResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD618B12A80E504007FA929 /* MockResponse.swift */; };
 		6DD618B42A80E504007FA929 /* MockResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD618B12A80E504007FA929 /* MockResponse.swift */; };
@@ -258,6 +262,8 @@
 		6DC43C552A7A909E002162FE /* CreateNoteScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNoteScreen.swift; sourceTree = "<group>"; };
 		6DC43C572A7B802D002162FE /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
 		6DC43C592A7B8A68002162FE /* CreateNoteScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNoteScreenViewModel.swift; sourceTree = "<group>"; };
+		6DCF64E42A85FEC60084F809 /* NoteDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailScreen.swift; sourceTree = "<group>"; };
+		6DCF64E72A8600D50084F809 /* NoteDetailScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailScreenViewModel.swift; sourceTree = "<group>"; };
 		6DD618B12A80E504007FA929 /* MockResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockResponse.swift; sourceTree = "<group>"; };
 		6DE11C832A8283AE00D27006 /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		6DE11C852A8283EF00D27006 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
@@ -473,6 +479,7 @@
 				6DC43C592A7B8A68002162FE /* CreateNoteScreenViewModel.swift */,
 				6DE11C8D2A836E5900D27006 /* ToastViewModel.swift */,
 				4BDB87262A850B5A000CC1B9 /* AccountDetailScreenViewModel.swift */,
+				6DCF64E72A8600D50084F809 /* NoteDetailScreenViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -566,6 +573,7 @@
 				6DC43C552A7A909E002162FE /* CreateNoteScreen.swift */,
 				6DC43C572A7B802D002162FE /* HomeScreen.swift */,
 				01069F172A83641C0003F8F5 /* AccountDetailsScreen.swift */,
+				6DCF64E42A85FEC60084F809 /* NoteDetailScreen.swift */,
 			);
 			path = Screen;
 			sourceTree = "<group>";
@@ -886,6 +894,7 @@
 				019595E52A83CE83008425AD /* DeviceSettingManager.swift in Sources */,
 				019595E92A83CE91008425AD /* ToastModifier.swift in Sources */,
 				019595DB2A83CE63008425AD /* Tasks+CoreDataProperties.swift in Sources */,
+				6DCF64E62A85FEC60084F809 /* NoteDetailScreen.swift in Sources */,
 				019595DF2A83CE6F008425AD /* MetaEntity.swift in Sources */,
 				019595DC2A83CE68008425AD /* BaseRepository.swift in Sources */,
 				019595DD2A83CE6A008425AD /* TaskRepository.swift in Sources */,
@@ -893,6 +902,7 @@
 				019595E42A83CE81008425AD /* ColorExtension.swift in Sources */,
 				019595F22A83CEAF008425AD /* ExpandableTextView.swift in Sources */,
 				019595F52A83CEBA008425AD /* LoginScreenViewModel.swift in Sources */,
+				6DCF64E92A8600D50084F809 /* NoteDetailScreenViewModel.swift in Sources */,
 				019595FB2A83CECC008425AD /* Environments.swift in Sources */,
 				019595ED2A83CE9C008425AD /* AccountList.swift in Sources */,
 				019595E12A83CE74008425AD /* ApiHelper.swift in Sources */,
@@ -940,6 +950,7 @@
 				6DE11C8E2A836E5900D27006 /* ToastViewModel.swift in Sources */,
 				6DE11C8C2A8361F000D27006 /* UIScreenExtension.swift in Sources */,
 				6DE11C862A8283EF00D27006 /* ToastView.swift in Sources */,
+				6DCF64E52A85FEC60084F809 /* NoteDetailScreen.swift in Sources */,
 				6DE11C882A82842100D27006 /* ToastModifier.swift in Sources */,
 				4BDB87252A84C2CB000CC1B9 /* NoteList.swift in Sources */,
 				6DC43C4B2A78EC01002162FE /* TermsBottomStrip.swift in Sources */,
@@ -947,6 +958,7 @@
 				4BDB87272A850B5A000CC1B9 /* AccountDetailScreenViewModel.swift in Sources */,
 				6D8C7D352A77A22F005D597E /* ApiHelper.swift in Sources */,
 				4B583BD82A7BBEF2005B97D0 /* TopBar.swift in Sources */,
+				6DCF64E82A8600D50084F809 /* NoteDetailScreenViewModel.swift in Sources */,
 				6DBB507A2A77C58300B58F88 /* LoginScreen.swift in Sources */,
 				6D8C7D382A77A254005D597E /* ApiError.swift in Sources */,
 				6D8C7CDA2A779A97005D597E /* SalesSparrowApp.swift in Sources */,
