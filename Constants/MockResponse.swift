@@ -9,7 +9,7 @@ import Foundation
 
 class MockResponse {
     static let responseObj = [
-        "/v1/auth/salesforce/redirect-url": [
+        "GET /v1/auth/salesforce/redirect-url": [
             "default":[
                 "success": "true",
                 "statusCode": 200,
@@ -34,7 +34,16 @@ class MockResponse {
                 ] as [String : Any]
             ]
         ],
-        "/api/v1/accounts": [
+        "POST /v1/auth/salesforce/connect": [
+            "default":[
+                "success": "true",
+                "statusCode": 200,
+                "data":[
+                    "current_user": ["id":"123","name":"User1","email":"user1@truesparrow.com"]
+                ],
+            ]
+        ],
+        "GET /v1/accounts": [
             "default":[
                 "success": "true",
                 "statusCode": 200,
@@ -51,6 +60,54 @@ class MockResponse {
                     "account_map_by_id": ["1": ["id": "1", "name": "Mock Account 1"], "2":["id": "2", "name": "acd"], "3":["id": "3", "name": "bad"]]
                 ] as [String : Any],
             ] as [String : Any]
-        ]
+        ],
+        "POST /v1/auth/logout": [
+            "default":[
+                "success": "true",
+                "statusCode": 200,
+                "data": [:] as [String : Any]
+            ] as [String : Any]
+        ],
+        "GET /v1/users/current": [
+            "default":[
+                "success": "true",
+                "statusCode": 200,
+                "data":[
+                    "current_user": ["id":"123","name":"User1","email":"user1@truesparrow.com"]
+                ],
+            ],
+            "loggedOutUser":[
+                "success": "false",
+                "statusCode": 400,
+                "error": [
+                    "http_code": 400,
+                    "message": "User Not logged in.",
+                    "code": "INVALID_PARAMS",
+                    "internal_error_identifier": "b_2"
+                ] as [String : Any]
+            ]
+        ],
+        "GET /v1/accounts/1/notes": [
+            "default":[
+                "success": "true",
+                "statusCode": 200,
+                "data":[
+                    "note_id": ["100","200","300"],
+                    "note_map_by_id": [
+                        "100":["id":"100","creator":"User1","text_preview":"This is Note text.","last_modified_time":"2019-10-12T07:20:50.52Z"],
+                        "200":["id":"200","creator":"User2","text_preview":"This is Note long long text.","last_modified_time":"2019-10-12T07:20:50.58Z"]
+                    ]
+                ] as [String : Any],
+            ]
+        ],
+        "POST /v1/accounts/1/notes": [
+            "default":[
+                "success": "true",
+                "statusCode": 200,
+                "data":[
+                    "note_id": "100"
+                ],
+            ]
+        ],
     ]
 }

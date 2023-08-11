@@ -21,6 +21,7 @@ struct AccountDetailsHeader: View {
                 
                 Text("Account Details")
                     .foregroundColor(Color("TextPrimary"))
+                    .font(.custom("Nunito-SemiBold",size: 16))
                 
                 Spacer()
             }
@@ -29,12 +30,13 @@ struct AccountDetailsHeader: View {
                     Text("Account Details")
                         .font(.custom("Nunito-Regular",size: 14))
                         .foregroundColor(Color("TextPrimary"))
+                        .opacity(0.7)
                     
                     Spacer()
                 }
                 HStack {
                     Text(accountName)
-                        .font(.custom("Nunito-Regular",size: 22))
+                        .font(.custom("Nunito-Bold",size: 18))
                         .foregroundColor(Color("TextPrimary"))
                     
                     Spacer()

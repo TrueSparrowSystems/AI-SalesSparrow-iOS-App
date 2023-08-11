@@ -66,4 +66,15 @@ struct BasicHelper {
         }
         return false
     }
+    
+    static func getInitials(from name: String) -> String {
+           let components = name.components(separatedBy: " ")
+           let initials = components.compactMap { component in
+               if let firstLetter = component.first {
+                   return String(firstLetter)
+               }
+               return nil
+           }
+           return initials.joined().uppercased()
+       }
 }

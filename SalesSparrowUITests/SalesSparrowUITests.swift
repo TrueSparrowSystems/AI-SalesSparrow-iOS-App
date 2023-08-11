@@ -34,7 +34,7 @@ final class SalesSparrowUITests: XCTestCase {
     
     func testLoginScreen() throws {
         let app = XCUIApplication()
-        app.launchArguments = ["isRunningUITests"]
+        app.launchArguments = ["isRunningUITests","loggedOutUser"]
         app.launch()
         
         let timeout = 2

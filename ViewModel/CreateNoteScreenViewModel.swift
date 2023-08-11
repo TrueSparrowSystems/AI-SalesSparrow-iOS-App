@@ -31,7 +31,7 @@ class CreateNoteScreenViewModel: ObservableObject {
         
         let params: [String: Any] = ["text": text ?? ""]
         
-        apiService.post(type: CreateNoteStruct.self, endpoint: "accounts/\(accountId)/notes", params: params){
+        apiService.post(type: CreateNoteStruct.self, endpoint: "/v1/accounts/\(accountId)/notes", params: params){
             [weak self]  result, statusCode in
             switch result {
             case .success(_):

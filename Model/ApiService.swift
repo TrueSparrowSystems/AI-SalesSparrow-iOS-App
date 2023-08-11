@@ -29,14 +29,15 @@ struct AnyEncodable: Encodable {
 class MockAPIService: ApiService {
     
     override func callApi<T: Decodable>(type: T.Type, requestUrl: URLRequest, endpoint: String, completion: @escaping(Result<T, ErrorStruct>, Int?) -> Void) {
+        let testEndpoint = "\(requestUrl.httpMethod ?? "") \(endpoint)"
         do{
             var caseIdentifierFound: String = "default"
             Environments.shared.testVars["testCaseIdentifiers"]?.forEach { testCaseIdentifier in
-                if let response = MockResponse.responseObj[endpoint]?[testCaseIdentifier] {
+                if let response = MockResponse.responseObj[testEndpoint]?[testCaseIdentifier] {
                     caseIdentifierFound = testCaseIdentifier
                 }
             }
-            let response = MockResponse.responseObj[endpoint]?[caseIdentifierFound]
+            let response = MockResponse.responseObj[testEndpoint]?[caseIdentifierFound]
             
             if(response?["statusCode"] as! Int == 200) {
                 do{
