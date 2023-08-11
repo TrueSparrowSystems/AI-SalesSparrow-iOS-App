@@ -38,8 +38,11 @@ struct AccountDetailsScreen: View {
             self.presentationMode.wrappedValue.dismiss()
         }) {
             HStack {
-                Image(systemName: "arrow.left")
+                Image("ArrowLeft")
+                    .frame(width: 24.14,height: 24.14)
                 Text("Details")
+                    .font(.custom("Nunito-SemiBold",size: 16))
+                    .foregroundColor(Color("SaveButtonBackground"))
             }
             .foregroundColor(Color("SaveButtonBackground"))
         }

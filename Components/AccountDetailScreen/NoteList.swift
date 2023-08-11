@@ -25,6 +25,8 @@ struct NotesList: View {
                     .frame(width: 20.0, height: 20.0)
                 
                 Text("Notes")
+                    .font(.custom("Nunito-SemiBold",size: 16))
+                    .foregroundColor(Color("TextPrimary"))
                 
                 Spacer()
                 
@@ -40,22 +42,28 @@ struct NotesList: View {
                     
                 }
             }
-            if showOverlay {
-                VStack(spacing: 5) {
+            if acccountDetailScreenViewModelObject.NotesData.note_ids.isEmpty {
+                VStack(spacing: 0) {
                     HStack {
                         Spacer()
                         Text("Add notes and sync with your salesforce account")
                             .font(.custom("Nunito-Regular",size: 12))
+                            .foregroundColor(Color("TextPrimary"))
+                            .padding(EdgeInsets(top: 12, leading: 14, bottom: 12, trailing: 14))
+                        
                         Spacer()
                     }
+                    .background(
+                        RoundedRectangle(cornerRadius: 4)
+                            .strokeBorder(style: StrokeStyle(lineWidth: 2, dash: [1, 5], dashPhase: 10))
+                            .background(
+                                Color.clear
+                                    .frame(height: 2)
+                            )
+                    )
                 }
-                .padding()
-                .cornerRadius(5) /// make the background rounded
-                .overlay( /// apply a rounded border
-                    RoundedRectangle(cornerRadius: 5)
-                    //                    .stroke(Color("BorderColor"), lineWidth: 1)
-                        .strokeBorder(style: StrokeStyle(lineWidth: 1, dash: [1,5]))
-                )
+                .frame(maxWidth: .infinity, alignment: .center)
+                Spacer()
             } else {
                 VStack{
                     ForEach(self.acccountDetailScreenViewModelObject.NotesData.note_ids, id: \.self){ id in
@@ -81,12 +89,12 @@ struct NoteCardView: View {
     var body: some View {
         VStack(spacing: 5){
             HStack {
-                Text("AB")
-                    .frame(width: 22, height:22)
-                    .font(.custom("Nunito-Bold", size: 7))
+                Text("\(BasicHelper.getInitials(from: acccountDetailScreenViewModelObject.NotesData.note_map_by_id[NoteId]!.creator))")
+                    .frame(width: 18.49, height:17.83)
+                    .font(.custom("Nunito-Bold", size: 5.24))
                     .foregroundColor(.black)
-                    .background(Color(hex: "#C5B8FA"))
-                    .clipShape(RoundedRectangle(cornerRadius: 11))
+                    .background(Color("UserBubble"))
+                    .clipShape(RoundedRectangle(cornerRadius: 26))
                 
                 Text("\(acccountDetailScreenViewModelObject.NotesData.note_map_by_id[NoteId]!.creator)")
                     .font(.custom("Nunito-Medium",size: 14))
@@ -109,6 +117,8 @@ struct NoteCardView: View {
             Text("\(acccountDetailScreenViewModelObject.NotesData.note_map_by_id[NoteId]!.text_preview)")
                 .font(.custom("Nunito-Medium",size: 14))
                 .foregroundColor(Color("TextPrimary"))
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .multilineTextAlignment(.leading)
         }
         .padding(14)
         .background(.white)
