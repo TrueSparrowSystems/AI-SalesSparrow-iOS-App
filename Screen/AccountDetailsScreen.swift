@@ -46,6 +46,7 @@ struct AccountDetailsScreen: View {
             }
             .foregroundColor(Color("SaveButtonBackground"))
         }
+        .accessibilityIdentifier("btn_account_detail_back")
     }
 }
 

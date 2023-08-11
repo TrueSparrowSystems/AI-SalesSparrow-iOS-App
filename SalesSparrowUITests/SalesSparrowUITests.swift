@@ -73,8 +73,6 @@ final class SalesSparrowUITests: XCTestCase {
         XCTAssertTrue(btnSearchAddNoteBtn.waitForExistence(timeout: TimeInterval(timeout)))
         // add note should be clickable
         XCTAssertTrue(btnSearchAddNoteBtn.isEnabled)
-                
-        app.activate()
         
     }
     
@@ -109,8 +107,99 @@ final class SalesSparrowUITests: XCTestCase {
         XCTAssertTrue(btnSearchAddNoteBtn.isEnabled)
                 
         
-        app.activate()
+    }
+    
+    func openAccountDetailUsingSearch(app: XCUIApplication,accountName: String = "Test Data 1") {
+        let timeout = 2
+        let searchAccountButton = app.images["btn_search_account"]
+        XCTAssertTrue(searchAccountButton.waitForExistence(timeout: TimeInterval(timeout)))
+        searchAccountButton.tap()
         
+        // modal should open with default data
+        let btnSearchAccountNameBtn = app.buttons["btn_search_account_name_\(accountName)"]
+        XCTAssertTrue(btnSearchAccountNameBtn.waitForExistence(timeout: TimeInterval(timeout)))
+        btnSearchAccountNameBtn.tap()
+    }
+    
+    func testAccountDetailHeader() throws {
+        // Launch the app with the specified launch arguments
+        let app = XCUIApplication()
+        app.launchArguments = ["isRunningUITests"]
+        app.launch()
+
+        // Open the account detail using the helper function
+        openAccountDetailUsingSearch(app: app)
+        
+        let timeout = 5
+        // Check the account icon
+        XCTAssertTrue(app.images["img_account_detail_account_icon"].waitForExistence(timeout: TimeInterval(timeout)))
+        
+        // Check the account details title
+        XCTAssertTrue(app.staticTexts["txt_account_detail_account_details_title"].waitForExistence(timeout: TimeInterval(timeout)))
+        
+        // Check the account text
+        XCTAssertTrue(app.staticTexts["txt_account_detail_account_text"].waitForExistence(timeout: TimeInterval(timeout)))
+        
+        // Check the account name text
+        XCTAssertTrue(app.staticTexts["txt_account_detail_account_name"].waitForExistence(timeout: TimeInterval(timeout)))
+        
+        // Check the notes icon
+        XCTAssertTrue(app.images["img_account_detail_note_icon"].waitForExistence(timeout: TimeInterval(timeout)))
+        
+        // Check the notes title
+        XCTAssertTrue(app.staticTexts["txt_account_detail_notes_title"].waitForExistence(timeout: TimeInterval(timeout)))
+        
+        sleep(5)
+    }
+    
+    func testNotesSection() throws {
+        // Launch the app with the specified launch arguments
+        let app = XCUIApplication()
+        app.launchArguments = ["isRunningUITests"]
+        app.launch()
+
+        // Set the timeout duration
+        let timeout = 5
+        
+        // Open the account detail using the helper function
+        openAccountDetailUsingSearch(app: app)
+        
+        // Check the Add Note button
+        let addNoteButton = app.buttons["btn_account_detail_add_note"]
+        XCTAssertTrue(addNoteButton.waitForExistence(timeout: TimeInterval(timeout)))
+        XCTAssertTrue(addNoteButton.isEnabled) // Ensure the button is enabled
+        
+        XCTAssertTrue(app.staticTexts["txt_account_detail_note_creator"].waitForExistence(timeout: TimeInterval(timeout)))
+
+        XCTAssertTrue(app.staticTexts["txt_account_detail_note_text"].waitForExistence(timeout: TimeInterval(timeout)))
+        
+        let backButton = app.buttons["btn_account_detail_back"]
+        XCTAssertTrue(backButton.waitForExistence(timeout: TimeInterval(timeout)))
+        backButton.tap()
+    }
+    
+    func testNotesSectionWithEmptyList() throws {
+        // Launch the app with the specified launch arguments
+        let app = XCUIApplication()
+        app.launchArguments = ["isRunningUITests","emptyNoteList"]
+        app.launch()
+
+        // Set the timeout duration
+        let timeout = 5
+        
+        // Open the account detail using the helper function
+        openAccountDetailUsingSearch(app: app)
+        
+        // Check the Add Note button
+        let addNoteButton = app.buttons["btn_account_detail_add_note"]
+        XCTAssertTrue(addNoteButton.waitForExistence(timeout: TimeInterval(timeout)))
+        XCTAssertTrue(addNoteButton.isEnabled) // Ensure the button is enabled
+        
+        XCTAssertTrue(app.staticTexts["txt_account_detail_add_note_text"].waitForExistence(timeout: TimeInterval(timeout)))
+        
+        let backButton = app.buttons["btn_account_detail_back"]
+        XCTAssertTrue(backButton.waitForExistence(timeout: TimeInterval(timeout)))
+        backButton.tap()
     }
     
     func testCreateNoteScreen(){

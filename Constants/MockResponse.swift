@@ -49,7 +49,7 @@ class MockResponse {
                 "statusCode": 200,
                 "data":[
                     "account_ids": ["1","2","3"],
-                    "account_map_by_id": ["1": ["id": "1", "name": "Test Data 1"], "2":["id": "2", "name": "acd"], "3":["id": "3", "name": "bad"]]
+                    "account_map_by_id": ["1": ["id": "1", "name": "Test Data 1"], "2":["id": "2", "name": "Test Data 2"], "3":["id": "3", "name": "bad"]]
                 ] as [String : Any],
             ] as [String : Any],
             "searchResponseWithQuery":[
@@ -92,11 +92,40 @@ class MockResponse {
                 "success": "true",
                 "statusCode": 200,
                 "data":[
-                    "note_id": ["100","200","300"],
+                    "note_ids": ["100","200"],
                     "note_map_by_id": [
                         "100":["id":"100","creator":"User1","text_preview":"This is Note text.","last_modified_time":"2019-10-12T07:20:50.52Z"],
                         "200":["id":"200","creator":"User2","text_preview":"This is Note long long text.","last_modified_time":"2019-10-12T07:20:50.58Z"]
                     ]
+                ] as [String : Any],
+            ],
+            "emptyNoteList":[
+                "success": "true",
+                "statusCode": 200,
+                "data":[
+                    "note_ids": [] as [String],
+                    "note_map_by_id": [:] as [String : Any],
+                ] as [String : Any],
+            ]
+        ],
+        "GET /v1/accounts/2/notes": [
+            "default":[
+                "success": "true",
+                "statusCode": 200,
+                "data":[
+                    "note_ids": ["400","500"],
+                    "note_map_by_id": [
+                        "400":["id":"400","creator":"User1","text_preview":"This is Note text.","last_modified_time":"2019-10-12T07:20:50.52Z"],
+                        "500":["id":"500","creator":"User2","text_preview":"This is Note long long text.","last_modified_time":"2019-10-12T07:20:50.58Z"]
+                    ]
+                ] as [String : Any],
+            ],
+            "emptyNoteList":[
+                "success": "true",
+                "statusCode": 200,
+                "data":[
+                    "note_ids": [] as [String],
+                    "note_map_by_id": [:] as [String : Any],
                 ] as [String : Any],
             ]
         ],

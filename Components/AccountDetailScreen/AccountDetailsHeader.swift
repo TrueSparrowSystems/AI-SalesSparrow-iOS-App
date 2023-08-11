@@ -18,8 +18,10 @@ struct AccountDetailsHeader: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 25.0, height: 25.0)
+                    .accessibilityIdentifier("img_account_detail_account_icon")
                 
                 Text("Account Details")
+                    .accessibilityIdentifier("txt_account_detail_account_details_title")
                     .foregroundColor(Color("TextPrimary"))
                     .font(.custom("Nunito-SemiBold",size: 16))
                 
@@ -27,7 +29,8 @@ struct AccountDetailsHeader: View {
             }
             VStack(spacing: 5) {
                 HStack {
-                    Text("Account Details")
+                    Text("Accounts")
+                        .accessibilityIdentifier("txt_account_detail_account_text")
                         .font(.custom("Nunito-Regular",size: 14))
                         .foregroundColor(Color("TextPrimary"))
                         .opacity(0.7)
@@ -36,6 +39,7 @@ struct AccountDetailsHeader: View {
                 }
                 HStack {
                     Text(accountName)
+                        .accessibilityIdentifier("txt_account_detail_account_name")
                         .font(.custom("Nunito-Bold",size: 18))
                         .foregroundColor(Color("TextPrimary"))
                     

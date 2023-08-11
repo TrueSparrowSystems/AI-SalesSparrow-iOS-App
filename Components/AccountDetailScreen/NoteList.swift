@@ -23,10 +23,12 @@ struct NotesList: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 20.0, height: 20.0)
+                    .accessibilityIdentifier("img_account_detail_note_icon")
                 
                 Text("Notes")
                     .font(.custom("Nunito-SemiBold",size: 16))
                     .foregroundColor(Color("TextPrimary"))
+                    .accessibilityIdentifier("txt_account_detail_notes_title")
                 
                 Spacer()
                 
@@ -41,8 +43,9 @@ struct NotesList: View {
                     .padding(.bottom, 10)
                     
                 }
+                .accessibilityIdentifier("btn_account_detail_add_note")
             }
-            if acccountDetailScreenViewModelObject.NotesData.note_ids.isEmpty {
+            if acccountDetailScreenViewModelObject.noteData.note_ids.isEmpty {
                 VStack(spacing: 0) {
                     HStack {
                         Spacer()
@@ -50,6 +53,7 @@ struct NotesList: View {
                             .font(.custom("Nunito-Regular",size: 12))
                             .foregroundColor(Color("TextPrimary"))
                             .padding(EdgeInsets(top: 12, leading: 14, bottom: 12, trailing: 14))
+                            .accessibilityIdentifier("txt_account_detail_add_note_text")
                         
                         Spacer()
                     }
@@ -66,10 +70,12 @@ struct NotesList: View {
                 Spacer()
             } else {
                 VStack{
-                    ForEach(self.acccountDetailScreenViewModelObject.NotesData.note_ids, id: \.self){ id in
+                    ForEach(self.acccountDetailScreenViewModelObject.noteData.note_ids, id: \.self){ id in
                         NavigationLink(destination: NoteDetailScreen(noteId: id, accountId: accountId, accountName: accountName)
                         ){
-                            NoteCardView(NoteId: id)
+                            if self.acccountDetailScreenViewModelObject.noteData.note_map_by_id[id] != nil{
+                                NoteCardView(noteId: id)
+                            }
                         }
                     }
                 }
@@ -78,27 +84,31 @@ struct NotesList: View {
         }.onAppear {
             acccountDetailScreenViewModelObject.fetchNotes(accountId: accountId)
         }
+        .onDisappear {
+            acccountDetailScreenViewModelObject.resetData()
+        }
     }
 }
 
 struct NoteCardView: View {
-    let NoteId: String
+    let noteId: String
     @EnvironmentObject var acccountDetailScreenViewModelObject: AccountDetailViewScreenViewModel
-    var NotesData: [String: Note] = [:]
+    var noteData: [String: Note] = [:]
     
     var body: some View {
         VStack(spacing: 5){
             HStack {
-                Text("\(BasicHelper.getInitials(from: acccountDetailScreenViewModelObject.NotesData.note_map_by_id[NoteId]!.creator))")
+                Text("\(BasicHelper.getInitials(from: acccountDetailScreenViewModelObject.noteData.note_map_by_id[noteId]!.creator))")
                     .frame(width: 18.49, height:17.83)
                     .font(.custom("Nunito-Bold", size: 5.24))
                     .foregroundColor(.black)
                     .background(Color("UserBubble"))
                     .clipShape(RoundedRectangle(cornerRadius: 26))
                 
-                Text("\(acccountDetailScreenViewModelObject.NotesData.note_map_by_id[NoteId]!.creator)")
+                Text("\(acccountDetailScreenViewModelObject.noteData.note_map_by_id[noteId]!.creator)")
                     .font(.custom("Nunito-Medium",size: 14))
                     .foregroundColor(Color("TextPrimary"))
+                    .accessibilityIdentifier("txt_account_detail_note_creator")
                 
                 Spacer()
                 
@@ -114,11 +124,12 @@ struct NoteCardView: View {
                     .frame(width: 16, height: 16)
                     .foregroundColor(Color("TextPrimary"))
             }
-            Text("\(acccountDetailScreenViewModelObject.NotesData.note_map_by_id[NoteId]!.text_preview)")
+            Text("\(acccountDetailScreenViewModelObject.noteData.note_map_by_id[noteId]!.text_preview)")
                 .font(.custom("Nunito-Medium",size: 14))
                 .foregroundColor(Color("TextPrimary"))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .multilineTextAlignment(.leading)
+                .accessibilityIdentifier("txt_account_detail_note_text")
         }
         .padding(14)
         .background(.white)
