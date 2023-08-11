@@ -41,7 +41,7 @@ class AccountDetailViewScreenViewModel: ObservableObject {
             "3": Note(id: "3", creator: "Alex Zu", text_preview: "This is note 3", last_modified_time: "2019-10-12T07:20:50.52Z")
         ]
         
-        ApiService().get(type: NotesListStruct.self, endpoint: "accounts/\(accountId)/notes"){
+        ApiService().get(type: NotesListStruct.self, endpoint: "/v1/accounts/\(accountId)/notes"){
             [weak self]  result, statusCode in
             switch result {
             case .success(let results):
