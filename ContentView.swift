@@ -15,16 +15,6 @@ struct ContentView: View {
     @EnvironmentObject var userStateViewModel : UserStateViewModel
     @EnvironmentObject var environment: Environments
     
-    // The text entered by the user in the text field
-    @State var text: String = ""
-    
-    // The calculated height of the text field based on its contents
-    @State private var calculatedHeight: CGFloat = 32
-    
-    // The minimum and maximum height of the text field
-    let minHeight: CGFloat = 32
-    let maxHeight: CGFloat = 200
-    
     @StateObject var loginScreenViewModel = LoginScreenViewModel()
     @StateObject var toastViewModel = ToastViewModel.shared
     

@@ -77,6 +77,7 @@ struct NotesList: View {
                                 NoteCardView(noteId: id)
                             }
                         }
+                        .accessibilityIdentifier("note_card_\(id)")
                     }
                 }
                 .padding(.trailing)
