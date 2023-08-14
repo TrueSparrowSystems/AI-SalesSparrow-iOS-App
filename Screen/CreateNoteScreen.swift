@@ -118,6 +118,7 @@ struct CreateNoteScreen : View {
                             .padding(.horizontal, 6)
                             .foregroundColor(Color("RedHighlight"))
                             .font(.custom("Nunito-Bold", size: 14))
+                            .accessibilityIdentifier("cn_selected_account")
                     }
                     .background(Color("SelectAccountDropdownBG"))
                     .clipShape(RoundedRectangle(cornerRadius: 4))

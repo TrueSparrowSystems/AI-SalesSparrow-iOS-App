@@ -21,6 +21,7 @@ struct HTMLTextView: UIViewRepresentable {
         textView.textContainer.lineFragmentPadding = 0
         textView.contentMode = .top
         textView.backgroundColor = backgroundColor
+        textView.accessibilityIdentifier = "html_text_view"
         return textView
     }
     

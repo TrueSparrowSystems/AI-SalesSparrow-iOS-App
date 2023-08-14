@@ -56,7 +56,8 @@ struct NoteDetailScreen : View {
                 
             }else if(noteDetailScreenViewModel.errorMessage != ""){
                 Text(noteDetailScreenViewModel.errorMessage)
-                    .foregroundColor(Color("TextPrimary"))                  .accessibilityIdentifier("txt_note_detail_error")
+                    .foregroundColor(Color("TextPrimary"))
+                    .accessibilityIdentifier("txt_note_detail_error")
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                 
             }else{

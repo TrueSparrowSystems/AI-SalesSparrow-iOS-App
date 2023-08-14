@@ -138,5 +138,19 @@ class MockResponse {
                 ],
             ]
         ],
+        "GET /v1/accounts/1/notes/100": [
+            "default":[
+                "success": "true",
+                "statusCode": 200,
+                "data":[
+                    "note_details": [
+                        "id":"100",
+                        "creator":"User1",
+                        "text":"This is Note text. This is Note long long text. this is Note long long text. this is Note long long text.",
+                        "last_modified_time":"2019-10-12T07:20:50.52Z"
+                    ]
+                ]
+            ] as [String : Any],
+        ],
     ]
 }
