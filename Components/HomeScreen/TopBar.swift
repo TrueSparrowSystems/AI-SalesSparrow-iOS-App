@@ -19,11 +19,13 @@ struct TopBar: View {
         HStack {
             Image("Buildings")
                 .frame(width: 28.0, height: 28.0)
+                .accessibilityIdentifier("img_home_screen_account_icon")
             
             Text("Accounts")
                 .font(.custom("Nunito-Regular",size: 24))
                 .fontWeight(.bold)
                 .frame(width: 103.0, height: 33.0)
+                .accessibilityIdentifier("txt_account_details_title")
             
             Spacer()
             
@@ -51,16 +53,17 @@ struct TopBar: View {
                         self.createNoteScreenActivated = true
                     })
                 }
-            Text("AB")
-                .frame(width: 22, height:22)
-                .font(.custom("Nunito-Bold", size: 7))
-                .foregroundColor(.black)
-                .background(Color(hex: "#C5B8FA"))
-                .clipShape(RoundedRectangle(cornerRadius: 11))
-                .onTapGesture {
-                    userStateViewModel.logOut()
-                }
-                 
+            Button(action: {
+                userStateViewModel.logOut()
+            }){
+                Text(BasicHelper.getInitials(from: userStateViewModel.currentUser.name))
+                    .frame(width: 22, height:22)
+                    .font(.custom("Nunito-Bold", size: 7))
+                    .foregroundColor(.black)
+            }
+            .background(Color(hex: "#C5B8FA"))
+            .clipShape(RoundedRectangle(cornerRadius: 11))
+            
         }
         .foregroundColor(Color("TextPrimary"))
         .padding(EdgeInsets(top: 50, leading: 20, bottom: 0, trailing: 20))

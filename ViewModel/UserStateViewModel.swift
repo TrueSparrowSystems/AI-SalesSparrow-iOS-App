@@ -21,6 +21,7 @@ class UserStateViewModel: ObservableObject {
     @Published var isUserLoggedIn = false
     @Published var isLogOutInProgress = false
     @Published var currentUser = CurrentUserStruct(id: "", name: "", email: "")
+    @Published var isAppLaunchInProgress = true
     var apiService = DependencyContainer.shared.apiService
     
     static let shared = UserStateViewModel()
@@ -28,8 +29,6 @@ class UserStateViewModel: ObservableObject {
     private init(){}
     
     func setLoggedInUser(currentUser: CurrentUserStruct) {
-        print("setting logged in user \(currentUser)")
-        
         self.currentUser = currentUser
         self.isUserLoggedIn = true
     }
@@ -67,6 +66,7 @@ class UserStateViewModel: ObservableObject {
                     case .failure(let error):
                         print("error loading data in getCurrentUser: \(error)")
                     }
+                    self?.isAppLaunchInProgress = false
                 }
             }
         }

@@ -21,10 +21,14 @@ struct ContentView: View {
     /// The body of the view
     var body: some View {
         VStack{
-            if(!userStateViewModel.isUserLoggedIn){
-                LoginScreen()
-            }else {
-                HomeScreen()
+            if(userStateViewModel.isAppLaunchInProgress){
+                LaunchScreen()
+            }else{
+                if(!userStateViewModel.isUserLoggedIn){
+                    LoginScreen()
+                }else {
+                    HomeScreen()
+                }
             }
         }
         .onOpenURL { incomingURL in
