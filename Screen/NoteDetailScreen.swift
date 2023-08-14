@@ -84,14 +84,12 @@ struct NoteDetailScreen : View {
                 }
                 .padding(.top, 12)
                 
-                HStack{
-                    Text(noteDetailScreenViewModel.noteDetail.text)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .font(.custom("Nunito-SemiBold", size: 18))
-                        .accessibilityIdentifier("txt_note_detail_text")
-                        .foregroundColor(Color("TextPrimary"))
-                    
-                }
+                HTMLTextView(htmlText: noteDetailScreenViewModel.noteDetail.text, textColor: UIColor(named: "TextPrimary") ?? .gray, font: UIFont(name: "Nunito-SemiBold", size: 18) ?? UIFont.systemFont(ofSize: 18), backgroundColor: UIColor(named: "Background") ?? .white)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .font(.custom("Nunito-SemiBold", size: 18))
+                    .accessibilityIdentifier("txt_note_detail_text")
+                    .foregroundColor(Color("TextPrimary"))
+                
                 Spacer()
             }
             

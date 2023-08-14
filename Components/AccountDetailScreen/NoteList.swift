@@ -45,7 +45,10 @@ struct NotesList: View {
                 }
                 .accessibilityIdentifier("btn_account_detail_add_note")
             }
-            if acccountDetailScreenViewModelObject.noteData.note_ids.isEmpty {
+            if acccountDetailScreenViewModelObject.isLoading {
+                ProgressView()
+            }
+            else if acccountDetailScreenViewModelObject.noteData.note_ids.isEmpty {
                 VStack(spacing: 0) {
                     HStack {
                         Spacer()
@@ -85,9 +88,6 @@ struct NotesList: View {
         }.onAppear {
             acccountDetailScreenViewModelObject.fetchNotes(accountId: accountId)
         }
-        .onDisappear {
-            acccountDetailScreenViewModelObject.resetData()
-        }
     }
 }
 
@@ -99,14 +99,14 @@ struct NoteCardView: View {
     var body: some View {
         VStack(spacing: 5){
             HStack {
-                Text("\(BasicHelper.getInitials(from: acccountDetailScreenViewModelObject.noteData.note_map_by_id[noteId]!.creator))")
+                Text("\(BasicHelper.getInitials(from: acccountDetailScreenViewModelObject.noteData.note_map_by_id[noteId]?.creator ?? ""))")
                     .frame(width: 18.49, height:17.83)
                     .font(.custom("Nunito-Bold", size: 5.24))
                     .foregroundColor(.black)
                     .background(Color("UserBubble"))
                     .clipShape(RoundedRectangle(cornerRadius: 26))
                 
-                Text("\(acccountDetailScreenViewModelObject.noteData.note_map_by_id[noteId]!.creator)")
+                Text("\(acccountDetailScreenViewModelObject.noteData.note_map_by_id[noteId]?.creator ?? "")")
                     .font(.custom("Nunito-Medium",size: 14))
                     .foregroundColor(Color("TextPrimary"))
                     .accessibilityIdentifier("txt_account_detail_note_creator")
@@ -125,7 +125,7 @@ struct NoteCardView: View {
                     .frame(width: 16, height: 16)
                     .foregroundColor(Color("TextPrimary"))
             }
-            Text("\(acccountDetailScreenViewModelObject.noteData.note_map_by_id[noteId]!.text_preview)")
+            Text("\(acccountDetailScreenViewModelObject.noteData.note_map_by_id[noteId]?.text_preview ?? "")")
                 .font(.custom("Nunito-Medium",size: 14))
                 .foregroundColor(Color("TextPrimary"))
                 .frame(maxWidth: .infinity, alignment: .leading)

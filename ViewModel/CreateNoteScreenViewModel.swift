@@ -25,10 +25,6 @@ class CreateNoteScreenViewModel: ObservableObject {
         }
         self.isCreateNoteInProgress = true
         
-        //TODO: Remove this once the login api is implemented
-        onSuccess()
-        self.isCreateNoteInProgress = false
-        
         let params: [String: Any] = ["text": text ?? ""]
         
         apiService.post(type: CreateNoteStruct.self, endpoint: "/v1/accounts/\(accountId)/notes", params: params){

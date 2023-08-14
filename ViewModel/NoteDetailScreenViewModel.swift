@@ -8,7 +8,7 @@
 import Foundation
 
 struct NoteDetailRespStruct: Codable {
-    var note_detail: NoteDetailStruct
+    var note_details: NoteDetailStruct
 }
 
 struct NoteDetailStruct : Codable {
@@ -30,20 +30,15 @@ class NoteDetailScreenViewModel: ObservableObject {
         
         apiService.get(type: NoteDetailRespStruct.self, endpoint: endPoint){
             [weak self] result, statusCode in
-            
-            //TODO: remove once api is integrated
-            self?.noteDetail = NoteDetailStruct(id: noteId, creator: "A", text: "Note Full Content", last_modified_time: "2019-10-12T07:20:50.52Z")
-            
             DispatchQueue.main.async {
                 switch result {
                 case .success(let results):
                     self?.errorMessage = ""
+                    self?.noteDetail = results.note_details
                     self?.isFetchNoteDetailInProgress = false
-                    self?.noteDetail = results.note_detail
                 case .failure(let error):
                     self?.isFetchNoteDetailInProgress = false
-                    //TODO: uncomment this line once api is integrated
-                    //                    self?.errorMessage = error.message
+                    self?.errorMessage = error.message
                     
                 }
             }

@@ -136,10 +136,12 @@ class ApiService {
         var requestUrl = URLRequest(url: urlApiEndpoint)
         
         do {
-            let jsonData = try? JSONSerialization.data(withJSONObject: params)
+            let jsonData = try JSONSerialization.data(withJSONObject: params)
             requestUrl.httpBody = jsonData
-        }
-        catch let decodingError {
+            if(dev){
+                print("-------httpsBody = --------------\(jsonData)")
+            }
+        } catch let decodingError {
             completion(Result.failure(APIError().decodingError(error: (decodingError as! DecodingError))), 0)
             return
         }
@@ -201,6 +203,7 @@ class ApiService {
         
         URLSession.shared.dataTask(with: requestUrl) { data, response, error in
             if(self.dev){
+                print("---------------data----------\(data)")
                 print("---------------response----------\(response)")
                 print("---------------error----------\(error)")
             }
@@ -234,7 +237,13 @@ class ApiService {
                 
                 do {
                     let result = try JSONDecoder().decode(type, from: data)
+                    if(self.dev){
+                        print("==============result  \(result)=======")
+                    }   
                     let responseData = try JSONSerialization.jsonObject(with: data) as! [String: Any]
+                    if(self.dev){
+                        print("==============responseData  \(responseData)=======")
+                    }
                     DispatchQueue.main.async {
                         ApiHelper.syncEntities(responseData)
                     }
