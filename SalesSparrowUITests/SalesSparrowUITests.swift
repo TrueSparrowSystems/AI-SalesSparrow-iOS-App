@@ -238,7 +238,7 @@ final class SalesSparrowUITests: XCTestCase {
         XCTAssertTrue(app.staticTexts["txt_note_detail_account_name"].waitForExistence(timeout: TimeInterval(timeout)))
         
         // Check if the HTMLTextView content exists
-//        XCTAssertTrue(app.staticTexts["html_text_view"].waitForExistence(timeout: TimeInterval(timeout)))
+        XCTAssertTrue(app.textViews["txt_note_detail_text"].waitForExistence(timeout: TimeInterval(timeout)))
     }
     
     func testAddNoteButton() throws {
@@ -277,7 +277,6 @@ final class SalesSparrowUITests: XCTestCase {
         let selectedAccountText = selectedAccount.label
         // Check if the selectedAccountText matches the accountName
         XCTAssertEqual(selectedAccountText, accountName)
-        
         //Check for Create Note text field
         let addNoteTextField = app.textViews["et_create_note"]
         XCTAssertTrue(addNoteTextField.waitForExistence(timeout: TimeInterval(timeout)))
@@ -293,6 +292,7 @@ final class SalesSparrowUITests: XCTestCase {
         XCTAssertTrue(doneButton.waitForExistence(timeout: TimeInterval(timeout)))
         // cancel should be clickable
         XCTAssertTrue(doneButton.isEnabled)
+        
     }
     
     func testCreateNoteScreen(){
