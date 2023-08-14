@@ -8,7 +8,7 @@
 import Foundation
 
 struct NoteDetailRespStruct: Codable {
-    var note_details: NoteDetailStruct
+    var note_detail: NoteDetailStruct
 }
 
 struct NoteDetailStruct : Codable {
@@ -34,7 +34,7 @@ class NoteDetailScreenViewModel: ObservableObject {
                 switch result {
                 case .success(let results):
                     self?.errorMessage = ""
-                    self?.noteDetail = results.note_details
+                    self?.noteDetail = results.note_detail
                     self?.isFetchNoteDetailInProgress = false
                 case .failure(let error):
                     self?.isFetchNoteDetailInProgress = false
