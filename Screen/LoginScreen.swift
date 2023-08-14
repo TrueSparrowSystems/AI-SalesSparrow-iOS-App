@@ -79,6 +79,7 @@ struct LoginScreen: View {
                         isLoginInProgress = true
                         loginScreenViewModel.fetchSalesforceConnectUrl(onSuccess: {url in
                             openURL(URL(string: url)!)
+                            isLoginInProgress = false
                         }, onFailure: {
                             isLoginInProgress = false
                         })
@@ -123,6 +124,7 @@ struct LoginScreen: View {
         }
         .background(Color("Background"))
         .onChange(of: environment.vars["auth_code"], perform: { _ in
+            isLoginInProgress = true
             loginScreenViewModel.salesforceConnect(authCode: environment.vars["auth_code"], onSuccess: {
                 isLoginInProgress = false
             }, onFailure: {

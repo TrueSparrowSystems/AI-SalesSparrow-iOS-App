@@ -42,7 +42,11 @@ struct AccountSearchView: View {
                 .background(Color("SearchPrimary"))
                 .opacity(0.6)
             
-            if(accountSearchViewModel.accountListData.account_ids.count > 0){
+            if(accountSearchViewModel.isSearchAccountInProgress){
+                ProgressView()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+            }
+            else if(accountSearchViewModel.accountListData.account_ids.count > 0){
                 // List of Accounts
                 AccountListView(
                     listData: accountSearchViewModel.accountListData,
@@ -85,7 +89,7 @@ struct AccountListView: View {
                                     .foregroundColor(Color("SearchPrimary"))
                                 Spacer()
                             }
-                            .border(.white)
+                            .border(Color("Background"))
                             .accessibility(addTraits: .isButton)
                             .accessibilityIdentifier("btn_search_account_name_\(account.name)")
                             .onTapGesture {
