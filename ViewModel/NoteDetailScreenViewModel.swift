@@ -39,7 +39,7 @@ class NoteDetailScreenViewModel: ObservableObject {
                 case .failure(let error):
                     self?.isFetchNoteDetailInProgress = false
                     self?.errorMessage = error.message
-                    
+                    ToastViewModel.shared.showToast(_toast: Toast(style: .error, message: error.message))
                 }
             }
         }

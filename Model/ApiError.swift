@@ -35,7 +35,7 @@ struct APIError {
         return convertDataToErrorStruct(error: ["message":"bad response with status code: \(statusCode)"])
     }
     func decodingError(error: DecodingError?) -> ErrorStruct {
-        return convertDataToErrorStruct(error: ["message":"decoding error: \(String(describing: error))"])
+        return convertDataToErrorStruct(error: ["message":"Something went wrong"])
     }
     func internalServerError() -> ErrorStruct {
         return convertDataToErrorStruct(error: ["message":"Something went wrong"])

@@ -202,6 +202,21 @@ final class SalesSparrowUITests: XCTestCase {
         backButton.tap()
     }
 
+    func testNotesSectionWithError() throws {
+        // Launch the app with the specified launch arguments
+        let app = XCUIApplication()
+        app.launchArguments = ["isRunningUITests","noteListError"]
+        app.launch()
+        
+        // Set the timeout duration
+        let timeout = 5
+        
+        // Open the account detail using the helper function
+        openAccountDetailUsingSearch(app: app)
+        
+        XCTAssertTrue(app.staticTexts["toast_view_text"].waitForExistence(timeout: TimeInterval(timeout)))
+    }
+
     
     func testViewNoteButton() throws {
         // Launch the app with the specified launch arguments

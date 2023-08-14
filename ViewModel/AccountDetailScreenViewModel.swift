@@ -46,6 +46,7 @@ class AccountDetailViewScreenViewModel: ObservableObject {
                     print("error loading data: \(error)")
                     self?.noteData = NotesListStruct(note_ids: [], note_map_by_id: [:])
                     self?.isLoading = false
+                    ToastViewModel.shared.showToast(_toast: Toast(style: .error, message: error.message))
                 }
             }
         }

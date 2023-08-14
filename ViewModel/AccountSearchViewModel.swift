@@ -58,7 +58,7 @@ class AccountSearchViewModel: ObservableObject {
                     
                 case .failure(let error):
                     self?.accountListData = .init(account_ids: [], account_map_by_id: [:])
-                    
+                    ToastViewModel.shared.showToast(_toast: Toast(style: .error, message: error.message))
                     print("Error loading data: \(error)")
                 }
                 

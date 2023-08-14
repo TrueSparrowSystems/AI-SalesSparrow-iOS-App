@@ -106,6 +106,15 @@ class MockResponse {
                     "note_ids": [] as [String],
                     "note_map_by_id": [:] as [String : Any],
                 ] as [String : Any],
+            ],
+            "noteListError":[
+                "success": "false",
+                "statusCode": 500,
+                "error": [
+                    "message": "Something went wrong.",
+                    "code": "",
+                    "internal_error_identifier": "",
+                    ]as [String : Any]
             ]
         ],
         "GET /v1/accounts/2/notes": [
