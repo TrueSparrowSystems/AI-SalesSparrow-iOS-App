@@ -152,7 +152,7 @@ class MockResponse {
                 "success": "true",
                 "statusCode": 200,
                 "data":[
-                    "note_details": [
+                    "note_detail": [
                         "id":"100",
                         "creator":"User1",
                         "text":"This is Note text. This is Note long long text. this is Note long long text. this is Note long long text.",

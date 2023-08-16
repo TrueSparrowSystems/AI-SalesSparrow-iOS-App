@@ -47,6 +47,7 @@ struct NotesList: View {
             }
             if acccountDetailScreenViewModelObject.isLoading {
                 ProgressView()
+                    .tint(Color("LoginButtonSecondary"))
             }
             else if acccountDetailScreenViewModelObject.noteData.note_ids.isEmpty {
                 VStack(spacing: 0) {

@@ -56,7 +56,7 @@ struct TopBar: View {
                 }
             NavigationLink(destination: UserAccountDetailScreen()
                 .navigationBarBackButtonHidden(true),
-                           isActive: self.$accountDetailsScreenActivated) {
+                           isActive: self.$userAccountSettingScreenActivated) {
                 Text(BasicHelper.getInitials(from: userStateViewModel.currentUser.name))
                     .frame(width: 22, height:22)
                     .font(.custom("Nunito-Bold", size: 7))

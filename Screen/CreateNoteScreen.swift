@@ -46,6 +46,8 @@ struct CreateNoteScreen : View {
                     HStack(alignment: .center, spacing: 0){
                         if(isSaveInProgress){
                             ProgressView()
+                                .tint(Color("LoginButtonPrimary"))
+                                .controlSize(.small)
                             Text("Saving")
                                 .foregroundColor(.white)
                                 .font(.custom("Nunito-Medium", size: 12))

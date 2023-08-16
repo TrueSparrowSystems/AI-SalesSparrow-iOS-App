@@ -45,6 +45,8 @@ struct AccountSearchView: View {
             if(accountSearchViewModel.isSearchAccountInProgress){
                 ProgressView()
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                    .tint(Color("LoginButtonSecondary"))
+                    .controlSize(.large)
             }
             else if(accountSearchViewModel.accountListData.account_ids.count > 0){
                 // List of Accounts

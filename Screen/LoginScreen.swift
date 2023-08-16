@@ -87,6 +87,7 @@ struct LoginScreen: View {
                         HStack(alignment: .center, spacing: 0){
                             if(isLoginInProgress){
                                 ProgressView()
+                                    .tint(Color("LoginButtonPrimary"))
                             }else{
                                 Image("SalesforceIcon")
                                     .resizable()

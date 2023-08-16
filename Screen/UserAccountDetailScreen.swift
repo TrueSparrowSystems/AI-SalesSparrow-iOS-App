@@ -117,6 +117,7 @@ struct UserAccountDetailScreen: View {
                     DisconnectSalesforceModal(disconnectSalesforceModel: $disconnectSalesforceModel)
             }
         }
+        .background(Color("Background"))
     }
 }
 

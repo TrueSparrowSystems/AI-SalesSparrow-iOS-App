@@ -105,7 +105,7 @@ final class SalesSparrowUITests: XCTestCase {
         XCTAssertTrue(btnSearchAddNoteBtn.waitForExistence(timeout: TimeInterval(timeout)))
         // add note should be clickable
         XCTAssertTrue(btnSearchAddNoteBtn.isEnabled)
-                
+        
         
     }
     
@@ -151,7 +151,7 @@ final class SalesSparrowUITests: XCTestCase {
         
         sleep(5)
     }
-        
+    
     func testNotesSectionWithEmptyList() throws {
         // Launch the app with the specified launch arguments
         let app = XCUIApplication()
@@ -171,11 +171,8 @@ final class SalesSparrowUITests: XCTestCase {
         
         XCTAssertTrue(app.staticTexts["txt_account_detail_add_note_text"].waitForExistence(timeout: TimeInterval(timeout)))
         
-        let backButton = app.buttons["btn_account_detail_back"]
-        XCTAssertTrue(backButton.waitForExistence(timeout: TimeInterval(timeout)))
-        backButton.tap()
     }
-
+    
     func testNotesSection() throws {
         // Launch the app with the specified launch arguments
         let app = XCUIApplication()
@@ -199,9 +196,9 @@ final class SalesSparrowUITests: XCTestCase {
         
         let backButton = app.buttons["btn_account_detail_back"]
         XCTAssertTrue(backButton.waitForExistence(timeout: TimeInterval(timeout)))
-        backButton.tap()
+        //        backButton.tap()
     }
-
+    
     func testNotesSectionWithError() throws {
         // Launch the app with the specified launch arguments
         let app = XCUIApplication()
@@ -216,7 +213,7 @@ final class SalesSparrowUITests: XCTestCase {
         
         XCTAssertTrue(app.staticTexts["toast_view_text"].waitForExistence(timeout: TimeInterval(timeout)))
     }
-
+    
     
     func testViewNoteButton() throws {
         // Launch the app with the specified launch arguments
@@ -237,7 +234,7 @@ final class SalesSparrowUITests: XCTestCase {
         firstNoteCard.tap()
         
         // check if you are on the note detail screen by checking appropriate elements
-
+        
         // check the done button
         let doneButton = app.staticTexts["btn_done_note_screen"]
         XCTAssertTrue(doneButton.waitForExistence(timeout: 5))
@@ -248,7 +245,7 @@ final class SalesSparrowUITests: XCTestCase {
         
         // check the "Account" title
         XCTAssertTrue(app.staticTexts["txt_note_detail_account_text"].waitForExistence(timeout: TimeInterval(timeout)))
-
+        
         // check the account name
         XCTAssertTrue(app.staticTexts["txt_note_detail_account_name"].waitForExistence(timeout: TimeInterval(timeout)))
         

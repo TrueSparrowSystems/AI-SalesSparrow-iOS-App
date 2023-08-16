@@ -53,6 +53,8 @@ struct NoteDetailScreen : View {
                 ProgressView()
                     .accessibilityIdentifier("loader_note_detail")
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                    .tint(Color("LoginButtonSecondary"))
+                    .controlSize(.large)
                 
             }else if(noteDetailScreenViewModel.errorMessage != ""){
                 Text(noteDetailScreenViewModel.errorMessage)
