@@ -20,6 +20,7 @@ struct CurrentUserStruct: Codable{
 class UserStateViewModel: ObservableObject {
     @Published var isUserLoggedIn = false
     @Published var isLogOutInProgress = false
+    @Published var isDisconnectInProgress = false
     @Published var currentUser = CurrentUserStruct(id: "", name: "", email: "")
     @Published var isAppLaunchInProgress = true
     var apiService = DependencyContainer.shared.apiService
@@ -71,4 +72,25 @@ class UserStateViewModel: ObservableObject {
             }
         }
     }
+    
+    func disconnectUser()  {
+        guard !self.isDisconnectInProgress else {return}
+        
+        DispatchQueue.main.async {
+            self.isDisconnectInProgress = true
+            
+            self.apiService.post(type: LogoutStruct.self, endpoint: "/v1/auth/disconnect"){
+                [weak self]  result, statusCode in
+                
+                DispatchQueue.main.async {
+                    self?.isDisconnectInProgress = false
+                    self?.isUserLoggedIn = false
+                    HTTPCookieStorage.shared.cookies?.forEach(HTTPCookieStorage.shared.deleteCookie)
+                    
+                }
+                
+            }
+        }
+    }
+
 }

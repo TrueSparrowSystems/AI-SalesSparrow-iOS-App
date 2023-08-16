@@ -10,6 +10,7 @@ import SwiftUI
 struct TopBar: View {
     @State private var showAccountSearchView: Bool = false
     @State var accountDetailsScreenActivated = false
+    @State var userAccountSettingScreenActivated = false
     @State var createNoteScreenActivated = false
     @State var selectedAccountId: String? = nil
     @State var selectedAccountName: String? = nil
@@ -53,17 +54,17 @@ struct TopBar: View {
                         self.createNoteScreenActivated = true
                     })
                 }
-            Button(action: {
-                userStateViewModel.logOut()
-            }){
+            NavigationLink(destination: UserAccountDetailScreen()
+                .navigationBarBackButtonHidden(true),
+                           isActive: self.$accountDetailsScreenActivated) {
                 Text(BasicHelper.getInitials(from: userStateViewModel.currentUser.name))
                     .frame(width: 22, height:22)
                     .font(.custom("Nunito-Bold", size: 7))
                     .foregroundColor(.black)
+                    .accessibilityIdentifier("txt_user_account_icon")
             }
-            .background(Color(hex: "#C5B8FA"))
-            .clipShape(RoundedRectangle(cornerRadius: 11))
-            
+                           .background(Color(hex: "#C5B8FA"))
+                           .clipShape(Circle())
         }
         .foregroundColor(Color("TextPrimary"))
         .padding(EdgeInsets(top: 50, leading: 20, bottom: 0, trailing: 20))
