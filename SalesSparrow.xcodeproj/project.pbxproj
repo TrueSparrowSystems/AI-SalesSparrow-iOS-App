@@ -99,6 +99,8 @@
 		6D2CB5192A77CF570057C73F /* Nunito-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D2CB5092A77CF570057C73F /* Nunito-Black.ttf */; };
 		6D2CB51A2A77CF570057C73F /* Nunito-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D2CB50A2A77CF570057C73F /* Nunito-BlackItalic.ttf */; };
 		6D3E84802A77E83E00E9FB83 /* LoginScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E847F2A77E83E00E9FB83 /* LoginScreenViewModel.swift */; };
+		6D4C061B2A8CDFAF00A677FE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6D4C061A2A8CDFAF00A677FE /* GoogleService-Info.plist */; };
+		6D4C061D2A8CDFFC00A677FE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6D4C061C2A8CDFFC00A677FE /* GoogleService-Info.plist */; };
 		6D8C7CDA2A779A97005D597E /* SalesSparrowApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8C7CD92A779A97005D597E /* SalesSparrowApp.swift */; };
 		6D8C7CDC2A779A97005D597E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8C7CDB2A779A97005D597E /* ContentView.swift */; };
 		6D8C7CDE2A779A99005D597E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6D8C7CDD2A779A99005D597E /* Assets.xcassets */; };
@@ -150,8 +152,6 @@
 		6DD618B42A80E504007FA929 /* MockResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD618B12A80E504007FA929 /* MockResponse.swift */; };
 		6DD618B52A80EB10007FA929 /* Environments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8C7D0C2A779D14005D597E /* Environments.swift */; };
 		6DD618B62A80EB11007FA929 /* Environments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8C7D0C2A779D14005D597E /* Environments.swift */; };
-		6DDA46852A8CAA44005F5A85 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6DDA46842A8CAA44005F5A85 /* GoogleService-Info.plist */; };
-		6DDA46872A8CAA66005F5A85 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6DDA46862A8CAA66005F5A85 /* GoogleService-Info.plist */; };
 		6DE11C842A8283AE00D27006 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE11C832A8283AE00D27006 /* Toast.swift */; };
 		6DE11C862A8283EF00D27006 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE11C852A8283EF00D27006 /* ToastView.swift */; };
 		6DE11C882A82842100D27006 /* ToastModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE11C872A82842100D27006 /* ToastModifier.swift */; };
@@ -215,6 +215,8 @@
 		6D2CB5092A77CF570057C73F /* Nunito-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Black.ttf"; sourceTree = "<group>"; };
 		6D2CB50A2A77CF570057C73F /* Nunito-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-BlackItalic.ttf"; sourceTree = "<group>"; };
 		6D3E847F2A77E83E00E9FB83 /* LoginScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenViewModel.swift; sourceTree = "<group>"; };
+		6D4C061A2A8CDFAF00A677FE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		6D4C061C2A8CDFFC00A677FE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6D8C7CD62A779A97005D597E /* SalesSparrow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SalesSparrow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D8C7CD92A779A97005D597E /* SalesSparrowApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalesSparrowApp.swift; sourceTree = "<group>"; };
 		6D8C7CDB2A779A97005D597E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -260,8 +262,6 @@
 		6DCF64E42A85FEC60084F809 /* NoteDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailScreen.swift; sourceTree = "<group>"; };
 		6DCF64E72A8600D50084F809 /* NoteDetailScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailScreenViewModel.swift; sourceTree = "<group>"; };
 		6DD618B12A80E504007FA929 /* MockResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockResponse.swift; sourceTree = "<group>"; };
-		6DDA46842A8CAA44005F5A85 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		6DDA46862A8CAA66005F5A85 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6DE11C832A8283AE00D27006 /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		6DE11C852A8283EF00D27006 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		6DE11C872A82842100D27006 /* ToastModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastModifier.swift; sourceTree = "<group>"; };
@@ -316,7 +316,7 @@
 		019595B92A83CD76008425AD /* SalesSparrowDev */ = {
 			isa = PBXGroup;
 			children = (
-				6DDA46862A8CAA66005F5A85 /* GoogleService-Info.plist */,
+				6D4C061A2A8CDFAF00A677FE /* GoogleService-Info.plist */,
 				019596172A83DDB9008425AD /* SalesSparrowDev.entitlements */,
 				019596052A83CF97008425AD /* Info.plist */,
 				019595BA2A83CD76008425AD /* SalesSparrowDevApp.swift */,
@@ -421,7 +421,7 @@
 		6D8C7CD82A779A97005D597E /* SalesSparrow */ = {
 			isa = PBXGroup;
 			children = (
-				6DDA46842A8CAA44005F5A85 /* GoogleService-Info.plist */,
+				6D4C061C2A8CDFFC00A677FE /* GoogleService-Info.plist */,
 				6DBB50682A77A30500B58F88 /* Info.plist */,
 				6DBB50692A77A41600B58F88 /* SalesSparrow.entitlements */,
 				6D8C7CD92A779A97005D597E /* SalesSparrowApp.swift */,
@@ -757,8 +757,8 @@
 				019595D02A83CE06008425AD /* Nunito-LightItalic.ttf in Resources */,
 				019595C62A83CDDF008425AD /* Nunito-Black.ttf in Resources */,
 				019595C72A83CDE4008425AD /* Nunito-BlackItalic.ttf in Resources */,
-				6DDA46872A8CAA66005F5A85 /* GoogleService-Info.plist in Resources */,
 				019595CA2A83CDF5008425AD /* Nunito-ExtraBold.ttf in Resources */,
+				6D4C061B2A8CDFAF00A677FE /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -785,8 +785,8 @@
 				6D2CB50D2A77CF570057C73F /* Nunito-ExtraBold.ttf in Resources */,
 				6D2CB5132A77CF570057C73F /* Nunito-BoldItalic.ttf in Resources */,
 				6D2CB5172A77CF570057C73F /* Nunito-Italic.ttf in Resources */,
-				6DDA46852A8CAA44005F5A85 /* GoogleService-Info.plist in Resources */,
 				6D2CB51A2A77CF570057C73F /* Nunito-BlackItalic.ttf in Resources */,
+				6D4C061D2A8CDFFC00A677FE /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1046,7 +1046,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.truesparrowsystemspvtltd.SalesSparrowDev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.truesparrow.salesdev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1076,7 +1076,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.truesparrowsystemspvtltd.SalesSparrowDev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.truesparrow.salesdev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1222,7 +1222,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.truesparrowsystemspvtltd.SalesSparrow;
+				PRODUCT_BUNDLE_IDENTIFIER = com.truesparrow.sales;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1254,7 +1254,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.truesparrowsystemspvtltd.SalesSparrow;
+				PRODUCT_BUNDLE_IDENTIFIER = com.truesparrow.sales;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1274,7 +1274,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.truesparrowsystemspvtltd.SalesSparrowTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.truesparrow.salestests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -1295,7 +1295,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.truesparrowsystemspvtltd.SalesSparrowTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.truesparrow.salestests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -1315,7 +1315,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.truesparrowsystemspvtltd.SalesSparrowUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.truesparrow.salesuitests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -1335,7 +1335,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.truesparrowsystemspvtltd.SalesSparrowUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.truesparrow.salesuitests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;

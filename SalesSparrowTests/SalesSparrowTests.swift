@@ -16,11 +16,11 @@ final class SalesSparrowTests: XCTestCase {
         try super.setUpWithError()
         sut = AppDelegate()
     }
-
+    
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-
+    
     func testExample() throws {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
@@ -99,7 +99,7 @@ final class SalesSparrowTests: XCTestCase {
         XCTAssertNil(BasicHelper.toDouble(nilVariable))
         // Check if the value after conversion of nil to string using util function is nil
         XCTAssertNil(BasicHelper.toString(nilVariable))
-
+        
         
         let char: Character = "a"
         // Check if the value after conversion of char to string using util function is nil
@@ -114,7 +114,7 @@ final class SalesSparrowTests: XCTestCase {
         var timeString = dateFormatter.string(from: time)
         var formattedDateForCard = BasicHelper.getFormattedDateForCard(from: timeString)
         XCTAssertTrue(formattedDateForCard == "1 year ago")
-
+        
         // 2 Years Ago
         time = Date(timeInterval: -(2*370*24*60*60), since: Date())
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSZ"
@@ -180,6 +180,28 @@ final class SalesSparrowTests: XCTestCase {
         XCTAssertTrue(formattedDateForCard.isEmpty)
     }
     
+    func testGetInitials() throws {
+        // 2 word name
+        var name = "Abc Xyz"
+        var initials = BasicHelper.getInitials(from: name)
+        XCTAssertTrue(initials == "AX")
+        
+        //1 word name
+        name = "Abc"
+        initials = BasicHelper.getInitials(from: name)
+        XCTAssertTrue(initials == "A")
+        
+        //No name
+        name = ""
+        initials = BasicHelper.getInitials(from: name)
+        XCTAssertTrue(initials == "")
+        
+        //Long Name
+        name = "Abc def Ghi Jkl"
+        initials = BasicHelper.getInitials(from: name)
+        XCTAssertTrue(initials == "AD")
+    }
+    
     func testNotificationIsPublishedWithExpectedTitle() throws {
         let center = UNUserNotificationCenter.current()
         center.removeAllPendingNotificationRequests()
@@ -196,7 +218,7 @@ final class SalesSparrowTests: XCTestCase {
         center.add(request) { error in
             XCTAssertNil(error)
         }
-        
+
 //        let expectation = XCTestExpectation(description: "Notification delivered")
 //        center.getDeliveredNotifications { notifications in
 //            for notification in notifications {
@@ -208,12 +230,12 @@ final class SalesSparrowTests: XCTestCase {
 //
 //        wait(for: [expectation], timeout: 5)
     }
-
+    
 //    func testPerformanceExample() throws {
 //        // This is an example of a performance test case.
 //        self.measure {
 //            // Put the code you want to measure the time of here.
 //        }
 //    }
-
+    
 }
