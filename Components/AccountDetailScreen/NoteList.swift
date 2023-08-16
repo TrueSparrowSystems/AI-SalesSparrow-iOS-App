@@ -114,7 +114,7 @@ struct NoteCardView: View {
                 Spacer()
                 
                 HStack(spacing: 0) {
-                    Text("\(BasicHelper.timeAgo(from: acccountDetailScreenViewModelObject.noteData.note_map_by_id[noteId]!.last_modified_time))")
+                    Text("\(BasicHelper.getFormattedDateForCard(from: acccountDetailScreenViewModelObject.noteData.note_map_by_id[noteId]!.last_modified_time))")
                 }
                 .font(.custom("Nunito-Light",size: 12))
                 .foregroundColor(Color("TextPrimary"))

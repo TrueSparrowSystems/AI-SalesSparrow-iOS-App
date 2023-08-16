@@ -8,7 +8,7 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>com.truesparrowsystemspvtltd.SalesSparrowDev</string>
+			<string>com.truesparrow.salesdev</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>SalesSparrowDev</string>

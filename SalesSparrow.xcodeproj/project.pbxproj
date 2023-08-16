@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		01069F182A83641C0003F8F5 /* AccountDetailsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01069F172A83641C0003F8F5 /* AccountDetailsScreen.swift */; };
+		0174DE962A8CE1BF004C5C3C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0174DE952A8CE1BF004C5C3C /* GoogleService-Info.plist */; };
+		0174DE982A8CE1E9004C5C3C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0174DE972A8CE1E9004C5C3C /* GoogleService-Info.plist */; };
 		019595BB2A83CD76008425AD /* SalesSparrowDevApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019595BA2A83CD76008425AD /* SalesSparrowDevApp.swift */; };
 		019595C62A83CDDF008425AD /* Nunito-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D2CB5092A77CF570057C73F /* Nunito-Black.ttf */; };
 		019595C72A83CDE4008425AD /* Nunito-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D2CB50A2A77CF570057C73F /* Nunito-BlackItalic.ttf */; };
@@ -1066,7 +1068,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.truesparrowsystemspvtltd.SalesSparrowDev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.truesparrow.salesdev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1096,7 +1098,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.truesparrowsystemspvtltd.SalesSparrowDev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.truesparrow.salesdev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1242,7 +1244,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.truesparrowsystemspvtltd.SalesSparrow;
+				PRODUCT_BUNDLE_IDENTIFIER = com.truesparrow.sales;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1274,7 +1276,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.truesparrowsystemspvtltd.SalesSparrow;
+				PRODUCT_BUNDLE_IDENTIFIER = com.truesparrow.sales;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1294,7 +1296,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.truesparrowsystemspvtltd.SalesSparrowTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.truesparrow.salestests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -1315,7 +1317,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.truesparrowsystemspvtltd.SalesSparrowTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.truesparrow.salestests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -1335,7 +1337,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.truesparrowsystemspvtltd.SalesSparrowUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.truesparrow.salesuitests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -1355,7 +1357,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.truesparrowsystemspvtltd.SalesSparrowUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.truesparrow.salesuitests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;

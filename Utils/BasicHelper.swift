@@ -69,16 +69,20 @@ struct BasicHelper {
     
     static func getInitials(from name: String) -> String {
         let components = name.components(separatedBy: " ")
-        let initials = components.compactMap { component in
+        var initials : [String] = []
+        for component in components {
+            
             if let firstLetter = component.first {
-                return String(firstLetter)
+                initials.append(String(firstLetter))
             }
-            return nil
+            if(initials.count >= 2){
+                break
+            }
         }
         return initials.joined().uppercased()
     }
     
-    static func timeAgo(from dateString: String) -> String {
+    static func getFormattedDateForCard(from dateString: String) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSZ"
         if let date = dateFormatter.date(from: dateString) {
@@ -90,14 +94,21 @@ struct BasicHelper {
                 return "\(year) year\(year > 1 ? "s" : "") ago"
             } else if let month = components.month, month > 0 {
                 return "\(month) month\(month > 1 ? "s" : "") ago"
-            } else if let day = components.day, day > 0 {
-                return "\(day) day\(day > 1 ? "s" : "") ago"
-            } else if let hour = components.hour, hour > 0 {
-                return "\(hour) hour\(hour > 1 ? "s" : "") ago"
-            } else if let minute = components.minute, minute > 0 {
-                return "\(minute) minute\(minute > 1 ? "s" : "") ago"
+            } else if let day = components.day {
+                if(day > 7){
+                    let week = day / 7
+                    return "\(week) week\(week > 1 ? "s" : "") ago"
+                } else if(day == 0 && components.hour == 0 &&  (components.minute ?? 0) < 5){
+                    return "Just now"
+                }
+                else{
+                    dateFormatter.dateFormat = "EEEE, hh:mma"
+                    dateFormatter.amSymbol = "am"
+                    dateFormatter.pmSymbol = "pm"
+                    return "\(dateFormatter.string(from: date))"
+                }
             } else {
-                return "Just now"
+                return ""
             }
         } else {
             return ""
