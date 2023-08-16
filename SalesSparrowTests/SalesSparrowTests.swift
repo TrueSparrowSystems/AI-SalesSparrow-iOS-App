@@ -106,6 +106,80 @@ final class SalesSparrowTests: XCTestCase {
         XCTAssertNil(BasicHelper.toString(char))
     }
     
+    func testGetFormattedDateForCard() throws {
+        // 1 Year Ago
+        var time = Date(timeInterval: -(370*24*60*60), since: Date())
+        var dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSZ"
+        var timeString = dateFormatter.string(from: time)
+        var formattedDateForCard = BasicHelper.getFormattedDateForCard(from: timeString)
+        XCTAssertTrue(formattedDateForCard == "1 year ago")
+
+        // 2 Years Ago
+        time = Date(timeInterval: -(2*370*24*60*60), since: Date())
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSZ"
+        timeString = dateFormatter.string(from: time)
+        formattedDateForCard = BasicHelper.getFormattedDateForCard(from: timeString)
+        XCTAssertTrue(formattedDateForCard == "2 years ago")
+        
+        // 1 Month Ago
+        time = Date(timeInterval: -(31*24*60*60), since: Date())
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSZ"
+        timeString = dateFormatter.string(from: time)
+        formattedDateForCard = BasicHelper.getFormattedDateForCard(from: timeString)
+        XCTAssertTrue(formattedDateForCard == "1 month ago")
+        
+        // 2 Months Ago
+        time = Date(timeInterval: -(2*31*24*60*60), since: Date())
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSZ"
+        timeString = dateFormatter.string(from: time)
+        formattedDateForCard = BasicHelper.getFormattedDateForCard(from: timeString)
+        XCTAssertTrue(formattedDateForCard == "2 months ago")
+        
+        // 1 week Ago
+        time = Date(timeInterval: -(8*24*60*60), since: Date())
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSZ"
+        timeString = dateFormatter.string(from: time)
+        formattedDateForCard = BasicHelper.getFormattedDateForCard(from: timeString)
+        XCTAssertTrue(formattedDateForCard == "1 week ago")
+        
+        // 2 weeks Ago
+        time = Date(timeInterval: -(2*8*24*60*60), since: Date())
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSZ"
+        timeString = dateFormatter.string(from: time)
+        formattedDateForCard = BasicHelper.getFormattedDateForCard(from: timeString)
+        XCTAssertTrue(formattedDateForCard == "2 weeks ago")
+        
+        // Less than a week Ago
+        time = Date(timeInterval: -(24*60*60), since: Date())
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSZ"
+        timeString = dateFormatter.string(from: time)
+        dateFormatter.dateFormat = "EEEE, hh:mma"
+        dateFormatter.amSymbol = "am"
+        dateFormatter.pmSymbol = "pm"
+        let dateString = dateFormatter.string(from: time)
+        formattedDateForCard = BasicHelper.getFormattedDateForCard(from: timeString)
+        XCTAssertTrue(formattedDateForCard == dateString)
+        
+        // Just now
+        time = Date(timeInterval: -(60), since: Date())
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSZ"
+        timeString = dateFormatter.string(from: time)
+        formattedDateForCard = BasicHelper.getFormattedDateForCard(from: timeString)
+        XCTAssertTrue(formattedDateForCard == "Just now")
+        
+        // Invalid Date format case
+        time = Date(timeInterval: -(31*24*60*60), since: Date())
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mmaZ"
+        timeString = dateFormatter.string(from: time)
+        formattedDateForCard = BasicHelper.getFormattedDateForCard(from: timeString)
+        XCTAssertTrue(formattedDateForCard.isEmpty)
+        
+        // Invalid Date String
+        formattedDateForCard = BasicHelper.getFormattedDateForCard(from: "abcd")
+        XCTAssertTrue(formattedDateForCard.isEmpty)
+    }
+    
     func testNotificationIsPublishedWithExpectedTitle() throws {
         let center = UNUserNotificationCenter.current()
         center.removeAllPendingNotificationRequests()

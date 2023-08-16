@@ -78,13 +78,13 @@ struct BasicHelper {
         return initials.joined().uppercased()
     }
     
-    static func timeAgo(from dateString: String) -> String {
+    static func getFormattedDateForCard(from dateString: String) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSZ"
         if let date = dateFormatter.date(from: dateString) {
             let calendar = Calendar.current
             let now = Date()
-            let components = calendar.dateComponents([.year, .month, .day], from: date, to: now)
+            let components = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: date, to: now)
             
             if let year = components.year, year > 0 {
                 return "\(year) year\(year > 1 ? "s" : "") ago"
@@ -94,6 +94,8 @@ struct BasicHelper {
                 if(day > 7){
                     let week = day / 7
                     return "\(week) week\(week > 1 ? "s" : "") ago"
+                } else if(day == 0 && components.hour == 0 &&  (components.minute ?? 0) < 5){
+                    return "Just now"
                 }
                 else{
                     dateFormatter.dateFormat = "EEEE, hh:mma"
@@ -102,7 +104,7 @@ struct BasicHelper {
                     return "\(dateFormatter.string(from: date))"
                 }
             } else {
-                return "Just now"
+                return ""
             }
         } else {
             return ""
