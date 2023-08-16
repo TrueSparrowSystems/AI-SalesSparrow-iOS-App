@@ -84,18 +84,23 @@ struct BasicHelper {
         if let date = dateFormatter.date(from: dateString) {
             let calendar = Calendar.current
             let now = Date()
-            let components = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: date, to: now)
+            let components = calendar.dateComponents([.year, .month, .day], from: date, to: now)
             
             if let year = components.year, year > 0 {
                 return "\(year) year\(year > 1 ? "s" : "") ago"
             } else if let month = components.month, month > 0 {
                 return "\(month) month\(month > 1 ? "s" : "") ago"
-            } else if let day = components.day, day > 0 {
-                return "\(day) day\(day > 1 ? "s" : "") ago"
-            } else if let hour = components.hour, hour > 0 {
-                return "\(hour) hour\(hour > 1 ? "s" : "") ago"
-            } else if let minute = components.minute, minute > 0 {
-                return "\(minute) minute\(minute > 1 ? "s" : "") ago"
+            } else if let day = components.day {
+                if(day > 7){
+                    let week = day / 7
+                    return "\(week) week\(week > 1 ? "s" : "") ago"
+                }
+                else{
+                    dateFormatter.dateFormat = "EEEE, hh:mma"
+                    dateFormatter.amSymbol = "am"
+                    dateFormatter.pmSymbol = "pm"
+                    return "\(dateFormatter.string(from: date))"
+                }
             } else {
                 return "Just now"
             }

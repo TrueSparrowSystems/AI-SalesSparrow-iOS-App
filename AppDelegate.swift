@@ -20,7 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         let uuid = UIDevice.current.identifierForVendor?.uuidString
         let userId = uuid
         Crashlytics.crashlytics().setUserID(userId)
-        registerForRemoteNotifications()
+        //TODO: Uncomment to register for push notification
+        //        registerForRemoteNotifications()
         return true
     }
     
