@@ -78,8 +78,6 @@
 		4B583BD82A7BBEF2005B97D0 /* TopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B583BD72A7BBEF2005B97D0 /* TopBar.swift */; };
 		4B583BDC2A7BE818005B97D0 /* AccountList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B583BDB2A7BE818005B97D0 /* AccountList.swift */; };
 		4B583BDE2A7BEB11005B97D0 /* BottomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B583BDD2A7BEB11005B97D0 /* BottomBar.swift */; };
-		4B9E5DD92A8CA97A00041D65 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4B9E5DD82A8CA97A00041D65 /* GoogleService-Info.plist */; };
-		4B9E5DDB2A8CA99800041D65 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4B9E5DDA2A8CA99800041D65 /* GoogleService-Info.plist */; };
 		4B9E5DE02A8CD59900041D65 /* UserAccountDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9E5DDF2A8CD59900041D65 /* UserAccountDetailScreen.swift */; };
 		4B9E5DE12A8CD59900041D65 /* UserAccountDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9E5DDF2A8CD59900041D65 /* UserAccountDetailScreen.swift */; };
 		4B9E5DE42A8CE6AD00041D65 /* DisconnectSalesforeModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9E5DE32A8CE6AD00041D65 /* DisconnectSalesforeModal.swift */; };
@@ -105,6 +103,8 @@
 		6D2CB5192A77CF570057C73F /* Nunito-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D2CB5092A77CF570057C73F /* Nunito-Black.ttf */; };
 		6D2CB51A2A77CF570057C73F /* Nunito-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D2CB50A2A77CF570057C73F /* Nunito-BlackItalic.ttf */; };
 		6D3E84802A77E83E00E9FB83 /* LoginScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E847F2A77E83E00E9FB83 /* LoginScreenViewModel.swift */; };
+		6D4C061F2A8D143E00A677FE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6D4C061E2A8D143E00A677FE /* GoogleService-Info.plist */; };
+		6D4C06212A8D147500A677FE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6D4C06202A8D147500A677FE /* GoogleService-Info.plist */; };
 		6D8C7CDA2A779A97005D597E /* SalesSparrowApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8C7CD92A779A97005D597E /* SalesSparrowApp.swift */; };
 		6D8C7CDC2A779A97005D597E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8C7CDB2A779A97005D597E /* ContentView.swift */; };
 		6D8C7CDE2A779A99005D597E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6D8C7CDD2A779A99005D597E /* Assets.xcassets */; };
@@ -197,8 +197,6 @@
 		4B583BD72A7BBEF2005B97D0 /* TopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBar.swift; sourceTree = "<group>"; };
 		4B583BDB2A7BE818005B97D0 /* AccountList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountList.swift; sourceTree = "<group>"; };
 		4B583BDD2A7BEB11005B97D0 /* BottomBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBar.swift; sourceTree = "<group>"; };
-		4B9E5DD82A8CA97A00041D65 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
-		4B9E5DDA2A8CA99800041D65 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4B9E5DDF2A8CD59900041D65 /* UserAccountDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAccountDetailScreen.swift; sourceTree = "<group>"; };
 		4B9E5DE32A8CE6AD00041D65 /* DisconnectSalesforeModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisconnectSalesforeModal.swift; sourceTree = "<group>"; };
 		4BDB87222A84C20E000CC1B9 /* AccountDetailsHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailsHeader.swift; sourceTree = "<group>"; };
@@ -223,6 +221,8 @@
 		6D2CB5092A77CF570057C73F /* Nunito-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Black.ttf"; sourceTree = "<group>"; };
 		6D2CB50A2A77CF570057C73F /* Nunito-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-BlackItalic.ttf"; sourceTree = "<group>"; };
 		6D3E847F2A77E83E00E9FB83 /* LoginScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenViewModel.swift; sourceTree = "<group>"; };
+		6D4C061E2A8D143E00A677FE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		6D4C06202A8D147500A677FE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6D8C7CD62A779A97005D597E /* SalesSparrow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SalesSparrow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D8C7CD92A779A97005D597E /* SalesSparrowApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalesSparrowApp.swift; sourceTree = "<group>"; };
 		6D8C7CDB2A779A97005D597E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -322,7 +322,7 @@
 		019595B92A83CD76008425AD /* SalesSparrowDev */ = {
 			isa = PBXGroup;
 			children = (
-				4B9E5DDA2A8CA99800041D65 /* GoogleService-Info.plist */,
+				6D4C061E2A8D143E00A677FE /* GoogleService-Info.plist */,
 				019596172A83DDB9008425AD /* SalesSparrowDev.entitlements */,
 				019596052A83CF97008425AD /* Info.plist */,
 				019595BA2A83CD76008425AD /* SalesSparrowDevApp.swift */,
@@ -435,7 +435,7 @@
 		6D8C7CD82A779A97005D597E /* SalesSparrow */ = {
 			isa = PBXGroup;
 			children = (
-				4B9E5DD82A8CA97A00041D65 /* GoogleService-Info.plist */,
+				6D4C06202A8D147500A677FE /* GoogleService-Info.plist */,
 				6DBB50682A77A30500B58F88 /* Info.plist */,
 				6DBB50692A77A41600B58F88 /* SalesSparrow.entitlements */,
 				6D8C7CD92A779A97005D597E /* SalesSparrowApp.swift */,
@@ -773,8 +773,8 @@
 				019595D02A83CE06008425AD /* Nunito-LightItalic.ttf in Resources */,
 				019595C62A83CDDF008425AD /* Nunito-Black.ttf in Resources */,
 				019595C72A83CDE4008425AD /* Nunito-BlackItalic.ttf in Resources */,
-				4B9E5DDB2A8CA99800041D65 /* GoogleService-Info.plist in Resources */,
 				019595CA2A83CDF5008425AD /* Nunito-ExtraBold.ttf in Resources */,
+				6D4C061F2A8D143E00A677FE /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -801,8 +801,8 @@
 				6D2CB50D2A77CF570057C73F /* Nunito-ExtraBold.ttf in Resources */,
 				6D2CB5132A77CF570057C73F /* Nunito-BoldItalic.ttf in Resources */,
 				6D2CB5172A77CF570057C73F /* Nunito-Italic.ttf in Resources */,
-				4B9E5DD92A8CA97A00041D65 /* GoogleService-Info.plist in Resources */,
 				6D2CB51A2A77CF570057C73F /* Nunito-BlackItalic.ttf in Resources */,
+				6D4C06212A8D147500A677FE /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
