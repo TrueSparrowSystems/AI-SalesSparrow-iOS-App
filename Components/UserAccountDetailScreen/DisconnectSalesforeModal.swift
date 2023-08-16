@@ -27,6 +27,7 @@ struct DisconnectSalesforceModal : View{
                         .font(.system(size: 13))
                         .multilineTextAlignment(.center)
                         .fixedSize(horizontal: false, vertical: true)
+                        .accessibilityIdentifier("txt_user_account_detail_message")
                 }
                 .padding()
                 
@@ -41,6 +42,7 @@ struct DisconnectSalesforceModal : View{
                             .font(.system(size: 17, weight: .regular))
                             .foregroundColor(Color("CancelButtonForeground"))
                     }
+                    .accessibilityIdentifier("btn_user_account_detail_cancel")
                     .padding(.vertical)
                     .frame(maxWidth: .infinity)
                     .overlay(
@@ -58,6 +60,7 @@ struct DisconnectSalesforceModal : View{
                             .font(.system(size: 17, weight: .semibold))
                             .foregroundColor(Color("DisconnectButtonForeground"))
                     }
+                    .accessibilityIdentifier("btn_user_account_detail_disconnect")
                     .padding(.vertical)
                     .frame(maxWidth: .infinity)
                 }

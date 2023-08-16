@@ -22,6 +22,7 @@ struct UserAccountDetailScreen: View {
                 HStack{
                     Image("Close")
                         .frame(width: 32,height: 32)
+                        .accessibilityIdentifier("img_user_account_detail_dismiss")
                         .onTapGesture {
                             self.presentationMode.wrappedValue.dismiss()
                         }
@@ -40,6 +41,7 @@ struct UserAccountDetailScreen: View {
                         Text(userStateViewModel.currentUser.name)
                             .font(.custom("Nunito-Medium", size: 14))
                             .foregroundColor(Color("TextPrimary"))
+                            .accessibilityIdentifier("txt_user_account_detail_user_name")
                         
                         Spacer()
                     }
@@ -52,6 +54,7 @@ struct UserAccountDetailScreen: View {
                                 }) {
                                     Image("ToggleButton")
                                 }
+                                .accessibilityIdentifier("img_user_account_detail_salesforce_disconnect")
                                 
                                 
                                 Text("Disconnect Salesforce")
@@ -86,6 +89,11 @@ struct UserAccountDetailScreen: View {
                         Text("Log Out")
                             .font(.custom("Nunito-SemiBold", size: 16))
                             .foregroundColor(Color("TextPrimary"))
+                            .accessibilityIdentifier("btn_user_account_detail_logout")
+                            .onTapGesture {
+                                userStateViewModel.logOut()
+                            }
+                            
                         
                         Spacer()
                     }
@@ -93,9 +101,6 @@ struct UserAccountDetailScreen: View {
                     .background(Color.white)
                     .cornerRadius(4)
                     .overlay(RoundedRectangle(cornerRadius: 4).stroke(Color("BorderColor"), lineWidth: 1))
-                    .onTapGesture {
-                        userStateViewModel.logOut()
-                    }
                 }
                 .padding()
                 
