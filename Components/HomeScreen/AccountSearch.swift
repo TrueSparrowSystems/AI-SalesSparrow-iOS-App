@@ -22,6 +22,7 @@ struct AccountSearchView: View {
             // Top Bar
             HStack {
                 Image(systemName: "magnifyingglass")
+                    .accessibilityIdentifier("img_search_magnifying_glass")
                 
                 TextField("Search Accounts", text: $searchText)
                     .font(.custom("Nunito-Regular", size: 16).weight(.regular))
@@ -62,6 +63,7 @@ struct AccountSearchView: View {
             else{
                 Text("No Result Found")
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                    .accessibilityIdentifier("txt_search_no_result_found")
             }
         }
         .onAppear {
@@ -89,6 +91,7 @@ struct AccountListView: View {
                                 Text(account.name)
                                     .font(.custom("Nunito-Regular", size: 16))
                                     .foregroundColor(Color("SearchPrimary"))
+                                    .accessibilityIdentifier("txt_search_account_name_\(account.name)")
                                 Spacer()
                             }
                             .border(Color("Background"))
@@ -112,6 +115,7 @@ struct AccountListView: View {
                                         Text("Add Note")
                                             .font(.custom("Nunito-Regular", size: 16))
                                             .foregroundColor(Color("LoginButtonPrimary"))
+                                            .accessibilityIdentifier("txt_search_add_note_\(account.name)")
                                     }
                                     .accessibilityIdentifier("btn_search_add_note_\(account.name)")
                                     

@@ -35,8 +35,10 @@ struct UserAccountDetailScreen: View {
                         Text(BasicHelper.getInitials(from: userStateViewModel.currentUser.name))
                             .frame(width: 32, height: 32)
                             .font(.custom("Nunito-Bold", size: 7))
+                            .foregroundColor(Color.black)
                             .background(Color("UserBubble"))
                             .clipShape(RoundedRectangle(cornerRadius: 47))
+                            .accessibilityIdentifier("img_user_account_detail_user_initials")
                         
                         Text(userStateViewModel.currentUser.name)
                             .font(.custom("Nunito-Medium", size: 14))
@@ -60,6 +62,7 @@ struct UserAccountDetailScreen: View {
                                 Text("Disconnect Salesforce")
                                     .font(.custom("Nunito-SemiBold", size: 16))
                                     .foregroundColor(Color("TextPrimary"))
+                                    .accessibilityIdentifier("txt_user_account_detail_salesforce_disconnect")
                                 
                                 Spacer()
                             }
@@ -68,9 +71,7 @@ struct UserAccountDetailScreen: View {
                             .padding(EdgeInsets(top: 2, leading: 8, bottom: 2, trailing: 4))
                             
                             
-                            Text("Disconnecting Salesforce will also delete your account and all details associated with it.")
-                                .font(.custom("Nunito-SemiBold", size: 14))
-                                .foregroundColor(Color("TextPrimary"))
+                            DisconnectDescription()
                         }
                         .padding()
                         .background(Color("DisconnectBackground"))
@@ -85,6 +86,7 @@ struct UserAccountDetailScreen: View {
                     HStack{
                         Image("SignOut")
                             .padding(EdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 0))
+                            .accessibilityIdentifier("img_user_account_detail_logout")
                         
                         Text("Log Out")
                             .font(.custom("Nunito-SemiBold", size: 16))
@@ -93,7 +95,7 @@ struct UserAccountDetailScreen: View {
                             .onTapGesture {
                                 userStateViewModel.logOut()
                             }
-                            
+                        
                         
                         Spacer()
                     }
@@ -110,19 +112,41 @@ struct UserAccountDetailScreen: View {
                     Text("V\(appVersion)")
                         .font(.custom("Nunito-SemiBold", size: 12))
                         .foregroundColor(Color("TextPrimary"))
+                        .accessibilityIdentifier("txt_user_account_detail_app_version")
                     
                     Text("Sales Sparrow by True Sparrow")
                         .font(.custom("Nunito-SemiBold", size: 16))
                         .foregroundColor(Color("TextPrimary"))
+                        .accessibilityIdentifier("txt_user_account_detail_app_name")
                 }
             }
             .padding()
             
             if disconnectSalesforceModel {
-                    DisconnectSalesforceModal(disconnectSalesforceModel: $disconnectSalesforceModel)
+                DisconnectSalesforceModal(disconnectSalesforceModel: $disconnectSalesforceModel)
             }
         }
         .background(Color("Background"))
+    }
+}
+
+struct DisconnectDescription: View {
+    
+    var body: some View {
+        let t1 = Text("Disconnecting Salesforce will also ")
+            .font(.custom("Nunito-SemiBold", size: 14))
+            .foregroundColor(Color("TextPrimary"))
+        
+        let t2 = Text("delete your account")
+            .font(.custom("Nunito-SemiBold", size: 14))
+            .foregroundColor(Color("RedHighlight"))
+        
+        let t3 = Text(" and all details associated with it.")
+            .font(.custom("Nunito-SemiBold", size: 14))
+            .foregroundColor(Color("TextPrimary"))
+        
+        return t1 + t2 + t3
+            
     }
 }
 

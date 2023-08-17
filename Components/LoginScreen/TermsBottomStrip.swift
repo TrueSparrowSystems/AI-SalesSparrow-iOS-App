@@ -17,7 +17,7 @@ struct TermsBottomStrip: View {
             .font(.custom("Nunito-SemiBold" ,size: 12))
             .underline()
             .foregroundColor(Color("RedHighlight"))
-            .accessibilityLabel(Text("txt_terms"))
+            .accessibilityLabel(Text("txt_login_terms"))
         
         let termsTextWithLink = Text("[Terms and Conditions](https://truesparrow.com)")
             .font(.custom("Nunito-SemiBold" ,size: 12))
@@ -28,7 +28,7 @@ struct TermsBottomStrip: View {
             .font(.custom("Nunito-SemiBold" ,size: 12))
             .underline()
             .foregroundColor(Color("RedHighlight"))
-            .accessibilityLabel(Text("txt_privacy"))
+            .accessibilityLabel(Text("txt_login_privacy"))
         
         let privacyTextWithLink = Text("[Privacy Policy](https://truesparrow.com)")
             .font(.custom("Nunito-SemiBold" ,size: 12))

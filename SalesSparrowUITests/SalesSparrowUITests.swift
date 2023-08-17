@@ -392,7 +392,11 @@ final class SalesSparrowUITests: XCTestCase {
         let disconnectButton = app.buttons["btn_user_account_detail_disconnect"]
         XCTAssertTrue(disconnectButton.waitForExistence(timeout: TimeInterval(timeout)))
         XCTAssertTrue(disconnectButton.isHittable)
-//        disconnectButton.tap()
+        disconnectButton.tap()
+        
+        // Check if login button is visible
+        let salesforceConnectButton = app.buttons["btn_connect_salesforce"]
+        XCTAssertTrue(salesforceConnectButton.waitForExistence(timeout: TimeInterval(timeout)))
     }
     
     func testCreateNoteScreen(){

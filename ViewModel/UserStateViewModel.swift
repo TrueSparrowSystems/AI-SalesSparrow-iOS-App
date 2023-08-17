@@ -10,6 +10,9 @@ import Foundation
 // A struct that represents the meta data of the logout api
 struct LogoutStruct: Codable {}
 
+// A struct that represents the meta data of the disconnect user API
+struct DisconnectUserStruct: Codable {}
+
 // A struct that represents the meta data of the current user API
 struct CurrentUserRespStruct: Codable {
     var current_user: CurrentUserStruct
@@ -88,7 +91,7 @@ class UserStateViewModel: ObservableObject {
         DispatchQueue.main.async {
             self.isDisconnectInProgress = true
             
-            self.apiService.post(type: LogoutStruct.self, endpoint: "/v1/auth/disconnect"){
+            self.apiService.post(type: DisconnectUserStruct.self, endpoint: "/v1/auth/disconnect"){
                 [weak self]  result, statusCode in
                 
                 DispatchQueue.main.async {
