@@ -52,14 +52,14 @@ struct CreateNoteScreen : View {
                                 .foregroundColor(.white)
                                 .font(.custom("Nunito-Medium", size: 12))
                                 .accessibilityIdentifier("txt_create_note_saving")
-                                
+                            
                         }else if(isNoteSaved){
                             Image("CheckMark")
                                 .resizable()
                                 .frame(width: 12, height: 12)
                                 .padding(.trailing, 6)
                                 .accessibilityIdentifier("img_create_note_checkmark")
-
+                            
                             Text("Saved")
                                 .foregroundColor(.white)
                                 .font(.custom("Nunito-Medium", size: 12))
@@ -70,7 +70,7 @@ struct CreateNoteScreen : View {
                                 .frame(width: 17, height: 12)
                                 .padding(.trailing, 6)
                                 .accessibilityIdentifier("img_create_note_salesforce_icon")
-
+                            
                             Text("Save")
                                 .foregroundColor(.white)
                                 .font(.custom("Nunito-Medium", size: 12))
@@ -85,6 +85,7 @@ struct CreateNoteScreen : View {
                 })
                 .accessibilityIdentifier("btn_save_note")
                 .disabled(isNoteSaved || isSaveInProgress || accountId == "" || text == "")
+                .opacity(accountId == "" || text == "" ? 0.7 : 1)
             }
             .padding(.vertical, 12)
             

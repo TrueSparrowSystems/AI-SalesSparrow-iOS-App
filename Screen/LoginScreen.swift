@@ -22,7 +22,7 @@ struct LoginScreen: View {
                 VStack {
                     Image("AppLogo")
                         .resizable()
-                        .frame(width: 160, height: 80)
+                        .frame(width: 220, height: 50)
                         .padding(.bottom, 16)
                         .accessibilityIdentifier("img_login_app_logo")
                     

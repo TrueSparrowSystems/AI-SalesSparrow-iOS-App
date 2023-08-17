@@ -16,6 +16,7 @@ struct AccountSearchView: View {
     var isCreateNoteFlow: Bool = false
     var onAccountSelected: ((String, String) -> Void)? // Callback function to handle account selection
     var onNoteCreateSelected: ((String,String) -> Void)?  // Callback function to handle note creation selection
+    @FocusState private var focused: Bool
     
     var body: some View {
         VStack(spacing: 0) {
@@ -24,11 +25,12 @@ struct AccountSearchView: View {
                 Image(systemName: "magnifyingglass")
                     .accessibilityIdentifier("img_search_magnifying_glass")
                 
-                TextField("Search Accounts", text: $searchText)
-                    .font(.custom("Nunito-Regular", size: 16).weight(.regular))
-                    .foregroundColor(Color("SearchPrimary"))
-                    .accessibilityIdentifier("text_field_search_account")
-                    .opacity(0.8)
+                TextField("", text: $searchText,
+                          prompt: Text("Search Accounts").foregroundColor(Color("SearchPrimary").opacity(0.8)))
+                .font(.custom("Nunito-Regular", size: 16).weight(.regular))
+                .foregroundColor(Color("LuckyPoint"))
+                .accessibilityIdentifier("text_field_search_account")
+                .focused($focused)
             }
             .frame(height: 66)
             .padding(.horizontal)
@@ -57,7 +59,8 @@ struct AccountSearchView: View {
                     isCreateNoteFlow: isCreateNoteFlow,
                     onNoteCreateSelected: onNoteCreateSelected,
                     onAccountSelected: onAccountSelected,
-                    isPresented: $isPresented
+                    isPresented: $isPresented,
+                    onScroll: onScroll
                 )
             }
             else{
@@ -68,8 +71,15 @@ struct AccountSearchView: View {
         }
         .onAppear {
             accountSearchViewModel.fetchData("")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05){
+                focused = true
+            }
         }
         .background(Color("Background"))
+    }
+    
+    func onScroll(_: DragGesture.Value) -> Void {
+        focused = false
     }
 }
 
@@ -80,6 +90,7 @@ struct AccountListView: View {
     var onNoteCreateSelected: ((String, String) -> Void)?
     var onAccountSelected: ((String, String) -> Void)?
     @Binding var isPresented: Bool
+    var onScroll: ((DragGesture.Value) -> Void)
     
     var body: some View {
         ScrollView {
@@ -134,6 +145,11 @@ struct AccountListView: View {
                 }
             }
         }
+        .simultaneousGesture(
+            DragGesture().onChanged(
+                    onScroll
+            )
+        )
     }
 }
 
