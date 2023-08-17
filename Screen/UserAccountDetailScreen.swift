@@ -35,6 +35,7 @@ struct UserAccountDetailScreen: View {
                         Text(BasicHelper.getInitials(from: userStateViewModel.currentUser.name))
                             .frame(width: 32, height: 32)
                             .font(.custom("Nunito-Bold", size: 7))
+                            .foregroundColor(Color.black)
                             .background(Color("UserBubble"))
                             .clipShape(RoundedRectangle(cornerRadius: 47))
                             .accessibilityIdentifier("img_user_account_detail_user_initials")
