@@ -161,5 +161,12 @@ class MockResponse {
                 ]
             ] as [String : Any],
         ],
+        "POST /v1/auth/disconnect": [
+            "default":[
+                "success": "true",
+                "statusCode": 200,
+                "data": [:] as [String : Any]
+            ] as [String : Any]
+        ]
     ]
 }
