@@ -22,12 +22,13 @@ struct DisconnectSalesforceModal : View{
                         .font(.system(size: 17))
                         .foregroundColor(Color.black)
                         .multilineTextAlignment(.center)
+                        .accessibilityIdentifier("txt_user_account_detail_disconnect_title")
                     
                     Text("This will **delete your account** and all details associated with it. This is an irreversible process, are you sure you want to do this?")
                         .font(.system(size: 13))
                         .multilineTextAlignment(.center)
                         .fixedSize(horizontal: false, vertical: true)
-                        .accessibilityIdentifier("txt_user_account_detail_message")
+                        .accessibilityIdentifier("txt_user_account_detail_disconnect_message")
                 }
                 .padding()
                 
@@ -41,6 +42,7 @@ struct DisconnectSalesforceModal : View{
                         Text("Cancel")
                             .font(.system(size: 17, weight: .regular))
                             .foregroundColor(Color("CancelButtonForeground"))
+                            .accessibilityIdentifier("txt_user_account_detail_cancel")
                     }
                     .accessibilityIdentifier("btn_user_account_detail_cancel")
                     .padding(.vertical)
@@ -59,6 +61,7 @@ struct DisconnectSalesforceModal : View{
                         Text("Disconnect")
                             .font(.system(size: 17, weight: .semibold))
                             .foregroundColor(Color("DisconnectButtonForeground"))
+                            .accessibilityIdentifier("txt_user_account_detail_disconnect")
                     }
                     .accessibilityIdentifier("btn_user_account_detail_disconnect")
                     .padding(.vertical)

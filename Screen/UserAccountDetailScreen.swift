@@ -37,6 +37,7 @@ struct UserAccountDetailScreen: View {
                             .font(.custom("Nunito-Bold", size: 7))
                             .background(Color("UserBubble"))
                             .clipShape(RoundedRectangle(cornerRadius: 47))
+                            .accessibilityIdentifier("img_user_account_detail_user_initials")
                         
                         Text(userStateViewModel.currentUser.name)
                             .font(.custom("Nunito-Medium", size: 14))
@@ -60,6 +61,7 @@ struct UserAccountDetailScreen: View {
                                 Text("Disconnect Salesforce")
                                     .font(.custom("Nunito-SemiBold", size: 16))
                                     .foregroundColor(Color("TextPrimary"))
+                                    .accessibilityIdentifier("txt_user_account_detail_salesforce_disconnect")
                                 
                                 Spacer()
                             }
@@ -85,6 +87,7 @@ struct UserAccountDetailScreen: View {
                     HStack{
                         Image("SignOut")
                             .padding(EdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 0))
+                            .accessibilityIdentifier("img_user_account_detail_logout")
                         
                         Text("Log Out")
                             .font(.custom("Nunito-SemiBold", size: 16))
@@ -93,7 +96,7 @@ struct UserAccountDetailScreen: View {
                             .onTapGesture {
                                 userStateViewModel.logOut()
                             }
-                            
+                        
                         
                         Spacer()
                     }
@@ -110,16 +113,18 @@ struct UserAccountDetailScreen: View {
                     Text("V\(appVersion)")
                         .font(.custom("Nunito-SemiBold", size: 12))
                         .foregroundColor(Color("TextPrimary"))
+                        .accessibilityIdentifier("txt_user_account_detail_app_version")
                     
                     Text("Sales Sparrow by True Sparrow")
                         .font(.custom("Nunito-SemiBold", size: 16))
                         .foregroundColor(Color("TextPrimary"))
+                        .accessibilityIdentifier("txt_user_account_detail_app_name")
                 }
             }
             .padding()
             
             if disconnectSalesforceModel {
-                    DisconnectSalesforceModal(disconnectSalesforceModel: $disconnectSalesforceModel)
+                DisconnectSalesforceModal(disconnectSalesforceModel: $disconnectSalesforceModel)
             }
         }
         .background(Color("Background"))

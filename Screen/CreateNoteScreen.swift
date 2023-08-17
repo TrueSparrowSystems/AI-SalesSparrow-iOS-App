@@ -51,22 +51,30 @@ struct CreateNoteScreen : View {
                             Text("Saving")
                                 .foregroundColor(.white)
                                 .font(.custom("Nunito-Medium", size: 12))
+                                .accessibilityIdentifier("txt_create_note_saving")
+                                
                         }else if(isNoteSaved){
                             Image("CheckMark")
                                 .resizable()
                                 .frame(width: 12, height: 12)
                                 .padding(.trailing, 6)
+                                .accessibilityIdentifier("img_create_note_checkmark")
+
                             Text("Saved")
                                 .foregroundColor(.white)
                                 .font(.custom("Nunito-Medium", size: 12))
+                                .accessibilityIdentifier("txt_create_note_saved")
                         }else{
                             Image("SalesforceIcon")
                                 .resizable()
                                 .frame(width: 17, height: 12)
                                 .padding(.trailing, 6)
+                                .accessibilityIdentifier("img_create_note_salesforce_icon")
+
                             Text("Save")
                                 .foregroundColor(.white)
                                 .font(.custom("Nunito-Medium", size: 12))
+                                .accessibilityIdentifier("txt_create_note_save")
                         }
                     }
                     .frame(width: 68, height: 32)
@@ -84,10 +92,12 @@ struct CreateNoteScreen : View {
                 Image("AccountIcon")
                     .resizable()
                     .frame(width: 14, height: 14)
+                    .accessibilityIdentifier("img_create_note_account_icon")
                 
                 Text("Account")
                     .foregroundColor(Color("TextPrimary"))
                     .font(.custom("Nunito-Regular", size: 12))
+                    .accessibilityIdentifier("txt_create_note_account")
                 if(isAccountSelectable && !(isNoteSaved || isSaveInProgress)){
                     HStack(alignment: .center){
                         Text(accountId == "" ? "Select": accountName)
@@ -95,6 +105,7 @@ struct CreateNoteScreen : View {
                             .padding(.horizontal, 6)
                             .foregroundColor(Color("RedHighlight"))
                             .font(.custom("Nunito-Light", size: 14))
+                            .accessibilityIdentifier(accountId == "" ? "txt_create_note_select_account" : "txt_create_note_selected_account")
                         Image("ArrowDown")
                             .frame(width: 7, height: 4)
                             .padding(.trailing, 6)

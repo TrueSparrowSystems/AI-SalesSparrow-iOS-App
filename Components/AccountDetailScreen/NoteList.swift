@@ -38,6 +38,7 @@ struct NotesList: View {
                         Image("CreateNoteIcon")
                             .resizable()
                             .frame(width: 20.0, height: 20.0)
+                            .accessibilityIdentifier("img_account_detail_create_note_icon")
                     }
                     .frame(width: 40, height: 30, alignment: .bottomLeading)
                     .padding(.bottom, 10)
@@ -106,6 +107,7 @@ struct NoteCardView: View {
                     .foregroundColor(.black)
                     .background(Color("UserBubble"))
                     .clipShape(RoundedRectangle(cornerRadius: 26))
+                    .accessibilityIdentifier("txt_account_detail_note_creator_initials")
                 
                 Text("\(acccountDetailScreenViewModelObject.noteData.note_map_by_id[noteId]?.creator ?? "")")
                     .font(.custom("Nunito-Medium",size: 14))
@@ -119,10 +121,12 @@ struct NoteCardView: View {
                 }
                 .font(.custom("Nunito-Light",size: 12))
                 .foregroundColor(Color("TextPrimary"))
+                .accessibilityIdentifier("txt_account_detail_note_last_modified_time")
                 
                 Image("DotsThreeOutline")
                     .frame(width: 16, height: 16)
                     .foregroundColor(Color("TextPrimary"))
+                    .accessibilityIdentifier("img_account_detail_note_more")
             }
             Text("\(acccountDetailScreenViewModelObject.noteData.note_map_by_id[noteId]?.text_preview ?? "")")
                 .font(.custom("Nunito-Medium",size: 14))

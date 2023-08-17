@@ -24,45 +24,60 @@ struct LoginScreen: View {
                         .resizable()
                         .frame(width: 160, height: 80)
                         .padding(.bottom, 16)
+                        .accessibilityIdentifier("img_login_app_logo")
+                    
                     Text("Your Salesforce app with AI powered recommendations")
                         .padding(.bottom, 16)
                         .font(.custom("Nunito-Regular", size: 16))
                         .multilineTextAlignment(.center)
                         .foregroundColor(Color("LoginScreenText"))
+                        .accessibilityIdentifier("txt_login_app_description")
                     
                     HStack{
                         Image("NoteIcon")
                             .resizable()
                             .frame(width: 15, height: 15)
                             .padding(.horizontal, 2)
+                            .accessibilityIdentifier("img_login_note_icon")
+                        
                         Text("Notes")
                             .font(.custom("Nunito-Regular",size: 14))
                             .foregroundColor(Color("TextPrimary"))
+                            .accessibilityIdentifier("txt_login_note")
                         
                         Image("TasksIcon")
                             .resizable()
                             .frame(width: 15, height: 15)
                             .padding(.horizontal, 2)
+                            .accessibilityIdentifier("img_login_tasks_icon")
+
                         Text("Tasks")
                             .font(.custom("Nunito-Regular",size: 14))
                             .foregroundColor(Color("TextPrimary"))
+                            .accessibilityIdentifier("txt_login_tasks")
                         
                         Image("EventsIcon")
                             .resizable()
                             .frame(width: 15, height: 15)
                             .padding(.horizontal, 2)
+                            .accessibilityIdentifier("img_login_events_icon")
+
                         Text("Events")
                             .font(.custom("Nunito-Regular",size: 14))
                             .foregroundColor(Color("TextPrimary"))
+                            .accessibilityIdentifier("txt_login_events")
                         
                         Image("OpportunitiesIcon")
                             .resizable()
                             .frame(width: 15, height: 15)
                             .padding(.horizontal, 2)
+                            .accessibilityIdentifier("img_login_opportunities_icon")
+
                         Text("Opportunities")
                             .font(.custom("Nunito-Regular",size: 14))
                             .foregroundColor(Color("TextPrimary"))
                             .lineLimit(1)
+                            .accessibilityIdentifier("txt_login_opportunities")
                         
                     }
                     // 1px divider line
@@ -74,6 +89,7 @@ struct LoginScreen: View {
                     Text("Create Account")
                         .font(.custom("Nunito-SemiBold", size: 18))
                         .foregroundColor(Color("LoginScreenText"))
+                        .accessibilityIdentifier("txt_login_create_account")
                     
                     Button(action: {
                         isLoginInProgress = true
@@ -92,10 +108,13 @@ struct LoginScreen: View {
                                 Image("SalesforceIcon")
                                     .resizable()
                                     .frame(width: 26, height: 18)
+                                    .accessibilityIdentifier("img_login_salesforce_icon")
+
                                 Text("Continue with Salesforce")
                                     .padding()
                                     .foregroundStyle(.white)
                                     .font(.custom("Nunito-Medium", size: 16))
+                                    .accessibilityIdentifier("txt_login_continue_salesforce")
                             }
                             
                         }
@@ -110,7 +129,7 @@ struct LoginScreen: View {
                     }
                     )
                     .disabled($isLoginInProgress.wrappedValue)
-                    .accessibilityIdentifier("btn_connect_salesforce")
+                    .accessibilityIdentifier("btn_login_connect_salesforce")
                 }
                 .padding(.horizontal, 20)
                 .padding(.vertical, 40)
@@ -135,6 +154,7 @@ struct LoginScreen: View {
         
     }
 }
+
 
 struct LoginScreen_Previews: PreviewProvider {
     static var previews: some View {
