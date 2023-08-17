@@ -7,17 +7,18 @@
 
 import Foundation
 
-// A struct that represents the meta data of the list
+// A struct that represents the meta data of the create note
 struct CreateNoteStruct: Codable {
     var note_id: String
 }
 
-// A class that represents the view model of the LoginScreen
+// A class that represents the view model of the create note
 class CreateNoteScreenViewModel: ObservableObject {
     @Published var createNoteData = CreateNoteStruct(note_id: "")
     @Published var isCreateNoteInProgress = false
     var apiService = DependencyContainer.shared.apiService
     
+    // A function to create note from given text and account id.
     func createNote(text: String?, accountId: String, onSuccess : @escaping()-> Void, onFailure : @escaping()-> Void){
         
         guard !self.isCreateNoteInProgress else {

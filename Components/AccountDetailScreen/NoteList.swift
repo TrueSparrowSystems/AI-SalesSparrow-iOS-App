@@ -14,8 +14,7 @@ struct NotesList: View {
     @EnvironmentObject var acccountDetailScreenViewModelObject: AccountDetailViewScreenViewModel
     @State private var showOverlay = false
     @State var createNoteScreenActivated = false
-    
-    
+        
     var body: some View {
         VStack(spacing: 0) {
             HStack{
@@ -63,13 +62,14 @@ struct NotesList: View {
                     }
                     .background(
                         RoundedRectangle(cornerRadius: 4)
-                            .strokeBorder(style: StrokeStyle(lineWidth: 2, dash: [1, 5], dashPhase: 10))
+                            .strokeBorder(style: StrokeStyle(lineWidth: 2, dash: [2, 5], dashPhase: 10))
                             .background(
                                 Color.clear
                                     .frame(height: 2)
                             )
                     )
                 }
+                .padding(.trailing)
                 .frame(maxWidth: .infinity, alignment: .center)
                 Spacer()
             } else {

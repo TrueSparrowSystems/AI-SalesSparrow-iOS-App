@@ -67,6 +67,7 @@ struct BasicHelper {
         return false
     }
     
+    // A static function that returns initial from given name. Max 2 characters.
     static func getInitials(from name: String) -> String {
         let components = name.components(separatedBy: " ")
         var initials : [String] = []
@@ -82,6 +83,7 @@ struct BasicHelper {
         return initials.joined().uppercased()
     }
     
+    // A static function that convert date string into formatted date string. eg. monday 02:30pm, 3 weeks ago, 2 months ago, 1 year ago, etc..
     static func getFormattedDateForCard(from dateString: String) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSZ"

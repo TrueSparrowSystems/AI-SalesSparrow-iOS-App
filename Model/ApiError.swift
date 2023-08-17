@@ -7,6 +7,7 @@
 
 import Foundation
 
+// Error structure returned from BE.
 struct ErrorStruct: Error,Decodable {
     var message: String
     var code: String?
@@ -15,6 +16,7 @@ struct ErrorStruct: Error,Decodable {
     var error_data: [Dictionary<String, String>]?
 }
 
+// Class to handle errors.
 struct APIError {
     func convertDataToErrorStruct(error: [String: Any]) -> ErrorStruct{
         do{
@@ -27,12 +29,6 @@ struct APIError {
     
     func badURL() -> ErrorStruct {
         return convertDataToErrorStruct(error:  ["message":"Bad URL"])
-    }
-    func urlSession(error: URLError?) -> ErrorStruct {
-        return convertDataToErrorStruct(error: ["message":"urlSession error: \(error.debugDescription)"])
-    }
-    func badResponse(statusCode: Int) -> ErrorStruct {
-        return convertDataToErrorStruct(error: ["message":"bad response with status code: \(statusCode)"])
     }
     func decodingError(error: DecodingError?) -> ErrorStruct {
         return convertDataToErrorStruct(error: ["message":"Something went wrong"])

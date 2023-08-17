@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 import CoreData
 
+// A struct that represents the meta data of the note
 struct Note: Identifiable, Codable {
     let id: String
     let creator: String
@@ -16,12 +17,13 @@ struct Note: Identifiable, Codable {
     let last_modified_time: String
 }
 
+// A struct that represents the meta data of the note list API
 struct NotesListStruct: Codable {
     var note_ids: [String]
     var note_map_by_id: [String: Note]
 }
 
-// A class that represents the view model of the list
+// A class that represents the view model of account details
 class AccountDetailViewScreenViewModel: ObservableObject {
     @Published var noteData = NotesListStruct(note_ids: [], note_map_by_id: [:])
     @Published var isLoading = false

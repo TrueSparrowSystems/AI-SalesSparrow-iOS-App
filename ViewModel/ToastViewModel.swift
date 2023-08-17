@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 
+// A class that represents the view model of the toast.
 class ToastViewModel: ObservableObject {
     @Published var toast: Toast? = nil
     static let shared = ToastViewModel()

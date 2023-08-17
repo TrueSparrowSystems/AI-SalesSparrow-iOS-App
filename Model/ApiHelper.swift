@@ -7,7 +7,7 @@
 
 import Foundation
 
-/// A class that provides methods for storing entities in the database from API responses.
+/// A class that provides helper methods for storing entities in the database from API responses.
 class ApiHelper {
     // Map of single entity keys to store function
     static let singleEntityKeysToStoreFunctionMap = ["current_user": Tasks.storeEntity];

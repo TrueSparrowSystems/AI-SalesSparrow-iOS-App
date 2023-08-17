@@ -7,16 +7,21 @@
 
 import Foundation
 
+// A struct that represents the meta data of the logout api
 struct LogoutStruct: Codable {}
+
+// A struct that represents the meta data of the current user API
 struct CurrentUserRespStruct: Codable {
     var current_user: CurrentUserStruct
 }
+// A struct that represents the meta data of the current user
 struct CurrentUserStruct: Codable{
     var id: String
     var name: String
     var email: String
 }
 
+// A class that represents the view model of the user states
 class UserStateViewModel: ObservableObject {
     @Published var isUserLoggedIn = false
     @Published var isLogOutInProgress = false
@@ -29,11 +34,13 @@ class UserStateViewModel: ObservableObject {
     
     private init(){}
     
+    // A function that sets user logged in.
     func setLoggedInUser(currentUser: CurrentUserStruct) {
         self.currentUser = currentUser
         self.isUserLoggedIn = true
     }
     
+    // A function to logout user.
     func logOut()  {
         guard !self.isLogOutInProgress else {return}
         
@@ -54,6 +61,7 @@ class UserStateViewModel: ObservableObject {
         }
     }
     
+    // A function to fetch currently logged in user.
     func getCurrentUser() {
         DispatchQueue.main.async {
             self.apiService.get(type: CurrentUserRespStruct.self, endpoint: "/v1/users/current"){
@@ -73,6 +81,7 @@ class UserStateViewModel: ObservableObject {
         }
     }
     
+    // A function to disconnect salesforce and logout user.
     func disconnectUser()  {
         guard !self.isDisconnectInProgress else {return}
         
@@ -85,10 +94,8 @@ class UserStateViewModel: ObservableObject {
                 DispatchQueue.main.async {
                     self?.isDisconnectInProgress = false
                     self?.isUserLoggedIn = false
-                    HTTPCookieStorage.shared.cookies?.forEach(HTTPCookieStorage.shared.deleteCookie)
-                    
+                    HTTPCookieStorage.shared.cookies?.forEach(HTTPCookieStorage.shared.deleteCookie)                    
                 }
-                
             }
         }
     }

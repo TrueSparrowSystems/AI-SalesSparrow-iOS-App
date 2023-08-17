@@ -8,6 +8,7 @@
 import SwiftUI
 import Combine
 
+// A class to extract device settings and set into device header parameters.
 class DeviceSettingManager: ObservableObject {
     static let shared = DeviceSettingManager()
     

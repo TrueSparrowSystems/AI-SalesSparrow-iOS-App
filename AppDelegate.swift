@@ -25,6 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         return true
     }
     
+    // A function to set env variable in case of test running. Also fetch logged in user.
     func bootService() {
         let isRunningUITests = ProcessInfo.processInfo.arguments.contains("isRunningUITests")
         if(isRunningUITests && ProcessInfo.processInfo.arguments.count > 2){

@@ -8,11 +8,12 @@
 
 import Foundation
 
-// A struct that represents the meta data of the list
+// A struct that represents the meta data of the redirect url API
 struct RedirectUrlStruct: Codable {
     var url: String
 }
 
+// A struct that represents the meta data of the salesforce connect API
 struct SalesforceConnectStruct: Codable {
     var current_user: CurrentUserStruct
 }
@@ -24,6 +25,7 @@ class LoginScreenViewModel: ObservableObject {
     @Published var isLoginInProgress = false
     var apiService = DependencyContainer.shared.apiService
     
+    // A function to get salesforce connect url from BE.
     func fetchSalesforceConnectUrl(onSuccess : @escaping(String)-> Void, onFailure : @escaping()-> Void) {
         guard !self.isfetchUrlInProgress else {return}
         guard self.loginData.url == "" else {
@@ -53,6 +55,7 @@ class LoginScreenViewModel: ObservableObject {
         }
     }
     
+    // A function to login user by calling BE API.
     func salesforceConnect(authCode: String?, onSuccess : @escaping()-> Void, onFailure : @escaping()-> Void){
         
         guard !self.isLoginInProgress else {

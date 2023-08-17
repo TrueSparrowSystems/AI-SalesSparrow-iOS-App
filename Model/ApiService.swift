@@ -7,25 +7,9 @@
 
 import Foundation
 
-struct AnyEncodable: Encodable {
-    let value: Any
-    
-    init(_ value: Any) {
-        self.value = value
-    }
-    
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        
-        switch value {
-        case let encodableValue as Encodable:
-            try container.encode(encodableValue)
-        default:
-            throw EncodingError.invalidValue(value, EncodingError.Context(codingPath: [], debugDescription: "Value is not encodable."))
-        }
-    }
-}
-
+/**
+ A class to mock API request and give mock response.
+ */
 class MockAPIService: ApiService {
     
     override func callApi<T: Decodable>(type: T.Type, requestUrl: URLRequest, endpoint: String, completion: @escaping(Result<T, ErrorStruct>, Int?) -> Void) {
@@ -208,7 +192,7 @@ class ApiService {
                 print("---------------error----------\(error)")
             }
             if let error = error as? URLError {
-                completion(Result.failure(APIError().urlSession(error: error)), 0)
+                completion(Result.failure(APIError().internalServerError()), 0)
             }
             else if let response = response as? HTTPURLResponse, !(200...299).contains(response.statusCode) {
                 var errorData: ErrorStruct

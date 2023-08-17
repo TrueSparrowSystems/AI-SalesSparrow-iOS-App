@@ -7,6 +7,7 @@
 
 import Foundation
 
+// A class with mock API responses. Used for test cases.
 class MockResponse {
     static let responseObj = [
         "GET /v1/auth/salesforce/redirect-url": [

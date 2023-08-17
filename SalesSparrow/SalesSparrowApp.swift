@@ -31,6 +31,7 @@ struct SalesSparrowApp: App {
     }
 }
 
+// A class that defines appropriate Api service to be used based upon target.
 class DependencyContainer: ObservableObject {
     static let shared = DependencyContainer()
     var apiService: ApiService = ApiService()

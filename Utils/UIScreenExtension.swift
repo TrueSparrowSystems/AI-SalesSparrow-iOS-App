@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// An extention to get top safe area insets of UI screen.
 extension UIScreen {
     static var topSafeArea: CGFloat {
         let keyWindow = UIApplication.shared.connectedScenes

@@ -13,6 +13,7 @@ enum _BuildTarget {
     case production
 }
 
+// Sample environment file. Need to be copied in Environments.swift with appropriate values.
 class Environments_Sample : ObservableObject {
     var target = _BuildTarget.production
     static let shared = Environments_Sample()
@@ -24,6 +25,7 @@ class Environments_Sample : ObservableObject {
         setVars()
     }
     
+    // A function to set vars based on the target.
     func setVars() {
         switch self.target {
         case .development:

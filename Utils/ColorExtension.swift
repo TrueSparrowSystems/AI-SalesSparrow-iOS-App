@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// Extention to support hex string in the Color class init.
 extension Color {
     init(hex: String) {
         var hexString: String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
