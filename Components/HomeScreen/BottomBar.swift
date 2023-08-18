@@ -13,16 +13,14 @@ struct BottomBar: View {
     @State var selectedAccountName: String? = nil
     
     var body: some View {
-        ZStack() {
+        ZStack {
             Color("Background")
-                .frame(height: 27) // Set the height of the bottom 27px to be similar to Rectangle()
+                .frame(height: 44)
                 .overlay(
-                    RoundedRectangle(cornerRadius: 0)
-                        .stroke(Color("Background"), lineWidth: 0.5)
-                        .opacity(0.2)
+                    Rectangle().frame(width: nil, height: 0.5, alignment: .top).foregroundColor(.black.opacity(0.2)), alignment: .top
                 )
-            
-            // Button for headerIcon at the middle of the nave bar
+
+            // Button for headerIcon at the middle of the navbar
             Button(action: {
                 self.createNoteScreenActivated = true
             }) {
@@ -30,12 +28,11 @@ struct BottomBar: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 44.0, height: 44.0)
-                                    
+
             }
-            .padding(.bottom, 30) // Center the button in the middle of the 27px area
+            .offset(y: -22)
             .accessibilityIdentifier("btn_create_note")
         }
-        .frame(height: 27) // Set the total height of the bottom nav bar to 50px
         .background(
             NavigationLink(
                 destination: CreateNoteScreen(isAccountSelectable: true),

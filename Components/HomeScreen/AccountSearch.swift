@@ -60,6 +60,7 @@ struct AccountSearchView: View {
                     onNoteCreateSelected: onNoteCreateSelected,
                     onAccountSelected: onAccountSelected,
                     isPresented: $isPresented,
+                    removeSearchTextFocus: removeSearchTextFocus,
                     onScroll: onScroll
                 )
             }
@@ -78,6 +79,9 @@ struct AccountSearchView: View {
         .background(Color("Background"))
     }
     
+    func removeSearchTextFocus() -> Void {
+        focused = false
+    }
     func onScroll(_: DragGesture.Value) -> Void {
         focused = false
     }
@@ -90,6 +94,7 @@ struct AccountListView: View {
     var onNoteCreateSelected: ((String, String) -> Void)?
     var onAccountSelected: ((String, String) -> Void)?
     @Binding var isPresented: Bool
+    var removeSearchTextFocus: (() -> Void)
     var onScroll: ((DragGesture.Value) -> Void)
     
     var body: some View {
@@ -105,11 +110,12 @@ struct AccountListView: View {
                                     .accessibilityIdentifier("txt_search_account_name_\(account.name)")
                                 Spacer()
                             }
-                            .border(Color("Background"))
+                            .contentShape(Rectangle())
                             .accessibility(addTraits: .isButton)
                             .accessibilityIdentifier("btn_search_account_name_\(account.name)")
                             .onTapGesture {
                                 isPresented = false // Dismiss the sheet
+                                removeSearchTextFocus()
                                 if isCreateNoteFlow {
                                     onNoteCreateSelected?(accountId, account.name)
                                 } else {
@@ -121,6 +127,7 @@ struct AccountListView: View {
                                 HStack {
                                     Button(action: {
                                         isPresented = false // Dismiss the sheet
+                                        removeSearchTextFocus()
                                         onNoteCreateSelected?(accountId, account.name)
                                     }) {
                                         Text("Add Note")
