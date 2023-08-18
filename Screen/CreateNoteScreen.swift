@@ -156,9 +156,14 @@ struct CreateNoteScreen : View {
                         .accessibilityIdentifier("et_create_note")
                 }
             }
+            .contentShape(Rectangle())
+            .onTapGesture {
+                // Do nothing. Kept on tap here to override tap action over parent tap action
+            }
             Spacer()
             
         }
+        .contentShape(Rectangle())
         .padding(.horizontal, 12)
         .navigationBarBackButtonHidden(true)
         .background(Color("Background"))
@@ -167,6 +172,9 @@ struct CreateNoteScreen : View {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.05){
                 focused = true
             }
+        }
+        .onTapGesture {
+            focused = false
         }
     }
 }
