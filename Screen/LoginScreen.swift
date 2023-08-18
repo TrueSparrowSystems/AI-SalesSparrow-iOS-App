@@ -129,7 +129,7 @@ struct LoginScreen: View {
                     }
                     )
                     .disabled($isLoginInProgress.wrappedValue)
-                    .accessibilityIdentifier("btn_login_connect_salesforce")
+                    .accessibilityIdentifier("btn_connect_salesforce")
                 }
                 .padding(.horizontal, 20)
                 .padding(.vertical, 40)

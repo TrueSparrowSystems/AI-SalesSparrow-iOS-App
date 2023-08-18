@@ -383,9 +383,9 @@ final class SalesSparrowUITests: XCTestCase {
         
         // Check if disconnect modal is visible
         // text, cancel and disconnect button
-        XCTAssertTrue(app.staticTexts["txt_user_account_detail_message"].waitForExistence(timeout: TimeInterval(timeout)))
+        XCTAssertTrue(app.staticTexts["txt_user_account_detail_disconnect_message"].waitForExistence(timeout: TimeInterval(timeout)))
         
-        let closeButton = app.buttons["btn_user_account_detail_disconnect"]
+        let closeButton = app.buttons["btn_user_account_detail_cancel"]
         XCTAssertTrue(closeButton.waitForExistence(timeout: TimeInterval(timeout)))
         XCTAssertTrue(closeButton.isHittable)
         
