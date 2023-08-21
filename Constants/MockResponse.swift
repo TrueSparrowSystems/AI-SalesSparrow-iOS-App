@@ -168,6 +168,24 @@ class MockResponse {
                 "statusCode": 200,
                 "data": [:] as [String : Any]
             ] as [String : Any]
+        ],
+        "GET /v1/user": [
+            "default":[
+                "success": "true",
+                "statusCode": 200,
+                "data":[
+                    "user_ids": ["1","2","3"],
+                    "user_map_by_id": ["1": ["id": "1", "name": "Test User 1"], "2":["id": "2", "name": "Test User 2"], "3":["id": "3", "name": "bad"]]
+                ] as [String : Any],
+            ] as [String : Any],
+            "searchResponseWithQuery":[
+                "success": "true",
+                "statusCode": 200,
+                "data":[
+                    "user_ids": ["1","2","3"],
+                    "user_map_by_id": ["1": ["id": "1", "name": "Mock User 1"], "2":["id": "2", "name": "Alex Hunter"], "3":["id": "3", "name": "Lukas vaskas"]]
+                ] as [String : Any],
+            ] as [String : Any]
         ]
     ]
 }
