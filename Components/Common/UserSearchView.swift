@@ -27,7 +27,7 @@ struct UserSearchView: View {
                           prompt: Text("Search Users").foregroundColor(Color("SearchPrimary").opacity(0.8)))
                 .font(.custom("Nunito-Regular", size: 16).weight(.regular))
                 .foregroundColor(Color("LuckyPoint"))
-                .accessibilityIdentifier("text_field_search_account")
+                .accessibilityIdentifier("txt_search_user_field")
                 .focused($focused)
             }
             .frame(height: 66)
@@ -62,7 +62,7 @@ struct UserSearchView: View {
             else{
                 Text("No Result Found")
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-                    .accessibilityIdentifier("txt_search_no_result_found")
+                    .accessibilityIdentifier("txt_search_user_no_result_found")
             }
         }
         .onAppear {
@@ -102,18 +102,18 @@ struct UserListView: View {
                                 .foregroundColor(.black)
                                 .background(Color("UserBubble"))
                                 .clipShape(RoundedRectangle(cornerRadius: 26))
-                                .accessibilityIdentifier("txt_account_detail_note_creator_initials")
+                                .accessibilityIdentifier("txt_search_user_user_initials_\(user.name)")
                             
                             HStack {
                                 Text(user.name)
                                     .font(.custom("Nunito-Medium", size: 14))
                                     .foregroundColor(Color("SearchPrimary"))
-                                    .accessibilityIdentifier("txt_search_account_name_\(user.name)")
+                                    .accessibilityIdentifier("txt_search_user_user_name_\(user.name)")
                                 Spacer()
                             }
                             .contentShape(Rectangle())
                             .accessibility(addTraits: .isButton)
-                            .accessibilityIdentifier("btn_search_account_name_\(user.name)")
+                            .accessibilityIdentifier("btn_search_user_user_name_\(user.name)")
                             .onTapGesture {
                                 isPresented = false // Dismiss the sheet
                                 removeSearchTextFocus()

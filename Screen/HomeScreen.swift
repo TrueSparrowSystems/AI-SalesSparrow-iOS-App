@@ -35,6 +35,8 @@ struct HomeScreen: View {
                         print("\(userId) \(userName)")
                     })
                 }
+                .accessibilityIdentifier("btn_create_task_search_user")
+                
                 Spacer()
                 
                 // Bottom Bar with + Button
