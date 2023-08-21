@@ -1,0 +1,12 @@
+.DS_Store
+UserInterfaceState.xcuserstate
+xcschememanagement.plist
+.idea/
+xcuserdata
+xcuserdata/
+.xcuserstate
+Manifest.lock
+Podfile.lock
+Package.resolved
+Constants/Environments.swift
+GoogleService-Info.plist
