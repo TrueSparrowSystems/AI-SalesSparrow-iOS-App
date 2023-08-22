@@ -19,7 +19,7 @@ struct SearchAccountStruct: Codable {
     var account_map_by_id: [String: Account]
 }
 
-// A class that represents the view model of the LoginScreen
+// A class that represents the view model of the Account search
 class AccountSearchViewModel: ObservableObject {
     @Published var accountListData = SearchAccountStruct(account_ids: [], account_map_by_id: [:])
     var apiService = DependencyContainer.shared.apiService

@@ -10,9 +10,11 @@ import SwiftUI
 struct HomeScreen: View {
     @State private var showCreateNoteAccountSearchView: Bool = false
     @StateObject var acccountSearchViewModelObject = AccountSearchViewModel()
+    @StateObject var userSearchViewModelObject = UserSearchViewModel()
     @StateObject var acccountDetailScreenViewModelObject = AccountDetailViewScreenViewModel()
     @StateObject var createNoteViewModel = CreateNoteScreenViewModel()
     @StateObject var noteDetailScreenViewModel = NoteDetailScreenViewModel()
+    @State private var showUserSearchView: Bool = false
     
     var body: some View {
         NavigationView {
@@ -22,6 +24,19 @@ struct HomeScreen: View {
                 
                 // List of Accounts
                 //                AccountList()
+                Button(action: {
+                    showUserSearchView = true
+                }){
+                 Text("Search User")
+                }
+                .sheet(isPresented: $showUserSearchView){
+                    UserSearchView(isPresented: $showUserSearchView,
+                                   onUserSelect: { userId, userName in
+                        print("\(userId) \(userName)")
+                    })
+                }
+                .accessibilityIdentifier("btn_create_task_search_user")
+                
                 Spacer()
                 
                 // Bottom Bar with + Button
@@ -33,6 +48,7 @@ struct HomeScreen: View {
         }
         .navigationViewStyle(.stack)
         .environmentObject(acccountSearchViewModelObject)
+        .environmentObject(userSearchViewModelObject)
         .environmentObject(acccountDetailScreenViewModelObject)
         .environmentObject(createNoteViewModel)
         .environmentObject(noteDetailScreenViewModel)

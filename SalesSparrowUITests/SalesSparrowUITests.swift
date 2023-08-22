@@ -307,6 +307,55 @@ final class SalesSparrowUITests: XCTestCase {
         
     }
     
+    func testSearchUser() throws {
+        let app = XCUIApplication()
+        app.launchArguments = ["isRunningUITests"]
+        app.launch()
+        
+        let timeout = 2
+        
+        let searchAccountButton = app.buttons["btn_create_task_search_user"]
+        XCTAssertTrue(searchAccountButton.waitForExistence(timeout: TimeInterval(timeout)))
+        searchAccountButton.tap()
+        // modal should open with empty text box
+        let textFieldSearchAccount = app.textFields["txt_search_user_field"]
+        XCTAssertTrue(textFieldSearchAccount.waitForExistence(timeout: TimeInterval(timeout)))
+        let textFieldSearchAccountVal = textFieldSearchAccount.value as? String
+        XCTAssertTrue(((textFieldSearchAccountVal?.isEmpty) != nil))
+        
+        // modal should open with default data
+        let userName = "Test User 1"
+        let btnSearchUserNameBtn = app.buttons["btn_search_user_user_name_\(userName)"]
+        XCTAssertTrue(btnSearchUserNameBtn.waitForExistence(timeout: TimeInterval(timeout)))
+        // user row should be clickable
+        XCTAssertTrue(btnSearchUserNameBtn.isEnabled)
+    }
+    
+    func testSearchUserWithQueryOnHomeScreen() throws {
+        let app = XCUIApplication()
+        app.launchArguments = ["isRunningUITests", "searchResponseWithQuery"]
+        app.launch()
+        
+        let timeout = 2
+        // click on search icon home page
+        let searchUserButton = app.buttons["btn_create_task_search_user"]
+        XCTAssertTrue(searchUserButton.waitForExistence(timeout: TimeInterval(timeout)))
+        searchUserButton.tap()
+        // modal should open with empty text box
+        let textFieldSearchUser = app.textFields["txt_search_user_field"]
+        XCTAssertTrue(textFieldSearchUser.waitForExistence(timeout: TimeInterval(timeout)))
+        textFieldSearchUser.tap()
+        textFieldSearchUser.typeText("Mock User")
+        XCTAssertEqual(textFieldSearchUser.value as! String, "Mock User")
+        
+        // modal should open with default data
+        let userName = "Mock User"
+        let btnSearchUserNameBtn = app.buttons["btn_search_user_user_name_\(userName)"]
+        XCTAssertTrue(btnSearchUserNameBtn.waitForExistence(timeout: TimeInterval(timeout)))
+        // Account row should be clickable
+        XCTAssertTrue(btnSearchUserNameBtn.isEnabled)
+    }
+    
     func openUserAccountDetailScreen(app: XCUIApplication){
         let timeout = 2
         

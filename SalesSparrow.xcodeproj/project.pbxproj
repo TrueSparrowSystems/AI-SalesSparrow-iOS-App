@@ -75,6 +75,10 @@
 		019596122A83D7B4008425AD /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 019596112A83D7B4008425AD /* FirebaseCrashlytics */; };
 		0195961D2A84CBD9008425AD /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 0195961C2A84CBD9008425AD /* FirebaseCrashlytics */; };
 		0195961F2A84CBE5008425AD /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 0195961E2A84CBE5008425AD /* FirebaseCrashlytics */; };
+		4B13E4ED2A93821300CB24E4 /* UserSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B13E4EC2A93821300CB24E4 /* UserSearchView.swift */; };
+		4B13E4EE2A93821300CB24E4 /* UserSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B13E4EC2A93821300CB24E4 /* UserSearchView.swift */; };
+		4B13E4F02A93836700CB24E4 /* UserSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B13E4EF2A93836700CB24E4 /* UserSearchViewModel.swift */; };
+		4B13E4F12A93836700CB24E4 /* UserSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B13E4EF2A93836700CB24E4 /* UserSearchViewModel.swift */; };
 		4B393FF22A7AAA2D00572F66 /* AccountSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B393FF12A7AAA2D00572F66 /* AccountSearch.swift */; };
 		4B393FF42A7AAAF600572F66 /* AccountSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B393FF32A7AAAF600572F66 /* AccountSearchViewModel.swift */; };
 		4B583BD82A7BBEF2005B97D0 /* TopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B583BD72A7BBEF2005B97D0 /* TopBar.swift */; };
@@ -196,6 +200,8 @@
 		11C28B9A7C622812E3FDFC07 /* Pods-SalesSparrowTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SalesSparrowTests.debug.xcconfig"; path = "Target Support Files/Pods-SalesSparrowTests/Pods-SalesSparrowTests.debug.xcconfig"; sourceTree = "<group>"; };
 		216D9F06D488828BC1022AFD /* Pods_SalesSparrow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SalesSparrow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B4F1FDE360243CED55CFB69 /* Pods-SalesSparrow.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SalesSparrow.release.xcconfig"; path = "Target Support Files/Pods-SalesSparrow/Pods-SalesSparrow.release.xcconfig"; sourceTree = "<group>"; };
+		4B13E4EC2A93821300CB24E4 /* UserSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchView.swift; sourceTree = "<group>"; };
+		4B13E4EF2A93836700CB24E4 /* UserSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchViewModel.swift; sourceTree = "<group>"; };
 		4B393FF12A7AAA2D00572F66 /* AccountSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSearch.swift; sourceTree = "<group>"; wrapsLines = 1; };
 		4B393FF32A7AAAF600572F66 /* AccountSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSearchViewModel.swift; sourceTree = "<group>"; };
 		4B583BD72A7BBEF2005B97D0 /* TopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBar.swift; sourceTree = "<group>"; };
@@ -501,6 +507,7 @@
 				6DE11C8D2A836E5900D27006 /* ToastViewModel.swift */,
 				4BDB87262A850B5A000CC1B9 /* AccountDetailScreenViewModel.swift */,
 				6DCF64E72A8600D50084F809 /* NoteDetailScreenViewModel.swift */,
+				4B13E4EF2A93836700CB24E4 /* UserSearchViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -525,6 +532,7 @@
 				6DACD9CE2A89FBAA00B55747 /* HTMLTextView.swift */,
 				6D8C7D192A779F95005D597E /* ExpandableTextView.swift */,
 				6D8C7D1B2A77A057005D597E /* DateTimePicker.swift */,
+				4B13E4EC2A93821300CB24E4 /* UserSearchView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -929,6 +937,7 @@
 				019595F52A83CEBA008425AD /* LoginScreenViewModel.swift in Sources */,
 				6DCF64E92A8600D50084F809 /* NoteDetailScreenViewModel.swift in Sources */,
 				019595FB2A83CECC008425AD /* Environments.swift in Sources */,
+				4B13E4F12A93836700CB24E4 /* UserSearchViewModel.swift in Sources */,
 				019595ED2A83CE9C008425AD /* AccountList.swift in Sources */,
 				019595E12A83CE74008425AD /* ApiHelper.swift in Sources */,
 				019595EC2A83CE9A008425AD /* TopBar.swift in Sources */,
@@ -938,6 +947,7 @@
 				019595E22A83CE76008425AD /* ApiError.swift in Sources */,
 				019595E02A83CE71008425AD /* ApiService.swift in Sources */,
 				019595FA2A83CEC9008425AD /* Environments_Sample.swift in Sources */,
+				4B13E4EE2A93821300CB24E4 /* UserSearchView.swift in Sources */,
 				4B9E5DE52A8CE6AD00041D65 /* DisconnectSalesforeModal.swift in Sources */,
 				019595DE2A83CE6D008425AD /* BaseEntity.swift in Sources */,
 				019595F92A83CEC3008425AD /* ToastViewModel.swift in Sources */,
@@ -987,6 +997,7 @@
 				4B583BD82A7BBEF2005B97D0 /* TopBar.swift in Sources */,
 				6DCF64E82A8600D50084F809 /* NoteDetailScreenViewModel.swift in Sources */,
 				6DBB507A2A77C58300B58F88 /* LoginScreen.swift in Sources */,
+				4B13E4F02A93836700CB24E4 /* UserSearchViewModel.swift in Sources */,
 				6D8C7D382A77A254005D597E /* ApiError.swift in Sources */,
 				6D8C7CDA2A779A97005D597E /* SalesSparrowApp.swift in Sources */,
 				6D8C7D332A77A1E5005D597E /* ApiService.swift in Sources */,
@@ -996,6 +1007,7 @@
 				6D8C7D212A77A09F005D597E /* ColorExtension.swift in Sources */,
 				4BDB87232A84C20E000CC1B9 /* AccountDetailsHeader.swift in Sources */,
 				6D8C7D2A2A77A12B005D597E /* BaseRepository.swift in Sources */,
+				4B13E4ED2A93821300CB24E4 /* UserSearchView.swift in Sources */,
 				4B9E5DE42A8CE6AD00041D65 /* DisconnectSalesforeModal.swift in Sources */,
 				6DC43C542A7A8CF8002162FE /* UserStateViewModel.swift in Sources */,
 				6D8C7D1C2A77A057005D597E /* DateTimePicker.swift in Sources */,
