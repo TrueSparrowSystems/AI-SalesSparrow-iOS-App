@@ -34,7 +34,7 @@ struct NotesList: View {
                 NavigationLink(destination: CreateNoteScreen(accountId: accountId, accountName: accountName, isAccountSelectable: false)
                 ){
                     HStack{
-                        Image("CreateNoteIcon")
+                        Image("AddIcon")
                             .resizable()
                             .frame(width: 20.0, height: 20.0)
                             .accessibilityIdentifier("img_account_detail_create_note_icon")

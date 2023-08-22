@@ -18,10 +18,11 @@ struct CreateNoteScreen : View {
     @State var accountName = ""
     @State var isAccountSelectable = true
     @State var showAccountSearchView = false
+    @State var isPopoverVisible = false
     @FocusState private var focused: Bool
     
     var body: some View {
-        VStack{
+        ScrollView{
             HStack(alignment: .center){
                 Text(isNoteSaved ? "Done" : "Cancel")
                     .font(.custom("Nunito-Bold", size: 14))
@@ -139,6 +140,7 @@ struct CreateNoteScreen : View {
                 }
                 Spacer()
             }
+            .contentShape(Rectangle())
             .padding(.top, 12)
             
             HStack{
@@ -154,15 +156,44 @@ struct CreateNoteScreen : View {
                         .font(.custom("Nunito-SemiBold", size: 18))
                         .focused($focused)
                         .accessibilityIdentifier("et_create_note")
+                        .onTapGesture {
+                            // Do nothing. Kept on tap here to override tap action over parent tap action
+                        }
+                        
                 }
             }
             .contentShape(Rectangle())
-            .onTapGesture {
-                // Do nothing. Kept on tap here to override tap action over parent tap action
+            
+            if(isNoteSaved){
+                HStack{
+                    Image("Sparkle")
+                    Text("We have some recommendations")
+                        .foregroundColor(Color("TextPrimary"))
+                        .font(.custom("Nunito-SemiBold", size: 16))
+                    Spacer()
+                    Button{
+                        isPopoverVisible.toggle()
+                    } label: {
+                        Image("AddIcon")
+                            .frame(width: 20, height: 20)
+                    }
+                    .overlay{
+                        if isPopoverVisible {
+                            AddButtonPopoverComponent(isPopoverVisible: $isPopoverVisible)
+                                .offset(x: -55,y: 55)
+                        }
+                    }
+                }
             }
-            Spacer()
             
         }
+        .gesture(DragGesture().onChanged{_ in
+            if(isPopoverVisible){
+                isPopoverVisible.toggle()
+            }else{
+                focused = false
+            }
+        })
         .contentShape(Rectangle())
         .padding(.horizontal, 12)
         .navigationBarBackButtonHidden(true)
@@ -174,7 +205,11 @@ struct CreateNoteScreen : View {
             }
         }
         .onTapGesture {
-            focused = false
+            if(isPopoverVisible){
+                isPopoverVisible.toggle()
+            }else{
+                focused = false
+            }
         }
     }
 }
