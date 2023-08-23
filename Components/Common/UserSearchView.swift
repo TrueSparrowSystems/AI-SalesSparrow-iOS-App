@@ -49,11 +49,11 @@ struct UserSearchView: View {
                     .tint(Color("LoginButtonSecondary"))
                     .controlSize(.large)
             }
-            else if(userSearchViewModel.userListData.user_ids.count > 0){
+            else if(userSearchViewModel.userListData.crm_organization_user_ids.count > 0){
                 // List of users
                 UserListView(
                     listData: userSearchViewModel.userListData,
-                    userIds: userSearchViewModel.userListData.user_ids,
+                    userIds: userSearchViewModel.userListData.crm_organization_user_ids,
                     isPresented: $isPresented,
                     removeSearchTextFocus: removeSearchTextFocus,
                     onScroll: onScroll
@@ -94,7 +94,7 @@ struct UserListView: View {
         ScrollView {
             VStack(spacing: 0){
                 ForEach(userIds, id: \.self) { userId in
-                    if let user = listData.user_map_by_id[userId] {
+                    if let user = listData.crm_organization_user_map_by_id[userId] {
                         HStack (alignment: .center) {
                             Text("\(BasicHelper.getInitials(from: user.name))")
                                 .frame(width: 20, height: 20)

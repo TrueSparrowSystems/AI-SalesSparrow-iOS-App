@@ -14,6 +14,7 @@ struct HomeScreen: View {
     @StateObject var acccountDetailScreenViewModelObject = AccountDetailViewScreenViewModel()
     @StateObject var createNoteViewModel = CreateNoteScreenViewModel()
     @StateObject var noteDetailScreenViewModel = NoteDetailScreenViewModel()
+    @StateObject var suggestTaskViewModel = SuggestTaskViewModel()
     @State private var showUserSearchView: Bool = false
     
     var body: some View {
@@ -24,19 +25,6 @@ struct HomeScreen: View {
                 
                 // List of Accounts
                 //                AccountList()
-                Button(action: {
-                    showUserSearchView = true
-                }){
-                 Text("Search User")
-                }
-                .sheet(isPresented: $showUserSearchView){
-                    UserSearchView(isPresented: $showUserSearchView,
-                                   onUserSelect: { userId, userName in
-                        print("\(userId) \(userName)")
-                    })
-                }
-                .accessibilityIdentifier("btn_create_task_search_user")
-                
                 Spacer()
                 
                 // Bottom Bar with + Button
@@ -52,6 +40,7 @@ struct HomeScreen: View {
         .environmentObject(acccountDetailScreenViewModelObject)
         .environmentObject(createNoteViewModel)
         .environmentObject(noteDetailScreenViewModel)
+        .environmentObject(suggestTaskViewModel)
     }
 }
 

@@ -15,13 +15,13 @@ struct User: Identifiable, Codable {
 
 // A struct that represents the meta data of the Search user API
 struct SearchUserStruct: Codable {
-    var user_ids: [String]
-    var user_map_by_id: [String: Account]
+    var crm_organization_user_ids: [String]
+    var crm_organization_user_map_by_id: [String: Account]
 }
 
 // A class that represents the view model of the User search
 class UserSearchViewModel: ObservableObject {
-    @Published var userListData = SearchUserStruct(user_ids: [], user_map_by_id: [:])
+    @Published var userListData = SearchUserStruct(crm_organization_user_ids: [], crm_organization_user_map_by_id: [:])
     var apiService = DependencyContainer.shared.apiService
     @Published var isSearchUserInProgress = false
     let debounceTime = 0.5
@@ -47,18 +47,18 @@ class UserSearchViewModel: ObservableObject {
     // A function that Perform the API call for searching users
     private func searchUsers(withText searchText: String) {
         print("Query String--> \(searchText)")
-        let searchUrl = "/v1/users"
+        let searchUrl = "/v1/crm-organization-users"
         let params: [String: Any] = ["q": searchText]
         
         apiService.get(type: SearchUserStruct.self, endpoint: searchUrl, params: params) { [weak self] result, statusCode in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let results):
-                    self?.userListData.user_ids = results.user_ids
-                    self?.userListData.user_map_by_id = results.user_map_by_id
+                    self?.userListData.crm_organization_user_ids = results.crm_organization_user_ids
+                    self?.userListData.crm_organization_user_map_by_id = results.crm_organization_user_map_by_id
                     
                 case .failure(let error):
-                    self?.userListData = .init(user_ids: [], user_map_by_id: [:])
+                    self?.userListData = .init(crm_organization_user_ids: [], crm_organization_user_map_by_id: [:])
                     ToastViewModel.shared.showToast(_toast: Toast(style: .error, message: error.message))
                     print("Error loading data: \(error)")
                 }
