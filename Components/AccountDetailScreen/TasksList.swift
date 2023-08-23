@@ -157,7 +157,7 @@ struct TaskCardView: View {
                 Image("CalendarCheck")
                     .frame(width: 16, height: 16)
                 
-                Text("Due \("04/07/2023")")
+                Text("Due \(BasicHelper.getFormattedDateForDueDate(from: acccountDetailScreenViewModelObject.taskData.task_map_by_id[taskId]!.due_date))")
                     .font(.custom("Nunito-Regular",size: 12))
                     .foregroundColor(Color("TermsPrimary"))
                     .tracking(0.5)

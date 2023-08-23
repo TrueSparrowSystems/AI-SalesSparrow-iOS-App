@@ -116,4 +116,16 @@ struct BasicHelper {
             return ""
         }
     }
+    
+    static func getFormattedDateForDueDate(from dateString: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        if let date = dateFormatter.date(from: dateString) {
+            dateFormatter.dateFormat = "yyyy/MM/dd"
+            let formattedDateString = dateFormatter.string(from: date)
+            return formattedDateString
+        }else{
+            return ""
+        }
+    }
 }
