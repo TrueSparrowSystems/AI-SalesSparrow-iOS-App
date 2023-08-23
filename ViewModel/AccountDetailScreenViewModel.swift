@@ -43,15 +43,16 @@ struct TasksListStruct: Codable {
 class AccountDetailViewScreenViewModel: ObservableObject {
     @Published var noteData = NotesListStruct(note_ids: [], note_map_by_id: [:])
     @Published var taskData = TasksListStruct(task_ids: [], task_map_by_id: [:])
-    @Published var isLoading = false
+    @Published var isNoteLoading = false
+    @Published var isTaskLoading = false
     var apiService = DependencyContainer.shared.apiService
     
     // A function that fetches the data for the list
     func fetchNotes(accountId: String){
-        guard !self.isLoading else {
+        guard !self.isNoteLoading else {
             return
         }
-        self.isLoading = true
+        self.isNoteLoading = true
         
         apiService.get(type: NotesListStruct.self, endpoint: "/v1/accounts/\(accountId)/notes"){
             [weak self]  result, statusCode in
@@ -60,11 +61,11 @@ class AccountDetailViewScreenViewModel: ObservableObject {
                 case .success(let results):
                     self?.noteData.note_ids = results.note_ids
                     self?.noteData.note_map_by_id = results.note_map_by_id
-                    self?.isLoading = false
+                    self?.isNoteLoading = false
                 case .failure(let error):
                     print("error loading data: \(error)")
                     self?.noteData = NotesListStruct(note_ids: [], note_map_by_id: [:])
-                    self?.isLoading = false
+                    self?.isNoteLoading = false
                     ToastViewModel.shared.showToast(_toast: Toast(style: .error, message: error.message))
                 }
             }
@@ -72,10 +73,10 @@ class AccountDetailViewScreenViewModel: ObservableObject {
     }
     
     func fetchTasks(accountId: String){
-        guard !self.isLoading else {
+        guard !self.isTaskLoading else {
             return
         }
-        self.isLoading = true
+        self.isTaskLoading = true
         
         apiService.get(type: TasksListStruct.self, endpoint: "/v1/accounts/\(accountId)/tasks"){
             [weak self]  result, statusCode in
@@ -84,7 +85,7 @@ class AccountDetailViewScreenViewModel: ObservableObject {
                 case .success(let results):
                     self?.taskData.task_ids = results.task_ids
                     self?.taskData.task_map_by_id = results.task_map_by_id
-                    self?.isLoading = false
+                    self?.isTaskLoading = false
                 case .failure(let error):
                     print("error loading data: \(error)")
                     //TODO: remove the temp code once api is deployed
@@ -112,7 +113,7 @@ class AccountDetailViewScreenViewModel: ObservableObject {
                       ]
                     
 //                    self?.taskData = TasksListStruct(task_ids: [], task_map_by_id: [:])
-                    self?.isLoading = false
+                    self?.isTaskLoading = false
                     ToastViewModel.shared.showToast(_toast: Toast(style: .error, message: error.message))
                 }
             }

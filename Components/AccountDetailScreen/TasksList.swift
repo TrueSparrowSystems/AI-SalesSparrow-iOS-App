@@ -13,7 +13,6 @@ struct TasksList: View {
     
     @EnvironmentObject var acccountDetailScreenViewModelObject: AccountDetailViewScreenViewModel
     @State private var showOverlay = false
-    @State var createNoteScreenActivated = false
     
     var body: some View {
         VStack(spacing: 0) {
@@ -47,7 +46,7 @@ struct TasksList: View {
                 .accessibilityIdentifier("btn_account_detail_add_task")
             }
             
-            if acccountDetailScreenViewModelObject.isLoading {
+            if acccountDetailScreenViewModelObject.isTaskLoading {
                 ProgressView()
                     .tint(Color("LoginButtonSecondary"))
             }
@@ -59,7 +58,7 @@ struct TasksList: View {
                             .font(.custom("Nunito-Regular",size: 12))
                             .foregroundColor(Color("TextPrimary"))
                             .padding(EdgeInsets(top: 12, leading: 14, bottom: 12, trailing: 14))
-                            .accessibilityIdentifier("txt_account_detail_add_task_text")
+                            .accessibilityIdentifier("txt_account_detail_add_task")
                         
                         Spacer()
                     }
@@ -80,7 +79,6 @@ struct TasksList: View {
                     ForEach(self.acccountDetailScreenViewModelObject.taskData.task_ids, id: \.self){ id in
                         if self.acccountDetailScreenViewModelObject.taskData.task_map_by_id[id] != nil{
                             TaskCardView(taskId: id)
-                                .accessibilityIdentifier("task_card_\(id)")
                         }
                         
                         
@@ -129,24 +127,28 @@ struct TaskCardView: View {
                 Image("DotsThreeOutline")
                     .frame(width: 16, height: 16)
                     .foregroundColor(Color("TextPrimary"))
-                    .accessibilityIdentifier("img_account_detail_task_more")
+                    .accessibilityIdentifier("img_account_detail_task_more_\(taskId)")
             }
             Text("\(acccountDetailScreenViewModelObject.taskData.task_map_by_id[taskId]?.description ?? "")")
                 .font(.custom("Nunito-Medium",size: 14))
                 .foregroundColor(Color("TextPrimary"))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .multilineTextAlignment(.leading)
-                .accessibilityIdentifier("txt_account_detail_task_text")
+                .accessibilityIdentifier("txt_account_detail_task_description")
                 .padding(.top, 6)
             
             HStack(alignment: .center){
-                Text("Assign to ")
+                Text("Assign to")
                     .font(.custom("Nunito-Regular",size: 12))
                     .foregroundColor(Color("TermsPrimary"))
-                    .tracking(0.5) + Text(acccountDetailScreenViewModelObject.taskData.task_map_by_id[taskId]?.crm_organization_user_name ?? "")
+                    .tracking(0.5)
+                    .accessibilityIdentifier("txt_account_detail_task_assign_to_title")
+                
+                Text(acccountDetailScreenViewModelObject.taskData.task_map_by_id[taskId]?.crm_organization_user_name ?? "")
                     .font(.custom("Nunito-Regular",size: 12))
                     .foregroundColor(Color("RedHighlight"))
                     .tracking(0.5)
+                    .accessibilityIdentifier("txt_account_detail_task_assignee")
                 
                 Divider()
                     .frame(width: 0, height: 16)
@@ -159,6 +161,7 @@ struct TaskCardView: View {
                     .font(.custom("Nunito-Regular",size: 12))
                     .foregroundColor(Color("TermsPrimary"))
                     .tracking(0.5)
+                    .accessibilityIdentifier("txt_account_detail_task_due_date")
                 
                 Spacer()
             }

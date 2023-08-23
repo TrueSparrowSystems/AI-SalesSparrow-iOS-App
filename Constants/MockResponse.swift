@@ -118,27 +118,6 @@ class MockResponse {
                     ]as [String : Any]
             ]
         ],
-        "GET /v1/accounts/2/notes": [
-            "default":[
-                "success": "true",
-                "statusCode": 200,
-                "data":[
-                    "note_ids": ["400","500"],
-                    "note_map_by_id": [
-                        "400":["id":"400","creator":"User1","text_preview":"This is Note text.","last_modified_time":"2019-10-12T07:20:50.52Z"],
-                        "500":["id":"500","creator":"User2","text_preview":"This is Note long long text.","last_modified_time":"2019-10-12T07:20:50.58Z"]
-                    ]
-                ] as [String : Any],
-            ],
-            "emptyNoteList":[
-                "success": "true",
-                "statusCode": 200,
-                "data":[
-                    "note_ids": [] as [String],
-                    "note_map_by_id": [:] as [String : Any],
-                ] as [String : Any],
-            ]
-        ],
         "POST /v1/accounts/1/notes": [
             "default":[
                 "success": "true",
@@ -161,6 +140,51 @@ class MockResponse {
                     ]
                 ]
             ] as [String : Any],
+        ],
+        "GET /v1/accounts/1/tasks": [
+            "default":[
+                "success": "true",
+                "statusCode": 200,
+                "data":[
+                    "task_ids": [
+                        "00U1e000003TUB8EAO","00U1e000003TUB8EA1"
+                    ],
+                    "task_map_by_id": [
+                        "00U1e000003TUB8EAO":[
+                            "id":"00U1e000003TUB8EAO",
+                            "creator_name": "xyz",
+                            "crm_organization_user_name": "abc",
+                            "description": "Complete remaining task",
+                            "due_date": "2019-10-12",
+                            "last_modified_time": "2019-10-12T07:20:50.52Z"
+                        ],
+                        "00U1e000003TUB8EA1":[
+                            "id":"00U1e000003TUB8EA1",
+                            "creator_name": "Jakob Adison",
+                            "crm_organization_user_name": "Zaire",
+                            "description": "Reach out to Romit for to set a time for the next sync with their CTO",
+                            "due_date": "2023-10-12",
+                            "last_modified_time": "2023-08-20T07:20:50.52Z"]
+                    ]
+                ] as [String : Any],
+            ],
+            "emptyTaskList":[
+                "success": "true",
+                "statusCode": 200,
+                "data":[
+                    "task_ids": [] as [String],
+                    "task_map_by_id": [:] as [String : Any],
+                ] as [String : Any],
+            ],
+            "taskListError":[
+                "success": "false",
+                "statusCode": 500,
+                "error": [
+                    "message": "Something went wrong.",
+                    "code": "",
+                    "internal_error_identifier": "",
+                ]as [String : Any]
+            ]
         ],
         "POST /v1/auth/disconnect": [
             "default":[
