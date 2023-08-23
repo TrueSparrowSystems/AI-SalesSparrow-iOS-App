@@ -141,7 +141,6 @@ class ApiService {
      - Parameters:
      - type: The type to decode the response into.
      - endpoint: The endpoint to append to the base API endpoint.
-     - params: The body parameters to include in the request.
      - completion: A closure to call with the decoded response and the HTTP status code of the response.
      */
     func delete<T: Decodable>(type: T.Type, endpoint: String, completion: @escaping(Result<T, ErrorStruct>, Int?) -> Void) {
@@ -154,6 +153,9 @@ class ApiService {
             return
         }
         
+        if(dev){
+            print("urlApiEndpoint: \(urlApiEndpoint)")
+        }
         var requestUrl = URLRequest(url: urlApiEndpoint)
         requestUrl.httpMethod = "DELETE"
         

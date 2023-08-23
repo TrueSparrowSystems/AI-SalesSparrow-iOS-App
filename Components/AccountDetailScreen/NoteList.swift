@@ -14,7 +14,8 @@ struct NotesList: View {
     @EnvironmentObject var acccountDetailScreenViewModelObject: AccountDetailViewScreenViewModel
     @State private var showOverlay = false
     @State var createNoteScreenActivated = false
-        
+    @Binding var propagateClick : Int
+    
     var body: some View {
         VStack(spacing: 0) {
             HStack{
@@ -79,9 +80,10 @@ struct NotesList: View {
                         NavigationLink(destination: NoteDetailScreen(noteId: id, accountId: accountId, accountName: accountName)
                         ){
                             if self.acccountDetailScreenViewModelObject.noteData.note_map_by_id[id] != nil{
-                                NoteCardView(noteId: id)
+                                NoteCardView(noteId: id, accountId: accountId, propagateClick: $propagateClick)
                             }
                         }
+                        .buttonStyle(.plain)
                         .accessibilityIdentifier("note_card_\(id)")
                     }
                 }
@@ -91,19 +93,24 @@ struct NotesList: View {
             acccountDetailScreenViewModelObject.fetchNotes(accountId: accountId)
         }
     }
+    
 }
 
 struct NoteCardView: View {
     let noteId: String
+    let accountId: String
     @EnvironmentObject var acccountDetailScreenViewModelObject: AccountDetailViewScreenViewModel
     var noteData: [String: Note] = [:]
+    @State var isPopoverVisible: Bool = false
+    @Binding var propagateClick : Int
+    @State var isSelfPopupTriggered = false
     
     var body: some View {
-        VStack(spacing: 5){
+        VStack(spacing: 0){
             HStack {
                 Text("\(BasicHelper.getInitials(from: acccountDetailScreenViewModelObject.noteData.note_map_by_id[noteId]?.creator ?? ""))")
-                    .frame(width: 18.49, height:17.83)
-                    .font(.custom("Nunito-Bold", size: 5.24))
+                    .frame(width: 18, height:18)
+                    .font(.custom("Nunito-Bold", size: 6))
                     .foregroundColor(.black)
                     .background(Color("UserBubble"))
                     .clipShape(RoundedRectangle(cornerRadius: 26))
@@ -116,17 +123,24 @@ struct NoteCardView: View {
                 
                 Spacer()
                 
-                HStack(spacing: 0) {
+                HStack(spacing: 0){
                     Text("\(BasicHelper.getFormattedDateForCard(from: acccountDetailScreenViewModelObject.noteData.note_map_by_id[noteId]!.last_modified_time))")
+                        .font(.custom("Nunito-Light",size: 12))
+                        .foregroundColor(Color("TextPrimary"))
+                        .accessibilityIdentifier("txt_account_detail_note_last_modified_time")
+                    
+                    
+                    Button{
+                        isSelfPopupTriggered = true
+                        isPopoverVisible.toggle()
+                    } label: {
+                        Image("DotsThreeOutline")
+                            .frame(width: 16, height: 16)
+                            .padding(10)
+                            .foregroundColor(Color("TextPrimary"))
+                    }
+                    .accessibilityIdentifier("img_account_detail_note_more_\(noteId)")
                 }
-                .font(.custom("Nunito-Light",size: 12))
-                .foregroundColor(Color("TextPrimary"))
-                .accessibilityIdentifier("txt_account_detail_note_last_modified_time")
-                
-                Image("DotsThreeOutline")
-                    .frame(width: 16, height: 16)
-                    .foregroundColor(Color("TextPrimary"))
-                    .accessibilityIdentifier("img_account_detail_note_more")
             }
             Text("\(acccountDetailScreenViewModelObject.noteData.note_map_by_id[noteId]?.text_preview ?? "")")
                 .font(.custom("Nunito-Medium",size: 14))
@@ -134,13 +148,51 @@ struct NoteCardView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .multilineTextAlignment(.leading)
                 .accessibilityIdentifier("txt_account_detail_note_text")
+                .padding(EdgeInsets(top: 6, leading: 0, bottom: 0, trailing: 10))
         }
-        .padding(14)
+        .padding(EdgeInsets(top: 5, leading: 15, bottom: 15, trailing: 5))
         .cornerRadius(5)
         .background(Color("CardBackground"))
         .overlay(
             RoundedRectangle(cornerRadius: 5)
                 .stroke(Color("CardBorder"), lineWidth: 1)
         )
+        .overlay(alignment: .topTrailing){
+            if isPopoverVisible {
+                VStack {
+                    HStack{
+                        Image("DeleteIcon")
+                            .frame(width: 20, height: 20)
+                        Text("Delete")
+                            .font(.custom("Nunito-SemiBold",size: 16))
+                            .foregroundColor(Color("TextPrimary"))
+                    }
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        isPopoverVisible.toggle()
+                        acccountDetailScreenViewModelObject.deleteNote(accountId: accountId, noteId: noteId)
+                    }
+                }
+                .padding(10)
+                .cornerRadius(4)
+                .frame(width: 100, height: 50)
+                .background(Color("CardBackground"))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 4)
+                        .stroke(Color("CardBorder"), lineWidth: 1)
+                )
+                .offset(x: -14, y: 32)
+            }
+        }
+        .onChange(of: propagateClick){_ in
+            // onChange to hide Popover for events triggered by other cards or screen
+            
+            if(isSelfPopupTriggered){
+                // Don't hide popover if event trigged by self
+                isSelfPopupTriggered = false
+            }else{
+                isPopoverVisible = false
+            }
+        }
     }
 }

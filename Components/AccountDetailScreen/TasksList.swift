@@ -12,7 +12,7 @@ struct TasksList: View {
     let accountName: String
     
     @EnvironmentObject var acccountDetailScreenViewModelObject: AccountDetailViewScreenViewModel
-    @State private var showOverlay = false
+    @Binding var propagateClick : Int
     
     var body: some View {
         VStack(spacing: 0) {
@@ -78,7 +78,7 @@ struct TasksList: View {
                 VStack{
                     ForEach(self.acccountDetailScreenViewModelObject.taskData.task_ids, id: \.self){ id in
                         if self.acccountDetailScreenViewModelObject.taskData.task_map_by_id[id] != nil{
-                            TaskCardView(taskId: id)
+                            TaskCardView(taskId: id, accountId: accountId, propagateClick: $propagateClick)
                         }
                         
                         
@@ -94,15 +94,19 @@ struct TasksList: View {
 
 struct TaskCardView: View {
     let taskId: String
+    let accountId: String
     @EnvironmentObject var acccountDetailScreenViewModelObject: AccountDetailViewScreenViewModel
     var taskData: [String: Task] = [:]
+    @State var isPopoverVisible: Bool = false
+    @Binding var propagateClick : Int
+    @State var isSelfPopupTriggered = false
     
     var body: some View {
-        VStack(spacing: 5){
+        VStack(spacing: 0){
             HStack {
                 Text("\(BasicHelper.getInitials(from: acccountDetailScreenViewModelObject.taskData.task_map_by_id[taskId]?.creator_name ?? ""))")
                     .frame(width: 18, height:18)
-                    .font(.custom("Nunito-Bold", size: 5.24))
+                    .font(.custom("Nunito-Bold", size: 6))
                     .foregroundColor(.black)
                     .background(Color("UserBubble"))
                     .clipShape(RoundedRectangle(cornerRadius: 26))
@@ -116,18 +120,24 @@ struct TaskCardView: View {
                 
                 Spacer()
                 
-                HStack(spacing: 0) {
+                HStack(spacing: 0){
                     Text("\(BasicHelper.getFormattedDateForCard(from: acccountDetailScreenViewModelObject.taskData.task_map_by_id[taskId]!.last_modified_time))")
+                        .font(.custom("Nunito-Light",size: 12))
+                        .tracking(0.5)
+                        .foregroundColor(Color("TextPrimary"))
+                        .accessibilityIdentifier("txt_account_detail_task_last_modified_time")
+                    
+                    Button{
+                        isSelfPopupTriggered = true
+                        isPopoverVisible.toggle()
+                    } label: {
+                        Image("DotsThreeOutline")
+                            .frame(width: 16, height: 16)
+                            .padding(10)
+                            .foregroundColor(Color("TextPrimary"))
+                    }
+                    .accessibilityIdentifier("btn_account_detail_task_more_\(taskId)")
                 }
-                .font(.custom("Nunito-Light",size: 12))
-                .tracking(0.5)
-                .foregroundColor(Color("TextPrimary"))
-                .accessibilityIdentifier("txt_account_detail_task_last_modified_time")
-                
-                Image("DotsThreeOutline")
-                    .frame(width: 16, height: 16)
-                    .foregroundColor(Color("TextPrimary"))
-                    .accessibilityIdentifier("img_account_detail_task_more_\(taskId)")
             }
             Text("\(acccountDetailScreenViewModelObject.taskData.task_map_by_id[taskId]?.description ?? "")")
                 .font(.custom("Nunito-Medium",size: 14))
@@ -135,7 +145,7 @@ struct TaskCardView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .multilineTextAlignment(.leading)
                 .accessibilityIdentifier("txt_account_detail_task_description")
-                .padding(.top, 6)
+                .padding(EdgeInsets(top: 6, leading: 0, bottom: 0, trailing: 10))
             
             HStack(alignment: .center){
                 Text("Assign to")
@@ -168,13 +178,50 @@ struct TaskCardView: View {
             .padding(.top, 12)
             
         }
-        .padding(14)
+        .padding(EdgeInsets(top: 5, leading: 15, bottom: 15, trailing: 5))
         .cornerRadius(5)
         .background(Color("CardBackground"))
         .overlay(
             RoundedRectangle(cornerRadius: 5)
                 .stroke(Color("CardBorder"), lineWidth: 1)
         )
+        .overlay(alignment: .topTrailing){
+            if isPopoverVisible {
+                VStack {
+                    HStack{
+                        Image("DeleteIcon")
+                            .frame(width: 20, height: 20)
+                        Text("Delete")
+                            .font(.custom("Nunito-SemiBold",size: 16))
+                            .foregroundColor(Color("TextPrimary"))
+                    }
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        isPopoverVisible.toggle()
+                        acccountDetailScreenViewModelObject.deleteTask(accountId: accountId, taskId: taskId)
+                    }
+                }
+                .padding(10)
+                .cornerRadius(4)
+                .frame(width: 100, height: 50)
+                .background(Color("CardBackground"))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 4)
+                        .stroke(Color("CardBorder"), lineWidth: 1)
+                )
+                .offset(x: -14, y: 32)
+            }
+        }
+        .onChange(of: propagateClick){_ in
+            // onChange to hide Popover for events triggered by other cards or screen
+            
+            if(isSelfPopupTriggered){
+                // Don't hide popover if event trigged by self
+                isSelfPopupTriggered = false
+            }else{
+                isPopoverVisible = false
+            }
+        }
         
     }
 }
