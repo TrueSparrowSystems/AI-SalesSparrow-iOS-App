@@ -1,63 +1,65 @@
 //
-//  NoteList.swift
+//  TasksList.swift
 //  SalesSparrow
 //
-//  Created by Kartik Kapgate on 10/08/23.
+//  Created by Mohit Charkha on 22/08/23.
 //
 
 import SwiftUI
 
-struct NotesList: View {
+struct TasksList: View {
     let accountId: String
     let accountName: String
     
     @EnvironmentObject var acccountDetailScreenViewModelObject: AccountDetailViewScreenViewModel
     @State private var showOverlay = false
     @State var createNoteScreenActivated = false
-        
+    
     var body: some View {
         VStack(spacing: 0) {
             HStack{
-                Image("NoteIcon")
+                Image("TasksIcon")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 20.0, height: 20.0)
-                    .accessibilityIdentifier("img_account_detail_note_icon")
+                    .accessibilityIdentifier("img_account_detail_task_icon")
                 
-                Text("Notes")
+                Text("Tasks")
                     .font(.custom("Nunito-SemiBold",size: 16))
                     .foregroundColor(Color("TextPrimary"))
-                    .accessibilityIdentifier("txt_account_detail_notes_title")
+                    .accessibilityIdentifier("txt_account_detail_tasks_title")
                 
                 Spacer()
                 
+                //TODO: replace the navigation to create task once ready
                 NavigationLink(destination: CreateNoteScreen(accountId: accountId, accountName: accountName, isAccountSelectable: false)
                 ){
                     HStack{
                         Image("AddIcon")
                             .resizable()
                             .frame(width: 20.0, height: 20.0)
-                            .accessibilityIdentifier("img_account_detail_create_note_icon")
+                            .accessibilityIdentifier("img_account_detail_create_task_icon")
                     }
                     .frame(width: 40, height: 30, alignment: .bottomLeading)
                     .padding(.bottom, 10)
                     
                 }
-                .accessibilityIdentifier("btn_account_detail_add_note")
+                .accessibilityIdentifier("btn_account_detail_add_task")
             }
+            
             if acccountDetailScreenViewModelObject.isLoading {
                 ProgressView()
                     .tint(Color("LoginButtonSecondary"))
             }
-            else if acccountDetailScreenViewModelObject.noteData.note_ids.isEmpty {
+            else if acccountDetailScreenViewModelObject.taskData.task_ids.isEmpty {
                 VStack(spacing: 0) {
                     HStack {
                         Spacer()
-                        Text("Add notes and sync with your salesforce account")
+                        Text("Add tasks, set due dates and assign to your team")
                             .font(.custom("Nunito-Regular",size: 12))
                             .foregroundColor(Color("TextPrimary"))
                             .padding(EdgeInsets(top: 12, leading: 14, bottom: 12, trailing: 14))
-                            .accessibilityIdentifier("txt_account_detail_add_note_text")
+                            .accessibilityIdentifier("txt_account_detail_add_task_text")
                         
                         Spacer()
                     }
@@ -75,65 +77,93 @@ struct NotesList: View {
                 Spacer()
             } else {
                 VStack{
-                    ForEach(self.acccountDetailScreenViewModelObject.noteData.note_ids, id: \.self){ id in
-                        NavigationLink(destination: NoteDetailScreen(noteId: id, accountId: accountId, accountName: accountName)
-                        ){
-                            if self.acccountDetailScreenViewModelObject.noteData.note_map_by_id[id] != nil{
-                                NoteCardView(noteId: id)
-                            }
+                    ForEach(self.acccountDetailScreenViewModelObject.taskData.task_ids, id: \.self){ id in
+                        if self.acccountDetailScreenViewModelObject.taskData.task_map_by_id[id] != nil{
+                            TaskCardView(taskId: id)
+                                .accessibilityIdentifier("task_card_\(id)")
                         }
-                        .accessibilityIdentifier("note_card_\(id)")
+                        
+                        
                     }
                 }
                 .padding(.trailing)
             }
         }.onAppear {
-            acccountDetailScreenViewModelObject.fetchNotes(accountId: accountId)
+            acccountDetailScreenViewModelObject.fetchTasks(accountId: accountId)
         }
     }
 }
 
-struct NoteCardView: View {
-    let noteId: String
+struct TaskCardView: View {
+    let taskId: String
     @EnvironmentObject var acccountDetailScreenViewModelObject: AccountDetailViewScreenViewModel
-    var noteData: [String: Note] = [:]
+    var taskData: [String: Task] = [:]
     
     var body: some View {
         VStack(spacing: 5){
             HStack {
-                Text("\(BasicHelper.getInitials(from: acccountDetailScreenViewModelObject.noteData.note_map_by_id[noteId]?.creator ?? ""))")
-                    .frame(width: 18.49, height:17.83)
+                Text("\(BasicHelper.getInitials(from: acccountDetailScreenViewModelObject.taskData.task_map_by_id[taskId]?.creator_name ?? ""))")
+                    .frame(width: 18, height:18)
                     .font(.custom("Nunito-Bold", size: 5.24))
                     .foregroundColor(.black)
                     .background(Color("UserBubble"))
                     .clipShape(RoundedRectangle(cornerRadius: 26))
-                    .accessibilityIdentifier("txt_account_detail_note_creator_initials")
+                    .accessibilityIdentifier("txt_account_detail_task_creator_initials")
                 
-                Text("\(acccountDetailScreenViewModelObject.noteData.note_map_by_id[noteId]?.creator ?? "")")
+                Text("\(acccountDetailScreenViewModelObject.taskData.task_map_by_id[taskId]?.creator_name ?? "")")
                     .font(.custom("Nunito-Medium",size: 14))
+                    .tracking(0.6)
                     .foregroundColor(Color("TextPrimary"))
-                    .accessibilityIdentifier("txt_account_detail_note_creator")
+                    .accessibilityIdentifier("txt_account_detail_task_creator")
                 
                 Spacer()
                 
                 HStack(spacing: 0) {
-                    Text("\(BasicHelper.getFormattedDateForCard(from: acccountDetailScreenViewModelObject.noteData.note_map_by_id[noteId]!.last_modified_time))")
+                    Text("\(BasicHelper.getFormattedDateForCard(from: acccountDetailScreenViewModelObject.taskData.task_map_by_id[taskId]!.last_modified_time))")
                 }
                 .font(.custom("Nunito-Light",size: 12))
+                .tracking(0.5)
                 .foregroundColor(Color("TextPrimary"))
-                .accessibilityIdentifier("txt_account_detail_note_last_modified_time")
+                .accessibilityIdentifier("txt_account_detail_task_last_modified_time")
                 
                 Image("DotsThreeOutline")
                     .frame(width: 16, height: 16)
                     .foregroundColor(Color("TextPrimary"))
-                    .accessibilityIdentifier("img_account_detail_note_more")
+                    .accessibilityIdentifier("img_account_detail_task_more")
             }
-            Text("\(acccountDetailScreenViewModelObject.noteData.note_map_by_id[noteId]?.text_preview ?? "")")
+            Text("\(acccountDetailScreenViewModelObject.taskData.task_map_by_id[taskId]?.description ?? "")")
                 .font(.custom("Nunito-Medium",size: 14))
                 .foregroundColor(Color("TextPrimary"))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .multilineTextAlignment(.leading)
-                .accessibilityIdentifier("txt_account_detail_note_text")
+                .accessibilityIdentifier("txt_account_detail_task_text")
+                .padding(.top, 6)
+            
+            HStack(alignment: .center){
+                Text("Assign to ")
+                    .font(.custom("Nunito-Regular",size: 12))
+                    .foregroundColor(Color("TermsPrimary"))
+                    .tracking(0.5) + Text(acccountDetailScreenViewModelObject.taskData.task_map_by_id[taskId]?.crm_organization_user_name ?? "")
+                    .font(.custom("Nunito-Regular",size: 12))
+                    .foregroundColor(Color("RedHighlight"))
+                    .tracking(0.5)
+                
+                Divider()
+                    .frame(width: 0, height: 16)
+                    .foregroundColor(Color("TermsPrimary").opacity(0.1))
+                
+                Image("CalendarCheck")
+                    .frame(width: 16, height: 16)
+                
+                Text("Due \("04/07/2023")")
+                    .font(.custom("Nunito-Regular",size: 12))
+                    .foregroundColor(Color("TermsPrimary"))
+                    .tracking(0.5)
+                
+                Spacer()
+            }
+            .padding(.top, 12)
+            
         }
         .padding(14)
         .cornerRadius(5)
@@ -142,5 +172,6 @@ struct NoteCardView: View {
             RoundedRectangle(cornerRadius: 5)
                 .stroke(Color("CardBorder"), lineWidth: 1)
         )
+        
     }
 }

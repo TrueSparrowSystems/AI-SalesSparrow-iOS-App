@@ -22,6 +22,9 @@ struct AccountDetailsScreen: View {
                 
                 NotesList(accountId: accountId, accountName: accountName)
                 
+                TasksList(accountId: accountId, accountName: accountName)
+                
+                
                 Spacer()
             }
         }
