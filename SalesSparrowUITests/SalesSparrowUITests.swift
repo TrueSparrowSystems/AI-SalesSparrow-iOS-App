@@ -52,7 +52,7 @@ final class SalesSparrowUITests: XCTestCase {
         XCTAssertTrue(((textFieldSearchAccountVal?.isEmpty) != nil))
         
         // modal should open with default data
-        let accountName = "Test Data 1"
+        let accountName = "Test Account 1"
         let btnSearchAccountNameBtn = app.buttons["btn_search_account_name_\(accountName)"]
         XCTAssertTrue(btnSearchAccountNameBtn.waitForExistence(timeout: TimeInterval(timeout)))
         // Account row should be clickable
@@ -127,7 +127,7 @@ final class SalesSparrowUITests: XCTestCase {
         XCTAssertTrue(selectAccount.isEnabled)
         selectAccount.tap()
         
-        let accountName = "Test Data 1"
+        let accountName = "Test Account 1"
         let searchAccountBtn = app.buttons["btn_search_account_name_\(accountName)"]
         XCTAssertTrue(searchAccountBtn.waitForExistence(timeout: TimeInterval(timeout)))
         // Account row should be clickable

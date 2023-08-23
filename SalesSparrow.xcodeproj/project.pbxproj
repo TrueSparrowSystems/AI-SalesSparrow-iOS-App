@@ -141,7 +141,7 @@
 		6DBB506B2A77A45F00B58F88 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 6DBB506A2A77A45E00B58F88 /* LICENSE */; };
 		6DBB506D2A77A47200B58F88 /* CODE_OF_CONDUCT.md in Resources */ = {isa = PBXBuildFile; fileRef = 6DBB506C2A77A47200B58F88 /* CODE_OF_CONDUCT.md */; };
 		6DBB506F2A77A49400B58F88 /* CONTRIBUTING.md in Resources */ = {isa = PBXBuildFile; fileRef = 6DBB506E2A77A49400B58F88 /* CONTRIBUTING.md */; };
-		6DBB50732A77A69100B58F88 /* BaseRepositortTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBB50722A77A69100B58F88 /* BaseRepositortTests.swift */; };
+		6DBB50732A77A69100B58F88 /* BaseRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBB50722A77A69100B58F88 /* BaseRepositoryTests.swift */; };
 		6DBB507A2A77C58300B58F88 /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBB50782A77C05800B58F88 /* LoginScreen.swift */; };
 		6DC43C4B2A78EC01002162FE /* TermsBottomStrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC43C4A2A78EC01002162FE /* TermsBottomStrip.swift */; };
 		6DC43C522A7A69E1002162FE /* DeviceSettingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC43C512A7A69E0002162FE /* DeviceSettingManager.swift */; };
@@ -264,7 +264,7 @@
 		6DBB506A2A77A45E00B58F88 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		6DBB506C2A77A47200B58F88 /* CODE_OF_CONDUCT.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CODE_OF_CONDUCT.md; sourceTree = "<group>"; };
 		6DBB506E2A77A49400B58F88 /* CONTRIBUTING.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CONTRIBUTING.md; sourceTree = "<group>"; };
-		6DBB50722A77A69100B58F88 /* BaseRepositortTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRepositortTests.swift; sourceTree = "<group>"; };
+		6DBB50722A77A69100B58F88 /* BaseRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRepositoryTests.swift; sourceTree = "<group>"; };
 		6DBB50782A77C05800B58F88 /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		6DC43C4A2A78EC01002162FE /* TermsBottomStrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsBottomStrip.swift; sourceTree = "<group>"; };
 		6DC43C512A7A69E0002162FE /* DeviceSettingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceSettingManager.swift; sourceTree = "<group>"; };
@@ -459,7 +459,7 @@
 			isa = PBXGroup;
 			children = (
 				6D8C7CEF2A779A9A005D597E /* SalesSparrowTests.swift */,
-				6DBB50722A77A69100B58F88 /* BaseRepositortTests.swift */,
+				6DBB50722A77A69100B58F88 /* BaseRepositoryTests.swift */,
 			);
 			path = SalesSparrowTests;
 			sourceTree = "<group>";
@@ -1039,7 +1039,7 @@
 				6DD618B32A80E504007FA929 /* MockResponse.swift in Sources */,
 				6DD618B52A80EB10007FA929 /* Environments.swift in Sources */,
 				6D8C7CF02A779A9A005D597E /* SalesSparrowTests.swift in Sources */,
-				6DBB50732A77A69100B58F88 /* BaseRepositortTests.swift in Sources */,
+				6DBB50732A77A69100B58F88 /* BaseRepositoryTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

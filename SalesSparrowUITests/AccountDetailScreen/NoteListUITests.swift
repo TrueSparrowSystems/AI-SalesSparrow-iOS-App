@@ -10,7 +10,7 @@ import XCTest
 
 final class AccountDetailNoteListUITests: XCTestCase {
     
-    func openAccountDetailUsingSearch(app: XCUIApplication,accountName: String = "Test Data 1") {
+    func openAccountDetailUsingSearch(app: XCUIApplication,accountName: String = "Test Account 1") {
         let timeout = 2
         let searchAccountButton = app.images["btn_search_account"]
         XCTAssertTrue(searchAccountButton.waitForExistence(timeout: TimeInterval(timeout)))
@@ -97,7 +97,7 @@ final class AccountDetailNoteListUITests: XCTestCase {
         // Open the account detail using the helper function
         openAccountDetailUsingSearch(app: app)
         
-        let firstNoteCard = app.buttons["note_card_100"] // Replace "100" with the appropriate index
+        let firstNoteCard = app.buttons["note_card_note_100"] // Replace "100" with the appropriate index
         // Check if the note card exists
         XCTAssertTrue(firstNoteCard.waitForExistence(timeout: TimeInterval(timeout)))
         // Tap the note card to view it
@@ -152,7 +152,7 @@ final class AccountDetailNoteListUITests: XCTestCase {
         // save should not be clickable
         XCTAssertTrue(!saveButton.isEnabled)
         
-        let accountName = "Test Data 1"
+        let accountName = "Test Account 1"
         let selectedAccount = app.staticTexts["cn_selected_account"]
         XCTAssertTrue(selectedAccount.waitForExistence(timeout: TimeInterval(timeout)))
         // Get the text from the selectedAccount element

@@ -76,9 +76,11 @@ struct TasksList: View {
                 Spacer()
             } else {
                 VStack{
-                    ForEach(self.acccountDetailScreenViewModelObject.taskData.task_ids, id: \.self){ id in
-                        if self.acccountDetailScreenViewModelObject.taskData.task_map_by_id[id] != nil{
-                            TaskCardView(taskId: id, accountId: accountId, propagateClick: $propagateClick)
+                    let taskIdsArray = self.acccountDetailScreenViewModelObject.taskData.task_ids
+                    ForEach(0 ..< taskIdsArray.count){index in
+                        let taskId = taskIdsArray[index]
+                        if ( self.acccountDetailScreenViewModelObject.taskData.task_map_by_id[taskId] != nil) {
+                            TaskCardView(taskId: taskId, accountId: accountId, taskIndex: index, propagateClick: $propagateClick)
                         }
                         
                         
@@ -95,6 +97,7 @@ struct TasksList: View {
 struct TaskCardView: View {
     let taskId: String
     let accountId: String
+    let taskIndex: Int
     @EnvironmentObject var acccountDetailScreenViewModelObject: AccountDetailViewScreenViewModel
     var taskData: [String: Task] = [:]
     @State var isPopoverVisible: Bool = false
@@ -136,7 +139,7 @@ struct TaskCardView: View {
                             .padding(10)
                             .foregroundColor(Color("TextPrimary"))
                     }
-                    .accessibilityIdentifier("btn_account_detail_task_more_\(taskId)")
+                    .accessibilityIdentifier("btn_account_detail_task_more_\(taskIndex)")
                 }
             }
             Text("\(acccountDetailScreenViewModelObject.taskData.task_map_by_id[taskId]?.description ?? "")")
@@ -144,7 +147,7 @@ struct TaskCardView: View {
                 .foregroundColor(Color("TextPrimary"))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .multilineTextAlignment(.leading)
-                .accessibilityIdentifier("txt_account_detail_task_description")
+                .accessibilityIdentifier("txt_account_detail_task_description_\(taskIndex)")
                 .padding(EdgeInsets(top: 6, leading: 0, bottom: 0, trailing: 10))
             
             HStack(alignment: .center){
@@ -188,22 +191,23 @@ struct TaskCardView: View {
         .overlay(alignment: .topTrailing){
             if isPopoverVisible {
                 VStack {
-                    HStack{
-                        Image("DeleteIcon")
-                            .frame(width: 20, height: 20)
-                        Text("Delete")
-                            .font(.custom("Nunito-SemiBold",size: 16))
-                            .foregroundColor(Color("TextPrimary"))
-                    }
-                    .contentShape(Rectangle())
-                    .onTapGesture {
+                    Button(action: {
                         isPopoverVisible.toggle()
                         acccountDetailScreenViewModelObject.deleteTask(accountId: accountId, taskId: taskId)
+                    }){
+                        HStack{
+                            Image("DeleteIcon")
+                                .frame(width: 20, height: 20)
+                            Text("Delete")
+                                .font(.custom("Nunito-SemiBold",size: 16))
+                                .foregroundColor(Color("TextPrimary"))
+                        }
                     }
+                    .accessibilityIdentifier("btn_account_detail_delete_task_\(taskIndex)")
                 }
                 .padding(10)
                 .cornerRadius(4)
-                .frame(width: 100, height: 50)
+                .frame(width: 100, height: 40)
                 .background(Color("CardBackground"))
                 .overlay(
                     RoundedRectangle(cornerRadius: 4)

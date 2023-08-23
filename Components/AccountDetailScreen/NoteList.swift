@@ -76,15 +76,18 @@ struct NotesList: View {
                 Spacer()
             } else {
                 VStack{
-                    ForEach(self.acccountDetailScreenViewModelObject.noteData.note_ids, id: \.self){ id in
-                        NavigationLink(destination: NoteDetailScreen(noteId: id, accountId: accountId, accountName: accountName)
+                    let noteIdsArray = self.acccountDetailScreenViewModelObject.noteData.note_ids
+                    ForEach(0 ..< noteIdsArray.count){index in
+                        let noteId = noteIdsArray[index]
+                        NavigationLink(destination: NoteDetailScreen(noteId: noteId, accountId: accountId, accountName: accountName)
                         ){
-                            if self.acccountDetailScreenViewModelObject.noteData.note_map_by_id[id] != nil{
-                                NoteCardView(noteId: id, accountId: accountId, propagateClick: $propagateClick)
+                            if self.acccountDetailScreenViewModelObject.noteData.note_map_by_id[noteId] != nil{
+                                NoteCardView(noteId: noteId, accountId: accountId,
+                                             noteIndex: index,propagateClick: $propagateClick)
                             }
                         }
                         .buttonStyle(.plain)
-                        .accessibilityIdentifier("note_card_\(id)")
+                        .accessibilityIdentifier("note_card_\(noteId)")
                     }
                 }
                 .padding(.trailing)
@@ -99,6 +102,7 @@ struct NotesList: View {
 struct NoteCardView: View {
     let noteId: String
     let accountId: String
+    let noteIndex: Int
     @EnvironmentObject var acccountDetailScreenViewModelObject: AccountDetailViewScreenViewModel
     var noteData: [String: Note] = [:]
     @State var isPopoverVisible: Bool = false
@@ -139,7 +143,7 @@ struct NoteCardView: View {
                             .padding(10)
                             .foregroundColor(Color("TextPrimary"))
                     }
-                    .accessibilityIdentifier("img_account_detail_note_more_\(noteId)")
+                    .accessibilityIdentifier("btn_account_detail_note_more_\(noteIndex)")
                 }
             }
             Text("\(acccountDetailScreenViewModelObject.noteData.note_map_by_id[noteId]?.text_preview ?? "")")
@@ -147,7 +151,7 @@ struct NoteCardView: View {
                 .foregroundColor(Color("TextPrimary"))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .multilineTextAlignment(.leading)
-                .accessibilityIdentifier("txt_account_detail_note_text")
+                .accessibilityIdentifier("txt_account_detail_note_text_\(noteIndex)")
                 .padding(EdgeInsets(top: 6, leading: 0, bottom: 0, trailing: 10))
         }
         .padding(EdgeInsets(top: 5, leading: 15, bottom: 15, trailing: 5))
@@ -160,22 +164,23 @@ struct NoteCardView: View {
         .overlay(alignment: .topTrailing){
             if isPopoverVisible {
                 VStack {
-                    HStack{
-                        Image("DeleteIcon")
-                            .frame(width: 20, height: 20)
-                        Text("Delete")
-                            .font(.custom("Nunito-SemiBold",size: 16))
-                            .foregroundColor(Color("TextPrimary"))
-                    }
-                    .contentShape(Rectangle())
-                    .onTapGesture {
+                    Button(action: {
                         isPopoverVisible.toggle()
                         acccountDetailScreenViewModelObject.deleteNote(accountId: accountId, noteId: noteId)
+                    }){
+                        HStack{
+                            Image("DeleteIcon")
+                                .frame(width: 20, height: 20)
+                            Text("Delete")
+                                .font(.custom("Nunito-SemiBold",size: 16))
+                                .foregroundColor(Color("TextPrimary"))
+                        }
                     }
+                    .accessibilityIdentifier("btn_account_detail_delete_note_\(noteIndex)")
                 }
                 .padding(10)
                 .cornerRadius(4)
-                .frame(width: 100, height: 50)
+                .frame(width: 100, height: 40)
                 .background(Color("CardBackground"))
                 .overlay(
                     RoundedRectangle(cornerRadius: 4)

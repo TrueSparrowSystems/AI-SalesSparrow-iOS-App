@@ -9,7 +9,7 @@ import XCTest
 
 final class AccountDetailTaskListUITests: XCTestCase {
     
-    func openAccountDetailUsingSearch(app: XCUIApplication,accountName: String = "Test Data 1") {
+    func openAccountDetailUsingSearch(app: XCUIApplication,accountName: String = "Test Account 1") {
         let timeout = 2
         let searchAccountButton = app.images["btn_search_account"]
         XCTAssertTrue(searchAccountButton.waitForExistence(timeout: TimeInterval(timeout)))
