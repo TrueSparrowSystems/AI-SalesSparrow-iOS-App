@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		01069F182A83641C0003F8F5 /* AccountDetailsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01069F172A83641C0003F8F5 /* AccountDetailsScreen.swift */; };
+		014E34A42A973C0000288602 /* CreateNoteUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014E34A32A973C0000288602 /* CreateNoteUITests.swift */; };
 		0174DEAA2A8D1989004C5C3C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0174DEA92A8D1989004C5C3C /* GoogleService-Info.plist */; };
 		0174DEAC2A8D1996004C5C3C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0174DEAB2A8D1996004C5C3C /* GoogleService-Info.plist */; };
 		019595BB2A83CD76008425AD /* SalesSparrowDevApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019595BA2A83CD76008425AD /* SalesSparrowDevApp.swift */; };
@@ -203,6 +204,7 @@
 
 /* Begin PBXFileReference section */
 		01069F172A83641C0003F8F5 /* AccountDetailsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailsScreen.swift; sourceTree = "<group>"; };
+		014E34A32A973C0000288602 /* CreateNoteUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNoteUITests.swift; sourceTree = "<group>"; };
 		0174DEA92A8D1989004C5C3C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0174DEAB2A8D1996004C5C3C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		019595B82A83CD76008425AD /* SalesSparrowDev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SalesSparrowDev.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -498,6 +500,7 @@
 				6D8C7CF92A779A9A005D597E /* SalesSparrowUITests.swift */,
 				6D8C7CFB2A779A9A005D597E /* SalesSparrowUITestsLaunchTests.swift */,
 				6DD0BD572A95F23B008B30E3 /* UserAccountDetailUITests.swift */,
+				014E34A32A973C0000288602 /* CreateNoteUITests.swift */,
 			);
 			path = SalesSparrowUITests;
 			sourceTree = "<group>";
@@ -1094,6 +1097,7 @@
 				6DD618B42A80E504007FA929 /* MockResponse.swift in Sources */,
 				6DD0BD582A95F23B008B30E3 /* UserAccountDetailUITests.swift in Sources */,
 				6DD618B62A80EB11007FA929 /* Environments.swift in Sources */,
+				014E34A42A973C0000288602 /* CreateNoteUITests.swift in Sources */,
 				6DD0BD5B2A95F323008B30E3 /* NoteListUITests.swift in Sources */,
 				6DD0BD5D2A95F4A1008B30E3 /* TasksListUITests.swift in Sources */,
 				6D8C7CFC2A779A9A005D597E /* SalesSparrowUITestsLaunchTests.swift in Sources */,

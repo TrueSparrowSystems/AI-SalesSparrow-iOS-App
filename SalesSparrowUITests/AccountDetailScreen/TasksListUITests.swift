@@ -61,7 +61,7 @@ final class AccountDetailTaskListUITests: XCTestCase {
         
         XCTAssertTrue(app.staticTexts["txt_account_detail_task_creator"].waitForExistence(timeout: TimeInterval(timeout)))
         
-        XCTAssertTrue(app.staticTexts["txt_account_detail_task_description"].waitForExistence(timeout: TimeInterval(timeout)))
+        XCTAssertTrue(app.staticTexts["txt_account_detail_task_description_0"].waitForExistence(timeout: TimeInterval(timeout)))
         
         XCTAssertTrue(app.staticTexts["txt_account_detail_task_assignee"].waitForExistence(timeout: TimeInterval(timeout)))
         

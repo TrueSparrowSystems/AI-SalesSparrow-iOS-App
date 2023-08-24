@@ -141,6 +141,16 @@ class MockResponse {
                 ],
             ]
         ],
+        
+        "POST /v1/suggestions/crm-actions": [
+            "default":[
+                "success": "true",
+                "statusCode": 200,
+                "data":[
+                    "text": "some random text"
+                ],
+            ]
+        ],
 
         "GET /v1/accounts/account_1/notes/note_100": [
             "default":[

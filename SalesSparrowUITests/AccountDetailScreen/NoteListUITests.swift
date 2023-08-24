@@ -62,7 +62,7 @@ final class AccountDetailNoteListUITests: XCTestCase {
         
         XCTAssertTrue(app.staticTexts["txt_account_detail_note_creator"].waitForExistence(timeout: TimeInterval(timeout)))
         
-        XCTAssertTrue(app.staticTexts["txt_account_detail_note_text"].waitForExistence(timeout: TimeInterval(timeout)))
+        XCTAssertTrue(app.staticTexts["txt_account_detail_note_text_0"].waitForExistence(timeout: TimeInterval(timeout)))
         
         let backButton = app.buttons["btn_account_detail_back"]
         XCTAssertTrue(backButton.waitForExistence(timeout: TimeInterval(timeout)))
