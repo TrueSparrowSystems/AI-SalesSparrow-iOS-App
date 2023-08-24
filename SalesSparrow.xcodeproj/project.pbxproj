@@ -116,6 +116,9 @@
 		6D2CB5192A77CF570057C73F /* Nunito-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D2CB5092A77CF570057C73F /* Nunito-Black.ttf */; };
 		6D2CB51A2A77CF570057C73F /* Nunito-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D2CB50A2A77CF570057C73F /* Nunito-BlackItalic.ttf */; };
 		6D3E84802A77E83E00E9FB83 /* LoginScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E847F2A77E83E00E9FB83 /* LoginScreenViewModel.swift */; };
+		6D59FBFD2A97953800865BDD /* AccountListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D59FBFC2A97953800865BDD /* AccountListViewModel.swift */; };
+		6D59FBFE2A97953800865BDD /* AccountListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D59FBFC2A97953800865BDD /* AccountListViewModel.swift */; };
+		6D59FC002A97A54800865BDD /* AccountListUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D59FBFF2A97A54800865BDD /* AccountListUITests.swift */; };
 		6D7491612A935BC200F61A6F /* AddButtonPopoverComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D7491602A935BC200F61A6F /* AddButtonPopoverComponent.swift */; };
 		6D7491622A935C1200F61A6F /* AddButtonPopoverComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D7491602A935BC200F61A6F /* AddButtonPopoverComponent.swift */; };
 		6D76EF992A97496B009075C7 /* AlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D76EF982A97496B009075C7 /* AlertViewModel.swift */; };
@@ -250,6 +253,8 @@
 		6D2CB5092A77CF570057C73F /* Nunito-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Black.ttf"; sourceTree = "<group>"; };
 		6D2CB50A2A77CF570057C73F /* Nunito-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-BlackItalic.ttf"; sourceTree = "<group>"; };
 		6D3E847F2A77E83E00E9FB83 /* LoginScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenViewModel.swift; sourceTree = "<group>"; };
+		6D59FBFC2A97953800865BDD /* AccountListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountListViewModel.swift; sourceTree = "<group>"; };
+		6D59FBFF2A97A54800865BDD /* AccountListUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountListUITests.swift; sourceTree = "<group>"; };
 		6D7491602A935BC200F61A6F /* AddButtonPopoverComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButtonPopoverComponent.swift; sourceTree = "<group>"; };
 		6D76EF982A97496B009075C7 /* AlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewModel.swift; sourceTree = "<group>"; };
 		6D8C7CD62A779A97005D597E /* SalesSparrow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SalesSparrow.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -496,6 +501,7 @@
 				6D8C7CFB2A779A9A005D597E /* SalesSparrowUITestsLaunchTests.swift */,
 				6DD0BD572A95F23B008B30E3 /* UserAccountDetailUITests.swift */,
 				014E34A32A973C0000288602 /* CreateNoteUITests.swift */,
+				6D59FBFF2A97A54800865BDD /* AccountListUITests.swift */,
 			);
 			path = SalesSparrowUITests;
 			sourceTree = "<group>";
@@ -532,6 +538,7 @@
 				4B13E4EF2A93836700CB24E4 /* UserSearchViewModel.swift */,
 				4B819B4D2A96385700CE6293 /* SuggestTaskViewModel.swift */,
 				6D76EF982A97496B009075C7 /* AlertViewModel.swift */,
+				6D59FBFC2A97953800865BDD /* AccountListViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1009,6 +1016,7 @@
 				6D908DB52A8526EB00F36DCE /* NoteList.swift in Sources */,
 				019595E72A83CE8C008425AD /* Toast.swift in Sources */,
 				019595D72A83CE23008425AD /* CreateNoteScreen.swift in Sources */,
+				6D59FBFE2A97953800865BDD /* AccountListViewModel.swift in Sources */,
 				019595E62A83CE85008425AD /* UIScreenExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1075,6 +1083,7 @@
 				6DC43C562A7A909E002162FE /* CreateNoteScreen.swift in Sources */,
 				6DC43C582A7B802D002162FE /* HomeScreen.swift in Sources */,
 				6D8C7D1A2A779F95005D597E /* ExpandableTextView.swift in Sources */,
+				6D59FBFD2A97953800865BDD /* AccountListViewModel.swift in Sources */,
 				6D8C7D282A77A111005D597E /* MetaEntity.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1101,6 +1110,7 @@
 				6DD0BD5B2A95F323008B30E3 /* NoteListUITests.swift in Sources */,
 				6DD0BD5D2A95F4A1008B30E3 /* TasksListUITests.swift in Sources */,
 				6D8C7CFC2A779A9A005D597E /* SalesSparrowUITestsLaunchTests.swift in Sources */,
+				6D59FC002A97A54800865BDD /* AccountListUITests.swift in Sources */,
 				6DD0BD562A95F0F8008B30E3 /* AccountDetailsUITests.swift in Sources */,
 				6D8C7CFA2A779A9A005D597E /* SalesSparrowUITests.swift in Sources */,
 			);

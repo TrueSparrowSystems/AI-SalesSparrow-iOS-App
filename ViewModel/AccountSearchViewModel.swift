@@ -7,12 +7,6 @@
 
 import Foundation
 
-// A struct that represents the meta data of the account
-struct Account: Identifiable, Codable {
-    let id: String
-    let name: String
-}
-
 // A struct that represents the meta data of the Search account API
 struct SearchAccountStruct: Codable {
     var account_ids: [String]

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HomeScreen: View {
     @State private var showCreateNoteAccountSearchView: Bool = false
+    @StateObject var acccountListViewModelObject = AccountListViewModel()
     @StateObject var acccountSearchViewModelObject = AccountSearchViewModel()
     @StateObject var userSearchViewModelObject = UserSearchViewModel()
     @StateObject var acccountDetailScreenViewModelObject = AccountDetailViewScreenViewModel()
@@ -19,13 +20,12 @@ struct HomeScreen: View {
     
     var body: some View {
         NavigationView {
-            VStack {
+            VStack(spacing: 0) {
                 // Top Bar
                 TopBar()
                 
                 // List of Accounts
-                //                AccountList()
-                Spacer()
+                AccountList()
                 
                 // Bottom Bar with + Button
                 BottomBar()
@@ -41,33 +41,10 @@ struct HomeScreen: View {
         .environmentObject(createNoteViewModel)
         .environmentObject(noteDetailScreenViewModel)
         .environmentObject(suggestTaskViewModel)
+        .environmentObject(acccountListViewModelObject)
     }
 }
 
-struct AccountRowView: View {
-    var account: Account
-    
-    var body: some View {
-        // Account Row
-        HStack {
-            Image("Buildings")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 44.0, height: 44.0)
-            
-            Text(account.name)
-                .font(.custom("Nunito-Regular",size: 16))
-                .fontWeight(.bold)
-            
-            
-            Spacer()
-            
-            Text("\(account.id)")
-                .font(.custom("Nunito-Regular",size: 12))
-            
-        }
-    }
-}
 
 struct HomeScreen_Previews: PreviewProvider {
     static var previews: some View {
