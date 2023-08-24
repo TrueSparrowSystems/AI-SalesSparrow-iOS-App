@@ -17,6 +17,7 @@ struct ContentView: View {
     
     @StateObject var loginScreenViewModel = LoginScreenViewModel()
     @StateObject var toastViewModel = ToastViewModel.shared
+    @StateObject var alertViewModel = AlertViewModel.shared
     
     /// The body of the view
     var body: some View {
@@ -36,6 +37,11 @@ struct ContentView: View {
         }
         .environmentObject(loginScreenViewModel)
         .toastView(toast: $toastViewModel.toast)
+        .overlay(content: {
+            if(alertViewModel.isAlertVisible){
+                AlertModal()
+            }
+        })
     }
     
     

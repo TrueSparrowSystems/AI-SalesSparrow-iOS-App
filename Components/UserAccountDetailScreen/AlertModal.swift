@@ -1,5 +1,5 @@
 //
-//  DisconnectSalesforeModal.swift
+//  AlertModal.swift
 //  SalesSparrow
 //
 //  Created by Kartik Kapgate on 16/08/23.
@@ -7,29 +7,31 @@
 
 import SwiftUI
 
-struct DisconnectSalesforceModal : View{
-    @Binding var disconnectSalesforceModel: Bool
-    @EnvironmentObject var userStateViewModel : UserStateViewModel
+struct AlertModal : View{
     
     var body: some View {
+        
         ZStack{
             Color.black.opacity(0.7)
                 .edgesIgnoringSafeArea(.all)
+                .onTapGesture {
+                    AlertViewModel.shared.dismissAlert()
+                }
             
             VStack (spacing:0) {
                 VStack (spacing: 16) {
-                    Text("**Disconnect Salesforce**")
-                        .font(.system(size: 17))
+                    Text(AlertViewModel.shared.alert?.title ?? "")
+                        .font(.system(size: 17, weight: .bold))
                         .foregroundColor(Color.black)
                         .multilineTextAlignment(.center)
-                        .accessibilityIdentifier("txt_user_account_detail_disconnect_title")
+                        .accessibilityIdentifier("txt_alert_title")
                     
-                    Text("This will **delete your account** and all details associated with it. This is an irreversible process, are you sure you want to do this?")
+                    AlertViewModel.shared.alert?.message
                         .font(.system(size: 13))
                         .foregroundColor(Color.black)
                         .multilineTextAlignment(.center)
                         .fixedSize(horizontal: false, vertical: true)
-                        .accessibilityIdentifier("txt_user_account_detail_disconnect_message")
+                        .accessibilityIdentifier("txt_alert_message")
                 }
                 .padding()
                 
@@ -38,14 +40,14 @@ struct DisconnectSalesforceModal : View{
                 HStack(spacing: 0) {
                     Button(action: {
                         // Handle cancel action
-                        disconnectSalesforceModel = false
+                        AlertViewModel.shared.dismissAlert()
                     }) {
-                        Text("Cancel")
+                        Text(AlertViewModel.shared.alert?.cancelText ?? "Cancel")
                             .font(.system(size: 17, weight: .regular))
                             .foregroundColor(Color("CancelButtonForeground"))
-                            .accessibilityIdentifier("txt_user_account_detail_cancel")
+                            .accessibilityIdentifier("txt_alert_cancel")
                     }
-                    .accessibilityIdentifier("btn_user_account_detail_cancel")
+                    .accessibilityIdentifier("btn_alert_cancel")
                     .padding(.vertical)
                     .frame(maxWidth: .infinity)
                     .overlay(
@@ -55,25 +57,24 @@ struct DisconnectSalesforceModal : View{
                     )
                     
                     Button(action: {
-                        // Handle disconnect action
-                        userStateViewModel.disconnectUser()
-                        // Perform the disconnect process
+                        // handle alert submit action
+                        AlertViewModel.shared.alert?.onSubmitPress()
+                        AlertViewModel.shared.dismissAlert()
                     }) {
-                        Text("Disconnect")
+                        Text(AlertViewModel.shared.alert?.submitText ?? "Submit")
                             .font(.system(size: 17, weight: .semibold))
-                            .foregroundColor(Color("DisconnectButtonForeground"))
-                            .accessibilityIdentifier("txt_user_account_detail_disconnect")
+                            .foregroundColor(Color("AlertSubmitButtonForeground"))
+                            .accessibilityIdentifier("txt_alert_submit")
                     }
-                    .accessibilityIdentifier("btn_user_account_detail_disconnect")
+                    .accessibilityIdentifier("btn_alert_submit")
                     .padding(.vertical)
                     .frame(maxWidth: .infinity)
                 }
             }
-            .background(Color("DisconnectModalBackground"))
+            .background(Color("AlertModalBackground"))
             .cornerRadius(14)
-            .frame(width: 270, height: 172.5)
-            
+            .frame(width: 270)
         }
-
+        
     }
 }

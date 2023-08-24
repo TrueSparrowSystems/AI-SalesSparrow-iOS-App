@@ -165,8 +165,15 @@ struct NoteCardView: View {
             if isPopoverVisible {
                 VStack {
                     Button(action: {
-                        isPopoverVisible.toggle()
-                        acccountDetailScreenViewModelObject.deleteNote(accountId: accountId, noteId: noteId)
+                        isPopoverVisible = false
+                        AlertViewModel.shared.showAlert(_alert: Alert(
+                            title: "Delete Note",
+                            message: Text("Are you sure you want to delete this note?"),
+                            submitText: "Delete",
+                            onSubmitPress: {
+                                acccountDetailScreenViewModelObject.deleteNote(accountId: accountId, noteId: noteId)
+                            }
+                        ))
                     }){
                         HStack{
                             Image("DeleteIcon")

@@ -192,8 +192,16 @@ struct TaskCardView: View {
             if isPopoverVisible {
                 VStack {
                     Button(action: {
-                        isPopoverVisible.toggle()
-                        acccountDetailScreenViewModelObject.deleteTask(accountId: accountId, taskId: taskId)
+                        isPopoverVisible = false
+                        
+                        AlertViewModel.shared.showAlert(_alert: Alert(
+                            title: "Delete Task",
+                            message: Text("Are you sure you want to delete this task?"),
+                            submitText: "Delete",
+                            onSubmitPress: {
+                                acccountDetailScreenViewModelObject.deleteTask(accountId: accountId, taskId: taskId)
+                            }
+                        ))
                     }){
                         HStack{
                             Image("DeleteIcon")
