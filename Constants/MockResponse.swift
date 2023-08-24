@@ -236,7 +236,7 @@ class MockResponse {
                 "statusCode": 200,
                 "data": [:] as [String : Any]
             ] as [String : Any],
-            "deleteNoteError":[
+            "deleteTaskError":[
                 "success": "false",
                 "statusCode": 400,
                 "error": [

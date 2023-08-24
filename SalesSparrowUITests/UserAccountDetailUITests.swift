@@ -86,13 +86,13 @@ final class UserAccountDetailsUITests: XCTestCase {
         
         // Check if disconnect modal is visible
         // text, cancel and disconnect button
-        XCTAssertTrue(app.staticTexts["txt_user_account_detail_disconnect_message"].waitForExistence(timeout: TimeInterval(timeout)))
+        XCTAssertTrue(app.staticTexts["txt_alert_message"].waitForExistence(timeout: TimeInterval(timeout)))
         
-        let closeButton = app.buttons["btn_user_account_detail_cancel"]
+        let closeButton = app.buttons["btn_alert_cancel"]
         XCTAssertTrue(closeButton.waitForExistence(timeout: TimeInterval(timeout)))
         XCTAssertTrue(closeButton.isHittable)
         
-        let disconnectButton = app.buttons["btn_user_account_detail_disconnect"]
+        let disconnectButton = app.buttons["btn_alert_submit"]
         XCTAssertTrue(disconnectButton.waitForExistence(timeout: TimeInterval(timeout)))
         XCTAssertTrue(disconnectButton.isHittable)
         disconnectButton.tap()

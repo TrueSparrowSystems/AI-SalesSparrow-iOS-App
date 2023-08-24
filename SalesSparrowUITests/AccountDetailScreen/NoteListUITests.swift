@@ -176,4 +176,99 @@ final class AccountDetailNoteListUITests: XCTestCase {
         XCTAssertTrue(doneButton.isEnabled)
         
     }
+    
+    func testDeleteNote() throws {
+        // Launch the app with the specified launch arguments
+        let app = XCUIApplication()
+        app.launchArguments = ["isRunningUITests"]
+        app.launch()
+        
+        // Set the timeout duration
+        let timeout = 5
+        
+        // Open the account detail using the helper function
+        openAccountDetailUsingSearch(app: app)
+        
+        let threeDotButtonForNote2 = app.buttons["btn_account_detail_note_more_1"]
+        XCTAssertTrue(threeDotButtonForNote2.waitForExistence(timeout: TimeInterval(timeout)))
+        
+        threeDotButtonForNote2.tap()
+        
+        let deleteButtonForNote2 = app.buttons["btn_account_detail_delete_note_1"]
+        XCTAssertTrue(deleteButtonForNote2.waitForExistence(timeout: TimeInterval(timeout)))
+        
+        
+        let threeDotButtonForNote1 = app.buttons["btn_account_detail_note_more_0"]
+        XCTAssertTrue(threeDotButtonForNote1.waitForExistence(timeout: TimeInterval(timeout)))
+        
+        threeDotButtonForNote1.tap()
+        
+        let deleteButtonForNote1 = app.buttons["btn_account_detail_delete_note_0"]
+        XCTAssertTrue(deleteButtonForNote1.waitForExistence(timeout: TimeInterval(timeout)))
+        
+        let textForNote1 = app.staticTexts["txt_account_detail_note_text_0"].label
+        
+        //Check whether the delete button is closed for note 2 on open of delete button for note 1
+        XCTAssertFalse(deleteButtonForNote2.exists)
+        
+        deleteButtonForNote1.tap()
+        
+        // Check if delete confirmation modal is visible
+        // Verify message, cancel and delete button
+        XCTAssertTrue(app.staticTexts["txt_alert_message"].waitForExistence(timeout: TimeInterval(timeout)))
+        
+        let cancelButton = app.buttons["btn_alert_cancel"]
+        XCTAssertTrue(cancelButton.waitForExistence(timeout: TimeInterval(timeout)))
+        XCTAssertTrue(cancelButton.isHittable)
+        
+        let deleteButton = app.buttons["btn_alert_submit"]
+        XCTAssertTrue(deleteButton.waitForExistence(timeout: TimeInterval(timeout)))
+        XCTAssertTrue(deleteButton.isHittable)
+        deleteButton.tap()
+        
+        XCTAssertFalse(app.staticTexts["txt_alert_message"].exists)
+        
+        let textForNote1AfterDelete = app.staticTexts["txt_account_detail_note_text_0"].label
+        
+        //Verify the note text for 1st note before and after delete are not same
+        XCTAssertTrue(textForNote1 != textForNote1AfterDelete)
+    }
+    
+    func testDeleteNoteError() throws {
+        // Launch the app with the specified launch arguments
+        let app = XCUIApplication()
+        app.launchArguments = ["isRunningUITests", "deleteNoteError"]
+        app.launch()
+        
+        // Set the timeout duration
+        let timeout = 5
+        
+        // Open the account detail using the helper function
+        openAccountDetailUsingSearch(app: app)
+     
+        let threeDotButtonForNote1 = app.buttons["btn_account_detail_note_more_0"]
+        XCTAssertTrue(threeDotButtonForNote1.waitForExistence(timeout: TimeInterval(timeout)))
+        
+        threeDotButtonForNote1.tap()
+        
+        let textForNote1 = app.staticTexts["txt_account_detail_note_text_0"].label
+        
+        let deleteButtonForNote1 = app.buttons["btn_account_detail_delete_note_0"]
+        XCTAssertTrue(deleteButtonForNote1.waitForExistence(timeout: TimeInterval(timeout)))
+        
+        deleteButtonForNote1.tap()
+        
+        let deleteButton = app.buttons["btn_alert_submit"]
+        XCTAssertTrue(deleteButton.waitForExistence(timeout: TimeInterval(timeout)))
+        deleteButton.tap()
+        
+        
+        //Check whether on error the toast is received
+        XCTAssertTrue(app.staticTexts["toast_view_text"].waitForExistence(timeout: TimeInterval(timeout)))
+        
+        let textForNote1AfterDelete = app.staticTexts["txt_account_detail_note_text_0"].label
+        
+        //Verify the note text for 1st note before and after delete are same
+        XCTAssertTrue(textForNote1 == textForNote1AfterDelete)
+    }
 }

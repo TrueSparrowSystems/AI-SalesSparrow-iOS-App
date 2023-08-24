@@ -77,8 +77,7 @@ struct NotesList: View {
             } else {
                 VStack{
                     let noteIdsArray = self.acccountDetailScreenViewModelObject.noteData.note_ids
-                    ForEach(0 ..< noteIdsArray.count){index in
-                        let noteId = noteIdsArray[index]
+                    ForEach(Array(noteIdsArray.enumerated()), id: \.offset) { index, noteId in
                         NavigationLink(destination: NoteDetailScreen(noteId: noteId, accountId: accountId, accountName: accountName)
                         ){
                             if self.acccountDetailScreenViewModelObject.noteData.note_map_by_id[noteId] != nil{

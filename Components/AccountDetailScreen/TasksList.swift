@@ -77,8 +77,7 @@ struct TasksList: View {
             } else {
                 VStack{
                     let taskIdsArray = self.acccountDetailScreenViewModelObject.taskData.task_ids
-                    ForEach(0 ..< taskIdsArray.count){index in
-                        let taskId = taskIdsArray[index]
+                    ForEach(Array(taskIdsArray.enumerated()), id: \.offset) { index, taskId in
                         if ( self.acccountDetailScreenViewModelObject.taskData.task_map_by_id[taskId] != nil) {
                             TaskCardView(taskId: taskId, accountId: accountId, taskIndex: index, propagateClick: $propagateClick)
                         }
