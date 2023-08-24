@@ -21,7 +21,7 @@ struct CreateNoteScreen : View {
     @State var isPopoverVisible = false
     @FocusState private var focused: Bool
     @State var cancelSuggestedTask: Bool = false
-
+    
     var body: some View {
         ScrollView{
             HStack(alignment: .center){
@@ -186,10 +186,29 @@ struct CreateNoteScreen : View {
                     }
                 }
                 
-                if(!cancelSuggestedTask){
-                    SuggestedTaskView(text: text,cancelSuggestedTask: $cancelSuggestedTask)
+                if(createNoteScreenViewModel.suggestedTaskData.add_task_suggestions.count == 0){ // check for count of suggested task array
+                    // Show no recommendation message
+                    VStack{
+                        Image("Check")
+                            .frame(width: 48, height: 48, alignment: .center)
+                            .padding()
+                        
+                        Text("You are all set, no recommendation for now!")
+                            .foregroundColor(Color("TermsPrimary"))
+                            .font(.custom("Nunito-SemiBold" ,size: 14))
+                            .frame(alignment: .center)
+                            .padding()
+                    }
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 4)
+                            .stroke(style: StrokeStyle(lineWidth: 2, dash: [1,5]))
+                            .foregroundColor(Color("TextPrimary").opacity(0.5))
+                    )
+                } else {
+                    ForEach(createNoteScreenViewModel.suggestedTaskData.add_task_suggestions, id: \.self.description) { suggestion in
+                        SuggestedTaskCardView(accountId: accountId, suggestion: suggestion)
+                    }
                 }
-                
             }
             
         }

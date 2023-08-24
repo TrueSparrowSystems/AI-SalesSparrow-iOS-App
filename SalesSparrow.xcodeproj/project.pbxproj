@@ -98,6 +98,10 @@
 		4BDB87232A84C20E000CC1B9 /* AccountDetailsHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDB87222A84C20E000CC1B9 /* AccountDetailsHeader.swift */; };
 		4BDB87252A84C2CB000CC1B9 /* NoteList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDB87242A84C2CB000CC1B9 /* NoteList.swift */; };
 		4BDB87272A850B5A000CC1B9 /* AccountDetailScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDB87262A850B5A000CC1B9 /* AccountDetailScreenViewModel.swift */; };
+		4BF4C3CD2A97650A00983C2D /* CreateTaskScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF4C3CC2A97650A00983C2D /* CreateTaskScreen.swift */; };
+		4BF4C3CE2A97650A00983C2D /* CreateTaskScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF4C3CC2A97650A00983C2D /* CreateTaskScreen.swift */; };
+		4BF4C3D02A97689F00983C2D /* CreateTaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF4C3CF2A97689F00983C2D /* CreateTaskViewModel.swift */; };
+		4BF4C3D12A97689F00983C2D /* CreateTaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF4C3CF2A97689F00983C2D /* CreateTaskViewModel.swift */; };
 		6CCA3BABA0A693EB92C9B4C2 /* Pods_SalesSparrowTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCFD66DA5D9BD43B8402F504 /* Pods_SalesSparrowTests.framework */; };
 		6D2CB50B2A77CF570057C73F /* Nunito-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D2CB4FB2A77CF560057C73F /* Nunito-ExtraLightItalic.ttf */; };
 		6D2CB50C2A77CF570057C73F /* Nunito-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D2CB4FC2A77CF560057C73F /* Nunito-MediumItalic.ttf */; };
@@ -229,6 +233,8 @@
 		4BDB87222A84C20E000CC1B9 /* AccountDetailsHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailsHeader.swift; sourceTree = "<group>"; };
 		4BDB87242A84C2CB000CC1B9 /* NoteList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteList.swift; sourceTree = "<group>"; };
 		4BDB87262A850B5A000CC1B9 /* AccountDetailScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailScreenViewModel.swift; sourceTree = "<group>"; };
+		4BF4C3CC2A97650A00983C2D /* CreateTaskScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTaskScreen.swift; sourceTree = "<group>"; };
+		4BF4C3CF2A97689F00983C2D /* CreateTaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTaskViewModel.swift; sourceTree = "<group>"; };
 		53DA3CE34E5D5B9A7563E443 /* Pods-SalesSparrow-SalesSparrowUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SalesSparrow-SalesSparrowUITests.debug.xcconfig"; path = "Target Support Files/Pods-SalesSparrow-SalesSparrowUITests/Pods-SalesSparrow-SalesSparrowUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		6A561769BF628419998C917E /* Pods_SalesSparrow_SalesSparrowUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SalesSparrow_SalesSparrowUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D2CB4FB2A77CF560057C73F /* Nunito-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
@@ -536,6 +542,7 @@
 				6DCF64E72A8600D50084F809 /* NoteDetailScreenViewModel.swift */,
 				4B13E4EF2A93836700CB24E4 /* UserSearchViewModel.swift */,
 				4B819B4D2A96385700CE6293 /* SuggestTaskViewModel.swift */,
+				4BF4C3CF2A97689F00983C2D /* CreateTaskViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -635,6 +642,7 @@
 				6DCF64E42A85FEC60084F809 /* NoteDetailScreen.swift */,
 				6DACD9D12A8A413B00B55747 /* LaunchScreen.swift */,
 				4B9E5DDF2A8CD59900041D65 /* UserAccountDetailScreen.swift */,
+				4BF4C3CC2A97650A00983C2D /* CreateTaskScreen.swift */,
 			);
 			path = Screen;
 			sourceTree = "<group>";
@@ -993,6 +1001,7 @@
 				4B13E4EE2A93821300CB24E4 /* UserSearchView.swift in Sources */,
 				4B9E5DE52A8CE6AD00041D65 /* DisconnectSalesforeModal.swift in Sources */,
 				019595DE2A83CE6D008425AD /* BaseEntity.swift in Sources */,
+				4BF4C3CE2A97650A00983C2D /* CreateTaskScreen.swift in Sources */,
 				019595F92A83CEC3008425AD /* ToastViewModel.swift in Sources */,
 				019595D92A83CE2A008425AD /* AccountDetailsScreen.swift in Sources */,
 				019595EF2A83CEA5008425AD /* TermsBottomStrip.swift in Sources */,
@@ -1008,6 +1017,7 @@
 				6D7491622A935C1200F61A6F /* AddButtonPopoverComponent.swift in Sources */,
 				019595F32A83CEB1008425AD /* DateTimePicker.swift in Sources */,
 				019595EA2A83CE93008425AD /* ViewExtension.swift in Sources */,
+				4BF4C3D12A97689F00983C2D /* CreateTaskViewModel.swift in Sources */,
 				6D908DB52A8526EB00F36DCE /* NoteList.swift in Sources */,
 				019595E72A83CE8C008425AD /* Toast.swift in Sources */,
 				019595D72A83CE23008425AD /* CreateNoteScreen.swift in Sources */,
@@ -1057,6 +1067,7 @@
 				4B13E4ED2A93821300CB24E4 /* UserSearchView.swift in Sources */,
 				4B9E5DE42A8CE6AD00041D65 /* DisconnectSalesforeModal.swift in Sources */,
 				6DC43C542A7A8CF8002162FE /* UserStateViewModel.swift in Sources */,
+				4BF4C3CD2A97650A00983C2D /* CreateTaskScreen.swift in Sources */,
 				6D8C7D1C2A77A057005D597E /* DateTimePicker.swift in Sources */,
 				4B583BDE2A7BEB11005B97D0 /* BottomBar.swift in Sources */,
 				6D8C7D1F2A77A07F005D597E /* BasicHelper.swift in Sources */,
@@ -1072,6 +1083,7 @@
 				6D7491612A935BC200F61A6F /* AddButtonPopoverComponent.swift in Sources */,
 				6DE11C8A2A82845B00D27006 /* ViewExtension.swift in Sources */,
 				6D8C7D2F2A77A196005D597E /* Tasks+CoreDataClass.swift in Sources */,
+				4BF4C3D02A97689F00983C2D /* CreateTaskViewModel.swift in Sources */,
 				6DC43C562A7A909E002162FE /* CreateNoteScreen.swift in Sources */,
 				6DC43C582A7B802D002162FE /* HomeScreen.swift in Sources */,
 				6D8C7D1A2A779F95005D597E /* ExpandableTextView.swift in Sources */,
