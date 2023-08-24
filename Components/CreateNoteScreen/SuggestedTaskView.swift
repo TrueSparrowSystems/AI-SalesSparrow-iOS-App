@@ -43,19 +43,24 @@ struct SuggestedTaskCardView: View {
         ZStack{
             VStack{
                 // text editor component
-                Text("\(recommendedText)")
-                    .foregroundColor(Color("TextPrimary"))
-                    .font(.custom("Nunito-SemiBold", size: 16))
-                    .lineLimit(nil)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .accessibilityIdentifier("et_create_note")
-                    .onTapGesture {
-                        // Do nothing. Kept on tap here to override tap action over parent tap action
-                        showEditTaskView = true
-                    }
-                    .padding()
-                    .background(Color.white.opacity(0.2))
-                    .overlay(RoundedRectangle(cornerRadius: 4).stroke(Color("BorderColor"), lineWidth: 1))
+                HStack{
+                    Text("\(recommendedText)")
+                        .foregroundColor(Color("TextPrimary"))
+                        .font(.custom("Nunito-SemiBold", size: 16))
+                        .lineLimit(nil)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .accessibilityIdentifier("et_create_note")
+                        .onTapGesture {
+                            // Do nothing. Kept on tap here to override tap action over parent tap action
+                            showEditTaskView = true
+                        }
+                        .padding()
+                        .background(Color.white.opacity(0.2))
+                        .overlay(RoundedRectangle(cornerRadius: 4).stroke(Color("BorderColor"), lineWidth: 1))
+                    
+                    Spacer()
+                }
+                
                 
                 // assign to component + picker
                 HStack{
