@@ -11,6 +11,7 @@ struct AccountDetailsScreen: View {
     var accountId: String
     var accountName: String
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @State var propagateClick = 0
     
     var body: some View {
         ScrollView{
@@ -20,11 +21,22 @@ struct AccountDetailsScreen: View {
                 
                 // Contact list component
                 
-                NotesList(accountId: accountId, accountName: accountName)
+                NotesList(accountId: accountId, accountName: accountName, propagateClick: $propagateClick)
                 
-                Spacer()
+                TasksList(accountId: accountId, accountName: accountName, propagateClick: $propagateClick)
+                
             }
         }
+        .simultaneousGesture(
+            TapGesture().onEnded(){
+                propagateClick += 1
+            }
+        )
+        .simultaneousGesture(
+            DragGesture().onChanged{_ in
+                propagateClick += 1
+            }
+        )
         .padding(.vertical)
         .padding(.leading)
         .background(Color("Background"))

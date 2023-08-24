@@ -1,5 +1,5 @@
 //
-//  BaseRepositortTests.swift
+//  BaseRepositoryTests.swift
 //  SalesSparrowTests
 //
 //  Created by Mohit Charkha on 31/07/23.
