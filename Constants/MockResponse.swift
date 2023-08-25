@@ -15,7 +15,10 @@ class MockResponse {
                 "success": "true",
                 "statusCode": 200,
                 "data":[
-                    "current_user": ["id":"user_123","name":"Salesforce User ","email":"sales@truesparrow.com"]
+                    "current_user": [
+                        "id":"user_123",
+                        "name":"Salesforce User",
+                        "email":"sales@truesparrow.com"]
                 ],
             ],
             "loggedOutUser":[
@@ -29,7 +32,7 @@ class MockResponse {
                 ] as [String : Any]
             ]
         ],
-
+        
         "GET /v1/auth/salesforce/redirect-url": [
             "default":[
                 "success": "true",
@@ -55,17 +58,21 @@ class MockResponse {
                 ] as [String : Any]
             ]
         ],
-
+        
         "POST /v1/auth/salesforce/connect": [
             "default":[
                 "success": "true",
                 "statusCode": 200,
                 "data":[
-                    "current_user": ["id":"user_123","name":"Salesforce User ","email":"sales@truesparrow.com"]
+                    "current_user": [
+                        "id":"user_123",
+                        "name":"Salesforce User",
+                        "email":"sales@truesparrow.com"
+                    ]
                 ],
             ]
         ],
-
+        
         "POST /v1/auth/logout": [
             "default":[
                 "success": "true",
@@ -73,7 +80,7 @@ class MockResponse {
                 "data": [:] as [String : Any]
             ] as [String : Any]
         ],
-
+        
         "POST /v1/auth/disconnect": [
             "default":[
                 "success": "true",
@@ -81,14 +88,97 @@ class MockResponse {
                 "data": [:] as [String : Any]
             ] as [String : Any]
         ],
-
+        
+        "GET /v1/accounts/feed": [
+            "default":[
+                "success": "true",
+                "statusCode": 200,
+                "data":[
+                    "account_ids": ["account_1","account_2","account_3"],
+                    "account_map_by_id": [
+                        "account_1": [
+                            "id": "account_1",
+                            "name": "Test Account 1",
+                            "additional_fields": [
+                                "website": "https://account.com"
+                            ],
+                            "account_contact_associations_id": "account_contact_association_1"
+                        ] as [String : Any],
+                        "account_2": [
+                            "id": "account_2",
+                            "name": "Test Account 2",
+                            "additional_fields": [
+                                "website": "https://account.com"
+                            ],
+                            "account_contact_associations_id": "account_contact_association_2"
+                        ] as [String : Any],
+                        "account_3": [
+                            "id": "account_3",
+                            "name": "Test Account 3",
+                            "additional_fields": [
+                                "website": "https://account.com"
+                            ],
+                            "account_contact_associations_id": "account_contact_association_3"
+                        ] as [String : Any],
+                    ],
+                    "contact_map_by_id": [
+                        "contact_1": [
+                            "id": "contact_1",
+                            "name": "Test Contact 1",
+                            "additional_fields": [
+                                "email": "contact_1@truesparrow.com"
+                            ]
+                        ] as [String : Any],
+                        "contact_2": [
+                            "id": "contact_2",
+                            "name": "Test Contact 2",
+                            "additional_fields": [
+                                "email": "contact_2@truesparrow.com"
+                            ]
+                        ] as [String : Any],
+                        "contact_3": [
+                            "id": "contact_3",
+                            "name": "Test Contact 3",
+                            "additional_fields": [
+                                "email": "contact_3@truesparrow.com"
+                            ]
+                        ] as [String : Any],
+                    ],
+                    "account_contact_associations_map_by_id": [
+                        "account_contact_association_1": [
+                            "contact_ids": ["contact_1", "contact_2"]
+                        ],
+                        "account_contact_association_2": [
+                            "contact_ids": ["contact_2", "contact_3"]
+                        ],
+                        "account_contact_association_3": [
+                            "contact_ids": ["contact_3"]
+                        ],
+                    ]
+                ] as [String : Any],
+            ] as [String : Any],
+        ],
+        
         "GET /v1/accounts": [
             "default":[
                 "success": "true",
                 "statusCode": 200,
                 "data":[
-                    "account_ids": ["account_1","account_2","account_3","account_1","account_2","account_3","account_1","account_2","account_3","account_1","account_2","account_3","account_1","account_2","account_3"],
-                    "account_map_by_id": ["account_1": ["id": "account_1", "name": "Test Account 1"], "account_2":["id": "account_2", "name": "Test Account 2"], "account_3":["id": "account_3", "name": "Test Account 3"]]
+                    "account_ids": ["account_1","account_2","account_3"],
+                    "account_map_by_id": [
+                        "account_1": [
+                            "id": "account_1",
+                            "name": "Test Account 1"
+                        ],
+                        "account_2":[
+                            "id": "account_2",
+                            "name": "Test Account 2"
+                        ],
+                        "account_3":[
+                            "id": "account_3",
+                            "name": "Test Account 3"
+                        ]
+                    ]
                 ] as [String : Any],
             ] as [String : Any],
             "searchResponseWithQuery":[
@@ -96,11 +186,24 @@ class MockResponse {
                 "statusCode": 200,
                 "data":[
                     "account_ids": ["account_1","account_2","account_3"],
-                    "account_map_by_id": ["account_1": ["id": "account_1", "name": "Mock Account 1"], "account_2":["id": "account_2", "name": "Mock Account 2"], "account_3":["id": "account_3", "name": "Mock Account 3"]]
+                    "account_map_by_id": [
+                        "account_1": [
+                            "id": "account_1",
+                            "name": "Mock Account 1"
+                        ],
+                        "account_2":[
+                            "id": "account_2",
+                            "name": "Mock Account 2"
+                        ],
+                        "account_3":[
+                            "id": "account_3",
+                            "name": "Mock Account 3"
+                        ]
+                    ]
                 ] as [String : Any],
             ] as [String : Any]
         ],
-
+        
         "GET /v1/accounts/account_1/notes": [
             "default":[
                 "success": "true",
@@ -108,8 +211,18 @@ class MockResponse {
                 "data":[
                     "note_ids": ["note_100","note_200"],
                     "note_map_by_id": [
-                        "note_100":["id":"note_100","creator":"User1","text_preview":"This is Note text.","last_modified_time":"2019-10-12T07:20:50.52Z"],
-                        "note_200":["id":"note_200","creator":"User2","text_preview":"This is Note long long text.","last_modified_time":"2019-10-12T07:20:50.58Z"]
+                        "note_100":[
+                            "id":"note_100",
+                            "creator":"User1",
+                            "text_preview":"This is Note text.",
+                            "last_modified_time":"2019-10-12T07:20:50.52Z"
+                        ],
+                        "note_200":[
+                            "id":"note_200",
+                            "creator":"User2",
+                            "text_preview":"This is Note long long text.",
+                            "last_modified_time":"2019-10-12T07:20:50.58Z"
+                        ]
                     ]
                 ] as [String : Any],
             ],
@@ -128,10 +241,10 @@ class MockResponse {
                     "message": "Something went wrong.",
                     "code": "",
                     "internal_error_identifier": "",
-                    ]as [String : Any]
+                ]as [String : Any]
             ]
         ],
-
+        
         "POST /v1/accounts/account_1/notes": [
             "default":[
                 "success": "true",
@@ -151,7 +264,7 @@ class MockResponse {
                 ],
             ]
         ],
-
+        
         "GET /v1/accounts/account_1/notes/note_100": [
             "default":[
                 "success": "true",
@@ -166,7 +279,7 @@ class MockResponse {
                 ]
             ] as [String : Any],
         ],
-
+        
         "DELETE /v1/accounts/account_1/notes/note_100": [
             "default":[
                 "success": "true",
@@ -183,7 +296,7 @@ class MockResponse {
                 ]as [String : Any]
             ]
         ],
-
+        
         "GET /v1/accounts/account_1/tasks": [
             "default":[
                 "success": "true",
@@ -207,7 +320,8 @@ class MockResponse {
                             "crm_organization_user_name": "Zaire",
                             "description": "Reach out to Romit for to set a time for the next sync with their CTO",
                             "due_date": "2023-10-12",
-                            "last_modified_time": "2023-08-20T07:20:50.52Z"]
+                            "last_modified_time": "2023-08-20T07:20:50.52Z"
+                        ]
                     ]
                 ] as [String : Any],
             ],
@@ -229,13 +343,13 @@ class MockResponse {
                 ]as [String : Any]
             ]
         ],
-
+        
         "DELETE /v1/accounts/account_1/tasks/task_1": [
             "default":[
                 "success": "true",
                 "statusCode": 200,
                 "data": [:] as [String : Any]
-            ] as [String : Any],
+            ],
             "deleteTaskError":[
                 "success": "false",
                 "statusCode": 400,
@@ -246,24 +360,50 @@ class MockResponse {
                 ]as [String : Any]
             ]
         ],
-
+        
         "GET /v1/users": [
             "default":[
                 "success": "true",
                 "statusCode": 200,
                 "data":[
                     "user_ids": ["1","2","3"],
-                    "user_map_by_id": ["1": ["id": "1", "name": "Test User"], "2":["id": "2", "name": "Elon Musk"], "3":["id": "3", "name": "Mark Zuckerberg"]]
+                    "user_map_by_id": [
+                        "1": [
+                            "id": "1",
+                            "name": "Test User"
+                        ],
+                        "2":[
+                            "id": "2",
+                            "name": "Elon Musk"
+                        ],
+                        "3":[
+                            "id": "3",
+                            "name": "Mark Zuckerberg"
+                        ]
+                    ]
                 ] as [String : Any],
-            ] as [String : Any],
+            ],
             "searchResponseWithQuery":[
                 "success": "true",
                 "statusCode": 200,
                 "data":[
                     "user_ids": ["1","2","3"],
-                    "user_map_by_id": ["1": ["id": "1", "name": "Mock User"], "2":["id": "2", "name": "Alex Hunter"], "3":["id": "3", "name": "Lukas vaskas"]]
+                    "user_map_by_id": [
+                        "1": [
+                            "id": "1",
+                            "name": "Mock User"
+                        ],
+                        "2":[
+                            "id": "2",
+                            "name": "Alex Hunter"
+                        ],
+                        "3":[
+                            "id": "3",
+                            "name": "Lukas vaskas"
+                        ]
+                    ]
                 ] as [String : Any],
-            ] as [String : Any]
+            ]
         ]
     ]
 }

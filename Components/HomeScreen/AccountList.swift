@@ -80,6 +80,7 @@ struct AccountRowView: View {
                 .font(.custom("Nunito-SemiBold",size: 18))
                 .tracking(0.5)
                 .foregroundColor(Color("TermsPrimary"))
+                .lineLimit(1)
             
             
             //TODO: On Field customization remove hardcoded values and show all additional_fields

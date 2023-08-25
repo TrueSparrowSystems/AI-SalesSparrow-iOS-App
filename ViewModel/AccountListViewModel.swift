@@ -140,4 +140,8 @@ class AccountListViewModel: ObservableObject {
             }
         }
     }
+    
+    func resetData(){
+        self.accountListData = AccountListStruct(account_ids: [], account_map_by_id: [:], contact_map_by_id: [:], account_contact_associations_map_by_id: [:], next_page_payload: nil)
+    }
 }
