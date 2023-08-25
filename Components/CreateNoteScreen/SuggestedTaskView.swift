@@ -10,7 +10,7 @@ import SwiftUI
 struct SuggestedTaskCardView: View {
     var accountId: String
     var suggestion: SuggestionStruct
-    
+    var index: Int
     
     @EnvironmentObject var createNoteScreenViewModel : CreateNoteScreenViewModel
     @State var recommendedText: String
@@ -25,10 +25,11 @@ struct SuggestedTaskCardView: View {
     @FocusState private var focusedRecommendedText: Bool
     @FocusState private var userSelected: Bool
     
-    init(accountId: String, suggestion: SuggestionStruct) {
+    init(accountId: String, suggestion: SuggestionStruct,index: Int) {
         self.accountId = accountId
         self.suggestion = suggestion
         _recommendedText = State(initialValue: suggestion.description)
+        self.index = index
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd" // Format of your due_date
@@ -192,7 +193,7 @@ struct SuggestedTaskCardView: View {
                         Button(action: {
                             // TODO: Add action to disappear view
                             // Remove this card from ids array
-                            createNoteScreenViewModel.removeSuggestion(suggestion)
+                            createNoteScreenViewModel.removeSuggestion(at: index)
                         }, label:{
                             HStack(alignment: .center, spacing: 0){
                                 Text("Cancel")

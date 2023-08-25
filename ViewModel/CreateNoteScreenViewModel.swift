@@ -98,8 +98,8 @@ class CreateNoteScreenViewModel: ObservableObject {
         }
     }
     
-    func removeSuggestion(_ suggestion: SuggestionStruct) {
-        if let index = suggestedTaskData.add_task_suggestions.firstIndex(of: suggestion) {
+    func removeSuggestion(at index: Int) {
+        if suggestedTaskData.add_task_suggestions.indices.contains(index) {
             suggestedTaskData.add_task_suggestions.remove(at: index)
         }
     }

@@ -205,8 +205,11 @@ struct CreateNoteScreen : View {
                             .foregroundColor(Color("TextPrimary").opacity(0.5))
                     )
                 } else {
-                    ForEach(createNoteScreenViewModel.suggestedTaskData.add_task_suggestions, id: \.self.description) { suggestion in
-                        SuggestedTaskCardView(accountId: accountId, suggestion: suggestion)
+                    ForEach(createNoteScreenViewModel.suggestedTaskData.add_task_suggestions.indices, id: \.self) { index in
+                        if let suggestion = createNoteScreenViewModel.suggestedTaskData.add_task_suggestions.indices.contains(index) ?
+                            createNoteScreenViewModel.suggestedTaskData.add_task_suggestions[index] : nil {
+                            SuggestedTaskCardView(accountId: accountId, suggestion: suggestion,index: index)
+                        }
                     }
                 }
             }
