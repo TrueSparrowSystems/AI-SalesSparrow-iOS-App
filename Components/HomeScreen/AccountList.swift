@@ -21,19 +21,26 @@ struct AccountList: View {
                     .controlSize(.large)
             }
             else{
-                ScrollView {
+                List {
                     ForEach(Array(accountIds.enumerated()), id: \.offset) { index, accountId in
                         if let account = acccountListViewModelObject.accountListData.account_map_by_id[accountId] {
-                            NavigationLink(destination: AccountDetailsScreen(accountId: accountId, accountName: account.name)) {
+                            ZStack {
                                 AccountRowView(account: account)
                                     .onAppear{
+                                        print(account.name)
                                         if(accountIds.last == accountId){
-                                            print(account.name)
                                             acccountListViewModelObject.fetchData()
                                         }
                                     }
+                                
+                                NavigationLink(destination: AccountDetailsScreen(accountId: accountId, accountName: account.name)) {
+                                    EmptyView()
+                                }
+                                .buttonStyle(.plain)
+                                .opacity(0)
                             }
-                            .buttonStyle(.plain)
+                            .listRowBackground(Color("Background"))
+                            .listRowSeparator(.hidden)
                             .accessibilityAddTraits(.isButton)
                             .accessibilityIdentifier("account_card_\(index)")
                         }
@@ -42,19 +49,19 @@ struct AccountList: View {
                         if(acccountListViewModelObject.isFetchAccountInProgress && accountIds.count > 0){
                             ProgressView()
                                 .tint(Color("LoginButtonSecondary"))
+                                .listRowBackground(Color("Background"))
+                                .listRowSeparator(.hidden)
                                 .accessibilityAddTraits(.isImage)
                                 .accessibilityIdentifier("next_page_loader")
                                 .frame(maxWidth: .infinity, alignment: .center)
                         }
                     }
                 }
+                .scrollIndicators(.hidden)
+                .listStyle(.plain)
                 .accessibilityIdentifier("account_list_scroll_view")
-                .listStyle(PlainListStyle())
-                
-                
             }
         }
-        .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
         .onAppear{
             acccountListViewModelObject.fetchData()
         }
