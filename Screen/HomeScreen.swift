@@ -26,6 +26,7 @@ struct HomeScreen: View {
                 
                 // List of Accounts
                 AccountList()
+                    .padding(.top)
                 
                 // Bottom Bar with + Button
                 BottomBar()

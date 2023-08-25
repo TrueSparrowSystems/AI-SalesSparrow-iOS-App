@@ -27,7 +27,6 @@ struct AccountList: View {
                             NavigationLink(destination: AccountDetailsScreen(accountId: accountId, accountName: account.name)) {
                                 AccountRowView(account: account)
                                     .onAppear{
-                                        print(accountIds.last, accountId)
                                         if(accountIds.last == accountId){
                                             print(account.name)
                                             acccountListViewModelObject.fetchData()
@@ -40,13 +39,13 @@ struct AccountList: View {
                         }
                     }
                     HStack{
-//                        if(acccountListViewModelObject.isFetchAccountInProgress && accountIds.count > 0){
+                        if(acccountListViewModelObject.isFetchAccountInProgress && accountIds.count > 0){
                             ProgressView()
                                 .tint(Color("LoginButtonSecondary"))
                                 .accessibilityAddTraits(.isImage)
                                 .accessibilityIdentifier("next_page_loader")
                                 .frame(maxWidth: .infinity, alignment: .center)
-//                        }
+                        }
                     }
                 }
                 .accessibilityIdentifier("account_list_scroll_view")
@@ -66,6 +65,7 @@ struct AccountList: View {
 struct AccountRowView: View {
     var account: Account
     @Environment(\.openURL) var openURL
+    @EnvironmentObject var acccountListViewModelObject : AccountListViewModel
     
     var body: some View {
         // Account Row
@@ -82,21 +82,53 @@ struct AccountRowView: View {
                 .foregroundColor(Color("TermsPrimary"))
             
             
-            if((account.website) != nil){
+            //TODO: On Field customization remove hardcoded values and show all additional_fields
+            if((account.additional_fields["website"]) != nil){
                 HStack{
                     Image("Link")
                         .resizable()
                         .frame(width: 16, height: 16)
-                    Text(account.website!)
+                    Text(account.additional_fields["website"]!!)
                         .font(.custom("Nunito-Regular", size: 14))
                         .foregroundColor(Color("TermsPrimary"))
                     
                 }
                 .onTapGesture {
-                    openURL(URL(string: account.website!)!)
+                    openURL(URL(string: account.additional_fields["website"]!!)!)
                 }
                 .padding(.top, 2)
             }
+            
+            let accountContactAssociation = acccountListViewModelObject.accountListData.account_contact_associations_map_by_id[account.account_contact_associations_id]
+            
+            if((accountContactAssociation) != nil){
+                let contactIds = accountContactAssociation?.contact_ids
+                
+                let contact = acccountListViewModelObject.accountListData.contact_map_by_id[contactIds?.first ?? ""]
+                if(contact != nil){
+                    VStack(alignment: .leading, spacing: 0){
+                        Text("CONTACT")
+                            .font(.custom("Nunito-Bold",size: 12))
+                            .foregroundColor(Color("TermsPrimary").opacity(0.7))
+                            .tracking(0.5)
+                            .padding(.bottom, 6)
+                        
+                        Text(contact?.name ?? "")
+                            .font(.custom("Nunito-SemiBold",size: 18))
+                            .tracking(0.5)
+                            .foregroundColor(Color("TermsPrimary"))
+                        
+                        if((contact?.additional_fields["email"]) != nil){
+                            Text((contact?.additional_fields["email"])!!)
+                                .font(.custom("Nunito-Regular",size: 14))
+                                .foregroundColor(Color("TermsPrimary"))
+                        }
+                        
+                    }
+                    .padding(.top, 16)
+                }
+            }
+            
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding()
