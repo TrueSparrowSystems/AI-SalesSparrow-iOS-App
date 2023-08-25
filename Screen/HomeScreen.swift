@@ -15,6 +15,7 @@ struct HomeScreen: View {
     @StateObject var createNoteViewModel = CreateNoteScreenViewModel()
     @StateObject var noteDetailScreenViewModel = NoteDetailScreenViewModel()
     @StateObject var suggestTaskViewModel = SuggestTaskViewModel()
+    @StateObject var createTaskViewModel = CreateTaskViewModel()
     @State private var showUserSearchView: Bool = false
     
     var body: some View {
@@ -41,6 +42,7 @@ struct HomeScreen: View {
         .environmentObject(createNoteViewModel)
         .environmentObject(noteDetailScreenViewModel)
         .environmentObject(suggestTaskViewModel)
+        .environmentObject(createTaskViewModel)
     }
 }
 

@@ -21,7 +21,7 @@ class CreateTaskViewModel: ObservableObject {
     var apiService = DependencyContainer.shared.apiService
     
     // A function to create note from given text and account id.
-    func createTask(accountId: String, assignedToName: String, crmOrganizationUserId: String, description: String, dueDate: Date, onSuccess : @escaping()-> Void, onFailure : @escaping()-> Void){
+    func createTask(accountId: String, assignedToName: String, crmOrganizationUserId: String, description: String, dueDate: Date){
         
         guard !self.isCreateTaskInProgress else {
             return
@@ -35,7 +35,6 @@ class CreateTaskViewModel: ObservableObject {
             switch result {
             case .success(_):
                 DispatchQueue.main.async {
-                    onSuccess()
                     self?.isCreateTaskInProgress = false
                     ToastViewModel.shared.showToast(_toast: Toast(style: .success, message: "Task Saved and assigned to \(assignedToName)"))
                 }
@@ -43,7 +42,6 @@ class CreateTaskViewModel: ObservableObject {
             case .failure(let error):
                 DispatchQueue.main.async {
                     print("error loading data: \(error)")
-                    onFailure()
                     self?.isCreateTaskInProgress = false
                     ToastViewModel.shared.showToast(_toast: Toast(style: .error, message: error.message))
                 }

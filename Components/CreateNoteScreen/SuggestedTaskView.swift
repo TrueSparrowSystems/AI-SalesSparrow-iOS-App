@@ -13,14 +13,14 @@ struct SuggestedTaskCardView: View {
     var index: Int
     
     @EnvironmentObject var createNoteScreenViewModel : CreateNoteScreenViewModel
+    @EnvironmentObject var createTaskViewModel : CreateTaskViewModel
     @State var recommendedText: String
     @State var selectedDate: Date = Date.now
     @State var assignedToUsername: String = ""
     @State var selectedUserId: String = ""
-    @State var isAddTaskInProgress = false
     @State var isTaskSaved = false
     @State var showEditTaskView = false
-    @State private var isDatePickerVisible = false
+    @State private var isDateSelected = false
     @State private var showUserSearchView: Bool = false
     @FocusState private var focusedRecommendedText: Bool
     @FocusState private var userSelected: Bool
@@ -46,20 +46,19 @@ struct SuggestedTaskCardView: View {
                 // text editor component
                 HStack{
                     Text("\(recommendedText)")
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .multilineTextAlignment(.leading)
                         .foregroundColor(Color("TextPrimary"))
                         .font(.custom("Nunito-SemiBold", size: 16))
-                        .lineLimit(nil)
                         .fixedSize(horizontal: false, vertical: true)
                         .accessibilityIdentifier("et_create_note")
                         .onTapGesture {
                             // Do nothing. Kept on tap here to override tap action over parent tap action
                             showEditTaskView = true
                         }
-                        .padding()
-                        .background(Color.white.opacity(0.2))
-                        .overlay(RoundedRectangle(cornerRadius: 4).stroke(Color("BorderColor"), lineWidth: 1))
-                    
-                    Spacer()
+                        .padding(EdgeInsets(top: 5, leading: 8, bottom: 5, trailing: 8))
+                        .background(Color("GhostWhite").opacity(0.2))
+                        .overlay(RoundedRectangle(cornerRadius: 6).stroke(Color.black.opacity(0.1), lineWidth: 1))
                 }
                 
                 
@@ -69,52 +68,56 @@ struct SuggestedTaskCardView: View {
                         Text("Assign to")
                             .foregroundColor(Color("TextPrimary"))
                             .font(.custom("Nunito-SemiBold", size: 12))
-                            .padding()
+                            .tracking(0.5)
                         
                         // add verticle divider gray line
                         VerticalDividerRectangleView(width: 1, color: Color("BorderColor"))
-                            .padding(.vertical)
                         
                         Button(action: {
                             // Toggle user search view
                             showUserSearchView = true
                         }){
-                            if(!userSelected){
+                            if(assignedToUsername.isEmpty){
                                 Text("Select")
                                     .foregroundColor(Color("RedHighlight"))
                                     .font(.custom("Nunito-Bold", size: 12))
+                                    .tracking(0.5)
                                 
                                 Image("ArrowDown")
                                     .frame(width: 6, height: 3)
                                     .padding(.trailing, 6)
                             } else {
-                                Text("\(BasicHelper.getInitials(from: assignedToUsername))")
-                                    .frame(width: 12, height:18)
-                                    .font(.custom("Nunito-Bold", size: 5.24))
-                                    .foregroundColor(.black)
+                                Text(BasicHelper.getInitials(from: assignedToUsername))
+                                    .frame(width: 18, height: 18)
+                                    .font(.custom("Nunito-Bold", size: 6))
+                                    .foregroundColor(Color.white)
                                     .background(Color("UserBubble"))
-                                    .clipShape(RoundedRectangle(cornerRadius: 26))
-                                    .accessibilityIdentifier("txt_account_detail_note_creator_initials")
+                                    .clipShape(RoundedRectangle(cornerRadius: 47))
+                                    .accessibilityIdentifier("img_user_account_detail_user_initials")
                                 
                                 Text(assignedToUsername)
-                                    .padding(.vertical, 8)
-                                    .padding(.horizontal, 6)
                                     .foregroundColor(Color("RedHighlight"))
-                                    .font(.custom("Nunito-Light", size: 12))
-                                    .accessibilityIdentifier("txt_create_note_username")
+                                    .font(.custom("Nunito-Bold", size: 12))
+                                    .accessibilityIdentifier("txt_add_task_selected_user")
+                                    .tracking(0.5)
+                                
+                                Image("ArrowDown")
+                                    .frame(width: 6, height: 3)
+                                    .padding(.trailing, 6)
                             }
                             
                         }
                         .sheet(isPresented: $showUserSearchView){
                             UserSearchView(isPresented: $showUserSearchView,
                                            onUserSelect: { userId, userName in
-                                assignedToUsername = userId
-                                selectedUserId = userName
+                                assignedToUsername = userName
+                                selectedUserId = userId
                             })
                         }
                         .accessibilityIdentifier("btn_create_note_search_user")
                         
                     }
+                    .padding(EdgeInsets(top: 6, leading: 8, bottom: 6, trailing: 8))
                     .overlay(RoundedRectangle(cornerRadius: 4).stroke(Color("BorderColor"), lineWidth: 1))
                     
                     Spacer()
@@ -126,47 +129,50 @@ struct SuggestedTaskCardView: View {
                         Text("Due")
                             .foregroundColor(Color("TextPrimary"))
                             .font(.custom("Nunito-SemiBold", size: 12))
-                            .padding()
+                            .tracking(0.5)
                         
                         // add verticle divider gray line
                         VerticalDividerRectangleView(width: 1, color: Color("BorderColor"))
-                            .padding(.vertical)
                         
-                        Button(action: {
-                            // Toggle DateTimePicker
-                            isDatePickerVisible = true
-                        }){
-                            if(selectedDate != Date()){
-                                Text("Select")
-                                    .foregroundColor(Color("RedHighlight"))
-                                    .font(.custom("Nunito-Bold", size: 12))
-                                
-                                Image("CalendarCheck")
-                                    .frame(width: 15, height: 15)
-                                    .padding(.leading, 6)
-                            }
-                            else {
-                                Text("\((selectedDate.formatted(date: .numeric, time: .omitted)))")
-                                    .foregroundColor(Color(hex: "#444A62"))
-                                    .font(.custom("Nunito-Bold", size: 12))
+                        
+                        ZStack{
+                            DatePickerView(selectedDate: $selectedDate, onTap: {
+                                isDateSelected = true
+                            })
+                            
+                            if(!isDateSelected){
+                                HStack (spacing: 0) {
+                                    Text("Select Date")
+                                        .foregroundColor(Color("TermsPrimary"))
+                                        .font(.custom("Nunito-Light", size: 12))
+                                        .tracking(0.5)
+                                        .padding(0)
+                                    
+                                    Image("EmptyCalendar")
+                                        .frame(width: 15, height: 15)
+                                        .padding(0)
+                                }
+                                .padding(EdgeInsets(top: 10, leading: 28, bottom: 10, trailing: 28))
+                                .background(Color("Background"))
+                                .userInteractionDisabled()
                             }
                         }
-                        .padding()
-                        
                     }
+                    .frame(width: 180)
+                    .padding(EdgeInsets(top: 6, leading: 8, bottom: 6, trailing: 8))
                     .overlay(RoundedRectangle(cornerRadius: 4).stroke(Color("BorderColor"), lineWidth: 1))
-                    
                     Spacer()
                 }
+                
                 // action buttons + view model
                 if(!isTaskSaved){
                     HStack{
                         Button(action: {
-                            isAddTaskInProgress = true
+                            createTaskViewModel.createTask(accountId: accountId, assignedToName: assignedToUsername, crmOrganizationUserId: selectedUserId, description: recommendedText, dueDate: selectedDate)
                             // TODO: call create task view model
                         }, label:{
                             HStack(alignment: .center, spacing: 0){
-                                if(isAddTaskInProgress){
+                                if(createTaskViewModel.isCreateTaskInProgress){
                                     ProgressView()
                                         .tint(Color("LoginButtonPrimary"))
                                         .controlSize(.small)
@@ -182,17 +188,16 @@ struct SuggestedTaskCardView: View {
                                         .accessibilityIdentifier("txt_create_note_add_task")
                                 }
                             }
-                            .frame(width: isAddTaskInProgress ? 115 : 72, height: 32)
+                            .frame(width: createTaskViewModel.isCreateTaskInProgress ? 115 : 72, height: 32)
                             .background(
                                 Color(hex: "SaveButtonBackground")
                             )
                             .clipShape(RoundedRectangle(cornerRadius: 5))
                         })
+                        .disabled(disableSaveButton() || createTaskViewModel.isCreateTaskInProgress)
                         .accessibilityIdentifier("btn_create_note_add_task")
                         
                         Button(action: {
-                            // TODO: Add action to disappear view
-                            // Remove this card from ids array
                             createNoteScreenViewModel.removeSuggestion(at: index)
                         }, label:{
                             HStack(alignment: .center, spacing: 0){
@@ -210,6 +215,7 @@ struct SuggestedTaskCardView: View {
                         
                         Spacer()
                     }
+                    .padding(.top, 16)
                 }
             }
             .onAppear {
@@ -219,16 +225,16 @@ struct SuggestedTaskCardView: View {
             // Add dotted border
             .overlay(
                 RoundedRectangle(cornerRadius: 4)
-                    .stroke(style: StrokeStyle(lineWidth: 2, dash: [1,5])) // Specify the dash pattern here
-                    .foregroundColor(Color("TextPrimary").opacity(0.5))
+                    .stroke(style: StrokeStyle(lineWidth: 1.5, dash: [1,5])) // Specify the dash pattern here
+                    .foregroundColor(Color("TextPrimary"))
             )
             .background(
                 NavigationLink(
                     destination: CreateTaskScreen(isPresented: $showEditTaskView,
                                                   accountId: accountId,
                                                   description: $recommendedText,
-                                                 dueDate: $selectedDate,
-                                                 crmOrganizationUserId: $selectedUserId)
+                                                  dueDate: $selectedDate,
+                                                  crmOrganizationUserId: $selectedUserId)
                     .navigationBarBackButtonHidden(true),
                     isActive: self.$showEditTaskView
                 ) {
@@ -238,4 +244,28 @@ struct SuggestedTaskCardView: View {
             )
         }
     }
+    
+    private func disableSaveButton() -> Bool {
+        return accountId.isEmpty || recommendedText.isEmpty || selectedUserId.isEmpty || isDateSelected
+       }
+}
+
+struct NoHitTesting: ViewModifier {
+    func body(content: Content) -> some View {
+        SwiftUIWrapper { content }.allowsHitTesting(false)
+    }
+}
+
+extension View {
+    func userInteractionDisabled() -> some View {
+        self.modifier(NoHitTesting())
+    }
+}
+
+struct SwiftUIWrapper<T: View>: UIViewControllerRepresentable {
+    let content: () -> T
+    func makeUIViewController(context: Context) -> UIHostingController<T> {
+        UIHostingController(rootView: content())
+    }
+    func updateUIViewController(_ uiViewController: UIHostingController<T>, context: Context) {}
 }
