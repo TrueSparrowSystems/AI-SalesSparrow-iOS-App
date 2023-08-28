@@ -9,14 +9,18 @@ import SwiftUI
 
 struct DatePickerView: View {
     @Binding var selectedDate: Date
+    var onTap: (() -> Void)?
     
     var body: some View {
         
         // Date and time picker
-        DatePicker("", selection: $selectedDate, in: Date()..., displayedComponents:  [.date])
+        DatePicker("", selection: $selectedDate, displayedComponents:  [.date])
             .datePickerStyle(.compact)
             .labelsHidden()
-            .accentColor(Color.white)
+            .accentColor(Color.blue)
+            .onTapGesture {
+                onTap?()
+            }
     }
     
     private var dateFormatter: DateFormatter {

@@ -54,6 +54,7 @@ struct UserSearchView: View {
                 UserListView(
                     listData: userSearchViewModel.userListData,
                     userIds: userSearchViewModel.userListData.crm_organization_user_ids,
+                    onUserSelect: onUserSelect,
                     isPresented: $isPresented,
                     removeSearchTextFocus: removeSearchTextFocus,
                     onScroll: onScroll

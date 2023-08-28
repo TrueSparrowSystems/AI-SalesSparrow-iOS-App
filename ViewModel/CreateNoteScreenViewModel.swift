@@ -7,19 +7,26 @@
 
 import Foundation
 
-// A struct that represents the meta data of the create note
+// A struct that represents the meta data of the create note API
 struct CreateNoteStruct: Codable {
     var note_id: String
 }
-// A struct that represents the meta data of the generate suggested task
+
+// A struct that represents the meta data of the suggestion entity
+struct SuggestionStruct: Codable, Equatable {
+    var description: String
+    var due_date: String
+}
+
+// A struct that represents the meta data of the generate suggested task API
 struct GenerateSuggestionStruct: Codable {
-    var text: String
+    var add_task_suggestions: [SuggestionStruct]
 }
 
 // A class that represents the view model of the create note
 class CreateNoteScreenViewModel: ObservableObject {
     @Published var createNoteData = CreateNoteStruct(note_id: "")
-    @Published var suggestedTaskData = GenerateSuggestionStruct(text: "")
+    @Published var suggestedTaskData = GenerateSuggestionStruct(add_task_suggestions: [])
     @Published var isCreateNoteInProgress = false
     @Published var isSuggestionGenerationInProgress = false
     var apiService = DependencyContainer.shared.apiService
@@ -40,6 +47,7 @@ class CreateNoteScreenViewModel: ObservableObject {
             case .success(_):
                 DispatchQueue.main.async {
                     onSuccess()
+                    self?.generateSuggestion(text: text!, onSuccess: {}, onFailure: {})
                     self?.isCreateNoteInProgress = false
                     ToastViewModel.shared.showToast(_toast: Toast(style: .success, message: "Note is saved to your Salesforce Account"))
                 }
@@ -68,9 +76,10 @@ class CreateNoteScreenViewModel: ObservableObject {
         apiService.post(type: GenerateSuggestionStruct.self, endpoint: "/v1/suggestions/crm-actions", params: params){
             [weak self]  result, statusCode in
             switch result {
-            case .success(_):
+            case .success(let results):
                 DispatchQueue.main.async {
                     onSuccess()
+                    self?.suggestedTaskData.add_task_suggestions = results.add_task_suggestions
                     self?.isSuggestionGenerationInProgress = false
                 }
                 
@@ -79,10 +88,19 @@ class CreateNoteScreenViewModel: ObservableObject {
                     print("error loading data: \(error)")
                     onFailure()
                     self?.isSuggestionGenerationInProgress = false
+                    self?.suggestedTaskData.add_task_suggestions = [SuggestionStruct(description: "Do the laundry and got to gym, eat healthy", due_date: "2023-08-25"),
+                                                                    SuggestionStruct(description: "Buy groceries", due_date: "2023-08-26"),
+                                                                    SuggestionStruct(description: "Call mom", due_date: "2023-08-27")]
                     ToastViewModel.shared.showToast(_toast: Toast(style: .error, message: error.message))
                 }
             }
             
+        }
+    }
+    
+    func removeSuggestion(at index: Int) {
+        if suggestedTaskData.add_task_suggestions.indices.contains(index) {
+            suggestedTaskData.add_task_suggestions.remove(at: index)
         }
     }
 }
