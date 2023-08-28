@@ -28,7 +28,7 @@ class CreateTaskViewModel: ObservableObject {
         }
         self.isCreateTaskInProgress = true
         
-        let params: [String: Any] = ["crm_organization_user_id": crmOrganizationUserId, "description": description, "due_date": dueDate]
+        let params: [String: Any] = ["crm_organization_user_id": crmOrganizationUserId, "description": description, "due_date": BasicHelper.getDateStringFromDate(from: dueDate, dateFormat: "yyyy-MM-dd")]
         
         apiService.post(type: CreateTaskStruct.self, endpoint: "/v1/accounts/\(accountId)/tasks", params: params){
             [weak self]  result, statusCode in

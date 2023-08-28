@@ -11,13 +11,12 @@ struct CreateTaskScreen: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @EnvironmentObject var createTaskViewModel : CreateTaskViewModel
     
-    @Binding var isPresented: Bool // This binding will control the presentation of the User search view sheet
     var accountId: String
     @Binding var description: String
     @Binding var dueDate: Date
     @Binding var crmOrganizationUserId: String
-    @State var selectedUserName: String = ""
-    @State var selectedUserId: String = ""
+    @Binding var isDateSelected: Bool
+    @Binding var selectedUserName: String
     @FocusState private var focused: Bool
     @State var isTaskSaved = false
     @State private var showUserSearchView: Bool = false
@@ -33,7 +32,6 @@ struct CreateTaskScreen: View {
                     .onTapGesture {
                         self.presentationMode.wrappedValue.dismiss()
                     }
-                    .padding()
                 
                 Spacer()
                 
@@ -75,14 +73,14 @@ struct CreateTaskScreen: View {
                     .clipShape(RoundedRectangle(cornerRadius: 5))
                 })
                 .accessibilityIdentifier("btn_save_task")
-                .disabled(disableSaveButton())
-                .opacity(disableSaveButton() ? 0.7 : 1)
-                .padding()
+                .disabled(accountId.isEmpty || description.isEmpty || crmOrganizationUserId.isEmpty || !isDateSelected || createTaskViewModel.isCreateTaskInProgress || isTaskSaved)
+                .opacity(accountId.isEmpty || description.isEmpty || crmOrganizationUserId.isEmpty || !isDateSelected ? 0.7 : 1)
             }
-        
+            .padding(.vertical)
+            
             HStack {
                 Text("Assign to")
-                    .frame(width: 75,height: 30)
+                    .frame(width: 75,height: 30, alignment: .leading)
                     .font(.custom("Nunito-Regular",size: 14))
                     .foregroundColor(Color("TextPrimary"))
                     .accessibilityIdentifier("txt_add_tasks_assign_to")
@@ -109,11 +107,12 @@ struct CreateTaskScreen: View {
                             .font(.custom("Nunito-Bold", size: 12))
                             .accessibilityIdentifier("txt_add_task_selected_user")
                     }
+                    Spacer()
                     
                     Image("ArrowDown")
                         .frame(width: 7, height: 4)
-                        .padding(.trailing, 6)
                 }
+                .padding(.horizontal, 10)
                 .frame(width: 160, height: 30)
                 .overlay(
                     RoundedRectangle(cornerRadius: 4)
@@ -122,8 +121,8 @@ struct CreateTaskScreen: View {
                 .sheet(isPresented: $showUserSearchView){
                     UserSearchView(isPresented: $showUserSearchView,
                                    onUserSelect: { userId, userName in
-                        selectedUserName = userId
-                        selectedUserId = userName
+                        selectedUserName = userName
+                        crmOrganizationUserId = userId
                     })
                 }
                 
@@ -133,24 +132,57 @@ struct CreateTaskScreen: View {
             
             HStack {
                 Text("Due")
-                    .frame(width: 75,height: 30)
+                    .frame(width: 75,height: 30, alignment: .leading)
                     .font(.custom("Nunito-Regular",size: 14))
                     .foregroundColor(Color("TextPrimary"))
                     .accessibilityIdentifier("txt_add_tasks_due")
                 
-                Button(action:{
-                    // TODO: Active picker flow
-                }){
-                    Text("Select")
-                        .font(.custom("Nunito-Bold",size: 12))
-                        .foregroundColor(Color("TextPrimary"))
-                        .accessibilityIdentifier("txt_add_tasks_select")
-                        .padding()
+                ZStack{
+                    DatePickerView(selectedDate: $dueDate, onTap: {
+                        isDateSelected = true
+                    })
+                    .background(.white)
+                    .cornerRadius(8)
                     
-                    Image("CalendarCheck")
-                        .frame(width: 15, height: 15)
-                        .padding(.leading, 10)
+                    if(!isDateSelected){
+                        HStack (spacing: 0) {
+                            Text("Select")
+                                .foregroundColor(Color("TermsPrimary"))
+                                .font(.custom("Nunito-Light", size: 12))
+                                .tracking(0.5)
+                                .padding(0)
+                            
+                            Spacer()
+                            
+                            Image("EmptyCalendar")
+                                .frame(width: 15, height: 15)
+                                .padding(.leading, 6)
+                        }
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .background(.white)
+                        .userInteractionDisabled()
+                        
+                    }
+                    else{
+                        HStack (spacing: 0) {
+                            Text(BasicHelper.getDateStringFromDate(from: dueDate))
+                                .foregroundColor(Color("TermsPrimary"))
+                                .font(.custom("Nunito-Bold", size: 12))
+                                .tracking(0.5)
+                                .padding(0)
+                            
+                            Spacer()
+                            
+                            Image("EmptyCalendar")
+                                .frame(width: 15, height: 15)
+                                .padding(.leading, 10)
+                        }
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .background(.white)
+                        .userInteractionDisabled()
+                    }
                 }
+                .padding(.horizontal, 10)
                 .frame(width: 160, height: 30)
                 .overlay(
                     RoundedRectangle(cornerRadius: 4)
@@ -160,9 +192,7 @@ struct CreateTaskScreen: View {
                 Spacer()
             }
             
-            Divider()
-            
-            TextField("Add Note",text: $description, axis: .vertical)
+            TextField("Add Task",text: $description, axis: .vertical)
                 .foregroundColor(Color("TextPrimary"))
                 .font(.custom("Nunito-SemiBold", size: 18))
                 .focused($focused)
@@ -170,11 +200,9 @@ struct CreateTaskScreen: View {
                 .onTapGesture {
                     // Do nothing. Kept on tap here to override tap action over parent tap action
                 }
+                .padding(.top)
         }
-        .padding()
+        .padding(.horizontal)
+        .navigationBarBackButtonHidden(true)
     }
-    
-    private func disableSaveButton() -> Bool {
-           return accountId.isEmpty || description.isEmpty || crmOrganizationUserId.isEmpty || selectedUserName.isEmpty
-       }
 }

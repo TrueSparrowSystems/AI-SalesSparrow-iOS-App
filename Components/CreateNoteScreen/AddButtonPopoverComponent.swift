@@ -10,6 +10,15 @@ import SwiftUI
 
 struct AddButtonPopoverComponent: View{
     @Binding var isPopoverVisible : Bool
+    var accountId: String
+    @State var addTaskActivated = false
+    
+    @State var recommendedText: String = ""
+    @State var selectedDate: Date = Date()
+    @State var selectedUserId: String = ""
+    @State var selectedUserName: String = ""
+    @State var isDateSelected = false
+    
     var body: some View {
         
         VStack {
@@ -19,23 +28,41 @@ struct AddButtonPopoverComponent: View{
             }
             .contentShape(Rectangle())
             .onTapGesture {
-                isPopoverVisible.toggle()
-                print("Add Task")
+                addTaskActivated = true
             }
-            HStack{
-                Image("EventsIcon")
-                Text("Add Event")
-            }
-            .contentShape(Rectangle())
-            .onTapGesture {
-                isPopoverVisible.toggle()
-                print("Add Event")
-            }
+            // TODO: Uncomment once we add create event flow
+            //            HStack{
+            //                Image("EventsIcon")
+            //                Text("Add Event")
+            //            }
+            //            .contentShape(Rectangle())
+            //            .onTapGesture {
+            //                isPopoverVisible.toggle()
+            //                print("Add Event")
+            //            }
         }
         .padding(10)
-        .background(Color("Background"))
-        .border(Color(hex: "#DBDEEB"), width: 1)
-        .frame(width: 200, height: 100)
+        .cornerRadius(4)
+        .background(Color("CardBackground"))
+        .overlay(
+            RoundedRectangle(cornerRadius: 4)
+                .stroke(Color("CardBorder"), lineWidth: 1)
+        )
+        .frame(width: 200, height: 50)
+        .background{
+            NavigationLink(destination:
+                            CreateTaskScreen(accountId: accountId,
+                                             description: $recommendedText,
+                                             dueDate: $selectedDate,
+                                             crmOrganizationUserId: $selectedUserId,
+                                             isDateSelected: $isDateSelected,
+                                             selectedUserName: $selectedUserName),
+                           isActive: self.$addTaskActivated
+            ) {
+                EmptyView()
+            }
+            .hidden()
+        }
         
     }
 }

@@ -11,6 +11,12 @@ struct TasksList: View {
     let accountId: String
     let accountName: String
     
+    @State var recommendedText: String = ""
+    @State var selectedDate: Date = Date()
+    @State var selectedUserId: String = ""
+    @State var selectedUserName: String = ""
+    @State var isDateSelected = false
+    
     @EnvironmentObject var acccountDetailScreenViewModelObject: AccountDetailViewScreenViewModel
     @Binding var propagateClick : Int
     
@@ -30,8 +36,7 @@ struct TasksList: View {
                 
                 Spacer()
                 
-                //TODO: replace the navigation to create task once ready
-                NavigationLink(destination: CreateNoteScreen(accountId: accountId, accountName: accountName, isAccountSelectable: false)
+                NavigationLink(destination: CreateTaskScreen(accountId: accountId, description: $recommendedText, dueDate: $selectedDate, crmOrganizationUserId: $selectedUserId, isDateSelected: $isDateSelected, selectedUserName: $selectedUserName)
                 ){
                     HStack{
                         Image("AddIcon")

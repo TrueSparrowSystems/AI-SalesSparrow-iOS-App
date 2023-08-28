@@ -94,23 +94,23 @@ struct AccountRowView: View {
             
             
             //TODO: On Field customization remove hardcoded values and show all additional_fields
-            if((account.additional_fields["website"]) != nil){
+            if(!((account.additional_fields?["website"] ?? "") ?? "").isEmpty){
                 HStack{
                     Image("Link")
                         .resizable()
                         .frame(width: 16, height: 16)
-                    Text(account.additional_fields["website"]!!)
+                    Text(account.additional_fields?["website"]! ?? "")
                         .font(.custom("Nunito-Regular", size: 14))
                         .foregroundColor(Color("TermsPrimary"))
                     
                 }
                 .onTapGesture {
-                    openURL(URL(string: account.additional_fields["website"]!!)!)
+                    openURL(URL(string: account.additional_fields?["website"]! ?? "")!)
                 }
                 .padding(.top, 2)
             }
             
-            let accountContactAssociation = acccountListViewModelObject.accountListData.account_contact_associations_map_by_id[account.account_contact_associations_id]
+            let accountContactAssociation = acccountListViewModelObject.accountListData.account_contact_associations_map_by_id[account.account_contact_associations_id ?? ""]
             
             if((accountContactAssociation) != nil){
                 let contactIds = accountContactAssociation?.contact_ids
@@ -129,8 +129,8 @@ struct AccountRowView: View {
                             .tracking(0.5)
                             .foregroundColor(Color("TermsPrimary"))
                         
-                        if((contact?.additional_fields["email"]) != nil){
-                            Text((contact?.additional_fields["email"])!!)
+                        if(!((contact?.additional_fields?["email"] ?? "") ?? "").isEmpty){
+                            Text((contact?.additional_fields?["email"])! ?? "")
                                 .font(.custom("Nunito-Regular",size: 14))
                                 .foregroundColor(Color("TermsPrimary"))
                         }

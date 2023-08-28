@@ -11,14 +11,14 @@ import Foundation
 struct Account: Identifiable, Codable {
     var id: String
     var name: String
-    var additional_fields: [String: String?]
-    var account_contact_associations_id: String
+    var additional_fields: [String: String?]?
+    var account_contact_associations_id: String?
 }
 
 struct Contact: Identifiable,Codable {
     var id: String
     var name: String
-    var additional_fields: [String: String?]
+    var additional_fields: [String: String?]?
 }
 
 struct AccountContactAssociation: Codable {
@@ -60,59 +60,6 @@ class AccountListViewModel: ObservableObject {
             }
         }
         
-        //TODO: remove this dummy data once api is available
-        self.accountListData.account_ids = ["account_1","account_2","account_3"]
-        self.accountListData.account_map_by_id = [
-            "account_1":
-                Account(id: "account_1",
-                        name: "Test Account 1",
-                        additional_fields: ["website": "https://account.com"],
-                        account_contact_associations_id: "account_contact_association_1"
-                       ),
-            "account_2":
-                Account(
-                    id: "account_2",
-                    name: "Test Account 2",
-                    additional_fields: ["website": "https://truesparrow.com"],
-                    account_contact_associations_id: "account_contact_association_2"
-                ),
-            "account_3":
-                Account(
-                    id: "account_3",
-                    name: "Test Account 3",
-                    additional_fields: ["website": "https://truesparrow.com"],
-                    account_contact_associations_id: "account_contact_association_3"
-                )
-        ]
-        self.accountListData.contact_map_by_id = [
-            "contact_1":
-                Contact(
-                    id: "contact_1",
-                    name: "Test Contact 1",
-                    additional_fields: ["email": "contact_1@truesparrow.com"]
-                ),
-            "contact_2":
-                Contact(
-                    id: "contact_2",
-                    name: "Test Contact 2",
-                    additional_fields: ["email": "contact_2@truesparrow.com"]
-                ),
-        ]
-        self.accountListData.account_contact_associations_map_by_id = [
-            "account_contact_association_1":
-                AccountContactAssociation(
-                    contact_ids: ["contact_1", "contact_2"]
-                ),
-            "account_contact_association_2":
-                AccountContactAssociation(
-                    contact_ids: ["contact_2", "contact_1"]
-                ),
-            "account_contact_association_3":
-                AccountContactAssociation(
-                    contact_ids:  ["contact_1"]
-                )
-        ]
-        
         apiService.get(type: AccountListStruct.self, endpoint: "/v1/accounts/feed", params: apiParams){
             [weak self] result, statusCode in
             
@@ -128,8 +75,7 @@ class AccountListViewModel: ObservableObject {
                     self?.accountListData.next_page_payload = results.next_page_payload
                     
                 case .failure(let error):
-                    //TODO: Uncomment this line once API is available
-                    //                        self?.accountListData = .init(account_ids: [], account_map_by_id: [:], contact_map_by_id: [:], account_contact_associations_map_by_id: [:], next_page_payload: nil)
+                    self?.accountListData = .init(account_ids: [], account_map_by_id: [:], contact_map_by_id: [:], account_contact_associations_map_by_id: [:], next_page_payload: nil)
                     ToastViewModel.shared.showToast(_toast: Toast(style: .error, message: error.message))
                     print("Error loading data: \(error)")
                 }

@@ -13,7 +13,7 @@ struct CreateNoteScreen : View {
     
     @State var text: String = ""
     @State var isSaveInProgress = false
-    @State var isNoteSaved = true   // TODO: Revert this
+    @State var isNoteSaved = false
     @State var accountId = ""
     @State var accountName = ""
     @State var isAccountSelectable = true
@@ -86,8 +86,8 @@ struct CreateNoteScreen : View {
                     .clipShape(RoundedRectangle(cornerRadius: 5))
                 })
                 .accessibilityIdentifier("btn_save_note")
-                .disabled(isNoteSaved || isSaveInProgress || accountId == "" || text == "")
-                .opacity(accountId == "" || text == "" ? 0.7 : 1)
+                .disabled(isNoteSaved || isSaveInProgress || accountId.isEmpty || text.isEmpty)
+                .opacity(accountId.isEmpty || text.isEmpty ? 0.7 : 1)
             }
             .padding(.vertical, 12)
             
@@ -166,84 +166,85 @@ struct CreateNoteScreen : View {
             .contentShape(Rectangle())
             
             if(isNoteSaved){
-                if(createNoteScreenViewModel.isSuggestionGenerationInProgress){
-                    HStack{
-                        Image("Sparkle")
-                        Text("Getting recommendations")
-                            .foregroundColor(Color("TextPrimary"))
-                            .font(.custom("Nunito-SemiBold", size: 16))
-                        Spacer()
-                    }
-                    
-                    VStack(spacing: 0) {
-                        ProgressView()
-                            .tint(Color("BrinkPink"))
-                            .controlSize(.large)
-                        
-                        Text("Please wait, we're checking to recommend tasks or events for you.")
-                            .foregroundColor(Color("TermsPrimary"))
-                            .font(.custom("Nunito-SemiBold" ,size: 14))
-                            .multilineTextAlignment(.center)
-                            .padding(.top, 16)
-                    }
-                    .padding(.vertical,16)
-                    .frame(maxWidth: .infinity)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 4)
-                            .stroke(style: StrokeStyle(lineWidth: 1.5, dash: [1,5]))
-                            .foregroundColor(Color("TextPrimary"))
-                    )
-                }
-                else if(createNoteScreenViewModel.suggestedTaskData.add_task_suggestions.count == 0){ // check for count of suggested task array
-                    // Show no recommendation message
-                    VStack(spacing: 0) {
-                        Image("Check")
-                            .frame(width: 28, height: 28, alignment: .center)
-                        
-                        Text("You are all set, no recommendation for now!")
-                            .foregroundColor(Color("TermsPrimary"))
-                            .font(.custom("Nunito-SemiBold" ,size: 14))
-                            .frame(alignment: .center)
-                            .padding(.top, 16)
-                    }
-                    .padding(.vertical,16)
-                    .frame(maxWidth: .infinity)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 4)
-                            .stroke(style: StrokeStyle(lineWidth: 1.5, dash: [1,5]))
-                            .foregroundColor(Color("TextPrimary"))
-                    )
-                } else {
-                    HStack{
-                        Image("Sparkle")
-                        Text("We have some recommendations")
-                            .foregroundColor(Color("TextPrimary"))
-                            .font(.custom("Nunito-SemiBold", size: 16))
-                        Spacer()
-                        Button{
-                            isPopoverVisible.toggle()
-                        } label: {
-                            Image("AddIcon")
-                                .frame(width: 20, height: 20)
+                VStack{
+                    if(createNoteScreenViewModel.isSuggestionGenerationInProgress){
+                        HStack{
+                            Image("Sparkle")
+                            Text("Getting recommendations")
+                                .foregroundColor(Color("TextPrimary"))
+                                .font(.custom("Nunito-SemiBold", size: 16))
+                            Spacer()
                         }
-                        .overlay{
-                            if isPopoverVisible {
-                                AddButtonPopoverComponent(isPopoverVisible: $isPopoverVisible)
-                                    .offset(x: -55,y: 55)
+                        
+                        VStack(spacing: 0) {
+                            ProgressView()
+                                .tint(Color("BrinkPink"))
+                                .controlSize(.large)
+                            
+                            Text("Please wait, we're checking to recommend tasks or events for you.")
+                                .foregroundColor(Color("TermsPrimary"))
+                                .font(.custom("Nunito-SemiBold" ,size: 14))
+                                .multilineTextAlignment(.center)
+                                .padding(.top, 16)
+                        }
+                        .padding(.vertical,16)
+                        .frame(maxWidth: .infinity)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 4)
+                                .stroke(style: StrokeStyle(lineWidth: 1.5, dash: [1,5]))
+                                .foregroundColor(Color("TextPrimary"))
+                        )
+                    }
+                    else if(createNoteScreenViewModel.suggestedTaskData.add_task_suggestions.count == 0){ // check for count of suggested task array
+                        // Show no recommendation message
+                        VStack(spacing: 0) {
+                            Image("Check")
+                                .frame(width: 28, height: 28, alignment: .center)
+                            
+                            Text("You are all set, no recommendation for now!")
+                                .foregroundColor(Color("TermsPrimary"))
+                                .font(.custom("Nunito-SemiBold" ,size: 14))
+                                .frame(alignment: .center)
+                                .padding(.top, 16)
+                        }
+                        .padding(.vertical,16)
+                        .frame(maxWidth: .infinity)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 4)
+                                .stroke(style: StrokeStyle(lineWidth: 1.5, dash: [1,5]))
+                                .foregroundColor(Color("TextPrimary"))
+                        )
+                    } else {
+                        HStack{
+                            Image("Sparkle")
+                            Text("We have some recommendations")
+                                .foregroundColor(Color("TextPrimary"))
+                                .font(.custom("Nunito-SemiBold", size: 16))
+                            Spacer()
+                            Button{
+                                isPopoverVisible.toggle()
+                            } label: {
+                                Image("AddIcon")
+                                    .frame(width: 20, height: 20)
                             }
+                            
                         }
-                    }
-                    
-                    ForEach(createNoteScreenViewModel.suggestedTaskData.add_task_suggestions.indices, id: \.self) { index in
-                        if let suggestion = createNoteScreenViewModel.suggestedTaskData.add_task_suggestions.indices.contains(index) ?
-                            createNoteScreenViewModel.suggestedTaskData.add_task_suggestions[index] : nil {
+                        let addTaskSuggestions = createNoteScreenViewModel.suggestedTaskData.add_task_suggestions
+                        ForEach(Array(addTaskSuggestions.enumerated()), id: \.offset) { index, suggestion in
                             SuggestedTaskCardView(accountId: accountId, suggestion: suggestion,index: index)
                         }
                     }
+                    
+                }
+                .overlay(alignment: .topTrailing){
+                    if isPopoverVisible {
+                        AddButtonPopoverComponent(isPopoverVisible: $isPopoverVisible, accountId: accountId)
+                            .offset(x: 35,y: 25)
+                    }
                 }
             }
-            
         }
+        .scrollIndicators(.hidden)
         .gesture(DragGesture().onChanged{_ in
             if(isPopoverVisible){
                 isPopoverVisible.toggle()
@@ -256,12 +257,11 @@ struct CreateNoteScreen : View {
         .navigationBarBackButtonHidden(true)
         .background(Color("Background"))
         .onAppear {
-            // TODO: Revert this
-            createNoteScreenViewModel.generateSuggestion(text: "", onSuccess: {}, onFailure: {})
             // Adding a delay for view to render
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.05){
                 focused = true
             }
+            isPopoverVisible = false
         }
         .onTapGesture {
             if(isPopoverVisible){

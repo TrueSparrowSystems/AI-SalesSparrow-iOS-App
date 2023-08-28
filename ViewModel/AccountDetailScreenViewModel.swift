@@ -28,7 +28,7 @@ struct Task: Identifiable, Codable {
     let id: String
     let creator_name: String
     let crm_organization_user_name: String
-    let description: String
+    let description: String?
     let due_date: String
     let last_modified_time: String
 }
@@ -112,31 +112,7 @@ class AccountDetailViewScreenViewModel: ObservableObject {
                     self?.isTaskLoading = false
                 case .failure(let error):
                     print("error loading data: \(error)")
-                    //TODO: remove the temp code once api is deployed
-                    
-                    self?.taskData.task_ids = [
-                        "00U1e000003TUB8EAO","00U1e000003TUB8EA1"
-                    ]
-                    self?.taskData.task_map_by_id = [
-                        "00U1e000003TUB8EAO": Task(
-                            id: "00U1e000003TUB8EAO",
-                            creator_name: "xyz",
-                            crm_organization_user_name: "abc",
-                            description: "Complete remaining task",
-                            due_date: "2019-10-12",
-                            last_modified_time: "2019-10-12T07:20:50.52Z"
-                        ),
-                        "00U1e000003TUB8EA1": Task(
-                            id: "00U1e000003TUB8EA1",
-                            creator_name: "Jakob Adison",
-                            crm_organization_user_name: "Zaire",
-                            description: "Reach out to Romit for to set a time for the next sync with their CTO",
-                            due_date: "2023-10-12",
-                            last_modified_time: "2023-08-20T07:20:50.52Z"
-                        )
-                    ]
-                    
-                    //                    self?.taskData = TasksListStruct(task_ids: [], task_map_by_id: [:])
+                    self?.taskData = TasksListStruct(task_ids: [], task_map_by_id: [:])
                     self?.isTaskLoading = false
                     ToastViewModel.shared.showToast(_toast: Toast(style: .error, message: error.message))
                 }

@@ -15,11 +15,11 @@ struct CreateNoteStruct: Codable {
 // A struct that represents the meta data of the suggestion entity
 struct SuggestionStruct: Codable, Equatable {
     var description: String
-    var due_date: String
+    var due_date: String?
 }
 
 // A struct that represents the meta data of the generate suggested task API
-struct GenerateSuggestionStruct: Codable {
+struct GenerateSuggestionStruct: Codable, Equatable {
     var add_task_suggestions: [SuggestionStruct]
 }
 
@@ -88,9 +88,6 @@ class CreateNoteScreenViewModel: ObservableObject {
                     print("error loading data: \(error)")
                     onFailure()
                     self?.isSuggestionGenerationInProgress = false
-                    self?.suggestedTaskData.add_task_suggestions = [SuggestionStruct(description: "Do the laundry and got to gym, eat healthy", due_date: "2023-08-25"),
-                                                                    SuggestionStruct(description: "Buy groceries", due_date: "2023-08-26"),
-                                                                    SuggestionStruct(description: "Call mom", due_date: "2023-08-27")]
                     ToastViewModel.shared.showToast(_toast: Toast(style: .error, message: error.message))
                 }
             }
