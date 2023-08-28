@@ -56,6 +56,7 @@ class UserStateViewModel: ObservableObject {
                 DispatchQueue.main.async {
                     self?.isLogOutInProgress = false
                     self?.isUserLoggedIn = false
+                    self?.currentUser = CurrentUserStruct(id: "", name: "", email: "")
                     HTTPCookieStorage.shared.cookies?.forEach(HTTPCookieStorage.shared.deleteCookie)
                     
                 }
@@ -95,12 +96,13 @@ class UserStateViewModel: ObservableObject {
                 [weak self]  result, statusCode in
                 
                 DispatchQueue.main.async {
-                    self?.isDisconnectInProgress = false
-                    self?.isUserLoggedIn = false
-                    HTTPCookieStorage.shared.cookies?.forEach(HTTPCookieStorage.shared.deleteCookie)                    
+                    HTTPCookieStorage.shared.cookies?.forEach(HTTPCookieStorage.shared.deleteCookie)
+                    self.isDisconnectInProgress = false
+                    self.currentUser = CurrentUserStruct(id: "", name: "", email: "")
+                    self.isUserLoggedIn = false
                 }
             }
         }
     }
-
+    
 }

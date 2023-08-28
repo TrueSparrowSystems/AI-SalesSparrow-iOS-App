@@ -21,7 +21,7 @@ class CreateTaskViewModel: ObservableObject {
     var apiService = DependencyContainer.shared.apiService
     
     // A function to create note from given text and account id.
-    func createTask(accountId: String, assignedToName: String, crmOrganizationUserId: String, description: String, dueDate: Date){
+    func createTask(accountId: String, assignedToName: String, crmOrganizationUserId: String, description: String, dueDate: Date, onSuccess : @escaping(String)-> Void){
         
         guard !self.isCreateTaskInProgress else {
             return
@@ -33,7 +33,8 @@ class CreateTaskViewModel: ObservableObject {
         apiService.post(type: CreateTaskStruct.self, endpoint: "/v1/accounts/\(accountId)/tasks", params: params){
             [weak self]  result, statusCode in
             switch result {
-            case .success(_):
+            case .success(let results):
+                onSuccess(results.task_id)
                 DispatchQueue.main.async {
                     self?.isCreateTaskInProgress = false
                     ToastViewModel.shared.showToast(_toast: Toast(style: .success, message: "Task Saved and assigned to \(assignedToName)"))

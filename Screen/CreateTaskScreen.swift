@@ -17,14 +17,15 @@ struct CreateTaskScreen: View {
     @Binding var crmOrganizationUserId: String
     @Binding var isDateSelected: Bool
     @Binding var selectedUserName: String
+    @Binding var isTaskSaved: Bool
+    @Binding var taskId: String
     @FocusState private var focused: Bool
-    @State var isTaskSaved = false
     @State private var showUserSearchView: Bool = false
     
     var body: some View {
         ScrollView{
             HStack{
-                Text("Cancel")
+                Text(isTaskSaved ? "Done" : "Cancel")
                     .font(.custom("Nunito-Bold", size: 14))
                     .padding(.vertical, 10)
                     .foregroundColor(Color("CancelText"))
@@ -36,7 +37,10 @@ struct CreateTaskScreen: View {
                 Spacer()
                 
                 Button(action: {
-                    createTaskViewModel.createTask(accountId: accountId, assignedToName: selectedUserName, crmOrganizationUserId: crmOrganizationUserId, description: description, dueDate: dueDate)
+                    createTaskViewModel.createTask(accountId: accountId, assignedToName: selectedUserName, crmOrganizationUserId: crmOrganizationUserId, description: description, dueDate: dueDate){taskId in
+                        self.taskId = taskId
+                        isTaskSaved = true
+                    }
                 }, label:{
                     HStack(alignment: .center, spacing: 0){
                         if(createTaskViewModel.isCreateTaskInProgress){
@@ -46,24 +50,24 @@ struct CreateTaskScreen: View {
                             Text("Adding Task...")
                                 .foregroundColor(.white)
                                 .font(.custom("Nunito-Medium", size: 12))
-                                .accessibilityIdentifier("txt_create_note_saving")
+                                .accessibilityIdentifier("txt_create_task_saving")
                             
                         }else if(isTaskSaved){
                             Image("CheckMark")
                                 .resizable()
                                 .frame(width: 12, height: 12)
                                 .padding(.trailing, 6)
-                                .accessibilityIdentifier("img_create_note_checkmark")
+                                .accessibilityIdentifier("img_create_task_checkmark")
                             
                             Text("Saved")
                                 .foregroundColor(.white)
                                 .font(.custom("Nunito-Medium", size: 12))
-                                .accessibilityIdentifier("txt_create_note_saved")
+                                .accessibilityIdentifier("txt_create_task_saved")
                         }else{
                             Text("Add Task")
                                 .foregroundColor(.white)
                                 .font(.custom("Nunito-Medium", size: 12))
-                                .accessibilityIdentifier("txt_create_note_save")
+                                .accessibilityIdentifier("txt_create_task_save")
                         }
                     }
                     .frame(width: createTaskViewModel.isCreateTaskInProgress ? 115 : 68, height: 32)
@@ -112,6 +116,7 @@ struct CreateTaskScreen: View {
                     Image("ArrowDown")
                         .frame(width: 7, height: 4)
                 }
+                .disabled(isTaskSaved)
                 .padding(.horizontal, 10)
                 .frame(width: 160, height: 30)
                 .overlay(
@@ -138,11 +143,13 @@ struct CreateTaskScreen: View {
                     .accessibilityIdentifier("txt_add_tasks_due")
                 
                 ZStack{
-                    DatePickerView(selectedDate: $dueDate, onTap: {
-                        isDateSelected = true
-                    })
-                    .background(.white)
-                    .cornerRadius(8)
+                    if(!isTaskSaved){
+                        DatePickerView(selectedDate: $dueDate, onTap: {
+                            isDateSelected = true
+                        })
+                        .background(.white)
+                        .cornerRadius(8)
+                    }
                     
                     if(!isDateSelected){
                         HStack (spacing: 0) {
@@ -192,15 +199,23 @@ struct CreateTaskScreen: View {
                 Spacer()
             }
             
-            TextField("Add Task",text: $description, axis: .vertical)
-                .foregroundColor(Color("TextPrimary"))
-                .font(.custom("Nunito-SemiBold", size: 18))
-                .focused($focused)
-                .accessibilityIdentifier("et_create_note")
-                .onTapGesture {
-                    // Do nothing. Kept on tap here to override tap action over parent tap action
-                }
-                .padding(.top)
+            if(!isTaskSaved){
+                TextField("Add Task",text: $description, axis: .vertical)
+                    .foregroundColor(Color("TextPrimary"))
+                    .font(.custom("Nunito-SemiBold", size: 18))
+                    .focused($focused)
+                    .accessibilityIdentifier("et_create_task")
+                    .onTapGesture {
+                        // Do nothing. Kept on tap here to override tap action over parent tap action
+                    }
+                    .padding(.top)
+            }else{
+                Text(description)
+                    .foregroundColor(Color("TextPrimary"))
+                    .font(.custom("Nunito-SemiBold", size: 18))
+                    .accessibilityIdentifier("txt_create_task_description")
+                    .padding(.top)
+            }
         }
         .padding(.horizontal)
         .navigationBarBackButtonHidden(true)

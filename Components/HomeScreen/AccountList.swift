@@ -10,6 +10,7 @@ import SwiftUI
 struct AccountList: View {
     @EnvironmentObject var acccountListViewModelObject : AccountListViewModel
     @State var accountDetailsScreenActivated = false
+    @State var fetchFirstPage = true
     
     var body: some View {
         VStack{
@@ -65,7 +66,10 @@ struct AccountList: View {
             }
         }
         .onAppear{
-            acccountListViewModelObject.fetchData()
+            if(self.fetchFirstPage){
+                self.fetchFirstPage = false
+                acccountListViewModelObject.fetchData()
+            }
         }
         
     }

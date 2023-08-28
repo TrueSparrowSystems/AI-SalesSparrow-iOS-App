@@ -17,7 +17,9 @@ struct AddButtonPopoverComponent: View{
     @State var selectedDate: Date = Date()
     @State var selectedUserId: String = ""
     @State var selectedUserName: String = ""
+    @State var taskId: String = ""
     @State var isDateSelected = false
+    @State var isTaskSaved = false
     
     var body: some View {
         
@@ -56,7 +58,9 @@ struct AddButtonPopoverComponent: View{
                                              dueDate: $selectedDate,
                                              crmOrganizationUserId: $selectedUserId,
                                              isDateSelected: $isDateSelected,
-                                             selectedUserName: $selectedUserName),
+                                             selectedUserName: $selectedUserName, 
+                                             isTaskSaved: $isTaskSaved, 
+                                             taskId: $taskId),
                            isActive: self.$addTaskActivated
             ) {
                 EmptyView()

@@ -15,7 +15,9 @@ struct TasksList: View {
     @State var selectedDate: Date = Date()
     @State var selectedUserId: String = ""
     @State var selectedUserName: String = ""
+    @State var taskId: String = ""
     @State var isDateSelected = false
+    @State var isTaskSaved = false
     
     @EnvironmentObject var acccountDetailScreenViewModelObject: AccountDetailViewScreenViewModel
     @Binding var propagateClick : Int
@@ -36,7 +38,7 @@ struct TasksList: View {
                 
                 Spacer()
                 
-                NavigationLink(destination: CreateTaskScreen(accountId: accountId, description: $recommendedText, dueDate: $selectedDate, crmOrganizationUserId: $selectedUserId, isDateSelected: $isDateSelected, selectedUserName: $selectedUserName)
+                NavigationLink(destination: CreateTaskScreen(accountId: accountId, description: $recommendedText, dueDate: $selectedDate, crmOrganizationUserId: $selectedUserId, isDateSelected: $isDateSelected, selectedUserName: $selectedUserName, isTaskSaved: $isTaskSaved, taskId: $taskId)
                 ){
                     HStack{
                         Image("AddIcon")
@@ -203,7 +205,7 @@ struct TaskCardView: View {
                             message: Text("Are you sure you want to delete this task?"),
                             submitText: "Delete",
                             onSubmitPress: {
-                                acccountDetailScreenViewModelObject.deleteTask(accountId: accountId, taskId: taskId)
+                                acccountDetailScreenViewModelObject.deleteTask(accountId: accountId, taskId: taskId){}
                             }
                         ))
                     }){

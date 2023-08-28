@@ -121,7 +121,7 @@ class AccountDetailViewScreenViewModel: ObservableObject {
     }
     
     //A function that deletes task in an account
-    func deleteTask(accountId: String, taskId: String){
+    func deleteTask(accountId: String, taskId: String, onSuccess : @escaping() -> Void){
         
         apiService.delete(type: TaskDeleteStruct.self, endpoint: "/v1/accounts/\(accountId)/tasks/\(taskId)"){
             [weak self] result,statusCode  in
@@ -129,6 +129,7 @@ class AccountDetailViewScreenViewModel: ObservableObject {
             DispatchQueue.main.async {
                 switch result {
                 case .success(_):
+                    onSuccess()
                     self?.taskData.task_ids = self?.taskData.task_ids.filter(){$0 != taskId} ?? []
                     
                 case .failure(let error):
