@@ -17,20 +17,52 @@ final class AccountListUITests: XCTestCase {
         
         let timeout = 2
         
-        var scrollView = app.scrollViews["account_list_scroll_view"]
+        var availableScrollTries = 10
+        
+        var scrollView = app.collectionViews["account_list_scroll_view"]
         XCTAssertTrue(scrollView.waitForExistence(timeout: TimeInterval(timeout)))
         
         var lastCard = app.buttons["account_card_14"]
-        while !lastCard.isHittable{
+        while !lastCard.exists && availableScrollTries > 0{
+            availableScrollTries -= 1
             app.swipeUp()
         }
-        app.swipeUp()
         
-        var nextPageLoader = app.images["next_page_loader"]
-        XCTAssertTrue(nextPageLoader.waitForExistence(timeout: TimeInterval(timeout)))
+        availableScrollTries = 10
         
-        var paginatedCard = app.buttons["account_card_20"]
-        app.swipeUp()
+        var paginatedCard = app.buttons["account_card_25"]
+        while !paginatedCard.exists && availableScrollTries > 0{
+            availableScrollTries -= 1
+            app.swipeUp()
+        }
+        XCTAssertTrue(paginatedCard.waitForExistence(timeout: TimeInterval(timeout)))
+        
+    }
+    func testAccountListWithoutPagination(){
+        let app = XCUIApplication()
+        app.launchArguments = ["isRunningUITests", "AccountListWithoutPagination"]
+        app.launch()
+        
+        let timeout = 2
+        
+        var availableScrollTries = 10
+        
+        var scrollView = app.collectionViews["account_list_scroll_view"]
+        XCTAssertTrue(scrollView.waitForExistence(timeout: TimeInterval(timeout)))
+        
+        var lastCard = app.buttons["account_card_14"]
+        while !lastCard.exists && availableScrollTries > 0{
+            availableScrollTries -= 1
+            app.swipeUp()
+        }
+        
+        availableScrollTries = 10
+        
+        var paginatedCard = app.buttons["account_card_25"]
+        while !paginatedCard.exists && availableScrollTries > 0{
+            availableScrollTries -= 1
+            app.swipeUp()
+        }
         XCTAssertTrue(paginatedCard.waitForExistence(timeout: TimeInterval(timeout)))
         
     }

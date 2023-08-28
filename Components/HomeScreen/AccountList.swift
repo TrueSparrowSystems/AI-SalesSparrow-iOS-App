@@ -25,14 +25,13 @@ struct AccountList: View {
                     ForEach(Array(accountIds.enumerated()), id: \.offset) { index, accountId in
                         if let account = acccountListViewModelObject.accountListData.account_map_by_id[accountId] {
                             ZStack {
-                                AccountRowView(account: account)
+                                AccountRowView(account: account, index: index)
                                     .onAppear{
                                         print(account.name)
-                                        if(accountIds.last == accountId){
+                                        if(accountIds.count == index + 1){
                                             acccountListViewModelObject.fetchData()
                                         }
                                     }
-                                
                                 NavigationLink(destination: AccountDetailsScreen(accountId: accountId, accountName: account.name)) {
                                     EmptyView()
                                 }
@@ -45,16 +44,19 @@ struct AccountList: View {
                             .accessibilityIdentifier("account_card_\(index)")
                         }
                     }
-                    HStack{
-                        if(acccountListViewModelObject.isFetchAccountInProgress && accountIds.count > 0){
+                    
+                    if(acccountListViewModelObject.isFetchAccountInProgress && accountIds.count > 0){
+                        HStack(spacing: 0){
                             ProgressView()
                                 .tint(Color("LoginButtonSecondary"))
-                                .listRowBackground(Color("Background"))
-                                .listRowSeparator(.hidden)
                                 .accessibilityAddTraits(.isImage)
                                 .accessibilityIdentifier("next_page_loader")
                                 .frame(maxWidth: .infinity, alignment: .center)
                         }
+                        .contentShape(Rectangle())
+                        .padding(0)
+                        .listRowBackground(Color("Background"))
+                        .listRowSeparator(.hidden)
                     }
                 }
                 .scrollIndicators(.hidden)
@@ -71,13 +73,14 @@ struct AccountList: View {
 
 struct AccountRowView: View {
     var account: Account
+    var index: Int
     @Environment(\.openURL) var openURL
     @EnvironmentObject var acccountListViewModelObject : AccountListViewModel
     
     var body: some View {
         // Account Row
         VStack(alignment: .leading, spacing: 0) {
-            Text("ACCOUNT")
+            Text("ACCOUNT \(index)")
                 .font(.custom("Nunito-Bold",size: 12))
                 .foregroundColor(Color("TermsPrimary").opacity(0.7))
                 .tracking(0.5)

@@ -94,7 +94,7 @@ class MockResponse {
                 "success": "true",
                 "statusCode": 200,
                 "data":[
-                    "account_ids": ["account_1","account_2","account_3"],
+                    "account_ids": ["account_1", "account_2", "account_3"],
                     "account_map_by_id": [
                         "account_1": [
                             "id": "account_1",
@@ -154,7 +154,10 @@ class MockResponse {
                         "account_contact_association_3": [
                             "contact_ids": ["contact_3"]
                         ],
-                    ]
+                    ],
+                   "next_page_payload" : [
+                       "pagination_identifier": "next_page"
+                   ],
                 ] as [String : Any],
             ] as [String : Any],
         ],
