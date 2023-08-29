@@ -84,7 +84,7 @@ struct AccountRowView: View {
     var body: some View {
         // Account Row
         VStack(alignment: .leading, spacing: 0) {
-            Text("ACCOUNT \(index)")
+            Text("ACCOUNT")
                 .font(.custom("Nunito-Bold",size: 12))
                 .foregroundColor(Color("TermsPrimary").opacity(0.7))
                 .tracking(0.5)

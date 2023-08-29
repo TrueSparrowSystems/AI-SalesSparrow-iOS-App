@@ -255,7 +255,7 @@ struct CreateNoteScreen : View {
         .contentShape(Rectangle())
         .padding(.horizontal, 12)
         .navigationBarBackButtonHidden(true)
-        .background(Color("Background"))
+        .background(.white)
         .onAppear {
             // Adding a delay for view to render
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.05){
