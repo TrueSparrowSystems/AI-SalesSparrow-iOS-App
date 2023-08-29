@@ -97,9 +97,9 @@ class UserStateViewModel: ObservableObject {
                 
                 DispatchQueue.main.async {
                     HTTPCookieStorage.shared.cookies?.forEach(HTTPCookieStorage.shared.deleteCookie)
-                    self.isDisconnectInProgress = false
-                    self.currentUser = CurrentUserStruct(id: "", name: "", email: "")
-                    self.isUserLoggedIn = false
+                    self?.isDisconnectInProgress = false
+                    self?.currentUser = CurrentUserStruct(id: "", name: "", email: "")
+                    self?.isUserLoggedIn = false
                 }
             }
         }
