@@ -130,7 +130,7 @@ struct TaskCardView: View {
                 Spacer()
                 
                 HStack(spacing: 0){
-                    Text("\(BasicHelper.getFormattedDateForCard(from: acccountDetailScreenViewModelObject.taskData.task_map_by_id[taskId]!.last_modified_time))")
+                    Text("\(BasicHelper.getFormattedDateForCard(from: acccountDetailScreenViewModelObject.taskData.task_map_by_id[taskId]?.last_modified_time ?? ""))")
                         .font(.custom("Nunito-Light",size: 12))
                         .tracking(0.5)
                         .foregroundColor(Color("TextPrimary"))
@@ -176,7 +176,7 @@ struct TaskCardView: View {
                 Image("CalendarCheck")
                     .frame(width: 16, height: 16)
                 
-                Text("Due \(BasicHelper.getFormattedDateForDueDate(from: acccountDetailScreenViewModelObject.taskData.task_map_by_id[taskId]!.due_date))")
+                Text("Due \(BasicHelper.getFormattedDateForDueDate(from: acccountDetailScreenViewModelObject.taskData.task_map_by_id[taskId]?.due_date ?? ""))")
                     .font(.custom("Nunito-Regular",size: 12))
                     .foregroundColor(Color("TermsPrimary"))
                     .tracking(0.5)
