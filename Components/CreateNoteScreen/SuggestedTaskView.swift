@@ -159,7 +159,7 @@ struct SuggestedTaskCardView: View {
                                         .padding(.leading, 6)
                                 }
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                                .background(Color("Background"))
+                                .background(.white)
                                 .userInteractionDisabled()
                                 
                             }
@@ -176,7 +176,7 @@ struct SuggestedTaskCardView: View {
                                         .padding(.leading, 10)
                                 }
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                                .background(Color("Background"))
+                                .background(.white)
                                 .userInteractionDisabled()
                             }
                         }
@@ -245,7 +245,7 @@ struct SuggestedTaskCardView: View {
                                     .accessibilityIdentifier("txt_create_note_cancel")
                             }
                             .frame(width: 72, height: 32)
-                            .background(Color("Background"))
+                            .background(.white)
                             .clipShape(RoundedRectangle(cornerRadius: 5))
                         })
                         .accessibilityIdentifier("btn_create_note_cancel")

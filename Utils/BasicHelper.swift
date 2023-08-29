@@ -121,7 +121,7 @@ struct BasicHelper {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         if let date = dateFormatter.date(from: dateString) {
-            dateFormatter.dateFormat = "yyyy/MM/dd"
+            dateFormatter.dateFormat = "dd/MM/yyyy"
             let formattedDateString = dateFormatter.string(from: date)
             return formattedDateString
         }else{

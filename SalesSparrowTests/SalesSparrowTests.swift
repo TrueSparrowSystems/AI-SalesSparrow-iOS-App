@@ -185,7 +185,7 @@ final class SalesSparrowTests: XCTestCase {
         //Original dateString to be passed to the function
         var dateString = "2023-07-12"
         //Formatted DateString expected as output from function
-        let expectedFormattedDateString = "2023/07/12"
+        let expectedFormattedDateString = "12/07/2023"
         
         var formattedDateString = BasicHelper.getFormattedDateForDueDate(from: dateString)
         XCTAssertTrue(expectedFormattedDateString == formattedDateString)
