@@ -187,9 +187,9 @@ class ApiService {
         }
         
         URLSession.shared.dataTask(with: requestUrl) { data, response, error in
-            let stringData = String(decoding: data!, as: UTF8.self)
             if(self.dev){
-                print("---------------data----------\(stringData)")
+                let stringData = String(decoding: data!, as: UTF8.self)
+                print("---------------data----------\(data)---stringData---\(stringData)")
                 print("---------------response----------\(response)")
                 print("---------------error----------\(error)")
                 

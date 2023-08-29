@@ -215,7 +215,17 @@ struct CreateTaskScreen: View {
                     .font(.custom("Nunito-SemiBold", size: 18))
                     .accessibilityIdentifier("txt_create_task_description")
                     .padding(.top)
+                    .frame(maxWidth: .infinity, alignment: .leading)
             }
+        }
+        .onAppear {
+            // Adding a delay for view to render
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05){
+                focused = true
+            }
+        }
+        .onTapGesture {
+            focused = false
         }
         .padding(.horizontal)
         .navigationBarBackButtonHidden(true)

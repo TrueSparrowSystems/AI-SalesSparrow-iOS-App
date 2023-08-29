@@ -56,13 +56,14 @@ struct SuggestedTaskCardView: View {
                         .font(.custom("Nunito-SemiBold", size: 16))
                         .fixedSize(horizontal: false, vertical: true)
                         .accessibilityIdentifier("et_create_note")
-                        .onTapGesture {
-                            // Do nothing. Kept on tap here to override tap action over parent tap action
-                            showEditTaskView = true
-                        }
                         .padding(EdgeInsets(top: 5, leading: 8, bottom: 5, trailing: 8))
                         .background(Color("GhostWhite").opacity(0.2))
                         .overlay(RoundedRectangle(cornerRadius: 6).stroke(Color.black.opacity(0.1), lineWidth: 1))
+                }
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    // Do nothing. Kept on tap here to override tap action over parent tap action
+                    showEditTaskView = true
                 }
                 
                 // assign to component + picker
@@ -287,7 +288,6 @@ struct SuggestedTaskCardView: View {
                     .hidden()
             )
         }
-        
     }
     
 }
@@ -304,141 +304,173 @@ struct SavedTaskCard : View {
     @EnvironmentObject var createNoteScreenViewModel: CreateNoteScreenViewModel
     
     var body : some View {
-        VStack {
-            HStack{
-                Text(BasicHelper.getInitials(from: UserStateViewModel.shared.currentUser.name))
-                    .frame(width: 18, height: 18)
-                    .font(.custom("Nunito-Bold", size: 6))
-                    .foregroundColor(Color.white)
-                    .background(Color("UserBubble"))
-                    .clipShape(RoundedRectangle(cornerRadius: 47))
-                    .accessibilityIdentifier("img_creator_user_initials")
-                
-                Text(UserStateViewModel.shared.currentUser.name)
-                    .foregroundColor(Color("TermsPrimary"))
-                    .font(.custom("Nunito-Medium", size: 14))
-                    .accessibilityIdentifier("txt_add_task_creator_user")
-                    .tracking(0.5)
-                
-                Spacer()
-                Text("Just Now")
-                    .foregroundColor(Color("TermsPrimary"))
-                    .font(.custom("Nunito-Light", size: 12))
-                    .accessibilityIdentifier("txt_created_timestamp")
-                    .tracking(0.5)
-                
-                Button{
-                    isPopoverVisible.toggle()
-                } label: {
-                    Image("DotsThreeOutline")
-                        .frame(width: 16, height: 16)
-                        .padding(10)
-                        .foregroundColor(Color("TextPrimary"))
-                }
-                .accessibilityIdentifier("btn_create_note_task_more_\(index)")
-                
-            }
-            Text("\(recommendedText)")
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .multilineTextAlignment(.leading)
-                .foregroundColor(Color("TextPrimary"))
-                .font(.custom("Nunito-SemiBold", size: 16))
-                .fixedSize(horizontal: false, vertical: true)
-                .accessibilityIdentifier("et_create_note")
-            
-            HStack{
-                HStack {
-                    Text("Assign to")
-                        .foregroundColor(Color("TextPrimary"))
-                        .font(.custom("Nunito-SemiBold", size: 12))
-                        .tracking(0.5)
-                    
-                    // add verticle divider gray line
-                    VerticalDividerRectangleView(width: 1, color: Color("BorderColor"))
-                    
-                    Text(BasicHelper.getInitials(from: assignedToUsername))
-                        .frame(width: 18, height: 18)
-                        .font(.custom("Nunito-Bold", size: 6))
-                        .foregroundColor(Color.white)
-                        .background(Color("UserBubble"))
-                        .clipShape(RoundedRectangle(cornerRadius: 47))
-                        .accessibilityIdentifier("img_user_account_detail_user_initials")
-                    
-                    Text(assignedToUsername)
-                        .foregroundColor(Color("RedHighlight"))
-                        .font(.custom("Nunito-Bold", size: 12))
-                        .accessibilityIdentifier("txt_add_task_selected_user")
-                        .tracking(0.5)
-                    
-                    
-                }
-                .padding(EdgeInsets(top: 6, leading: 8, bottom: 6, trailing: 8))
-                .overlay(RoundedRectangle(cornerRadius: 4).stroke(Color("BorderColor"), lineWidth: 1))
-                
-                Spacer()
-            }
-            
-            HStack{
-                HStack {
-                    Text("Due")
-                        .foregroundColor(Color("TextPrimary"))
-                        .font(.custom("Nunito-SemiBold", size: 12))
-                        .tracking(0.5)
-                    
-                    // add verticle divider gray line
-                    VerticalDividerRectangleView(width: 1, color: Color("BorderColor"))
-                    
-                    
-                    Text(BasicHelper.getDateStringFromDate(from: selectedDate))
-                        .foregroundColor(Color("TermsPrimary"))
-                        .font(.custom("Nunito-Bold", size: 12))
-                        .tracking(0.5)
-                        .padding(0)
-                    
-                }
-                .padding(EdgeInsets(top: 6, leading: 8, bottom: 6, trailing: 8))
-                .overlay(RoundedRectangle(cornerRadius: 4).stroke(Color("BorderColor"), lineWidth: 1))
-                
-                Spacer()
-            }
-        }
-        .overlay(alignment: .topTrailing){
-            if isPopoverVisible {
+        ScrollView {
+            VStack {
                 VStack {
-                    Button(action: {
-                        isPopoverVisible = false
+                    HStack{
+                        Text(BasicHelper.getInitials(from: UserStateViewModel.shared.currentUser.name))
+                            .frame(width: 18, height: 18)
+                            .font(.custom("Nunito-Bold", size: 6))
+                            .foregroundColor(Color.white)
+                            .background(Color("UserBubble"))
+                            .clipShape(RoundedRectangle(cornerRadius: 47))
+                            .accessibilityIdentifier("img_creator_user_initials")
                         
-                        AlertViewModel.shared.showAlert(_alert: Alert(
-                            title: "Delete Task",
-                            message: Text("Are you sure you want to delete this task?"),
-                            submitText: "Delete",
-                            onSubmitPress: {
-                                acccountDetailScreenViewModelObject.deleteTask(accountId: accountId, taskId: taskId){
-                                    createNoteScreenViewModel.removeSuggestion(at: index)
-                                }
-                            }
-                        ))
-                    }){
-                        HStack{
-                            Image("DeleteIcon")
-                                .frame(width: 20, height: 20)
-                            Text("Delete")
-                                .font(.custom("Nunito-SemiBold",size: 16))
+                        Text(UserStateViewModel.shared.currentUser.name)
+                            .foregroundColor(Color("TermsPrimary"))
+                            .font(.custom("Nunito-Medium", size: 14))
+                            .accessibilityIdentifier("txt_add_task_creator_user")
+                            .tracking(0.5)
+                        
+                        Spacer()
+                        Text("Just Now")
+                            .foregroundColor(Color("TermsPrimary"))
+                            .font(.custom("Nunito-Light", size: 12))
+                            .accessibilityIdentifier("txt_created_timestamp")
+                            .tracking(0.5)
+                        
+                        Button{
+                            isPopoverVisible.toggle()
+                        } label: {
+                            Image("DotsThreeOutline")
+                                .frame(width: 16, height: 16)
+                                .padding(10)
                                 .foregroundColor(Color("TextPrimary"))
                         }
+                        .accessibilityIdentifier("btn_create_note_task_more_\(index)")
+                        
                     }
-                    .accessibilityIdentifier("btn_account_detail_delete_task_\(index)")
+                    Text("\(recommendedText)")
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .multilineTextAlignment(.leading)
+                        .foregroundColor(Color("PortGore"))
+                        .font(.custom("Nunito-SemiBold", size: 16))
+                        .fixedSize(horizontal: false, vertical: true)
+                        .accessibilityIdentifier("txt_create_note_task_description")
+                        .padding(6)
+                        .background(Color("AliceBlue"))
+                        .cornerRadius(6)
+                    
+                    HStack{
+                        HStack {
+                            Text("Assign to")
+                                .foregroundColor(Color("PortGore"))
+                                .font(.custom("Nunito-SemiBold", size: 12))
+                                .tracking(0.5)
+                            
+                            // add verticle divider gray line
+                            VerticalDividerRectangleView(width: 1, color: Color("PortGore").opacity(0.5))
+                            
+                            Text(BasicHelper.getInitials(from: assignedToUsername))
+                                .frame(width: 18, height: 18)
+                                .font(.custom("Nunito-Bold", size: 6))
+                                .foregroundColor(Color.white)
+                                .background(Color("UserBubble"))
+                                .clipShape(RoundedRectangle(cornerRadius: 47))
+                                .accessibilityIdentifier("img_user_account_detail_user_initials")
+                            
+                            Text(assignedToUsername)
+                                .foregroundColor(Color("RedHighlight"))
+                                .font(.custom("Nunito-Bold", size: 12))
+                                .accessibilityIdentifier("txt_add_task_selected_user")
+                                .tracking(0.5)
+                            
+                            
+                        }
+                        .padding(EdgeInsets(top: 6, leading: 8, bottom: 6, trailing: 8))
+                        .background(Color("GhostWhite"))
+                        .cornerRadius(6)
+                        
+                        Spacer()
+                    }
+                    .padding(.vertical, 6)
+                    
+                    HStack{
+                        HStack {
+                            Text("Due")
+                                .foregroundColor(Color("PortGore"))
+                                .font(.custom("Nunito-SemiBold", size: 12))
+                                .tracking(0.5)
+                            
+                            // add verticle divider gray line
+                            VerticalDividerRectangleView(width: 1, color: Color("PortGore").opacity(0.5))
+                            
+                            
+                            Text(BasicHelper.getDateStringFromDate(from: selectedDate))
+                                .foregroundColor(Color("PortGore"))
+                                .font(.custom("Nunito-Bold", size: 12))
+                                .tracking(0.5)
+                                .padding(0)
+                            
+                        }
+                        .padding(EdgeInsets(top: 6, leading: 8, bottom: 6, trailing: 8))
+                        .background(Color("GhostWhite"))
+                        .cornerRadius(6)
+                        
+                        Spacer()
+                    }
                 }
-                .padding(10)
-                .cornerRadius(4)
-                .frame(width: 100, height: 40)
-                .background(Color("CardBackground"))
-                .overlay(
-                    RoundedRectangle(cornerRadius: 4)
-                        .stroke(Color("CardBorder"), lineWidth: 1)
-                )
-                .offset(x: -14, y: 32)
+                .padding()
+                .overlay(alignment: .topTrailing){
+                    if isPopoverVisible {
+                        VStack {
+                            Button(action: {
+                                isPopoverVisible = false
+                                
+                                AlertViewModel.shared.showAlert(_alert: Alert(
+                                    title: "Delete Task",
+                                    message: Text("Are you sure you want to delete this task?"),
+                                    submitText: "Delete",
+                                    onSubmitPress: {
+                                        acccountDetailScreenViewModelObject.deleteTask(accountId: accountId, taskId: taskId){
+                                            createNoteScreenViewModel.removeSuggestion(at: index)
+                                        }
+                                    }
+                                ))
+                            }){
+                                HStack{
+                                    Image("DeleteIcon")
+                                        .frame(width: 20, height: 20)
+                                    Text("Delete")
+                                        .font(.custom("Nunito-SemiBold",size: 16))
+                                        .foregroundColor(Color("TextPrimary"))
+                                }
+                            }
+                            .accessibilityIdentifier("btn_account_detail_delete_task_\(index)")
+                        }
+                        .padding(10)
+                        .cornerRadius(4)
+                        .frame(width: 100, height: 40)
+                        .background(Color("CardBackground"))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 4)
+                                .stroke(Color("CardBorder"), lineWidth: 1)
+                        )
+                        .offset(x: -14, y: 32)
+                    }
+                }
+                
+                HStack{
+                    Image("CheckWithGreenTick")
+                        .scaledToFit()
+                        .frame(width: 18, height: 18)
+                    
+                    Text("Task Added")
+                    .foregroundColor(Color("PortGore"))
+                    .font(.custom("Nunito-SemiBold", size: 12))
+                }
+                .frame(maxWidth: .infinity)
+                .padding(8)
+                .background(Color("PastelGreen").opacity(0.2))
             }
+            .clipShape(RoundedRectangle(cornerRadius: 8))
+            .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color("BorderColor"), lineWidth: 1))
         }
+    }
+}
+
+struct SavedTaskCard_Previews: PreviewProvider {
+    static var previews: some View {
+        SavedTaskCard(recommendedText: "Hello text", selectedDate: Date(), assignedToUsername: "some user", index: 0, accountId: "sdfg34rf", taskId: "sdf234rtgv")
     }
 }
