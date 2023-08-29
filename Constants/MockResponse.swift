@@ -348,6 +348,15 @@ class MockResponse {
                 ]as [String : Any]
             ]
         ],
+        "POST /v1/accounts/account_1/tasks": [
+            "default":[
+                "success": "true",
+                "statusCode": 200,
+                "data":[
+                    "task_id": "task_1"
+                ] as [String : Any],
+            ],
+        ],
         
         "DELETE /v1/accounts/account_1/tasks/task_1": [
             "default":[

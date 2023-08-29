@@ -185,6 +185,10 @@ struct CreateTaskScreen: View {
                                 .frame(width: 15, height: 15)
                                 .padding(.leading, 10)
                         }
+                        .onTapGesture {
+                            print("Clicked")
+                        }
+                        .accessibilityIdentifier("txt_add_task_select_date")
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .background(.white)
                         .userInteractionDisabled()

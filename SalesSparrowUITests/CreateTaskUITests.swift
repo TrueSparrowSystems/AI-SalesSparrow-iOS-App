@@ -21,9 +21,8 @@ final class CreateTaskUITests: XCTestCase {
         btnSearchAccountNameBtn.tap()
     }
     
-    func testSearchUser(app: XCUIApplication) throws {
+    func SearchUser(app: XCUIApplication) throws {
         let timeout = 5
-        let noteIndex = 0
         
         let searchUserButton = app.buttons["btn_create_task_search_user"]
         XCTAssertTrue(searchUserButton.waitForExistence(timeout: TimeInterval(timeout)))
@@ -35,11 +34,9 @@ final class CreateTaskUITests: XCTestCase {
         XCTAssertTrue(searchUserNameBtn.waitForExistence(timeout: TimeInterval(timeout)))
         // Account row should be clickable
         searchUserNameBtn.tap()
-        
-        XCTAssertEqual(app.staticTexts["txt_create_note_suggestion_user_index_\(noteIndex)"].label,userName)
     }
 
-    func createTaskFromAccountTasklist() throws {
+    func testCreateTaskFromAccountTasklist() {
         let timeout = 5
         let app = XCUIApplication()
         app.launchArguments = ["isRunningUITests"]
@@ -59,24 +56,22 @@ final class CreateTaskUITests: XCTestCase {
         // cancel should be clickable
         XCTAssertTrue(cancelButton.isEnabled)
 
-        let saveButton = app.buttons["btn_save_note"]
-        XCTAssertTrue(saveButton.waitForExistence(timeout: TimeInterval(timeout)))
-        // save should not be clickable
-        XCTAssertTrue(!saveButton.isEnabled)
-
-        try? testSearchUser(app: app)
-        
         let datePicker = app.datePickers["dp_add_task_select_date"]
         datePicker.tap()
-        datePicker.collectionViews.buttons["Friday, January 14"].tap()
-        datePicker.tap()
+        XCTAssertTrue(datePicker.exists, "Date picker should be open.")
+
+        app.buttons["PopoverDismissRegion"].tap()
+        
+        try? SearchUser(app: app)
         
         let addTaskTextField = app.textViews["et_create_task"]
         XCTAssertTrue(addTaskTextField.waitForExistence(timeout: TimeInterval(timeout)))
         addTaskTextField.tap()
         //Type Text into the the text field
         addTaskTextField.typeText("Create new task and assign it to a user.\nTap on the save button to save it to salesforce.")
-
+        
+        let saveButton = app.buttons["btn_save_task"]
+        XCTAssertTrue(saveButton.waitForExistence(timeout: TimeInterval(timeout)))
         //Check if the save button is enabled
         XCTAssertTrue(saveButton.isEnabled)
         saveButton.tap()

@@ -17,7 +17,7 @@ final class AccountListUITests: XCTestCase {
         
         let timeout = 2
         
-        var availableScrollTries = 10
+        var availableScrollTries = 3
         
         var scrollView = app.collectionViews["account_list_scroll_view"]
         XCTAssertTrue(scrollView.waitForExistence(timeout: TimeInterval(timeout)))
@@ -28,7 +28,7 @@ final class AccountListUITests: XCTestCase {
             app.swipeUp()
         }
         
-        availableScrollTries = 10
+        availableScrollTries = 3
         
         var paginatedCard = app.buttons["account_card_25"]
         while !paginatedCard.exists && availableScrollTries > 0{
