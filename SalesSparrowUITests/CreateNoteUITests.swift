@@ -20,18 +20,9 @@ final class CreateNoteUITests: XCTestCase {
         btnSearchAccountNameBtn.tap()
     }
     
-    func testGenerateRecommendation() throws {
-        // Launch the app with the specified launch arguments
-        let app = XCUIApplication()
-        app.launchArguments = ["isRunningUITests"]
-        app.launch()
-
-        // Set the timeout duration
+    func createNoteFromAccountNotelist(app: XCUIApplication,accountName: String = "Test Account 1") {
         let timeout = 5
-
-        // Open the account detail using the helper function
-        openAccountDetailUsingSearch(app: app)
-
+        
         // Check the Add Note button
         let addNoteButton = app.buttons["btn_account_detail_add_note"]
         XCTAssertTrue(addNoteButton.waitForExistence(timeout: TimeInterval(timeout)))
@@ -70,42 +61,62 @@ final class CreateNoteUITests: XCTestCase {
         XCTAssertTrue(saveButton.isEnabled)
         saveButton.tap()
 
+    }
+    
+    func createNote() throws {
+        // Launch the app with the specified launch arguments
+        let app = XCUIApplication()
+        app.launchArguments = ["isRunningUITests"]
+        app.launch()
+
+        // Set the timeout duration
+        let timeout = 5
+
+        // Open the account detail using the helper function
+        openAccountDetailUsingSearch(app: app)
+
+        createNoteFromAccountNotelist(app: app)
+    }
+    
+    func testGenerateRecommendationAndAddTask() throws {
+        // Launch the app with the specified launch arguments
+        let app = XCUIApplication()
+        app.launchArguments = ["isRunningUITests"]
+        app.launch()
+
+        // Set the timeout duration
+        let timeout = 5
+
+        // Open the account detail using the helper function
+        openAccountDetailUsingSearch(app: app)
+
+        createNoteFromAccountNotelist(app: app)
 
         let suggestionTitle = app.staticTexts["txt_create_note_recommendations"]
         XCTAssertTrue(suggestionTitle.waitForExistence(timeout: TimeInterval(timeout)))
 
-        let suggestedNote = app.textViews["txt_create_note_suggestion"]
+        let noteIndex = 0
+        let suggestedNote = app.staticTexts["txt_create_note_suggestion_title_index_\(noteIndex)"]
         XCTAssertTrue(suggestedNote.waitForExistence(timeout: TimeInterval(timeout)))
 
-        let assignToButtonText = app.staticTexts["txt_create_note_assign_to"]
-        XCTAssertTrue(assignToButtonText.waitForExistence(timeout: TimeInterval(timeout)))
+        let assignToButton = app.buttons["btn_create_note_search_user_index_\(noteIndex)"]
+        XCTAssertTrue(assignToButton.waitForExistence(timeout: TimeInterval(timeout)))
+        XCTAssertTrue(assignToButton.isEnabled)
+        assignToButton.tap()
+        
+        let userName = "Test User"
+        let searchUserNameBtn = app.buttons["btn_search_user_user_name_\(userName)"]
+        XCTAssertTrue(searchUserNameBtn.waitForExistence(timeout: TimeInterval(timeout)))
+        // Account row should be clickable
+        searchUserNameBtn.tap()
 
-        let dueButtonText = app.staticTexts["txt_create_note_due"]
-        XCTAssertTrue(dueButtonText.waitForExistence(timeout: TimeInterval(timeout)))
-
-        let assignToPicker = app.buttons["btn_create_note_assign_to"]
-        XCTAssertTrue(assignToPicker.waitForExistence(timeout: TimeInterval(timeout)))
-
-        assignToPicker.tap()
-
-        // modal should open with empty text box
-        let textFieldSearchAccount = app.textFields["txt_search_user_field"]
-        XCTAssertTrue(textFieldSearchAccount.waitForExistence(timeout: TimeInterval(timeout)))
-        let textFieldSearchAccountVal = textFieldSearchAccount.value as? String
-        XCTAssertTrue(((textFieldSearchAccountVal?.isEmpty) != nil))
-
-        // modal should open with default data
-        let userName = "Test User 1"
-        let SearchUserNameBtn = app.buttons["btn_search_user_user_name_\(userName)"]
-        XCTAssertTrue(SearchUserNameBtn.waitForExistence(timeout: TimeInterval(timeout)))
-        // user row should be clickable
-        SearchUserNameBtn.tap()
-
-        let addTaskBtn = app.buttons["btn_create_note_add_task"]
+        let addTaskBtn = app.buttons["btn_create_note_add_task_\(noteIndex)"]
         XCTAssertTrue(addTaskBtn.waitForExistence(timeout: TimeInterval(timeout)))
-
-        let cancelBtn = app.buttons["btn_create_note_cancel"]
+        XCTAssertTrue(addTaskBtn.isEnabled)
+        
+        let cancelBtn = app.buttons["btn_create_note_cancel_\(noteIndex)"]
         XCTAssertTrue(cancelBtn.waitForExistence(timeout: TimeInterval(timeout)))
+        XCTAssertTrue(cancelBtn.isEnabled)
 
         addTaskBtn.tap()
 
@@ -118,48 +129,49 @@ final class CreateNoteUITests: XCTestCase {
         app.launch()
 
         let timeout = 2
+        
+        openAccountDetailUsingSearch(app: app)
+        
+        createNoteFromAccountNotelist(app: app)
+        
+        let noteIndex = 0
+        let searchUserButton = app.buttons["btn_create_note_search_user_index_\(noteIndex)"]
+        XCTAssertTrue(searchUserButton.waitForExistence(timeout: TimeInterval(timeout)))
+        XCTAssertTrue(searchUserButton.isEnabled)
+        searchUserButton.tap()
+        
+        let userName = "Test User"
+        let searchUserNameBtn = app.buttons["btn_search_user_user_name_\(userName)"]
+        XCTAssertTrue(searchUserNameBtn.waitForExistence(timeout: TimeInterval(timeout)))
+        // Account row should be clickable
+        searchUserNameBtn.tap()
+        
+        XCTAssertEqual(app.staticTexts["txt_create_note_suggestion_user_index_\(noteIndex)"].label,userName)
+    }
 
-        let searchAccountButton = app.buttons["btn_create_task_search_user"]
-        XCTAssertTrue(searchAccountButton.waitForExistence(timeout: TimeInterval(timeout)))
-        searchAccountButton.tap()
+    func testSearchUserWithQuery() throws {
+        let app = XCUIApplication()
+        app.launchArguments = ["isRunningUITests", "searchUserWithQuery"]
+        app.launch()
 
-        let textFieldSearchUser = app.textFields["txt_search_user_field"]
-        XCTAssertTrue(textFieldSearchUser.waitForExistence(timeout: TimeInterval(timeout)))
-        textFieldSearchUser.tap()
-        textFieldSearchUser.typeText("Mock User")
-        XCTAssertEqual(textFieldSearchUser.value as! String, "Mock User")
-
-        // modal should open with default data
+        let timeout = 2
+        openAccountDetailUsingSearch(app: app)
+        
+        createNoteFromAccountNotelist(app: app)
+        
+        let noteIndex = 0
+        let searchUserButton = app.buttons["btn_create_note_search_user_index_\(noteIndex)"]
+        XCTAssertTrue(searchUserButton.waitForExistence(timeout: TimeInterval(timeout)))
+        XCTAssertTrue(searchUserButton.isEnabled)
+        searchUserButton.tap()
+        
         let userName = "Mock User"
         let searchUserNameBtn = app.buttons["btn_search_user_user_name_\(userName)"]
         XCTAssertTrue(searchUserNameBtn.waitForExistence(timeout: TimeInterval(timeout)))
         // Account row should be clickable
         searchUserNameBtn.tap()
-    }
-
-    func testSearchUserWithQuery() throws {
-        let app = XCUIApplication()
-        app.launchArguments = ["isRunningUITests", "searchResponseWithQuery"]
-        app.launch()
-
-        let timeout = 2
-        // click on search icon home page
-        let searchUserButton = app.buttons["btn_create_task_search_user"]
-        XCTAssertTrue(searchUserButton.waitForExistence(timeout: TimeInterval(timeout)))
-        searchUserButton.tap()
-        // modal should open with empty text box
-        let textFieldSearchUser = app.textFields["txt_search_user_field"]
-        XCTAssertTrue(textFieldSearchUser.waitForExistence(timeout: TimeInterval(timeout)))
-        textFieldSearchUser.tap()
-        textFieldSearchUser.typeText("Mock User")
-        XCTAssertEqual(textFieldSearchUser.value as! String, "Mock User")
-
-        // modal should open with default data
-        let userName = "Mock User"
-        let btnSearchUserNameBtn = app.buttons["btn_search_user_user_name_\(userName)"]
-        XCTAssertTrue(btnSearchUserNameBtn.waitForExistence(timeout: TimeInterval(timeout)))
-        // Account row should be clickable
-        XCTAssertTrue(btnSearchUserNameBtn.isEnabled)
+        
+        XCTAssertEqual(app.staticTexts["txt_create_note_suggestion_user_index_\(noteIndex)"].label,userName)
     }
 
 }

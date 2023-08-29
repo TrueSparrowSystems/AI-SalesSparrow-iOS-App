@@ -58,15 +58,7 @@ class UserSearchViewModel: ObservableObject {
                     self?.userListData.crm_organization_user_map_by_id = results.crm_organization_user_map_by_id
                     
                 case .failure(let error):
-//                    self?.userListData = .init(crm_organization_user_ids: [], crm_organization_user_map_by_id: [:])
-                    self?.userListData = SearchUserStruct(
-                        crm_organization_user_ids: ["user1", "user2", "user3"],
-                        crm_organization_user_map_by_id: [
-                            "user1": Account(id: "user1", name: "User One"),
-                            "user2": Account(id: "user2", name: "User Two"),
-                            "user3": Account(id: "user3", name: "User Three")
-                        ]
-                    )
+                    self?.userListData = .init(crm_organization_user_ids: [], crm_organization_user_map_by_id: [:])
                     ToastViewModel.shared.showToast(_toast: Toast(style: .error, message: error.message))
                     print("Error loading data: \(error)")
                 }

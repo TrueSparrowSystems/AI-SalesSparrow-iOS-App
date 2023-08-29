@@ -29,7 +29,7 @@ struct CreateTaskScreen: View {
                     .font(.custom("Nunito-Bold", size: 14))
                     .padding(.vertical, 10)
                     .foregroundColor(Color("CancelText"))
-                    .accessibilityIdentifier("btn_add_task_cancel")
+                    .accessibilityIdentifier(isTaskSaved ? "btn_add_task_done" : "btn_add_task_cancel")
                     .onTapGesture {
                         self.presentationMode.wrappedValue.dismiss()
                     }
@@ -117,6 +117,7 @@ struct CreateTaskScreen: View {
                         .frame(width: 7, height: 4)
                 }
                 .disabled(isTaskSaved)
+                .accessibilityIdentifier("btn_create_task_search_user")
                 .padding(.horizontal, 10)
                 .frame(width: 160, height: 30)
                 .overlay(
@@ -133,7 +134,6 @@ struct CreateTaskScreen: View {
                 
                 Spacer()
             }
-            .accessibilityIdentifier("btn_create_task_search_user")
             
             HStack {
                 Text("Due")
@@ -149,6 +149,7 @@ struct CreateTaskScreen: View {
                         })
                         .background(.white)
                         .cornerRadius(8)
+                        .accessibilityIdentifier("dp_add_task_select_date")
                     }
                     
                     if(!isDateSelected){

@@ -220,6 +220,8 @@ struct CreateNoteScreen : View {
                             Text("We have some recommendations")
                                 .foregroundColor(Color("TextPrimary"))
                                 .font(.custom("Nunito-SemiBold", size: 16))
+                                .accessibilityIdentifier("txt_create_note_recommendations")
+                            
                             Spacer()
                             Button{
                                 isPopoverVisible.toggle()

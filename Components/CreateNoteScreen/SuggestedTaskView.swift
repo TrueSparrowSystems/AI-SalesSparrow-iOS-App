@@ -55,7 +55,7 @@ struct SuggestedTaskCardView: View {
                         .foregroundColor(Color("TextPrimary"))
                         .font(.custom("Nunito-SemiBold", size: 16))
                         .fixedSize(horizontal: false, vertical: true)
-                        .accessibilityIdentifier("et_create_note")
+                        .accessibilityIdentifier("txt_create_note_suggestion_title_index_\(index)")
                         .padding(EdgeInsets(top: 5, leading: 8, bottom: 5, trailing: 8))
                         .background(Color("GhostWhite").opacity(0.2))
                         .overlay(RoundedRectangle(cornerRadius: 6).stroke(Color.black.opacity(0.1), lineWidth: 1))
@@ -102,7 +102,7 @@ struct SuggestedTaskCardView: View {
                                 Text(assignedToUsername)
                                     .foregroundColor(Color("RedHighlight"))
                                     .font(.custom("Nunito-Bold", size: 12))
-                                    .accessibilityIdentifier("txt_add_task_selected_user")
+                                    .accessibilityIdentifier("txt_create_note_suggestion_user_index_\(index)")
                                     .tracking(0.5)
                                 
                                 Image("ArrowDown")
@@ -118,7 +118,7 @@ struct SuggestedTaskCardView: View {
                                 selectedUserId = userId
                             })
                         }
-                        .accessibilityIdentifier("btn_create_note_search_user")
+                        .accessibilityIdentifier("btn_create_note_search_user_index_\(index)")
                         
                     }
                     .padding(EdgeInsets(top: 6, leading: 8, bottom: 6, trailing: 8))
@@ -186,6 +186,7 @@ struct SuggestedTaskCardView: View {
                     .overlay(RoundedRectangle(cornerRadius: 4).stroke(Color("BorderColor"), lineWidth: 1))
                     Spacer()
                 }
+                .accessibilityIdentifier("btn_create_note_due")
                 
                 // action buttons + view model
                 if(!isTaskSaved){
@@ -204,13 +205,13 @@ struct SuggestedTaskCardView: View {
                                     Text("Adding Task...")
                                         .foregroundColor(.white)
                                         .font(.custom("Nunito-Medium", size: 12))
-                                        .accessibilityIdentifier("txt_create_note_adding_task")
+                                        .accessibilityIdentifier("txt_create_note_adding_task_\(index)")
                                     
                                 } else{
                                     Text("Add Task")
                                         .foregroundColor(.white)
                                         .font(.custom("Nunito-Medium", size: 12))
-                                        .accessibilityIdentifier("txt_create_note_add_task")
+                                        .accessibilityIdentifier("txt_create_note_add_task_index_\(index)")
                                 }
                             }
                             .frame(width: createTaskViewModel.isCreateTaskInProgress ? 115 : 72, height: 32)
@@ -221,7 +222,7 @@ struct SuggestedTaskCardView: View {
                         })
                         .disabled(accountId.isEmpty || recommendedText.isEmpty || selectedUserId.isEmpty || !isDateSelected || createTaskViewModel.isCreateTaskInProgress)
                         .opacity(accountId.isEmpty || recommendedText.isEmpty || selectedUserId.isEmpty || !isDateSelected ? 0.7 : 1)
-                        .accessibilityIdentifier("btn_create_note_add_task")
+                        .accessibilityIdentifier("btn_create_note_add_task_\(index)")
                         
                         Button(action: {
                             
@@ -248,7 +249,7 @@ struct SuggestedTaskCardView: View {
                             .background(.white)
                             .clipShape(RoundedRectangle(cornerRadius: 5))
                         })
-                        .accessibilityIdentifier("btn_create_note_cancel")
+                        .accessibilityIdentifier("btn_create_note_cancel_\(index)")
                         .overlay(RoundedRectangle(cornerRadius: 4).stroke(Color(hex: "#5D678D"), lineWidth: 1))
                         
                         Spacer()
