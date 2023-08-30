@@ -85,7 +85,7 @@ struct CreateNoteScreen : View {
                     )
                     .clipShape(RoundedRectangle(cornerRadius: 5))
                 })
-                .accessibilityIdentifier("btn_create_note_save_button")
+                .accessibilityIdentifier("btn_create_note_save")
                 .disabled(isNoteSaved || isSaveInProgress || accountId.isEmpty || text.isEmpty)
                 .opacity(accountId.isEmpty || text.isEmpty ? 0.7 : 1)
             }
@@ -231,7 +231,7 @@ struct CreateNoteScreen : View {
                                     Image("AddIcon")
                                         .frame(width: 20, height: 20)
                                 }
-                                
+                                .accessibilityIdentifier("btn_create_note_popover_create_task") 
                             }
                             let addTaskSuggestions = createNoteScreenViewModel.suggestedTaskData.add_task_suggestions
                             ForEach(Array(addTaskSuggestions.enumerated()), id: \.offset) { index, suggestion in

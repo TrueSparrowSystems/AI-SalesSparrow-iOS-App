@@ -22,16 +22,20 @@ struct AddButtonPopoverComponent: View{
     @State var isTaskSaved = false
     
     var body: some View {
-        
         VStack {
-            HStack{
-                Image("TasksIcon")
-                Text("Add Tasks")
-            }
-            .contentShape(Rectangle())
-            .onTapGesture {
+            Button(action: {
                 addTaskActivated = true
-            }
+            }, label: {
+                HStack{
+                    Image("TasksIcon")
+                    Text("Add Tasks")
+                        .font(.custom("Nunito-SemiBold",size: 16))
+                        .foregroundColor(Color("TextPrimary"))
+                        .accessibilityIdentifier("txt_create_note_popover_add_task")
+                }
+            })
+            .accessibilityIdentifier("btn_create_note_popover_add_task")
+            .contentShape(Rectangle())
             // TODO: Uncomment once we add create event flow
             //            HStack{
             //                Image("EventsIcon")

@@ -35,7 +35,7 @@ final class CreateNoteUITests: XCTestCase {
         // cancel should be clickable
         XCTAssertTrue(cancelButton.isEnabled)
 
-        let saveButton = app.buttons["btn_save_note"]
+        let saveButton = app.buttons["btn_create_note_save"]
         XCTAssertTrue(saveButton.waitForExistence(timeout: TimeInterval(timeout)))
         // save should not be clickable
         XCTAssertTrue(!saveButton.isEnabled)
@@ -63,14 +63,11 @@ final class CreateNoteUITests: XCTestCase {
 
     }
     
-    func createNote() throws {
+    func testCreateNote() throws {
         // Launch the app with the specified launch arguments
         let app = XCUIApplication()
         app.launchArguments = ["isRunningUITests"]
         app.launch()
-
-        // Set the timeout duration
-        let timeout = 5
 
         // Open the account detail using the helper function
         openAccountDetailUsingSearch(app: app)
