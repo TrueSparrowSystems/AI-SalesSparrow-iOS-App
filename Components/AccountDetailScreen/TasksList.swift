@@ -180,18 +180,20 @@ struct TaskCardView: View {
                     .tracking(0.5)
                     .accessibilityIdentifier("txt_account_detail_task_assignee")
                 
-                Divider()
-                    .frame(width: 0, height: 16)
-                    .foregroundColor(Color("TermsPrimary").opacity(0.1))
-                
-                Image("CalendarCheck")
-                    .frame(width: 16, height: 16)
-                
-                Text("Due \(BasicHelper.getFormattedDateForDueDate(from: acccountDetailScreenViewModelObject.taskData.task_map_by_id[taskId]?.due_date ?? ""))")
-                    .font(.custom("Nunito-Regular",size: 12))
-                    .foregroundColor(Color("TermsPrimary"))
-                    .tracking(0.5)
-                    .accessibilityIdentifier("txt_account_detail_task_due_date")
+                if((acccountDetailScreenViewModelObject.taskData.task_map_by_id[taskId]?.due_date != nil)){
+                    Divider()
+                        .frame(width: 0, height: 16)
+                        .foregroundColor(Color("TermsPrimary").opacity(0.1))
+                    
+                    Image("CalendarCheck")
+                        .frame(width: 16, height: 16)
+                    
+                    Text("Due \(BasicHelper.getFormattedDateForDueDate(from: acccountDetailScreenViewModelObject.taskData.task_map_by_id[taskId]?.due_date ?? ""))")
+                        .font(.custom("Nunito-Regular",size: 12))
+                        .foregroundColor(Color("TermsPrimary"))
+                        .tracking(0.5)
+                        .accessibilityIdentifier("txt_account_detail_task_due_date")
+                }
                 
                 Spacer()
             }

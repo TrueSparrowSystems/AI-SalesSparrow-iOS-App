@@ -29,7 +29,7 @@ struct Task: Identifiable, Codable {
     let creator_name: String
     let crm_organization_user_name: String
     let description: String?
-    let due_date: String
+    let due_date: String?
     let last_modified_time: String
 }
 

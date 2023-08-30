@@ -100,7 +100,7 @@ struct SuggestedTaskCardView: View {
                                     .foregroundColor(Color.white)
                                     .background(Color("UserBubble"))
                                     .clipShape(RoundedRectangle(cornerRadius: 47))
-                                    .accessibilityIdentifier("img_user_account_detail_user_initials")
+                                    .accessibilityIdentifier("img_user_account_detail_user_initials_index_\(index)")
                                 
                                 Text(assignedToUsername)
                                     .foregroundColor(Color("RedHighlight"))
@@ -148,6 +148,7 @@ struct SuggestedTaskCardView: View {
                             })
                             .background(.white)
                             .cornerRadius(8)
+                            .accessibilityIdentifier("dp_create_note_select_date_\(index)")
                             
                             if(!isDateSelected){
                                 HStack (spacing: 0) {
@@ -189,7 +190,6 @@ struct SuggestedTaskCardView: View {
                     .overlay(RoundedRectangle(cornerRadius: 4).stroke(Color("BorderColor"), lineWidth: 1))
                     Spacer()
                 }
-                .accessibilityIdentifier("btn_create_note_due")
                 
                 // action buttons + view model
                 if(!isTaskSaved){
@@ -212,7 +212,7 @@ struct SuggestedTaskCardView: View {
                                     Text("Adding Task...")
                                         .foregroundColor(.white)
                                         .font(.custom("Nunito-Medium", size: 12))
-                                        .accessibilityIdentifier("txt_create_note_adding_task_\(index)")
+                                        .accessibilityIdentifier("txt_create_note_adding_task_index_\(index)")
                                     
                                 } else{
                                     Text("Add Task")
@@ -250,7 +250,7 @@ struct SuggestedTaskCardView: View {
                                 Text("Cancel")
                                     .foregroundColor(Color("CancelText"))
                                     .font(.custom("Nunito-Medium", size: 12))
-                                    .accessibilityIdentifier("txt_create_note_cancel")
+                                    .accessibilityIdentifier("txt_create_note_cancel_\(index)")
                             }
                             .frame(width: 72, height: 32)
                             .background(.white)
@@ -467,6 +467,7 @@ struct SavedTaskCard : View {
                 Text("Task Added")
                     .foregroundColor(Color("PortGore"))
                     .font(.custom("Nunito-SemiBold", size: 12))
+                    .accessibilityIdentifier("txt_create_note_task_added_\(index)")
             }
             .frame(maxWidth: .infinity)
             .padding(8)

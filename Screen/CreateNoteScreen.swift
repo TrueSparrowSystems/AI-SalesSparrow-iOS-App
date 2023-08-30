@@ -85,7 +85,7 @@ struct CreateNoteScreen : View {
                     )
                     .clipShape(RoundedRectangle(cornerRadius: 5))
                 })
-                .accessibilityIdentifier("btn_save_note")
+                .accessibilityIdentifier("btn_create_note_save_button")
                 .disabled(isNoteSaved || isSaveInProgress || accountId.isEmpty || text.isEmpty)
                 .opacity(accountId.isEmpty || text.isEmpty ? 0.7 : 1)
             }
@@ -186,6 +186,7 @@ struct CreateNoteScreen : View {
                                     .font(.custom("Nunito-SemiBold" ,size: 14))
                                     .multilineTextAlignment(.center)
                                     .padding(.top, 16)
+                                    .accessibilityIdentifier("txt_create_note_getting_recommendations")
                             }
                             .padding(.vertical,16)
                             .frame(maxWidth: .infinity)
@@ -206,6 +207,7 @@ struct CreateNoteScreen : View {
                                     .font(.custom("Nunito-SemiBold" ,size: 14))
                                     .frame(alignment: .center)
                                     .padding(.top, 16)
+                                    .accessibilityIdentifier("txt_create_note_no_recommendations")
                             }
                             .padding(.vertical,16)
                             .frame(maxWidth: .infinity)
