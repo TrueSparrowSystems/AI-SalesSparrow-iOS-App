@@ -25,6 +25,7 @@ struct SuggestedTaskCardView: View {
     @State var taskId: String = ""
     @FocusState private var focusedRecommendedText: Bool
     @FocusState private var userSelected: Bool
+    @State var isAddTaskInProgress = false
     
     init(accountId: String,suggestion: SuggestionStruct, index: Int) {
         self.accountId = accountId
@@ -44,7 +45,9 @@ struct SuggestedTaskCardView: View {
     
     var body: some View {
         if isTaskSaved{
-            SavedTaskCard(recommendedText: recommendedText, selectedDate: selectedDate, assignedToUsername: assignedToUsername, index: index, accountId: accountId, taskId: taskId)
+            SavedTaskCard(recommendedText: recommendedText, selectedDate: selectedDate, assignedToUsername: assignedToUsername, index: index, accountId: accountId, taskId: taskId, onDeleteTask : {
+                createNoteScreenViewModel.removeSuggestion(at: index)
+            })
         }else{
             VStack{
                 // text editor component
@@ -192,13 +195,17 @@ struct SuggestedTaskCardView: View {
                 if(!isTaskSaved){
                     HStack{
                         Button(action: {
-                            createTaskViewModel.createTask(accountId: accountId, assignedToName: assignedToUsername, crmOrganizationUserId: selectedUserId, description: recommendedText, dueDate: selectedDate){taskId in
+                            isAddTaskInProgress = true
+                            createTaskViewModel.createTask(accountId: accountId, assignedToName: assignedToUsername, crmOrganizationUserId: selectedUserId, description: recommendedText, dueDate: selectedDate, onSuccess: { taskId in
                                 self.taskId = taskId
                                 isTaskSaved = true
-                            }
+                                isAddTaskInProgress = false
+                            }, onFailure: {
+                                isAddTaskInProgress = false
+                            })
                         }, label:{
                             HStack(alignment: .center, spacing: 0){
-                                if(createTaskViewModel.isCreateTaskInProgress){
+                                if(isAddTaskInProgress){
                                     ProgressView()
                                         .tint(Color("LoginButtonPrimary"))
                                         .controlSize(.small)
@@ -214,13 +221,13 @@ struct SuggestedTaskCardView: View {
                                         .accessibilityIdentifier("txt_create_note_add_task_index_\(index)")
                                 }
                             }
-                            .frame(width: createTaskViewModel.isCreateTaskInProgress ? 115 : 72, height: 32)
+                            .frame(width: isAddTaskInProgress ? 115 : 72, height: 32)
                             .background(
                                 Color(hex: "SaveButtonBackground")
                             )
                             .clipShape(RoundedRectangle(cornerRadius: 5))
                         })
-                        .disabled(accountId.isEmpty || recommendedText.isEmpty || selectedUserId.isEmpty || !isDateSelected || createTaskViewModel.isCreateTaskInProgress)
+                        .disabled(accountId.isEmpty || recommendedText.isEmpty || selectedUserId.isEmpty || !isDateSelected || isAddTaskInProgress)
                         .opacity(accountId.isEmpty || recommendedText.isEmpty || selectedUserId.isEmpty || !isDateSelected ? 0.7 : 1)
                         .accessibilityIdentifier("btn_create_note_add_task_\(index)")
                         
@@ -300,6 +307,7 @@ struct SavedTaskCard : View {
     var index: Int
     var accountId: String
     var taskId: String
+    var onDeleteTask : () -> Void
     @State var isPopoverVisible: Bool = false
     @EnvironmentObject var acccountDetailScreenViewModelObject: AccountDetailViewScreenViewModel
     @EnvironmentObject var createNoteScreenViewModel: CreateNoteScreenViewModel
@@ -423,7 +431,7 @@ struct SavedTaskCard : View {
                                 submitText: "Delete",
                                 onSubmitPress: {
                                     acccountDetailScreenViewModelObject.deleteTask(accountId: accountId, taskId: taskId){
-                                        createNoteScreenViewModel.removeSuggestion(at: index)
+                                        onDeleteTask()
                                     }
                                 }
                             ))
@@ -446,7 +454,7 @@ struct SavedTaskCard : View {
                         RoundedRectangle(cornerRadius: 4)
                             .stroke(Color("CardBorder"), lineWidth: 1)
                     )
-                    .offset(x: -14, y: 32)
+                    .offset(x: -20, y: 42)
                 }
             }
             .background(.white)
@@ -473,6 +481,6 @@ struct SavedTaskCard : View {
 
 struct SavedTaskCard_Previews: PreviewProvider {
     static var previews: some View {
-        SavedTaskCard(recommendedText: "Hello text", selectedDate: Date(), assignedToUsername: "some user", index: 0, accountId: "sdfg34rf", taskId: "sdf234rtgv")
+        SavedTaskCard(recommendedText: "Hello text", selectedDate: Date(), assignedToUsername: "some user", index: 0, accountId: "sdfg34rf", taskId: "sdf234rtgv", onDeleteTask: {})
     }
 }

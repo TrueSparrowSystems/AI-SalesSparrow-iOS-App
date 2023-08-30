@@ -21,6 +21,7 @@ struct CreateTaskScreen: View {
     @Binding var taskId: String
     @FocusState private var focused: Bool
     @State private var showUserSearchView: Bool = false
+    @State var isAddTaskInProgress = false
     
     var body: some View {
         ScrollView{
@@ -37,13 +38,17 @@ struct CreateTaskScreen: View {
                 Spacer()
                 
                 Button(action: {
-                    createTaskViewModel.createTask(accountId: accountId, assignedToName: selectedUserName, crmOrganizationUserId: crmOrganizationUserId, description: description, dueDate: dueDate){taskId in
+                    isAddTaskInProgress = true
+                    createTaskViewModel.createTask(accountId: accountId, assignedToName: selectedUserName, crmOrganizationUserId: crmOrganizationUserId, description: description, dueDate: dueDate, onSuccess: {taskId in
                         self.taskId = taskId
                         isTaskSaved = true
-                    }
+                        isAddTaskInProgress = false
+                    }, onFailure: {
+                        isAddTaskInProgress = false
+                    })
                 }, label:{
                     HStack(alignment: .center, spacing: 0){
-                        if(createTaskViewModel.isCreateTaskInProgress){
+                        if(isAddTaskInProgress){
                             ProgressView()
                                 .tint(Color("LoginButtonPrimary"))
                                 .controlSize(.small)
@@ -70,14 +75,14 @@ struct CreateTaskScreen: View {
                                 .accessibilityIdentifier("txt_create_task_save")
                         }
                     }
-                    .frame(width: createTaskViewModel.isCreateTaskInProgress ? 115 : 68, height: 32)
+                    .frame(width: isAddTaskInProgress ? 115 : 68, height: 32)
                     .background(
                         Color(hex: "SaveButtonBackground")
                     )
                     .clipShape(RoundedRectangle(cornerRadius: 5))
                 })
                 .accessibilityIdentifier("btn_save_task")
-                .disabled(accountId.isEmpty || description.isEmpty || crmOrganizationUserId.isEmpty || !isDateSelected || createTaskViewModel.isCreateTaskInProgress || isTaskSaved)
+                .disabled(accountId.isEmpty || description.isEmpty || crmOrganizationUserId.isEmpty || !isDateSelected || isAddTaskInProgress || isTaskSaved)
                 .opacity(accountId.isEmpty || description.isEmpty || crmOrganizationUserId.isEmpty || !isDateSelected ? 0.7 : 1)
             }
             .padding(.vertical)
