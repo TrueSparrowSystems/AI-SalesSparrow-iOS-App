@@ -24,7 +24,7 @@ struct CreateTaskScreen: View {
     @State var isAddTaskInProgress = false
     
     var body: some View {
-        ScrollView{
+        VStack{
             HStack{
                 Text(isTaskSaved ? "Done" : "Cancel")
                     .font(.custom("Nunito-Bold", size: 14))
@@ -208,24 +208,25 @@ struct CreateTaskScreen: View {
                 
                 Spacer()
             }
-            
-            if(!isTaskSaved){
-                TextField("Add Task",text: $description, axis: .vertical)
-                    .foregroundColor(Color("TextPrimary"))
-                    .font(.custom("Nunito-SemiBold", size: 18))
-                    .focused($focused)
-                    .accessibilityIdentifier("et_create_task")
-                    .onTapGesture {
-                        // Do nothing. Kept on tap here to override tap action over parent tap action
-                    }
-                    .padding(.top)
-            }else{
-                Text(description)
-                    .foregroundColor(Color("TextPrimary"))
-                    .font(.custom("Nunito-SemiBold", size: 18))
-                    .accessibilityIdentifier("txt_create_task_description")
-                    .padding(.top)
-                    .frame(maxWidth: .infinity, alignment: .leading)
+            ScrollView{
+                if(!isTaskSaved){
+                    TextField("Add Task",text: $description, axis: .vertical)
+                        .foregroundColor(Color("TextPrimary"))
+                        .font(.custom("Nunito-SemiBold", size: 18))
+                        .focused($focused)
+                        .accessibilityIdentifier("et_create_task")
+                        .onTapGesture {
+                            // Do nothing. Kept on tap here to override tap action over parent tap action
+                        }
+                        .padding(.top)
+                }else{
+                    Text(description)
+                        .foregroundColor(Color("TextPrimary"))
+                        .font(.custom("Nunito-SemiBold", size: 18))
+                        .accessibilityIdentifier("txt_create_task_description")
+                        .padding(.top)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
             }
         }
         .onAppear {
