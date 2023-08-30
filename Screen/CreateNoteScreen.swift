@@ -233,7 +233,7 @@ struct CreateNoteScreen : View {
                             }
                             let addTaskSuggestions = createNoteScreenViewModel.suggestedTaskData.add_task_suggestions
                             ForEach(Array(addTaskSuggestions.enumerated()), id: \.offset) { index, suggestion in
-                                SuggestedTaskCardView(accountId: accountId, suggestion:xw suggestion,index: index)
+                                SuggestedTaskCardView(accountId: accountId, suggestion:suggestion, index: index)
                             }
                         }
                         

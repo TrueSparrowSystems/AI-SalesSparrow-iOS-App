@@ -28,9 +28,6 @@ class MockAPIService: ApiService {
                     let responseData = try JSONSerialization.data(withJSONObject: response?["data"]! as Any, options: [])
                     let decodedData = try JSONDecoder().decode(T.self, from: responseData)
                     
-                    DispatchQueue.main.async {
-                        ApiHelper.syncEntities(response!)
-                    }
                     completion(Result.success(decodedData), (response?["statusCode"] as! Int))
                 } catch let decodingError {
                     completion(Result.failure(APIError().decodingError(error: (decodingError as! DecodingError))), 0)
@@ -54,9 +51,8 @@ class MockAPIService: ApiService {
  A class that provides methods for making API requests and handling responses. The class includes a base API endpoint, and methods for making GET requests with query parameters and decoding the response into a specified type.
  */
 class ApiService {
-    //TODO: reset this value
-    let dev = true
 
+    let dev = false
     
     /**
      Makes a GET request to the API with the specified endpoint and query parameters, and decodes the response into the specified type.
@@ -240,9 +236,6 @@ class ApiService {
                     let responseData = try JSONSerialization.jsonObject(with: data) as! [String: Any]
                     if(self.dev){
                         print("==============responseData  \(responseData)=======")
-                    }
-                    DispatchQueue.main.async {
-                        ApiHelper.syncEntities(responseData)
                     }
                     completion(Result.success(result), statusCode)
                     
