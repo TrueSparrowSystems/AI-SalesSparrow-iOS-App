@@ -142,5 +142,52 @@ final class CreateTaskUITests: XCTestCase {
 
         createTask(app: app)
     }
+    
+    func testDeleteRecommendedandSavedTask(){
+        let timeout = 5
+        let app = XCUIApplication()
+        app.launchArguments = ["isRunningUITests"]
+        app.launch()
+        
+        createNoteFromFloatingActionButton(app: app)
+        
+        let suggestionTitle = app.staticTexts["txt_create_note_recommendations"]
+        XCTAssertTrue(suggestionTitle.waitForExistence(timeout: TimeInterval(timeout)))
+
+        let taskIndex = 0
+        let suggestedNote = app.staticTexts["txt_create_note_suggestion_title_index_\(taskIndex)"]
+        XCTAssertTrue(suggestedNote.waitForExistence(timeout: TimeInterval(timeout)))
+
+        let assignToButton = app.buttons["btn_create_note_search_user_index_\(taskIndex)"]
+        XCTAssertTrue(assignToButton.waitForExistence(timeout: TimeInterval(timeout)))
+        XCTAssertTrue(assignToButton.isEnabled)
+        assignToButton.tap()
+        
+        let userName = "Test User"
+        let searchUserNameBtn = app.buttons["btn_search_user_user_name_\(userName)"]
+        XCTAssertTrue(searchUserNameBtn.waitForExistence(timeout: TimeInterval(timeout)))
+        // Account row should be clickable
+        searchUserNameBtn.tap()
+
+        let addTaskBtn = app.buttons["btn_create_note_add_task_\(taskIndex)"]
+        XCTAssertTrue(addTaskBtn.waitForExistence(timeout: TimeInterval(timeout)))
+        XCTAssertTrue(addTaskBtn.isEnabled)
+        
+        let cancelBtn = app.buttons["btn_create_note_cancel_\(taskIndex)"]
+        XCTAssertTrue(cancelBtn.waitForExistence(timeout: TimeInterval(timeout)))
+        XCTAssertTrue(cancelBtn.isEnabled)
+
+        addTaskBtn.tap()
+
+        XCTAssertTrue(app.staticTexts["toast_view_text"].waitForExistence(timeout: TimeInterval(timeout)))
+        
+        app.buttons["btn_create_note_task_more_\(taskIndex)"].tap()
+        app.buttons["btn_create_note_delete_task_\(taskIndex)"].tap()
+        
+        app.buttons["btn_alert_submit"].tap()
+        
+        XCTAssertTrue(!app.staticTexts["txt_create_note_suggestion_title_index_\(taskIndex)"].exists,"Suggest task text must disappear")
+        XCTAssertTrue(!app.buttons["btn_create_note_add_task_\(taskIndex)"].exists,"Suggest task add task button must be not visible")
+    }
 }
 

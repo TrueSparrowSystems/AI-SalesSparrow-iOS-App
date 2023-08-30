@@ -444,7 +444,7 @@ struct SavedTaskCard : View {
                                     .foregroundColor(Color("TextPrimary"))
                             }
                         }
-                        .accessibilityIdentifier("btn_account_detail_delete_task_\(index)")
+                        .accessibilityIdentifier("btn_create_note_delete_task_\(index)")
                     }
                     .padding(10)
                     .cornerRadius(4)
