@@ -234,5 +234,6 @@ struct CreateTaskScreen: View {
         }
         .padding(.horizontal)
         .navigationBarBackButtonHidden(true)
+        .background(Color.white)
     }
 }

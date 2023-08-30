@@ -55,7 +55,7 @@ class MockAPIService: ApiService {
  */
 class ApiService {
     
-    let dev = true
+    let dev = false
     
     /**
      Makes a GET request to the API with the specified endpoint and query parameters, and decodes the response into the specified type.

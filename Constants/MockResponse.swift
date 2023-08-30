@@ -94,7 +94,7 @@ class MockResponse {
                 "success": "true",
                 "statusCode": 200,
                 "data":[
-                    "account_ids": ["account_1", "account_2", "account_3"],
+                    "account_ids": ["account_1", "account_2", "account_3","account_4"],
                     "account_map_by_id": [
                         "account_1": [
                             "id": "account_1",
@@ -119,6 +119,10 @@ class MockResponse {
                                 "website": "https://account.com"
                             ],
                             "account_contact_associations_id": "account_contact_association_3"
+                        ] as [String : Any],
+                        "account_4": [
+                            "id": "account_4",
+                            "name": "Test Account 4",
                         ] as [String : Any],
                     ],
                     "contact_map_by_id": [

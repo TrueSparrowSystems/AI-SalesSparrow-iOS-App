@@ -38,11 +38,11 @@ struct AccountList: View {
                                 }
                                 .buttonStyle(.plain)
                                 .opacity(0)
+                                .accessibilityIdentifier("account_card_\(index)")
                             }
                             .listRowBackground(Color("Background"))
                             .listRowSeparator(.hidden)
                             .accessibilityAddTraits(.isButton)
-                            .accessibilityIdentifier("account_card_\(index)")
                         }
                     }
                     
@@ -95,6 +95,8 @@ struct AccountRowView: View {
                 .tracking(0.5)
                 .foregroundColor(Color("TermsPrimary"))
                 .lineLimit(1)
+                .accessibilityIdentifier("txt_account_list_account_name_index_\(index)")
+                .accessibilityElement()
             
             
             //TODO: On Field customization remove hardcoded values and show all additional_fields
@@ -103,9 +105,12 @@ struct AccountRowView: View {
                     Image("Link")
                         .resizable()
                         .frame(width: 16, height: 16)
+                    
                     Text(account.additional_fields?["website"]! ?? "")
                         .font(.custom("Nunito-Regular", size: 14))
                         .foregroundColor(Color("TermsPrimary"))
+                        .accessibilityIdentifier("txt_account_list_account_website_index_\(index)")
+                        .accessibilityElement()
                     
                 }
                 .onTapGesture {
@@ -132,11 +137,15 @@ struct AccountRowView: View {
                             .font(.custom("Nunito-SemiBold",size: 18))
                             .tracking(0.5)
                             .foregroundColor(Color("TermsPrimary"))
+                            .accessibilityIdentifier("txt_account_list_account_contact_name_index_\(index)")
+                            .accessibilityElement()
                         
                         if(!((contact?.additional_fields?["email"] ?? "") ?? "").isEmpty){
                             Text((contact?.additional_fields?["email"])! ?? "")
                                 .font(.custom("Nunito-Regular",size: 14))
                                 .foregroundColor(Color("TermsPrimary"))
+                                .accessibilityIdentifier("txt_account_list_account_email_index_\(index)")
+                                .accessibilityElement()
                         }
                         
                     }
