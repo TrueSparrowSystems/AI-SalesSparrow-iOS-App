@@ -96,7 +96,18 @@ struct TasksList: View {
             }
         }.onAppear {
             acccountDetailScreenViewModelObject.fetchTasks(accountId: accountId)
+            resetStates()
         }
+    }
+    func resetStates(){
+        self.recommendedText = ""
+        self.selectedDate = Date()
+        self.selectedUserId = ""
+        self.selectedUserName = ""
+        self.taskId = ""
+        self.isDateSelected = false
+        self.isTaskSaved = false
+        
     }
 }
 
