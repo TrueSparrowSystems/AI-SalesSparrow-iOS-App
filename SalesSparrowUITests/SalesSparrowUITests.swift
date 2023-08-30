@@ -121,7 +121,7 @@ final class SalesSparrowUITests: XCTestCase {
         // save should not be clickable
         XCTAssertTrue(!saveButton.isEnabled)
 
-        let selectAccount = app.staticTexts["btn_select_account"]
+        let selectAccount = app.staticTexts["txt_create_note_select_account"]
         XCTAssertTrue(selectAccount.waitForExistence(timeout: TimeInterval(timeout)))
         // select should be clickable
         XCTAssertTrue(selectAccount.isEnabled)

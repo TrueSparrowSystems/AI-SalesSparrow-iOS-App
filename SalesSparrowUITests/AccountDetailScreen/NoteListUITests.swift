@@ -153,7 +153,7 @@ final class AccountDetailNoteListUITests: XCTestCase {
         XCTAssertTrue(!saveButton.isEnabled)
         
         let accountName = "Test Account 1"
-        let selectedAccount = app.staticTexts["cn_selected_account"]
+        let selectedAccount = app.staticTexts["txt_create_note_selected_account"]
         XCTAssertTrue(selectedAccount.waitForExistence(timeout: TimeInterval(timeout)))
         // Get the text from the selectedAccount element
         let selectedAccountText = selectedAccount.label

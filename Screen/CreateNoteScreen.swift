@@ -113,7 +113,7 @@ struct CreateNoteScreen : View {
                             .frame(width: 7, height: 4)
                             .padding(.trailing, 6)
                     }
-                    .accessibilityIdentifier("btn_select_account")
+                    .accessibilityIdentifier("txt_create_note_select_account")
                     .background(Color("SelectAccountDropdownBG"))
                     .clipShape(RoundedRectangle(cornerRadius: 4))
                     .onTapGesture {
@@ -134,7 +134,7 @@ struct CreateNoteScreen : View {
                             .padding(.horizontal, 6)
                             .foregroundColor(Color("RedHighlight"))
                             .font(.custom("Nunito-Bold", size: 14))
-                            .accessibilityIdentifier("cn_selected_account")
+                            .accessibilityIdentifier("txt_create_note_selected_account")
                     }
                     .background(Color("SelectAccountDropdownBG"))
                     .clipShape(RoundedRectangle(cornerRadius: 4))
@@ -233,7 +233,7 @@ struct CreateNoteScreen : View {
                             }
                             let addTaskSuggestions = createNoteScreenViewModel.suggestedTaskData.add_task_suggestions
                             ForEach(Array(addTaskSuggestions.enumerated()), id: \.offset) { index, suggestion in
-                                SuggestedTaskCardView(accountId: accountId, suggestion: suggestion,index: index)
+                                SuggestedTaskCardView(accountId: accountId, suggestion:xw suggestion,index: index)
                             }
                         }
                         
