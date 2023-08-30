@@ -58,8 +58,8 @@ struct TopBar: View {
                 .navigationBarBackButtonHidden(true),
                            isActive: self.$userAccountSettingScreenActivated) {
                 Text(BasicHelper.getInitials(from: userStateViewModel.currentUser.name))
-                    .frame(width: 22, height:22)
-                    .font(.custom("Nunito-Bold", size: 7))
+                    .frame(width: 30, height:30)
+                    .font(.custom("Nunito-Bold", size: 9))
                     .foregroundColor(.black)
                     .accessibilityIdentifier("txt_user_account_icon")
             }

@@ -17,8 +17,8 @@ struct UserAccountDetailScreen: View {
     var body: some View {
         VStack (spacing: 16) {
             HStack{
-                Image("Close")
-                    .frame(width: 32,height: 32)
+                Image("ArrowLeft")
+                    .frame(width: 24, height: 24)
                     .accessibilityIdentifier("img_user_account_detail_dismiss")
                     .onTapGesture {
                         self.presentationMode.wrappedValue.dismiss()
@@ -30,11 +30,11 @@ struct UserAccountDetailScreen: View {
             VStack (spacing: 24) {
                 HStack{
                     Text(BasicHelper.getInitials(from: userStateViewModel.currentUser.name))
-                        .frame(width: 32, height: 32)
-                        .font(.custom("Nunito-Bold", size: 7))
+                        .frame(width: 30, height: 30)
+                        .font(.custom("Nunito-Bold", size: 9))
                         .foregroundColor(Color.black)
                         .background(Color("UserBubble"))
-                        .clipShape(RoundedRectangle(cornerRadius: 47))
+                        .clipShape(Circle())
                         .accessibilityIdentifier("img_user_account_detail_user_initials")
                     
                     Text(userStateViewModel.currentUser.name)
