@@ -60,7 +60,7 @@ final class AccountDetailNoteListUITests: XCTestCase {
         XCTAssertTrue(addNoteButton.waitForExistence(timeout: TimeInterval(timeout)))
         XCTAssertTrue(addNoteButton.isEnabled) // Ensure the button is enabled
         
-        XCTAssertTrue(app.staticTexts["txt_account_detail_note_creator"].waitForExistence(timeout: TimeInterval(timeout)))
+        XCTAssertTrue(app.staticTexts["txt_account_detail_note_creator_0"].waitForExistence(timeout: TimeInterval(timeout)))
         
         XCTAssertTrue(app.staticTexts["txt_account_detail_note_text_0"].waitForExistence(timeout: TimeInterval(timeout)))
         

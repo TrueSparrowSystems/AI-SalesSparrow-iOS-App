@@ -138,9 +138,10 @@ final class CreateNoteUITests: XCTestCase {
         XCTAssertTrue(suggestionTitle.waitForExistence(timeout: TimeInterval(timeout)))
 
         let noteIndex = 0
-        let suggestedNote = app.staticTexts["txt_create_note_suggestion_title_index_\(noteIndex)"]
-        XCTAssertTrue(suggestedNote.waitForExistence(timeout: TimeInterval(timeout)))
-
+        let suggestedTask = app.staticTexts["txt_create_note_suggestion_title_index_\(noteIndex)"]
+        XCTAssertTrue(suggestedTask.waitForExistence(timeout: TimeInterval(timeout)))
+        let suggestedTaskDescription = suggestedTask.label
+        
         let assignToButton = app.buttons["btn_create_note_search_user_index_\(noteIndex)"]
         XCTAssertTrue(assignToButton.waitForExistence(timeout: TimeInterval(timeout)))
         XCTAssertTrue(assignToButton.isEnabled)
@@ -163,9 +164,13 @@ final class CreateNoteUITests: XCTestCase {
         cancelBtn.tap()
         
         app.buttons["btn_alert_submit"].tap()
+        
+        let suggestedTaskAfterDelete = app.staticTexts["txt_create_note_suggestion_title_index_\(noteIndex)"]
+        XCTAssertTrue(suggestedTaskAfterDelete.waitForExistence(timeout: TimeInterval(timeout)))
+        let suggestedTaskDescriptionAfterDelete = suggestedTaskAfterDelete.label
 
-        XCTAssertTrue(!app.staticTexts["txt_create_note_suggestion_title_index_\(noteIndex)"].exists,"Suggest task text must disappear")
-        XCTAssertTrue(!app.buttons["btn_create_note_add_task_\(noteIndex)"].exists,"Suggest task add task button must be not visible")
+        //Verify that the task description before and after cancel is not same
+        XCTAssertTrue(suggestedTaskDescription != suggestedTaskDescriptionAfterDelete)
     }
 
     func testSearchUser() throws {

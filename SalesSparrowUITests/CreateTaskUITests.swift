@@ -155,8 +155,9 @@ final class CreateTaskUITests: XCTestCase {
         XCTAssertTrue(suggestionTitle.waitForExistence(timeout: TimeInterval(timeout)))
 
         let taskIndex = 0
-        let suggestedNote = app.staticTexts["txt_create_note_suggestion_title_index_\(taskIndex)"]
-        XCTAssertTrue(suggestedNote.waitForExistence(timeout: TimeInterval(timeout)))
+        let suggestedTask = app.staticTexts["txt_create_note_suggestion_title_index_\(taskIndex)"]
+        XCTAssertTrue(suggestedTask.waitForExistence(timeout: TimeInterval(timeout)))
+        let suggestedTaskDescription = suggestedTask.label
 
         let assignToButton = app.buttons["btn_create_note_search_user_index_\(taskIndex)"]
         XCTAssertTrue(assignToButton.waitForExistence(timeout: TimeInterval(timeout)))
@@ -181,13 +182,21 @@ final class CreateTaskUITests: XCTestCase {
 
         XCTAssertTrue(app.staticTexts["toast_view_text"].waitForExistence(timeout: TimeInterval(timeout)))
         
+        
+        XCTAssertTrue(!app.buttons["btn_create_note_add_task_\(taskIndex)"].exists,"Suggest task add task button must be not visible")
+        
         app.buttons["btn_create_note_task_more_\(taskIndex)"].tap()
         app.buttons["btn_create_note_delete_task_\(taskIndex)"].tap()
         
         app.buttons["btn_alert_submit"].tap()
         
-        XCTAssertTrue(!app.staticTexts["txt_create_note_suggestion_title_index_\(taskIndex)"].exists,"Suggest task text must disappear")
-        XCTAssertTrue(!app.buttons["btn_create_note_add_task_\(taskIndex)"].exists,"Suggest task add task button must be not visible")
+        
+        let suggestedTaskAfterDelete = app.staticTexts["txt_create_note_suggestion_title_index_\(taskIndex)"]
+        XCTAssertTrue(suggestedTaskAfterDelete.waitForExistence(timeout: TimeInterval(timeout)))
+        let suggestedTaskDescriptionAfterDelete = suggestedTaskAfterDelete.label
+        
+        //Verify that the task description before and after delete is not same
+        XCTAssertTrue(suggestedTaskDescription != suggestedTaskDescriptionAfterDelete)
     }
     
     func testCreateTaskFromSuggestedCard(){
