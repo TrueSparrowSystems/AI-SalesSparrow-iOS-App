@@ -40,7 +40,6 @@ class AccountSearchViewModel: ObservableObject {
     
     // A function that Perform the API call for searching accounts
     private func searchAccounts(withText searchText: String) {
-        print("Query String--> \(searchText)")
         let searchUrl = "/v1/accounts"
         let params: [String: Any] = ["q": searchText]
         

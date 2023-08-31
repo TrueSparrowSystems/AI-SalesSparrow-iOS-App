@@ -11,6 +11,7 @@ struct Alert {
     var title: String
     var message: Text
     var cancelText: String = "Cancel"
+    var submitButtonIdentifier: String = "alert_submit_button"
     var submitText: String
     var onSubmitPress: () -> Void
 }

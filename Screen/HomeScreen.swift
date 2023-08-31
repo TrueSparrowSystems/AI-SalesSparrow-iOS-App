@@ -15,7 +15,6 @@ struct HomeScreen: View {
     @StateObject var acccountDetailScreenViewModelObject = AccountDetailViewScreenViewModel()
     @StateObject var createNoteViewModel = CreateNoteScreenViewModel()
     @StateObject var noteDetailScreenViewModel = NoteDetailScreenViewModel()
-    @StateObject var suggestTaskViewModel = SuggestTaskViewModel()
     @StateObject var createTaskViewModel = CreateTaskViewModel()
     @State private var showUserSearchView: Bool = false
     
@@ -42,7 +41,6 @@ struct HomeScreen: View {
         .environmentObject(acccountDetailScreenViewModelObject)
         .environmentObject(createNoteViewModel)
         .environmentObject(noteDetailScreenViewModel)
-        .environmentObject(suggestTaskViewModel)
         .environmentObject(acccountListViewModelObject)
         .environmentObject(createTaskViewModel)
     }

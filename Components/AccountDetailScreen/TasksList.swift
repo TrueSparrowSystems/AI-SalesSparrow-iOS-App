@@ -11,6 +11,10 @@ struct TasksList: View {
     let accountId: String
     let accountName: String
     
+    @State var addTaskActivated = false
+    @State var suggestionId: String = ""
+    @EnvironmentObject var createNoteScreenViewModel : CreateNoteScreenViewModel
+    
     @EnvironmentObject var acccountDetailScreenViewModelObject: AccountDetailViewScreenViewModel
     @Binding var propagateClick : Int
     
@@ -30,8 +34,11 @@ struct TasksList: View {
                 
                 Spacer()
                 
-                //TODO: replace the navigation to create task once ready
-                NavigationLink(destination: CreateNoteScreen(accountId: accountId, accountName: accountName, isAccountSelectable: false)
+                Button(action: {
+                    suggestionId = UUID().uuidString
+                    createNoteScreenViewModel.initTaskData(suggestion: SuggestionStruct(id: suggestionId, description: ""))
+                    addTaskActivated = true
+                }
                 ){
                     HStack{
                         Image("AddIcon")
@@ -89,6 +96,14 @@ struct TasksList: View {
             }
         }.onAppear {
             acccountDetailScreenViewModelObject.fetchTasks(accountId: accountId)
+        }.background{
+            NavigationLink(destination:
+                            CreateTaskScreen(accountId: accountId, suggestionId: suggestionId),
+                           isActive: self.$addTaskActivated
+            ) {
+                EmptyView()
+            }
+            .hidden()
         }
     }
 }
@@ -112,22 +127,22 @@ struct TaskCardView: View {
                     .foregroundColor(.black)
                     .background(Color("UserBubble"))
                     .clipShape(RoundedRectangle(cornerRadius: 26))
-                    .accessibilityIdentifier("txt_account_detail_task_creator_initials")
+                    .accessibilityIdentifier("txt_account_detail_task_creator_initials_\(taskIndex)")
                 
                 Text("\(acccountDetailScreenViewModelObject.taskData.task_map_by_id[taskId]?.creator_name ?? "")")
                     .font(.custom("Nunito-Medium",size: 14))
                     .tracking(0.6)
                     .foregroundColor(Color("TextPrimary"))
-                    .accessibilityIdentifier("txt_account_detail_task_creator")
+                    .accessibilityIdentifier("txt_account_detail_task_creator_\(taskIndex)")
                 
                 Spacer()
                 
                 HStack(spacing: 0){
-                    Text("\(BasicHelper.getFormattedDateForCard(from: acccountDetailScreenViewModelObject.taskData.task_map_by_id[taskId]!.last_modified_time))")
+                    Text("\(BasicHelper.getFormattedDateForCard(from: acccountDetailScreenViewModelObject.taskData.task_map_by_id[taskId]?.last_modified_time ?? ""))")
                         .font(.custom("Nunito-Light",size: 12))
                         .tracking(0.5)
                         .foregroundColor(Color("TextPrimary"))
-                        .accessibilityIdentifier("txt_account_detail_task_last_modified_time")
+                        .accessibilityIdentifier("txt_account_detail_task_last_modified_time_\(taskIndex)")
                     
                     Button{
                         isSelfPopupTriggered = true
@@ -154,26 +169,28 @@ struct TaskCardView: View {
                     .font(.custom("Nunito-Regular",size: 12))
                     .foregroundColor(Color("TermsPrimary"))
                     .tracking(0.5)
-                    .accessibilityIdentifier("txt_account_detail_task_assign_to_title")
+                    .accessibilityIdentifier("txt_account_detail_task_assign_to_title_\(taskIndex)")
                 
                 Text(acccountDetailScreenViewModelObject.taskData.task_map_by_id[taskId]?.crm_organization_user_name ?? "")
                     .font(.custom("Nunito-Regular",size: 12))
                     .foregroundColor(Color("RedHighlight"))
                     .tracking(0.5)
-                    .accessibilityIdentifier("txt_account_detail_task_assignee")
+                    .accessibilityIdentifier("txt_account_detail_task_assignee_\(taskIndex)")
                 
-                Divider()
-                    .frame(width: 0, height: 16)
-                    .foregroundColor(Color("TermsPrimary").opacity(0.1))
-                
-                Image("CalendarCheck")
-                    .frame(width: 16, height: 16)
-                
-                Text("Due \(BasicHelper.getFormattedDateForDueDate(from: acccountDetailScreenViewModelObject.taskData.task_map_by_id[taskId]!.due_date))")
-                    .font(.custom("Nunito-Regular",size: 12))
-                    .foregroundColor(Color("TermsPrimary"))
-                    .tracking(0.5)
-                    .accessibilityIdentifier("txt_account_detail_task_due_date")
+                if((acccountDetailScreenViewModelObject.taskData.task_map_by_id[taskId]?.due_date != nil)){
+                    Divider()
+                        .frame(width: 0, height: 16)
+                        .foregroundColor(Color("TermsPrimary").opacity(0.1))
+                    
+                    Image("CalendarCheck")
+                        .frame(width: 16, height: 16)
+                    
+                    Text("Due \(BasicHelper.getFormattedDateForDueDate(from: acccountDetailScreenViewModelObject.taskData.task_map_by_id[taskId]?.due_date ?? ""))")
+                        .font(.custom("Nunito-Regular",size: 12))
+                        .foregroundColor(Color("TermsPrimary"))
+                        .tracking(0.5)
+                        .accessibilityIdentifier("txt_account_detail_task_due_date_\(taskIndex)")
+                }
                 
                 Spacer()
             }
@@ -198,7 +215,7 @@ struct TaskCardView: View {
                             message: Text("Are you sure you want to delete this task?"),
                             submitText: "Delete",
                             onSubmitPress: {
-                                acccountDetailScreenViewModelObject.deleteTask(accountId: accountId, taskId: taskId)
+                                acccountDetailScreenViewModelObject.deleteTask(accountId: accountId, taskId: taskId){}
                             }
                         ))
                     }){

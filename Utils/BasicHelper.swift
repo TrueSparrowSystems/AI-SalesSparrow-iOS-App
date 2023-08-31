@@ -121,11 +121,18 @@ struct BasicHelper {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         if let date = dateFormatter.date(from: dateString) {
-            dateFormatter.dateFormat = "yyyy/MM/dd"
+            dateFormatter.dateFormat = "dd/MM/yyyy"
             let formattedDateString = dateFormatter.string(from: date)
             return formattedDateString
         }else{
             return ""
         }
+    }
+    
+    static func getDateStringFromDate(from date: Date, dateFormat: String = "dd/MM/yyyy" ) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = dateFormat
+        let formattedDateString = dateFormatter.string(from: date)
+        return formattedDateString
     }
 }

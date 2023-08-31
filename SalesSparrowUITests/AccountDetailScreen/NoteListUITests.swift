@@ -60,7 +60,7 @@ final class AccountDetailNoteListUITests: XCTestCase {
         XCTAssertTrue(addNoteButton.waitForExistence(timeout: TimeInterval(timeout)))
         XCTAssertTrue(addNoteButton.isEnabled) // Ensure the button is enabled
         
-        XCTAssertTrue(app.staticTexts["txt_account_detail_note_creator"].waitForExistence(timeout: TimeInterval(timeout)))
+        XCTAssertTrue(app.staticTexts["txt_account_detail_note_creator_0"].waitForExistence(timeout: TimeInterval(timeout)))
         
         XCTAssertTrue(app.staticTexts["txt_account_detail_note_text_0"].waitForExistence(timeout: TimeInterval(timeout)))
         
@@ -147,13 +147,13 @@ final class AccountDetailNoteListUITests: XCTestCase {
         // cancel should be clickable
         XCTAssertTrue(cancelButton.isEnabled)
         
-        let saveButton = app.buttons["btn_save_note"]
+        let saveButton = app.buttons["btn_create_note_save"]
         XCTAssertTrue(saveButton.waitForExistence(timeout: TimeInterval(timeout)))
         // save should not be clickable
         XCTAssertTrue(!saveButton.isEnabled)
         
         let accountName = "Test Account 1"
-        let selectedAccount = app.staticTexts["cn_selected_account"]
+        let selectedAccount = app.staticTexts["txt_create_note_selected_account"]
         XCTAssertTrue(selectedAccount.waitForExistence(timeout: TimeInterval(timeout)))
         // Get the text from the selectedAccount element
         let selectedAccountText = selectedAccount.label

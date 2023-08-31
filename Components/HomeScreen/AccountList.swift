@@ -10,6 +10,7 @@ import SwiftUI
 struct AccountList: View {
     @EnvironmentObject var acccountListViewModelObject : AccountListViewModel
     @State var accountDetailsScreenActivated = false
+    @State var fetchFirstPage = true
     
     var body: some View {
         VStack{
@@ -27,7 +28,6 @@ struct AccountList: View {
                             ZStack {
                                 AccountRowView(account: account, index: index)
                                     .onAppear{
-                                        print(account.name)
                                         if(accountIds.count == index + 1){
                                             acccountListViewModelObject.fetchData()
                                         }
@@ -37,11 +37,11 @@ struct AccountList: View {
                                 }
                                 .buttonStyle(.plain)
                                 .opacity(0)
+                                .accessibilityIdentifier("account_card_\(index)")
                             }
                             .listRowBackground(Color("Background"))
                             .listRowSeparator(.hidden)
                             .accessibilityAddTraits(.isButton)
-                            .accessibilityIdentifier("account_card_\(index)")
                         }
                     }
                     
@@ -65,7 +65,10 @@ struct AccountList: View {
             }
         }
         .onAppear{
-            acccountListViewModelObject.fetchData()
+            if(self.fetchFirstPage){
+                self.fetchFirstPage = false
+                acccountListViewModelObject.fetchData()
+            }
         }
         
     }
@@ -80,7 +83,7 @@ struct AccountRowView: View {
     var body: some View {
         // Account Row
         VStack(alignment: .leading, spacing: 0) {
-            Text("ACCOUNT \(index)")
+            Text("ACCOUNT")
                 .font(.custom("Nunito-Bold",size: 12))
                 .foregroundColor(Color("TermsPrimary").opacity(0.7))
                 .tracking(0.5)
@@ -91,26 +94,31 @@ struct AccountRowView: View {
                 .tracking(0.5)
                 .foregroundColor(Color("TermsPrimary"))
                 .lineLimit(1)
+                .accessibilityIdentifier("txt_account_list_account_name_index_\(index)")
+                .accessibilityElement()
             
             
             //TODO: On Field customization remove hardcoded values and show all additional_fields
-            if((account.additional_fields["website"]) != nil){
+            if(!((account.additional_fields?["website"] ?? "") ?? "").isEmpty){
                 HStack{
                     Image("Link")
                         .resizable()
                         .frame(width: 16, height: 16)
-                    Text(account.additional_fields["website"]!!)
+                    
+                    Text(account.additional_fields?["website"]! ?? "")
                         .font(.custom("Nunito-Regular", size: 14))
                         .foregroundColor(Color("TermsPrimary"))
+                        .accessibilityIdentifier("txt_account_list_account_website_index_\(index)")
+                        .accessibilityElement()
                     
                 }
                 .onTapGesture {
-                    openURL(URL(string: account.additional_fields["website"]!!)!)
+                    openURL(URL(string: account.additional_fields?["website"]! ?? "")!)
                 }
                 .padding(.top, 2)
             }
             
-            let accountContactAssociation = acccountListViewModelObject.accountListData.account_contact_associations_map_by_id[account.account_contact_associations_id]
+            let accountContactAssociation = acccountListViewModelObject.accountListData.account_contact_associations_map_by_id[account.account_contact_associations_id ?? ""]
             
             if((accountContactAssociation) != nil){
                 let contactIds = accountContactAssociation?.contact_ids
@@ -128,11 +136,15 @@ struct AccountRowView: View {
                             .font(.custom("Nunito-SemiBold",size: 18))
                             .tracking(0.5)
                             .foregroundColor(Color("TermsPrimary"))
+                            .accessibilityIdentifier("txt_account_list_account_contact_name_index_\(index)")
+                            .accessibilityElement()
                         
-                        if((contact?.additional_fields["email"]) != nil){
-                            Text((contact?.additional_fields["email"])!!)
+                        if(!((contact?.additional_fields?["email"] ?? "") ?? "").isEmpty){
+                            Text((contact?.additional_fields?["email"])! ?? "")
                                 .font(.custom("Nunito-Regular",size: 14))
                                 .foregroundColor(Color("TermsPrimary"))
+                                .accessibilityIdentifier("txt_account_list_account_email_index_\(index)")
+                                .accessibilityElement()
                         }
                         
                     }

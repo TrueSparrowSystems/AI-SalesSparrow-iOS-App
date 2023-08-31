@@ -94,7 +94,7 @@ class MockResponse {
                 "success": "true",
                 "statusCode": 200,
                 "data":[
-                    "account_ids": ["account_1", "account_2", "account_3"],
+                    "account_ids": ["account_1", "account_2", "account_3","account_4"],
                     "account_map_by_id": [
                         "account_1": [
                             "id": "account_1",
@@ -119,6 +119,10 @@ class MockResponse {
                                 "website": "https://account.com"
                             ],
                             "account_contact_associations_id": "account_contact_association_3"
+                        ] as [String : Any],
+                        "account_4": [
+                            "id": "account_4",
+                            "name": "Test Account 4",
                         ] as [String : Any],
                     ],
                     "contact_map_by_id": [
@@ -263,7 +267,9 @@ class MockResponse {
                 "success": "true",
                 "statusCode": 200,
                 "data":[
-                    "text": "some random text"
+                    "add_task_suggestions": [["description":"This is suggested task text.","due_date":"2023-12-16"],
+                                            ["description":"This is recommended note description.","due_date":"2023-09-25"],
+                                            ["description":"Schedule meeting with John regarding software feedback","due_date":"2024-10-25"]],
                 ],
             ]
         ],
@@ -346,6 +352,15 @@ class MockResponse {
                 ]as [String : Any]
             ]
         ],
+        "POST /v1/accounts/account_1/tasks": [
+            "default":[
+                "success": "true",
+                "statusCode": 200,
+                "data":[
+                    "task_id": "task_1"
+                ] as [String : Any],
+            ],
+        ],
         
         "DELETE /v1/accounts/account_1/tasks/task_1": [
             "default":[
@@ -364,44 +379,44 @@ class MockResponse {
             ]
         ],
         
-        "GET /v1/users": [
+        "GET /v1/crm-organization-users": [
             "default":[
                 "success": "true",
                 "statusCode": 200,
                 "data":[
-                    "user_ids": ["1","2","3"],
-                    "user_map_by_id": [
-                        "1": [
-                            "id": "1",
+                    "crm_organization_user_ids": ["user_100","user_200","user_300"],
+                    "crm_organization_user_map_by_id": [
+                        "user_100": [
+                            "id": "user_100",
                             "name": "Test User"
                         ],
-                        "2":[
-                            "id": "2",
+                        "user_200":[
+                            "id": "user_200",
                             "name": "Elon Musk"
                         ],
-                        "3":[
-                            "id": "3",
+                        "user_300":[
+                            "id": "user_300",
                             "name": "Mark Zuckerberg"
                         ]
                     ]
                 ] as [String : Any],
             ],
-            "searchResponseWithQuery":[
+            "searchUserWithQuery":[
                 "success": "true",
                 "statusCode": 200,
                 "data":[
-                    "user_ids": ["1","2","3"],
-                    "user_map_by_id": [
-                        "1": [
-                            "id": "1",
+                    "crm_organization_user_ids": ["user_100","user_200","user_300"],
+                    "crm_organization_user_map_by_id": [
+                        "user_100": [
+                            "id": "user_100",
                             "name": "Mock User"
                         ],
-                        "2":[
-                            "id": "2",
+                        "user_200":[
+                            "id": "user_200",
                             "name": "Alex Hunter"
                         ],
-                        "3":[
-                            "id": "3",
+                        "user_300":[
+                            "id": "user_300",
                             "name": "Lukas vaskas"
                         ]
                     ]

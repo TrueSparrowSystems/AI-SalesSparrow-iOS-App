@@ -35,19 +35,14 @@ struct TopBar: View {
                     showAccountSearchView = true
                 }
                 .accessibilityIdentifier("btn_search_account")
-                .sheet(isPresented: $showAccountSearchView, onDismiss: {
-                    // Clear data
-                    print("Clear Search data from View model")
-                }) {
+                .sheet(isPresented: $showAccountSearchView) {
                     AccountSearchView(isPresented: $showAccountSearchView, onAccountSelected: { accountId, accountName in
-                        print("\(accountId) Search deatail Account")
                         
                         // Use ID to push view to navigation link
                         selectedAccountId = accountId
                         selectedAccountName = accountName
                         self.accountDetailsScreenActivated = true
                     }, onNoteCreateSelected: { accountId, accountName in
-                        print("Create Note for \(accountName) \(accountId)")
                         
                         selectedAccountId = accountId
                         selectedAccountName = accountName
@@ -58,8 +53,8 @@ struct TopBar: View {
                 .navigationBarBackButtonHidden(true),
                            isActive: self.$userAccountSettingScreenActivated) {
                 Text(BasicHelper.getInitials(from: userStateViewModel.currentUser.name))
-                    .frame(width: 22, height:22)
-                    .font(.custom("Nunito-Bold", size: 7))
+                    .frame(width: 30, height:30)
+                    .font(.custom("Nunito-Bold", size: 9))
                     .foregroundColor(.black)
                     .accessibilityIdentifier("txt_user_account_icon")
             }

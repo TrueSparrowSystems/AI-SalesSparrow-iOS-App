@@ -59,13 +59,13 @@ final class AccountDetailTaskListUITests: XCTestCase {
         XCTAssertTrue(addTaskButton.waitForExistence(timeout: TimeInterval(timeout)))
         XCTAssertTrue(addTaskButton.isEnabled) // Ensure the button is enabled
         
-        XCTAssertTrue(app.staticTexts["txt_account_detail_task_creator"].waitForExistence(timeout: TimeInterval(timeout)))
+        XCTAssertTrue(app.staticTexts["txt_account_detail_task_creator_0"].waitForExistence(timeout: TimeInterval(timeout)))
         
         XCTAssertTrue(app.staticTexts["txt_account_detail_task_description_0"].waitForExistence(timeout: TimeInterval(timeout)))
         
-        XCTAssertTrue(app.staticTexts["txt_account_detail_task_assignee"].waitForExistence(timeout: TimeInterval(timeout)))
+        XCTAssertTrue(app.staticTexts["txt_account_detail_task_assignee_0"].waitForExistence(timeout: TimeInterval(timeout)))
         
-        XCTAssertTrue(app.staticTexts["txt_account_detail_task_due_date"].waitForExistence(timeout: TimeInterval(timeout)))
+        XCTAssertTrue(app.staticTexts["txt_account_detail_task_due_date_0"].waitForExistence(timeout: TimeInterval(timeout)))
         
         let backButton = app.buttons["btn_account_detail_back"]
         XCTAssertTrue(backButton.waitForExistence(timeout: TimeInterval(timeout)))

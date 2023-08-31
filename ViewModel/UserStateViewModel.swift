@@ -49,6 +49,7 @@ class UserStateViewModel: ObservableObject {
         
         DispatchQueue.main.async {
             self.isLogOutInProgress = true
+            LoaderViewModel.shared.showLoader()
             
             self.apiService.post(type: LogoutStruct.self, endpoint: "/v1/auth/logout"){
                 [weak self]  result, statusCode in
@@ -56,8 +57,9 @@ class UserStateViewModel: ObservableObject {
                 DispatchQueue.main.async {
                     self?.isLogOutInProgress = false
                     self?.isUserLoggedIn = false
+                    self?.currentUser = CurrentUserStruct(id: "", name: "", email: "")
                     HTTPCookieStorage.shared.cookies?.forEach(HTTPCookieStorage.shared.deleteCookie)
-                    
+                    LoaderViewModel.shared.hideLoader()
                 }
                 
             }
@@ -90,17 +92,20 @@ class UserStateViewModel: ObservableObject {
         
         DispatchQueue.main.async {
             self.isDisconnectInProgress = true
+            LoaderViewModel.shared.showLoader()
             
             self.apiService.post(type: DisconnectUserStruct.self, endpoint: "/v1/auth/disconnect"){
                 [weak self]  result, statusCode in
                 
                 DispatchQueue.main.async {
+                    HTTPCookieStorage.shared.cookies?.forEach(HTTPCookieStorage.shared.deleteCookie)
                     self?.isDisconnectInProgress = false
+                    self?.currentUser = CurrentUserStruct(id: "", name: "", email: "")
                     self?.isUserLoggedIn = false
-                    HTTPCookieStorage.shared.cookies?.forEach(HTTPCookieStorage.shared.deleteCookie)                    
+                    LoaderViewModel.shared.hideLoader()
                 }
             }
         }
     }
-
+    
 }
