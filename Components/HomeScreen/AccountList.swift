@@ -28,7 +28,6 @@ struct AccountList: View {
                             ZStack {
                                 AccountRowView(account: account, index: index)
                                     .onAppear{
-                                        print(account.name)
                                         if(accountIds.count == index + 1){
                                             acccountListViewModelObject.fetchData()
                                         }

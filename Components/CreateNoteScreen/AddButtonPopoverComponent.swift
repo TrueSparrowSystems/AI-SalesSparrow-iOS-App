@@ -9,21 +9,19 @@ import SwiftUI
 
 
 struct AddButtonPopoverComponent: View{
+    @EnvironmentObject var createNoteScreenViewModel : CreateNoteScreenViewModel
+    
     @Binding var isPopoverVisible : Bool
     var accountId: String
-    @State var addTaskActivated = false
     
-    @State var recommendedText: String = ""
-    @State var selectedDate: Date = Date()
-    @State var selectedUserId: String = ""
-    @State var selectedUserName: String = ""
-    @State var taskId: String = ""
-    @State var isDateSelected = false
-    @State var isTaskSaved = false
+    @State var addTaskActivated = false
+    @State var suggestionId: String = ""
     
     var body: some View {
         VStack {
             Button(action: {
+                suggestionId = UUID().uuidString
+                createNoteScreenViewModel.initTaskData(suggestion: SuggestionStruct(id: suggestionId, description: ""))
                 addTaskActivated = true
             }, label: {
                 HStack{
@@ -44,7 +42,6 @@ struct AddButtonPopoverComponent: View{
             //            .contentShape(Rectangle())
             //            .onTapGesture {
             //                isPopoverVisible.toggle()
-            //                print("Add Event")
             //            }
         }
         .padding(10)
@@ -57,14 +54,7 @@ struct AddButtonPopoverComponent: View{
         .frame(width: 200, height: 50)
         .background{
             NavigationLink(destination:
-                            CreateTaskScreen(accountId: accountId,
-                                             description: $recommendedText,
-                                             dueDate: $selectedDate,
-                                             crmOrganizationUserId: $selectedUserId,
-                                             isDateSelected: $isDateSelected,
-                                             selectedUserName: $selectedUserName, 
-                                             isTaskSaved: $isTaskSaved, 
-                                             taskId: $taskId),
+                            CreateTaskScreen(accountId: accountId, suggestionId: suggestionId),
                            isActive: self.$addTaskActivated
             ) {
                 EmptyView()

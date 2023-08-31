@@ -46,7 +46,6 @@ class UserSearchViewModel: ObservableObject {
     
     // A function that Perform the API call for searching users
     private func searchUsers(withText searchText: String) {
-        print("Query String--> \(searchText)")
         let searchUrl = "/v1/crm-organization-users"
         let params: [String: Any] = ["q": searchText]
         

@@ -11,13 +11,9 @@ struct TasksList: View {
     let accountId: String
     let accountName: String
     
-    @State var recommendedText: String = ""
-    @State var selectedDate: Date = Date()
-    @State var selectedUserId: String = ""
-    @State var selectedUserName: String = ""
-    @State var taskId: String = ""
-    @State var isDateSelected = false
-    @State var isTaskSaved = false
+    @State var addTaskActivated = false
+    @State var suggestionId: String = ""
+    @EnvironmentObject var createNoteScreenViewModel : CreateNoteScreenViewModel
     
     @EnvironmentObject var acccountDetailScreenViewModelObject: AccountDetailViewScreenViewModel
     @Binding var propagateClick : Int
@@ -38,7 +34,11 @@ struct TasksList: View {
                 
                 Spacer()
                 
-                NavigationLink(destination: CreateTaskScreen(accountId: accountId, description: $recommendedText, dueDate: $selectedDate, crmOrganizationUserId: $selectedUserId, isDateSelected: $isDateSelected, selectedUserName: $selectedUserName, isTaskSaved: $isTaskSaved, taskId: $taskId)
+                Button(action: {
+                    suggestionId = UUID().uuidString
+                    createNoteScreenViewModel.initTaskData(suggestion: SuggestionStruct(id: suggestionId, description: ""))
+                    addTaskActivated = true
+                }
                 ){
                     HStack{
                         Image("AddIcon")
@@ -96,18 +96,15 @@ struct TasksList: View {
             }
         }.onAppear {
             acccountDetailScreenViewModelObject.fetchTasks(accountId: accountId)
-            resetStates()
+        }.background{
+            NavigationLink(destination:
+                            CreateTaskScreen(accountId: accountId, suggestionId: suggestionId),
+                           isActive: self.$addTaskActivated
+            ) {
+                EmptyView()
+            }
+            .hidden()
         }
-    }
-    func resetStates(){
-        self.recommendedText = ""
-        self.selectedDate = Date()
-        self.selectedUserId = ""
-        self.selectedUserName = ""
-        self.taskId = ""
-        self.isDateSelected = false
-        self.isTaskSaved = false
-        
     }
 }
 

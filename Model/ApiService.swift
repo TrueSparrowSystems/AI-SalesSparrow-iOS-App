@@ -51,8 +51,9 @@ class MockAPIService: ApiService {
  A class that provides methods for making API requests and handling responses. The class includes a base API endpoint, and methods for making GET requests with query parameters and decoding the response into a specified type.
  */
 class ApiService {
-
-    let dev = false
+    
+    //Variable to enable logs in development environment. Set this variable to true to start logging. 
+    let dev = false && Environments.shared.target == BuildTarget.development
     
     /**
      Makes a GET request to the API with the specified endpoint and query parameters, and decodes the response into the specified type.
