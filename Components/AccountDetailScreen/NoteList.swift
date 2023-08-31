@@ -117,12 +117,12 @@ struct NoteCardView: View {
                     .foregroundColor(.black)
                     .background(Color("UserBubble"))
                     .clipShape(RoundedRectangle(cornerRadius: 26))
-                    .accessibilityIdentifier("txt_account_detail_note_creator_initials")
+                    .accessibilityIdentifier("txt_account_detail_note_creator_initials_\(noteIndex)")
                 
                 Text("\(acccountDetailScreenViewModelObject.noteData.note_map_by_id[noteId]?.creator ?? "")")
                     .font(.custom("Nunito-Medium",size: 14))
                     .foregroundColor(Color("TextPrimary"))
-                    .accessibilityIdentifier("txt_account_detail_note_creator")
+                    .accessibilityIdentifier("txt_account_detail_note_creator_\(noteIndex)")
                 
                 Spacer()
                 
@@ -130,7 +130,7 @@ struct NoteCardView: View {
                     Text("\(BasicHelper.getFormattedDateForCard(from: acccountDetailScreenViewModelObject.noteData.note_map_by_id[noteId]?.last_modified_time ?? ""))")
                         .font(.custom("Nunito-Light",size: 12))
                         .foregroundColor(Color("TextPrimary"))
-                        .accessibilityIdentifier("txt_account_detail_note_last_modified_time")
+                        .accessibilityIdentifier("txt_account_detail_note_last_modified_time_\(noteIndex)")
                     
                     
                     Button{

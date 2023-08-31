@@ -22,7 +22,7 @@ final class CreateTaskUITests: XCTestCase {
         btnSearchAccountNameBtn.tap()
     }
     
-    func SearchUser(app: XCUIApplication) throws {
+    func SearchUser(app: XCUIApplication) {
         let timeout = 5
         
         let searchUserButton = app.buttons["btn_create_task_search_user"]
@@ -188,6 +188,23 @@ final class CreateTaskUITests: XCTestCase {
         
         XCTAssertTrue(!app.staticTexts["txt_create_note_suggestion_title_index_\(taskIndex)"].exists,"Suggest task text must disappear")
         XCTAssertTrue(!app.buttons["btn_create_note_add_task_\(taskIndex)"].exists,"Suggest task add task button must be not visible")
+    }
+    
+    func testCreateTaskFromSuggestedCard(){
+        let timeout = 5
+        let app = XCUIApplication()
+        app.launchArguments = ["isRunningUITests"]
+        app.launch()
+        
+        createNoteFromFloatingActionButton(app: app)
+        
+        let tileIndex = 0
+        
+        let suggestionTitle = app.staticTexts["txt_create_note_suggestion_title_index_\(tileIndex)"]
+        XCTAssertTrue(suggestionTitle.waitForExistence(timeout: TimeInterval(timeout)))
+        suggestionTitle.tap()
+        
+        createTask(app: app)
     }
 }
 
