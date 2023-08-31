@@ -161,6 +161,7 @@ struct CreateNoteScreen : View {
                             .onTapGesture {
                                 // Do nothing. Kept on tap here to override tap action over parent tap action
                             }
+                            .lineLimit(4...)
                         
                     }
                 }
@@ -232,7 +233,7 @@ struct CreateNoteScreen : View {
                                     Image("AddIcon")
                                         .frame(width: 20, height: 20)
                                 }
-                                .accessibilityIdentifier("btn_create_note_popover_create_task") 
+                                .accessibilityIdentifier("btn_create_note_popover_create_task")
                             }
                             let addTaskSuggestions = createNoteScreenViewModel.suggestedTaskData.add_task_suggestions
                             ForEach(Array(addTaskSuggestions.enumerated()), id: \.offset) { index, suggestion in

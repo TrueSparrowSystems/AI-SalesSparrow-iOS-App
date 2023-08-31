@@ -214,6 +214,7 @@ struct CreateTaskScreen: View {
                             // Do nothing. Kept on tap here to override tap action over parent tap action
                         }
                         .padding(.top)
+                        .lineLimit(4...)
                 }else{
                     Text(description)
                         .foregroundColor(Color("TextPrimary"))

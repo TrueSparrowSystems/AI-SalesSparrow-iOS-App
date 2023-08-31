@@ -136,6 +136,10 @@
 		6D8C7D212A77A09F005D597E /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8C7D202A77A09F005D597E /* ColorExtension.swift */; };
 		6D8C7D332A77A1E5005D597E /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8C7D322A77A1E5005D597E /* ApiService.swift */; };
 		6D8C7D382A77A254005D597E /* ApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8C7D372A77A254005D597E /* ApiError.swift */; };
+		6D8FF5C52AA09DF700215F38 /* AppLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8FF5C42AA09DF700215F38 /* AppLoader.swift */; };
+		6D8FF5C62AA09DF700215F38 /* AppLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8FF5C42AA09DF700215F38 /* AppLoader.swift */; };
+		6D8FF5C82AA09F1700215F38 /* LoaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8FF5C72AA09F1700215F38 /* LoaderViewModel.swift */; };
+		6D8FF5C92AA09F1700215F38 /* LoaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8FF5C72AA09F1700215F38 /* LoaderViewModel.swift */; };
 		6D908DB52A8526EB00F36DCE /* NoteList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDB87242A84C2CB000CC1B9 /* NoteList.swift */; };
 		6D908DB62A8526EF00F36DCE /* AccountDetailsHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDB87222A84C20E000CC1B9 /* AccountDetailsHeader.swift */; };
 		6D908DB72A85271500F36DCE /* AccountDetailScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDB87262A850B5A000CC1B9 /* AccountDetailScreenViewModel.swift */; };
@@ -267,6 +271,8 @@
 		6D8C7D202A77A09F005D597E /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		6D8C7D322A77A1E5005D597E /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
 		6D8C7D372A77A254005D597E /* ApiError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiError.swift; sourceTree = "<group>"; };
+		6D8FF5C42AA09DF700215F38 /* AppLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLoader.swift; sourceTree = "<group>"; };
+		6D8FF5C72AA09F1700215F38 /* LoaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderViewModel.swift; sourceTree = "<group>"; };
 		6DA82B042A94D4B60098D1D5 /* TasksList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksList.swift; sourceTree = "<group>"; };
 		6DACD9CE2A89FBAA00B55747 /* HTMLTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLTextView.swift; sourceTree = "<group>"; };
 		6DACD9D12A8A413B00B55747 /* LaunchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreen.swift; sourceTree = "<group>"; };
@@ -521,6 +527,7 @@
 				6D76EF982A97496B009075C7 /* AlertViewModel.swift */,
 				6D59FBFC2A97953800865BDD /* AccountListViewModel.swift */,
 				4BF4C3CF2A97689F00983C2D /* CreateTaskViewModel.swift */,
+				6D8FF5C72AA09F1700215F38 /* LoaderViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -546,6 +553,7 @@
 				6D8C7D1B2A77A057005D597E /* DateTimePicker.swift */,
 				4B13E4EC2A93821300CB24E4 /* UserSearchView.swift */,
 				4B819B4A2A96134500CE6293 /* VerticalDividerRectangleView.swift */,
+				6D8FF5C42AA09DF700215F38 /* AppLoader.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -939,6 +947,7 @@
 				019595E02A83CE71008425AD /* ApiService.swift in Sources */,
 				019595FA2A83CEC9008425AD /* Environments_Sample.swift in Sources */,
 				4B13E4EE2A93821300CB24E4 /* UserSearchView.swift in Sources */,
+				6D8FF5C62AA09DF700215F38 /* AppLoader.swift in Sources */,
 				4B9E5DE52A8CE6AD00041D65 /* AlertModal.swift in Sources */,
 				4B9E5DE52A8CE6AD00041D65 /* AlertModal.swift in Sources */,
 				4BF4C3CE2A97650A00983C2D /* CreateTaskScreen.swift in Sources */,
@@ -952,6 +961,7 @@
 				019595F62A83CEBC008425AD /* AccountSearchViewModel.swift in Sources */,
 				019595D62A83CE20008425AD /* LoginScreen.swift in Sources */,
 				019595FF2A83CEDD008425AD /* ContentView.swift in Sources */,
+				6D8FF5C92AA09F1700215F38 /* LoaderViewModel.swift in Sources */,
 				6D76EF9A2A97496B009075C7 /* AlertViewModel.swift in Sources */,
 				019595F72A83CEBE008425AD /* UserStateViewModel.swift in Sources */,
 				019595E32A83CE7E008425AD /* BasicHelper.swift in Sources */,
@@ -1000,6 +1010,7 @@
 				6D8C7D0D2A779D14005D597E /* Environments.swift in Sources */,
 				6D8C7D0F2A779E97005D597E /* AppDelegate.swift in Sources */,
 				6D8C7D212A77A09F005D597E /* ColorExtension.swift in Sources */,
+				6D8FF5C52AA09DF700215F38 /* AppLoader.swift in Sources */,
 				4BDB87232A84C20E000CC1B9 /* AccountDetailsHeader.swift in Sources */,
 				4B13E4ED2A93821300CB24E4 /* UserSearchView.swift in Sources */,
 				4B9E5DE42A8CE6AD00041D65 /* AlertModal.swift in Sources */,
@@ -1013,6 +1024,7 @@
 				6D8C7CE62A779A99005D597E /* SalesSparrow.xcdatamodeld in Sources */,
 				4B9E5DE02A8CD59900041D65 /* UserAccountDetailScreen.swift in Sources */,
 				6DACD9CF2A89FBAA00B55747 /* HTMLTextView.swift in Sources */,
+				6D8FF5C82AA09F1700215F38 /* LoaderViewModel.swift in Sources */,
 				6D3E84802A77E83E00E9FB83 /* LoginScreenViewModel.swift in Sources */,
 				4B393FF22A7AAA2D00572F66 /* AccountSearch.swift in Sources */,
 				6DC43C522A7A69E1002162FE /* DeviceSettingManager.swift in Sources */,

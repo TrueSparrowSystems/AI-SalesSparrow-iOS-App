@@ -79,6 +79,7 @@ class AccountDetailViewScreenViewModel: ObservableObject {
     //A function that deletes note in an account
     func deleteNote(accountId: String, noteId: String){
         
+        LoaderViewModel.shared.showLoader()
         apiService.delete(type: NoteDeleteStruct.self, endpoint: "/v1/accounts/\(accountId)/notes/\(noteId)"){
             [weak self] result,statusCode  in
             
@@ -91,6 +92,7 @@ class AccountDetailViewScreenViewModel: ObservableObject {
                     print("error deleting note: \(error)")
                     ToastViewModel.shared.showToast(_toast: Toast(style: .error, message: error.message))
                 }
+                LoaderViewModel.shared.hideLoader()
             }
         }
     }
@@ -122,7 +124,8 @@ class AccountDetailViewScreenViewModel: ObservableObject {
     
     //A function that deletes task in an account
     func deleteTask(accountId: String, taskId: String, onSuccess : @escaping() -> Void){
-        
+
+        LoaderViewModel.shared.showLoader()
         apiService.delete(type: TaskDeleteStruct.self, endpoint: "/v1/accounts/\(accountId)/tasks/\(taskId)"){
             [weak self] result,statusCode  in
             
@@ -136,6 +139,7 @@ class AccountDetailViewScreenViewModel: ObservableObject {
                     print("error deleting task: \(error)")
                     ToastViewModel.shared.showToast(_toast: Toast(style: .error, message: error.message))
                 }
+                LoaderViewModel.shared.hideLoader()
             }
         }
     }
