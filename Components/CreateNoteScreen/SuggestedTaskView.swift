@@ -250,6 +250,12 @@ struct SuggestedTaskCardView: View {
                         .padding(.top, 16)
                     }
                 }
+                .padding()
+                .overlay(
+                    RoundedRectangle(cornerRadius: 4)
+                        .stroke(style: StrokeStyle(lineWidth: 1.5, dash: [1,5])) // Specify the dash pattern here
+                        .foregroundColor(Color("TextPrimary"))
+                )
             }
         }
         .onChange(of: selectedDate, perform: {_ in
@@ -264,12 +270,6 @@ struct SuggestedTaskCardView: View {
             self.selectedDate =  updatedTaskState["dueDate"] as! Date
             
         }
-        )
-        .padding()
-        .overlay(
-            RoundedRectangle(cornerRadius: 4)
-                .stroke(style: StrokeStyle(lineWidth: 1.5, dash: [1,5])) // Specify the dash pattern here
-                .foregroundColor(Color("TextPrimary"))
         )
         .background(
             NavigationLink(
