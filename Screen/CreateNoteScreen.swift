@@ -102,23 +102,24 @@ struct CreateNoteScreen : View {
                     .font(.custom("Nunito-Regular", size: 12))
                     .accessibilityIdentifier("txt_create_note_account")
                 if(isAccountSelectable && !(isNoteSaved || isSaveInProgress)){
-                    HStack(alignment: .center){
-                        Text(accountId == "" ? "Select": accountName)
-                            .padding(.vertical, 8)
-                            .padding(.horizontal, 6)
-                            .foregroundColor(Color("RedHighlight"))
-                            .font(.custom("Nunito-Light", size: 14))
-                            .accessibilityIdentifier(accountId == "" ? "txt_create_note_select_account" : "txt_create_note_selected_account")
-                        Image("ArrowDown")
-                            .frame(width: 7, height: 4)
-                            .padding(.trailing, 6)
+                    Button(action: {showAccountSearchView = true}){
+                        HStack(alignment: .center){
+                            Text(accountId == "" ? "Select": accountName)
+                                .padding(.vertical, 8)
+                                .padding(.horizontal, 6)
+                                .foregroundColor(Color("RedHighlight"))
+                                .font(.custom("Nunito-Light", size: 14))
+                                .accessibilityIdentifier(accountId == "" ? "txt_create_note_select_account" : "txt_create_note_selected_account")
+                            Image("ArrowDown")
+                                .frame(width: 7, height: 4)
+                                .padding(.trailing, 6)
+                                .accessibilityIdentifier( "img_create_note_select_account")
+                        }
                     }
-                    .accessibilityIdentifier("txt_create_note_select_account")
+                    .accessibilityIdentifier("btn_create_note_select_account")
                     .background(Color("SelectAccountDropdownBG"))
                     .clipShape(RoundedRectangle(cornerRadius: 4))
-                    .onTapGesture {
-                        showAccountSearchView = true
-                    }
+                    
                     .sheet(isPresented: $showAccountSearchView, onDismiss: {
                     }) {
                         AccountSearchView(isPresented: $showAccountSearchView, isCreateNoteFlow: true, onNoteCreateSelected: { _accountId, _accountName in

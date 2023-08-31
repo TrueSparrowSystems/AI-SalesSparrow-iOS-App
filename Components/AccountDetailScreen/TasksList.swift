@@ -127,13 +127,13 @@ struct TaskCardView: View {
                     .foregroundColor(.black)
                     .background(Color("UserBubble"))
                     .clipShape(RoundedRectangle(cornerRadius: 26))
-                    .accessibilityIdentifier("txt_account_detail_task_creator_initials")
+                    .accessibilityIdentifier("txt_account_detail_task_creator_initials_\(taskIndex)")
                 
                 Text("\(acccountDetailScreenViewModelObject.taskData.task_map_by_id[taskId]?.creator_name ?? "")")
                     .font(.custom("Nunito-Medium",size: 14))
                     .tracking(0.6)
                     .foregroundColor(Color("TextPrimary"))
-                    .accessibilityIdentifier("txt_account_detail_task_creator")
+                    .accessibilityIdentifier("txt_account_detail_task_creator_\(taskIndex)")
                 
                 Spacer()
                 
@@ -142,7 +142,7 @@ struct TaskCardView: View {
                         .font(.custom("Nunito-Light",size: 12))
                         .tracking(0.5)
                         .foregroundColor(Color("TextPrimary"))
-                        .accessibilityIdentifier("txt_account_detail_task_last_modified_time")
+                        .accessibilityIdentifier("txt_account_detail_task_last_modified_time_\(taskIndex)")
                     
                     Button{
                         isSelfPopupTriggered = true
@@ -169,13 +169,13 @@ struct TaskCardView: View {
                     .font(.custom("Nunito-Regular",size: 12))
                     .foregroundColor(Color("TermsPrimary"))
                     .tracking(0.5)
-                    .accessibilityIdentifier("txt_account_detail_task_assign_to_title")
+                    .accessibilityIdentifier("txt_account_detail_task_assign_to_title_\(taskIndex)")
                 
                 Text(acccountDetailScreenViewModelObject.taskData.task_map_by_id[taskId]?.crm_organization_user_name ?? "")
                     .font(.custom("Nunito-Regular",size: 12))
                     .foregroundColor(Color("RedHighlight"))
                     .tracking(0.5)
-                    .accessibilityIdentifier("txt_account_detail_task_assignee")
+                    .accessibilityIdentifier("txt_account_detail_task_assignee_\(taskIndex)")
                 
                 if((acccountDetailScreenViewModelObject.taskData.task_map_by_id[taskId]?.due_date != nil)){
                     Divider()
@@ -189,7 +189,7 @@ struct TaskCardView: View {
                         .font(.custom("Nunito-Regular",size: 12))
                         .foregroundColor(Color("TermsPrimary"))
                         .tracking(0.5)
-                        .accessibilityIdentifier("txt_account_detail_task_due_date")
+                        .accessibilityIdentifier("txt_account_detail_task_due_date_\(taskIndex)")
                 }
                 
                 Spacer()
