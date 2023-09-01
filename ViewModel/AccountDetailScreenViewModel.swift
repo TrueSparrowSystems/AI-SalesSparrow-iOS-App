@@ -23,18 +23,40 @@ struct NotesListStruct: Codable {
     var note_map_by_id: [String: Note]
 }
 
+// A struct that represents the meta data of the note
+struct Task: Identifiable, Codable {
+    let id: String
+    let creator_name: String
+    let crm_organization_user_name: String
+    let description: String?
+    let due_date: String?
+    let last_modified_time: String
+}
+
+// A struct that represents the meta data of the note list API
+struct TasksListStruct: Codable {
+    var task_ids: [String]
+    var task_map_by_id: [String: Task]
+}
+
+struct NoteDeleteStruct: Codable {}
+
+struct TaskDeleteStruct: Codable {}
+
 // A class that represents the view model of account details
 class AccountDetailViewScreenViewModel: ObservableObject {
     @Published var noteData = NotesListStruct(note_ids: [], note_map_by_id: [:])
-    @Published var isLoading = false
+    @Published var taskData = TasksListStruct(task_ids: [], task_map_by_id: [:])
+    @Published var isNoteLoading = false
+    @Published var isTaskLoading = false
     var apiService = DependencyContainer.shared.apiService
     
-    // A function that fetches the data for the list
+    // A function that fetches the data for the note list
     func fetchNotes(accountId: String){
-        guard !self.isLoading else {
+        guard !self.isNoteLoading else {
             return
         }
-        self.isLoading = true
+        self.isNoteLoading = true
         
         apiService.get(type: NotesListStruct.self, endpoint: "/v1/accounts/\(accountId)/notes"){
             [weak self]  result, statusCode in
@@ -43,13 +65,81 @@ class AccountDetailViewScreenViewModel: ObservableObject {
                 case .success(let results):
                     self?.noteData.note_ids = results.note_ids
                     self?.noteData.note_map_by_id = results.note_map_by_id
-                    self?.isLoading = false
+                    self?.isNoteLoading = false
                 case .failure(let error):
                     print("error loading data: \(error)")
                     self?.noteData = NotesListStruct(note_ids: [], note_map_by_id: [:])
-                    self?.isLoading = false
+                    self?.isNoteLoading = false
                     ToastViewModel.shared.showToast(_toast: Toast(style: .error, message: error.message))
                 }
+            }
+        }
+    }
+    
+    //A function that deletes note in an account
+    func deleteNote(accountId: String, noteId: String){
+        
+        LoaderViewModel.shared.showLoader()
+        apiService.delete(type: NoteDeleteStruct.self, endpoint: "/v1/accounts/\(accountId)/notes/\(noteId)"){
+            [weak self] result,statusCode  in
+            
+            DispatchQueue.main.async {
+                switch result {
+                case .success(_):
+                    self?.noteData.note_ids = self?.noteData.note_ids.filter(){$0 != noteId} ?? []
+                    
+                case .failure(let error):
+                    print("error deleting note: \(error)")
+                    ToastViewModel.shared.showToast(_toast: Toast(style: .error, message: error.message))
+                }
+                LoaderViewModel.shared.hideLoader()
+            }
+        }
+    }
+    
+    // A function that fetches the data for the task list
+    func fetchTasks(accountId: String){
+        guard !self.isTaskLoading else {
+            return
+        }
+        self.isTaskLoading = true
+        
+        apiService.get(type: TasksListStruct.self, endpoint: "/v1/accounts/\(accountId)/tasks"){
+            [weak self]  result, statusCode in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let results):
+                    self?.taskData.task_ids = results.task_ids
+                    self?.taskData.task_map_by_id = results.task_map_by_id
+                    self?.isTaskLoading = false
+                case .failure(let error):
+                    print("error loading data: \(error)")
+                    self?.taskData = TasksListStruct(task_ids: [], task_map_by_id: [:])
+                    self?.isTaskLoading = false
+                    ToastViewModel.shared.showToast(_toast: Toast(style: .error, message: error.message))
+                }
+            }
+        }
+    }
+    
+    //A function that deletes task in an account
+    func deleteTask(accountId: String, taskId: String, onSuccess : @escaping() -> Void){
+
+        LoaderViewModel.shared.showLoader()
+        apiService.delete(type: TaskDeleteStruct.self, endpoint: "/v1/accounts/\(accountId)/tasks/\(taskId)"){
+            [weak self] result,statusCode  in
+            
+            DispatchQueue.main.async {
+                switch result {
+                case .success(_):
+                    onSuccess()
+                    self?.taskData.task_ids = self?.taskData.task_ids.filter(){$0 != taskId} ?? []
+                    
+                case .failure(let error):
+                    print("error deleting task: \(error)")
+                    ToastViewModel.shared.showToast(_toast: Toast(style: .error, message: error.message))
+                }
+                LoaderViewModel.shared.hideLoader()
             }
         }
     }
@@ -57,5 +147,6 @@ class AccountDetailViewScreenViewModel: ObservableObject {
     // A function that resets the data for the list
     func resetData(){
         self.noteData = NotesListStruct(note_ids: [], note_map_by_id: [:])
+        self.taskData = TasksListStruct(task_ids: [], task_map_by_id: [:])
     }
 }

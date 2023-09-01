@@ -180,6 +180,24 @@ final class SalesSparrowTests: XCTestCase {
         XCTAssertTrue(formattedDateForCard.isEmpty)
     }
     
+    func testGetFormattedDateForDueDate() throws {
+        
+        //Original dateString to be passed to the function
+        var dateString = "2023-07-12"
+        //Formatted DateString expected as output from function
+        let expectedFormattedDateString = "12/07/2023"
+        
+        var formattedDateString = BasicHelper.getFormattedDateForDueDate(from: dateString)
+        XCTAssertTrue(expectedFormattedDateString == formattedDateString)
+        
+        //Invalid DateString for error case
+        dateString = "2023.7"
+        
+        formattedDateString = BasicHelper.getFormattedDateForDueDate(from: dateString)
+        XCTAssertTrue(formattedDateString.isEmpty)
+        
+    }
+    
     func testGetInitials() throws {
         // 2 word name
         var name = "Abc Xyz"

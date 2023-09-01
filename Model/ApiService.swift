@@ -28,9 +28,6 @@ class MockAPIService: ApiService {
                     let responseData = try JSONSerialization.data(withJSONObject: response?["data"]! as Any, options: [])
                     let decodedData = try JSONDecoder().decode(T.self, from: responseData)
                     
-                    DispatchQueue.main.async {
-                        ApiHelper.syncEntities(response!)
-                    }
                     completion(Result.success(decodedData), (response?["statusCode"] as! Int))
                 } catch let decodingError {
                     completion(Result.failure(APIError().decodingError(error: (decodingError as! DecodingError))), 0)
@@ -55,6 +52,9 @@ class MockAPIService: ApiService {
  */
 class ApiService {
     
+    //Variable to enable logs in development environment. Set this variable to true to start logging. 
+    let dev = false && Environments.shared.target == BuildTarget.development
+    
     /**
      Makes a GET request to the API with the specified endpoint and query parameters, and decodes the response into the specified type.
      
@@ -64,9 +64,6 @@ class ApiService {
      - params: The query parameters to include in the request.
      - completion: A closure to call with the decoded response and the HTTP status code of the response.
      */
-    
-    let dev = false
-    
     func get<T: Decodable>(type: T.Type, endpoint: String, params: [String: Any] = [:], completion: @escaping(Result<T, ErrorStruct>, Int?) -> Void) {
         let envVars = Environments.shared.getVars()
         let apiBaseEndpoint: String = envVars["API_ENDPOINT"] ?? ""
@@ -141,7 +138,6 @@ class ApiService {
      - Parameters:
      - type: The type to decode the response into.
      - endpoint: The endpoint to append to the base API endpoint.
-     - params: The body parameters to include in the request.
      - completion: A closure to call with the decoded response and the HTTP status code of the response.
      */
     func delete<T: Decodable>(type: T.Type, endpoint: String, completion: @escaping(Result<T, ErrorStruct>, Int?) -> Void) {
@@ -154,6 +150,9 @@ class ApiService {
             return
         }
         
+        if(dev){
+            print("urlApiEndpoint: \(urlApiEndpoint)")
+        }
         var requestUrl = URLRequest(url: urlApiEndpoint)
         requestUrl.httpMethod = "DELETE"
         
@@ -187,9 +186,11 @@ class ApiService {
         
         URLSession.shared.dataTask(with: requestUrl) { data, response, error in
             if(self.dev){
-                print("---------------data----------\(data)")
+                let stringData = String(decoding: data!, as: UTF8.self)
+                print("---------------data----------\(data)---stringData---\(stringData)")
                 print("---------------response----------\(response)")
                 print("---------------error----------\(error)")
+                
             }
             if let error = error as? URLError {
                 completion(Result.failure(APIError().internalServerError()), 0)
@@ -209,6 +210,9 @@ class ApiService {
                     errorData = try JSONDecoder().decode(ErrorStruct.self, from: data!)
                     
                 } catch {
+                    if(self.dev){
+                        print("----in catch-----error decoding failed throwing internal server error")
+                    }
                     errorData = APIError().internalServerError()
                 }
                 
@@ -217,23 +221,29 @@ class ApiService {
                 }
                 completion(Result.failure(errorData), response.statusCode)
                 
-            } else if let data = data {
+            } else if var data = data {
                 
                 do {
+                    
+                    let statusCode = (response as? HTTPURLResponse)?.statusCode
+                    
+                    if(statusCode == 204){
+                        data = "{}".data(using: .utf8)!
+                    }
                     let result = try JSONDecoder().decode(type, from: data)
                     if(self.dev){
                         print("==============result  \(result)=======")
-                    }   
+                    }
                     let responseData = try JSONSerialization.jsonObject(with: data) as! [String: Any]
                     if(self.dev){
                         print("==============responseData  \(responseData)=======")
                     }
-                    DispatchQueue.main.async {
-                        ApiHelper.syncEntities(responseData)
-                    }
-                    let statusCode = (response as? HTTPURLResponse)?.statusCode
                     completion(Result.success(result), statusCode)
+                    
                 } catch let decodingError {
+                    if(self.dev){
+                        print(decodingError)
+                    }
                     completion(Result.failure(APIError().decodingError(error: (decodingError as! DecodingError))), 0)
                 }
             }

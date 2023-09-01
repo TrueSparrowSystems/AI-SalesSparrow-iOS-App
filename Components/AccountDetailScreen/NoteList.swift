@@ -14,7 +14,8 @@ struct NotesList: View {
     @EnvironmentObject var acccountDetailScreenViewModelObject: AccountDetailViewScreenViewModel
     @State private var showOverlay = false
     @State var createNoteScreenActivated = false
-        
+    @Binding var propagateClick : Int
+    
     var body: some View {
         VStack(spacing: 0) {
             HStack{
@@ -34,7 +35,7 @@ struct NotesList: View {
                 NavigationLink(destination: CreateNoteScreen(accountId: accountId, accountName: accountName, isAccountSelectable: false)
                 ){
                     HStack{
-                        Image("CreateNoteIcon")
+                        Image("AddIcon")
                             .resizable()
                             .frame(width: 20.0, height: 20.0)
                             .accessibilityIdentifier("img_account_detail_create_note_icon")
@@ -45,7 +46,7 @@ struct NotesList: View {
                 }
                 .accessibilityIdentifier("btn_account_detail_add_note")
             }
-            if acccountDetailScreenViewModelObject.isLoading {
+            if acccountDetailScreenViewModelObject.isNoteLoading {
                 ProgressView()
                     .tint(Color("LoginButtonSecondary"))
             }
@@ -75,14 +76,17 @@ struct NotesList: View {
                 Spacer()
             } else {
                 VStack{
-                    ForEach(self.acccountDetailScreenViewModelObject.noteData.note_ids, id: \.self){ id in
-                        NavigationLink(destination: NoteDetailScreen(noteId: id, accountId: accountId, accountName: accountName)
+                    let noteIdsArray = self.acccountDetailScreenViewModelObject.noteData.note_ids
+                    ForEach(Array(noteIdsArray.enumerated()), id: \.offset) { index, noteId in
+                        NavigationLink(destination: NoteDetailScreen(noteId: noteId, accountId: accountId, accountName: accountName)
                         ){
-                            if self.acccountDetailScreenViewModelObject.noteData.note_map_by_id[id] != nil{
-                                NoteCardView(noteId: id)
+                            if self.acccountDetailScreenViewModelObject.noteData.note_map_by_id[noteId] != nil{
+                                NoteCardView(noteId: noteId, accountId: accountId,
+                                             noteIndex: index,propagateClick: $propagateClick)
                             }
                         }
-                        .accessibilityIdentifier("note_card_\(id)")
+                        .buttonStyle(.plain)
+                        .accessibilityIdentifier("note_card_\(noteId)")
                     }
                 }
                 .padding(.trailing)
@@ -91,52 +95,115 @@ struct NotesList: View {
             acccountDetailScreenViewModelObject.fetchNotes(accountId: accountId)
         }
     }
+    
 }
 
 struct NoteCardView: View {
     let noteId: String
+    let accountId: String
+    let noteIndex: Int
     @EnvironmentObject var acccountDetailScreenViewModelObject: AccountDetailViewScreenViewModel
     var noteData: [String: Note] = [:]
+    @State var isPopoverVisible: Bool = false
+    @Binding var propagateClick : Int
+    @State var isSelfPopupTriggered = false
     
     var body: some View {
-        VStack(spacing: 5){
+        VStack(spacing: 0){
             HStack {
                 Text("\(BasicHelper.getInitials(from: acccountDetailScreenViewModelObject.noteData.note_map_by_id[noteId]?.creator ?? ""))")
-                    .frame(width: 18.49, height:17.83)
-                    .font(.custom("Nunito-Bold", size: 5.24))
+                    .frame(width: 18, height:18)
+                    .font(.custom("Nunito-Bold", size: 6))
                     .foregroundColor(.black)
                     .background(Color("UserBubble"))
                     .clipShape(RoundedRectangle(cornerRadius: 26))
-                    .accessibilityIdentifier("txt_account_detail_note_creator_initials")
+                    .accessibilityIdentifier("txt_account_detail_note_creator_initials_\(noteIndex)")
                 
                 Text("\(acccountDetailScreenViewModelObject.noteData.note_map_by_id[noteId]?.creator ?? "")")
                     .font(.custom("Nunito-Medium",size: 14))
                     .foregroundColor(Color("TextPrimary"))
-                    .accessibilityIdentifier("txt_account_detail_note_creator")
+                    .accessibilityIdentifier("txt_account_detail_note_creator_\(noteIndex)")
                 
                 Spacer()
                 
-                HStack(spacing: 0) {
-                    Text("\(BasicHelper.getFormattedDateForCard(from: acccountDetailScreenViewModelObject.noteData.note_map_by_id[noteId]!.last_modified_time))")
+                HStack(spacing: 0){
+                    Text("\(BasicHelper.getFormattedDateForCard(from: acccountDetailScreenViewModelObject.noteData.note_map_by_id[noteId]?.last_modified_time ?? ""))")
+                        .font(.custom("Nunito-Light",size: 12))
+                        .foregroundColor(Color("TextPrimary"))
+                        .accessibilityIdentifier("txt_account_detail_note_last_modified_time_\(noteIndex)")
+                    
+                    
+                    Button{
+                        isSelfPopupTriggered = true
+                        isPopoverVisible.toggle()
+                    } label: {
+                        Image("DotsThreeOutline")
+                            .frame(width: 16, height: 16)
+                            .padding(10)
+                            .foregroundColor(Color("TextPrimary"))
+                    }
+                    .accessibilityIdentifier("btn_account_detail_note_more_\(noteIndex)")
                 }
-                .font(.custom("Nunito-Light",size: 12))
-                .foregroundColor(Color("TextPrimary"))
-                .accessibilityIdentifier("txt_account_detail_note_last_modified_time")
-                
-                Image("DotsThreeOutline")
-                    .frame(width: 16, height: 16)
-                    .foregroundColor(Color("TextPrimary"))
-                    .accessibilityIdentifier("img_account_detail_note_more")
             }
             Text("\(acccountDetailScreenViewModelObject.noteData.note_map_by_id[noteId]?.text_preview ?? "")")
                 .font(.custom("Nunito-Medium",size: 14))
                 .foregroundColor(Color("TextPrimary"))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .multilineTextAlignment(.leading)
-                .accessibilityIdentifier("txt_account_detail_note_text")
+                .accessibilityIdentifier("txt_account_detail_note_text_\(noteIndex)")
+                .padding(EdgeInsets(top: 6, leading: 0, bottom: 0, trailing: 10))
         }
-        .padding(14)
-        .background(.white)
-        .cornerRadius(5) /// make the background rounded
+        .padding(EdgeInsets(top: 5, leading: 15, bottom: 15, trailing: 5))
+        .cornerRadius(5)
+        .background(Color("CardBackground"))
+        .overlay(
+            RoundedRectangle(cornerRadius: 5)
+                .stroke(Color("CardBorder"), lineWidth: 1)
+        )
+        .overlay(alignment: .topTrailing){
+            if isPopoverVisible {
+                VStack {
+                    Button(action: {
+                        isPopoverVisible = false
+                        AlertViewModel.shared.showAlert(_alert: Alert(
+                            title: "Delete Note",
+                            message: Text("Are you sure you want to delete this note?"),
+                            submitText: "Delete",
+                            onSubmitPress: {
+                                acccountDetailScreenViewModelObject.deleteNote(accountId: accountId, noteId: noteId)
+                            }
+                        ))
+                    }){
+                        HStack{
+                            Image("DeleteIcon")
+                                .frame(width: 20, height: 20)
+                            Text("Delete")
+                                .font(.custom("Nunito-SemiBold",size: 16))
+                                .foregroundColor(Color("TextPrimary"))
+                        }
+                    }
+                    .accessibilityIdentifier("btn_account_detail_delete_note_\(noteIndex)")
+                }
+                .padding(10)
+                .cornerRadius(4)
+                .frame(width: 100, height: 40)
+                .background(Color("CardBackground"))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 4)
+                        .stroke(Color("CardBorder"), lineWidth: 1)
+                )
+                .offset(x: -14, y: 32)
+            }
+        }
+        .onChange(of: propagateClick){_ in
+            // onChange to hide Popover for events triggered by other cards or screen
+            
+            if(isSelfPopupTriggered){
+                // Don't hide popover if event trigged by self
+                isSelfPopupTriggered = false
+            }else{
+                isPopoverVisible = false
+            }
+        }
     }
 }

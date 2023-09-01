@@ -95,14 +95,14 @@ During the QA and testing phase, we use Firebase App Distribution to upload and 
 
 The project is organized into the following directories:
 
-<b><u>salessparrow:</u></b> This is the main folder that contains the source code and resources for the iOS app. It includes the SwiftUI views, view models, model files, and other necessary components for the app.
+<b><u>SalesSparrow:</u></b> This is the main folder that contains the source code and resources for the iOS app. It includes the SwiftUI views, view models, model files, and other necessary components for the app.
 
 - Components: Contains the custom components used throughout the app.
 - ViewModel: Contains the view models used for data binding and handling business logic.
 - Utils: Contains utility classes and helper functions.
 - Persistence.swift: Manages the Core Data persistence for the app.
 - Model: Contains the data models used throughout the app.
-- swiftui_boilerplateApp.swift: The entry point of the app.
+- SalesSparrowApp.swift: The entry point of the app.
 - ContentView.swift: The root view of the app.
 
 <b><u>salessparrowTests:</u></b> This folder contains the test cases for the app. It includes unit tests to ensure the app's functionality and performance.

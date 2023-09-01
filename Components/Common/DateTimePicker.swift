@@ -7,8 +7,30 @@
 
 import SwiftUI
 
-struct DateTimePicker: View {
-    @State private var selectedDate = Date()
+struct DatePickerView: View {
+    @Binding var selectedDate: Date
+    var onTap: (() -> Void)?
+    
+    var body: some View {
+        
+        // Date and time picker
+        DatePicker("", selection: $selectedDate, displayedComponents:  [.date])
+            .datePickerStyle(.compact)
+            .labelsHidden()
+            .accentColor(Color.blue)
+            .onTapGesture {
+                onTap?()
+            }
+    }
+    
+    private var dateFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .long
+        return formatter
+    }
+}
+
+struct TimePickerView: View {
     @State private var selectedTime = Date()
     
     var body: some View {
@@ -16,11 +38,6 @@ struct DateTimePicker: View {
             // Date and time picker
             VStack(spacing: 8) {
                 HStack {
-                    DatePicker("", selection: $selectedDate, displayedComponents:  [.date])
-                        .datePickerStyle(.automatic)
-                        .accentColor(Color(hex: "#f5aa42"))
-                        .foregroundColor(.blue)
-                    
                     DatePicker("", selection: $selectedTime, displayedComponents:  [.hourAndMinute])
                         .datePickerStyle(.automatic)
                         .accentColor(Color(hex: "#f5aa42"))
@@ -32,23 +49,9 @@ struct DateTimePicker: View {
         }
     }
     
-    private var dateFormatter: DateFormatter {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .long
-        return formatter
-    }
-    
     private var timeFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.timeStyle = .short
         return formatter
-    }
-}
-
-
-
-struct CustomComponent_Previews: PreviewProvider {
-    static var previews: some View {
-        DateTimePicker()
     }
 }

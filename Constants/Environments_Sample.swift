@@ -30,12 +30,12 @@ class Environments_Sample : ObservableObject {
         switch self.target {
         case .development:
             self.vars = [
-                "API_ENDPOINT": "https://salesparrow.coffeewith.xyz/api",
+                "API_ENDPOINT": "https://staging.sales.truesparrow.com/api",
                 "redirect_uri": "salessparrowdev://oauth/success",
             ]
         case .staging:
             self.vars =  [
-                "API_ENDPOINT": "https://sales.quick-poc.com/",
+                "API_ENDPOINT": "https://staging.sales.truesparrow.com/api",
                 "redirect_uri": "salessparrowdev://oauth/success",
             ]
         case .production:
