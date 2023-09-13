@@ -146,8 +146,10 @@ struct LoginScreen: View {
         .onChange(of: environment.vars["auth_code"], perform: { _ in
             isLoginInProgress = true
             loginScreenViewModel.salesforceConnect(authCode: environment.vars["auth_code"], onSuccess: {
+                Environments.shared.setAuthToken(authToken: "")
                 isLoginInProgress = false
             }, onFailure: {
+                Environments.shared.setAuthToken(authToken: "")
                 isLoginInProgress = false
             })
         })
