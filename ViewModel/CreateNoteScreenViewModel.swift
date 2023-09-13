@@ -51,7 +51,7 @@ class CreateNoteScreenViewModel: ObservableObject {
         } else {
             dueDate = Date()
         }
-        suggestedEventStates[suggestion.id ?? ""] = [
+        suggestedTaskStates[suggestion.id ?? ""] = [
             "description": suggestion.description,
             "dueDate": dueDate,
             "assignedToUsername": "",
@@ -76,7 +76,7 @@ class CreateNoteScreenViewModel: ObservableObject {
         } else {
             endDate = Date()
         }
-        suggestedTaskStates[suggestion.id ?? ""] = [
+        suggestedEventStates[suggestion.id ?? ""] = [
             "description": suggestion.description,
             "startDate": startDate,
             "endDate": endDate,

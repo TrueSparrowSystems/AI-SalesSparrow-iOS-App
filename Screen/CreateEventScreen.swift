@@ -80,8 +80,8 @@ struct CreateEventScreen: View {
                     .clipShape(RoundedRectangle(cornerRadius: 5))
                 })
                 .accessibilityIdentifier("btn_save_event")
-                .disabled(accountId.isEmpty || description.isEmpty || ((suggestedEventState["selectedUserId"] ?? "") as! String).isEmpty || !(suggestedEventState["isStartDateSelected"] as! Bool) || !(suggestedEventState["isEndDateSelected"] as! Bool) || isAddEventInProgress || (suggestedEventState["isEventSaved"] as! Bool))
-                .opacity(accountId.isEmpty || description.isEmpty || ((suggestedEventState["selectedUserId"] ?? "") as! String).isEmpty || !(suggestedEventState["isStartDateSelected"] as! Bool) || !(suggestedEventState["isEndDateSelected"] as! Bool) ? 0.7 : 1)
+                .disabled(accountId.isEmpty || description.isEmpty || !(suggestedEventState["isStartDateSelected"] as! Bool) || !(suggestedEventState["isEndDateSelected"] as! Bool) || isAddEventInProgress || (suggestedEventState["isEventSaved"] as! Bool))
+                .opacity(accountId.isEmpty || description.isEmpty || !(suggestedEventState["isStartDateSelected"] as! Bool) || !(suggestedEventState["isEndDateSelected"] as! Bool) ? 0.7 : 1)
             }
             .padding(.vertical)
             
