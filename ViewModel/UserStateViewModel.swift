@@ -60,6 +60,7 @@ class UserStateViewModel: ObservableObject {
                     self?.currentUser = CurrentUserStruct(id: "", name: "", email: "")
                     HTTPCookieStorage.shared.cookies?.forEach(HTTPCookieStorage.shared.deleteCookie)
                     LoaderViewModel.shared.hideLoader()
+                    Environments.shared.setAuthToken(authToken: "")
                 }
                 
             }
@@ -103,6 +104,7 @@ class UserStateViewModel: ObservableObject {
                     self?.currentUser = CurrentUserStruct(id: "", name: "", email: "")
                     self?.isUserLoggedIn = false
                     LoaderViewModel.shared.hideLoader()
+                    Environments.shared.setAuthToken(authToken: "")
                 }
             }
         }
