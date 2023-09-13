@@ -25,6 +25,8 @@ struct AccountDetailsScreen: View {
                 
                 TasksList(accountId: accountId, accountName: accountName, propagateClick: $propagateClick)
                 
+                EventsList(accountId: accountId, accountName: accountName, propagateClick: $propagateClick)
+                
             }
         }
         .simultaneousGesture(

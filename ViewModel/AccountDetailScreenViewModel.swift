@@ -23,7 +23,7 @@ struct NotesListStruct: Codable {
     var note_map_by_id: [String: Note]
 }
 
-// A struct that represents the meta data of the note
+// A struct that represents the meta data of the task
 struct Task: Identifiable, Codable {
     let id: String
     let creator_name: String
@@ -33,30 +33,50 @@ struct Task: Identifiable, Codable {
     let last_modified_time: String
 }
 
-// A struct that represents the meta data of the note list API
+// A struct that represents the meta data of the event
+struct Event: Identifiable, Codable {
+    let id: String
+    let creator_name: String
+    let description: String?
+    let start_datetime: String?
+    let end_datetime: String?
+    let last_modified_time: String
+}
+
+// A struct that represents the meta data of the task list API
 struct TasksListStruct: Codable {
     var task_ids: [String]
     var task_map_by_id: [String: Task]
+}
+
+// A struct that represents the meta data of the event list API
+struct EventsListStruct: Codable {
+    var event_ids: [String]
+    var event_map_by_id: [String: Event]
 }
 
 struct NoteDeleteStruct: Codable {}
 
 struct TaskDeleteStruct: Codable {}
 
+struct EventDeleteStruct: Codable {}
+
 // A class that represents the view model of account details
 class AccountDetailViewScreenViewModel: ObservableObject {
     @Published var noteData = NotesListStruct(note_ids: [], note_map_by_id: [:])
     @Published var taskData = TasksListStruct(task_ids: [], task_map_by_id: [:])
-    @Published var isNoteLoading = false
-    @Published var isTaskLoading = false
+    @Published var eventData = EventsListStruct(event_ids: [], event_map_by_id: [:])
+    @Published var isNoteListLoading = false
+    @Published var isTaskListLoading = false
+    @Published var isEventListLoading = false
     var apiService = DependencyContainer.shared.apiService
     
     // A function that fetches the data for the note list
     func fetchNotes(accountId: String){
-        guard !self.isNoteLoading else {
+        guard !self.isNoteListLoading else {
             return
         }
-        self.isNoteLoading = true
+        self.isNoteListLoading = true
         
         apiService.get(type: NotesListStruct.self, endpoint: "/v1/accounts/\(accountId)/notes"){
             [weak self]  result, statusCode in
@@ -65,11 +85,11 @@ class AccountDetailViewScreenViewModel: ObservableObject {
                 case .success(let results):
                     self?.noteData.note_ids = results.note_ids
                     self?.noteData.note_map_by_id = results.note_map_by_id
-                    self?.isNoteLoading = false
+                    self?.isNoteListLoading = false
                 case .failure(let error):
                     print("error loading data: \(error)")
                     self?.noteData = NotesListStruct(note_ids: [], note_map_by_id: [:])
-                    self?.isNoteLoading = false
+                    self?.isNoteListLoading = false
                     ToastViewModel.shared.showToast(_toast: Toast(style: .error, message: error.message))
                 }
             }
@@ -99,10 +119,10 @@ class AccountDetailViewScreenViewModel: ObservableObject {
     
     // A function that fetches the data for the task list
     func fetchTasks(accountId: String){
-        guard !self.isTaskLoading else {
+        guard !self.isTaskListLoading else {
             return
         }
-        self.isTaskLoading = true
+        self.isTaskListLoading = true
         
         apiService.get(type: TasksListStruct.self, endpoint: "/v1/accounts/\(accountId)/tasks"){
             [weak self]  result, statusCode in
@@ -111,11 +131,11 @@ class AccountDetailViewScreenViewModel: ObservableObject {
                 case .success(let results):
                     self?.taskData.task_ids = results.task_ids
                     self?.taskData.task_map_by_id = results.task_map_by_id
-                    self?.isTaskLoading = false
+                    self?.isTaskListLoading = false
                 case .failure(let error):
                     print("error loading data: \(error)")
                     self?.taskData = TasksListStruct(task_ids: [], task_map_by_id: [:])
-                    self?.isTaskLoading = false
+                    self?.isTaskListLoading = false
                     ToastViewModel.shared.showToast(_toast: Toast(style: .error, message: error.message))
                 }
             }
@@ -137,6 +157,54 @@ class AccountDetailViewScreenViewModel: ObservableObject {
                     
                 case .failure(let error):
                     print("error deleting task: \(error)")
+                    ToastViewModel.shared.showToast(_toast: Toast(style: .error, message: error.message))
+                }
+                LoaderViewModel.shared.hideLoader()
+            }
+        }
+    }
+    
+    // A function that fetches the data for the event list
+    func fetchEvents(accountId: String){
+        guard !self.isEventListLoading else {
+            return
+        }
+        self.isEventListLoading = true
+        
+        apiService.get(type: EventsListStruct.self, endpoint: "/v1/accounts/\(accountId)/events"){
+            [weak self]  result, statusCode in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let results):
+                    self?.eventData.event_ids = results.event_ids
+                    self?.eventData.event_map_by_id = results.event_map_by_id
+                    self?.isEventListLoading = false
+                case .failure(let error):
+                    print("error loading data: \(error)")
+                    self?.eventData = EventsListStruct(event_ids: [], event_map_by_id: [:])
+                    self?.isEventListLoading = false
+                    ToastViewModel.shared.showToast(_toast: Toast(style: .error, message: error.message))
+                }
+            }
+        }
+    }
+    
+    
+    //A function that deletes event in an account
+    func deleteEvent(accountId: String, eventId: String, onSuccess : @escaping() -> Void){
+
+        LoaderViewModel.shared.showLoader()
+        apiService.delete(type: EventDeleteStruct.self, endpoint: "/v1/accounts/\(accountId)/events/\(eventId)"){
+            [weak self] result,statusCode  in
+            
+            DispatchQueue.main.async {
+                switch result {
+                case .success(_):
+                    onSuccess()
+                    self?.eventData.event_ids = self?.eventData.event_ids.filter(){$0 != eventId} ?? []
+                    
+                case .failure(let error):
+                    print("error deleting event: \(error)")
                     ToastViewModel.shared.showToast(_toast: Toast(style: .error, message: error.message))
                 }
                 LoaderViewModel.shared.hideLoader()

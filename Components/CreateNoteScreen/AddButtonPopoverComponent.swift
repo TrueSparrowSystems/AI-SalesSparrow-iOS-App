@@ -15,13 +15,14 @@ struct AddButtonPopoverComponent: View{
     var accountId: String
     
     @State var addTaskActivated = false
+    @State var addEventActivated = false
     @State var suggestionId: String = ""
     
     var body: some View {
         VStack {
             Button(action: {
                 suggestionId = UUID().uuidString
-                createNoteScreenViewModel.initTaskData(suggestion: SuggestionStruct(id: suggestionId, description: ""))
+                createNoteScreenViewModel.initTaskData(suggestion: TaskSuggestionStruct(id: suggestionId, description: ""))
                 addTaskActivated = true
             }, label: {
                 HStack{
@@ -34,15 +35,22 @@ struct AddButtonPopoverComponent: View{
             })
             .accessibilityIdentifier("btn_create_note_popover_add_task")
             .contentShape(Rectangle())
-            // TODO: Uncomment once we add create event flow
-            //            HStack{
-            //                Image("EventsIcon")
-            //                Text("Add Event")
-            //            }
-            //            .contentShape(Rectangle())
-            //            .onTapGesture {
-            //                isPopoverVisible.toggle()
-            //            }
+            
+            Button(action: {
+                suggestionId = UUID().uuidString
+                createNoteScreenViewModel.initEventData(suggestion: EventSuggestionStruct(id: suggestionId, description: ""))
+                addEventActivated = true
+            }, label: {
+                HStack{
+                    Image("EventsIcon")
+                    Text("Add Event")
+                        .font(.custom("Nunito-SemiBold",size: 16))
+                        .foregroundColor(Color("TextPrimary"))
+                        .accessibilityIdentifier("txt_create_note_popover_add_event")
+                }
+            })
+            .accessibilityIdentifier("btn_create_note_popover_add_event")
+            .contentShape(Rectangle())
         }
         .padding(10)
         .cornerRadius(4)
@@ -51,11 +59,20 @@ struct AddButtonPopoverComponent: View{
             RoundedRectangle(cornerRadius: 4)
                 .stroke(Color("CardBorder"), lineWidth: 1)
         )
-        .frame(width: 200, height: 50)
+        .frame(width: 200, height: 100)
         .background{
             NavigationLink(destination:
                             CreateTaskScreen(accountId: accountId, suggestionId: suggestionId),
                            isActive: self.$addTaskActivated
+            ) {
+                EmptyView()
+            }
+            .hidden()
+        }
+        .background{
+            NavigationLink(destination:
+                            CreateEventScreen(accountId: accountId, suggestionId: suggestionId),
+                           isActive: self.$addEventActivated
             ) {
                 EmptyView()
             }
