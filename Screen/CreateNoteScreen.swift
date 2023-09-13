@@ -177,26 +177,15 @@ struct CreateNoteScreen : View {
                                     .font(.custom("Nunito-SemiBold", size: 16))
                                 Spacer()
                             }
-                            
-                            VStack(spacing: 0) {
-                                ProgressView()
-                                    .tint(Color("BrinkPink"))
-                                    .controlSize(.large)
-                                
-                                Text("Please wait, we're checking to recommend tasks or events for you.")
-                                    .foregroundColor(Color("TermsPrimary"))
-                                    .font(.custom("Nunito-SemiBold" ,size: 14))
-                                    .multilineTextAlignment(.center)
-                                    .padding(.top, 16)
-                                    .accessibilityIdentifier("txt_create_note_getting_recommendations")
+                            VStack(alignment: .leading, spacing: 10){
+                                ShimmerView(size: CGSize(width: 356, height: 26))
+                                ShimmerView(size: CGSize(width: 356, height: 64))
+                                HStack{
+                                    ShimmerView(size: CGSize(width: 72, height: 33))
+                                    ShimmerView(size: CGSize(width: 72, height: 33))
+                                }
                             }
-                            .padding(.vertical,16)
-                            .frame(maxWidth: .infinity)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 4)
-                                    .stroke(style: StrokeStyle(lineWidth: 1.5, dash: [1,5]))
-                                    .foregroundColor(Color("TextPrimary"))
-                            )
+                            
                         }
                         else if(createNoteScreenViewModel.suggestedTaskData.add_task_suggestions.count == 0){ // check for count of suggested task array
                             // Show no recommendation message
