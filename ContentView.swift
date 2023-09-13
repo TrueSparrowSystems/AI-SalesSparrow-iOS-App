@@ -58,7 +58,7 @@ struct ContentView: View {
         }
         let authToken = components.queryItems?.first(where: { $0.name == "code" })?.value
         
-        if((authToken) != nil){
+        if((authToken) != nil && !userStateViewModel.isAppLaunchInProgress && !userStateViewModel.isUserLoggedIn){
             environment.setAuthToken(authToken: authToken ?? "")
         }
         
