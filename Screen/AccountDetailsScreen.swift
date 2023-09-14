@@ -20,6 +20,7 @@ struct AccountDetailsScreen: View {
                 AccountDetailsHeader(accountId: accountId, accountName: accountName)
                 
                 // Contact list component
+                AccountContactDetail(accountId: accountId, accountName: accountName)
                 
                 NotesList(accountId: accountId, accountName: accountName, propagateClick: $propagateClick)
                 

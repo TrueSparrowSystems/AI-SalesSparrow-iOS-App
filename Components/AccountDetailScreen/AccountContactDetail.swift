@@ -1,13 +1,14 @@
 //
-//  AccountDetailsHeader.swift
+//  AccountContactDetail.swift
 //  SalesSparrow
 //
-//  Created by Kartik Kapgate on 10/08/23.
+//  Created by Kartik Kapgate on 14/09/23.
 //
+
 
 import SwiftUI
 
-struct AccountDetailsHeader: View {
+struct AccountContactDetail: View {
     @EnvironmentObject var accountListViewModelObject : AccountListViewModel
     var accountId: String
     var accountName: String
@@ -16,13 +17,13 @@ struct AccountDetailsHeader: View {
     var body: some View {
         VStack{
             HStack{
-                Image("Buildings")
+                Image("AddressBook")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 25.0, height: 25.0)
                     .accessibilityIdentifier("img_account_detail_account_icon")
                 
-                Text("Account Details")
+                Text("Contact Details")
                     .accessibilityIdentifier("txt_account_detail_account_details_title")
                     .foregroundColor(Color("TextPrimary"))
                     .font(.custom("Nunito-SemiBold",size: 16))
@@ -30,63 +31,44 @@ struct AccountDetailsHeader: View {
                 Spacer()
             }
             VStack(spacing: 5) {
-                HStack {
-                    Text("ACCOUNT")
-                        .accessibilityIdentifier("txt_account_detail_account_text")
-                        .font(.custom("Nunito-Bold",size: 12))
-                        .foregroundColor(Color("TextPrimary"))
-                        .opacity(0.7)
-                    
-                    Spacer()
-                }
-                HStack {
-                    Text(accountName)
-                        .accessibilityIdentifier("txt_account_detail_account_name")
-                        .font(.custom("Nunito-Bold",size: 18))
-                        .foregroundColor(Color("TextPrimary"))
-                    
-                    
-                    Spacer()
-                }
-                
-                // loop of additional fields
-                if(!expandAccountDetails){
-                    let additionalFields = accountListViewModelObject.accountListData.account_map_by_id[accountId]?.additional_fields
-                    if let additionalFields = additionalFields {
-                        ForEach(Array(additionalFields.keys.prefix(3)), id: \.self) { key in
-                            if let value = additionalFields[key] {
-                                RenderFields(fieldName: key, fieldValue: value ?? "")
-                            } else {
-                                // Handle the case where the value is nil, if needed.
+                // Iterate through contacts
+                if let contactIds = accountListViewModelObject.accountListData.account_contact_associations_map_by_id[(accountListViewModelObject.accountListData.account_map_by_id[accountId]?.account_contact_associations_id)!]?.contact_ids {
+                    ForEach(contactIds, id: \.self) { contactId in
+                        if let contact = accountListViewModelObject.accountListData.contact_map_by_id[contactId] {
+                            HStack {
+                                Text("CONTACT \(contactIds.firstIndex(of: contactId)! + 1)")
+                                    .accessibilityIdentifier("txt_account_detail_account_text")
+                                    .font(.custom("Nunito-Bold", size: 14))
+                                    .foregroundColor(Color("TextPrimary"))
+                                    .opacity(0.7)
+                                
+                                Spacer()
+                            }
+                            HStack {
+                                Text(contact.name) // Assuming the contact has a 'name' property
+                                    .accessibilityIdentifier("txt_account_detail_contact_\(contact.name)")
+                                    .font(.custom("Nunito-Regular", size: 14))
+                                    .foregroundColor(Color("TextPrimary"))
+                                
+                                Spacer()
                             }
                         }
-                    }
-                    
-                    if(additionalFields!.count > 2){
-                        Divider()
                         
-                        HStack{
-                            Text("More Details")
-                                .foregroundColor(Color("RedHighlight"))
-                                .font(.custom("Nunito-Medium", size: 14))
-                        }
-                        .onTapGesture {
-                            expandAccountDetails = true
-                        }
-                    }
-                } else {
-                    let additionalFields = accountListViewModelObject.accountListData.account_map_by_id[accountId]?.additional_fields
-                    if let additionalFields = additionalFields {
-                        ForEach(Array(additionalFields.keys), id: \.self) { key in
-                            if let value = additionalFields[key] {
-                                RenderFields(fieldName: key, fieldValue: value ?? "")
-                            } else {
-                                // Handle the case where the value is nil, if needed.
+                        let additionalContactFields = accountListViewModelObject.accountListData.contact_map_by_id[contactId]?.additional_fields
+                        if let additionalFields = additionalContactFields {
+                            ForEach(Array(additionalFields.keys), id: \.self) { key in
+                                if let value = additionalFields[key] {
+                                    RenderContactFields(fieldName: key, fieldValue: value ?? "")
+                                } else {
+                                    // Handle the case where the value is nil, if needed.
+                                }
                             }
                         }
+                        
+                        Divider()
+                            .opacity(0.7)
                     }
                 }
-
             }
             .padding()
             .background(.white)
@@ -100,7 +82,8 @@ struct AccountDetailsHeader: View {
     }
 }
 
-struct RenderFields: View {
+
+struct RenderContactFields: View {
     var fieldName: String
     var fieldValue: String
     @EnvironmentObject var accountListViewModelObject : AccountListViewModel
@@ -110,6 +93,20 @@ struct RenderFields: View {
         let fieldTitle = fieldInfo?.title
         
         switch fieldInfo?.type {
+        case .TITLE:
+            HStack{
+                Text(fieldValue)
+                    .accessibilityIdentifier("txt_account_detail_account_\(fieldValue)")
+                    .font(.custom("Nunito-Regular",size: 14))
+                    .foregroundColor(Color("TextPrimary"))
+            }
+        case .EMAIL:
+            HStack{
+                Text(fieldValue)
+                    .accessibilityIdentifier("txt_account_detail_account_\(fieldValue)")
+                    .font(.custom("Nunito-Regular",size: 14))
+                    .foregroundColor(Color("TextPrimary"))
+            }
         case .STRING:
             HStack{
                 Text("\(fieldTitle!):")
@@ -147,4 +144,3 @@ struct RenderFields: View {
         }
     }
 }
-
