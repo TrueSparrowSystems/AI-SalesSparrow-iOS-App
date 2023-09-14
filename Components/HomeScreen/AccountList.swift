@@ -16,10 +16,14 @@ struct AccountList: View {
         VStack{
             let accountIds = acccountListViewModelObject.accountListData.account_ids
             if(acccountListViewModelObject.isFetchAccountInProgress && accountIds.count == 0){
-                ProgressView()
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-                    .tint(Color("LoginButtonSecondary"))
-                    .controlSize(.large)
+                ScrollView{
+                    LoadingAccountRowView()
+                    LoadingAccountRowView()
+                    LoadingAccountRowView()
+                    LoadingAccountRowView()
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+                .padding(.horizontal, 20)
             }
             else{
                 List {

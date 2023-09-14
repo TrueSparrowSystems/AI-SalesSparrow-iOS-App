@@ -100,6 +100,10 @@
 		6D0BC8AD2AB1D890004D1E83 /* CreateEventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0BC8AB2AB1D890004D1E83 /* CreateEventViewModel.swift */; };
 		6D0BC8AF2AB1DE4A004D1E83 /* EventsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0BC8AE2AB1DE4A004D1E83 /* EventsList.swift */; };
 		6D0BC8B02AB1DE4A004D1E83 /* EventsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0BC8AE2AB1DE4A004D1E83 /* EventsList.swift */; };
+		6D0BC8A32AB18961004D1E83 /* ShimmerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0BC8A22AB18961004D1E83 /* ShimmerView.swift */; };
+		6D0BC8A42AB18961004D1E83 /* ShimmerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0BC8A22AB18961004D1E83 /* ShimmerView.swift */; };
+		6D0BC8A62AB1A6D0004D1E83 /* LoadingAccountRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0BC8A52AB1A6D0004D1E83 /* LoadingAccountRowView.swift */; };
+		6D0BC8A72AB1A6D0004D1E83 /* LoadingAccountRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0BC8A52AB1A6D0004D1E83 /* LoadingAccountRowView.swift */; };
 		6D204B772A9CF6EC0012EE85 /* DisableUserInteractionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D204B762A9CF6EC0012EE85 /* DisableUserInteractionExtension.swift */; };
 		6D204B782A9CF6EC0012EE85 /* DisableUserInteractionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D204B762A9CF6EC0012EE85 /* DisableUserInteractionExtension.swift */; };
 		6D2CB50B2A77CF570057C73F /* Nunito-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D2CB4FB2A77CF560057C73F /* Nunito-ExtraLightItalic.ttf */; };
@@ -239,6 +243,8 @@
 		6D0BC8A82AB1D852004D1E83 /* CreateEventScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEventScreen.swift; sourceTree = "<group>"; };
 		6D0BC8AB2AB1D890004D1E83 /* CreateEventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEventViewModel.swift; sourceTree = "<group>"; };
 		6D0BC8AE2AB1DE4A004D1E83 /* EventsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsList.swift; sourceTree = "<group>"; };
+		6D0BC8A22AB18961004D1E83 /* ShimmerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerView.swift; sourceTree = "<group>"; };
+		6D0BC8A52AB1A6D0004D1E83 /* LoadingAccountRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingAccountRowView.swift; sourceTree = "<group>"; };
 		6D204B762A9CF6EC0012EE85 /* DisableUserInteractionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisableUserInteractionExtension.swift; sourceTree = "<group>"; };
 		6D2CB4FB2A77CF560057C73F /* Nunito-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
 		6D2CB4FC2A77CF560057C73F /* Nunito-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-MediumItalic.ttf"; sourceTree = "<group>"; };
@@ -386,6 +392,7 @@
 				4B583BD72A7BBEF2005B97D0 /* TopBar.swift */,
 				4B583BDB2A7BE818005B97D0 /* AccountList.swift */,
 				4B583BDD2A7BEB11005B97D0 /* BottomBar.swift */,
+				6D0BC8A52AB1A6D0004D1E83 /* LoadingAccountRowView.swift */,
 			);
 			path = HomeScreen;
 			sourceTree = "<group>";
@@ -565,6 +572,7 @@
 				4B13E4EC2A93821300CB24E4 /* UserSearchView.swift */,
 				4B819B4A2A96134500CE6293 /* VerticalDividerRectangleView.swift */,
 				6D8FF5C42AA09DF700215F38 /* AppLoader.swift */,
+				6D0BC8A22AB18961004D1E83 /* ShimmerView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -934,6 +942,7 @@
 				6D0BC8AA2AB1D852004D1E83 /* CreateEventScreen.swift in Sources */,
 				019595E82A83CE8E008425AD /* ToastView.swift in Sources */,
 				019596002A83CEE0008425AD /* AppDelegate.swift in Sources */,
+				6D0BC8A42AB18961004D1E83 /* ShimmerView.swift in Sources */,
 				019595FD2A83CED8008425AD /* Persistence.swift in Sources */,
 				6D908DB72A85271500F36DCE /* AccountDetailScreenViewModel.swift in Sources */,
 				019595D82A83CE26008425AD /* HomeScreen.swift in Sources */,
@@ -960,6 +969,7 @@
 				019595E02A83CE71008425AD /* ApiService.swift in Sources */,
 				019595FA2A83CEC9008425AD /* Environments_Sample.swift in Sources */,
 				4B13E4EE2A93821300CB24E4 /* UserSearchView.swift in Sources */,
+				6D0BC8A72AB1A6D0004D1E83 /* LoadingAccountRowView.swift in Sources */,
 				6D8FF5C62AA09DF700215F38 /* AppLoader.swift in Sources */,
 				4B9E5DE52A8CE6AD00041D65 /* AlertModal.swift in Sources */,
 				4B9E5DE52A8CE6AD00041D65 /* AlertModal.swift in Sources */,
@@ -1000,6 +1010,7 @@
 				6D0BC8A92AB1D852004D1E83 /* CreateEventScreen.swift in Sources */,
 				4B583BDC2A7BE818005B97D0 /* AccountList.swift in Sources */,
 				6DD618B22A80E504007FA929 /* MockResponse.swift in Sources */,
+				6D0BC8A32AB18961004D1E83 /* ShimmerView.swift in Sources */,
 				6DE11C842A8283AE00D27006 /* Toast.swift in Sources */,
 				4B819B4B2A96134500CE6293 /* VerticalDividerRectangleView.swift in Sources */,
 				4B393FF42A7AAAF600572F66 /* AccountSearchViewModel.swift in Sources */,
@@ -1026,6 +1037,7 @@
 				6D8C7D0D2A779D14005D597E /* Environments.swift in Sources */,
 				6D8C7D0F2A779E97005D597E /* AppDelegate.swift in Sources */,
 				6D8C7D212A77A09F005D597E /* ColorExtension.swift in Sources */,
+				6D0BC8A62AB1A6D0004D1E83 /* LoadingAccountRowView.swift in Sources */,
 				6D8FF5C52AA09DF700215F38 /* AppLoader.swift in Sources */,
 				4BDB87232A84C20E000CC1B9 /* AccountDetailsHeader.swift in Sources */,
 				4B13E4ED2A93821300CB24E4 /* UserSearchView.swift in Sources */,
