@@ -80,8 +80,10 @@ class CreateNoteScreenViewModel: ObservableObject {
             "description": suggestion.description,
             "startDate": startDate,
             "endDate": endDate,
-            "isStartDateSelected": suggestion.start_datetime?.isEmpty ?? true ?  false : true,
-            "isEndDateSelected": suggestion.end_datetime?.isEmpty ?? true ?  false : true,
+            "isStartDateSelected": suggestion.start_datetime?.isEmpty ?? true ? false : true,
+            "isStartTimeSelected": suggestion.start_datetime?.isEmpty ?? true ? false : true,
+            "isEndDateSelected": suggestion.end_datetime?.isEmpty ?? true ? false : true,
+            "isEndTimeSelected": suggestion.end_datetime?.isEmpty ?? true ? false : true,
             "isEventSaved": false,
         ]
     }

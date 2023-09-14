@@ -90,7 +90,7 @@ struct CreateEventScreen: View {
             
             HStack {
                 Text("Start")
-                    .frame(width: 75,height: 30, alignment: .leading)
+                    .frame(width: 35,height: 30, alignment: .leading)
                     .font(.custom("Nunito-Regular",size: 14))
                     .foregroundColor(Color("TextPrimary"))
                     .accessibilityIdentifier("txt_add_events_due")
@@ -107,7 +107,7 @@ struct CreateEventScreen: View {
                     
                     if(!(suggestedEventState["isStartDateSelected"] as! Bool)){
                         HStack (spacing: 0) {
-                            Text("Select")
+                            Text("Select Date")
                                 .foregroundColor(Color("TermsPrimary"))
                                 .font(.custom("Nunito-Light", size: 12))
                                 .tracking(0.5)
@@ -150,17 +150,71 @@ struct CreateEventScreen: View {
                     RoundedRectangle(cornerRadius: 4)
                         .stroke(Color("CardBorder"), lineWidth: 1)
                 )
+                ZStack{
+                    if(!(suggestedEventState["isEventSaved"] as! Bool)){
+                        TimePickerView(selectedTime: $startTime, onTap: {
+                            createNoteScreenViewModel.setEventDataAttribute(id: suggestionId ?? "", attrKey: "isStartTimeSelected", attrValue: true)
+                        })
+                        .background(.white)
+                        .cornerRadius(8)
+                        .accessibilityIdentifier("dp_add_event_select_time")
+                    }
+                    
+                    if(!(suggestedEventState["isStartTimeSelected"] as! Bool)){
+                        HStack (spacing: 0) {
+                            Text("Select Time")
+                                .foregroundColor(Color("TermsPrimary"))
+                                .font(.custom("Nunito-Light", size: 12))
+                                .tracking(0.5)
+                                .padding(0)
+                            
+                            Spacer()
+                            
+                            Image("Clock")
+                                .frame(width: 15, height: 15)
+                                .padding(.leading, 6)
+                        }
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .background(.white)
+                        .userInteractionDisabled()
+                        
+                    }
+                    else{
+                        HStack (spacing: 0) {
+                            Text(BasicHelper.getTimeStringFromDate(from: startTime))
+                                .foregroundColor(Color("TermsPrimary"))
+                                .font(.custom("Nunito-Bold", size: 12))
+                                .tracking(0.5)
+                                .padding(0)
+                            
+                            Spacer()
+                            
+                            Image("Clock")
+                                .frame(width: 15, height: 15)
+                                .padding(.leading, 10)
+                        }
+                        .accessibilityIdentifier("txt_add_event_select_time")
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .background(.white)
+                        .userInteractionDisabled()
+                    }
+                }
+                .padding(.horizontal, 10)
+                .frame(width: 140, height: 30)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 4)
+                        .stroke(Color("CardBorder"), lineWidth: 1)
+                )
                 //TODO: add default state. Select time similar to date picker.
                 //Add isDateSelected check.
                 //Disable save until date & time selected
                 //Add check for endDate > startDate
-                TimePickerView(selectedTime: $startTime)
                 
                 Spacer()
             }
             HStack {
                 Text("End")
-                    .frame(width: 75,height: 30, alignment: .leading)
+                    .frame(width: 35,height: 30, alignment: .leading)
                     .font(.custom("Nunito-Regular",size: 14))
                     .foregroundColor(Color("TextPrimary"))
                     .accessibilityIdentifier("txt_add_events_due")
@@ -177,7 +231,7 @@ struct CreateEventScreen: View {
                     
                     if(!(suggestedEventState["isEndDateSelected"] as! Bool)){
                         HStack (spacing: 0) {
-                            Text("Select")
+                            Text("Select Date")
                                 .foregroundColor(Color("TermsPrimary"))
                                 .font(.custom("Nunito-Light", size: 12))
                                 .tracking(0.5)
@@ -221,8 +275,62 @@ struct CreateEventScreen: View {
                         .stroke(Color("CardBorder"), lineWidth: 1)
                 )
                 
-                TimePickerView(selectedTime: $endTime)
                 
+                ZStack{
+                    if(!(suggestedEventState["isEventSaved"] as! Bool)){
+                        TimePickerView(selectedTime: $endTime, onTap: {
+                            createNoteScreenViewModel.setEventDataAttribute(id: suggestionId ?? "", attrKey: "isEndTimeSelected", attrValue: true)
+                        })
+                        .background(.white)
+                        .cornerRadius(8)
+                        .accessibilityIdentifier("dp_add_event_select_end_time")
+                    }
+                    
+                    if(!(suggestedEventState["isEndTimeSelected"] as! Bool)){
+                        HStack (spacing: 0) {
+                            Text("Select Time")
+                                .foregroundColor(Color("TermsPrimary"))
+                                .font(.custom("Nunito-Light", size: 12))
+                                .tracking(0.5)
+                                .padding(0)
+
+                            Spacer()
+
+                            Image("Clock")
+                                .frame(width: 15, height: 15)
+                                .padding(.leading, 6)
+                        }
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .background(.white)
+                        .userInteractionDisabled()
+
+                    }
+                    else{
+                        HStack (spacing: 0) {
+                            Text(BasicHelper.getTimeStringFromDate(from: endTime))
+                                .foregroundColor(Color("TermsPrimary"))
+                                .font(.custom("Nunito-Bold", size: 12))
+                                .tracking(0.5)
+                                .padding(0)
+
+                            Spacer()
+
+                            Image("Clock")
+                                .frame(width: 15, height: 15)
+                                .padding(.leading, 10)
+                        }
+                        .accessibilityIdentifier("txt_add_event_select_time")
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .background(.white)
+                        .userInteractionDisabled()
+                    }
+                }
+                .padding(.horizontal, 10)
+                .frame(width: 140, height: 30)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 4)
+                        .stroke(Color("CardBorder"), lineWidth: 1)
+                )
                 Spacer()
             }
             ScrollView{

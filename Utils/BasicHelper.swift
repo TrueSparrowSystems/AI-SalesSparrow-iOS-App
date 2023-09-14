@@ -135,4 +135,11 @@ struct BasicHelper {
         let formattedDateString = dateFormatter.string(from: date)
         return formattedDateString
     }
+    
+    static func getTimeStringFromDate(from date: Date, timeFormat: String = "hh:mm a" ) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = timeFormat
+        let formattedDateString = dateFormatter.string(from: date)
+        return formattedDateString
+    }
 }
