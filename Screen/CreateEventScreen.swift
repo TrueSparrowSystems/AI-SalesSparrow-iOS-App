@@ -15,7 +15,9 @@ struct CreateEventScreen: View {
     var accountId: String
     @State var description: String = ""
     @State var startDate: Date = Date()
+    @State var startTime: Date = Date()
     @State var endDate: Date = Date()
+    @State var endTime: Date = Date()
     @FocusState private var focused: Bool
     @State var isAddEventInProgress = false
     var suggestionId: String?
@@ -148,6 +150,11 @@ struct CreateEventScreen: View {
                     RoundedRectangle(cornerRadius: 4)
                         .stroke(Color("CardBorder"), lineWidth: 1)
                 )
+                //TODO: add default state. Select time similar to date picker.
+                //Add isDateSelected check.
+                //Disable save until date & time selected
+                //Add check for endDate > startDate
+                TimePickerView(selectedTime: $startTime)
                 
                 Spacer()
             }
@@ -213,6 +220,8 @@ struct CreateEventScreen: View {
                     RoundedRectangle(cornerRadius: 4)
                         .stroke(Color("CardBorder"), lineWidth: 1)
                 )
+                
+                TimePickerView(selectedTime: $endTime)
                 
                 Spacer()
             }
