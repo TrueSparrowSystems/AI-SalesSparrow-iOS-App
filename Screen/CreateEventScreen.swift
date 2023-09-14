@@ -82,8 +82,8 @@ struct CreateEventScreen: View {
                     .clipShape(RoundedRectangle(cornerRadius: 5))
                 })
                 .accessibilityIdentifier("btn_save_event")
-                .disabled(accountId.isEmpty || description.isEmpty || !(suggestedEventState["isStartDateSelected"] as! Bool) || !(suggestedEventState["isEndDateSelected"] as! Bool) || isAddEventInProgress || (suggestedEventState["isEventSaved"] as! Bool))
-                .opacity(accountId.isEmpty || description.isEmpty || !(suggestedEventState["isStartDateSelected"] as! Bool) || !(suggestedEventState["isEndDateSelected"] as! Bool) ? 0.7 : 1)
+                .disabled(accountId.isEmpty || description.isEmpty || !(suggestedEventState["isStartDateSelected"] as! Bool) || !(suggestedEventState["isStartTimeSelected"] as! Bool) || !(suggestedEventState["isEndDateSelected"] as! Bool) || !(suggestedEventState["isEndTimeSelected"] as! Bool) || isAddEventInProgress || (suggestedEventState["isEventSaved"] as! Bool))
+                .opacity(accountId.isEmpty || description.isEmpty || !(suggestedEventState["isStartDateSelected"] as! Bool) || !(suggestedEventState["isStartTimeSelected"] as! Bool) || !(suggestedEventState["isEndDateSelected"] as! Bool) || !(suggestedEventState["isEndTimeSelected"] as! Bool) ? 0.7 : 1)
             }
             .padding(.vertical)
             
@@ -205,10 +205,7 @@ struct CreateEventScreen: View {
                     RoundedRectangle(cornerRadius: 4)
                         .stroke(Color("CardBorder"), lineWidth: 1)
                 )
-                //TODO: add default state. Select time similar to date picker.
-                //Add isDateSelected check.
-                //Disable save until date & time selected
-                //Add check for endDate > startDate
+                //TODO: Add check for endDate > startDate
                 
                 Spacer()
             }
@@ -293,9 +290,9 @@ struct CreateEventScreen: View {
                                 .font(.custom("Nunito-Light", size: 12))
                                 .tracking(0.5)
                                 .padding(0)
-
+                            
                             Spacer()
-
+                            
                             Image("Clock")
                                 .frame(width: 15, height: 15)
                                 .padding(.leading, 6)
@@ -303,7 +300,7 @@ struct CreateEventScreen: View {
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .background(.white)
                         .userInteractionDisabled()
-
+                        
                     }
                     else{
                         HStack (spacing: 0) {
@@ -312,9 +309,9 @@ struct CreateEventScreen: View {
                                 .font(.custom("Nunito-Bold", size: 12))
                                 .tracking(0.5)
                                 .padding(0)
-
+                            
                             Spacer()
-
+                            
                             Image("Clock")
                                 .frame(width: 15, height: 15)
                                 .padding(.leading, 10)
