@@ -19,14 +19,14 @@ class CreateEventViewModel: ObservableObject {
     var apiService = DependencyContainer.shared.apiService
     
     // A function to create note from given text and account id.
-    func createEvent(accountId: String, description: String, startDate: Date, endDate: Date, onSuccess : @escaping(String)-> Void, onFailure: (()-> Void)?){
+    func createEvent(accountId: String, description: String, startDate: Date, startTime: Date, endDate: Date, endTime: Date, onSuccess : @escaping(String)-> Void, onFailure: (()-> Void)?){
         
         guard !self.isCreateEventInProgress else {
             return
         }
         self.isCreateEventInProgress = true
         
-        let params: [String: Any] = ["description": description, "start_datetime": BasicHelper.getDateStringFromDate(from: startDate, dateFormat: "yyyy-MM-dd"), "end_datetime": BasicHelper.getDateStringFromDate(from: endDate, dateFormat: "yyyy-MM-dd")]
+        let params: [String: Any] = ["description": description, "start_datetime": BasicHelper.getFormattedDateTimeString(from: startDate, from: startTime), "end_datetime": BasicHelper.getFormattedDateTimeString(from: endDate, from: endTime)]
         
         apiService.post(type: CreateEventStruct.self, endpoint: "/v1/accounts/\(accountId)/events", params: params){
             [weak self]  result, statusCode in

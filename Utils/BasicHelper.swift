@@ -142,4 +142,24 @@ struct BasicHelper {
         let formattedDateString = dateFormatter.string(from: date)
         return formattedDateString
     }
+    
+    static func getFormattedDateTimeString(from date: Date, from time: Date, dateTimeFormat: String = "yyyy-MM-dd'T'HH:mm:ss.SSSZ") -> String{
+
+        // Create a Calendar instance
+        let calendar = Calendar.current
+
+        // Extract the time components (hour, minute, second) from the 'time' variable
+        let timeComponents = calendar.dateComponents([.hour, .minute, .second], from: time)
+
+        // Create a new Date using the merged components
+        if let mergedDate = calendar.date(bySettingHour: timeComponents.hour ?? 0, minute: timeComponents.minute ?? 0, second: timeComponents.second ?? 0, of: date) {
+            //Format and convert date in desired dateFormat
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = dateTimeFormat
+            let formattedDateString = dateFormatter.string(from: mergedDate)
+            return formattedDateString
+        }
+        
+        return ""
+    }
 }

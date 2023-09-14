@@ -39,7 +39,7 @@ struct CreateEventScreen: View {
                 
                 Button(action: {
                     isAddEventInProgress = true
-                    createEventViewModel.createEvent(accountId: accountId, description: description, startDate: startDate, endDate:endDate, onSuccess: {eventId in
+                    createEventViewModel.createEvent(accountId: accountId, description: description, startDate: startDate, startTime: startTime, endDate:endDate, endTime: endTime, onSuccess: {eventId in
                         createNoteScreenViewModel.setEventDataAttribute(id: suggestionId ?? "", attrKey: "eventId", attrValue: eventId)
                         createNoteScreenViewModel.setEventDataAttribute(id: suggestionId ?? "", attrKey: "isEventSaved", attrValue: true)
                         isAddEventInProgress = false
