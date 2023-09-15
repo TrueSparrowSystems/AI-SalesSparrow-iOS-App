@@ -63,23 +63,31 @@ class CreateNoteScreenViewModel: ObservableObject {
     
     func initEventData(suggestion: EventSuggestionStruct){
         var startDate: Date
+        var startTime: Date
         var endDate: Date
+        var endTime: Date
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd" // Format of your due_date
         if let date = dateFormatter.date(from: suggestion.start_datetime ?? "") {
             startDate =  date
+            startTime =  date
         } else {
             startDate = Date()
+            startTime = Date()
         }
         if let date = dateFormatter.date(from: suggestion.end_datetime ?? "") {
             endDate =  date
+            endTime =  date
         } else {
             endDate = Date()
+            endTime = Date()
         }
         suggestedEventStates[suggestion.id ?? ""] = [
             "description": suggestion.description,
             "startDate": startDate,
+            "startTime": startTime,
             "endDate": endDate,
+            "endTime": endTime,
             "isStartDateSelected": suggestion.start_datetime?.isEmpty ?? true ? false : true,
             "isStartTimeSelected": suggestion.start_datetime?.isEmpty ?? true ? false : true,
             "isEndDateSelected": suggestion.end_datetime?.isEmpty ?? true ? false : true,

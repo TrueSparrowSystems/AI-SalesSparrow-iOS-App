@@ -358,8 +358,14 @@ struct CreateEventScreen: View {
         .onChange(of: startDate, perform: {_ in
             createNoteScreenViewModel.setEventDataAttribute(id: suggestionId ?? "", attrKey: "startDate", attrValue: startDate)
         })
+        .onChange(of: startTime, perform: {_ in
+            createNoteScreenViewModel.setEventDataAttribute(id: suggestionId ?? "", attrKey: "startTime", attrValue: startDate)
+        })
         .onChange(of: endDate, perform: {_ in
             createNoteScreenViewModel.setEventDataAttribute(id: suggestionId ?? "", attrKey: "endDate", attrValue: endDate)
+        })
+        .onChange(of: endTime, perform: {_ in
+            createNoteScreenViewModel.setEventDataAttribute(id: suggestionId ?? "", attrKey: "endTime", attrValue: endDate)
         })
         .onAppear {
             // Adding a delay for view to render
