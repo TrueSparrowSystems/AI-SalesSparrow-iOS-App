@@ -11,6 +11,7 @@ struct AccountDetailsScreen: View {
     var accountId: String
     var accountName: String
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @EnvironmentObject var accountDetailViewModelObject : AccountDetailScreenViewModel
     @State var propagateClick = 0
     
     var body: some View {
@@ -27,6 +28,9 @@ struct AccountDetailsScreen: View {
                 TasksList(accountId: accountId, accountName: accountName, propagateClick: $propagateClick)
                 
             }
+        }
+        .onAppear {
+            accountDetailViewModelObject.fetchAccountDetail(accountId: accountId)
         }
         .simultaneousGesture(
             TapGesture().onEnded(){

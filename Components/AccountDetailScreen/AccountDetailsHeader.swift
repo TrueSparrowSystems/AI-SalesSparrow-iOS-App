@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AccountDetailsHeader: View {
-    @EnvironmentObject var accountListViewModelObject : AccountListViewModel
+    @EnvironmentObject var accountDetailViewModelObject : AccountDetailScreenViewModel
     var accountId: String
     var accountName: String
     @State var expandAccountDetails: Bool = false
@@ -29,40 +29,39 @@ struct AccountDetailsHeader: View {
                 
                 Spacer()
             }
-            VStack(spacing: 5) {
-                HStack {
-                    Text("ACCOUNT")
-                        .accessibilityIdentifier("txt_account_detail_account_text")
-                        .font(.custom("Nunito-Bold",size: 12))
-                        .foregroundColor(Color("TextPrimary"))
-                        .opacity(0.7)
-                    
-                    Spacer()
+            VStack(spacing: 0) {
+                VStack(spacing: 5){
+                    HStack {
+                        Text("ACCOUNT")
+                            .accessibilityIdentifier("txt_account_detail_account_text")
+                            .font(.custom("Nunito-Bold",size: 12))
+                            .foregroundColor(Color("TextPrimary"))
+                            .opacity(0.7)
+                        
+                        Spacer()
+                    }
+                    HStack {
+                        Text(accountDetailViewModelObject.accountDetail.name)
+                            .accessibilityIdentifier("txt_account_detail_account_name")
+                            .font(.custom("Nunito-SemiBold",size: 18))
+                            .foregroundColor(Color("TextPrimary"))
+                        
+                        
+                        Spacer()
+                    }
                 }
-                HStack {
-                    Text(accountName)
-                        .accessibilityIdentifier("txt_account_detail_account_name")
-                        .font(.custom("Nunito-Bold",size: 18))
-                        .foregroundColor(Color("TextPrimary"))
-                    
-                    
-                    Spacer()
-                }
-                
                 // loop of additional fields
                 if(!expandAccountDetails){
-                    let additionalFields = accountListViewModelObject.accountListData.account_map_by_id[accountId]?.additional_fields
+                    let additionalFields = accountDetailViewModelObject.accountDetail.additional_fields
                     if let additionalFields = additionalFields {
-                        ForEach(Array(additionalFields.keys.prefix(3)), id: \.self) { key in
-                            if let value = additionalFields[key] {
+                        ForEach(Array(additionalFields.keys.prefix(2)), id: \.self) { key in
+                            if let value = additionalFields[key], let _ = accountDetailViewModelObject.customFields.fields[key]{
                                 RenderFields(fieldName: key, fieldValue: value ?? "")
-                            } else {
-                                // Handle the case where the value is nil, if needed.
                             }
                         }
                     }
                     
-                    if(additionalFields!.count > 2){
+                    if(additionalFields?.count ?? 0 > 2){
                         Divider()
                         
                         HStack{
@@ -75,13 +74,20 @@ struct AccountDetailsHeader: View {
                         }
                     }
                 } else {
-                    let additionalFields = accountListViewModelObject.accountListData.account_map_by_id[accountId]?.additional_fields
+                    let additionalFields = accountDetailViewModelObject.accountDetail.additional_fields
                     if let additionalFields = additionalFields {
-                        ForEach(Array(additionalFields.keys), id: \.self) { key in
-                            if let value = additionalFields[key] {
-                                RenderFields(fieldName: key, fieldValue: value ?? "")
-                            } else {
-                                // Handle the case where the value is nil, if needed.
+                        ForEach(Array(Array(additionalFields.keys).enumerated()), id: \.offset) { index, key in
+                            if let value = additionalFields[key], let _ = accountDetailViewModelObject.customFields.fields[key] {
+                                VStack(spacing: 0){
+                                    RenderFields(fieldName: key, fieldValue: value ?? "")
+                                    
+                                    if(index+1 != additionalFields.keys.count){
+                                        Divider()
+                                            .frame(height: 1)
+                                            .foregroundColor(Color("BorderColor"))
+                                            .padding(.vertical, 8)
+                                    }
+                                }
                             }
                         }
                     }
@@ -97,54 +103,6 @@ struct AccountDetailsHeader: View {
             )
         }
         .padding(.trailing)
-    }
-}
-
-struct RenderFields: View {
-    var fieldName: String
-    var fieldValue: String
-    @EnvironmentObject var accountListViewModelObject : AccountListViewModel
-    
-    var body: some View {
-        let fieldInfo = accountListViewModelObject.customFields.fields[fieldName]
-        let fieldTitle = fieldInfo?.title
-        
-        switch fieldInfo?.type {
-        case .STRING:
-            HStack{
-                Text("\(fieldTitle!):")
-                    .accessibilityIdentifier("txt_account_detail_account_\(fieldName)")
-                    .font(.custom("Nunito-Medium",size: 14))
-                    .foregroundColor(Color("TextPrimary"))
-                
-                Text("\(fieldValue)")
-                    .accessibilityIdentifier("txt_account_detail_account_\(fieldValue)")
-                    .font(.custom("Nunito-Medium",size: 14))
-                    .foregroundColor(Color("TextPrimary"))
-                
-                Spacer()
-            }
-            
-        case .LINK:
-            HStack{
-                Image("Link")
-                
-                Text("\(fieldTitle!):")
-                    .accessibilityIdentifier("txt_account_detail_account_\(fieldName)")
-                    .font(.custom("Nunito-Medium",size: 14))
-                    .foregroundColor(Color("TextPrimary"))
-                
-                Text("\(fieldValue)")
-                    .accessibilityIdentifier("txt_account_detail_account_\(fieldValue)")
-                    .font(.custom("Nunito-Medium",size: 14))
-                    .foregroundColor(Color("TextPrimary"))
-                    .underline(true, color: Color("TextPrimary"))
-                
-                Spacer()
-            }
-        default:
-            EmptyView()
-        }
     }
 }
 

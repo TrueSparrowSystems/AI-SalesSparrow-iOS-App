@@ -87,6 +87,10 @@
 		4B9E5DE12A8CD59900041D65 /* UserAccountDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9E5DDF2A8CD59900041D65 /* UserAccountDetailScreen.swift */; };
 		4B9E5DE42A8CE6AD00041D65 /* AlertModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9E5DE32A8CE6AD00041D65 /* AlertModal.swift */; };
 		4B9E5DE52A8CE6AD00041D65 /* AlertModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9E5DE32A8CE6AD00041D65 /* AlertModal.swift */; };
+		4BA0A1B12AB43D2900C4D58D /* RenderFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA0A1B02AB43D2900C4D58D /* RenderFields.swift */; };
+		4BA0A1B22AB43D2900C4D58D /* RenderFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA0A1B02AB43D2900C4D58D /* RenderFields.swift */; };
+		4BA0A1B42AB441AA00C4D58D /* AccountDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA0A1B32AB441AA00C4D58D /* AccountDetailViewModel.swift */; };
+		4BA0A1B52AB441AA00C4D58D /* AccountDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA0A1B32AB441AA00C4D58D /* AccountDetailViewModel.swift */; };
 		4BA575292A9E2D56004E0ED7 /* CreateTaskUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA575282A9E2D56004E0ED7 /* CreateTaskUITests.swift */; };
 		4BDB87232A84C20E000CC1B9 /* AccountDetailsHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDB87222A84C20E000CC1B9 /* AccountDetailsHeader.swift */; };
 		4BDB87252A84C2CB000CC1B9 /* NoteList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDB87242A84C2CB000CC1B9 /* NoteList.swift */; };
@@ -229,6 +233,8 @@
 		4B819B502A9667C000CE6293 /* SuggestedTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestedTaskView.swift; sourceTree = "<group>"; };
 		4B9E5DDF2A8CD59900041D65 /* UserAccountDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAccountDetailScreen.swift; sourceTree = "<group>"; };
 		4B9E5DE32A8CE6AD00041D65 /* AlertModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertModal.swift; sourceTree = "<group>"; };
+		4BA0A1B02AB43D2900C4D58D /* RenderFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderFields.swift; sourceTree = "<group>"; };
+		4BA0A1B32AB441AA00C4D58D /* AccountDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailViewModel.swift; sourceTree = "<group>"; };
 		4BA575282A9E2D56004E0ED7 /* CreateTaskUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTaskUITests.swift; sourceTree = "<group>"; };
 		4BDB87222A84C20E000CC1B9 /* AccountDetailsHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailsHeader.swift; sourceTree = "<group>"; };
 		4BDB87242A84C2CB000CC1B9 /* NoteList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteList.swift; sourceTree = "<group>"; };
@@ -398,6 +404,7 @@
 				4BDB87242A84C2CB000CC1B9 /* NoteList.swift */,
 				6DA82B042A94D4B60098D1D5 /* TasksList.swift */,
 				4B68077D2AB3458C0024B6ED /* AccountContactDetail.swift */,
+				4BA0A1B02AB43D2900C4D58D /* RenderFields.swift */,
 			);
 			path = AccountDetailScreen;
 			sourceTree = "<group>";
@@ -539,6 +546,7 @@
 				6D59FBFC2A97953800865BDD /* AccountListViewModel.swift */,
 				4BF4C3CF2A97689F00983C2D /* CreateTaskViewModel.swift */,
 				6D8FF5C72AA09F1700215F38 /* LoaderViewModel.swift */,
+				4BA0A1B32AB441AA00C4D58D /* AccountDetailViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -934,6 +942,7 @@
 				019595E82A83CE8E008425AD /* ToastView.swift in Sources */,
 				019596002A83CEE0008425AD /* AppDelegate.swift in Sources */,
 				6D0BC8A42AB18961004D1E83 /* ShimmerView.swift in Sources */,
+				4BA0A1B22AB43D2900C4D58D /* RenderFields.swift in Sources */,
 				019595FD2A83CED8008425AD /* Persistence.swift in Sources */,
 				6D908DB72A85271500F36DCE /* AccountDetailScreenViewModel.swift in Sources */,
 				019595D82A83CE26008425AD /* HomeScreen.swift in Sources */,
@@ -956,6 +965,7 @@
 				019595EC2A83CE9A008425AD /* TopBar.swift in Sources */,
 				019595FE2A83CEDB008425AD /* SalesSparrow.xcdatamodeld in Sources */,
 				019595F82A83CEC1008425AD /* CreateNoteScreenViewModel.swift in Sources */,
+				4BA0A1B52AB441AA00C4D58D /* AccountDetailViewModel.swift in Sources */,
 				019595E22A83CE76008425AD /* ApiError.swift in Sources */,
 				019595E02A83CE71008425AD /* ApiService.swift in Sources */,
 				019595FA2A83CEC9008425AD /* Environments_Sample.swift in Sources */,
@@ -1000,6 +1010,7 @@
 				4B583BDC2A7BE818005B97D0 /* AccountList.swift in Sources */,
 				6DD618B22A80E504007FA929 /* MockResponse.swift in Sources */,
 				6D0BC8A32AB18961004D1E83 /* ShimmerView.swift in Sources */,
+				4BA0A1B12AB43D2900C4D58D /* RenderFields.swift in Sources */,
 				6DE11C842A8283AE00D27006 /* Toast.swift in Sources */,
 				4B819B4B2A96134500CE6293 /* VerticalDividerRectangleView.swift in Sources */,
 				4B393FF42A7AAAF600572F66 /* AccountSearchViewModel.swift in Sources */,
@@ -1022,6 +1033,7 @@
 				4B13E4F02A93836700CB24E4 /* UserSearchViewModel.swift in Sources */,
 				6D8C7D382A77A254005D597E /* ApiError.swift in Sources */,
 				6D8C7CDA2A779A97005D597E /* SalesSparrowApp.swift in Sources */,
+				4BA0A1B42AB441AA00C4D58D /* AccountDetailViewModel.swift in Sources */,
 				6D8C7D332A77A1E5005D597E /* ApiService.swift in Sources */,
 				6D8C7D0D2A779D14005D597E /* Environments.swift in Sources */,
 				6D8C7D0F2A779E97005D597E /* AppDelegate.swift in Sources */,
