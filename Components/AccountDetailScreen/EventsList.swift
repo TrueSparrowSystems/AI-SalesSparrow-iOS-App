@@ -95,8 +95,7 @@ struct EventsList: View {
                 .padding(.trailing)
             }
         }.onAppear {
-            //TODO: Uncomment once Event List API is deployed from backend
-            //            acccountDetailScreenViewModelObject.fetchEvents(accountId: accountId)
+            acccountDetailScreenViewModelObject.fetchEvents(accountId: accountId)
         }.background{
             NavigationLink(destination:
                             CreateEventScreen(accountId: accountId, suggestionId: suggestionId),
@@ -165,33 +164,36 @@ struct EventCardView: View {
                 .accessibilityIdentifier("txt_account_detail_event_description_\(eventIndex)")
                 .padding(EdgeInsets(top: 6, leading: 0, bottom: 0, trailing: 10))
             
-            HStack(alignment: .center){
-                
+            HStack(alignment: .center, spacing: 0){
                 if((acccountDetailScreenViewModelObject.eventData.event_map_by_id[eventId]?.start_datetime != nil)){
-                    
-                    
                     Image("CalendarCheck")
                         .frame(width: 16, height: 16)
+                        .padding(.trailing, 4)
+                    
                     Text("From")
                         .font(.custom("Nunito-Regular",size: 12))
                         .foregroundColor(Color("TermsPrimary"))
                         .tracking(0.5)
+                    
                     Divider()
                         .frame(width: 0, height: 16)
                         .foregroundColor(Color("TermsPrimary").opacity(0.1))
-                    Text("\(BasicHelper.getFormattedDateForDueDate(from: acccountDetailScreenViewModelObject.eventData.event_map_by_id[eventId]?.start_datetime ?? ""))")
+                        .padding(.horizontal, 6)
+                    
+                    Text("\(BasicHelper.getFormattedDateForDateTime(from: acccountDetailScreenViewModelObject.eventData.event_map_by_id[eventId]?.start_datetime ?? ""))")
                         .font(.custom("Nunito-Regular",size: 12))
                         .foregroundColor(Color("TermsPrimary"))
                         .tracking(0.5)
-                        .accessibilityIdentifier("txt_account_detail_event_due_date_\(eventIndex)")
-                    Text(" - \(BasicHelper.getFormattedDateForDueDate(from: acccountDetailScreenViewModelObject.eventData.event_map_by_id[eventId]?.end_datetime ?? ""))")
+                        .accessibilityIdentifier("txt_account_detail_event_start_date_\(eventIndex)")
+                        .lineLimit(1)
+                    
+                    Text(" - \(BasicHelper.getFormattedDateForDateTime(from: acccountDetailScreenViewModelObject.eventData.event_map_by_id[eventId]?.end_datetime ?? ""))")
                         .font(.custom("Nunito-Regular",size: 12))
                         .foregroundColor(Color("TermsPrimary"))
                         .tracking(0.5)
-                        .accessibilityIdentifier("txt_account_detail_event_due_date_\(eventIndex)")
+                        .accessibilityIdentifier("txt_account_detail_event_end_date_\(eventIndex)")
+                        .lineLimit(1)
                 }
-                
-                Spacer()
             }
             .padding(.top, 12)
             
