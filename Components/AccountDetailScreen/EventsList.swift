@@ -95,7 +95,8 @@ struct EventsList: View {
                 .padding(.trailing)
             }
         }.onAppear {
-            acccountDetailScreenViewModelObject.fetchEvents(accountId: accountId)
+            //TODO: Uncomment once Event List API is deployed from backend
+            //            acccountDetailScreenViewModelObject.fetchEvents(accountId: accountId)
         }.background{
             NavigationLink(destination:
                             CreateEventScreen(accountId: accountId, suggestionId: suggestionId),

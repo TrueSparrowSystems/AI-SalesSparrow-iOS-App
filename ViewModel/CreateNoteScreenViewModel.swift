@@ -104,7 +104,7 @@ class CreateNoteScreenViewModel: ObservableObject {
         
     }
     
- func setEventDataAttribute(id: String, attrKey: String, attrValue: Any){
+    func setEventDataAttribute(id: String, attrKey: String, attrValue: Any){
         if(suggestedEventStates[id] == nil){
             suggestedEventStates[id] = [:]
         }

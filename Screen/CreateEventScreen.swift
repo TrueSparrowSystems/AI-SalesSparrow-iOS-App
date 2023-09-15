@@ -82,8 +82,8 @@ struct CreateEventScreen: View {
                     .clipShape(RoundedRectangle(cornerRadius: 5))
                 })
                 .accessibilityIdentifier("btn_save_event")
-                .disabled(accountId.isEmpty || description.isEmpty || !(suggestedEventState["isStartDateSelected"] as! Bool) || !(suggestedEventState["isStartTimeSelected"] as! Bool) || !(suggestedEventState["isEndDateSelected"] as! Bool) || !(suggestedEventState["isEndTimeSelected"] as! Bool) || isAddEventInProgress || (suggestedEventState["isEventSaved"] as! Bool))
-                .opacity(accountId.isEmpty || description.isEmpty || !(suggestedEventState["isStartDateSelected"] as! Bool) || !(suggestedEventState["isStartTimeSelected"] as! Bool) || !(suggestedEventState["isEndDateSelected"] as! Bool) || !(suggestedEventState["isEndTimeSelected"] as! Bool) ? 0.7 : 1)
+                .disabled(accountId.isEmpty || description.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || !(suggestedEventState["isStartDateSelected"] as! Bool) || !(suggestedEventState["isStartTimeSelected"] as! Bool) || !(suggestedEventState["isEndDateSelected"] as! Bool) || !(suggestedEventState["isEndTimeSelected"] as! Bool) || isAddEventInProgress || (suggestedEventState["isEventSaved"] as! Bool))
+                .opacity(accountId.isEmpty || description.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || !(suggestedEventState["isStartDateSelected"] as! Bool) || !(suggestedEventState["isStartTimeSelected"] as! Bool) || !(suggestedEventState["isEndDateSelected"] as! Bool) || !(suggestedEventState["isEndTimeSelected"] as! Bool) ? 0.7 : 1)
             }
             .padding(.vertical)
             
@@ -205,7 +205,6 @@ struct CreateEventScreen: View {
                     RoundedRectangle(cornerRadius: 4)
                         .stroke(Color("CardBorder"), lineWidth: 1)
                 )
-                //TODO: Add check for endDate > startDate
                 
                 Spacer()
             }

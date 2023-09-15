@@ -80,8 +80,8 @@ struct CreateTaskScreen: View {
                     .clipShape(RoundedRectangle(cornerRadius: 5))
                 })
                 .accessibilityIdentifier("btn_save_task")
-                .disabled(accountId.isEmpty || description.isEmpty || ((suggestedTaskState["selectedUserId"] ?? "") as! String).isEmpty || !(suggestedTaskState["isDateSelected"] as! Bool) || isAddTaskInProgress || (suggestedTaskState["isTaskSaved"] as! Bool))
-                .opacity(accountId.isEmpty || description.isEmpty || ((suggestedTaskState["selectedUserId"] ?? "") as! String).isEmpty || !(suggestedTaskState["isDateSelected"] as! Bool) ? 0.7 : 1)
+                .disabled(accountId.isEmpty || description.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || ((suggestedTaskState["selectedUserId"] ?? "") as! String).isEmpty || !(suggestedTaskState["isDateSelected"] as! Bool) || isAddTaskInProgress || (suggestedTaskState["isTaskSaved"] as! Bool))
+                .opacity(accountId.isEmpty || description.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || ((suggestedTaskState["selectedUserId"] ?? "") as! String).isEmpty || !(suggestedTaskState["isDateSelected"] as! Bool) ? 0.7 : 1)
             }
             .padding(.vertical)
             
