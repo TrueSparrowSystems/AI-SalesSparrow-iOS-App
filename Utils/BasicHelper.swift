@@ -156,6 +156,7 @@ struct BasicHelper {
             //Format and convert date in desired dateFormat
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = dateTimeFormat
+            dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
             let formattedDateString = dateFormatter.string(from: mergedDate)
             return formattedDateString
         }
