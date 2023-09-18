@@ -21,10 +21,10 @@ struct AccountContactDetail: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 25.0, height: 25.0)
-                    .accessibilityIdentifier("img_account_detail_account_icon")
+                    .accessibilityIdentifier("img_account_detail_contact_icon")
 
                 Text("Contact Details")
-                    .accessibilityIdentifier("txt_account_detail_account_details_title")
+                    .accessibilityIdentifier("txt_account_detail_contact_details_title")
                     .foregroundColor(Color("TextPrimary"))
                     .font(.custom("Nunito-SemiBold",size: 16))
 
@@ -44,6 +44,7 @@ struct AccountContactDetail: View {
                                 Text("CONTACT \(index + 1)")
                                     .font(.custom("Nunito-Bold", size: 14))
                                     .foregroundColor(Color("TextPrimary"))
+                                    .accessibilityIdentifier("txt_account_detail_contact_number_index_\(index)")
                                     .opacity(0.7)
                                 
                                 Spacer()
@@ -52,6 +53,7 @@ struct AccountContactDetail: View {
                                 Text(contact?.name ?? "")
                                     .font(.custom("Nunito-SemiBold", size: 18))
                                     .foregroundColor(Color("TextPrimary"))
+                                    .accessibilityIdentifier("txt_account_detail_contact_name_index_\(index)")
                                 
                                 Spacer()
                                 

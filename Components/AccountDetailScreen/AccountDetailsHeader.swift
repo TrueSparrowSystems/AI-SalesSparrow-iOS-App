@@ -29,8 +29,8 @@ struct AccountDetailsHeader: View {
                 
                 Spacer()
             }
-            VStack(spacing: 0) {
-                VStack(spacing: 5){
+            VStack(spacing: 5) {
+                VStack {
                     HStack {
                         Text("ACCOUNT")
                             .accessibilityIdentifier("txt_account_detail_account_text")
@@ -64,14 +64,17 @@ struct AccountDetailsHeader: View {
                     if(additionalFields?.count ?? 0 > 2){
                         Divider()
                         
-                        HStack{
-                            Text("More Details")
-                                .foregroundColor(Color("RedHighlight"))
-                                .font(.custom("Nunito-Medium", size: 14))
-                        }
-                        .onTapGesture {
+                        
+                        Button(action: {
                             expandAccountDetails = true
+                        }){
+                            HStack{
+                                Text("More Details")
+                                    .foregroundColor(Color("RedHighlight"))
+                                    .font(.custom("Nunito-Medium", size: 14))
+                            }
                         }
+                        .accessibilityIdentifier("btn_account_detail_more_details")
                     }
                 } else {
                     let additionalFields = accountDetailViewModelObject.accountDetail.additional_fields

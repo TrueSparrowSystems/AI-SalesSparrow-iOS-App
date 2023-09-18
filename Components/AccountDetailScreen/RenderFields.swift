@@ -23,6 +23,7 @@ struct RenderFields: View {
                 Text(fieldValue)
                     .font(.custom("Nunito-Regular",size: 14))
                     .foregroundColor(Color("TextPrimary"))
+                    .accessibilityIdentifier("txt_account_detail_field_type_\(fieldName)")
                 
                 Spacer()
             }
@@ -31,6 +32,7 @@ struct RenderFields: View {
                 Text(fieldValue)
                     .font(.custom("Nunito-Regular",size: 12))
                     .foregroundColor(Color("TextPrimary"))
+                    .accessibilityIdentifier("txt_account_detail_field_type_\(fieldName)")
                 
                 Spacer()
             }
@@ -39,10 +41,12 @@ struct RenderFields: View {
                     Text("\(fieldTitle!): ")
                         .font(.custom("Nunito-Medium",size: 14))
                         .foregroundColor(Color("TextPrimary"))
+                        .accessibilityIdentifier("txt_account_detail_field_type_\(fieldName)")
                     
                     Text("\(fieldValue)")
                         .font(.custom("Nunito-Medium",size: 14))
                         .foregroundColor(Color("TextPrimary"))
+                        .accessibilityIdentifier("txt_account_detail_field_value_\(fieldValue)")
                     
                     Spacer()
                 }
@@ -51,16 +55,19 @@ struct RenderFields: View {
             HStack(spacing: 0) {
                 Image("Link")
                     .frame(width: 12,height: 12)
-                    .padding(.horizontal, 2)
+                    .padding(.leading, 2)
+                    .padding(.trailing, 4)
                 
                 Text("\(fieldTitle!): ")
                     .font(.custom("Nunito-Medium",size: 14))
                     .foregroundColor(Color("TextPrimary"))
+                    .accessibilityIdentifier("txt_account_detail_field_type_\(fieldName)")
                 
                 Text("\(fieldValue)")
                     .font(.custom("Nunito-Medium",size: 14))
                     .foregroundColor(Color("TextPrimary"))
                     .underline(true, color: Color("TextPrimary"))
+                    .accessibilityIdentifier("txt_account_detail_field_value_\(fieldValue)")
                     .onTapGesture {
                         openURL(URL(string: fieldValue)!)
                         }
