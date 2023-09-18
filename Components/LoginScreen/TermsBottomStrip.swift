@@ -19,7 +19,7 @@ struct TermsBottomStrip: View {
             .foregroundColor(Color("RedHighlight"))
             .accessibilityLabel(Text("txt_login_terms"))
         
-        let termsTextWithLink = Text("[Terms and Conditions](https://truesparrow.com)")
+        let termsTextWithLink = Text("[Terms and Conditions](https://drive.google.com/file/d/1pOQOLw_yt1aF9QXHlJag2YgaFmwtMf3Y/view)")
             .font(.custom("Nunito-SemiBold" ,size: 12))
             .foregroundColor(.clear)
             .accessibilityLabel(Text("txt_terms"))
@@ -30,7 +30,7 @@ struct TermsBottomStrip: View {
             .foregroundColor(Color("RedHighlight"))
             .accessibilityLabel(Text("txt_login_privacy"))
         
-        let privacyTextWithLink = Text("[Privacy Policy](https://truesparrow.com)")
+        let privacyTextWithLink = Text("[Privacy Policy](https://drive.google.com/file/d/1kccg9XL2D0QEtCV09Bn8icStNX1PAF5E/view)")
             .font(.custom("Nunito-SemiBold" ,size: 12))
             .foregroundColor(.clear)
             .accessibilityLabel(Text("txt_privacy"))
