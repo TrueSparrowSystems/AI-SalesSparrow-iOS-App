@@ -29,24 +29,23 @@ struct NoteDetailScreen : View {
                     }
                 
                 Spacer()
-                // TODO: uncomment this code once edit functionality is implemented
-                //                if(isEditing){
-                //                    HStack(alignment: .center, spacing: 0){
-                //                        Image("CheckMark")
-                //                            .resizable()
-                //                            .frame(width: 12, height: 12)
-                //                            .padding(.trailing, 6)
-                //                        Text("Saved")
-                //                            .foregroundColor(.white)
-                //                            .font(.custom("Nunito-Medium", size: 12))
-                //                    }
-                //                    .frame(width: 68, height: 32)
-                //                    .background(
-                //                        Color(hex: "SaveButtonBackground")
-                //                    )
-                //                    .clipShape(RoundedRectangle(cornerRadius: 5))
-                //                    .accessibilityIdentifier("btn_note_saved")
-                //                }
+                if(isEditing){
+                    HStack(alignment: .center, spacing: 0){
+                        Image("CheckMark")
+                            .resizable()
+                            .frame(width: 12, height: 12)
+                            .padding(.trailing, 6)
+                        Text("Saved")
+                            .foregroundColor(.white)
+                            .font(.custom("Nunito-Medium", size: 12))
+                    }
+                    .frame(width: 68, height: 32)
+                    .background(
+                        Color(hex: "SaveButtonBackground")
+                    )
+                    .clipShape(RoundedRectangle(cornerRadius: 5))
+                    .accessibilityIdentifier("btn_note_saved")
+                }
             }
             
             if(noteDetailScreenViewModel.isFetchNoteDetailInProgress){
