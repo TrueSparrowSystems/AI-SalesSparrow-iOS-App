@@ -85,7 +85,7 @@ struct CreateNoteScreen : View {
                     )
                     .clipShape(RoundedRectangle(cornerRadius: 5))
                 })
-                .accessibilityIdentifier("btn_create_note_save")
+                .accessibilityIdentifier("btn_save_note")
                 .disabled(isNoteSaved || isSaveInProgress || accountId.isEmpty || text.isEmpty)
                 .opacity(accountId.isEmpty || text.isEmpty ? 0.7 : 1)
             }
