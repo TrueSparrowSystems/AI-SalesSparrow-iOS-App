@@ -181,15 +181,7 @@ class AccountDetailViewScreenViewModel: ObservableObject {
                     self?.isEventListLoading = false
                 case .failure(let error):
                     print("error loading data: \(error)")
-                    //                    self?.eventData = EventsListStruct(event_ids: [], event_map_by_id: [:])
-                    
-                    //TODO: Uncomment once Event List API is deployed from backend
-                    self?.eventData.event_ids = [
-                        "00U1e000003TUB8EAO"
-                    ]
-                    self?.eventData.event_map_by_id = [
-                        "00U1e000003TUB8EAO": Event(id: "00U1e000003TUB8EAO", creator_name: "xyz", description: "Event Content", start_datetime: "2019-10-12T07:20:50.52Z", end_datetime: "2019-10-12T07:20:50.52Z", last_modified_time: "2019-10-12T07:20:50.52Z")
-                    ]
+                    self?.eventData = EventsListStruct(event_ids: [], event_map_by_id: [:])
                     self?.isEventListLoading = false
                     ToastViewModel.shared.showToast(_toast: Toast(style: .error, message: error.message))
                 }
