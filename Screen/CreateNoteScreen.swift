@@ -86,8 +86,8 @@ struct CreateNoteScreen : View {
                     .clipShape(RoundedRectangle(cornerRadius: 5))
                 })
                 .accessibilityIdentifier("btn_save_note")
-                .disabled(isNoteSaved || isSaveInProgress || accountId.isEmpty || text.isEmpty)
-                .opacity(accountId.isEmpty || text.isEmpty ? 0.7 : 1)
+                .disabled(isNoteSaved || isSaveInProgress || accountId.isEmpty || text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+                .opacity(accountId.isEmpty || text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? 0.7 : 1)
             }
             .padding(.vertical, 12)
             

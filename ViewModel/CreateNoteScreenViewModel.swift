@@ -12,16 +12,24 @@ struct CreateNoteStruct: Codable {
     var note_id: String
 }
 
-// A struct that represents the meta data of the suggestion entity
-struct SuggestionStruct: Codable, Equatable {
+// A struct that represents the meta data of the task suggestion entity
+struct TaskSuggestionStruct: Codable, Equatable {
     var id: String?
     var description: String
     var due_date: String?
 }
 
+// A struct that represents the meta data of the event suggestion entity
+struct EventSuggestionStruct: Codable, Equatable {
+    var id: String?
+    var description: String
+    var start_datetime: String?
+    var end_datetime: String?
+}
+
 // A struct that represents the meta data of the generate suggested task API
 struct GenerateSuggestionStruct: Codable, Equatable {
-    var add_task_suggestions: [SuggestionStruct]
+    var add_task_suggestions: [TaskSuggestionStruct]
 }
 
 // A class that represents the view model of the create note
@@ -31,9 +39,10 @@ class CreateNoteScreenViewModel: ObservableObject {
     @Published var isCreateNoteInProgress = false
     @Published var isSuggestionGenerationInProgress = false
     @Published var suggestedTaskStates : [String: [String: Any]]  = [:]
+    @Published var suggestedEventStates : [String: [String: Any]]  = [:]
     var apiService = DependencyContainer.shared.apiService
     
-    func initTaskData(suggestion: SuggestionStruct){
+    func initTaskData(suggestion: TaskSuggestionStruct){
         var dueDate: Date
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd" // Format of your due_date
@@ -52,11 +61,54 @@ class CreateNoteScreenViewModel: ObservableObject {
         ]
     }
     
+    func initEventData(suggestion: EventSuggestionStruct){
+        var startDate: Date
+        var startTime: Date
+        var endDate: Date
+        var endTime: Date
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd" // Format of your due_date
+        if let date = dateFormatter.date(from: suggestion.start_datetime ?? "") {
+            startDate =  date
+            startTime =  date
+        } else {
+            startDate = Date()
+            startTime = Date()
+        }
+        if let date = dateFormatter.date(from: suggestion.end_datetime ?? "") {
+            endDate =  date
+            endTime =  date
+        } else {
+            endDate = Date()
+            endTime = Date()
+        }
+        suggestedEventStates[suggestion.id ?? ""] = [
+            "description": suggestion.description,
+            "startDate": startDate,
+            "startTime": startTime,
+            "endDate": endDate,
+            "endTime": endTime,
+            "isStartDateSelected": suggestion.start_datetime?.isEmpty ?? true ? false : true,
+            "isStartTimeSelected": suggestion.start_datetime?.isEmpty ?? true ? false : true,
+            "isEndDateSelected": suggestion.end_datetime?.isEmpty ?? true ? false : true,
+            "isEndTimeSelected": suggestion.end_datetime?.isEmpty ?? true ? false : true,
+            "isEventSaved": false,
+        ]
+    }
+    
     func setTaskDataAttribute(id: String, attrKey: String, attrValue: Any){
         if(suggestedTaskStates[id] == nil){
             suggestedTaskStates[id] = [:]
         }
         suggestedTaskStates[id]?[attrKey] = attrValue
+        
+    }
+    
+    func setEventDataAttribute(id: String, attrKey: String, attrValue: Any){
+        if(suggestedEventStates[id] == nil){
+            suggestedEventStates[id] = [:]
+        }
+        suggestedEventStates[id]?[attrKey] = attrValue
         
     }
     
@@ -114,7 +166,7 @@ class CreateNoteScreenViewModel: ObservableObject {
                         
                         self?.suggestedTaskData.add_task_suggestions[index].id = UUID().uuidString
                         let suggestion = self?.suggestedTaskData.add_task_suggestions[index]
-                        self?.initTaskData(suggestion: suggestion ?? SuggestionStruct(description: ""))
+                        self?.initTaskData(suggestion: suggestion ?? TaskSuggestionStruct(description: ""))
                     }
                 }
                 

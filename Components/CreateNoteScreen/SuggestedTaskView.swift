@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SuggestedTaskCardView: View {
     var accountId: String
-    var suggestion: SuggestionStruct
+    var suggestion: TaskSuggestionStruct
     var index: Int
     
     @EnvironmentObject var createNoteScreenViewModel : CreateNoteScreenViewModel
@@ -21,7 +21,7 @@ struct SuggestedTaskCardView: View {
     @FocusState private var userSelected: Bool
     @State var isAddTaskInProgress = false
     
-    init(accountId: String,suggestion: SuggestionStruct, index: Int) {
+    init(accountId: String,suggestion: TaskSuggestionStruct, index: Int) {
         self.accountId = accountId
         self.suggestion = suggestion
         self.index = index

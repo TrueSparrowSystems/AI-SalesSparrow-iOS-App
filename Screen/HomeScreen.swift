@@ -16,6 +16,7 @@ struct HomeScreen: View {
     @StateObject var createNoteViewModel = CreateNoteScreenViewModel()
     @StateObject var noteDetailScreenViewModel = NoteDetailScreenViewModel()
     @StateObject var createTaskViewModel = CreateTaskViewModel()
+    @StateObject var createEventViewModel = CreateEventViewModel()
     @StateObject var accountDetailViewModel = AccountDetailScreenViewModel()
     @State private var showUserSearchView: Bool = false
     
@@ -44,6 +45,7 @@ struct HomeScreen: View {
         .environmentObject(noteDetailScreenViewModel)
         .environmentObject(acccountListViewModelObject)
         .environmentObject(createTaskViewModel)
+        .environmentObject(createEventViewModel)
         .environmentObject(accountDetailViewModel)
     }
 }

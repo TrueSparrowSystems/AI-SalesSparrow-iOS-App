@@ -1,17 +1,17 @@
 //
-//  TasksList.swift
+//  EventsList.swift
 //  SalesSparrow
 //
-//  Created by Mohit Charkha on 22/08/23.
+//  Created by Mohit Charkha on 13/09/23.
 //
 
 import SwiftUI
 
-struct TasksList: View {
+struct EventsList: View {
     let accountId: String
     let accountName: String
     
-    @State var addTaskActivated = false
+    @State var addEventActivated = false
     @State var suggestionId: String = ""
     @EnvironmentObject var createNoteScreenViewModel : CreateNoteScreenViewModel
     
@@ -21,51 +21,51 @@ struct TasksList: View {
     var body: some View {
         VStack(spacing: 0) {
             HStack{
-                Image("TasksIcon")
+                Image("EventsIcon")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 20.0, height: 20.0)
-                    .accessibilityIdentifier("img_account_detail_task_icon")
+                    .accessibilityIdentifier("img_account_detail_event_icon")
                 
-                Text("Tasks")
+                Text("Events")
                     .font(.custom("Nunito-SemiBold",size: 16))
                     .foregroundColor(Color("TextPrimary"))
-                    .accessibilityIdentifier("txt_account_detail_tasks_title")
+                    .accessibilityIdentifier("txt_account_detail_events_title")
                 
                 Spacer()
                 
                 Button(action: {
                     suggestionId = UUID().uuidString
-                    createNoteScreenViewModel.initTaskData(suggestion: TaskSuggestionStruct(id: suggestionId, description: ""))
-                    addTaskActivated = true
+                    createNoteScreenViewModel.initEventData(suggestion: EventSuggestionStruct(id: suggestionId, description: ""))
+                    addEventActivated = true
                 }
                 ){
                     HStack{
                         Image("AddIcon")
                             .resizable()
                             .frame(width: 20.0, height: 20.0)
-                            .accessibilityIdentifier("img_account_detail_create_task_icon")
+                            .accessibilityIdentifier("img_account_detail_create_event_icon")
                     }
                     .frame(width: 40, height: 30, alignment: .bottomLeading)
                     .padding(.bottom, 10)
                     
                 }
-                .accessibilityIdentifier("btn_account_detail_add_task")
+                .accessibilityIdentifier("btn_account_detail_add_event")
             }
             
-            if acccountDetailScreenViewModelObject.isTaskListLoading {
+            if acccountDetailScreenViewModelObject.isEventListLoading {
                 ProgressView()
                     .tint(Color("LoginButtonSecondary"))
             }
-            else if acccountDetailScreenViewModelObject.taskData.task_ids.isEmpty {
+            else if acccountDetailScreenViewModelObject.eventData.event_ids.isEmpty {
                 VStack(spacing: 0) {
                     HStack {
                         Spacer()
-                        Text("Add tasks, set due dates and assign to your team")
+                        Text("Add events, set due dates and assign to your team")
                             .font(.custom("Nunito-Regular",size: 12))
                             .foregroundColor(Color("TextPrimary"))
                             .padding(EdgeInsets(top: 12, leading: 14, bottom: 12, trailing: 14))
-                            .accessibilityIdentifier("txt_account_detail_add_task")
+                            .accessibilityIdentifier("txt_account_detail_add_event")
                         
                         Spacer()
                     }
@@ -83,10 +83,10 @@ struct TasksList: View {
                 Spacer()
             } else {
                 VStack{
-                    let taskIdsArray = self.acccountDetailScreenViewModelObject.taskData.task_ids
-                    ForEach(Array(taskIdsArray.enumerated()), id: \.offset) { index, taskId in
-                        if ( self.acccountDetailScreenViewModelObject.taskData.task_map_by_id[taskId] != nil) {
-                            TaskCardView(taskId: taskId, accountId: accountId, taskIndex: index, propagateClick: $propagateClick)
+                    let eventIdsArray = self.acccountDetailScreenViewModelObject.eventData.event_ids
+                    ForEach(Array(eventIdsArray.enumerated()), id: \.offset) { index, eventId in
+                        if ( self.acccountDetailScreenViewModelObject.eventData.event_map_by_id[eventId] != nil) {
+                            EventCardView(eventId: eventId, accountId: accountId, eventIndex: index, propagateClick: $propagateClick)
                         }
                         
                         
@@ -95,11 +95,11 @@ struct TasksList: View {
                 .padding(.trailing)
             }
         }.onAppear {
-            acccountDetailScreenViewModelObject.fetchTasks(accountId: accountId)
+            acccountDetailScreenViewModelObject.fetchEvents(accountId: accountId)
         }.background{
             NavigationLink(destination:
-                            CreateTaskScreen(accountId: accountId, suggestionId: suggestionId),
-                           isActive: self.$addTaskActivated
+                            CreateEventScreen(accountId: accountId, suggestionId: suggestionId),
+                           isActive: self.$addEventActivated
             ) {
                 EmptyView()
             }
@@ -108,12 +108,12 @@ struct TasksList: View {
     }
 }
 
-struct TaskCardView: View {
-    let taskId: String
+struct EventCardView: View {
+    let eventId: String
     let accountId: String
-    let taskIndex: Int
+    let eventIndex: Int
     @EnvironmentObject var acccountDetailScreenViewModelObject: AccountDetailViewScreenViewModel
-    var taskData: [String: Task] = [:]
+    var eventData: [String: Event] = [:]
     @State var isPopoverVisible: Bool = false
     @Binding var propagateClick : Int
     @State var isSelfPopupTriggered = false
@@ -121,28 +121,28 @@ struct TaskCardView: View {
     var body: some View {
         VStack(spacing: 0){
             HStack {
-                Text("\(BasicHelper.getInitials(from: acccountDetailScreenViewModelObject.taskData.task_map_by_id[taskId]?.creator_name ?? ""))")
+                Text("\(BasicHelper.getInitials(from: acccountDetailScreenViewModelObject.eventData.event_map_by_id[eventId]?.creator_name ?? ""))")
                     .frame(width: 18, height:18)
                     .font(.custom("Nunito-Bold", size: 6))
                     .foregroundColor(.black)
                     .background(Color("UserBubble"))
                     .clipShape(RoundedRectangle(cornerRadius: 26))
-                    .accessibilityIdentifier("txt_account_detail_task_creator_initials_\(taskIndex)")
+                    .accessibilityIdentifier("txt_account_detail_event_creator_initials_\(eventIndex)")
                 
-                Text("\(acccountDetailScreenViewModelObject.taskData.task_map_by_id[taskId]?.creator_name ?? "")")
+                Text("\(acccountDetailScreenViewModelObject.eventData.event_map_by_id[eventId]?.creator_name ?? "")")
                     .font(.custom("Nunito-Medium",size: 14))
                     .tracking(0.6)
                     .foregroundColor(Color("TextPrimary"))
-                    .accessibilityIdentifier("txt_account_detail_task_creator_\(taskIndex)")
+                    .accessibilityIdentifier("txt_account_detail_event_creator_\(eventIndex)")
                 
                 Spacer()
                 
                 HStack(spacing: 0){
-                    Text("\(BasicHelper.getFormattedDateForCard(from: acccountDetailScreenViewModelObject.taskData.task_map_by_id[taskId]?.last_modified_time ?? ""))")
+                    Text("\(BasicHelper.getFormattedDateForCard(from: acccountDetailScreenViewModelObject.eventData.event_map_by_id[eventId]?.last_modified_time ?? ""))")
                         .font(.custom("Nunito-Light",size: 12))
                         .tracking(0.5)
                         .foregroundColor(Color("TextPrimary"))
-                        .accessibilityIdentifier("txt_account_detail_task_last_modified_time_\(taskIndex)")
+                        .accessibilityIdentifier("txt_account_detail_event_last_modified_time_\(eventIndex)")
                     
                     Button{
                         isSelfPopupTriggered = true
@@ -153,46 +153,47 @@ struct TaskCardView: View {
                             .padding(10)
                             .foregroundColor(Color("TextPrimary"))
                     }
-                    .accessibilityIdentifier("btn_account_detail_task_more_\(taskIndex)")
+                    .accessibilityIdentifier("btn_account_detail_event_more_\(eventIndex)")
                 }
             }
-            Text("\(acccountDetailScreenViewModelObject.taskData.task_map_by_id[taskId]?.description ?? "")")
+            Text("\(acccountDetailScreenViewModelObject.eventData.event_map_by_id[eventId]?.description ?? "")")
                 .font(.custom("Nunito-Medium",size: 14))
                 .foregroundColor(Color("TextPrimary"))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .multilineTextAlignment(.leading)
-                .accessibilityIdentifier("txt_account_detail_task_description_\(taskIndex)")
+                .accessibilityIdentifier("txt_account_detail_event_description_\(eventIndex)")
                 .padding(EdgeInsets(top: 6, leading: 0, bottom: 0, trailing: 10))
             
-            HStack(alignment: .center){
-                Text("Assign to")
-                    .font(.custom("Nunito-Regular",size: 12))
-                    .foregroundColor(Color("TermsPrimary"))
-                    .tracking(0.5)
-                    .accessibilityIdentifier("txt_account_detail_task_assign_to_title_\(taskIndex)")
-                
-                Text(acccountDetailScreenViewModelObject.taskData.task_map_by_id[taskId]?.crm_organization_user_name ?? "")
-                    .font(.custom("Nunito-Regular",size: 12))
-                    .foregroundColor(Color("RedHighlight"))
-                    .tracking(0.5)
-                    .accessibilityIdentifier("txt_account_detail_task_assignee_\(taskIndex)")
-                
-                if((acccountDetailScreenViewModelObject.taskData.task_map_by_id[taskId]?.due_date != nil)){
-                    Divider()
-                        .frame(width: 0, height: 16)
-                        .foregroundColor(Color("TermsPrimary").opacity(0.1))
-                    
+            HStack(alignment: .center, spacing: 0){
+                if((acccountDetailScreenViewModelObject.eventData.event_map_by_id[eventId]?.start_datetime != nil)){
                     Image("CalendarCheck")
                         .frame(width: 16, height: 16)
+                        .padding(.trailing, 4)
                     
-                    Text("Due \(BasicHelper.getFormattedDateForDueDate(from: acccountDetailScreenViewModelObject.taskData.task_map_by_id[taskId]?.due_date ?? ""))")
+                    Text("From")
                         .font(.custom("Nunito-Regular",size: 12))
                         .foregroundColor(Color("TermsPrimary"))
                         .tracking(0.5)
-                        .accessibilityIdentifier("txt_account_detail_task_due_date_\(taskIndex)")
+                    
+                    Divider()
+                        .frame(width: 0, height: 16)
+                        .foregroundColor(Color("TermsPrimary").opacity(0.1))
+                        .padding(.horizontal, 6)
+                    
+                    Text("\(BasicHelper.getFormattedDateForDateTime(from: acccountDetailScreenViewModelObject.eventData.event_map_by_id[eventId]?.start_datetime ?? ""))")
+                        .font(.custom("Nunito-Regular",size: 12))
+                        .foregroundColor(Color("TermsPrimary"))
+                        .tracking(0.5)
+                        .accessibilityIdentifier("txt_account_detail_event_start_date_\(eventIndex)")
+                        .lineLimit(1)
+                    
+                    Text(" - \(BasicHelper.getFormattedDateForDateTime(from: acccountDetailScreenViewModelObject.eventData.event_map_by_id[eventId]?.end_datetime ?? ""))")
+                        .font(.custom("Nunito-Regular",size: 12))
+                        .foregroundColor(Color("TermsPrimary"))
+                        .tracking(0.5)
+                        .accessibilityIdentifier("txt_account_detail_event_end_date_\(eventIndex)")
+                        .lineLimit(1)
                 }
-                
-                Spacer()
             }
             .padding(.top, 12)
             
@@ -211,11 +212,11 @@ struct TaskCardView: View {
                         isPopoverVisible = false
                         
                         AlertViewModel.shared.showAlert(_alert: Alert(
-                            title: "Delete Task",
-                            message: Text("Are you sure you want to delete this task?"),
+                            title: "Delete Event",
+                            message: Text("Are you sure you want to delete this event?"),
                             submitText: "Delete",
                             onSubmitPress: {
-                                acccountDetailScreenViewModelObject.deleteTask(accountId: accountId, taskId: taskId){}
+                                acccountDetailScreenViewModelObject.deleteEvent(accountId: accountId, eventId: eventId){}
                             }
                         ))
                     }){
@@ -227,7 +228,7 @@ struct TaskCardView: View {
                                 .foregroundColor(Color("TextPrimary"))
                         }
                     }
-                    .accessibilityIdentifier("btn_account_detail_delete_task_\(taskIndex)")
+                    .accessibilityIdentifier("btn_account_detail_delete_event_\(eventIndex)")
                 }
                 .padding(10)
                 .cornerRadius(4)
