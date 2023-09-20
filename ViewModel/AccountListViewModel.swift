@@ -38,8 +38,26 @@ struct AccountListStruct: Codable {
     var next_page_payload: Pagination?
 }
 
+struct FieldDefinition: Codable {
+    let fields: [String: FieldInfo]
+
+    struct FieldInfo: Codable {
+        let type: FieldType
+        let title: String
+    }
+}
+
+enum FieldType: String, Codable {
+    case LINK
+    case TITLE
+    case STRING
+    case EMAIL
+}
+
 class AccountListViewModel: ObservableObject {
     @Published var accountListData = AccountListStruct(account_ids: [], account_map_by_id: [:], contact_map_by_id: [:], account_contact_associations_map_by_id: [:], next_page_payload: nil)
+    
+    
     var apiService = DependencyContainer.shared.apiService
     @Published var isFetchAccountInProgress = false
     

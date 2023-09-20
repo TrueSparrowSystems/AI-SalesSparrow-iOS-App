@@ -11,6 +11,7 @@ struct AccountDetailsScreen: View {
     var accountId: String
     var accountName: String
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @EnvironmentObject var accountDetailViewModelObject : AccountDetailScreenViewModel
     @State var propagateClick = 0
     
     var body: some View {
@@ -20,6 +21,7 @@ struct AccountDetailsScreen: View {
                 AccountDetailsHeader(accountId: accountId, accountName: accountName)
                 
                 // Contact list component
+                AccountContactDetail(accountId: accountId, accountName: accountName)
                 
                 NotesList(accountId: accountId, accountName: accountName, propagateClick: $propagateClick)
                 
@@ -28,6 +30,9 @@ struct AccountDetailsScreen: View {
                 EventsList(accountId: accountId, accountName: accountName, propagateClick: $propagateClick)
                 
             }
+        }
+        .onAppear {
+            accountDetailViewModelObject.fetchAccountDetail(accountId: accountId)
         }
         .simultaneousGesture(
             TapGesture().onEnded(){
