@@ -11,9 +11,10 @@ import SwiftUI
 struct LoginScreen: View {
     @EnvironmentObject var loginScreenViewModel : LoginScreenViewModel
     @EnvironmentObject var userStateViewModel : UserStateViewModel
-    @Environment(\.openURL) var openURL
     @State var isLoginInProgress = false
     @EnvironmentObject var environment: Environments
+    @State private var isPresentWebView = false
+    @State var loginUrl = ""
     
     var body: some View {
         VStack{
@@ -80,21 +81,12 @@ struct LoginScreen: View {
                             .accessibilityIdentifier("txt_login_opportunities")
                         
                     }
-                    // 1px divider line
-                    Rectangle()
-                        .fill(Color.gray)
-                        .frame(height: 1)
-                        .padding(.vertical, 16)
-                    
-                    Text("Create Account")
-                        .font(.custom("Nunito-SemiBold", size: 18))
-                        .foregroundColor(Color("LoginScreenText"))
-                        .accessibilityIdentifier("txt_login_create_account")
                     
                     Button(action: {
                         isLoginInProgress = true
                         loginScreenViewModel.fetchSalesforceConnectUrl(onSuccess: {url in
-                            openURL(URL(string: url)!)
+                            loginUrl = url
+                            isPresentWebView = true
                             isLoginInProgress = false
                         }, onFailure: {
                             isLoginInProgress = false
@@ -120,11 +112,10 @@ struct LoginScreen: View {
                         }
                         .frame(maxWidth: .infinity, maxHeight: 46)
                         .background(
-                            
                             LinearGradient(gradient: Gradient(stops: [.init(color: Color("LoginButtonSecondary"), location: 0), .init(color: Color("LoginButtonPrimary"), location: 4)]), startPoint: .top, endPoint: .bottom)
-                            
                         )
                         .clipShape(RoundedRectangle(cornerRadius: 5))
+                        .padding(.top, 20)
                         
                     }
                     )
@@ -151,7 +142,10 @@ struct LoginScreen: View {
                 isLoginInProgress = false
             })
         })
-        
+        .fullScreenCover(isPresented: $isPresentWebView) {
+                   SafariWebView(url: URL(string: loginUrl)!)
+                       .ignoresSafeArea()
+               }
     }
 }
 
