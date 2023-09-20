@@ -107,6 +107,7 @@ struct NoteCardView: View {
     @State var isPopoverVisible: Bool = false
     @Binding var propagateClick : Int
     @State var isSelfPopupTriggered = false
+    @State var editNoteActivated = false
     
     var body: some View {
         VStack(spacing: 0){
@@ -163,7 +164,8 @@ struct NoteCardView: View {
         .overlay(alignment: .topTrailing){
             if isPopoverVisible {
                 VStack {
-                    NavigationLink(destination: NoteDetailScreen(noteId: noteId, accountId: accountId, accountName: accountName, isEditing: true)
+                    NavigationLink(destination: EditNoteScreen(accountId: accountId, noteId: noteId, accountName: accountName),
+                                   isActive: self.$editNoteActivated
                     ){
                         HStack{
                             Image("EditIcon")
@@ -171,6 +173,12 @@ struct NoteCardView: View {
                             Text("Edit")
                                 .font(.custom("Nunito-SemiBold",size: 16))
                                 .foregroundColor(Color("TextPrimary"))
+                            
+                            Spacer()
+                        }
+                        .onTapGesture {
+                            isPopoverVisible = false
+                            editNoteActivated = true
                         }
                     }
                     .buttonStyle(.plain)
@@ -193,6 +201,8 @@ struct NoteCardView: View {
                             Text("Delete")
                                 .font(.custom("Nunito-SemiBold",size: 16))
                                 .foregroundColor(Color("TextPrimary"))
+                            
+                            Spacer()
                         }
                     }
                     .accessibilityIdentifier("btn_account_detail_delete_note_\(noteIndex)")

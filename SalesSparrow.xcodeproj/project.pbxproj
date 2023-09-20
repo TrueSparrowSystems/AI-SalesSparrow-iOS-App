@@ -72,6 +72,8 @@
 		4B13E4EE2A93821300CB24E4 /* UserSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B13E4EC2A93821300CB24E4 /* UserSearchView.swift */; };
 		4B13E4F02A93836700CB24E4 /* UserSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B13E4EF2A93836700CB24E4 /* UserSearchViewModel.swift */; };
 		4B13E4F12A93836700CB24E4 /* UserSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B13E4EF2A93836700CB24E4 /* UserSearchViewModel.swift */; };
+		4B2A6CE02ABAC79F001E5720 /* EditNoteScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B2A6CDF2ABAC79F001E5720 /* EditNoteScreen.swift */; };
+		4B2A6CE12ABAC79F001E5720 /* EditNoteScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B2A6CDF2ABAC79F001E5720 /* EditNoteScreen.swift */; };
 		4B393FF22A7AAA2D00572F66 /* AccountSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B393FF12A7AAA2D00572F66 /* AccountSearch.swift */; };
 		4B393FF42A7AAAF600572F66 /* AccountSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B393FF32A7AAAF600572F66 /* AccountSearchViewModel.swift */; };
 		4B583BD82A7BBEF2005B97D0 /* TopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B583BD72A7BBEF2005B97D0 /* TopBar.swift */; };
@@ -217,6 +219,7 @@
 		2B4F1FDE360243CED55CFB69 /* Pods-SalesSparrow.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SalesSparrow.release.xcconfig"; path = "Target Support Files/Pods-SalesSparrow/Pods-SalesSparrow.release.xcconfig"; sourceTree = "<group>"; };
 		4B13E4EC2A93821300CB24E4 /* UserSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchView.swift; sourceTree = "<group>"; };
 		4B13E4EF2A93836700CB24E4 /* UserSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchViewModel.swift; sourceTree = "<group>"; };
+		4B2A6CDF2ABAC79F001E5720 /* EditNoteScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNoteScreen.swift; sourceTree = "<group>"; };
 		4B393FF12A7AAA2D00572F66 /* AccountSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSearch.swift; sourceTree = "<group>"; wrapsLines = 1; };
 		4B393FF32A7AAAF600572F66 /* AccountSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSearchViewModel.swift; sourceTree = "<group>"; };
 		4B583BD72A7BBEF2005B97D0 /* TopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBar.swift; sourceTree = "<group>"; };
@@ -606,6 +609,7 @@
 				6DACD9D12A8A413B00B55747 /* LaunchScreen.swift */,
 				4B9E5DDF2A8CD59900041D65 /* UserAccountDetailScreen.swift */,
 				4BF4C3CC2A97650A00983C2D /* CreateTaskScreen.swift */,
+				4B2A6CDF2ABAC79F001E5720 /* EditNoteScreen.swift */,
 			);
 			path = Screen;
 			sourceTree = "<group>";
@@ -980,6 +984,7 @@
 				019595EA2A83CE93008425AD /* ViewExtension.swift in Sources */,
 				4BF4C3D12A97689F00983C2D /* CreateTaskViewModel.swift in Sources */,
 				6D908DB52A8526EB00F36DCE /* NoteList.swift in Sources */,
+				4B2A6CE12ABAC79F001E5720 /* EditNoteScreen.swift in Sources */,
 				019595E72A83CE8C008425AD /* Toast.swift in Sources */,
 				019595D72A83CE23008425AD /* CreateNoteScreen.swift in Sources */,
 				6D59FBFE2A97953800865BDD /* AccountListViewModel.swift in Sources */,
@@ -1045,6 +1050,7 @@
 				6D8C7D0B2A779CE0005D597E /* Environments_Sample.swift in Sources */,
 				6D7491612A935BC200F61A6F /* AddButtonPopoverComponent.swift in Sources */,
 				6DE11C8A2A82845B00D27006 /* ViewExtension.swift in Sources */,
+				4B2A6CE02ABAC79F001E5720 /* EditNoteScreen.swift in Sources */,
 				4BF4C3D02A97689F00983C2D /* CreateTaskViewModel.swift in Sources */,
 				6DC43C562A7A909E002162FE /* CreateNoteScreen.swift in Sources */,
 				6DC43C582A7B802D002162FE /* HomeScreen.swift in Sources */,
