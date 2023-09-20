@@ -216,5 +216,6 @@ class AccountDetailViewScreenViewModel: ObservableObject {
     func resetData(){
         self.noteData = NotesListStruct(note_ids: [], note_map_by_id: [:])
         self.taskData = TasksListStruct(task_ids: [], task_map_by_id: [:])
+        self.eventData = EventsListStruct(event_ids: [], event_map_by_id: [:])
     }
 }
