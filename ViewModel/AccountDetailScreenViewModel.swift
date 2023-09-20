@@ -144,7 +144,7 @@ class AccountDetailViewScreenViewModel: ObservableObject {
     
     //A function that deletes task in an account
     func deleteTask(accountId: String, taskId: String, onSuccess : @escaping() -> Void){
-
+        
         LoaderViewModel.shared.showLoader()
         apiService.delete(type: TaskDeleteStruct.self, endpoint: "/v1/accounts/\(accountId)/tasks/\(taskId)"){
             [weak self] result,statusCode  in
@@ -169,37 +169,38 @@ class AccountDetailViewScreenViewModel: ObservableObject {
         guard !self.isEventListLoading else {
             return
         }
-//        self.isEventListLoading = true
-        self.eventData.event_ids = [
-            "00U1e000003TUB8EAO"
-        ]
-        self.eventData.event_map_by_id = [
-            "00U1e000003TUB8EAO": Event(id: "00U1e000003TUB8EAO", creator_name: "xyz", description: "Event Content", start_datetime: "2019-10-12T07:20:50.52Z", end_datetime: "2019-10-12T07:20:50.52Z", last_modified_time: "2019-10-12T07:20:50.52Z")
-          ]
+        self.isEventListLoading = true
         
-        //TODO: Uncomment once Event List API is deployed from backend
-//        apiService.get(type: EventsListStruct.self, endpoint: "/v1/accounts/\(accountId)/events"){
-//            [weak self]  result, statusCode in
-//            DispatchQueue.main.async {
-//                switch result {
-//                case .success(let results):
-//                    self?.eventData.event_ids = results.event_ids
-//                    self?.eventData.event_map_by_id = results.event_map_by_id
-//                    self?.isEventListLoading = false
-//                case .failure(let error):
-//                    print("error loading data: \(error)")
-//                    self?.eventData = EventsListStruct(event_ids: [], event_map_by_id: [:])
-//                    self?.isEventListLoading = false
-//                    ToastViewModel.shared.showToast(_toast: Toast(style: .error, message: error.message))
-//                }
-//            }
-//        }
+        apiService.get(type: EventsListStruct.self, endpoint: "/v1/accounts/\(accountId)/events"){
+            [weak self]  result, statusCode in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let results):
+                    self?.eventData.event_ids = results.event_ids
+                    self?.eventData.event_map_by_id = results.event_map_by_id
+                    self?.isEventListLoading = false
+                case .failure(let error):
+                    print("error loading data: \(error)")
+                    //                    self?.eventData = EventsListStruct(event_ids: [], event_map_by_id: [:])
+                    
+                    //TODO: Uncomment once Event List API is deployed from backend
+                    self?.eventData.event_ids = [
+                        "00U1e000003TUB8EAO"
+                    ]
+                    self?.eventData.event_map_by_id = [
+                        "00U1e000003TUB8EAO": Event(id: "00U1e000003TUB8EAO", creator_name: "xyz", description: "Event Content", start_datetime: "2019-10-12T07:20:50.52Z", end_datetime: "2019-10-12T07:20:50.52Z", last_modified_time: "2019-10-12T07:20:50.52Z")
+                    ]
+                    self?.isEventListLoading = false
+                    ToastViewModel.shared.showToast(_toast: Toast(style: .error, message: error.message))
+                }
+            }
+        }
     }
     
     
     //A function that deletes event in an account
     func deleteEvent(accountId: String, eventId: String, onSuccess : @escaping() -> Void){
-
+        
         LoaderViewModel.shared.showLoader()
         apiService.delete(type: EventDeleteStruct.self, endpoint: "/v1/accounts/\(accountId)/events/\(eventId)"){
             [weak self] result,statusCode  in
