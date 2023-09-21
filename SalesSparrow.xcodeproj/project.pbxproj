@@ -130,6 +130,8 @@
 		6D2CB51A2A77CF570057C73F /* Nunito-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D2CB50A2A77CF570057C73F /* Nunito-BlackItalic.ttf */; };
 		6D3E1DCF2ABC0DAF0099891C /* EventsListUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E1DCE2ABC0DAF0099891C /* EventsListUITests.swift */; };
 		6D3E1DD12ABC19D40099891C /* CreateEventUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E1DD02ABC19D40099891C /* CreateEventUITests.swift */; };
+		6D3E1DCC2ABBFF9F0099891C /* SafariWebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E1DCB2ABBFF9F0099891C /* SafariWebViewModel.swift */; };
+		6D3E1DCD2ABBFF9F0099891C /* SafariWebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E1DCB2ABBFF9F0099891C /* SafariWebViewModel.swift */; };
 		6D3E84802A77E83E00E9FB83 /* LoginScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E847F2A77E83E00E9FB83 /* LoginScreenViewModel.swift */; };
 		6D59FBFD2A97953800865BDD /* AccountListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D59FBFC2A97953800865BDD /* AccountListViewModel.swift */; };
 		6D59FBFE2A97953800865BDD /* AccountListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D59FBFC2A97953800865BDD /* AccountListViewModel.swift */; };
@@ -161,6 +163,8 @@
 		6D908DB52A8526EB00F36DCE /* NoteList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDB87242A84C2CB000CC1B9 /* NoteList.swift */; };
 		6D908DB62A8526EF00F36DCE /* AccountDetailsHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDB87222A84C20E000CC1B9 /* AccountDetailsHeader.swift */; };
 		6D908DB72A85271500F36DCE /* AccountDetailScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDB87262A850B5A000CC1B9 /* AccountDetailScreenViewModel.swift */; };
+		6DA2C57D2ABAB4E600720CF3 /* SafariWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA2C57C2ABAB4E600720CF3 /* SafariWebView.swift */; };
+		6DA2C57E2ABAB4E600720CF3 /* SafariWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA2C57C2ABAB4E600720CF3 /* SafariWebView.swift */; };
 		6DA82B052A94D4B60098D1D5 /* TasksList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA82B042A94D4B60098D1D5 /* TasksList.swift */; };
 		6DA82B062A94D4B60098D1D5 /* TasksList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA82B042A94D4B60098D1D5 /* TasksList.swift */; };
 		6DACD9CF2A89FBAA00B55747 /* HTMLTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DACD9CE2A89FBAA00B55747 /* HTMLTextView.swift */; };
@@ -275,6 +279,7 @@
 		6D2CB50A2A77CF570057C73F /* Nunito-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-BlackItalic.ttf"; sourceTree = "<group>"; };
 		6D3E1DCE2ABC0DAF0099891C /* EventsListUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListUITests.swift; sourceTree = "<group>"; };
 		6D3E1DD02ABC19D40099891C /* CreateEventUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEventUITests.swift; sourceTree = "<group>"; };
+		6D3E1DCB2ABBFF9F0099891C /* SafariWebViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebViewModel.swift; sourceTree = "<group>"; };
 		6D3E847F2A77E83E00E9FB83 /* LoginScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenViewModel.swift; sourceTree = "<group>"; };
 		6D59FBFC2A97953800865BDD /* AccountListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountListViewModel.swift; sourceTree = "<group>"; };
 		6D59FBFF2A97A54800865BDD /* AccountListUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountListUITests.swift; sourceTree = "<group>"; };
@@ -301,6 +306,7 @@
 		6D8C7D372A77A254005D597E /* ApiError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiError.swift; sourceTree = "<group>"; };
 		6D8FF5C42AA09DF700215F38 /* AppLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLoader.swift; sourceTree = "<group>"; };
 		6D8FF5C72AA09F1700215F38 /* LoaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderViewModel.swift; sourceTree = "<group>"; };
+		6DA2C57C2ABAB4E600720CF3 /* SafariWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebView.swift; sourceTree = "<group>"; };
 		6DA82B042A94D4B60098D1D5 /* TasksList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksList.swift; sourceTree = "<group>"; };
 		6DACD9CE2A89FBAA00B55747 /* HTMLTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLTextView.swift; sourceTree = "<group>"; };
 		6DACD9D12A8A413B00B55747 /* LaunchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreen.swift; sourceTree = "<group>"; };
@@ -563,6 +569,7 @@
 				6D8FF5C72AA09F1700215F38 /* LoaderViewModel.swift */,
 				6D0BC8AB2AB1D890004D1E83 /* CreateEventViewModel.swift */,
 				4BA0A1B32AB441AA00C4D58D /* AccountDetailViewModel.swift */,
+				6D3E1DCB2ABBFF9F0099891C /* SafariWebViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -635,6 +642,7 @@
 				4B9E5DDF2A8CD59900041D65 /* UserAccountDetailScreen.swift */,
 				4BF4C3CC2A97650A00983C2D /* CreateTaskScreen.swift */,
 				6D0BC8A82AB1D852004D1E83 /* CreateEventScreen.swift */,
+				6DA2C57C2ABAB4E600720CF3 /* SafariWebView.swift */,
 			);
 			path = Screen;
 			sourceTree = "<group>";
@@ -970,6 +978,7 @@
 				019595E52A83CE83008425AD /* DeviceSettingManager.swift in Sources */,
 				6DACD9D32A8A413B00B55747 /* LaunchScreen.swift in Sources */,
 				019595E92A83CE91008425AD /* ToastModifier.swift in Sources */,
+				6DA2C57E2ABAB4E600720CF3 /* SafariWebView.swift in Sources */,
 				6DCF64E62A85FEC60084F809 /* NoteDetailScreen.swift in Sources */,
 				6DA82B062A94D4B60098D1D5 /* TasksList.swift in Sources */,
 				6D908DB62A8526EF00F36DCE /* AccountDetailsHeader.swift in Sources */,
@@ -997,6 +1006,7 @@
 				6D0BC8AD2AB1D890004D1E83 /* CreateEventViewModel.swift in Sources */,
 				4BF4C3CE2A97650A00983C2D /* CreateTaskScreen.swift in Sources */,
 				019595F92A83CEC3008425AD /* ToastViewModel.swift in Sources */,
+				6D3E1DCD2ABBFF9F0099891C /* SafariWebViewModel.swift in Sources */,
 				019595D92A83CE2A008425AD /* AccountDetailsScreen.swift in Sources */,
 				019595EF2A83CEA5008425AD /* TermsBottomStrip.swift in Sources */,
 				019595BB2A83CD76008425AD /* SalesSparrowDevApp.swift in Sources */,
@@ -1041,6 +1051,7 @@
 				6DE11C8C2A8361F000D27006 /* UIScreenExtension.swift in Sources */,
 				6DE11C862A8283EF00D27006 /* ToastView.swift in Sources */,
 				6DCF64E52A85FEC60084F809 /* NoteDetailScreen.swift in Sources */,
+				6DA2C57D2ABAB4E600720CF3 /* SafariWebView.swift in Sources */,
 				6DA82B052A94D4B60098D1D5 /* TasksList.swift in Sources */,
 				6DE11C882A82842100D27006 /* ToastModifier.swift in Sources */,
 				4BDB87252A84C2CB000CC1B9 /* NoteList.swift in Sources */,
@@ -1068,6 +1079,7 @@
 				6D0BC8AC2AB1D890004D1E83 /* CreateEventViewModel.swift in Sources */,
 				4B9E5DE42A8CE6AD00041D65 /* AlertModal.swift in Sources */,
 				4B9E5DE42A8CE6AD00041D65 /* AlertModal.swift in Sources */,
+				6D3E1DCC2ABBFF9F0099891C /* SafariWebViewModel.swift in Sources */,
 				6DC43C542A7A8CF8002162FE /* UserStateViewModel.swift in Sources */,
 				4BF4C3CD2A97650A00983C2D /* CreateTaskScreen.swift in Sources */,
 				6D8C7D1C2A77A057005D597E /* DateTimePicker.swift in Sources */,
@@ -1147,7 +1159,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SalesSparrowDev/SalesSparrowDev.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = 98TLCMN66P;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1177,7 +1189,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SalesSparrowDev/SalesSparrowDev.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = 98TLCMN66P;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1322,7 +1334,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SalesSparrow/SalesSparrow.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 98TLCMN66P;
 				ENABLE_PREVIEWS = YES;
@@ -1354,7 +1366,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SalesSparrow/SalesSparrow.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 98TLCMN66P;
 				ENABLE_PREVIEWS = YES;
@@ -1385,7 +1397,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = 98TLCMN66P;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -1406,7 +1418,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = 98TLCMN66P;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -1426,7 +1438,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = 98TLCMN66P;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -1446,7 +1458,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = 98TLCMN66P;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
