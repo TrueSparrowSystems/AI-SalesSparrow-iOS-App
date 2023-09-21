@@ -222,7 +222,7 @@ struct CreateNoteScreen : View {
                                     Image("AddIcon")
                                         .frame(width: 20, height: 20)
                                 }
-                                .accessibilityIdentifier("btn_create_note_popover_create_task")
+                                .accessibilityIdentifier("btn_create_note_popover_add_recommendation")
                             }
                             let addTaskSuggestions = createNoteScreenViewModel.suggestedTaskData.add_task_suggestions
                             ForEach(Array(addTaskSuggestions.enumerated()), id: \.offset) { index, suggestion in

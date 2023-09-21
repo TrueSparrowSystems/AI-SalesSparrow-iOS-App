@@ -135,7 +135,7 @@ final class CreateTaskUITests: XCTestCase {
         createNoteFromFloatingActionButton(app: app)
 
         // Open Popover and navigate to create task screen
-        app.buttons["btn_create_note_popover_create_task"].tap()
+        app.buttons["btn_create_note_popover_add_recommendation"].tap()
         XCTAssertTrue(app.staticTexts["txt_create_note_popover_add_task"].waitForExistence(timeout: TimeInterval(timeout)))
         app.buttons["btn_create_note_popover_add_task"].tap()
         
