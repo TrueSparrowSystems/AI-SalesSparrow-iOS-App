@@ -21,18 +21,17 @@ struct SalesforceConnectStruct: Codable {
 // A class that represents the view model of the LoginScreen
 class LoginScreenViewModel: ObservableObject {
     @Published var loginData = RedirectUrlStruct(url: "")
-    @Published var isfetchUrlInProgress = false
     @Published var isLoginInProgress = false
     var apiService = DependencyContainer.shared.apiService
     
     // A function to get salesforce connect url from BE.
     func fetchSalesforceConnectUrl(onSuccess : @escaping(String)-> Void, onFailure : @escaping()-> Void) {
-        guard !self.isfetchUrlInProgress else {return}
+        guard !self.isLoginInProgress else {return}
         guard self.loginData.url == "" else {
             onSuccess(self.loginData.url)
             return
         }
-        self.isfetchUrlInProgress = true
+        self.isLoginInProgress = true
         let params: [String: Any] = ["redirect_uri": Environments.shared.vars["redirect_uri"] ?? ""]
         apiService.get(type: RedirectUrlStruct.self, endpoint: "/v1/auth/salesforce/redirect-url", params: params){
             [weak self]  result, statusCode in
@@ -41,13 +40,13 @@ class LoginScreenViewModel: ObservableObject {
                 DispatchQueue.main.async {
                     self?.loginData.url = results.url
                     onSuccess(results.url)
-                    self?.isfetchUrlInProgress = false
+                    self?.isLoginInProgress = false
                 }
                 
             case .failure(let error):
                 DispatchQueue.main.async {
                     onFailure()
-                    self?.isfetchUrlInProgress = false
+                    self?.isLoginInProgress = false
                     ToastViewModel.shared.showToast(_toast: Toast(style: .error, message: error.message))
                 }
             }
