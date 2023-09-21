@@ -107,7 +107,6 @@ struct NoteCardView: View {
     @State var isPopoverVisible: Bool = false
     @Binding var propagateClick : Int
     @State var isSelfPopupTriggered = false
-    @State var editNoteActivated = false
     
     var body: some View {
         VStack(spacing: 0){
@@ -164,8 +163,7 @@ struct NoteCardView: View {
         .overlay(alignment: .topTrailing){
             if isPopoverVisible {
                 VStack {
-                    NavigationLink(destination: EditNoteScreen(accountId: accountId, noteId: noteId, accountName: accountName),
-                                   isActive: self.$editNoteActivated
+                    NavigationLink(destination: EditNoteScreen(accountId: accountId, noteId: noteId, accountName: accountName)
                     ){
                         HStack{
                             Image("EditIcon")
@@ -173,16 +171,9 @@ struct NoteCardView: View {
                             Text("Edit")
                                 .font(.custom("Nunito-SemiBold",size: 16))
                                 .foregroundColor(Color("TextPrimary"))
-                            
                             Spacer()
                         }
-                        .onTapGesture {
-                            isPopoverVisible = false
-                            editNoteActivated = true
-                        }
                     }
-                    .buttonStyle(.plain)
-                    .accessibilityIdentifier("btn_account_detail_edit_note_\(noteIndex)")
                     
                     Button(action: {
                         isPopoverVisible = false
@@ -201,32 +192,20 @@ struct NoteCardView: View {
                             Text("Delete")
                                 .font(.custom("Nunito-SemiBold",size: 16))
                                 .foregroundColor(Color("TextPrimary"))
-                            
                             Spacer()
                         }
                     }
                     .accessibilityIdentifier("btn_account_detail_delete_note_\(noteIndex)")
-                    
-                    
                 }
                 .padding(10)
                 .cornerRadius(4)
-                .frame(width: 100, height: 70)
+                .frame(width: 103, height: 88)
                 .background(Color("CardBackground"))
                 .overlay(
                     RoundedRectangle(cornerRadius: 4)
                         .stroke(Color("CardBorder"), lineWidth: 1)
                 )
                 .offset(x: -14, y: 32)
-//                .background{
-//                    NavigationLink(destination:
-//                                    CreateEventScreen(accountId: accountId, suggestionId: suggestionId),
-//                                   isActive: self.$addEventActivated
-//                    ) {
-//                        EmptyView()
-//                    }
-//                    .hidden()
-//                }
             }
         }
         .onChange(of: propagateClick){_ in

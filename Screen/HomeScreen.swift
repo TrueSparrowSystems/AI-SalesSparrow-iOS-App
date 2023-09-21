@@ -18,10 +18,11 @@ struct HomeScreen: View {
     @StateObject var createTaskViewModel = CreateTaskViewModel()
     @StateObject var createEventViewModel = CreateEventViewModel()
     @StateObject var accountDetailViewModel = AccountDetailScreenViewModel()
+    @StateObject var editNoteViewModel = EditNoteScreenViewModel()
     @State private var showUserSearchView: Bool = false
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack(spacing: 0) {
                 // Top Bar
                 TopBar()
@@ -47,6 +48,7 @@ struct HomeScreen: View {
         .environmentObject(createTaskViewModel)
         .environmentObject(createEventViewModel)
         .environmentObject(accountDetailViewModel)
+        .environmentObject(editNoteViewModel)
     }
 }
 
