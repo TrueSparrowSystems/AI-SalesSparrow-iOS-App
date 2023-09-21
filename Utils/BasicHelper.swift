@@ -129,10 +129,50 @@ struct BasicHelper {
         }
     }
     
+    static func getFormattedDateForDateTime(from dateTimeString: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        if let date = dateFormatter.date(from: dateTimeString) {
+            dateFormatter.dateFormat = "dd/MM/yyyy hh:mm a"
+            let formattedDateString = dateFormatter.string(from: date)
+            return formattedDateString
+        }else{
+            return ""
+        }
+    }
+    
     static func getDateStringFromDate(from date: Date, dateFormat: String = "dd/MM/yyyy" ) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = dateFormat
         let formattedDateString = dateFormatter.string(from: date)
         return formattedDateString
+    }
+    
+    static func getTimeStringFromDate(from date: Date, timeFormat: String = "hh:mm a" ) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = timeFormat
+        let formattedDateString = dateFormatter.string(from: date)
+        return formattedDateString
+    }
+    
+    static func getFormattedDateTimeString(from date: Date, from time: Date, dateTimeFormat: String = "yyyy-MM-dd'T'HH:mm:ss.SSSZ") -> String{
+        
+        // Create a Calendar instance
+        let calendar = Calendar.current
+        
+        // Extract the time components (hour, minute, second) from the 'time' variable
+        let timeComponents = calendar.dateComponents([.hour, .minute, .second], from: time)
+        
+        // Create a new Date using the merged components
+        if let mergedDate = calendar.date(bySettingHour: timeComponents.hour ?? 0, minute: timeComponents.minute ?? 0, second: timeComponents.second ?? 0, of: date) {
+            //Format and convert date in desired dateFormat
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = dateTimeFormat
+            dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+            let formattedDateString = dateFormatter.string(from: mergedDate)
+            return formattedDateString
+        }
+        
+        return ""
     }
 }

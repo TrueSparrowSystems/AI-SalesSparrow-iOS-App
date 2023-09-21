@@ -120,7 +120,8 @@ class ApiService {
             let jsonData = try JSONSerialization.data(withJSONObject: params)
             requestUrl.httpBody = jsonData
             if(dev){
-                print("-------httpsBody = --------------\(jsonData)")
+                let stringJSONData = String(decoding: jsonData, as: UTF8.self)
+                print("-------httpsBody = --------------\(stringJSONData)")
             }
         } catch let decodingError {
             completion(Result.failure(APIError().decodingError(error: (decodingError as! DecodingError))), 0)

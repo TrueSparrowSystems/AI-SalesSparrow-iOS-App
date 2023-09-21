@@ -79,6 +79,8 @@
 		4B583BD82A7BBEF2005B97D0 /* TopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B583BD72A7BBEF2005B97D0 /* TopBar.swift */; };
 		4B583BDC2A7BE818005B97D0 /* AccountList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B583BDB2A7BE818005B97D0 /* AccountList.swift */; };
 		4B583BDE2A7BEB11005B97D0 /* BottomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B583BDD2A7BEB11005B97D0 /* BottomBar.swift */; };
+		4B68077E2AB3458C0024B6ED /* AccountContactDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B68077D2AB3458C0024B6ED /* AccountContactDetail.swift */; };
+		4B68077F2AB3458C0024B6ED /* AccountContactDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B68077D2AB3458C0024B6ED /* AccountContactDetail.swift */; };
 		4B819B4B2A96134500CE6293 /* VerticalDividerRectangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B819B4A2A96134500CE6293 /* VerticalDividerRectangleView.swift */; };
 		4B819B4C2A96134500CE6293 /* VerticalDividerRectangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B819B4A2A96134500CE6293 /* VerticalDividerRectangleView.swift */; };
 		4B819B512A9667C000CE6293 /* SuggestedTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B819B502A9667C000CE6293 /* SuggestedTaskView.swift */; };
@@ -87,6 +89,10 @@
 		4B9E5DE12A8CD59900041D65 /* UserAccountDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9E5DDF2A8CD59900041D65 /* UserAccountDetailScreen.swift */; };
 		4B9E5DE42A8CE6AD00041D65 /* AlertModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9E5DE32A8CE6AD00041D65 /* AlertModal.swift */; };
 		4B9E5DE52A8CE6AD00041D65 /* AlertModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9E5DE32A8CE6AD00041D65 /* AlertModal.swift */; };
+		4BA0A1B12AB43D2900C4D58D /* RenderFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA0A1B02AB43D2900C4D58D /* RenderFields.swift */; };
+		4BA0A1B22AB43D2900C4D58D /* RenderFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA0A1B02AB43D2900C4D58D /* RenderFields.swift */; };
+		4BA0A1B42AB441AA00C4D58D /* AccountDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA0A1B32AB441AA00C4D58D /* AccountDetailViewModel.swift */; };
+		4BA0A1B52AB441AA00C4D58D /* AccountDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA0A1B32AB441AA00C4D58D /* AccountDetailViewModel.swift */; };
 		4BA575292A9E2D56004E0ED7 /* CreateTaskUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA575282A9E2D56004E0ED7 /* CreateTaskUITests.swift */; };
 		4BDB87232A84C20E000CC1B9 /* AccountDetailsHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDB87222A84C20E000CC1B9 /* AccountDetailsHeader.swift */; };
 		4BDB87252A84C2CB000CC1B9 /* NoteList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDB87242A84C2CB000CC1B9 /* NoteList.swift */; };
@@ -96,6 +102,12 @@
 		4BF4C3D02A97689F00983C2D /* CreateTaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF4C3CF2A97689F00983C2D /* CreateTaskViewModel.swift */; };
 		4BF4C3D12A97689F00983C2D /* CreateTaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF4C3CF2A97689F00983C2D /* CreateTaskViewModel.swift */; };
 		6CCA3BABA0A693EB92C9B4C2 /* Pods_SalesSparrowTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCFD66DA5D9BD43B8402F504 /* Pods_SalesSparrowTests.framework */; };
+		6D0BC8A92AB1D852004D1E83 /* CreateEventScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0BC8A82AB1D852004D1E83 /* CreateEventScreen.swift */; };
+		6D0BC8AA2AB1D852004D1E83 /* CreateEventScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0BC8A82AB1D852004D1E83 /* CreateEventScreen.swift */; };
+		6D0BC8AC2AB1D890004D1E83 /* CreateEventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0BC8AB2AB1D890004D1E83 /* CreateEventViewModel.swift */; };
+		6D0BC8AD2AB1D890004D1E83 /* CreateEventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0BC8AB2AB1D890004D1E83 /* CreateEventViewModel.swift */; };
+		6D0BC8AF2AB1DE4A004D1E83 /* EventsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0BC8AE2AB1DE4A004D1E83 /* EventsList.swift */; };
+		6D0BC8B02AB1DE4A004D1E83 /* EventsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0BC8AE2AB1DE4A004D1E83 /* EventsList.swift */; };
 		6D0BC8A32AB18961004D1E83 /* ShimmerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0BC8A22AB18961004D1E83 /* ShimmerView.swift */; };
 		6D0BC8A42AB18961004D1E83 /* ShimmerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0BC8A22AB18961004D1E83 /* ShimmerView.swift */; };
 		6D0BC8A62AB1A6D0004D1E83 /* LoadingAccountRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0BC8A52AB1A6D0004D1E83 /* LoadingAccountRowView.swift */; };
@@ -118,6 +130,8 @@
 		6D2CB5182A77CF570057C73F /* Nunito-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D2CB5082A77CF570057C73F /* Nunito-Regular.ttf */; };
 		6D2CB5192A77CF570057C73F /* Nunito-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D2CB5092A77CF570057C73F /* Nunito-Black.ttf */; };
 		6D2CB51A2A77CF570057C73F /* Nunito-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D2CB50A2A77CF570057C73F /* Nunito-BlackItalic.ttf */; };
+		6D3E1DCC2ABBFF9F0099891C /* SafariWebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E1DCB2ABBFF9F0099891C /* SafariWebViewModel.swift */; };
+		6D3E1DCD2ABBFF9F0099891C /* SafariWebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E1DCB2ABBFF9F0099891C /* SafariWebViewModel.swift */; };
 		6D3E84802A77E83E00E9FB83 /* LoginScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E847F2A77E83E00E9FB83 /* LoginScreenViewModel.swift */; };
 		6D59FBFD2A97953800865BDD /* AccountListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D59FBFC2A97953800865BDD /* AccountListViewModel.swift */; };
 		6D59FBFE2A97953800865BDD /* AccountListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D59FBFC2A97953800865BDD /* AccountListViewModel.swift */; };
@@ -149,6 +163,8 @@
 		6D908DB52A8526EB00F36DCE /* NoteList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDB87242A84C2CB000CC1B9 /* NoteList.swift */; };
 		6D908DB62A8526EF00F36DCE /* AccountDetailsHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDB87222A84C20E000CC1B9 /* AccountDetailsHeader.swift */; };
 		6D908DB72A85271500F36DCE /* AccountDetailScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDB87262A850B5A000CC1B9 /* AccountDetailScreenViewModel.swift */; };
+		6DA2C57D2ABAB4E600720CF3 /* SafariWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA2C57C2ABAB4E600720CF3 /* SafariWebView.swift */; };
+		6DA2C57E2ABAB4E600720CF3 /* SafariWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA2C57C2ABAB4E600720CF3 /* SafariWebView.swift */; };
 		6DA82B052A94D4B60098D1D5 /* TasksList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA82B042A94D4B60098D1D5 /* TasksList.swift */; };
 		6DA82B062A94D4B60098D1D5 /* TasksList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA82B042A94D4B60098D1D5 /* TasksList.swift */; };
 		6DACD9CF2A89FBAA00B55747 /* HTMLTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DACD9CE2A89FBAA00B55747 /* HTMLTextView.swift */; };
@@ -225,10 +241,13 @@
 		4B583BD72A7BBEF2005B97D0 /* TopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBar.swift; sourceTree = "<group>"; };
 		4B583BDB2A7BE818005B97D0 /* AccountList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountList.swift; sourceTree = "<group>"; };
 		4B583BDD2A7BEB11005B97D0 /* BottomBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBar.swift; sourceTree = "<group>"; };
+		4B68077D2AB3458C0024B6ED /* AccountContactDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountContactDetail.swift; sourceTree = "<group>"; };
 		4B819B4A2A96134500CE6293 /* VerticalDividerRectangleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalDividerRectangleView.swift; sourceTree = "<group>"; };
 		4B819B502A9667C000CE6293 /* SuggestedTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestedTaskView.swift; sourceTree = "<group>"; };
 		4B9E5DDF2A8CD59900041D65 /* UserAccountDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAccountDetailScreen.swift; sourceTree = "<group>"; };
 		4B9E5DE32A8CE6AD00041D65 /* AlertModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertModal.swift; sourceTree = "<group>"; };
+		4BA0A1B02AB43D2900C4D58D /* RenderFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderFields.swift; sourceTree = "<group>"; };
+		4BA0A1B32AB441AA00C4D58D /* AccountDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailViewModel.swift; sourceTree = "<group>"; };
 		4BA575282A9E2D56004E0ED7 /* CreateTaskUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTaskUITests.swift; sourceTree = "<group>"; };
 		4BDB87222A84C20E000CC1B9 /* AccountDetailsHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailsHeader.swift; sourceTree = "<group>"; };
 		4BDB87242A84C2CB000CC1B9 /* NoteList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteList.swift; sourceTree = "<group>"; };
@@ -237,6 +256,9 @@
 		4BF4C3CF2A97689F00983C2D /* CreateTaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTaskViewModel.swift; sourceTree = "<group>"; };
 		53DA3CE34E5D5B9A7563E443 /* Pods-SalesSparrow-SalesSparrowUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SalesSparrow-SalesSparrowUITests.debug.xcconfig"; path = "Target Support Files/Pods-SalesSparrow-SalesSparrowUITests/Pods-SalesSparrow-SalesSparrowUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		6A561769BF628419998C917E /* Pods_SalesSparrow_SalesSparrowUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SalesSparrow_SalesSparrowUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6D0BC8A82AB1D852004D1E83 /* CreateEventScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEventScreen.swift; sourceTree = "<group>"; };
+		6D0BC8AB2AB1D890004D1E83 /* CreateEventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEventViewModel.swift; sourceTree = "<group>"; };
+		6D0BC8AE2AB1DE4A004D1E83 /* EventsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsList.swift; sourceTree = "<group>"; };
 		6D0BC8A22AB18961004D1E83 /* ShimmerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerView.swift; sourceTree = "<group>"; };
 		6D0BC8A52AB1A6D0004D1E83 /* LoadingAccountRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingAccountRowView.swift; sourceTree = "<group>"; };
 		6D204B762A9CF6EC0012EE85 /* DisableUserInteractionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisableUserInteractionExtension.swift; sourceTree = "<group>"; };
@@ -256,6 +278,7 @@
 		6D2CB5082A77CF570057C73F /* Nunito-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Regular.ttf"; sourceTree = "<group>"; };
 		6D2CB5092A77CF570057C73F /* Nunito-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Black.ttf"; sourceTree = "<group>"; };
 		6D2CB50A2A77CF570057C73F /* Nunito-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-BlackItalic.ttf"; sourceTree = "<group>"; };
+		6D3E1DCB2ABBFF9F0099891C /* SafariWebViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebViewModel.swift; sourceTree = "<group>"; };
 		6D3E847F2A77E83E00E9FB83 /* LoginScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenViewModel.swift; sourceTree = "<group>"; };
 		6D59FBFC2A97953800865BDD /* AccountListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountListViewModel.swift; sourceTree = "<group>"; };
 		6D59FBFF2A97A54800865BDD /* AccountListUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountListUITests.swift; sourceTree = "<group>"; };
@@ -282,6 +305,7 @@
 		6D8C7D372A77A254005D597E /* ApiError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiError.swift; sourceTree = "<group>"; };
 		6D8FF5C42AA09DF700215F38 /* AppLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLoader.swift; sourceTree = "<group>"; };
 		6D8FF5C72AA09F1700215F38 /* LoaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderViewModel.swift; sourceTree = "<group>"; };
+		6DA2C57C2ABAB4E600720CF3 /* SafariWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebView.swift; sourceTree = "<group>"; };
 		6DA82B042A94D4B60098D1D5 /* TasksList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksList.swift; sourceTree = "<group>"; };
 		6DACD9CE2A89FBAA00B55747 /* HTMLTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLTextView.swift; sourceTree = "<group>"; };
 		6DACD9D12A8A413B00B55747 /* LaunchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreen.swift; sourceTree = "<group>"; };
@@ -397,6 +421,9 @@
 				4BDB87222A84C20E000CC1B9 /* AccountDetailsHeader.swift */,
 				4BDB87242A84C2CB000CC1B9 /* NoteList.swift */,
 				6DA82B042A94D4B60098D1D5 /* TasksList.swift */,
+				6D0BC8AE2AB1DE4A004D1E83 /* EventsList.swift */,
+				4B68077D2AB3458C0024B6ED /* AccountContactDetail.swift */,
+				4BA0A1B02AB43D2900C4D58D /* RenderFields.swift */,
 			);
 			path = AccountDetailScreen;
 			sourceTree = "<group>";
@@ -538,6 +565,9 @@
 				6D59FBFC2A97953800865BDD /* AccountListViewModel.swift */,
 				4BF4C3CF2A97689F00983C2D /* CreateTaskViewModel.swift */,
 				6D8FF5C72AA09F1700215F38 /* LoaderViewModel.swift */,
+				6D0BC8AB2AB1D890004D1E83 /* CreateEventViewModel.swift */,
+				4BA0A1B32AB441AA00C4D58D /* AccountDetailViewModel.swift */,
+				6D3E1DCB2ABBFF9F0099891C /* SafariWebViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -610,6 +640,8 @@
 				4B9E5DDF2A8CD59900041D65 /* UserAccountDetailScreen.swift */,
 				4BF4C3CC2A97650A00983C2D /* CreateTaskScreen.swift */,
 				4B2A6CDF2ABAC79F001E5720 /* EditNoteScreen.swift */,
+				6D0BC8A82AB1D852004D1E83 /* CreateEventScreen.swift */,
+				6DA2C57C2ABAB4E600720CF3 /* SafariWebView.swift */,
 			);
 			path = Screen;
 			sourceTree = "<group>";
@@ -931,9 +963,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				019595EB2A83CE97008425AD /* AccountSearch.swift in Sources */,
+				6D0BC8AA2AB1D852004D1E83 /* CreateEventScreen.swift in Sources */,
 				019595E82A83CE8E008425AD /* ToastView.swift in Sources */,
 				019596002A83CEE0008425AD /* AppDelegate.swift in Sources */,
 				6D0BC8A42AB18961004D1E83 /* ShimmerView.swift in Sources */,
+				4BA0A1B22AB43D2900C4D58D /* RenderFields.swift in Sources */,
 				019595FD2A83CED8008425AD /* Persistence.swift in Sources */,
 				6D908DB72A85271500F36DCE /* AccountDetailScreenViewModel.swift in Sources */,
 				019595D82A83CE26008425AD /* HomeScreen.swift in Sources */,
@@ -942,6 +976,7 @@
 				019595E52A83CE83008425AD /* DeviceSettingManager.swift in Sources */,
 				6DACD9D32A8A413B00B55747 /* LaunchScreen.swift in Sources */,
 				019595E92A83CE91008425AD /* ToastModifier.swift in Sources */,
+				6DA2C57E2ABAB4E600720CF3 /* SafariWebView.swift in Sources */,
 				6DCF64E62A85FEC60084F809 /* NoteDetailScreen.swift in Sources */,
 				6DA82B062A94D4B60098D1D5 /* TasksList.swift in Sources */,
 				6D908DB62A8526EF00F36DCE /* AccountDetailsHeader.swift in Sources */,
@@ -956,16 +991,20 @@
 				019595EC2A83CE9A008425AD /* TopBar.swift in Sources */,
 				019595FE2A83CEDB008425AD /* SalesSparrow.xcdatamodeld in Sources */,
 				019595F82A83CEC1008425AD /* CreateNoteScreenViewModel.swift in Sources */,
+				4BA0A1B52AB441AA00C4D58D /* AccountDetailViewModel.swift in Sources */,
 				019595E22A83CE76008425AD /* ApiError.swift in Sources */,
 				019595E02A83CE71008425AD /* ApiService.swift in Sources */,
 				019595FA2A83CEC9008425AD /* Environments_Sample.swift in Sources */,
 				4B13E4EE2A93821300CB24E4 /* UserSearchView.swift in Sources */,
 				6D0BC8A72AB1A6D0004D1E83 /* LoadingAccountRowView.swift in Sources */,
 				6D8FF5C62AA09DF700215F38 /* AppLoader.swift in Sources */,
+				4B68077F2AB3458C0024B6ED /* AccountContactDetail.swift in Sources */,
 				4B9E5DE52A8CE6AD00041D65 /* AlertModal.swift in Sources */,
 				4B9E5DE52A8CE6AD00041D65 /* AlertModal.swift in Sources */,
+				6D0BC8AD2AB1D890004D1E83 /* CreateEventViewModel.swift in Sources */,
 				4BF4C3CE2A97650A00983C2D /* CreateTaskScreen.swift in Sources */,
 				019595F92A83CEC3008425AD /* ToastViewModel.swift in Sources */,
+				6D3E1DCD2ABBFF9F0099891C /* SafariWebViewModel.swift in Sources */,
 				019595D92A83CE2A008425AD /* AccountDetailsScreen.swift in Sources */,
 				019595EF2A83CEA5008425AD /* TermsBottomStrip.swift in Sources */,
 				019595BB2A83CD76008425AD /* SalesSparrowDevApp.swift in Sources */,
@@ -975,6 +1014,7 @@
 				019595F62A83CEBC008425AD /* AccountSearchViewModel.swift in Sources */,
 				019595D62A83CE20008425AD /* LoginScreen.swift in Sources */,
 				019595FF2A83CEDD008425AD /* ContentView.swift in Sources */,
+				6D0BC8B02AB1DE4A004D1E83 /* EventsList.swift in Sources */,
 				6D8FF5C92AA09F1700215F38 /* LoaderViewModel.swift in Sources */,
 				6D76EF9A2A97496B009075C7 /* AlertViewModel.swift in Sources */,
 				019595F72A83CEBE008425AD /* UserStateViewModel.swift in Sources */,
@@ -997,9 +1037,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				6D8C7CE32A779A99005D597E /* Persistence.swift in Sources */,
+				6D0BC8A92AB1D852004D1E83 /* CreateEventScreen.swift in Sources */,
 				4B583BDC2A7BE818005B97D0 /* AccountList.swift in Sources */,
 				6DD618B22A80E504007FA929 /* MockResponse.swift in Sources */,
 				6D0BC8A32AB18961004D1E83 /* ShimmerView.swift in Sources */,
+				4BA0A1B12AB43D2900C4D58D /* RenderFields.swift in Sources */,
 				6DE11C842A8283AE00D27006 /* Toast.swift in Sources */,
 				4B819B4B2A96134500CE6293 /* VerticalDividerRectangleView.swift in Sources */,
 				4B393FF42A7AAAF600572F66 /* AccountSearchViewModel.swift in Sources */,
@@ -1008,6 +1050,7 @@
 				6DE11C8C2A8361F000D27006 /* UIScreenExtension.swift in Sources */,
 				6DE11C862A8283EF00D27006 /* ToastView.swift in Sources */,
 				6DCF64E52A85FEC60084F809 /* NoteDetailScreen.swift in Sources */,
+				6DA2C57D2ABAB4E600720CF3 /* SafariWebView.swift in Sources */,
 				6DA82B052A94D4B60098D1D5 /* TasksList.swift in Sources */,
 				6DE11C882A82842100D27006 /* ToastModifier.swift in Sources */,
 				4BDB87252A84C2CB000CC1B9 /* NoteList.swift in Sources */,
@@ -1022,16 +1065,20 @@
 				4B13E4F02A93836700CB24E4 /* UserSearchViewModel.swift in Sources */,
 				6D8C7D382A77A254005D597E /* ApiError.swift in Sources */,
 				6D8C7CDA2A779A97005D597E /* SalesSparrowApp.swift in Sources */,
+				4BA0A1B42AB441AA00C4D58D /* AccountDetailViewModel.swift in Sources */,
 				6D8C7D332A77A1E5005D597E /* ApiService.swift in Sources */,
 				6D8C7D0D2A779D14005D597E /* Environments.swift in Sources */,
 				6D8C7D0F2A779E97005D597E /* AppDelegate.swift in Sources */,
 				6D8C7D212A77A09F005D597E /* ColorExtension.swift in Sources */,
 				6D0BC8A62AB1A6D0004D1E83 /* LoadingAccountRowView.swift in Sources */,
 				6D8FF5C52AA09DF700215F38 /* AppLoader.swift in Sources */,
+				4B68077E2AB3458C0024B6ED /* AccountContactDetail.swift in Sources */,
 				4BDB87232A84C20E000CC1B9 /* AccountDetailsHeader.swift in Sources */,
 				4B13E4ED2A93821300CB24E4 /* UserSearchView.swift in Sources */,
+				6D0BC8AC2AB1D890004D1E83 /* CreateEventViewModel.swift in Sources */,
 				4B9E5DE42A8CE6AD00041D65 /* AlertModal.swift in Sources */,
 				4B9E5DE42A8CE6AD00041D65 /* AlertModal.swift in Sources */,
+				6D3E1DCC2ABBFF9F0099891C /* SafariWebViewModel.swift in Sources */,
 				6DC43C542A7A8CF8002162FE /* UserStateViewModel.swift in Sources */,
 				4BF4C3CD2A97650A00983C2D /* CreateTaskScreen.swift in Sources */,
 				6D8C7D1C2A77A057005D597E /* DateTimePicker.swift in Sources */,
@@ -1041,6 +1088,7 @@
 				6D8C7CE62A779A99005D597E /* SalesSparrow.xcdatamodeld in Sources */,
 				4B9E5DE02A8CD59900041D65 /* UserAccountDetailScreen.swift in Sources */,
 				6DACD9CF2A89FBAA00B55747 /* HTMLTextView.swift in Sources */,
+				6D0BC8AF2AB1DE4A004D1E83 /* EventsList.swift in Sources */,
 				6D8FF5C82AA09F1700215F38 /* LoaderViewModel.swift in Sources */,
 				6D3E84802A77E83E00E9FB83 /* LoginScreenViewModel.swift in Sources */,
 				4B393FF22A7AAA2D00572F66 /* AccountSearch.swift in Sources */,
@@ -1109,7 +1157,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SalesSparrowDev/SalesSparrowDev.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = 98TLCMN66P;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1139,7 +1187,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SalesSparrowDev/SalesSparrowDev.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = 98TLCMN66P;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1284,7 +1332,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SalesSparrow/SalesSparrow.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 98TLCMN66P;
 				ENABLE_PREVIEWS = YES;
@@ -1316,7 +1364,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SalesSparrow/SalesSparrow.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 98TLCMN66P;
 				ENABLE_PREVIEWS = YES;
@@ -1347,7 +1395,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = 98TLCMN66P;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -1368,7 +1416,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = 98TLCMN66P;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -1388,7 +1436,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = 98TLCMN66P;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -1408,7 +1456,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = 98TLCMN66P;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;

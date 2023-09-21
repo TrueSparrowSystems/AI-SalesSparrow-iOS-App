@@ -210,7 +210,44 @@ class MockResponse {
                 ] as [String : Any],
             ] as [String : Any]
         ],
-        
+        "GET /v1/accounts/account_1": [
+            "default":[
+                "success": "true",
+                "statusCode": 200,
+                "data":[
+                    "account_detail": [
+                        "id":"account_1",
+                        "name":"Mock Account 1",
+                        "additional_fields":[
+                            "website": "https://www.example.com",
+                            "ppt": "https://www.ppt.com/sampleppt1",
+                            "account_source": "Crunchbase",
+                            "status": "Active",
+                            "last_funding": "$4 million",
+                            "hq": "USA",
+                            "last_modified_time":"2019-10-12T07:20:50.52Z"
+                        ],
+                        "account_contact_associations_id": "account_contact_association_1",
+                        "account_contact_associations_map_by_id": [
+                            "account_contact_association_1": [
+                                "contact_ids": ["contact_1", "contact_2"]
+                            ],
+                        ],
+                        "contact_map_by_id": [
+                            "contact_1": [
+                                "id": "contact_1",
+                                "name": "Test Contact 1",
+                                "additional_fields": [
+                                    "title": "CTO and Co Founder",
+                                    "email": "contact_1@truesparrow.com",
+                                    "linkedin": "https://www.linkedin.com/peter"
+                                ]
+                            ] as [String : Any] as [String : Any],
+                        ],
+                    ] as [String : Any]
+                ] as [String : Any],
+            ],
+        ],
         "GET /v1/accounts/account_1/notes": [
             "default":[
                 "success": "true",

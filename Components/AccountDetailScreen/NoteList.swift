@@ -46,7 +46,7 @@ struct NotesList: View {
                 }
                 .accessibilityIdentifier("btn_account_detail_add_note")
             }
-            if acccountDetailScreenViewModelObject.isNoteLoading {
+            if acccountDetailScreenViewModelObject.isNoteListLoading {
                 ProgressView()
                     .tint(Color("LoginButtonSecondary"))
             }

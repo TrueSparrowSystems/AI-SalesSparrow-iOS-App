@@ -11,9 +11,6 @@ import SwiftUI
 struct LoginScreen: View {
     @EnvironmentObject var loginScreenViewModel : LoginScreenViewModel
     @EnvironmentObject var userStateViewModel : UserStateViewModel
-    @Environment(\.openURL) var openURL
-    @State var isLoginInProgress = false
-    @EnvironmentObject var environment: Environments
     
     var body: some View {
         VStack{
@@ -50,7 +47,7 @@ struct LoginScreen: View {
                             .frame(width: 15, height: 15)
                             .padding(.horizontal, 2)
                             .accessibilityIdentifier("img_login_tasks_icon")
-
+                        
                         Text("Tasks")
                             .font(.custom("Nunito-Regular",size: 14))
                             .foregroundColor(Color("TextPrimary"))
@@ -61,7 +58,7 @@ struct LoginScreen: View {
                             .frame(width: 15, height: 15)
                             .padding(.horizontal, 2)
                             .accessibilityIdentifier("img_login_events_icon")
-
+                        
                         Text("Events")
                             .font(.custom("Nunito-Regular",size: 14))
                             .foregroundColor(Color("TextPrimary"))
@@ -72,7 +69,7 @@ struct LoginScreen: View {
                             .frame(width: 15, height: 15)
                             .padding(.horizontal, 2)
                             .accessibilityIdentifier("img_login_opportunities_icon")
-
+                        
                         Text("Opportunities")
                             .font(.custom("Nunito-Regular",size: 14))
                             .foregroundColor(Color("TextPrimary"))
@@ -80,28 +77,14 @@ struct LoginScreen: View {
                             .accessibilityIdentifier("txt_login_opportunities")
                         
                     }
-                    // 1px divider line
-                    Rectangle()
-                        .fill(Color.gray)
-                        .frame(height: 1)
-                        .padding(.vertical, 16)
-                    
-                    Text("Create Account")
-                        .font(.custom("Nunito-SemiBold", size: 18))
-                        .foregroundColor(Color("LoginScreenText"))
-                        .accessibilityIdentifier("txt_login_create_account")
                     
                     Button(action: {
-                        isLoginInProgress = true
                         loginScreenViewModel.fetchSalesforceConnectUrl(onSuccess: {url in
-                            openURL(URL(string: url)!)
-                            isLoginInProgress = false
-                        }, onFailure: {
-                            isLoginInProgress = false
-                        })
+                            SafariWebViewModel.shared.showWebView(_url: url)
+                        }, onFailure: {})
                     }, label:{
                         HStack(alignment: .center, spacing: 0){
-                            if(isLoginInProgress){
+                            if(loginScreenViewModel.isLoginInProgress){
                                 ProgressView()
                                     .tint(Color("LoginButtonPrimary"))
                             }else{
@@ -109,7 +92,7 @@ struct LoginScreen: View {
                                     .resizable()
                                     .frame(width: 26, height: 18)
                                     .accessibilityIdentifier("img_login_salesforce_icon")
-
+                                
                                 Text("Continue with Salesforce")
                                     .padding()
                                     .foregroundStyle(.white)
@@ -120,15 +103,14 @@ struct LoginScreen: View {
                         }
                         .frame(maxWidth: .infinity, maxHeight: 46)
                         .background(
-                            
                             LinearGradient(gradient: Gradient(stops: [.init(color: Color("LoginButtonSecondary"), location: 0), .init(color: Color("LoginButtonPrimary"), location: 4)]), startPoint: .top, endPoint: .bottom)
-                            
                         )
                         .clipShape(RoundedRectangle(cornerRadius: 5))
+                        .padding(.top, 20)
                         
                     }
                     )
-                    .disabled($isLoginInProgress.wrappedValue)
+                    .disabled(loginScreenViewModel.isLoginInProgress)
                     .accessibilityIdentifier("btn_connect_salesforce")
                 }
                 .padding(.horizontal, 20)
@@ -143,17 +125,6 @@ struct LoginScreen: View {
             
         }
         .background(Color("Background"))
-        .onChange(of: environment.vars["auth_code"], perform: { _ in
-            isLoginInProgress = true
-            loginScreenViewModel.salesforceConnect(authCode: environment.vars["auth_code"], onSuccess: {
-                Environments.shared.setAuthToken(authToken: "")
-                isLoginInProgress = false
-            }, onFailure: {
-                Environments.shared.setAuthToken(authToken: "")
-                isLoginInProgress = false
-            })
-        })
-        
     }
 }
 
