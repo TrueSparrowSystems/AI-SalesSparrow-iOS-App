@@ -13,12 +13,12 @@ struct ContentView: View {
     
     @Environment(\.managedObjectContext) private var viewContext
     @EnvironmentObject var userStateViewModel : UserStateViewModel
-    @EnvironmentObject var environment: Environments
     
     @StateObject var loginScreenViewModel = LoginScreenViewModel()
     @StateObject var toastViewModel = ToastViewModel.shared
     @StateObject var alertViewModel = AlertViewModel.shared
     @StateObject var loaderViewModel = LoaderViewModel.shared
+    @StateObject var safariWebViewModel = SafariWebViewModel.shared
     
     /// The body of the view
     var body: some View {
@@ -46,6 +46,10 @@ struct ContentView: View {
                 AlertModal()
             }
         })
+        .fullScreenCover(isPresented: $safariWebViewModel.isWebViewVisible) {
+            SafariWebView(url: URL(string: safariWebViewModel.url)!)
+                .ignoresSafeArea()
+        }
     }
     
     
@@ -59,7 +63,9 @@ struct ContentView: View {
         let authToken = components.queryItems?.first(where: { $0.name == "code" })?.value
         
         if((authToken) != nil){
-            environment.setAuthToken(authToken: authToken ?? "")
+            safariWebViewModel.hideWebView()
+            loginScreenViewModel.salesforceConnect(authCode: authToken, onSuccess: {
+            }, onFailure: {})
         }
         
     }

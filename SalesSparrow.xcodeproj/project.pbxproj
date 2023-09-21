@@ -112,6 +112,8 @@
 		6D2CB5182A77CF570057C73F /* Nunito-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D2CB5082A77CF570057C73F /* Nunito-Regular.ttf */; };
 		6D2CB5192A77CF570057C73F /* Nunito-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D2CB5092A77CF570057C73F /* Nunito-Black.ttf */; };
 		6D2CB51A2A77CF570057C73F /* Nunito-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D2CB50A2A77CF570057C73F /* Nunito-BlackItalic.ttf */; };
+		6D3E1DCC2ABBFF9F0099891C /* SafariWebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E1DCB2ABBFF9F0099891C /* SafariWebViewModel.swift */; };
+		6D3E1DCD2ABBFF9F0099891C /* SafariWebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E1DCB2ABBFF9F0099891C /* SafariWebViewModel.swift */; };
 		6D3E84802A77E83E00E9FB83 /* LoginScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E847F2A77E83E00E9FB83 /* LoginScreenViewModel.swift */; };
 		6D59FBFD2A97953800865BDD /* AccountListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D59FBFC2A97953800865BDD /* AccountListViewModel.swift */; };
 		6D59FBFE2A97953800865BDD /* AccountListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D59FBFC2A97953800865BDD /* AccountListViewModel.swift */; };
@@ -249,6 +251,7 @@
 		6D2CB5082A77CF570057C73F /* Nunito-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Regular.ttf"; sourceTree = "<group>"; };
 		6D2CB5092A77CF570057C73F /* Nunito-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Black.ttf"; sourceTree = "<group>"; };
 		6D2CB50A2A77CF570057C73F /* Nunito-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-BlackItalic.ttf"; sourceTree = "<group>"; };
+		6D3E1DCB2ABBFF9F0099891C /* SafariWebViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebViewModel.swift; sourceTree = "<group>"; };
 		6D3E847F2A77E83E00E9FB83 /* LoginScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenViewModel.swift; sourceTree = "<group>"; };
 		6D59FBFC2A97953800865BDD /* AccountListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountListViewModel.swift; sourceTree = "<group>"; };
 		6D59FBFF2A97A54800865BDD /* AccountListUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountListUITests.swift; sourceTree = "<group>"; };
@@ -531,6 +534,7 @@
 				6D59FBFC2A97953800865BDD /* AccountListViewModel.swift */,
 				4BF4C3CF2A97689F00983C2D /* CreateTaskViewModel.swift */,
 				6D8FF5C72AA09F1700215F38 /* LoaderViewModel.swift */,
+				6D3E1DCB2ABBFF9F0099891C /* SafariWebViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -957,6 +961,7 @@
 				4B9E5DE52A8CE6AD00041D65 /* AlertModal.swift in Sources */,
 				4BF4C3CE2A97650A00983C2D /* CreateTaskScreen.swift in Sources */,
 				019595F92A83CEC3008425AD /* ToastViewModel.swift in Sources */,
+				6D3E1DCD2ABBFF9F0099891C /* SafariWebViewModel.swift in Sources */,
 				019595D92A83CE2A008425AD /* AccountDetailsScreen.swift in Sources */,
 				019595EF2A83CEA5008425AD /* TermsBottomStrip.swift in Sources */,
 				019595BB2A83CD76008425AD /* SalesSparrowDevApp.swift in Sources */,
@@ -1021,6 +1026,7 @@
 				4B13E4ED2A93821300CB24E4 /* UserSearchView.swift in Sources */,
 				4B9E5DE42A8CE6AD00041D65 /* AlertModal.swift in Sources */,
 				4B9E5DE42A8CE6AD00041D65 /* AlertModal.swift in Sources */,
+				6D3E1DCC2ABBFF9F0099891C /* SafariWebViewModel.swift in Sources */,
 				6DC43C542A7A8CF8002162FE /* UserStateViewModel.swift in Sources */,
 				4BF4C3CD2A97650A00983C2D /* CreateTaskScreen.swift in Sources */,
 				6D8C7D1C2A77A057005D597E /* DateTimePicker.swift in Sources */,
