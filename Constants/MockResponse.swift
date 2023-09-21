@@ -159,9 +159,9 @@ class MockResponse {
                             "contact_ids": ["contact_3"]
                         ],
                     ],
-                   "next_page_payload" : [
-                       "pagination_identifier": "next_page"
-                   ],
+                    "next_page_payload" : [
+                        "pagination_identifier": "next_page"
+                    ],
                 ] as [String : Any],
             ] as [String : Any],
         ],
@@ -305,8 +305,8 @@ class MockResponse {
                 "statusCode": 200,
                 "data":[
                     "add_task_suggestions": [["description":"This is suggested task text.","due_date":"2023-12-16"],
-                                            ["description":"This is recommended note description.","due_date":"2023-09-25"],
-                                            ["description":"Schedule meeting with John regarding software feedback","due_date":"2024-10-25"]],
+                                             ["description":"This is recommended note description.","due_date":"2023-09-25"],
+                                             ["description":"Schedule meeting with John regarding software feedback","due_date":"2024-10-25"]],
                 ],
             ]
         ],
@@ -410,6 +410,78 @@ class MockResponse {
                 "statusCode": 400,
                 "error": [
                     "message": "Task cannot be deleted.",
+                    "code": "",
+                    "internal_error_identifier": "",
+                ]as [String : Any]
+            ]
+        ],
+        "GET /v1/accounts/account_1/events": [
+            "default":[
+                "success": "true",
+                "statusCode": 200,
+                "data":[
+                    "event_ids": [
+                        "event_1","event_2"
+                    ],
+                    "event_map_by_id": [
+                        "event_1":[
+                            "id":"event_1",
+                            "creator_name": "xyz",
+                            "description": "Morning Sync Call",
+                            "start_datetime": "2023-10-12T09:00:00.000+0000",
+                            "end_datetime": "2023-10-12T10:00:00.000+0000",
+                            "last_modified_time": "2019-10-12T07:20:50.52Z"
+                        ],
+                        "event_2":[
+                            "id":"event_2",
+                            "creator_name": "Jakob Adison",
+                            "description": "Sync with CTO",
+                            "start_datetime": "2023-10-12T13:12:17.000+0000",
+                            "end_datetime": "2023-10-12T14:12:17.000+0000",
+                            "last_modified_time": "2023-08-20T07:20:50.52Z"
+                        ]
+                    ]
+                ] as [String : Any],
+            ],
+            "emptyEventList":[
+                "success": "true",
+                "statusCode": 200,
+                "data":[
+                    "event_ids": [] as [String],
+                    "event_map_by_id": [:] as [String : Any],
+                ] as [String : Any],
+            ],
+            "eventListError":[
+                "success": "false",
+                "statusCode": 500,
+                "error": [
+                    "message": "Something went wrong.",
+                    "code": "",
+                    "internal_error_identifier": "",
+                ]as [String : Any]
+            ]
+        ],
+        "POST /v1/accounts/account_1/events": [
+            "default":[
+                "success": "true",
+                "statusCode": 200,
+                "data":[
+                    "event_id": "event_1"
+                ] as [String : Any],
+            ],
+        ],
+        
+        "DELETE /v1/accounts/account_1/events/event_1": [
+            "default":[
+                "success": "true",
+                "statusCode": 200,
+                "data": [:] as [String : Any]
+            ],
+            "deleteEventError":[
+                "success": "false",
+                "statusCode": 400,
+                "error": [
+                    "message": "Event cannot be deleted.",
                     "code": "",
                     "internal_error_identifier": "",
                 ]as [String : Any]
