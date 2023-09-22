@@ -60,249 +60,265 @@ struct SuggestedEventCardView: View {
                     }
                     
                     
+                    VStack{
+                        // start date component + picker
+                        HStack {
+                            Text("Start")
+                                .frame(width: 30,height: 30, alignment: .leading)
+                                .font(.custom("Nunito-Bold",size: 12))
+                                .foregroundColor(Color("TextPrimary"))
+                                .accessibilityIdentifier("txt_add_events_start")
+                            
+                            ZStack{
+                                if(!(suggestedEventState["isEventSaved"] as! Bool)){
+                                    DatePickerView(selectedDate: $selectedStartDate, onTap: {
+                                        createNoteScreenViewModel.setEventDataAttribute(id: suggestionId ?? "", attrKey: "isStartDateSelected", attrValue: true)
+                                    })
+                                    .background(.white)
+                                    .cornerRadius(8)
+                                    .accessibilityIdentifier("dp_add_event_select_start_date")
+                                }
+                                
+                                if(!(suggestedEventState["isStartDateSelected"] as! Bool)){
+                                    HStack (spacing: 0) {
+                                        Text("Select Date")
+                                            .foregroundColor(Color("TermsPrimary"))
+                                            .font(.custom("Nunito-Light", size: 12))
+                                            .tracking(0.5)
+                                            .padding(0)
+                                        
+                                        Spacer()
+                                        
+                                        Image("EmptyCalendar")
+                                            .frame(width: 15, height: 15)
+                                            .padding(.leading, 6)
+                                    }
+                                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                    .background(.white)
+                                    .userInteractionDisabled()
+                                    
+                                }
+                                else{
+                                    HStack (spacing: 0) {
+                                        Text(BasicHelper.getDateStringFromDate(from: selectedStartDate))
+                                            .foregroundColor(Color("TermsPrimary"))
+                                            .font(.custom("Nunito-Bold", size: 12))
+                                            .tracking(0.5)
+                                            .padding(0)
+                                        
+                                        Spacer()
+                                        
+                                        Image("EmptyCalendar")
+                                            .frame(width: 15, height: 15)
+                                            .padding(.leading, 10)
+                                    }
+                                    .accessibilityIdentifier("txt_add_event_select_start_date")
+                                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                    .background(.white)
+                                    .userInteractionDisabled()
+                                }
+                            }
+                            .padding(.horizontal, 10)
+                            .frame(width: 145, height: 30)
+                            .clipped()
+                            .background(Color.white)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 4)
+                                    .stroke(Color("CardBorder"), lineWidth: 1)
+                            )
+                            ZStack{
+                                if(!(suggestedEventState["isEventSaved"] as! Bool)){
+                                    TimePickerView(selectedTime: $selectedStartTime, onTap: {
+                                        createNoteScreenViewModel.setEventDataAttribute(id: suggestionId ?? "", attrKey: "isStartTimeSelected", attrValue: true)
+                                    })
+                                    .background(.white)
+                                    .cornerRadius(8)
+                                    .accessibilityIdentifier("dp_add_event_select_start_time")
+                                }
+                                
+                                if(!(suggestedEventState["isStartTimeSelected"] as! Bool)){
+                                    HStack (spacing: 0) {
+                                        Text("Select Time")
+                                            .foregroundColor(Color("TermsPrimary"))
+                                            .font(.custom("Nunito-Light", size: 12))
+                                            .tracking(0.5)
+                                            .padding(0)
+                                        
+                                        Spacer()
+                                        
+                                        Image("Clock")
+                                            .frame(width: 15, height: 15)
+                                            .padding(.leading, 6)
+                                    }
+                                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                    .background(.white)
+                                    .userInteractionDisabled()
+                                    
+                                }
+                                else{
+                                    HStack (spacing: 0) {
+                                        Text(BasicHelper.getTimeStringFromDate(from: selectedStartTime))
+                                            .foregroundColor(Color("TermsPrimary"))
+                                            .font(.custom("Nunito-Bold", size: 12))
+                                            .tracking(0.5)
+                                            .padding(0)
+                                        
+                                        Spacer()
+                                        
+                                        Image("Clock")
+                                            .frame(width: 15, height: 15)
+                                            .padding(.leading, 10)
+                                    }
+                                    .accessibilityIdentifier("txt_add_event_select_start_time")
+                                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                    .background(.white)
+                                    .userInteractionDisabled()
+                                }
+                            }
+                            .padding(.horizontal, 10)
+                            .frame(width: 120, height: 30)
+                            .clipped()
+                            .background(Color.white)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 4)
+                                    .stroke(Color("CardBorder"), lineWidth: 1)
+                            )
+                            
+                            Spacer()
+                        }
+                        
+                        // end date component + picker
+                        HStack {
+                            Text("End")
+                                .frame(width: 30,height: 30, alignment: .leading)
+                                .font(.custom("Nunito-Bold",size: 12))
+                                .foregroundColor(Color("TextPrimary"))
+                                .accessibilityIdentifier("txt_add_events_end")
+                            
+                            ZStack{
+                                if(!(suggestedEventState["isEventSaved"] as! Bool)){
+                                    DatePickerView(selectedDate: $selectedEndDate, onTap: {
+                                        createNoteScreenViewModel.setEventDataAttribute(id: suggestionId ?? "", attrKey: "isEndDateSelected", attrValue: true)
+                                    })
+                                    .background(.white)
+                                    .cornerRadius(8)
+                                    .accessibilityIdentifier("dp_add_event_select_end_date")
+                                }
+                                
+                                if(!(suggestedEventState["isEndDateSelected"] as! Bool)){
+                                    HStack (spacing: 0) {
+                                        Text("Select Date")
+                                            .foregroundColor(Color("TermsPrimary"))
+                                            .font(.custom("Nunito-Light", size: 12))
+                                            .tracking(0.5)
+                                            .padding(0)
+                                        
+                                        Spacer()
+                                        
+                                        Image("EmptyCalendar")
+                                            .frame(width: 15, height: 15)
+                                            .padding(.leading, 6)
+                                    }
+                                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                    .background(.white)
+                                    .userInteractionDisabled()
+                                    
+                                }
+                                else{
+                                    HStack (spacing: 0) {
+                                        Text(BasicHelper.getDateStringFromDate(from: selectedEndDate))
+                                            .foregroundColor(Color("TermsPrimary"))
+                                            .font(.custom("Nunito-Bold", size: 12))
+                                            .tracking(0.5)
+                                            .padding(0)
+                                        
+                                        Spacer()
+                                        
+                                        Image("EmptyCalendar")
+                                            .frame(width: 15, height: 15)
+                                            .padding(.leading, 10)
+                                    }
+                                    .accessibilityIdentifier("txt_add_event_select_end_date")
+                                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                    .background(.white)
+                                    .userInteractionDisabled()
+                                }
+                            }
+                            .padding(.horizontal, 10)
+                            .frame(width: 145, height: 30)
+                            .clipped()
+                            .background(Color.white)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 4)
+                                    .stroke(Color("CardBorder"), lineWidth: 1)
+                            )
+                            
+                            
+                            ZStack{
+                                if(!(suggestedEventState["isEventSaved"] as! Bool)){
+                                    TimePickerView(selectedTime: $selectedEndTime, onTap: {
+                                        createNoteScreenViewModel.setEventDataAttribute(id: suggestionId ?? "", attrKey: "isEndTimeSelected", attrValue: true)
+                                    })
+                                    .background(.white)
+                                    .cornerRadius(8)
+                                    .accessibilityIdentifier("dp_add_event_select_end_time")
+                                }
+                                
+                                if(!(suggestedEventState["isEndTimeSelected"] as! Bool)){
+                                    HStack (spacing: 0) {
+                                        Text("Select Time")
+                                            .foregroundColor(Color("TermsPrimary"))
+                                            .font(.custom("Nunito-Light", size: 12))
+                                            .tracking(0.5)
+                                            .padding(0)
+                                        
+                                        Spacer()
+                                        
+                                        Image("Clock")
+                                            .frame(width: 15, height: 15)
+                                            .padding(.leading, 6)
+                                    }
+                                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                    .background(.white)
+                                    .userInteractionDisabled()
+                                    
+                                }
+                                else{
+                                    HStack (spacing: 0) {
+                                        Text(BasicHelper.getTimeStringFromDate(from: selectedEndTime))
+                                            .foregroundColor(Color("TermsPrimary"))
+                                            .font(.custom("Nunito-Bold", size: 12))
+                                            .tracking(0.5)
+                                            .padding(0)
+                                        
+                                        Spacer()
+                                        
+                                        Image("Clock")
+                                            .frame(width: 15, height: 15)
+                                            .padding(.leading, 10)
+                                    }
+                                    .accessibilityIdentifier("txt_add_event_select_end_time")
+                                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                    .background(.white)
+                                    .userInteractionDisabled()
+                                }
+                            }
+                            .padding(.horizontal, 10)
+                            .frame(width: 120, height: 30)
+                            .clipped()
+                            .background(Color.white)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 4)
+                                    .stroke(Color("CardBorder"), lineWidth: 1)
+                            )
+                            Spacer()
+                        }
+                    }
+                    .padding(8)
+                    .cornerRadius(5)
+                    .background(Color("AliceBlue"))
+                    .padding(.vertical, 10)
                     
-                    // due date component + picker
-                    HStack {
-                        Text("Start")
-                            .frame(width: 35,height: 30, alignment: .leading)
-                            .font(.custom("Nunito-Regular",size: 14))
-                            .foregroundColor(Color("TextPrimary"))
-                            .accessibilityIdentifier("txt_add_events_start")
-                        
-                        ZStack{
-                            if(!(suggestedEventState["isEventSaved"] as! Bool)){
-                                DatePickerView(selectedDate: $selectedStartDate, onTap: {
-                                    createNoteScreenViewModel.setEventDataAttribute(id: suggestionId ?? "", attrKey: "isStartDateSelected", attrValue: true)
-                                })
-                                .background(.white)
-                                .cornerRadius(8)
-                                .accessibilityIdentifier("dp_add_event_select_start_date")
-                            }
-                            
-                            if(!(suggestedEventState["isStartDateSelected"] as! Bool)){
-                                HStack (spacing: 0) {
-                                    Text("Select Date")
-                                        .foregroundColor(Color("TermsPrimary"))
-                                        .font(.custom("Nunito-Light", size: 12))
-                                        .tracking(0.5)
-                                        .padding(0)
-                                    
-                                    Spacer()
-                                    
-                                    Image("EmptyCalendar")
-                                        .frame(width: 15, height: 15)
-                                        .padding(.leading, 6)
-                                }
-                                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                                .background(.white)
-                                .userInteractionDisabled()
-                                
-                            }
-                            else{
-                                HStack (spacing: 0) {
-                                    Text(BasicHelper.getDateStringFromDate(from: selectedStartDate))
-                                        .foregroundColor(Color("TermsPrimary"))
-                                        .font(.custom("Nunito-Bold", size: 12))
-                                        .tracking(0.5)
-                                        .padding(0)
-                                    
-                                    Spacer()
-                                    
-                                    Image("EmptyCalendar")
-                                        .frame(width: 15, height: 15)
-                                        .padding(.leading, 10)
-                                }
-                                .accessibilityIdentifier("txt_add_event_select_start_date")
-                                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                                .background(.white)
-                                .userInteractionDisabled()
-                            }
-                        }
-                        .padding(.horizontal, 10)
-                        .frame(width: 160, height: 30)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 4)
-                                .stroke(Color("CardBorder"), lineWidth: 1)
-                        )
-                        ZStack{
-                            if(!(suggestedEventState["isEventSaved"] as! Bool)){
-                                TimePickerView(selectedTime: $selectedStartTime, onTap: {
-                                    createNoteScreenViewModel.setEventDataAttribute(id: suggestionId ?? "", attrKey: "isStartTimeSelected", attrValue: true)
-                                })
-                                .background(.white)
-                                .cornerRadius(8)
-                                .accessibilityIdentifier("dp_add_event_select_start_time")
-                            }
-                            
-                            if(!(suggestedEventState["isStartTimeSelected"] as! Bool)){
-                                HStack (spacing: 0) {
-                                    Text("Select Time")
-                                        .foregroundColor(Color("TermsPrimary"))
-                                        .font(.custom("Nunito-Light", size: 12))
-                                        .tracking(0.5)
-                                        .padding(0)
-                                    
-                                    Spacer()
-                                    
-                                    Image("Clock")
-                                        .frame(width: 15, height: 15)
-                                        .padding(.leading, 6)
-                                }
-                                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                                .background(.white)
-                                .userInteractionDisabled()
-                                
-                            }
-                            else{
-                                HStack (spacing: 0) {
-                                    Text(BasicHelper.getTimeStringFromDate(from: selectedStartTime))
-                                        .foregroundColor(Color("TermsPrimary"))
-                                        .font(.custom("Nunito-Bold", size: 12))
-                                        .tracking(0.5)
-                                        .padding(0)
-                                    
-                                    Spacer()
-                                    
-                                    Image("Clock")
-                                        .frame(width: 15, height: 15)
-                                        .padding(.leading, 10)
-                                }
-                                .accessibilityIdentifier("txt_add_event_select_start_time")
-                                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                                .background(.white)
-                                .userInteractionDisabled()
-                            }
-                        }
-                        .padding(.horizontal, 10)
-                        .frame(width: 140, height: 30)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 4)
-                                .stroke(Color("CardBorder"), lineWidth: 1)
-                        )
-                        
-                        Spacer()
-                    }
-                    HStack {
-                        Text("End")
-                            .frame(width: 35,height: 30, alignment: .leading)
-                            .font(.custom("Nunito-Regular",size: 14))
-                            .foregroundColor(Color("TextPrimary"))
-                            .accessibilityIdentifier("txt_add_events_end")
-                        
-                        ZStack{
-                            if(!(suggestedEventState["isEventSaved"] as! Bool)){
-                                DatePickerView(selectedDate: $selectedEndDate, onTap: {
-                                    createNoteScreenViewModel.setEventDataAttribute(id: suggestionId ?? "", attrKey: "isEndDateSelected", attrValue: true)
-                                })
-                                .background(.white)
-                                .cornerRadius(8)
-                                .accessibilityIdentifier("dp_add_event_select_end_date")
-                            }
-                            
-                            if(!(suggestedEventState["isEndDateSelected"] as! Bool)){
-                                HStack (spacing: 0) {
-                                    Text("Select Date")
-                                        .foregroundColor(Color("TermsPrimary"))
-                                        .font(.custom("Nunito-Light", size: 12))
-                                        .tracking(0.5)
-                                        .padding(0)
-                                    
-                                    Spacer()
-                                    
-                                    Image("EmptyCalendar")
-                                        .frame(width: 15, height: 15)
-                                        .padding(.leading, 6)
-                                }
-                                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                                .background(.white)
-                                .userInteractionDisabled()
-                                
-                            }
-                            else{
-                                HStack (spacing: 0) {
-                                    Text(BasicHelper.getDateStringFromDate(from: selectedEndDate))
-                                        .foregroundColor(Color("TermsPrimary"))
-                                        .font(.custom("Nunito-Bold", size: 12))
-                                        .tracking(0.5)
-                                        .padding(0)
-                                    
-                                    Spacer()
-                                    
-                                    Image("EmptyCalendar")
-                                        .frame(width: 15, height: 15)
-                                        .padding(.leading, 10)
-                                }
-                                .accessibilityIdentifier("txt_add_event_select_end_date")
-                                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                                .background(.white)
-                                .userInteractionDisabled()
-                            }
-                        }
-                        .padding(.horizontal, 10)
-                        .frame(width: 160, height: 30)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 4)
-                                .stroke(Color("CardBorder"), lineWidth: 1)
-                        )
-                        
-                        
-                        ZStack{
-                            if(!(suggestedEventState["isEventSaved"] as! Bool)){
-                                TimePickerView(selectedTime: $selectedEndTime, onTap: {
-                                    createNoteScreenViewModel.setEventDataAttribute(id: suggestionId ?? "", attrKey: "isEndTimeSelected", attrValue: true)
-                                })
-                                .background(.white)
-                                .cornerRadius(8)
-                                .accessibilityIdentifier("dp_add_event_select_end_time")
-                            }
-                            
-                            if(!(suggestedEventState["isEndTimeSelected"] as! Bool)){
-                                HStack (spacing: 0) {
-                                    Text("Select Time")
-                                        .foregroundColor(Color("TermsPrimary"))
-                                        .font(.custom("Nunito-Light", size: 12))
-                                        .tracking(0.5)
-                                        .padding(0)
-                                    
-                                    Spacer()
-                                    
-                                    Image("Clock")
-                                        .frame(width: 15, height: 15)
-                                        .padding(.leading, 6)
-                                }
-                                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                                .background(.white)
-                                .userInteractionDisabled()
-                                
-                            }
-                            else{
-                                HStack (spacing: 0) {
-                                    Text(BasicHelper.getTimeStringFromDate(from: selectedEndTime))
-                                        .foregroundColor(Color("TermsPrimary"))
-                                        .font(.custom("Nunito-Bold", size: 12))
-                                        .tracking(0.5)
-                                        .padding(0)
-                                    
-                                    Spacer()
-                                    
-                                    Image("Clock")
-                                        .frame(width: 15, height: 15)
-                                        .padding(.leading, 10)
-                                }
-                                .accessibilityIdentifier("txt_add_event_select_end_time")
-                                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                                .background(.white)
-                                .userInteractionDisabled()
-                            }
-                        }
-                        .padding(.horizontal, 10)
-                        .frame(width: 140, height: 30)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 4)
-                                .stroke(Color("CardBorder"), lineWidth: 1)
-                        )
-                        Spacer()
-                    }
                     
                     // action buttons + view model
                     if(!(suggestedEventState["isEventSaved"] as! Bool)){
@@ -503,14 +519,14 @@ struct SavedEventCard : View {
                             .foregroundColor(Color("TermsPrimary").opacity(0.1))
                             .padding(.horizontal, 6)
                         
-                        Text("\(BasicHelper.getFormattedDateTimeString(from: selectedStartDate, from: selectedStartTime))")
+                        Text("\(BasicHelper.getFormattedDateForDateTime(from: BasicHelper.getFormattedDateTimeString(from: selectedStartDate, from: selectedStartTime)))")
                             .font(.custom("Nunito-Regular",size: 12))
                             .foregroundColor(Color("TermsPrimary"))
                             .tracking(0.5)
                             .accessibilityIdentifier("txt_create_note_event_start_date_\(index)")
                             .lineLimit(1)
                         
-                        Text(" - \(BasicHelper.getFormattedDateTimeString(from: selectedEndDate, from: selectedEndTime))")
+                        Text(" - \(BasicHelper.getFormattedDateForDateTime(from:BasicHelper.getFormattedDateTimeString(from: selectedEndDate, from: selectedEndTime)))")
                             .font(.custom("Nunito-Regular",size: 12))
                             .foregroundColor(Color("TermsPrimary"))
                             .tracking(0.5)
