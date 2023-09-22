@@ -1,35 +1,36 @@
 //
-//  CreateTaskScreen.swift
+//  TaskDetailScreen.swift
 //  SalesSparrow
 //
-//  Created by Kartik Kapgate on 24/08/23.
+//  Created by Kartik Kapgate on 22/09/23.
 //
 
 import SwiftUI
 
-struct CreateTaskScreen: View {
+struct TaskDetailScreen: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @EnvironmentObject var createTaskViewModel : CreateTaskViewModel
-    @EnvironmentObject var createNoteScreenViewModel : CreateNoteScreenViewModel
+    @EnvironmentObject var taskDetailScreenViewModel : TaskDetailScreenViewModel
     
     var accountId: String
+    var taskId: String
+    var isEditFlow: Bool
+    @State var crm_organization_user_id: String = ""
+    @State var crm_organization_user_name: String = ""
     @State var description: String = ""
-    @State var dueDate: Date = Date()
+    @State var selectedDate: Date = Date()
+    @State var isDateSelected = false
+    @State var isTaskSaved: Bool = false
     @FocusState private var focused: Bool
     @State private var showUserSearchView: Bool = false
-    @State var isAddTaskInProgress = false
-    var suggestionId: String?
     
     var body: some View {
-        let suggestedTaskState = createNoteScreenViewModel.suggestedTaskStates[suggestionId ?? ""] ?? [:]
-        
         VStack{
             HStack{
-                Text((suggestedTaskState["isTaskSaved"] as! Bool) ? "Done" : "Cancel")
+                Text((isTaskSaved) ? "Done" : "Cancel")
                     .font(.custom("Nunito-Bold", size: 14))
                     .padding(.vertical, 10)
                     .foregroundColor(Color("CancelText"))
-                    .accessibilityIdentifier((suggestedTaskState["isTaskSaved"] as! Bool) ? "btn_add_task_done" : "btn_add_task_cancel")
+                    .accessibilityIdentifier((isTaskSaved) ? "btn_add_task_done" : "btn_add_task_cancel")
                     .onTapGesture {
                         self.presentationMode.wrappedValue.dismiss()
                     }
@@ -37,26 +38,21 @@ struct CreateTaskScreen: View {
                 Spacer()
                 
                 Button(action: {
-                    isAddTaskInProgress = true
-                    createTaskViewModel.createTask(accountId: accountId, assignedToName: ((suggestedTaskState["assignedToUsername"] ?? "") as! String), crmOrganizationUserId: ((suggestedTaskState["selectedUserId"] ?? "") as! String), description: description, dueDate: dueDate, onSuccess: {taskId in
-                        createNoteScreenViewModel.setTaskDataAttribute(id: suggestionId ?? "", attrKey: "taskId", attrValue: taskId)
-                        createNoteScreenViewModel.setTaskDataAttribute(id: suggestionId ?? "", attrKey: "isTaskSaved", attrValue: true)
-                        isAddTaskInProgress = false
-                    }, onFailure: {
-                        isAddTaskInProgress = false
+                    taskDetailScreenViewModel.EditTaskDetail(accountId: accountId, taskId: taskId, crm_organization_user_id: crm_organization_user_name, description: description, due_date: BasicHelper.getDateStringFromDate(from: selectedDate), onSuccess: {
+                        isTaskSaved = true
                     })
                 }, label:{
                     HStack(alignment: .center, spacing: 0){
-                        if(isAddTaskInProgress){
+                        if(taskDetailScreenViewModel.isSaveTaskInProgress){
                             ProgressView()
                                 .tint(Color("LoginButtonPrimary"))
                                 .controlSize(.small)
-                            Text("Adding Task...")
+                            
+                            Text("Editing Task...")
                                 .foregroundColor(.white)
                                 .font(.custom("Nunito-Medium", size: 12))
                                 .accessibilityIdentifier("txt_create_task_saving")
-                            
-                        }else if((suggestedTaskState["isTaskSaved"] as! Bool)){
+                        }else if(isTaskSaved){
                             Image("CheckMark")
                                 .resizable()
                                 .frame(width: 12, height: 12)
@@ -74,15 +70,15 @@ struct CreateTaskScreen: View {
                                 .accessibilityIdentifier("txt_create_task_save")
                         }
                     }
-                    .frame(width: isAddTaskInProgress ? 115 : 68, height: 32)
+                    .frame(width: taskDetailScreenViewModel.isSaveTaskInProgress ? 115 : 68, height: 32)
                     .background(
                         Color(hex: "SaveButtonBackground")
                     )
                     .clipShape(RoundedRectangle(cornerRadius: 5))
                 })
                 .accessibilityIdentifier("btn_save_task")
-                .disabled(accountId.isEmpty || description.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || ((suggestedTaskState["selectedUserId"] ?? "") as! String).isEmpty || !(suggestedTaskState["isDateSelected"] as! Bool) || isAddTaskInProgress || (suggestedTaskState["isTaskSaved"] as! Bool))
-                .opacity(accountId.isEmpty || description.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || ((suggestedTaskState["selectedUserId"] ?? "") as! String).isEmpty || !(suggestedTaskState["isDateSelected"] as! Bool) ? 0.7 : 1)
+                .disabled(accountId.isEmpty || taskId.isEmpty || description.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || (crm_organization_user_name).isEmpty || isDateSelected)
+                .opacity(isEditFlow ? (accountId.isEmpty || taskId.isEmpty || description.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || (crm_organization_user_name).isEmpty || isDateSelected) ? 0.7 : 1 : 0)
             }
             .padding(.vertical)
             
@@ -96,21 +92,20 @@ struct CreateTaskScreen: View {
                 Button(action:{
                     showUserSearchView = true
                 }){
-                    if(((suggestedTaskState["assignedToUsername"] ?? "") as! String).isEmpty){
+                    if(crm_organization_user_name.isEmpty){
                         Text("Select")
                             .foregroundColor(Color("TextPrimary"))
                             .font(.custom("Nunito-Bold", size: 12))
                             .accessibilityIdentifier("txt_add_task_selected_user")
                     } else{
-                        Text(BasicHelper.getInitials(from: ((suggestedTaskState["assignedToUsername"] ?? "") as! String)))
+                        Text(BasicHelper.getInitials(from: crm_organization_user_name))
                             .frame(width: 18, height: 18)
                             .font(.custom("Nunito-Bold", size: 6))
                             .foregroundColor(Color.white)
                             .background(Color("UserBubble"))
                             .clipShape(RoundedRectangle(cornerRadius: 47))
-                            .accessibilityIdentifier("img_user_account_detail_user_initials")
                         
-                        Text(((suggestedTaskState["assignedToUsername"] ?? "") as! String))
+                        Text(crm_organization_user_name)
                             .foregroundColor(Color("RedHighlight"))
                             .font(.custom("Nunito-Bold", size: 12))
                             .accessibilityIdentifier("txt_add_task_selected_user")
@@ -120,7 +115,7 @@ struct CreateTaskScreen: View {
                     Image("ArrowDown")
                         .frame(width: 7, height: 4)
                 }
-                .disabled((suggestedTaskState["isTaskSaved"] as! Bool))
+                .disabled(isEditFlow ? false : true)
                 .accessibilityIdentifier("btn_create_task_search_user")
                 .padding(.horizontal, 10)
                 .frame(width: 160, height: 30)
@@ -131,8 +126,8 @@ struct CreateTaskScreen: View {
                 .sheet(isPresented: $showUserSearchView){
                     UserSearchView(isPresented: $showUserSearchView,
                                    onUserSelect: { userId, userName in
-                        createNoteScreenViewModel.setTaskDataAttribute(id: suggestionId ?? "", attrKey: "assignedToUsername", attrValue: userName)
-                        createNoteScreenViewModel.setTaskDataAttribute(id: suggestionId ?? "", attrKey: "selectedUserId", attrValue: userId)
+                        crm_organization_user_id = userId
+                        crm_organization_user_name = userName
                     })
                 }
                 
@@ -147,16 +142,16 @@ struct CreateTaskScreen: View {
                     .accessibilityIdentifier("txt_add_tasks_due")
                 
                 ZStack{
-                    if(!(suggestedTaskState["isTaskSaved"] as! Bool)){
-                        DatePickerView(selectedDate: $dueDate, onTap: {
-                            createNoteScreenViewModel.setTaskDataAttribute(id: suggestionId ?? "", attrKey: "isDateSelected", attrValue: true)
-                        })
-                        .background(.white)
-                        .cornerRadius(8)
-                        .accessibilityIdentifier("dp_add_task_select_date")
-                    }
+                    DatePickerView(selectedDate: $selectedDate,onTap: {
+                        isDateSelected = true
+                    })
+                    .disabled(isEditFlow ? false : true)
+                    .background(.white)
+                    .cornerRadius(8)
+                    .accessibilityIdentifier("dp_add_task_select_date")
                     
-                    if(!(suggestedTaskState["isDateSelected"] as! Bool)){
+                    
+                    if(!(isDateSelected)){
                         HStack (spacing: 0) {
                             Text("Select")
                                 .foregroundColor(Color("TermsPrimary"))
@@ -177,7 +172,7 @@ struct CreateTaskScreen: View {
                     }
                     else{
                         HStack (spacing: 0) {
-                            Text(BasicHelper.getDateStringFromDate(from: dueDate))
+                            Text(BasicHelper.getDateStringFromDate(from: selectedDate))
                                 .foregroundColor(Color("TermsPrimary"))
                                 .font(.custom("Nunito-Bold", size: 12))
                                 .tracking(0.5)
@@ -205,7 +200,12 @@ struct CreateTaskScreen: View {
                 Spacer()
             }
             ScrollView{
-                if(!(suggestedTaskState["isTaskSaved"] as! Bool)){
+                if(taskDetailScreenViewModel.isFetchTaskInProgress){
+                    Spacer()
+                    ProgressView()
+                        .tint(Color("LoginButtonSecondary"))
+                    Spacer()
+                } else if(isEditFlow){
                     TextField("Add Task",text: $description, axis: .vertical)
                         .foregroundColor(Color("TextPrimary"))
                         .font(.custom("Nunito-SemiBold", size: 18))
@@ -226,21 +226,17 @@ struct CreateTaskScreen: View {
                 }
             }
         }
-        .onChange(of: description){_ in
-            createNoteScreenViewModel.setTaskDataAttribute(id: suggestionId ?? "", attrKey: "description", attrValue: self.description)
-        }
-        .onChange(of: dueDate, perform: {_ in
-            createNoteScreenViewModel.setTaskDataAttribute(id: suggestionId ?? "", attrKey: "dueDate", attrValue: dueDate)
-        })
         .onAppear {
             // Adding a delay for view to render
+            taskDetailScreenViewModel.EditTaskDetail(accountId: accountId, taskId: taskId, crm_organization_user_id: crm_organization_user_id, description: description, due_date: BasicHelper.getDateStringFromDate(from: selectedDate), onSuccess: {})
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.05){
                 focused = true
             }
-            self.description = ((suggestedTaskState["description"] ?? "") as! String)
-            
-            self.dueDate = (suggestedTaskState["dueDate"] ?? Date()) as! Date
-            
+        }
+        .onChange(of: taskDetailScreenViewModel.currentTaskData){ currentTask  in
+            crm_organization_user_id = currentTask.crm_organization_user_id
+            crm_organization_user_name = currentTask.crm_organization_user_name
+            description = currentTask.description
         }
         .onTapGesture {
             focused = false
@@ -250,3 +246,5 @@ struct CreateTaskScreen: View {
         .background(Color.white)
     }
 }
+
+

@@ -240,7 +240,7 @@ class ApiService {
                 
                 do {
                     if(response.statusCode == 401){
-                        UserStateViewModel.shared.logOut()
+//                        UserStateViewModel.shared.logOut()
                     }
                     
                     if(self.dev){

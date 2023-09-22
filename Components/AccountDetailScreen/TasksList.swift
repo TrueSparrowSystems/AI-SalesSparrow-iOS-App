@@ -85,18 +85,20 @@ struct TasksList: View {
                 VStack{
                     let taskIdsArray = self.acccountDetailScreenViewModelObject.taskData.task_ids
                     ForEach(Array(taskIdsArray.enumerated()), id: \.offset) { index, taskId in
-                        if ( self.acccountDetailScreenViewModelObject.taskData.task_map_by_id[taskId] != nil) {
+                        NavigationLink(destination: TaskDetailScreen(accountId: accountId, taskId: taskId, isEditFlow: false)
+                        ){                        if ( self.acccountDetailScreenViewModelObject.taskData.task_map_by_id[taskId] != nil) {
                             TaskCardView(taskId: taskId, accountId: accountId, taskIndex: index, propagateClick: $propagateClick)
-                        }
-                        
-                        
+                        }}
+                        .buttonStyle(.plain)
+                        .accessibilityIdentifier("note_card_\(taskId)")
                     }
                 }
                 .padding(.trailing)
             }
         }.onAppear {
             acccountDetailScreenViewModelObject.fetchTasks(accountId: accountId)
-        }.background{
+        }
+        .background{
             NavigationLink(destination:
                             CreateTaskScreen(accountId: accountId, suggestionId: suggestionId),
                            isActive: self.$addTaskActivated
@@ -206,16 +208,26 @@ struct TaskCardView: View {
         )
         .overlay(alignment: .topTrailing){
             if isPopoverVisible {
-                VStack {
+                VStack (alignment: .leading) {
+                    NavigationLink(destination: TaskDetailScreen(accountId: accountId, taskId: taskId, isEditFlow: true)
+                    ){
+                        HStack{
+                            Image("EditIcon")
+                                .frame(width: 20, height: 20)
+                            Text("Edit")
+                                .font(.custom("Nunito-SemiBold",size: 16))
+                                .foregroundColor(Color("TextPrimary"))
+                        }
+                    }
+                    
                     Button(action: {
                         isPopoverVisible = false
-                        
                         AlertViewModel.shared.showAlert(_alert: Alert(
                             title: "Delete Task",
                             message: Text("Are you sure you want to delete this task?"),
                             submitText: "Delete",
                             onSubmitPress: {
-                                acccountDetailScreenViewModelObject.deleteTask(accountId: accountId, taskId: taskId){}
+                                acccountDetailScreenViewModelObject.deleteTask(accountId: accountId, taskId: taskId, onSuccess: {})
                             }
                         ))
                     }){
@@ -227,11 +239,11 @@ struct TaskCardView: View {
                                 .foregroundColor(Color("TextPrimary"))
                         }
                     }
-                    .accessibilityIdentifier("btn_account_detail_delete_task_\(taskIndex)")
+                    .accessibilityIdentifier("btn_account_detail_delete_note_\(taskIndex)")
                 }
                 .padding(10)
                 .cornerRadius(4)
-                .frame(width: 100, height: 40)
+                .frame(width: 103, height: 88)
                 .background(Color("CardBackground"))
                 .overlay(
                     RoundedRectangle(cornerRadius: 4)

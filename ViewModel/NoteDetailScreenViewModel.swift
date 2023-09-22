@@ -20,9 +20,6 @@ struct NoteDetailStruct : Codable {
     var last_modified_time: String
 }
 
-// A struct that represents the meta data of the note details API
-struct EditNoteRespStruct: Codable {
-}
 
 // A class that represents the view model of Note details
 class NoteDetailScreenViewModel: ObservableObject {

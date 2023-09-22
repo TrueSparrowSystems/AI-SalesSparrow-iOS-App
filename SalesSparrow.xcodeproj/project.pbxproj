@@ -72,10 +72,12 @@
 		4B13E4EE2A93821300CB24E4 /* UserSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B13E4EC2A93821300CB24E4 /* UserSearchView.swift */; };
 		4B13E4F02A93836700CB24E4 /* UserSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B13E4EF2A93836700CB24E4 /* UserSearchViewModel.swift */; };
 		4B13E4F12A93836700CB24E4 /* UserSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B13E4EF2A93836700CB24E4 /* UserSearchViewModel.swift */; };
-		4B2A6CE02ABAC79F001E5720 /* EditNoteScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B2A6CDF2ABAC79F001E5720 /* EditNoteScreen.swift */; };
-		4B2A6CE12ABAC79F001E5720 /* EditNoteScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B2A6CDF2ABAC79F001E5720 /* EditNoteScreen.swift */; };
 		4B393FF22A7AAA2D00572F66 /* AccountSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B393FF12A7AAA2D00572F66 /* AccountSearch.swift */; };
 		4B393FF42A7AAAF600572F66 /* AccountSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B393FF32A7AAAF600572F66 /* AccountSearchViewModel.swift */; };
+		4B56F3062ABD68F700FEAD23 /* TaskDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B56F3052ABD68F700FEAD23 /* TaskDetailScreen.swift */; };
+		4B56F3072ABD68F700FEAD23 /* TaskDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B56F3052ABD68F700FEAD23 /* TaskDetailScreen.swift */; };
+		4B56F3092ABD694000FEAD23 /* TaskDetailScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B56F3082ABD694000FEAD23 /* TaskDetailScreenViewModel.swift */; };
+		4B56F30A2ABD694000FEAD23 /* TaskDetailScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B56F3082ABD694000FEAD23 /* TaskDetailScreenViewModel.swift */; };
 		4B583BD82A7BBEF2005B97D0 /* TopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B583BD72A7BBEF2005B97D0 /* TopBar.swift */; };
 		4B583BDC2A7BE818005B97D0 /* AccountList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B583BDB2A7BE818005B97D0 /* AccountList.swift */; };
 		4B583BDE2A7BEB11005B97D0 /* BottomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B583BDD2A7BEB11005B97D0 /* BottomBar.swift */; };
@@ -237,9 +239,10 @@
 		2B4F1FDE360243CED55CFB69 /* Pods-SalesSparrow.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SalesSparrow.release.xcconfig"; path = "Target Support Files/Pods-SalesSparrow/Pods-SalesSparrow.release.xcconfig"; sourceTree = "<group>"; };
 		4B13E4EC2A93821300CB24E4 /* UserSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchView.swift; sourceTree = "<group>"; };
 		4B13E4EF2A93836700CB24E4 /* UserSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchViewModel.swift; sourceTree = "<group>"; };
-		4B2A6CDF2ABAC79F001E5720 /* EditNoteScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNoteScreen.swift; sourceTree = "<group>"; };
 		4B393FF12A7AAA2D00572F66 /* AccountSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSearch.swift; sourceTree = "<group>"; wrapsLines = 1; };
 		4B393FF32A7AAAF600572F66 /* AccountSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSearchViewModel.swift; sourceTree = "<group>"; };
+		4B56F3052ABD68F700FEAD23 /* TaskDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailScreen.swift; sourceTree = "<group>"; };
+		4B56F3082ABD694000FEAD23 /* TaskDetailScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailScreenViewModel.swift; sourceTree = "<group>"; };
 		4B583BD72A7BBEF2005B97D0 /* TopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBar.swift; sourceTree = "<group>"; };
 		4B583BDB2A7BE818005B97D0 /* AccountList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountList.swift; sourceTree = "<group>"; };
 		4B583BDD2A7BEB11005B97D0 /* BottomBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBar.swift; sourceTree = "<group>"; };
@@ -572,6 +575,7 @@
 				4BA0A1B32AB441AA00C4D58D /* AccountDetailViewModel.swift */,
 				6D3E1DCB2ABBFF9F0099891C /* SafariWebViewModel.swift */,
 				4B9518B02ABC7BF300453FCA /* EditNoteScreenViewModel.swift */,
+				4B56F3082ABD694000FEAD23 /* TaskDetailScreenViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -643,9 +647,9 @@
 				6DACD9D12A8A413B00B55747 /* LaunchScreen.swift */,
 				4B9E5DDF2A8CD59900041D65 /* UserAccountDetailScreen.swift */,
 				4BF4C3CC2A97650A00983C2D /* CreateTaskScreen.swift */,
-				4B2A6CDF2ABAC79F001E5720 /* EditNoteScreen.swift */,
 				6D0BC8A82AB1D852004D1E83 /* CreateEventScreen.swift */,
 				6DA2C57C2ABAB4E600720CF3 /* SafariWebView.swift */,
+				4B56F3052ABD68F700FEAD23 /* TaskDetailScreen.swift */,
 			);
 			path = Screen;
 			sourceTree = "<group>";
@@ -1000,6 +1004,7 @@
 				019595E02A83CE71008425AD /* ApiService.swift in Sources */,
 				019595FA2A83CEC9008425AD /* Environments_Sample.swift in Sources */,
 				4B13E4EE2A93821300CB24E4 /* UserSearchView.swift in Sources */,
+				4B56F30A2ABD694000FEAD23 /* TaskDetailScreenViewModel.swift in Sources */,
 				6D0BC8A72AB1A6D0004D1E83 /* LoadingAccountRowView.swift in Sources */,
 				6D8FF5C62AA09DF700215F38 /* AppLoader.swift in Sources */,
 				4B68077F2AB3458C0024B6ED /* AccountContactDetail.swift in Sources */,
@@ -1023,13 +1028,13 @@
 				6D76EF9A2A97496B009075C7 /* AlertViewModel.swift in Sources */,
 				019595F72A83CEBE008425AD /* UserStateViewModel.swift in Sources */,
 				019595E32A83CE7E008425AD /* BasicHelper.swift in Sources */,
+				4B56F3072ABD68F700FEAD23 /* TaskDetailScreen.swift in Sources */,
 				6D7491622A935C1200F61A6F /* AddButtonPopoverComponent.swift in Sources */,
 				019595F32A83CEB1008425AD /* DateTimePicker.swift in Sources */,
 				019595EA2A83CE93008425AD /* ViewExtension.swift in Sources */,
 				4B9518B22ABC7BF400453FCA /* EditNoteScreenViewModel.swift in Sources */,
 				4BF4C3D12A97689F00983C2D /* CreateTaskViewModel.swift in Sources */,
 				6D908DB52A8526EB00F36DCE /* NoteList.swift in Sources */,
-				4B2A6CE12ABAC79F001E5720 /* EditNoteScreen.swift in Sources */,
 				019595E72A83CE8C008425AD /* Toast.swift in Sources */,
 				019595D72A83CE23008425AD /* CreateNoteScreen.swift in Sources */,
 				6D59FBFE2A97953800865BDD /* AccountListViewModel.swift in Sources */,
@@ -1075,6 +1080,7 @@
 				6D8C7D0D2A779D14005D597E /* Environments.swift in Sources */,
 				6D8C7D0F2A779E97005D597E /* AppDelegate.swift in Sources */,
 				6D8C7D212A77A09F005D597E /* ColorExtension.swift in Sources */,
+				4B56F3092ABD694000FEAD23 /* TaskDetailScreenViewModel.swift in Sources */,
 				6D0BC8A62AB1A6D0004D1E83 /* LoadingAccountRowView.swift in Sources */,
 				6D8FF5C52AA09DF700215F38 /* AppLoader.swift in Sources */,
 				4B68077E2AB3458C0024B6ED /* AccountContactDetail.swift in Sources */,
@@ -1098,13 +1104,13 @@
 				6D3E84802A77E83E00E9FB83 /* LoginScreenViewModel.swift in Sources */,
 				4B393FF22A7AAA2D00572F66 /* AccountSearch.swift in Sources */,
 				6DC43C522A7A69E1002162FE /* DeviceSettingManager.swift in Sources */,
+				4B56F3062ABD68F700FEAD23 /* TaskDetailScreen.swift in Sources */,
 				6D76EF992A97496B009075C7 /* AlertViewModel.swift in Sources */,
 				01069F182A83641C0003F8F5 /* AccountDetailsScreen.swift in Sources */,
 				6D8C7D0B2A779CE0005D597E /* Environments_Sample.swift in Sources */,
 				4B9518B12ABC7BF400453FCA /* EditNoteScreenViewModel.swift in Sources */,
 				6D7491612A935BC200F61A6F /* AddButtonPopoverComponent.swift in Sources */,
 				6DE11C8A2A82845B00D27006 /* ViewExtension.swift in Sources */,
-				4B2A6CE02ABAC79F001E5720 /* EditNoteScreen.swift in Sources */,
 				4BF4C3D02A97689F00983C2D /* CreateTaskViewModel.swift in Sources */,
 				6DC43C562A7A909E002162FE /* CreateNoteScreen.swift in Sources */,
 				6DC43C582A7B802D002162FE /* HomeScreen.swift in Sources */,

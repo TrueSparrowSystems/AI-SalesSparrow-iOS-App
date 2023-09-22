@@ -162,8 +162,8 @@ struct NoteCardView: View {
         )
         .overlay(alignment: .topTrailing){
             if isPopoverVisible {
-                VStack {
-                    NavigationLink(destination: EditNoteScreen(accountId: accountId, noteId: noteId, accountName: accountName)
+                VStack (alignment: .leading) {
+                    NavigationLink(destination: Text("Hello")/*EditNoteScreen(accountId: accountId, noteId: noteId, accountName: accountName)*/
                     ){
                         HStack{
                             Image("EditIcon")
@@ -171,7 +171,6 @@ struct NoteCardView: View {
                             Text("Edit")
                                 .font(.custom("Nunito-SemiBold",size: 16))
                                 .foregroundColor(Color("TextPrimary"))
-                            Spacer()
                         }
                     }
                     
@@ -192,7 +191,6 @@ struct NoteCardView: View {
                             Text("Delete")
                                 .font(.custom("Nunito-SemiBold",size: 16))
                                 .foregroundColor(Color("TextPrimary"))
-                            Spacer()
                         }
                     }
                     .accessibilityIdentifier("btn_account_detail_delete_note_\(noteIndex)")
