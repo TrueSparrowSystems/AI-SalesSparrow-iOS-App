@@ -72,6 +72,7 @@ struct TasksList: View {
                     .background(
                         RoundedRectangle(cornerRadius: 4)
                             .strokeBorder(style: StrokeStyle(lineWidth: 2, dash: [2, 5], dashPhase: 10))
+                            .foregroundColor(Color("TextPrimary"))
                             .background(
                                 Color.clear
                                     .frame(height: 2)
