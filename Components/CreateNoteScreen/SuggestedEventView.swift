@@ -48,7 +48,7 @@ struct SuggestedEventCardView: View {
                             .foregroundColor(Color("TextPrimary"))
                             .font(.custom("Nunito-SemiBold", size: 16))
                             .fixedSize(horizontal: false, vertical: true)
-                            .accessibilityIdentifier("txt_create_note_suggestion_title_index_\(index)")
+                            .accessibilityIdentifier("txt_create_note_event_suggestion_title_\(index)")
                             .padding(EdgeInsets(top: 5, leading: 8, bottom: 5, trailing: 8))
                             .background(Color("GhostWhite").opacity(0.2))
                             .overlay(RoundedRectangle(cornerRadius: 6).stroke(Color.black.opacity(0.1), lineWidth: 1))
@@ -383,7 +383,7 @@ struct SuggestedEventCardView: View {
                                 .background(.white)
                                 .clipShape(RoundedRectangle(cornerRadius: 5))
                             })
-                            .accessibilityIdentifier("btn_create_note_cancel_\(index)")
+                            .accessibilityIdentifier("btn_create_note_event_cancel_\(index)")
                             .overlay(RoundedRectangle(cornerRadius: 4).stroke(Color("CancelText"), lineWidth: 1))
                             
                             Spacer()
