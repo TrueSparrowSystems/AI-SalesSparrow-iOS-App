@@ -358,7 +358,7 @@ struct CreateEventScreen: View {
             createNoteScreenViewModel.setEventDataAttribute(id: suggestionId ?? "", attrKey: "startDate", attrValue: startDate)
         })
         .onChange(of: startTime, perform: {_ in
-            createNoteScreenViewModel.setEventDataAttribute(id: suggestionId ?? "", attrKey: "startTime", attrValue: startDate)
+            createNoteScreenViewModel.setEventDataAttribute(id: suggestionId ?? "", attrKey: "startTime", attrValue: startTime)
         })
         .onChange(of: endDate, perform: {_ in
             createNoteScreenViewModel.setEventDataAttribute(id: suggestionId ?? "", attrKey: "endDate", attrValue: endDate)
@@ -375,7 +375,11 @@ struct CreateEventScreen: View {
             
             self.startDate = (suggestedEventState["startDate"] ?? Date()) as! Date
             
+            self.startTime = (suggestedEventState["startTime"] ?? Date()) as! Date
+            
             self.endDate = (suggestedEventState["endDate"] ?? Date()) as! Date
+            
+            self.endTime = (suggestedEventState["endTime"] ?? Date()) as! Date
             
         }
         .onTapGesture {
