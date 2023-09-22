@@ -33,7 +33,7 @@ struct SuggestedTaskCardView: View {
         VStack{
             if ((suggestedTaskState["isTaskSaved"] as! Bool)){
                 SavedTaskCard(recommendedText: ((suggestedTaskState["description"] ?? "") as! String), selectedDate: selectedDate, assignedToUsername: (suggestedTaskState["assignedToUsername"] ?? "") as! String, index: index, accountId: accountId, taskId: (suggestedTaskState["taskId"] ?? "") as! String, onDeleteTask : {
-                    createNoteScreenViewModel.removeSuggestion(at: index)
+                    createNoteScreenViewModel.removeTaskSuggestion(at: index)
                 })
             }else{
                 VStack{
@@ -226,7 +226,7 @@ struct SuggestedTaskCardView: View {
                                     message: Text("Are you sure you want to remove this task suggestion?"),
                                     submitText: "Remove",
                                     onSubmitPress: {
-                                        createNoteScreenViewModel.removeSuggestion(at: index)
+                                        createNoteScreenViewModel.removeTaskSuggestion(at: index)
                                     }
                                 ))
                                 
@@ -243,7 +243,7 @@ struct SuggestedTaskCardView: View {
                                 .clipShape(RoundedRectangle(cornerRadius: 5))
                             })
                             .accessibilityIdentifier("btn_create_note_cancel_\(index)")
-                            .overlay(RoundedRectangle(cornerRadius: 4).stroke(Color(hex: "#5D678D"), lineWidth: 1))
+                            .overlay(RoundedRectangle(cornerRadius: 4).stroke(Color("CancelText"), lineWidth: 1))
                             
                             Spacer()
                         }
@@ -264,8 +264,8 @@ struct SuggestedTaskCardView: View {
         .onAppear{
             self.selectedDate =  suggestedTaskState["dueDate"] as! Date
         }
-        .onChange(of: createNoteScreenViewModel.suggestedTaskData, perform: {_ in
-            suggestionId = createNoteScreenViewModel.suggestedTaskData.add_task_suggestions[self.index].id
+        .onChange(of: createNoteScreenViewModel.suggestedData, perform: {_ in
+            suggestionId = createNoteScreenViewModel.suggestedData.add_task_suggestions?[self.index].id
             let updatedTaskState = createNoteScreenViewModel.suggestedTaskStates[suggestionId ?? ""] ?? [:]
             self.selectedDate =  updatedTaskState["dueDate"] as! Date
             

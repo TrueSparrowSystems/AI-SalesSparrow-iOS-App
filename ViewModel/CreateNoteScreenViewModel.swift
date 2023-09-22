@@ -29,13 +29,14 @@ struct EventSuggestionStruct: Codable, Equatable {
 
 // A struct that represents the meta data of the generate suggested task API
 struct GenerateSuggestionStruct: Codable, Equatable {
-    var add_task_suggestions: [TaskSuggestionStruct]
+    var add_task_suggestions: [TaskSuggestionStruct]?
+    var add_event_suggestions: [EventSuggestionStruct]?
 }
 
 // A class that represents the view model of the create note
 class CreateNoteScreenViewModel: ObservableObject {
     @Published var createNoteData = CreateNoteStruct(note_id: "")
-    @Published var suggestedTaskData = GenerateSuggestionStruct(add_task_suggestions: [])
+    @Published var suggestedData = GenerateSuggestionStruct(add_task_suggestions: [], add_event_suggestions: [])
     @Published var isCreateNoteInProgress = false
     @Published var isSuggestionGenerationInProgress = false
     @Published var suggestedTaskStates : [String: [String: Any]]  = [:]
@@ -160,13 +161,22 @@ class CreateNoteScreenViewModel: ObservableObject {
             case .success(let results):
                 DispatchQueue.main.async {
                     onSuccess()
-                    self?.suggestedTaskData.add_task_suggestions = results.add_task_suggestions
+                    self?.suggestedData.add_task_suggestions = results.add_task_suggestions
+                    self?.suggestedData.add_event_suggestions =  [EventSuggestionStruct(description: "Event")]
                     self?.isSuggestionGenerationInProgress = false
-                    for index in 0..<results.add_task_suggestions.count{
+                    
+                    for index in 0..<(results.add_task_suggestions?.count ?? 0){
                         
-                        self?.suggestedTaskData.add_task_suggestions[index].id = UUID().uuidString
-                        let suggestion = self?.suggestedTaskData.add_task_suggestions[index]
+                        self?.suggestedData.add_task_suggestions?[index].id = UUID().uuidString
+                        let suggestion = self?.suggestedData.add_task_suggestions?[index]
                         self?.initTaskData(suggestion: suggestion ?? TaskSuggestionStruct(description: ""))
+                    }
+                    
+                    for index in 0..<(self?.suggestedData.add_event_suggestions?.count ?? 0){
+                        
+                        self?.suggestedData.add_event_suggestions?[index].id = UUID().uuidString
+                        let suggestion = self?.suggestedData.add_event_suggestions?[index]
+                        self?.initEventData(suggestion: suggestion ?? EventSuggestionStruct(description: ""))
                     }
                 }
                 
@@ -182,9 +192,14 @@ class CreateNoteScreenViewModel: ObservableObject {
         }
     }
     
-    func removeSuggestion(at index: Int) {
-        if suggestedTaskData.add_task_suggestions.indices.contains(index) {
-            suggestedTaskData.add_task_suggestions.remove(at: index)
+    func removeTaskSuggestion(at index: Int) {
+        if ((suggestedData.add_task_suggestions?.indices.contains(index)) != nil) {
+            suggestedData.add_task_suggestions?.remove(at: index)
+        }
+    }
+    func removeEventSuggestion(at index: Int) {
+        if ((suggestedData.add_event_suggestions?.indices.contains(index)) != nil) {
+            suggestedData.add_event_suggestions?.remove(at: index)
         }
     }
 }
