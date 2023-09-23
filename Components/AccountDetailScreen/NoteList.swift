@@ -173,6 +173,7 @@ struct NoteCardView: View {
                                 .foregroundColor(Color("TextPrimary"))
                         }
                     }
+                    .accessibilityIdentifier("btn_account_detail_edit_note_\(noteIndex)")
                     
                     Button(action: {
                         isPopoverVisible = false

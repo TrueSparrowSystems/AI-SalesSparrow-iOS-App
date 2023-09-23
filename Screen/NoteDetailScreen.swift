@@ -119,7 +119,7 @@ struct NoteDetailScreen : View {
                         .foregroundColor(Color("TextPrimary"))
                         .font(.custom("Nunito-SemiBold", size: 18))
                         .focused($focused)
-                        .accessibilityIdentifier("et_create_task")
+                        .accessibilityIdentifier("et_create_note")
                         .onTapGesture {
                             // Do nothing. Kept on tap here to override tap action over parent tap action
                         }

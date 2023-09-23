@@ -176,6 +176,33 @@ final class AccountDetailNoteListUITests: XCTestCase {
         XCTAssertTrue(doneButton.isEnabled)
         
     }
+
+    func testEditNote() throws {
+        // Launch the app with the specified launch arguments
+        let app = XCUIApplication()
+        app.launchArguments = ["isRunningUITests"]
+        app.launch()
+        
+        // Set the timeout duration
+        let timeout = 5
+        
+        // Open the account detail using the helper function
+        openAccountDetailUsingSearch(app: app)
+        let noteIndex = 0
+        let threeDotButtonForNote = app.buttons["btn_account_detail_note_more_\(noteIndex)"]
+        XCTAssertTrue(threeDotButtonForNote.waitForExistence(timeout: TimeInterval(timeout)))
+        threeDotButtonForNote.tap()
+
+        app.buttons["btn_account_detail_edit_note_\(noteIndex)"].tap()
+        
+        let addNoteTextField = app.textViews["et_create_note"]
+        XCTAssertTrue(addNoteTextField.waitForExistence(timeout: TimeInterval(timeout)))
+        addNoteTextField.tap()
+        //Type Text into the the text field
+        addNoteTextField.typeText("Create new note.\nTap on the save button to save it to salesforce.")
+        
+        app.buttons["btn_save_task"].tap()
+    }
     
     func testDeleteNote() throws {
         // Launch the app with the specified launch arguments
