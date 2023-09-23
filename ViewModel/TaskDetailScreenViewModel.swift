@@ -54,9 +54,9 @@ class TaskDetailScreenViewModel: ObservableObject {
                         id: "your_mock_task_id",
                         creator: "your_mock_creator",
                         crm_organization_user_id: "your_mock_crm_user_id",
-                        crm_organization_user_name: "your_mock_crm_user_name",
+                        crm_organization_user_name: "your mock_crm_user_name",
                         description: "Your mock task description",
-                        due_date: "2023-07-21", // Mock due date
+                        due_date: "2028-01-31", // Mock due date
                         last_modified_time: "2023-09-22T10:30:00.00Z" // Mock last modified time
                     )
                     ToastViewModel.shared.showToast(_toast: Toast(style: .error, message: error.message))

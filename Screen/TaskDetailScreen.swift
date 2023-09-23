@@ -13,7 +13,7 @@ struct TaskDetailScreen: View {
     
     var accountId: String
     var taskId: String
-    var isEditFlow: Bool
+    var isEditFlow: Bool = false
     @State var crm_organization_user_id: String = ""
     @State var crm_organization_user_name: String = ""
     @State var description: String = ""
@@ -38,7 +38,7 @@ struct TaskDetailScreen: View {
                 Spacer()
                 
                 Button(action: {
-                    taskDetailScreenViewModel.EditTaskDetail(accountId: accountId, taskId: taskId, crm_organization_user_id: crm_organization_user_name, description: description, due_date: BasicHelper.getDateStringFromDate(from: selectedDate), onSuccess: {
+                    taskDetailScreenViewModel.EditTaskDetail(accountId: accountId, taskId: taskId, crm_organization_user_id: crm_organization_user_name, description: description, due_date: BasicHelper.getDateStringFromDate(from: selectedDate, dateFormat: "YYYY-MM-DD"), onSuccess: {
                         isTaskSaved = true
                     })
                 }, label:{
@@ -77,8 +77,8 @@ struct TaskDetailScreen: View {
                     .clipShape(RoundedRectangle(cornerRadius: 5))
                 })
                 .accessibilityIdentifier("btn_save_task")
-                .disabled(accountId.isEmpty || taskId.isEmpty || description.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || (crm_organization_user_name).isEmpty || isDateSelected)
-                .opacity(isEditFlow ? (accountId.isEmpty || taskId.isEmpty || description.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || (crm_organization_user_name).isEmpty || isDateSelected) ? 0.7 : 1 : 0)
+                .disabled(accountId.isEmpty || taskId.isEmpty || description.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || crm_organization_user_name.isEmpty || crm_organization_user_id.isEmpty || !isDateSelected)
+                .opacity(calculateOpacity())
             }
             .padding(.vertical)
             
@@ -228,7 +228,7 @@ struct TaskDetailScreen: View {
         }
         .onAppear {
             // Adding a delay for view to render
-            taskDetailScreenViewModel.EditTaskDetail(accountId: accountId, taskId: taskId, crm_organization_user_id: crm_organization_user_id, description: description, due_date: BasicHelper.getDateStringFromDate(from: selectedDate), onSuccess: {})
+            taskDetailScreenViewModel.fetchTaskDetail(accountId: accountId, taskId: taskId)
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.05){
                 focused = true
             }
@@ -237,6 +237,10 @@ struct TaskDetailScreen: View {
             crm_organization_user_id = currentTask.crm_organization_user_id
             crm_organization_user_name = currentTask.crm_organization_user_name
             description = currentTask.description
+            if let selectedDate = BasicHelper.getDateFromString(currentTask.due_date) {
+                self.selectedDate = BasicHelper.getDateFromString(currentTask.due_date)!
+                isDateSelected = true
+            }
         }
         .onTapGesture {
             focused = false
@@ -244,6 +248,18 @@ struct TaskDetailScreen: View {
         .padding(.horizontal)
         .navigationBarBackButtonHidden(true)
         .background(Color.white)
+    }
+    
+    func calculateOpacity() -> Double {
+        if isEditFlow {
+            if accountId.isEmpty || taskId.isEmpty || description.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || crm_organization_user_name.isEmpty || crm_organization_user_id.isEmpty || !isDateSelected {
+                return 0.7
+            } else {
+                return 1.0
+            }
+        } else {
+            return 0.0
+        }
     }
 }
 
