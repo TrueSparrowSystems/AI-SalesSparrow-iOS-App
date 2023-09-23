@@ -203,7 +203,10 @@ struct TaskDetailScreen: View {
                 if(taskDetailScreenViewModel.isFetchTaskInProgress){
                     Spacer()
                     ProgressView()
+                        .accessibilityIdentifier("loader_note_detail")
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                         .tint(Color("LoginButtonSecondary"))
+                        .controlSize(.large)
                     Spacer()
                 } else if(isEditFlow){
                     TextField("Add Task",text: $description, axis: .vertical)

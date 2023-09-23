@@ -78,7 +78,7 @@ struct NotesList: View {
                 VStack{
                     let noteIdsArray = self.acccountDetailScreenViewModelObject.noteData.note_ids
                     ForEach(Array(noteIdsArray.enumerated()), id: \.offset) { index, noteId in
-                        NavigationLink(destination: NoteDetailScreen(noteId: noteId, accountId: accountId, accountName: accountName)
+                        NavigationLink(destination: NoteDetailScreen(accountId: accountId, accountName: accountName, noteId: noteId, isEditFlow: false)
                         ){
                             if self.acccountDetailScreenViewModelObject.noteData.note_map_by_id[noteId] != nil{
                                 NoteCardView(noteId: noteId, accountId: accountId, accountName: accountName, noteIndex: index,propagateClick: $propagateClick)
@@ -163,7 +163,7 @@ struct NoteCardView: View {
         .overlay(alignment: .topTrailing){
             if isPopoverVisible {
                 VStack (alignment: .leading) {
-                    NavigationLink(destination: Text("Hello")/*EditNoteScreen(accountId: accountId, noteId: noteId, accountName: accountName)*/
+                    NavigationLink(destination: NoteDetailScreen(accountId: accountId, accountName: accountName, noteId: noteId, isEditFlow: true, isNoteSaved: true)
                     ){
                         HStack{
                             Image("EditIcon")

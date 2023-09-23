@@ -13,7 +13,7 @@ struct NoteDetailRespStruct: Codable {
 }
 
 // A struct that represents the meta data of the note details
-struct NoteDetailStruct : Codable {
+struct NoteDetailStruct : Equatable, Codable {
     var id: String
     var creator: String
     var text: String
@@ -45,6 +45,30 @@ class NoteDetailScreenViewModel: ObservableObject {
                 case .failure(let error):
                     self?.isFetchNoteDetailInProgress = false
                     self?.errorMessage = error.message
+                    ToastViewModel.shared.showToast(_toast: Toast(style: .error, message: error.message))
+                }
+            }
+        }
+    }
+    
+    // A function to fetch note details using API.
+    func EditNoteDetail(text: String, accountId: String, noteId: String, onSuccess : @escaping()-> Void){
+        let endPoint = "/v1/accounts/\(accountId)/notes/\(noteId)"
+        isEditNoteInProgress = true
+
+        let params: [String: Any] = ["text": text]
+
+        apiService.put(type: EditNoteRespStruct.self, endpoint: endPoint, params: params){
+            [weak self] result, statusCode in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(_):
+                    onSuccess()
+                    self?.isEditNoteInProgress = false
+                    ToastViewModel.shared.showToast(_toast: Toast(style: .success, message: "Note is saved to your Salesforce Account"))
+
+                case .failure(let error):
+                    self?.isEditNoteInProgress = false
                     ToastViewModel.shared.showToast(_toast: Toast(style: .error, message: error.message))
                 }
             }
