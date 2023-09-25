@@ -51,7 +51,7 @@ struct AccountSearchView: View {
                     .tint(Color("LoginButtonSecondary"))
                     .controlSize(.large)
             }
-            else if(accountSearchViewModel.accountListData.account_ids.count > 0){
+            else if(!accountSearchViewModel.accountListData.account_ids.isEmpty){
                 // List of Accounts
                 AccountListView(
                     listData: accountSearchViewModel.accountListData,

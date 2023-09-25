@@ -186,7 +186,7 @@ struct CreateNoteScreen : View {
                             }
                             
                         }
-                        else if(createNoteScreenViewModel.suggestedData.add_task_suggestions?.count == 0 && createNoteScreenViewModel.suggestedData.add_event_suggestions?.count == 0){ // check for count of suggested task array
+                        else if(createNoteScreenViewModel.suggestedData.add_task_suggestions?.isEmpty && createNoteScreenViewModel.suggestedData.add_event_suggestions?.isEmpty){ // check for count of suggested task and event array
                             // Show no recommendation message
                             VStack(spacing: 0) {
                                 Image("Check")

@@ -15,7 +15,7 @@ struct AccountList: View {
     var body: some View {
         VStack{
             let accountIds = acccountListViewModelObject.accountListData.account_ids
-            if(acccountListViewModelObject.isFetchAccountInProgress && accountIds.count == 0){
+            if(acccountListViewModelObject.isFetchAccountInProgress && accountIds.isEmpty){
                 ScrollView{
                     LoadingAccountRowView()
                     LoadingAccountRowView()
@@ -49,7 +49,7 @@ struct AccountList: View {
                         }
                     }
                     
-                    if(acccountListViewModelObject.isFetchAccountInProgress && accountIds.count > 0){
+                    if(acccountListViewModelObject.isFetchAccountInProgress && !accountIds.isEmpty){
                         HStack(spacing: 0){
                             ProgressView()
                                 .tint(Color("LoginButtonSecondary"))

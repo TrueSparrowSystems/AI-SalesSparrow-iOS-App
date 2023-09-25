@@ -279,6 +279,7 @@
 		6D2CB5082A77CF570057C73F /* Nunito-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Regular.ttf"; sourceTree = "<group>"; };
 		6D2CB5092A77CF570057C73F /* Nunito-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Black.ttf"; sourceTree = "<group>"; };
 		6D2CB50A2A77CF570057C73F /* Nunito-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-BlackItalic.ttf"; sourceTree = "<group>"; };
+		6D351AEC2AC1763100FD47D9 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		6D3E1DCB2ABBFF9F0099891C /* SafariWebViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebViewModel.swift; sourceTree = "<group>"; };
 		6D3E1DCE2ABC0DAF0099891C /* EventsListUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListUITests.swift; sourceTree = "<group>"; };
 		6D3E1DD02ABC19D40099891C /* CreateEventUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEventUITests.swift; sourceTree = "<group>"; };
@@ -468,6 +469,7 @@
 		6D8C7CCD2A779A97005D597E = {
 			isa = PBXGroup;
 			children = (
+				6D351AEC2AC1763100FD47D9 /* .swiftlint.yml */,
 				6D2CB4FA2A77CF410057C73F /* Fonts */,
 				6D8C7D222A77A0B1005D597E /* Model */,
 				6D8C7D1D2A77A06F005D597E /* Utils */,
@@ -693,6 +695,7 @@
 				019595B42A83CD76008425AD /* Sources */,
 				019595B52A83CD76008425AD /* Frameworks */,
 				019595B62A83CD76008425AD /* Resources */,
+				6D351AEB2AC1730B00FD47D9 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -714,6 +717,7 @@
 				6D8C7CD22A779A97005D597E /* Sources */,
 				6D8C7CD32A779A97005D597E /* Frameworks */,
 				6D8C7CD42A779A97005D597E /* Resources */,
+				6D351AEA2AC172D900FD47D9 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -916,6 +920,40 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		6D351AEA2AC172D900FD47D9 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+		6D351AEB2AC1730B00FD47D9 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		8DE90EB4EA8984FABAC2AF78 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;

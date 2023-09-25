@@ -72,7 +72,7 @@ class AccountListViewModel: ObservableObject {
             apiParams["pagination_identifier"] = (self.accountListData.next_page_payload!.pagination_identifier!) as String
         } else{
             //If pagination identifier is not present and account list is already fetched then return
-            if(self.accountListData.account_ids.count != 0){
+            if(!self.accountListData.account_ids.isEmpty){
                 isFetchAccountInProgress = false
                 return
             }

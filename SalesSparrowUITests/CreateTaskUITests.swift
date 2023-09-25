@@ -22,7 +22,7 @@ final class CreateTaskUITests: XCTestCase {
         btnSearchAccountNameBtn.tap()
     }
     
-    func SearchUser(app: XCUIApplication) {
+    func searchUser(app: XCUIApplication) {
         let timeout = 5
         
         let searchUserButton = app.buttons["btn_create_task_search_user"]
@@ -44,7 +44,7 @@ final class CreateTaskUITests: XCTestCase {
         // cancel should be clickable
         XCTAssertTrue(cancelButton.isEnabled)
 
-        try? SearchUser(app: app)
+        searchUser(app: app)
 
         let datePicker = app.datePickers["dp_add_task_select_date"]
         datePicker.tap()
