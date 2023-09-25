@@ -54,14 +54,6 @@ class EventDetailScreenViewModel: ObservableObject {
                 case .failure(let error):
                     self?.isFetchEventInProgress = false
                     self?.errorMessage = error.message
-                    self?.currentEventData = EventDetailStruct(
-                        id: "your_mock_task_id",
-                        creator: "your_mock_creator",
-                        description: "Your mock Event description",
-                        start_datetime: "2023-01-19T11:30:00.00Z",
-                        end_datetime: "2023-12-08T04:30:00.00Z",
-                        last_modified_time: "2023-09-22T10:30:00.00Z"
-                    )
                     ToastViewModel.shared.showToast(_toast: Toast(style: .error, message: error.message))
                 }
             }

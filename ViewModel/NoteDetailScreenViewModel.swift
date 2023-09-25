@@ -20,6 +20,8 @@ struct NoteDetailStruct : Equatable, Codable {
     var last_modified_time: String
 }
 
+struct EditNoteRespStruct: Codable {
+}
 
 // A class that represents the view model of Note details
 class NoteDetailScreenViewModel: ObservableObject {

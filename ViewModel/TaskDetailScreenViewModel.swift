@@ -50,15 +50,6 @@ class TaskDetailScreenViewModel: ObservableObject {
                 case .failure(let error):
                     self?.isFetchTaskInProgress = false
                     self?.errorMessage = error.message
-                    self?.currentTaskData = TaskDetailStruct(
-                        id: "your_mock_task_id",
-                        creator: "your_mock_creator",
-                        crm_organization_user_id: "your_mock_crm_user_id",
-                        crm_organization_user_name: "your mock_crm_user_name",
-                        description: "Your mock task description",
-                        due_date: "2028-01-31", // Mock due date
-                        last_modified_time: "2023-09-22T10:30:00.00Z" // Mock last modified time
-                    )
                     ToastViewModel.shared.showToast(_toast: Toast(style: .error, message: error.message))
                 }
             }
@@ -73,7 +64,7 @@ class TaskDetailScreenViewModel: ObservableObject {
                                      "description": description,
                                      "due_date": due_date]
         
-        apiService.put(type: EditNoteRespStruct.self, endpoint: endPoint, params: params){
+        apiService.put(type: EditTaskRespStruct.self, endpoint: endPoint, params: params){
             [weak self] result, statusCode in
             DispatchQueue.main.async {
                 switch result {
