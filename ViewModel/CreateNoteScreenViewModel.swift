@@ -162,9 +162,7 @@ class CreateNoteScreenViewModel: ObservableObject {
                 DispatchQueue.main.async {
                     onSuccess()
                     self?.suggestedData.add_task_suggestions = results.add_task_suggestions
-                    //TODO: Replace the following with results once API is deployed
-                    self?.suggestedData.add_event_suggestions =  [EventSuggestionStruct(description: "Event 1", start_datetime: "2023-07-21T13:12:17.000+0000"), EventSuggestionStruct(description: "Event 2"), EventSuggestionStruct(description: "Event 3"), EventSuggestionStruct(description: "Event 4")]
-//                  self?.suggestedData.add_event_suggestions = results.add_event_suggestions
+                    self?.suggestedData.add_event_suggestions = results.add_event_suggestions
                     self?.isSuggestionGenerationInProgress = false
                     
                     for index in 0..<(results.add_task_suggestions?.count ?? 0){
@@ -173,8 +171,7 @@ class CreateNoteScreenViewModel: ObservableObject {
                         let suggestion = self?.suggestedData.add_task_suggestions?[index]
                         self?.initTaskData(suggestion: suggestion ?? TaskSuggestionStruct(description: ""))
                     }
-                    //TODO: Replace the following with results once API is deployed
-                    for index in 0..<(self?.suggestedData.add_event_suggestions?.count ?? 0){
+                    for index in 0..<(results.add_event_suggestions?.count ?? 0){
                         
                         self?.suggestedData.add_event_suggestions?[index].id = UUID().uuidString
                         let suggestion = self?.suggestedData.add_event_suggestions?[index]
