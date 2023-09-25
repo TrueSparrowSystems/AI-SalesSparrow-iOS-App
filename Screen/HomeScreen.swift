@@ -19,6 +19,7 @@ struct HomeScreen: View {
     @StateObject var createEventViewModel = CreateEventViewModel()
     @StateObject var accountDetailViewModel = AccountDetailScreenViewModel()
     @StateObject var taskDetailScreenViewModel = TaskDetailScreenViewModel()
+    @StateObject var eventDetailScreenViewModel = EventDetailScreenViewModel()
     @State private var showUserSearchView: Bool = false
     
     var body: some View {
@@ -49,6 +50,7 @@ struct HomeScreen: View {
         .environmentObject(createEventViewModel)
         .environmentObject(accountDetailViewModel)
         .environmentObject(taskDetailScreenViewModel)
+        .environmentObject(eventDetailScreenViewModel)
     }
 }
 

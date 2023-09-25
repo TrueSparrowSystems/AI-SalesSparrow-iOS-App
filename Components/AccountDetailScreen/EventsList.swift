@@ -85,11 +85,14 @@ struct EventsList: View {
                 VStack{
                     let eventIdsArray = self.acccountDetailScreenViewModelObject.eventData.event_ids
                     ForEach(Array(eventIdsArray.enumerated()), id: \.offset) { index, eventId in
-                        if ( self.acccountDetailScreenViewModelObject.eventData.event_map_by_id[eventId] != nil) {
-                            EventCardView(eventId: eventId, accountId: accountId, eventIndex: index, propagateClick: $propagateClick)
+                        NavigationLink(destination: EventDetailScreen(accountId: accountId, eventId: eventId)
+                        ) {
+                            if ( self.acccountDetailScreenViewModelObject.eventData.event_map_by_id[eventId] != nil) {
+                                EventCardView(eventId: eventId, accountId: accountId, eventIndex: index, propagateClick: $propagateClick)
+                            }
                         }
-                        
-                        
+                        .buttonStyle(.plain)
+                        .accessibilityIdentifier("note_card_\(eventId)")
                     }
                 }
                 .padding(.trailing)
@@ -208,6 +211,18 @@ struct EventCardView: View {
         .overlay(alignment: .topTrailing){
             if isPopoverVisible {
                 VStack {
+                    NavigationLink(destination: EventDetailScreen(accountId: accountId, eventId: eventId, isEditFlow: true)
+                    ){
+                        HStack{
+                            Image("EditIcon")
+                                .frame(width: 20, height: 20)
+                            Text("Edit")
+                                .font(.custom("Nunito-SemiBold",size: 16))
+                                .foregroundColor(Color("TextPrimary"))
+                        }
+                    }
+                    .accessibilityIdentifier("btn_account_detail_edit_note_\(eventIndex)")
+                    
                     Button(action: {
                         isPopoverVisible = false
                         
@@ -232,7 +247,7 @@ struct EventCardView: View {
                 }
                 .padding(10)
                 .cornerRadius(4)
-                .frame(width: 100, height: 40)
+                .frame(width: 103, height: 88)
                 .background(Color("CardBackground"))
                 .overlay(
                     RoundedRectangle(cornerRadius: 4)

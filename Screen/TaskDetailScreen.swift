@@ -151,44 +151,24 @@ struct TaskDetailScreen: View {
                     .accessibilityIdentifier("dp_add_task_select_date")
                     
                     
-                    if(!(isDateSelected)){
-                        HStack (spacing: 0) {
-                            Text("Select")
-                                .foregroundColor(Color("TermsPrimary"))
-                                .font(.custom("Nunito-Light", size: 12))
-                                .tracking(0.5)
-                                .padding(0)
-                            
-                            Spacer()
-                            
-                            Image("EmptyCalendar")
-                                .frame(width: 15, height: 15)
-                                .padding(.leading, 6)
-                        }
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .background(.white)
-                        .userInteractionDisabled()
+                    HStack (spacing: 0) {
+                        Text(BasicHelper.getDateStringFromDate(from: selectedDate))
+                            .foregroundColor(Color("TermsPrimary"))
+                            .font(.custom("Nunito-Bold", size: 12))
+                            .tracking(0.5)
+                            .padding(0)
                         
+                        Spacer()
+                        
+                        Image("EmptyCalendar")
+                            .frame(width: 15, height: 15)
+                            .padding(.leading, 10)
                     }
-                    else{
-                        HStack (spacing: 0) {
-                            Text(BasicHelper.getDateStringFromDate(from: selectedDate))
-                                .foregroundColor(Color("TermsPrimary"))
-                                .font(.custom("Nunito-Bold", size: 12))
-                                .tracking(0.5)
-                                .padding(0)
-                            
-                            Spacer()
-                            
-                            Image("EmptyCalendar")
-                                .frame(width: 15, height: 15)
-                                .padding(.leading, 10)
-                        }
-                        .accessibilityIdentifier("txt_add_task_select_date")
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .background(.white)
-                        .userInteractionDisabled()
-                    }
+                    .accessibilityIdentifier("txt_add_task_select_date")
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(.white)
+                    .userInteractionDisabled()
+                    
                 }
                 .padding(.horizontal, 10)
                 .frame(width: 160, height: 30)
@@ -240,10 +220,8 @@ struct TaskDetailScreen: View {
             crm_organization_user_id = currentTask.crm_organization_user_id
             crm_organization_user_name = currentTask.crm_organization_user_name
             description = currentTask.description
-            if let selectedDate = BasicHelper.getDateFromString(currentTask.due_date) {
-                self.selectedDate = BasicHelper.getDateFromString(currentTask.due_date)!
-                isDateSelected = true
-            }
+            self.selectedDate = BasicHelper.getDateFromString(currentTask.due_date)
+            isDateSelected = true
         }
         .onTapGesture {
             focused = false

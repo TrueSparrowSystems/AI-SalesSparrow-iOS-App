@@ -129,12 +129,6 @@ struct BasicHelper {
         }
     }
     
-    static func getDateFromString(_ dateString: String) -> Date? {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        return dateFormatter.date(from: dateString)
-    }
-    
     static func getFormattedDateForDateTime(from dateTimeString: String) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
@@ -144,6 +138,30 @@ struct BasicHelper {
             return formattedDateString
         }else{
             return ""
+        }
+    }
+    
+    static func getDateFromString(_ dateTimeString: String) -> Date {
+        let dateFormatter = DateFormatter()
+        var dateFormat: String = ""
+        
+        if dateTimeString.contains("/") {
+            // Input is in the "dd/MM/yyyy" format
+            dateFormat = "dd/MM/yyyy"
+        } else if dateTimeString.contains("T") && dateTimeString.contains(":") {
+            // Input is in the "yyyy-MM-dd'T'HH:mm:ss.SSSZ" format
+            dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        } else {
+            // Default format (e.g., "yyyy-MM-dd")
+            dateFormat = "yyyy-MM-dd"
+        }
+        
+        dateFormatter.dateFormat = dateFormat
+        
+        if let date = dateFormatter.date(from: dateTimeString) {
+            return date
+        } else {
+            return Date()
         }
     }
     
