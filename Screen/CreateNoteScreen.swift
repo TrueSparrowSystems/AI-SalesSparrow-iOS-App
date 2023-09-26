@@ -186,7 +186,7 @@ struct CreateNoteScreen: View {
                                     ShimmerView(size: CGSize(width: 72, height: 33))
                                 }
                             }
-                        } else if (createNoteScreenViewModel.suggestedData.add_task_suggestions?.isEmpty != nil) && (createNoteScreenViewModel.suggestedData.add_event_suggestions?.isEmpty != nil) { // check for count of suggested task and event array
+                        } else if  createNoteScreenViewModel.suggestedData.add_task_suggestions?.isEmpty ?? true && createNoteScreenViewModel.suggestedData.add_event_suggestions?.isEmpty ?? true { // check for count of suggested task and event array
                             // Show no recommendation message
                             VStack(spacing: 0) {
                                 Image(Asset.check.name)

@@ -6,6 +6,7 @@ disabled_rules:
   - type_body_length
   - closure_parameter_position
   - todo
+  - deployment_target
 identifier_name:
   allowed_symbols: "_"
 type_name:

@@ -22,11 +22,8 @@ internal typealias AssetColorTypeAlias = ColorAsset.Color
 @available(*, deprecated, renamed: "ImageAsset.Image", message: "This typealias will be removed in SwiftGen 7.0")
 internal typealias AssetImageTypeAlias = ImageAsset.Image
 
-// swiftlint:disable superfluous_disable_command file_length implicit_return
-
 // MARK: - Asset Catalogs
 
-// swiftlint:disable identifier_name line_length nesting type_body_length type_name
 internal enum Asset {
   internal static let accentColor = ColorAsset(name: "AccentColor")
   internal static let alertModalBackground = ColorAsset(name: "AlertModalBackground")
@@ -85,7 +82,6 @@ internal enum Asset {
   internal static let toggleButton = ImageAsset(name: "ToggleButton")
   internal static let checkWithRoundedWhiteBG = ImageAsset(name: "CheckWithRoundedWhiteBG")
 }
-// swiftlint:enable identifier_name line_length nesting type_body_length type_name
 
 // MARK: - Implementation Details
 
