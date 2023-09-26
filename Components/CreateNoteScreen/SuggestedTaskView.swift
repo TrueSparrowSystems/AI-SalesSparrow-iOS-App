@@ -70,7 +70,7 @@ struct SuggestedTaskCardView: View {
                             Button(action: {
                                 // Toggle user search view
                                 showUserSearchView = true
-                            }) {
+                            }, label: {
                                 if ((suggestedTaskState["assignedToUsername"] ?? "") as! String).isEmpty {
                                     Text("Select")
                                         .foregroundColor(Color("RedHighlight"))
@@ -101,6 +101,7 @@ struct SuggestedTaskCardView: View {
                                 }
                                 
                             }
+                                   )
                             .sheet(isPresented: $showUserSearchView) {
                                 UserSearchView(isPresented: $showUserSearchView,
                                                onUserSelect: { userId, userName in
@@ -415,7 +416,7 @@ struct SavedTaskCard: View {
                                     }
                                 }
                             ))
-                        }) {
+                        }, label: {
                             HStack {
                                 Image("DeleteIcon")
                                     .frame(width: 20, height: 20)
@@ -424,6 +425,7 @@ struct SavedTaskCard: View {
                                     .foregroundColor(Color("TextPrimary"))
                             }
                         }
+                               )
                         .accessibilityIdentifier("btn_create_note_delete_task_\(index)")
                     }
                     .padding(10)

@@ -26,7 +26,7 @@ class LoginScreenViewModel: ObservableObject {
     // A function to get salesforce connect url from BE.
     func fetchSalesforceConnectUrl(onSuccess: @escaping(String) -> Void, onFailure: @escaping() -> Void) {
         guard !self.isLoginInProgress else {return}
-        guard self.loginData.url == "" else {
+        guard self.loginData.url.isEmpty else {
             onSuccess(self.loginData.url)
             return
         }

@@ -101,31 +101,33 @@ struct CreateNoteScreen: View {
                     .font(.nunitoRegular(size: 12))
                     .accessibilityIdentifier("txt_create_note_account")
                 if isAccountSelectable && !(isNoteSaved || isSaveInProgress) {
-                    Button(action: {showAccountSearchView = true}) {
+                    Button(action: {showAccountSearchView = true}, label: {
                         HStack(alignment: .center) {
-                            Text(accountId == "" ? "Select": accountName)
+                            Text(accountId.isEmpty ? "Select": accountName)
                                 .padding(.vertical, 8)
                                 .padding(.horizontal, 6)
                                 .foregroundColor(Color("RedHighlight"))
                                 .font(.nunitoLight(size: 14))
-                                .accessibilityIdentifier(accountId == "" ? "txt_create_note_select_account" : "txt_create_note_selected_account")
+                                .accessibilityIdentifier(accountId.isEmpty ? "txt_create_note_select_account" : "txt_create_note_selected_account")
                             Image("ArrowDown")
                                 .frame(width: 7, height: 4)
                                 .padding(.trailing, 6)
                                 .accessibilityIdentifier( "img_create_note_select_account")
                         }
                     }
+                    )
                     .accessibilityIdentifier("btn_create_note_select_account")
                     .background(Color("SelectAccountDropdownBG"))
                     .clipShape(RoundedRectangle(cornerRadius: 4))
                     
                     .sheet(isPresented: $showAccountSearchView, onDismiss: {
-                    }) {
+                    }, content: {
                         AccountSearchView(isPresented: $showAccountSearchView, isCreateNoteFlow: true, onNoteCreateSelected: { _accountId, _accountName in
                             accountId = _accountId
                             accountName = _accountName
                         })
                     }
+                    )
                     
                 } else {
                     HStack(alignment: .center) {

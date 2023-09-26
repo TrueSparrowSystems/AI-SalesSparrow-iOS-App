@@ -41,12 +41,13 @@ struct AlertModal: View {
                     Button(action: {
                         // Handle cancel action
                         AlertViewModel.shared.dismissAlert()
-                    }) {
+                    }, label: {
                         Text(AlertViewModel.shared.alert?.cancelText ?? "Cancel")
                             .font(.system(size: 17, weight: .regular))
                             .foregroundColor(Color("CancelButtonForeground"))
                             .accessibilityIdentifier("txt_alert_cancel")
                     }
+                    )
                     .accessibilityIdentifier("btn_alert_cancel")
                     .padding(.vertical)
                     .frame(maxWidth: .infinity)
@@ -59,12 +60,13 @@ struct AlertModal: View {
                         // handle alert submit action
                         AlertViewModel.shared.alert?.onSubmitPress()
                         AlertViewModel.shared.dismissAlert()
-                    }) {
+                    }, label: {
                         Text(AlertViewModel.shared.alert?.submitText ?? "Submit")
                             .font(.system(size: 17, weight: .semibold))
                             .foregroundColor(Color("AlertSubmitButtonForeground"))
                             .accessibilityIdentifier("txt_alert_submit")
                     }
+                    )
                     .accessibilityIdentifier("btn_alert_submit")
                     .padding(.vertical)
                     .frame(maxWidth: .infinity)

@@ -56,9 +56,10 @@ struct UserAccountDetailScreen: View {
                                         onSubmitPress: {userStateViewModel.disconnectUser()}
                                     )
                                 )
-                            }) {
+                            }, label: {
                                 Image("ToggleButton")
                             }
+                            )
                             .accessibilityIdentifier("img_user_account_detail_salesforce_disconnect")
                             
                             Text("Disconnect Salesforce")
@@ -129,19 +130,19 @@ struct UserAccountDetailScreen: View {
 struct DisconnectDescription: View {
     
     var body: some View {
-        let t1 = Text("Disconnecting Salesforce will also ")
+        let text1 = Text("Disconnecting Salesforce will also ")
             .font(.nunitoSemiBold(size: 14))
             .foregroundColor(Color("TextPrimary"))
         
-        let t2 = Text("delete your account")
+        let text2 = Text("delete your account")
             .font(.nunitoSemiBold(size: 14))
             .foregroundColor(Color("RedHighlight"))
         
-        let t3 = Text(" and all details associated with it.")
+        let text3 = Text(" and all details associated with it.")
             .font(.nunitoSemiBold(size: 14))
             .foregroundColor(Color("TextPrimary"))
         
-        return t1 + t2 + t3
+        return text1 + text2 + text3
         
     }
 }

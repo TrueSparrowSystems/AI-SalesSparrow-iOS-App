@@ -56,7 +56,7 @@ struct NoteDetailScreen: View {
                     .tint(Color("LoginButtonSecondary"))
                     .controlSize(.large)
                 
-            } else if noteDetailScreenViewModel.errorMessage != "" {
+            } else if !noteDetailScreenViewModel.errorMessage.isEmpty {
                 Text(noteDetailScreenViewModel.errorMessage)
                     .foregroundColor(Color("TextPrimary"))
                     .accessibilityIdentifier("txt_note_detail_error")

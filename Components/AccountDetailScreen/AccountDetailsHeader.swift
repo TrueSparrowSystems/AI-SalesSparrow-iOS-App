@@ -65,13 +65,14 @@ struct AccountDetailsHeader: View {
                         
                         Button(action: {
                             expandAccountDetails = true
-                        }) {
-                            HStack {
+                        }, label: {
+                            HStack(alignment: .center) {
                                 Text("More Details")
                                     .foregroundColor(Color("RedHighlight"))
                                     .font(.nunitoMedium(size: 14))
                             }
                         }
+                        )
                         .accessibilityIdentifier("btn_account_detail_more_details")
                     }
                 } else {
@@ -93,7 +94,7 @@ struct AccountDetailsHeader: View {
                         }
                     }
                 }
-
+                
             }
             .padding()
             .background(.white)

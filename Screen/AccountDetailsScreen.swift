@@ -55,7 +55,7 @@ struct AccountDetailsScreen: View {
         Button(action: {
             // This will dismiss the AccountDetailsScreen and go back to the previous view
             self.presentationMode.wrappedValue.dismiss()
-        }) {
+        }, label: {
             HStack {
                 Image("ArrowLeft")
                     .frame(width: 24.14, height: 24.14)
@@ -65,6 +65,7 @@ struct AccountDetailsScreen: View {
             }
             .foregroundColor(Color("SaveButtonBackground"))
         }
+        )
         .accessibilityIdentifier("btn_account_detail_back")
     }
 }

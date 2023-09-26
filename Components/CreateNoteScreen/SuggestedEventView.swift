@@ -546,7 +546,7 @@ struct SavedEventCard: View {
                                     }
                                 }
                             ))
-                        }) {
+                        }, label: {
                             HStack {
                                 Image("DeleteIcon")
                                     .frame(width: 20, height: 20)
@@ -555,6 +555,7 @@ struct SavedEventCard: View {
                                     .foregroundColor(Color("TextPrimary"))
                             }
                         }
+                        )
                         .accessibilityIdentifier("btn_create_note_delete_event_\(index)")
                     }
                     .padding(10)

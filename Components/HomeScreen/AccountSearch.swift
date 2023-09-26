@@ -127,12 +127,13 @@ struct AccountListView: View {
                                         isPresented = false // Dismiss the sheet
                                         removeSearchTextFocus()
                                         onNoteCreateSelected?(accountId, account.name)
-                                    }) {
+                                    }, label: {
                                         Text("Add Note")
                                             .font(.nunitoRegular(size: 16))
                                             .foregroundColor(Color("LoginButtonPrimary"))
                                             .accessibilityIdentifier("txt_search_add_note_\(account.name)")
                                     }
+                                    )
                                     .accessibilityIdentifier("btn_search_add_note_\(account.name)")
                                     
                                 }

@@ -94,7 +94,7 @@ struct CreateTaskScreen: View {
                 
                 Button(action: {
                     showUserSearchView = true
-                }) {
+                }, label: {
                     if ((suggestedTaskState["assignedToUsername"] ?? "") as! String).isEmpty {
                         Text("Select")
                             .foregroundColor(Color("TextPrimary"))
@@ -119,6 +119,7 @@ struct CreateTaskScreen: View {
                     Image("ArrowDown")
                         .frame(width: 7, height: 4)
                 }
+                )
                 .disabled((suggestedTaskState["isTaskSaved"] as! Bool))
                 .accessibilityIdentifier("btn_create_task_search_user")
                 .padding(.horizontal, 10)

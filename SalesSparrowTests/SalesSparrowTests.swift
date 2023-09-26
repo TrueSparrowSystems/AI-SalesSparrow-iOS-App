@@ -211,7 +211,7 @@ final class SalesSparrowTests: XCTestCase {
         // No name
         name = ""
         initials = BasicHelper.getInitials(from: name)
-        XCTAssertTrue(initials == "")
+        XCTAssertTrue(initials.isEmpty)
         
         // Long Name
         name = "Abc def Ghi Jkl"

@@ -38,8 +38,7 @@ struct EventsList: View {
                     suggestionId = UUID().uuidString
                     createNoteScreenViewModel.initEventData(suggestion: EventSuggestionStruct(id: suggestionId, description: ""))
                     addEventActivated = true
-                }
-                ) {
+                }, label: {
                     HStack {
                         Image("AddIcon")
                             .resizable()
@@ -50,6 +49,7 @@ struct EventsList: View {
                     .padding(.bottom, 10)
                     
                 }
+                )
                 .accessibilityIdentifier("btn_account_detail_add_event")
             }
             
@@ -216,7 +216,7 @@ struct EventCardView: View {
                                 acccountDetailScreenViewModelObject.deleteEvent(accountId: accountId, eventId: eventId) {}
                             }
                         ))
-                    }) {
+                    }, label: {
                         HStack {
                             Image("DeleteIcon")
                                 .frame(width: 20, height: 20)
@@ -225,6 +225,7 @@ struct EventCardView: View {
                                 .foregroundColor(Color("TextPrimary"))
                         }
                     }
+                    )
                     .accessibilityIdentifier("btn_account_detail_delete_event_\(eventIndex)")
                 }
                 .padding(10)

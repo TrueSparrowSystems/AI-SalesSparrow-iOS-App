@@ -17,7 +17,7 @@ class MockAPIService: ApiService {
         do {
             var caseIdentifierFound: String = "default"
             Environments.shared.testVars["testCaseIdentifiers"]?.forEach { testCaseIdentifier in
-                if let response = MockResponse.responseObj[testEndpoint]?[testCaseIdentifier] {
+                if (MockResponse.responseObj[testEndpoint]?[testCaseIdentifier]) != nil {
                     caseIdentifierFound = testCaseIdentifier
                 }
             }
@@ -173,7 +173,7 @@ class ApiService {
         var requestUrl = requestUrl
         let deviceHeaderParams = DeviceSettingManager.shared.deviceHeaderParams
         if dev {
-            print(HTTPCookieStorage.shared.cookies)
+            print(HTTPCookieStorage.shared.cookies as Any)
         }
         // Add request headers for authentication and content type to the request object
         requestUrl.setValue("application/json, text/plain, */*", forHTTPHeaderField: "Accept")
@@ -191,7 +191,7 @@ class ApiService {
                 print("---------------error----------\(error)")
                 
             }
-            if let error = error as? URLError {
+            if error is URLError {
                 completion(Result.failure(APIError().internalServerError()), 0)
             } else if let response = response as? HTTPURLResponse, !(200...299).contains(response.statusCode) {
                 var errorData: ErrorStruct

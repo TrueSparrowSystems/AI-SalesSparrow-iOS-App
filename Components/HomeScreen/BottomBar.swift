@@ -19,17 +19,18 @@ struct BottomBar: View {
                 .overlay(
                     Rectangle().frame(width: nil, height: 0.5, alignment: .top).foregroundColor(.black.opacity(0.2)), alignment: .top
                 )
-
+            
             // Button for headerIcon at the middle of the navbar
             Button(action: {
                 self.createNoteScreenActivated = true
-            }) {
+            }, label: {
                 Image("AddIcon")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 44.0, height: 44.0)
-
+                
             }
+            )
             .offset(y: -22)
             .accessibilityIdentifier("btn_create_note")
         }

@@ -38,8 +38,7 @@ struct TasksList: View {
                     suggestionId = UUID().uuidString
                     createNoteScreenViewModel.initTaskData(suggestion: TaskSuggestionStruct(id: suggestionId, description: ""))
                     addTaskActivated = true
-                }
-                ) {
+                }, label: {
                     HStack {
                         Image("AddIcon")
                             .resizable()
@@ -50,6 +49,7 @@ struct TasksList: View {
                     .padding(.bottom, 10)
                     
                 }
+                       )
                 .accessibilityIdentifier("btn_account_detail_add_task")
             }
             
@@ -217,7 +217,7 @@ struct TaskCardView: View {
                                 acccountDetailScreenViewModelObject.deleteTask(accountId: accountId, taskId: taskId) {}
                             }
                         ))
-                    }) {
+                    }, label: {
                         HStack {
                             Image("DeleteIcon")
                                 .frame(width: 20, height: 20)
@@ -226,6 +226,7 @@ struct TaskCardView: View {
                                 .foregroundColor(Color("TextPrimary"))
                         }
                     }
+                    )
                     .accessibilityIdentifier("btn_account_detail_delete_task_\(taskIndex)")
                 }
                 .padding(10)

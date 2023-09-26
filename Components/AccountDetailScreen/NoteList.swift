@@ -172,7 +172,7 @@ struct NoteCardView: View {
                                 acccountDetailScreenViewModelObject.deleteNote(accountId: accountId, noteId: noteId)
                             }
                         ))
-                    }) {
+                    }, label: {
                         HStack {
                             Image("DeleteIcon")
                                 .frame(width: 20, height: 20)
@@ -181,6 +181,7 @@ struct NoteCardView: View {
                                 .foregroundColor(Color("TextPrimary"))
                         }
                     }
+                           )
                     .accessibilityIdentifier("btn_account_detail_delete_note_\(noteIndex)")
                 }
                 .padding(10)
