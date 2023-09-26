@@ -5,7 +5,6 @@
 //  Created by Mohit Charkha on 21/09/23.
 //
 
-
 import Foundation
 import SwiftUI
 
@@ -15,14 +14,14 @@ class SafariWebViewModel: ObservableObject {
     @Published var url: String = ""
     static let shared = SafariWebViewModel()
     
-    private init(){}
+    private init() {}
     
-    func showWebView(_url: String){
+    func showWebView(_url: String) {
         self.isWebViewVisible = true
         self.url = _url
     }
     
-    func hideWebView(){
+    func hideWebView() {
         self.isWebViewVisible = false
         self.url = ""
     }

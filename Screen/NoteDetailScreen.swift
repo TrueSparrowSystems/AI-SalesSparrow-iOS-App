@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct NoteDetailScreen : View {
-    @EnvironmentObject var noteDetailScreenViewModel : NoteDetailScreenViewModel
+struct NoteDetailScreen: View {
+    @EnvironmentObject var noteDetailScreenViewModel: NoteDetailScreenViewModel
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @State var noteId: String = ""
@@ -17,8 +17,8 @@ struct NoteDetailScreen : View {
     @State var isEditing = false
     
     var body: some View {
-        VStack{
-            HStack(alignment: .center){
+        VStack {
+            HStack(alignment: .center) {
                 Text("Done")
                     .font(.nunitoBold(size: 14))
                     .padding(.vertical, 10)
@@ -49,21 +49,21 @@ struct NoteDetailScreen : View {
                 //                }
             }
             
-            if(noteDetailScreenViewModel.isFetchNoteDetailInProgress){
+            if noteDetailScreenViewModel.isFetchNoteDetailInProgress {
                 ProgressView()
                     .accessibilityIdentifier("loader_note_detail")
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                     .tint(Color("LoginButtonSecondary"))
                     .controlSize(.large)
                 
-            }else if(noteDetailScreenViewModel.errorMessage != ""){
+            } else if noteDetailScreenViewModel.errorMessage != "" {
                 Text(noteDetailScreenViewModel.errorMessage)
                     .foregroundColor(Color("TextPrimary"))
                     .accessibilityIdentifier("txt_note_detail_error")
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                 
-            }else{
-                HStack{
+            } else {
+                HStack {
                     Image("AccountIcon")
                         .resizable()
                         .frame(width: 14, height: 14)
@@ -72,7 +72,7 @@ struct NoteDetailScreen : View {
                         .foregroundColor(Color("TextPrimary"))
                         .font(.nunitoRegular(size: 12))
                         .accessibilityIdentifier("txt_note_detail_account_text")
-                    HStack(alignment: .center){
+                    HStack(alignment: .center) {
                         Text(accountName)
                             .padding(.vertical, 8)
                             .padding(.horizontal, 6)
@@ -100,7 +100,7 @@ struct NoteDetailScreen : View {
         .padding(.horizontal, 12)
         .navigationBarBackButtonHidden(true)
         .background(Color("Background"))
-        .onAppear{
+        .onAppear {
             noteDetailScreenViewModel.fetchNoteDetail(accountId: accountId, noteId: noteId)
         }
     }

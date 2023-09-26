@@ -5,12 +5,11 @@
 //  Created by Mohit Charkha on 24/08/23.
 //
 
-
 import XCTest
 
 final class AccountListUITests: XCTestCase {
     
-    func testAccountListWithoutPagination(){
+    func testAccountListWithoutPagination() {
         let app = XCUIApplication()
         app.launchArguments = ["isRunningUITests"]
         app.launch()
@@ -23,7 +22,7 @@ final class AccountListUITests: XCTestCase {
         XCTAssertTrue(scrollView.waitForExistence(timeout: TimeInterval(timeout)))
         
         let lastCard = app.buttons["account_card_\(rowIndex)"]
-        while !lastCard.exists && availableScrollTries > 0{
+        while !lastCard.exists && availableScrollTries > 0 {
             availableScrollTries -= 1
             app.swipeUp()
         }

@@ -10,7 +10,7 @@ import SwiftUI
 struct RenderFields: View {
     var fieldName: String
     var fieldValue: String
-    @EnvironmentObject var accountDetailViewModelObject : AccountDetailScreenViewModel
+    @EnvironmentObject var accountDetailViewModelObject: AccountDetailScreenViewModel
     @Environment(\.openURL) var openURL
     
     var body: some View {
@@ -19,7 +19,7 @@ struct RenderFields: View {
         
         switch fieldInfo?.type {
         case .TITLE:
-            HStack(spacing: 0){
+            HStack(spacing: 0) {
                 Text(fieldValue)
                     .font(.nunitoRegular(size: 14))
                     .foregroundColor(Color("TextPrimary"))
@@ -28,7 +28,7 @@ struct RenderFields: View {
                 Spacer()
             }
         case .EMAIL:
-            HStack(spacing: 0){
+            HStack(spacing: 0) {
                 Text(fieldValue)
                     .font(.nunitoRegular(size: 12))
                     .foregroundColor(Color("TextPrimary"))
@@ -37,7 +37,7 @@ struct RenderFields: View {
                 Spacer()
             }
         case .STRING:
-                HStack(spacing: 0){
+                HStack(spacing: 0) {
                     Text("\(fieldTitle!): ")
                         .font(.nunitoMedium(size: 14))
                         .foregroundColor(Color("TextPrimary"))
@@ -54,7 +54,7 @@ struct RenderFields: View {
         case .LINK:
             HStack(spacing: 0) {
                 Image("Link")
-                    .frame(width: 12,height: 12)
+                    .frame(width: 12, height: 12)
                     .padding(.leading, 2)
                     .padding(.trailing, 4)
                 

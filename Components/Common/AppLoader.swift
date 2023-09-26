@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct AppLoader : View{
+struct AppLoader: View {
     
     var body: some View {
         
-        ZStack{
+        ZStack {
             Color.black.opacity(0.7)
                 .edgesIgnoringSafeArea(.all)
             

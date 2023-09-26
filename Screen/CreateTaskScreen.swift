@@ -9,8 +9,8 @@ import SwiftUI
 
 struct CreateTaskScreen: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @EnvironmentObject var createTaskViewModel : CreateTaskViewModel
-    @EnvironmentObject var createNoteScreenViewModel : CreateNoteScreenViewModel
+    @EnvironmentObject var createTaskViewModel: CreateTaskViewModel
+    @EnvironmentObject var createNoteScreenViewModel: CreateNoteScreenViewModel
     
     var accountId: String
     @State var description: String = ""
@@ -22,8 +22,8 @@ struct CreateTaskScreen: View {
     
     var body: some View {
         let suggestedTaskState = createNoteScreenViewModel.suggestedTaskStates[suggestionId ?? ""] ?? [:]
-        VStack{
-            HStack{
+        VStack {
+            HStack {
                 Text((suggestedTaskState["isTaskSaved"] as! Bool) ? "Done" : "Cancel")
                     .font(.nunitoBold(size: 14))
                     .padding(.vertical, 10)
@@ -44,9 +44,9 @@ struct CreateTaskScreen: View {
                     }, onFailure: {
                         isAddTaskInProgress = false
                     })
-                }, label:{
-                    HStack(alignment: .center, spacing: 0){
-                        if(isAddTaskInProgress){
+                }, label: {
+                    HStack(alignment: .center, spacing: 0) {
+                        if isAddTaskInProgress {
                             ProgressView()
                                 .tint(Color("LoginButtonPrimary"))
                                 .controlSize(.small)
@@ -55,7 +55,7 @@ struct CreateTaskScreen: View {
                                 .font(.nunitoMedium(size: 12))
                                 .accessibilityIdentifier("txt_create_task_saving")
                             
-                        }else if((suggestedTaskState["isTaskSaved"] as! Bool)){
+                        } else if suggestedTaskState["isTaskSaved"] as! Bool {
                             Image("CheckMark")
                                 .resizable()
                                 .frame(width: 12, height: 12)
@@ -66,7 +66,7 @@ struct CreateTaskScreen: View {
                                 .foregroundColor(.white)
                                 .font(.nunitoMedium(size: 12))
                                 .accessibilityIdentifier("txt_create_task_saved")
-                        }else{
+                        } else {
                             Text("Add Task")
                                 .foregroundColor(.white)
                                 .font(.nunitoMedium(size: 12))
@@ -87,20 +87,20 @@ struct CreateTaskScreen: View {
             
             HStack {
                 Text("Assign to")
-                    .frame(width: 75,height: 30, alignment: .leading)
+                    .frame(width: 75, height: 30, alignment: .leading)
                     .font(.nunitoRegular(size: 14))
                     .foregroundColor(Color("TextPrimary"))
                     .accessibilityIdentifier("txt_add_tasks_assign_to")
                 
-                Button(action:{
+                Button(action: {
                     showUserSearchView = true
-                }){
-                    if(((suggestedTaskState["assignedToUsername"] ?? "") as! String).isEmpty){
+                }) {
+                    if ((suggestedTaskState["assignedToUsername"] ?? "") as! String).isEmpty {
                         Text("Select")
                             .foregroundColor(Color("TextPrimary"))
                             .font(.nunitoBold(size: 12))
                             .accessibilityIdentifier("txt_add_task_selected_user")
-                    } else{
+                    } else {
                         Text(BasicHelper.getInitials(from: ((suggestedTaskState["assignedToUsername"] ?? "") as! String)))
                             .frame(width: 18, height: 18)
                             .font(.nunitoBold(size: 6))
@@ -127,7 +127,7 @@ struct CreateTaskScreen: View {
                     RoundedRectangle(cornerRadius: 4)
                         .stroke(Color("CardBorder"), lineWidth: 1)
                 )
-                .sheet(isPresented: $showUserSearchView){
+                .sheet(isPresented: $showUserSearchView) {
                     UserSearchView(isPresented: $showUserSearchView,
                                    onUserSelect: { userId, userName in
                         createNoteScreenViewModel.setTaskDataAttribute(id: suggestionId ?? "", attrKey: "assignedToUsername", attrValue: userName)
@@ -140,13 +140,13 @@ struct CreateTaskScreen: View {
             
             HStack {
                 Text("Due")
-                    .frame(width: 75,height: 30, alignment: .leading)
+                    .frame(width: 75, height: 30, alignment: .leading)
                     .font(.nunitoRegular(size: 14))
                     .foregroundColor(Color("TextPrimary"))
                     .accessibilityIdentifier("txt_add_tasks_due")
                 
-                ZStack{
-                    if(!(suggestedTaskState["isTaskSaved"] as! Bool)){
+                ZStack {
+                    if !(suggestedTaskState["isTaskSaved"] as! Bool) {
                         DatePickerView(selectedDate: $dueDate, onTap: {
                             createNoteScreenViewModel.setTaskDataAttribute(id: suggestionId ?? "", attrKey: "isDateSelected", attrValue: true)
                         })
@@ -155,8 +155,8 @@ struct CreateTaskScreen: View {
                         .accessibilityIdentifier("dp_add_task_select_date")
                     }
                     
-                    if(!(suggestedTaskState["isDateSelected"] as! Bool)){
-                        HStack (spacing: 0) {
+                    if !(suggestedTaskState["isDateSelected"] as! Bool) {
+                        HStack(spacing: 0) {
                             Text("Select")
                                 .foregroundColor(Color("TermsPrimary"))
                                 .font(.nunitoLight(size: 12))
@@ -173,9 +173,8 @@ struct CreateTaskScreen: View {
                         .background(.white)
                         .userInteractionDisabled()
                         
-                    }
-                    else{
-                        HStack (spacing: 0) {
+                    } else {
+                        HStack(spacing: 0) {
                             Text(BasicHelper.getDateStringFromDate(from: dueDate))
                                 .foregroundColor(Color("TermsPrimary"))
                                 .font(.nunitoBold(size: 12))
@@ -203,9 +202,9 @@ struct CreateTaskScreen: View {
                 
                 Spacer()
             }
-            ScrollView{
-                if(!(suggestedTaskState["isTaskSaved"] as! Bool)){
-                    TextField("Add Task",text: $description, axis: .vertical)
+            ScrollView {
+                if !(suggestedTaskState["isTaskSaved"] as! Bool) {
+                    TextField("Add Task", text: $description, axis: .vertical)
                         .foregroundColor(Color("TextPrimary"))
                         .font(.nunitoSemiBold(size: 18))
                         .focused($focused)
@@ -215,7 +214,7 @@ struct CreateTaskScreen: View {
                         }
                         .padding(.top)
                         .lineLimit(4...)
-                }else{
+                } else {
                     Text(description)
                         .foregroundColor(Color("TextPrimary"))
                         .font(.nunitoSemiBold(size: 18))
@@ -225,7 +224,7 @@ struct CreateTaskScreen: View {
                 }
             }
         }
-        .onChange(of: description){_ in
+        .onChange(of: description) {_ in
             createNoteScreenViewModel.setTaskDataAttribute(id: suggestionId ?? "", attrKey: "description", attrValue: self.description)
         }
         .onChange(of: dueDate, perform: {_ in
@@ -233,7 +232,7 @@ struct CreateTaskScreen: View {
         })
         .onAppear {
             // Adding a delay for view to render
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05){
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                 focused = true
             }
             self.description = ((suggestedTaskState["description"] ?? "") as! String)

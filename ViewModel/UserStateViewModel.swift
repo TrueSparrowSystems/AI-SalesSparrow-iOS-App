@@ -18,7 +18,7 @@ struct CurrentUserRespStruct: Codable {
     var current_user: CurrentUserStruct
 }
 // A struct that represents the meta data of the current user
-struct CurrentUserStruct: Codable{
+struct CurrentUserStruct: Codable {
     var id: String
     var name: String
     var email: String
@@ -35,7 +35,7 @@ class UserStateViewModel: ObservableObject {
     
     static let shared = UserStateViewModel()
     
-    private init(){}
+    private init() {}
     
     // A function that sets user logged in.
     func setLoggedInUser(currentUser: CurrentUserStruct) {
@@ -44,15 +44,15 @@ class UserStateViewModel: ObservableObject {
     }
     
     // A function to logout user.
-    func logOut()  {
+    func logOut() {
         guard !self.isLogOutInProgress else {return}
         
         DispatchQueue.main.async {
             self.isLogOutInProgress = true
             LoaderViewModel.shared.showLoader()
             
-            self.apiService.post(type: LogoutStruct.self, endpoint: "/v1/auth/logout"){
-                [weak self]  result, statusCode in
+            self.apiService.post(type: LogoutStruct.self, endpoint: "/v1/auth/logout") {
+                [weak self]  _, _ in
                 
                 DispatchQueue.main.async {
                     self?.isLogOutInProgress = false
@@ -69,8 +69,8 @@ class UserStateViewModel: ObservableObject {
     // A function to fetch currently logged in user.
     func getCurrentUser() {
         DispatchQueue.main.async {
-            self.apiService.get(type: CurrentUserRespStruct.self, endpoint: "/v1/users/current"){
-                [weak self]  result, statusCode in
+            self.apiService.get(type: CurrentUserRespStruct.self, endpoint: "/v1/users/current") {
+                [weak self]  result, _ in
                 
                 DispatchQueue.main.async {
                     switch result {
@@ -87,15 +87,15 @@ class UserStateViewModel: ObservableObject {
     }
     
     // A function to disconnect salesforce and logout user.
-    func disconnectUser()  {
+    func disconnectUser() {
         guard !self.isDisconnectInProgress else {return}
         
         DispatchQueue.main.async {
             self.isDisconnectInProgress = true
             LoaderViewModel.shared.showLoader()
             
-            self.apiService.post(type: DisconnectUserStruct.self, endpoint: "/v1/auth/disconnect"){
-                [weak self]  result, statusCode in
+            self.apiService.post(type: DisconnectUserStruct.self, endpoint: "/v1/auth/disconnect") {
+                [weak self]  _, _ in
                 
                 DispatchQueue.main.async {
                     HTTPCookieStorage.shared.cookies?.forEach(HTTPCookieStorage.shared.deleteCookie)

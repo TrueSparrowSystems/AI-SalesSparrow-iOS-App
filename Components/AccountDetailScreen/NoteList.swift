@@ -14,11 +14,11 @@ struct NotesList: View {
     @EnvironmentObject var acccountDetailScreenViewModelObject: AccountDetailViewScreenViewModel
     @State private var showOverlay = false
     @State var createNoteScreenActivated = false
-    @Binding var propagateClick : Int
+    @Binding var propagateClick: Int
     
     var body: some View {
         VStack(spacing: 0) {
-            HStack{
+            HStack {
                 Image("NoteIcon")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
@@ -33,8 +33,8 @@ struct NotesList: View {
                 Spacer()
                 
                 NavigationLink(destination: CreateNoteScreen(accountId: accountId, accountName: accountName, isAccountSelectable: false)
-                ){
-                    HStack{
+                ) {
+                    HStack {
                         Image("AddIcon")
                             .resizable()
                             .frame(width: 20.0, height: 20.0)
@@ -49,8 +49,7 @@ struct NotesList: View {
             if acccountDetailScreenViewModelObject.isNoteListLoading {
                 ProgressView()
                     .tint(Color("LoginButtonSecondary"))
-            }
-            else if acccountDetailScreenViewModelObject.noteData.note_ids.isEmpty {
+            } else if acccountDetailScreenViewModelObject.noteData.note_ids.isEmpty {
                 VStack(spacing: 0) {
                     HStack {
                         Spacer()
@@ -76,14 +75,14 @@ struct NotesList: View {
                 .frame(maxWidth: .infinity, alignment: .center)
                 Spacer()
             } else {
-                VStack{
+                VStack {
                     let noteIdsArray = self.acccountDetailScreenViewModelObject.noteData.note_ids
                     ForEach(Array(noteIdsArray.enumerated()), id: \.offset) { index, noteId in
                         NavigationLink(destination: NoteDetailScreen(noteId: noteId, accountId: accountId, accountName: accountName)
-                        ){
-                            if self.acccountDetailScreenViewModelObject.noteData.note_map_by_id[noteId] != nil{
+                        ) {
+                            if self.acccountDetailScreenViewModelObject.noteData.note_map_by_id[noteId] != nil {
                                 NoteCardView(noteId: noteId, accountId: accountId,
-                                             noteIndex: index,propagateClick: $propagateClick)
+                                             noteIndex: index, propagateClick: $propagateClick)
                             }
                         }
                         .buttonStyle(.plain)
@@ -106,14 +105,14 @@ struct NoteCardView: View {
     @EnvironmentObject var acccountDetailScreenViewModelObject: AccountDetailViewScreenViewModel
     var noteData: [String: Note] = [:]
     @State var isPopoverVisible: Bool = false
-    @Binding var propagateClick : Int
+    @Binding var propagateClick: Int
     @State var isSelfPopupTriggered = false
     
     var body: some View {
-        VStack(spacing: 0){
+        VStack(spacing: 0) {
             HStack {
                 Text("\(BasicHelper.getInitials(from: acccountDetailScreenViewModelObject.noteData.note_map_by_id[noteId]?.creator ?? ""))")
-                    .frame(width: 18, height:18)
+                    .frame(width: 18, height: 18)
                     .font(.nunitoBold(size: 6))
                     .foregroundColor(.black)
                     .background(Color("UserBubble"))
@@ -127,14 +126,13 @@ struct NoteCardView: View {
                 
                 Spacer()
                 
-                HStack(spacing: 0){
+                HStack(spacing: 0) {
                     Text("\(BasicHelper.getFormattedDateForCard(from: acccountDetailScreenViewModelObject.noteData.note_map_by_id[noteId]?.last_modified_time ?? ""))")
                         .font(.nunitoLight(size: 12))
                         .foregroundColor(Color("TextPrimary"))
                         .accessibilityIdentifier("txt_account_detail_note_last_modified_time_\(noteIndex)")
                     
-                    
-                    Button{
+                    Button {
                         isSelfPopupTriggered = true
                         isPopoverVisible.toggle()
                     } label: {
@@ -161,7 +159,7 @@ struct NoteCardView: View {
             RoundedRectangle(cornerRadius: 5)
                 .stroke(Color("CardBorder"), lineWidth: 1)
         )
-        .overlay(alignment: .topTrailing){
+        .overlay(alignment: .topTrailing) {
             if isPopoverVisible {
                 VStack {
                     Button(action: {
@@ -174,8 +172,8 @@ struct NoteCardView: View {
                                 acccountDetailScreenViewModelObject.deleteNote(accountId: accountId, noteId: noteId)
                             }
                         ))
-                    }){
-                        HStack{
+                    }) {
+                        HStack {
                             Image("DeleteIcon")
                                 .frame(width: 20, height: 20)
                             Text("Delete")
@@ -196,13 +194,13 @@ struct NoteCardView: View {
                 .offset(x: -14, y: 32)
             }
         }
-        .onChange(of: propagateClick){_ in
+        .onChange(of: propagateClick) {_ in
             // onChange to hide Popover for events triggered by other cards or screen
             
-            if(isSelfPopupTriggered){
+            if isSelfPopupTriggered {
                 // Don't hide popover if event trigged by self
                 isSelfPopupTriggered = false
-            }else{
+            } else {
                 isPopoverVisible = false
             }
         }

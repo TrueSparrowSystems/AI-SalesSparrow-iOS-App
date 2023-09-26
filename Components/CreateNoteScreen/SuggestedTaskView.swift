@@ -12,8 +12,8 @@ struct SuggestedTaskCardView: View {
     var suggestion: TaskSuggestionStruct
     var index: Int
     
-    @EnvironmentObject var createNoteScreenViewModel : CreateNoteScreenViewModel
-    @EnvironmentObject var createTaskViewModel : CreateTaskViewModel
+    @EnvironmentObject var createNoteScreenViewModel: CreateNoteScreenViewModel
+    @EnvironmentObject var createTaskViewModel: CreateTaskViewModel
     @State var selectedDate: Date = Date()
     @State var showEditTaskView = false
     @State private var showUserSearchView: Bool = false
@@ -21,7 +21,7 @@ struct SuggestedTaskCardView: View {
     @FocusState private var userSelected: Bool
     @State var isAddTaskInProgress = false
     
-    init(accountId: String,suggestion: TaskSuggestionStruct, index: Int) {
+    init(accountId: String, suggestion: TaskSuggestionStruct, index: Int) {
         self.accountId = accountId
         self.suggestion = suggestion
         self.index = index
@@ -30,15 +30,15 @@ struct SuggestedTaskCardView: View {
     var body: some View {
         var suggestionId = suggestion.id
         let suggestedTaskState = createNoteScreenViewModel.suggestedTaskStates[suggestionId ?? ""] ?? [:]
-        VStack{
-            if ((suggestedTaskState["isTaskSaved"] as! Bool)){
-                SavedTaskCard(recommendedText: ((suggestedTaskState["description"] ?? "") as! String), selectedDate: selectedDate, assignedToUsername: (suggestedTaskState["assignedToUsername"] ?? "") as! String, index: index, accountId: accountId, taskId: (suggestedTaskState["taskId"] ?? "") as! String, onDeleteTask : {
+        VStack {
+            if suggestedTaskState["isTaskSaved"] as! Bool {
+                SavedTaskCard(recommendedText: ((suggestedTaskState["description"] ?? "") as! String), selectedDate: selectedDate, assignedToUsername: (suggestedTaskState["assignedToUsername"] ?? "") as! String, index: index, accountId: accountId, taskId: (suggestedTaskState["taskId"] ?? "") as! String, onDeleteTask: {
                     createNoteScreenViewModel.removeTaskSuggestion(at: index)
                 })
-            }else{
-                VStack{
+            } else {
+                VStack {
                     // text editor component
-                    HStack{
+                    HStack {
                         Text("\((suggestedTaskState["description"] ?? "") as! String)")
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .multilineTextAlignment(.leading)
@@ -57,7 +57,7 @@ struct SuggestedTaskCardView: View {
                     }
                     
                     // assign to component + picker
-                    HStack{
+                    HStack {
                         HStack {
                             Text("Assign to")
                                 .foregroundColor(Color("TextPrimary"))
@@ -70,8 +70,8 @@ struct SuggestedTaskCardView: View {
                             Button(action: {
                                 // Toggle user search view
                                 showUserSearchView = true
-                            }){
-                                if(((suggestedTaskState["assignedToUsername"] ?? "") as! String).isEmpty){
+                            }) {
+                                if ((suggestedTaskState["assignedToUsername"] ?? "") as! String).isEmpty {
                                     Text("Select")
                                         .foregroundColor(Color("RedHighlight"))
                                         .font(.nunitoBold(size: 12))
@@ -101,7 +101,7 @@ struct SuggestedTaskCardView: View {
                                 }
                                 
                             }
-                            .sheet(isPresented: $showUserSearchView){
+                            .sheet(isPresented: $showUserSearchView) {
                                 UserSearchView(isPresented: $showUserSearchView,
                                                onUserSelect: { userId, userName in
                                     createNoteScreenViewModel.setTaskDataAttribute(id: suggestionId ?? "", attrKey: "assignedToUsername", attrValue: userName)
@@ -118,8 +118,8 @@ struct SuggestedTaskCardView: View {
                     }
                     
                     // due date component + picker
-                    HStack{
-                        HStack{
+                    HStack {
+                        HStack {
                             Text("Due")
                                 .foregroundColor(Color("TextPrimary"))
                                 .font(.nunitoSemiBold(size: 12))
@@ -128,8 +128,7 @@ struct SuggestedTaskCardView: View {
                             // add verticle divider gray line
                             VerticalDividerRectangleView(width: 1, color: Color("BorderColor"))
                             
-                            
-                            ZStack{
+                            ZStack {
                                 DatePickerView(selectedDate: $selectedDate, onTap: {
                                     createNoteScreenViewModel.setTaskDataAttribute(id: suggestionId ?? "", attrKey: "isDateSelected", attrValue: true)
                                 })
@@ -137,8 +136,8 @@ struct SuggestedTaskCardView: View {
                                 .cornerRadius(8)
                                 .accessibilityIdentifier("dp_create_note_select_date_\(index)")
                                 
-                                if(!(suggestedTaskState["isDateSelected"] as! Bool)){
-                                    HStack (spacing: 0) {
+                                if !(suggestedTaskState["isDateSelected"] as! Bool) {
+                                    HStack(spacing: 0) {
                                         Text("Select Date")
                                             .foregroundColor(Color("TermsPrimary"))
                                             .font(.nunitoLight(size: 12))
@@ -153,9 +152,8 @@ struct SuggestedTaskCardView: View {
                                     .background(.white)
                                     .userInteractionDisabled()
                                     
-                                }
-                                else{
-                                    HStack (spacing: 0) {
+                                } else {
+                                    HStack(spacing: 0) {
                                         Text(BasicHelper.getDateStringFromDate(from: selectedDate))
                                             .foregroundColor(Color("TermsPrimary"))
                                             .font(.nunitoBold(size: 12))
@@ -179,8 +177,8 @@ struct SuggestedTaskCardView: View {
                     }
                     
                     // action buttons + view model
-                    if(!(suggestedTaskState["isTaskSaved"] as! Bool)){
-                        HStack{
+                    if !(suggestedTaskState["isTaskSaved"] as! Bool) {
+                        HStack {
                             Button(action: {
                                 isAddTaskInProgress = true
                                 createTaskViewModel.createTask(accountId: accountId, assignedToName: ((suggestedTaskState["assignedToUsername"] ?? "") as! String), crmOrganizationUserId: ((suggestedTaskState["selectedUserId"] ?? "") as! String), description: ((suggestedTaskState["description"] ?? "") as! String), dueDate: selectedDate, onSuccess: { taskId in
@@ -191,9 +189,9 @@ struct SuggestedTaskCardView: View {
                                 }, onFailure: {
                                     isAddTaskInProgress = false
                                 })
-                            }, label:{
-                                HStack(alignment: .center, spacing: 0){
-                                    if(isAddTaskInProgress){
+                            }, label: {
+                                HStack(alignment: .center, spacing: 0) {
+                                    if isAddTaskInProgress {
                                         ProgressView()
                                             .tint(Color("LoginButtonPrimary"))
                                             .controlSize(.small)
@@ -202,7 +200,7 @@ struct SuggestedTaskCardView: View {
                                             .font(.nunitoMedium(size: 12))
                                             .accessibilityIdentifier("txt_create_note_adding_task_index_\(index)")
                                         
-                                    } else{
+                                    } else {
                                         Text("Add Task")
                                             .foregroundColor(.white)
                                             .font(.nunitoMedium(size: 12))
@@ -230,9 +228,8 @@ struct SuggestedTaskCardView: View {
                                     }
                                 ))
                                 
-                                
-                            }, label:{
-                                HStack(alignment: .center, spacing: 0){
+                            }, label: {
+                                HStack(alignment: .center, spacing: 0) {
                                     Text("Cancel")
                                         .foregroundColor(Color("CancelText"))
                                         .font(.nunitoMedium(size: 12))
@@ -253,7 +250,7 @@ struct SuggestedTaskCardView: View {
                 .padding()
                 .overlay(
                     RoundedRectangle(cornerRadius: 4)
-                        .stroke(style: StrokeStyle(lineWidth: 1.5, dash: [1,5])) // Specify the dash pattern here
+                        .stroke(style: StrokeStyle(lineWidth: 1.5, dash: [1, 5])) // Specify the dash pattern here
                         .foregroundColor(Color("TextPrimary"))
                 )
             }
@@ -261,7 +258,7 @@ struct SuggestedTaskCardView: View {
         .onChange(of: selectedDate, perform: {_ in
             createNoteScreenViewModel.setTaskDataAttribute(id: suggestionId ?? "", attrKey: "dueDate", attrValue: selectedDate)
         })
-        .onAppear{
+        .onAppear {
             self.selectedDate =  suggestedTaskState["dueDate"] as! Date
         }
         .onChange(of: createNoteScreenViewModel.suggestedData, perform: {_ in
@@ -285,22 +282,22 @@ struct SuggestedTaskCardView: View {
     
 }
 
-struct SavedTaskCard : View {
+struct SavedTaskCard: View {
     var recommendedText: String
     var selectedDate: Date
     var assignedToUsername: String = ""
     var index: Int
     var accountId: String
     var taskId: String
-    var onDeleteTask : () -> Void
+    var onDeleteTask: () -> Void
     @State var isPopoverVisible: Bool = false
     @EnvironmentObject var acccountDetailScreenViewModelObject: AccountDetailViewScreenViewModel
     @EnvironmentObject var createNoteScreenViewModel: CreateNoteScreenViewModel
     
-    var body : some View {
+    var body: some View {
         VStack {
             VStack {
-                HStack{
+                HStack {
                     Text(BasicHelper.getInitials(from: UserStateViewModel.shared.currentUser.name))
                         .frame(width: 18, height: 18)
                         .font(.nunitoBold(size: 6))
@@ -322,7 +319,7 @@ struct SavedTaskCard : View {
                         .accessibilityIdentifier("txt_created_timestamp")
                         .tracking(0.5)
                     
-                    Button{
+                    Button {
                         isPopoverVisible.toggle()
                     } label: {
                         Image("DotsThreeOutline")
@@ -344,7 +341,7 @@ struct SavedTaskCard : View {
                     .background(Color("AliceBlue"))
                     .cornerRadius(6)
                 
-                HStack{
+                HStack {
                     HStack {
                         Text("Assign to")
                             .foregroundColor(Color("PortGore"))
@@ -368,7 +365,6 @@ struct SavedTaskCard : View {
                             .accessibilityIdentifier("txt_add_task_selected_user")
                             .tracking(0.5)
                         
-                        
                     }
                     .padding(EdgeInsets(top: 6, leading: 8, bottom: 6, trailing: 8))
                     .background(Color("GhostWhite"))
@@ -378,7 +374,7 @@ struct SavedTaskCard : View {
                 }
                 .padding(.vertical, 6)
                 
-                HStack{
+                HStack {
                     HStack {
                         Text("Due")
                             .foregroundColor(Color("PortGore"))
@@ -387,7 +383,6 @@ struct SavedTaskCard : View {
                         
                         // add verticle divider gray line
                         VerticalDividerRectangleView(width: 1, color: Color("PortGore").opacity(0.5))
-                        
                         
                         Text(BasicHelper.getDateStringFromDate(from: selectedDate))
                             .foregroundColor(Color("PortGore"))
@@ -404,7 +399,7 @@ struct SavedTaskCard : View {
                 }
             }
             .padding()
-            .overlay(alignment: .topTrailing){
+            .overlay(alignment: .topTrailing) {
                 if isPopoverVisible {
                     VStack {
                         Button(action: {
@@ -415,13 +410,13 @@ struct SavedTaskCard : View {
                                 message: Text("Are you sure you want to delete this task?"),
                                 submitText: "Delete",
                                 onSubmitPress: {
-                                    acccountDetailScreenViewModelObject.deleteTask(accountId: accountId, taskId: taskId){
+                                    acccountDetailScreenViewModelObject.deleteTask(accountId: accountId, taskId: taskId) {
                                         onDeleteTask()
                                     }
                                 }
                             ))
-                        }){
-                            HStack{
+                        }) {
+                            HStack {
                                 Image("DeleteIcon")
                                     .frame(width: 20, height: 20)
                                 Text("Delete")
@@ -444,7 +439,7 @@ struct SavedTaskCard : View {
             }
             .background(.white)
             
-            HStack{
+            HStack {
                 Image("CheckWithGreenTick")
                     .scaledToFit()
                     .frame(width: 18, height: 18)

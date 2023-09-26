@@ -5,12 +5,11 @@
 //  Created by Mohit Charkha on 23/08/23.
 //
 
-
 import XCTest
 
 final class UserAccountDetailsUITests: XCTestCase {
     
-    func openUserAccountDetailScreen(app: XCUIApplication){
+    func openUserAccountDetailScreen(app: XCUIApplication) {
         let timeout = 2
         
         let userAccountDetailIcon = app.buttons["txt_user_account_icon"]
@@ -18,7 +17,7 @@ final class UserAccountDetailsUITests: XCTestCase {
         userAccountDetailIcon.tap()
     }
     
-    func testUserAccountScreen(){
+    func testUserAccountScreen() {
         let app = XCUIApplication()
         app.launchArguments = ["isRunningUITests"]
         app.launch()
@@ -28,7 +27,7 @@ final class UserAccountDetailsUITests: XCTestCase {
         
         openUserAccountDetailScreen(app: app)
                 
-        //Check if dismiss Icon is loaded
+        // Check if dismiss Icon is loaded
         let dismissButton = app.images["img_user_account_detail_dismiss"]
         XCTAssertTrue(dismissButton.waitForExistence(timeout: TimeInterval(timeout)))
         
@@ -47,7 +46,7 @@ final class UserAccountDetailsUITests: XCTestCase {
         XCTAssertTrue(logoutButton.isHittable)
     }
     
-    func testLogoutFlow(){
+    func testLogoutFlow() {
         let app = XCUIApplication()
         app.launchArguments = ["isRunningUITests"]
         app.launch()
@@ -68,7 +67,7 @@ final class UserAccountDetailsUITests: XCTestCase {
         XCTAssertTrue(salesforceConnectButton.waitForExistence(timeout: TimeInterval(timeout)))
     }
     
-    func testUserAccountDisconnectFlow(){
+    func testUserAccountDisconnectFlow() {
         let app = XCUIApplication()
         app.launchArguments = ["isRunningUITests"]
         app.launch()

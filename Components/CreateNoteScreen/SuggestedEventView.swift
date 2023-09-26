@@ -12,8 +12,8 @@ struct SuggestedEventCardView: View {
     var suggestion: EventSuggestionStruct
     var index: Int
     
-    @EnvironmentObject var createNoteScreenViewModel : CreateNoteScreenViewModel
-    @EnvironmentObject var createEventViewModel : CreateEventViewModel
+    @EnvironmentObject var createNoteScreenViewModel: CreateNoteScreenViewModel
+    @EnvironmentObject var createEventViewModel: CreateEventViewModel
     @State var selectedStartDate: Date = Date()
     @State var selectedStartTime: Date = Date()
     @State var selectedEndDate: Date = Date()
@@ -24,7 +24,7 @@ struct SuggestedEventCardView: View {
     @FocusState private var userSelected: Bool
     @State var isAddEventInProgress = false
     
-    init(accountId: String,suggestion: EventSuggestionStruct, index: Int) {
+    init(accountId: String, suggestion: EventSuggestionStruct, index: Int) {
         self.accountId = accountId
         self.suggestion = suggestion
         self.index = index
@@ -33,15 +33,15 @@ struct SuggestedEventCardView: View {
     var body: some View {
         var suggestionId = suggestion.id
         let suggestedEventState = createNoteScreenViewModel.suggestedEventStates[suggestionId ?? ""] ?? [:]
-        VStack{
-            if ((suggestedEventState["isEventSaved"] as! Bool)){
-                SavedEventCard(recommendedText: ((suggestedEventState["description"] ?? "") as! String), selectedStartDate: selectedStartDate, selectedStartTime: selectedStartTime, selectedEndDate: selectedEndDate, selectedEndTime: selectedEndTime, index: index, accountId: accountId, eventId: (suggestedEventState["eventId"] ?? "") as! String, onDeleteEvent : {
+        VStack {
+            if suggestedEventState["isEventSaved"] as! Bool {
+                SavedEventCard(recommendedText: ((suggestedEventState["description"] ?? "") as! String), selectedStartDate: selectedStartDate, selectedStartTime: selectedStartTime, selectedEndDate: selectedEndDate, selectedEndTime: selectedEndTime, index: index, accountId: accountId, eventId: (suggestedEventState["eventId"] ?? "") as! String, onDeleteEvent: {
                     createNoteScreenViewModel.removeEventSuggestion(at: index)
                 })
-            }else{
-                VStack{
+            } else {
+                VStack {
                     // text editor component
-                    HStack{
+                    HStack {
                         Text("\((suggestedEventState["description"] ?? "") as! String)")
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .multilineTextAlignment(.leading)
@@ -59,18 +59,17 @@ struct SuggestedEventCardView: View {
                         showEditEventView = true
                     }
                     
-                    
-                    VStack{
+                    VStack {
                         // start date component + picker
                         HStack {
                             Text("Start")
-                                .frame(width: 30,height: 30, alignment: .leading)
+                                .frame(width: 30, height: 30, alignment: .leading)
                                 .font(.nunitoBold(size: 12))
                                 .foregroundColor(Color("TextPrimary"))
                                 .accessibilityIdentifier("txt_add_events_start")
                             
-                            ZStack{
-                                if(!(suggestedEventState["isEventSaved"] as! Bool)){
+                            ZStack {
+                                if !(suggestedEventState["isEventSaved"] as! Bool) {
                                     DatePickerView(selectedDate: $selectedStartDate, onTap: {
                                         createNoteScreenViewModel.setEventDataAttribute(id: suggestionId ?? "", attrKey: "isStartDateSelected", attrValue: true)
                                     })
@@ -79,8 +78,8 @@ struct SuggestedEventCardView: View {
                                     .accessibilityIdentifier("dp_add_event_select_start_date")
                                 }
                                 
-                                if(!(suggestedEventState["isStartDateSelected"] as! Bool)){
-                                    HStack (spacing: 0) {
+                                if !(suggestedEventState["isStartDateSelected"] as! Bool) {
+                                    HStack(spacing: 0) {
                                         Text("Select Date")
                                             .foregroundColor(Color("TermsPrimary"))
                                             .font(.nunitoLight(size: 12))
@@ -97,9 +96,8 @@ struct SuggestedEventCardView: View {
                                     .background(.white)
                                     .userInteractionDisabled()
                                     
-                                }
-                                else{
-                                    HStack (spacing: 0) {
+                                } else {
+                                    HStack(spacing: 0) {
                                         Text(BasicHelper.getDateStringFromDate(from: selectedStartDate))
                                             .foregroundColor(Color("TermsPrimary"))
                                             .font(.nunitoBold(size: 12))
@@ -126,8 +124,8 @@ struct SuggestedEventCardView: View {
                                 RoundedRectangle(cornerRadius: 4)
                                     .stroke(Color("CardBorder"), lineWidth: 1)
                             )
-                            ZStack{
-                                if(!(suggestedEventState["isEventSaved"] as! Bool)){
+                            ZStack {
+                                if !(suggestedEventState["isEventSaved"] as! Bool) {
                                     TimePickerView(selectedTime: $selectedStartTime, onTap: {
                                         createNoteScreenViewModel.setEventDataAttribute(id: suggestionId ?? "", attrKey: "isStartTimeSelected", attrValue: true)
                                     })
@@ -136,8 +134,8 @@ struct SuggestedEventCardView: View {
                                     .accessibilityIdentifier("dp_add_event_select_start_time")
                                 }
                                 
-                                if(!(suggestedEventState["isStartTimeSelected"] as! Bool)){
-                                    HStack (spacing: 0) {
+                                if !(suggestedEventState["isStartTimeSelected"] as! Bool) {
+                                    HStack(spacing: 0) {
                                         Text("Select Time")
                                             .foregroundColor(Color("TermsPrimary"))
                                             .font(.nunitoLight(size: 12))
@@ -154,9 +152,8 @@ struct SuggestedEventCardView: View {
                                     .background(.white)
                                     .userInteractionDisabled()
                                     
-                                }
-                                else{
-                                    HStack (spacing: 0) {
+                                } else {
+                                    HStack(spacing: 0) {
                                         Text(BasicHelper.getTimeStringFromDate(from: selectedStartTime))
                                             .foregroundColor(Color("TermsPrimary"))
                                             .font(.nunitoBold(size: 12))
@@ -190,13 +187,13 @@ struct SuggestedEventCardView: View {
                         // end date component + picker
                         HStack {
                             Text("End")
-                                .frame(width: 30,height: 30, alignment: .leading)
+                                .frame(width: 30, height: 30, alignment: .leading)
                                 .font(.nunitoBold(size: 12))
                                 .foregroundColor(Color("TextPrimary"))
                                 .accessibilityIdentifier("txt_add_events_end")
                             
-                            ZStack{
-                                if(!(suggestedEventState["isEventSaved"] as! Bool)){
+                            ZStack {
+                                if !(suggestedEventState["isEventSaved"] as! Bool) {
                                     DatePickerView(selectedDate: $selectedEndDate, onTap: {
                                         createNoteScreenViewModel.setEventDataAttribute(id: suggestionId ?? "", attrKey: "isEndDateSelected", attrValue: true)
                                     })
@@ -205,8 +202,8 @@ struct SuggestedEventCardView: View {
                                     .accessibilityIdentifier("dp_add_event_select_end_date")
                                 }
                                 
-                                if(!(suggestedEventState["isEndDateSelected"] as! Bool)){
-                                    HStack (spacing: 0) {
+                                if !(suggestedEventState["isEndDateSelected"] as! Bool) {
+                                    HStack(spacing: 0) {
                                         Text("Select Date")
                                             .foregroundColor(Color("TermsPrimary"))
                                             .font(.nunitoLight(size: 12))
@@ -223,9 +220,8 @@ struct SuggestedEventCardView: View {
                                     .background(.white)
                                     .userInteractionDisabled()
                                     
-                                }
-                                else{
-                                    HStack (spacing: 0) {
+                                } else {
+                                    HStack(spacing: 0) {
                                         Text(BasicHelper.getDateStringFromDate(from: selectedEndDate))
                                             .foregroundColor(Color("TermsPrimary"))
                                             .font(.nunitoBold(size: 12))
@@ -253,9 +249,8 @@ struct SuggestedEventCardView: View {
                                     .stroke(Color("CardBorder"), lineWidth: 1)
                             )
                             
-                            
-                            ZStack{
-                                if(!(suggestedEventState["isEventSaved"] as! Bool)){
+                            ZStack {
+                                if !(suggestedEventState["isEventSaved"] as! Bool) {
                                     TimePickerView(selectedTime: $selectedEndTime, onTap: {
                                         createNoteScreenViewModel.setEventDataAttribute(id: suggestionId ?? "", attrKey: "isEndTimeSelected", attrValue: true)
                                     })
@@ -264,8 +259,8 @@ struct SuggestedEventCardView: View {
                                     .accessibilityIdentifier("dp_add_event_select_end_time")
                                 }
                                 
-                                if(!(suggestedEventState["isEndTimeSelected"] as! Bool)){
-                                    HStack (spacing: 0) {
+                                if !(suggestedEventState["isEndTimeSelected"] as! Bool) {
+                                    HStack(spacing: 0) {
                                         Text("Select Time")
                                             .foregroundColor(Color("TermsPrimary"))
                                             .font(.nunitoLight(size: 12))
@@ -282,9 +277,8 @@ struct SuggestedEventCardView: View {
                                     .background(.white)
                                     .userInteractionDisabled()
                                     
-                                }
-                                else{
-                                    HStack (spacing: 0) {
+                                } else {
+                                    HStack(spacing: 0) {
                                         Text(BasicHelper.getTimeStringFromDate(from: selectedEndTime))
                                             .foregroundColor(Color("TermsPrimary"))
                                             .font(.nunitoBold(size: 12))
@@ -319,22 +313,21 @@ struct SuggestedEventCardView: View {
                     .background(Color("AliceBlue"))
                     .padding(.vertical, 10)
                     
-                    
                     // action buttons + view model
-                    if(!(suggestedEventState["isEventSaved"] as! Bool)){
-                        HStack{
+                    if !(suggestedEventState["isEventSaved"] as! Bool) {
+                        HStack {
                             Button(action: {
                                 isAddEventInProgress = true
-                                createEventViewModel.createEvent(accountId: accountId, description: ((suggestedEventState["description"] ?? "") as! String), startDate: selectedStartDate, startTime: selectedStartTime, endDate: selectedEndDate, endTime: selectedEndTime,  onSuccess: { eventId in
+                                createEventViewModel.createEvent(accountId: accountId, description: ((suggestedEventState["description"] ?? "") as! String), startDate: selectedStartDate, startTime: selectedStartTime, endDate: selectedEndDate, endTime: selectedEndTime, onSuccess: { eventId in
                                     createNoteScreenViewModel.setEventDataAttribute(id: suggestionId ?? "", attrKey: "eventId", attrValue: eventId)
                                     createNoteScreenViewModel.setEventDataAttribute(id: suggestionId ?? "", attrKey: "isEventSaved", attrValue: true)
                                     isAddEventInProgress = false
                                 }, onFailure: {
                                     isAddEventInProgress = false
                                 })
-                            }, label:{
-                                HStack(alignment: .center, spacing: 0){
-                                    if(isAddEventInProgress){
+                            }, label: {
+                                HStack(alignment: .center, spacing: 0) {
+                                    if isAddEventInProgress {
                                         ProgressView()
                                             .tint(Color("LoginButtonPrimary"))
                                             .controlSize(.small)
@@ -343,7 +336,7 @@ struct SuggestedEventCardView: View {
                                             .font(.nunitoMedium(size: 12))
                                             .accessibilityIdentifier("txt_create_note_adding_event_index_\(index)")
                                         
-                                    } else{
+                                    } else {
                                         Text("Add Event")
                                             .foregroundColor(.white)
                                             .font(.nunitoMedium(size: 12))
@@ -371,9 +364,8 @@ struct SuggestedEventCardView: View {
                                     }
                                 ))
                                 
-                                
-                            }, label:{
-                                HStack(alignment: .center, spacing: 0){
+                            }, label: {
+                                HStack(alignment: .center, spacing: 0) {
                                     Text("Cancel")
                                         .foregroundColor(Color("CancelText"))
                                         .font(.nunitoMedium(size: 12))
@@ -394,7 +386,7 @@ struct SuggestedEventCardView: View {
                 .padding()
                 .overlay(
                     RoundedRectangle(cornerRadius: 4)
-                        .stroke(style: StrokeStyle(lineWidth: 1.5, dash: [1,5])) // Specify the dash pattern here
+                        .stroke(style: StrokeStyle(lineWidth: 1.5, dash: [1, 5])) // Specify the dash pattern here
                         .foregroundColor(Color("TextPrimary"))
                 )
             }
@@ -411,7 +403,7 @@ struct SuggestedEventCardView: View {
         .onChange(of: selectedEndTime, perform: {_ in
             createNoteScreenViewModel.setEventDataAttribute(id: suggestionId ?? "", attrKey: "endTime", attrValue: selectedEndTime)
         })
-        .onAppear{
+        .onAppear {
             self.selectedStartDate =  suggestedEventState["startDate"] as! Date
             self.selectedStartTime =  suggestedEventState["startTime"] as! Date
             self.selectedEndDate =  suggestedEventState["endDate"] as! Date
@@ -441,7 +433,7 @@ struct SuggestedEventCardView: View {
     
 }
 
-struct SavedEventCard : View {
+struct SavedEventCard: View {
     var recommendedText: String
     var selectedStartDate: Date
     var selectedStartTime: Date
@@ -450,15 +442,15 @@ struct SavedEventCard : View {
     var index: Int
     var accountId: String
     var eventId: String
-    var onDeleteEvent : () -> Void
+    var onDeleteEvent: () -> Void
     @State var isPopoverVisible: Bool = false
     @EnvironmentObject var acccountDetailScreenViewModelObject: AccountDetailViewScreenViewModel
     @EnvironmentObject var createNoteScreenViewModel: CreateNoteScreenViewModel
     
-    var body : some View {
+    var body: some View {
         VStack {
             VStack {
-                HStack{
+                HStack {
                     Text(BasicHelper.getInitials(from: UserStateViewModel.shared.currentUser.name))
                         .frame(width: 18, height: 18)
                         .font(.nunitoBold(size: 6))
@@ -480,7 +472,7 @@ struct SavedEventCard : View {
                         .accessibilityIdentifier("txt_created_timestamp")
                         .tracking(0.5)
                     
-                    Button{
+                    Button {
                         isPopoverVisible.toggle()
                     } label: {
                         Image("DotsThreeOutline")
@@ -502,9 +494,8 @@ struct SavedEventCard : View {
                     .background(Color("AliceBlue"))
                     .cornerRadius(6)
                 
-                
-                HStack{
-                    HStack(alignment: .center, spacing: 0){
+                HStack {
+                    HStack(alignment: .center, spacing: 0) {
                         Image("CalendarCheck")
                             .frame(width: 16, height: 16)
                             .padding(.trailing, 4)
@@ -526,7 +517,7 @@ struct SavedEventCard : View {
                             .accessibilityIdentifier("txt_create_note_event_start_date_\(index)")
                             .lineLimit(1)
                         
-                        Text(" - \(BasicHelper.getFormattedDateForDateTime(from:BasicHelper.getFormattedDateTimeString(from: selectedEndDate, from: selectedEndTime)))")
+                        Text(" - \(BasicHelper.getFormattedDateForDateTime(from: BasicHelper.getFormattedDateTimeString(from: selectedEndDate, from: selectedEndTime)))")
                             .font(.nunitoRegular(size: 12))
                             .foregroundColor(Color("TermsPrimary"))
                             .tracking(0.5)
@@ -539,7 +530,7 @@ struct SavedEventCard : View {
                 }
             }
             .padding()
-            .overlay(alignment: .topTrailing){
+            .overlay(alignment: .topTrailing) {
                 if isPopoverVisible {
                     VStack {
                         Button(action: {
@@ -550,13 +541,13 @@ struct SavedEventCard : View {
                                 message: Text("Are you sure you want to delete this event?"),
                                 submitText: "Delete",
                                 onSubmitPress: {
-                                    acccountDetailScreenViewModelObject.deleteEvent(accountId: accountId, eventId: eventId){
+                                    acccountDetailScreenViewModelObject.deleteEvent(accountId: accountId, eventId: eventId) {
                                         onDeleteEvent()
                                     }
                                 }
                             ))
-                        }){
-                            HStack{
+                        }) {
+                            HStack {
                                 Image("DeleteIcon")
                                     .frame(width: 20, height: 20)
                                 Text("Delete")
@@ -579,7 +570,7 @@ struct SavedEventCard : View {
             }
             .background(.white)
             
-            HStack{
+            HStack {
                 Image("CheckWithGreenTick")
                     .scaledToFit()
                     .frame(width: 18, height: 18)
@@ -602,6 +593,6 @@ struct SavedEventCard : View {
 
 struct SavedEventCard_Previews: PreviewProvider {
     static var previews: some View {
-        SavedEventCard( recommendedText: "Hello text", selectedStartDate: Date(), selectedStartTime: Date(),selectedEndDate: Date(), selectedEndTime: Date(), index: 0, accountId: "sdfg34rf", eventId: "sdf234rtgv", onDeleteEvent: {})
+        SavedEventCard( recommendedText: "Hello text", selectedStartDate: Date(), selectedStartTime: Date(), selectedEndDate: Date(), selectedEndTime: Date(), index: 0, accountId: "sdfg34rf", eventId: "sdf234rtgv", onDeleteEvent: {})
     }
 }

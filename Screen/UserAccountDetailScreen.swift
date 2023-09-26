@@ -5,18 +5,17 @@
 //  Created by Kartik Kapgate on 16/08/23.
 //
 
-
 import SwiftUI
 
 struct UserAccountDetailScreen: View {
     let appVersion: String = DeviceSettingManager.shared.deviceHeaderParams["X-SalesSparrow-App-Version"] as! String
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @EnvironmentObject var userStateViewModel : UserStateViewModel
+    @EnvironmentObject var userStateViewModel: UserStateViewModel
     
     var body: some View {
-        VStack (spacing: 16) {
-            HStack{
+        VStack(spacing: 16) {
+            HStack {
                 Image("ArrowLeft")
                     .frame(width: 24, height: 24)
                     .accessibilityIdentifier("img_user_account_detail_dismiss")
@@ -27,8 +26,8 @@ struct UserAccountDetailScreen: View {
                 Spacer()
             }
             
-            VStack (spacing: 24) {
-                HStack{
+            VStack(spacing: 24) {
+                HStack {
                     Text(BasicHelper.getInitials(from: userStateViewModel.currentUser.name))
                         .frame(width: 30, height: 30)
                         .font(.nunitoBold(size: 9))
@@ -62,7 +61,6 @@ struct UserAccountDetailScreen: View {
                             }
                             .accessibilityIdentifier("img_user_account_detail_salesforce_disconnect")
                             
-                            
                             Text("Disconnect Salesforce")
                                 .font(.nunitoSemiBold(size: 16))
                                 .foregroundColor(Color("TextPrimary"))
@@ -73,7 +71,6 @@ struct UserAccountDetailScreen: View {
                         .background(Color.white)
                         .cornerRadius(4)
                         .padding(EdgeInsets(top: 2, leading: 8, bottom: 2, trailing: 4))
-                        
                         
                         DisconnectDescription()
                     }
@@ -87,7 +84,7 @@ struct UserAccountDetailScreen: View {
                 .cornerRadius(4)
                 .overlay(RoundedRectangle(cornerRadius: 4).stroke(Color("BorderColor"), lineWidth: 1))
                 
-                HStack{
+                HStack {
                     Image("SignOut")
                         .padding(EdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 0))
                         .accessibilityIdentifier("img_user_account_detail_logout")
@@ -100,7 +97,6 @@ struct UserAccountDetailScreen: View {
                             userStateViewModel.logOut()
                         }
                     
-                    
                     Spacer()
                 }
                 .padding(10)
@@ -112,7 +108,7 @@ struct UserAccountDetailScreen: View {
             
             Spacer()
             
-            VStack{
+            VStack {
                 Text("V\(appVersion)")
                     .font(.nunitoSemiBold(size: 12))
                     .foregroundColor(Color("TextPrimary"))

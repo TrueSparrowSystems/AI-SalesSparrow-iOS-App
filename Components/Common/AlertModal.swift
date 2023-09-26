@@ -7,19 +7,19 @@
 
 import SwiftUI
 
-struct AlertModal : View{
+struct AlertModal: View {
     
     var body: some View {
         
-        ZStack{
+        ZStack {
             Color.black.opacity(0.7)
                 .edgesIgnoringSafeArea(.all)
                 .onTapGesture {
                     AlertViewModel.shared.dismissAlert()
                 }
             
-            VStack (spacing:0) {
-                VStack (spacing: 16) {
+            VStack(spacing: 0) {
+                VStack(spacing: 16) {
                     Text(AlertViewModel.shared.alert?.title ?? "")
                         .font(.system(size: 17, weight: .bold))
                         .foregroundColor(Color.black)
@@ -52,8 +52,7 @@ struct AlertModal : View{
                     .frame(maxWidth: .infinity)
                     .overlay(
                         Divider()
-                            .frame(maxWidth: 1, maxHeight: .infinity)
-                        ,alignment: .trailing
+                            .frame(maxWidth: 1, maxHeight: .infinity), alignment: .trailing
                     )
                     
                     Button(action: {

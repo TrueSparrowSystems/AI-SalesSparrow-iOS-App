@@ -12,9 +12,9 @@ struct TopBar: View {
     @State var accountDetailsScreenActivated = false
     @State var userAccountSettingScreenActivated = false
     @State var createNoteScreenActivated = false
-    @State var selectedAccountId: String? = nil
-    @State var selectedAccountName: String? = nil
-    @EnvironmentObject var userStateViewModel : UserStateViewModel
+    @State var selectedAccountId: String?
+    @State var selectedAccountName: String?
+    @EnvironmentObject var userStateViewModel: UserStateViewModel
     
     var body: some View {
         HStack {
@@ -53,7 +53,7 @@ struct TopBar: View {
                 .navigationBarBackButtonHidden(true),
                            isActive: self.$userAccountSettingScreenActivated) {
                 Text(BasicHelper.getInitials(from: userStateViewModel.currentUser.name))
-                    .frame(width: 30, height:30)
+                    .frame(width: 30, height: 30)
                     .font(.nunitoBold(size: 9))
                     .foregroundColor(.black)
                     .accessibilityIdentifier("txt_user_account_icon")
@@ -74,7 +74,7 @@ struct TopBar: View {
                         EmptyView()
                     }
                     .hidden()
-                } else if self.createNoteScreenActivated && selectedAccountId != nil{
+                } else if self.createNoteScreenActivated && selectedAccountId != nil {
                     NavigationLink(
                         destination: CreateNoteScreen(accountId: selectedAccountId!, accountName: selectedAccountName!, isAccountSelectable: false),
                         isActive: self.$createNoteScreenActivated

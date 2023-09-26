@@ -43,13 +43,12 @@ struct UserSearchView: View {
                 .background(Color("SearchPrimary"))
                 .opacity(0.6)
             
-            if(userSearchViewModel.isSearchUserInProgress){
+            if userSearchViewModel.isSearchUserInProgress {
                 ProgressView()
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                     .tint(Color("LoginButtonSecondary"))
                     .controlSize(.large)
-            }
-            else if(userSearchViewModel.userListData.crm_organization_user_ids.count > 0){
+            } else if userSearchViewModel.userListData.crm_organization_user_ids.count > 0 {
                 // List of users
                 UserListView(
                     listData: userSearchViewModel.userListData,
@@ -59,8 +58,7 @@ struct UserSearchView: View {
                     removeSearchTextFocus: removeSearchTextFocus,
                     onScroll: onScroll
                 )
-            }
-            else{
+            } else {
                 Text("No Result Found")
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                     .accessibilityIdentifier("txt_search_user_no_result_found")
@@ -68,17 +66,17 @@ struct UserSearchView: View {
         }
         .onAppear {
             userSearchViewModel.fetchData("")
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05){
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                 focused = true
             }
         }
         .background(Color("Background"))
     }
     
-    func removeSearchTextFocus() -> Void {
+    func removeSearchTextFocus() {
         focused = false
     }
-    func onScroll(_: DragGesture.Value) -> Void {
+    func onScroll(_: DragGesture.Value) {
         focused = false
     }
 }
@@ -93,10 +91,10 @@ struct UserListView: View {
     
     var body: some View {
         ScrollView {
-            VStack(spacing: 0){
+            VStack(spacing: 0) {
                 ForEach(userIds, id: \.self) { userId in
                     if let user = listData.crm_organization_user_map_by_id[userId] {
-                        HStack (alignment: .center) {
+                        HStack(alignment: .center) {
                             Text("\(BasicHelper.getInitials(from: user.name))")
                                 .frame(width: 20, height: 20)
                                 .font(.nunitoBold(size: 6))

@@ -5,7 +5,6 @@
 //  Created by Mohit Charkha on 31/07/23.
 //
 
-
 import UIKit
 import UserNotifications
 import FirebaseCore
@@ -13,14 +12,14 @@ import FirebaseCrashlytics
 
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     
-    //In this method, you can perform any setup tasks that need to be done before the app is ready to use.
+    // In this method, you can perform any setup tasks that need to be done before the app is ready to use.
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
         bootService()
         let uuid = UIDevice.current.identifierForVendor?.uuidString
         let userId = uuid
         Crashlytics.crashlytics().setUserID(userId)
-        //TODO: Uncomment to register for push notification
+        // TODO: Uncomment to register for push notification
         //        registerForRemoteNotifications()
         return true
     }
@@ -28,10 +27,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     // A function to set env variable in case of test running. Also fetch logged in user.
     func bootService() {
         let isRunningUITests = ProcessInfo.processInfo.arguments.contains("isRunningUITests")
-        if(isRunningUITests && ProcessInfo.processInfo.arguments.count > 2){
+        if isRunningUITests && ProcessInfo.processInfo.arguments.count > 2 {
             let launchArgs = ProcessInfo.processInfo.arguments
             let testArgs: ArraySlice<String> = launchArgs[2...(launchArgs.count-1)]
-            let testCaseIdentifiers: Array<String> = [] + testArgs
+            let testCaseIdentifiers: [String] = [] + testArgs
             
             Environments.shared.testVars["testCaseIdentifiers"] = testCaseIdentifiers
         }

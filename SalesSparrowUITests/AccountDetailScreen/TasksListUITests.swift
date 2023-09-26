@@ -9,7 +9,7 @@ import XCTest
 
 final class AccountDetailTaskListUITests: XCTestCase {
     
-    func openAccountDetailUsingSearch(app: XCUIApplication,accountName: String = "Test Account 1") {
+    func openAccountDetailUsingSearch(app: XCUIApplication, accountName: String = "Test Account 1") {
         let timeout = 2
         let searchAccountButton = app.images["btn_search_account"]
         XCTAssertTrue(searchAccountButton.waitForExistence(timeout: TimeInterval(timeout)))
@@ -24,7 +24,7 @@ final class AccountDetailTaskListUITests: XCTestCase {
     func testTasksSectionWithEmptyList() throws {
         // Launch the app with the specified launch arguments
         let app = XCUIApplication()
-        app.launchArguments = ["isRunningUITests","emptyTaskList"]
+        app.launchArguments = ["isRunningUITests", "emptyTaskList"]
         app.launch()
         
         // Set the timeout duration
@@ -74,7 +74,7 @@ final class AccountDetailTaskListUITests: XCTestCase {
     func testTasksSectionWithError() throws {
         // Launch the app with the specified launch arguments
         let app = XCUIApplication()
-        app.launchArguments = ["isRunningUITests","taskListError"]
+        app.launchArguments = ["isRunningUITests", "taskListError"]
         app.launch()
         
         // Set the timeout duration
@@ -125,7 +125,6 @@ final class AccountDetailTaskListUITests: XCTestCase {
         let deleteButtonForTask2 = app.buttons["btn_account_detail_delete_task_1"]
         XCTAssertTrue(deleteButtonForTask2.waitForExistence(timeout: TimeInterval(timeout)))
         
-        
         let threeDotButtonForTask1 = app.buttons["btn_account_detail_task_more_0"]
         XCTAssertTrue(threeDotButtonForTask1.waitForExistence(timeout: TimeInterval(timeout)))
         
@@ -136,7 +135,7 @@ final class AccountDetailTaskListUITests: XCTestCase {
         
         let descriptionForTask1 = app.staticTexts["txt_account_detail_task_description_0"].label
         
-        //Check whether the delete button is closed for task 2 on open of delete button for task 1
+        // Check whether the delete button is closed for task 2 on open of delete button for task 1
         XCTAssertFalse(deleteButtonForTask2.exists)
         
         deleteButtonForTask1.tap()
@@ -158,9 +157,8 @@ final class AccountDetailTaskListUITests: XCTestCase {
         
         let descriptionForTask1AfterDelete = app.staticTexts["txt_account_detail_task_description_0"].label
         
-        //Verify the task description for 1st task before and after delete are not same
+        // Verify the task description for 1st task before and after delete are not same
         XCTAssertTrue(descriptionForTask1 != descriptionForTask1AfterDelete)
-        
         
     }
     
@@ -185,8 +183,6 @@ final class AccountDetailTaskListUITests: XCTestCase {
         
         threeDotButtonForTask1.tap()
         
-    
-        
         let deleteButtonForTask1 = app.buttons["btn_account_detail_delete_task_0"]
         XCTAssertTrue(deleteButtonForTask1.waitForExistence(timeout: TimeInterval(timeout)))
         
@@ -196,13 +192,12 @@ final class AccountDetailTaskListUITests: XCTestCase {
         XCTAssertTrue(deleteButton.waitForExistence(timeout: TimeInterval(timeout)))
         deleteButton.tap()
         
-        
-        //Check whether on error the toast is received
+        // Check whether on error the toast is received
         XCTAssertTrue(app.staticTexts["toast_view_text"].waitForExistence(timeout: TimeInterval(timeout)))
         
         let descriptionForTask1AfterDelete = app.staticTexts["txt_account_detail_task_description_0"].label
         
-        //Verify the task description for 1st task before and after delete are same
+        // Verify the task description for 1st task before and after delete are same
         XCTAssertTrue(descriptionForTask1 == descriptionForTask1AfterDelete)
     }
 }

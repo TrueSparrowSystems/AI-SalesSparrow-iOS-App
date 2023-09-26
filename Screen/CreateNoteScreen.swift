@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct CreateNoteScreen : View {
-    @EnvironmentObject var createNoteScreenViewModel : CreateNoteScreenViewModel
+struct CreateNoteScreen: View {
+    @EnvironmentObject var createNoteScreenViewModel: CreateNoteScreenViewModel
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @State var text: String = ""
@@ -22,8 +22,8 @@ struct CreateNoteScreen : View {
     @FocusState private var focused: Bool
     
     var body: some View {
-        VStack{
-            HStack(alignment: .center){
+        VStack {
+            HStack(alignment: .center) {
                 Text(isNoteSaved ? "Done" : "Cancel")
                     .font(.nunitoBold(size: 14))
                     .padding(.vertical, 10)
@@ -37,15 +37,15 @@ struct CreateNoteScreen : View {
                 
                 Button(action: {
                     isSaveInProgress = true
-                    createNoteScreenViewModel.createNote(text: text,accountId: accountId, onSuccess: {
+                    createNoteScreenViewModel.createNote(text: text, accountId: accountId, onSuccess: {
                         isSaveInProgress = false
                         isNoteSaved = true
                     }, onFailure: {
                         isSaveInProgress = false
                     })
-                }, label:{
-                    HStack(alignment: .center, spacing: 0){
-                        if(isSaveInProgress){
+                }, label: {
+                    HStack(alignment: .center, spacing: 0) {
+                        if isSaveInProgress {
                             ProgressView()
                                 .tint(Color("LoginButtonPrimary"))
                                 .controlSize(.small)
@@ -54,7 +54,7 @@ struct CreateNoteScreen : View {
                                 .font(.nunitoMedium(size: 12))
                                 .accessibilityIdentifier("txt_create_note_saving")
                             
-                        }else if(isNoteSaved){
+                        } else if isNoteSaved {
                             Image("CheckMark")
                                 .resizable()
                                 .frame(width: 12, height: 12)
@@ -65,7 +65,7 @@ struct CreateNoteScreen : View {
                                 .foregroundColor(.white)
                                 .font(.nunitoMedium(size: 12))
                                 .accessibilityIdentifier("txt_create_note_saved")
-                        }else{
+                        } else {
                             Image("SalesforceIcon")
                                 .resizable()
                                 .frame(width: 17, height: 12)
@@ -90,7 +90,7 @@ struct CreateNoteScreen : View {
             }
             .padding(.vertical, 12)
             
-            HStack{
+            HStack {
                 Image("AccountIcon")
                     .resizable()
                     .frame(width: 14, height: 14)
@@ -100,9 +100,9 @@ struct CreateNoteScreen : View {
                     .foregroundColor(Color("TextPrimary"))
                     .font(.nunitoRegular(size: 12))
                     .accessibilityIdentifier("txt_create_note_account")
-                if(isAccountSelectable && !(isNoteSaved || isSaveInProgress)){
-                    Button(action: {showAccountSearchView = true}){
-                        HStack(alignment: .center){
+                if isAccountSelectable && !(isNoteSaved || isSaveInProgress) {
+                    Button(action: {showAccountSearchView = true}) {
+                        HStack(alignment: .center) {
                             Text(accountId == "" ? "Select": accountName)
                                 .padding(.vertical, 8)
                                 .padding(.horizontal, 6)
@@ -127,8 +127,8 @@ struct CreateNoteScreen : View {
                         })
                     }
                     
-                }else{
-                    HStack(alignment: .center){
+                } else {
+                    HStack(alignment: .center) {
                         Text(accountName)
                             .padding(.vertical, 8)
                             .padding(.horizontal, 6)
@@ -143,16 +143,16 @@ struct CreateNoteScreen : View {
             }
             .contentShape(Rectangle())
             .padding(.top, 12)
-            ScrollView{
-                HStack{
-                    if(isNoteSaved || isSaveInProgress){
+            ScrollView {
+                HStack {
+                    if isNoteSaved || isSaveInProgress {
                         Text(text)
                             .foregroundColor(Color("TextPrimary"))
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .font(.nunitoSemiBold(size: 18))
                         
-                    }else{
-                        TextField("Add Note",text: $text, axis: .vertical)
+                    } else {
+                        TextField("Add Note", text: $text, axis: .vertical)
                             .foregroundColor(Color("TextPrimary"))
                             .font(.nunitoSemiBold(size: 18))
                             .focused($focused)
@@ -166,26 +166,25 @@ struct CreateNoteScreen : View {
                 }
                 .contentShape(Rectangle())
                 
-                if(isNoteSaved){
-                    VStack{
-                        if(createNoteScreenViewModel.isSuggestionGenerationInProgress){
-                            HStack{
+                if isNoteSaved {
+                    VStack {
+                        if createNoteScreenViewModel.isSuggestionGenerationInProgress {
+                            HStack {
                                 Image("Sparkle")
                                 Text("Getting recommendations")
                                     .foregroundColor(Color("TextPrimary"))
                                     .font(.nunitoSemiBold(size: 16))
                                 Spacer()
                             }
-                            VStack(alignment: .leading, spacing: 10){
+                            VStack(alignment: .leading, spacing: 10) {
                                 ShimmerView(size: CGSize(width: 356, height: 26))
                                 ShimmerView(size: CGSize(width: 356, height: 64))
-                                HStack{
+                                HStack {
                                     ShimmerView(size: CGSize(width: 72, height: 33))
                                     ShimmerView(size: CGSize(width: 72, height: 33))
                                 }
                             }
-                        }
-                        else if((createNoteScreenViewModel.suggestedData.add_task_suggestions?.isEmpty != nil) && (createNoteScreenViewModel.suggestedData.add_event_suggestions?.isEmpty != nil)){ // check for count of suggested task and event array
+                        } else if (createNoteScreenViewModel.suggestedData.add_task_suggestions?.isEmpty != nil) && (createNoteScreenViewModel.suggestedData.add_event_suggestions?.isEmpty != nil) { // check for count of suggested task and event array
                             // Show no recommendation message
                             VStack(spacing: 0) {
                                 Image("Check")
@@ -198,15 +197,15 @@ struct CreateNoteScreen : View {
                                     .padding(.top, 16)
                                     .accessibilityIdentifier("txt_create_note_no_recommendations")
                             }
-                            .padding(.vertical,16)
+                            .padding(.vertical, 16)
                             .frame(maxWidth: .infinity)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 4)
-                                    .stroke(style: StrokeStyle(lineWidth: 1.5, dash: [1,5]))
+                                    .stroke(style: StrokeStyle(lineWidth: 1.5, dash: [1, 5]))
                                     .foregroundColor(Color("TextPrimary"))
                             )
                         } else {
-                            HStack{
+                            HStack {
                                 Image("Sparkle")
                                 Text("We have some recommendations")
                                     .foregroundColor(Color("TextPrimary"))
@@ -214,7 +213,7 @@ struct CreateNoteScreen : View {
                                     .accessibilityIdentifier("txt_create_note_recommendations")
                                 
                                 Spacer()
-                                Button{
+                                Button {
                                     isPopoverVisible.toggle()
                                 } label: {
                                     Image("AddIcon")
@@ -224,29 +223,29 @@ struct CreateNoteScreen : View {
                             }
                             let addTaskSuggestions = createNoteScreenViewModel.suggestedData.add_task_suggestions ?? []
                             ForEach(Array(addTaskSuggestions.enumerated()), id: \.offset) { index, suggestion in
-                                SuggestedTaskCardView(accountId: accountId, suggestion:suggestion, index: index)
+                                SuggestedTaskCardView(accountId: accountId, suggestion: suggestion, index: index)
                             }
                             
                             let addEventSuggestions = createNoteScreenViewModel.suggestedData.add_event_suggestions ?? []
                             ForEach(Array(addEventSuggestions.enumerated()), id: \.offset) { index, suggestion in
-                                SuggestedEventCardView(accountId: accountId, suggestion:suggestion, index: index)
+                                SuggestedEventCardView(accountId: accountId, suggestion: suggestion, index: index)
                             }
                         }
                         
                     }
-                    .overlay(alignment: .topTrailing){
+                    .overlay(alignment: .topTrailing) {
                         if isPopoverVisible {
                             AddButtonPopoverComponent(isPopoverVisible: $isPopoverVisible, accountId: accountId)
-                                .offset(x: 35,y: 25)
+                                .offset(x: 35, y: 25)
                         }
                     }
                 }
             }
             .scrollIndicators(.hidden)
-            .gesture(DragGesture().onChanged{_ in
-                if(isPopoverVisible){
+            .gesture(DragGesture().onChanged {_ in
+                if isPopoverVisible {
                     isPopoverVisible.toggle()
-                }else{
+                } else {
                     focused = false
                 }
             })
@@ -257,15 +256,15 @@ struct CreateNoteScreen : View {
         .background(.white)
         .onAppear {
             // Adding a delay for view to render
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05){
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                 focused = true
             }
             isPopoverVisible = false
         }
         .onTapGesture {
-            if(isPopoverVisible){
+            if isPopoverVisible {
                 isPopoverVisible.toggle()
-            }else{
+            } else {
                 focused = false
             }
         }

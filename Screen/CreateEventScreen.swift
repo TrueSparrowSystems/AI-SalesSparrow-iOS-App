@@ -9,8 +9,8 @@ import SwiftUI
 
 struct CreateEventScreen: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @EnvironmentObject var createEventViewModel : CreateEventViewModel
-    @EnvironmentObject var createNoteScreenViewModel : CreateNoteScreenViewModel
+    @EnvironmentObject var createEventViewModel: CreateEventViewModel
+    @EnvironmentObject var createNoteScreenViewModel: CreateNoteScreenViewModel
     
     var accountId: String
     @State var description: String = ""
@@ -24,8 +24,8 @@ struct CreateEventScreen: View {
     
     var body: some View {
         let suggestedEventState = createNoteScreenViewModel.suggestedEventStates[suggestionId ?? ""] ?? [:]
-        VStack{
-            HStack{
+        VStack {
+            HStack {
                 Text((suggestedEventState["isEventSaved"] as! Bool) ? "Done" : "Cancel")
                     .font(.nunitoBold(size: 14))
                     .padding(.vertical, 10)
@@ -39,16 +39,16 @@ struct CreateEventScreen: View {
                 
                 Button(action: {
                     isAddEventInProgress = true
-                    createEventViewModel.createEvent(accountId: accountId, description: description, startDate: startDate, startTime: startTime, endDate:endDate, endTime: endTime, onSuccess: {eventId in
+                    createEventViewModel.createEvent(accountId: accountId, description: description, startDate: startDate, startTime: startTime, endDate: endDate, endTime: endTime, onSuccess: {eventId in
                         createNoteScreenViewModel.setEventDataAttribute(id: suggestionId ?? "", attrKey: "eventId", attrValue: eventId)
                         createNoteScreenViewModel.setEventDataAttribute(id: suggestionId ?? "", attrKey: "isEventSaved", attrValue: true)
                         isAddEventInProgress = false
                     }, onFailure: {
                         isAddEventInProgress = false
                     })
-                }, label:{
-                    HStack(alignment: .center, spacing: 0){
-                        if(isAddEventInProgress){
+                }, label: {
+                    HStack(alignment: .center, spacing: 0) {
+                        if isAddEventInProgress {
                             ProgressView()
                                 .tint(Color("LoginButtonPrimary"))
                                 .controlSize(.small)
@@ -57,7 +57,7 @@ struct CreateEventScreen: View {
                                 .font(.nunitoMedium(size: 12))
                                 .accessibilityIdentifier("txt_create_event_saving")
                             
-                        }else if((suggestedEventState["isEventSaved"] as! Bool)){
+                        } else if suggestedEventState["isEventSaved"] as! Bool {
                             Image("CheckMark")
                                 .resizable()
                                 .frame(width: 12, height: 12)
@@ -68,7 +68,7 @@ struct CreateEventScreen: View {
                                 .foregroundColor(.white)
                                 .font(.nunitoMedium(size: 12))
                                 .accessibilityIdentifier("txt_create_event_saved")
-                        }else{
+                        } else {
                             Text("Add Event")
                                 .foregroundColor(.white)
                                 .font(.nunitoMedium(size: 12))
@@ -87,16 +87,15 @@ struct CreateEventScreen: View {
             }
             .padding(.vertical)
             
-            
             HStack {
                 Text("Start")
-                    .frame(width: 35,height: 30, alignment: .leading)
+                    .frame(width: 35, height: 30, alignment: .leading)
                     .font(.nunitoRegular(size: 14))
                     .foregroundColor(Color("TextPrimary"))
                     .accessibilityIdentifier("txt_add_events_start")
                 
-                ZStack{
-                    if(!(suggestedEventState["isEventSaved"] as! Bool)){
+                ZStack {
+                    if !(suggestedEventState["isEventSaved"] as! Bool) {
                         DatePickerView(selectedDate: $startDate, onTap: {
                             createNoteScreenViewModel.setEventDataAttribute(id: suggestionId ?? "", attrKey: "isStartDateSelected", attrValue: true)
                         })
@@ -105,8 +104,8 @@ struct CreateEventScreen: View {
                         .accessibilityIdentifier("dp_add_event_select_start_date")
                     }
                     
-                    if(!(suggestedEventState["isStartDateSelected"] as! Bool)){
-                        HStack (spacing: 0) {
+                    if !(suggestedEventState["isStartDateSelected"] as! Bool) {
+                        HStack(spacing: 0) {
                             Text("Select Date")
                                 .foregroundColor(Color("TermsPrimary"))
                                 .font(.nunitoLight(size: 12))
@@ -123,9 +122,8 @@ struct CreateEventScreen: View {
                         .background(.white)
                         .userInteractionDisabled()
                         
-                    }
-                    else{
-                        HStack (spacing: 0) {
+                    } else {
+                        HStack(spacing: 0) {
                             Text(BasicHelper.getDateStringFromDate(from: startDate))
                                 .foregroundColor(Color("TermsPrimary"))
                                 .font(.nunitoBold(size: 12))
@@ -150,8 +148,8 @@ struct CreateEventScreen: View {
                     RoundedRectangle(cornerRadius: 4)
                         .stroke(Color("CardBorder"), lineWidth: 1)
                 )
-                ZStack{
-                    if(!(suggestedEventState["isEventSaved"] as! Bool)){
+                ZStack {
+                    if !(suggestedEventState["isEventSaved"] as! Bool) {
                         TimePickerView(selectedTime: $startTime, onTap: {
                             createNoteScreenViewModel.setEventDataAttribute(id: suggestionId ?? "", attrKey: "isStartTimeSelected", attrValue: true)
                         })
@@ -160,8 +158,8 @@ struct CreateEventScreen: View {
                         .accessibilityIdentifier("dp_add_event_select_start_time")
                     }
                     
-                    if(!(suggestedEventState["isStartTimeSelected"] as! Bool)){
-                        HStack (spacing: 0) {
+                    if !(suggestedEventState["isStartTimeSelected"] as! Bool) {
+                        HStack(spacing: 0) {
                             Text("Select Time")
                                 .foregroundColor(Color("TermsPrimary"))
                                 .font(.nunitoLight(size: 12))
@@ -178,9 +176,8 @@ struct CreateEventScreen: View {
                         .background(.white)
                         .userInteractionDisabled()
                         
-                    }
-                    else{
-                        HStack (spacing: 0) {
+                    } else {
+                        HStack(spacing: 0) {
                             Text(BasicHelper.getTimeStringFromDate(from: startTime))
                                 .foregroundColor(Color("TermsPrimary"))
                                 .font(.nunitoBold(size: 12))
@@ -210,13 +207,13 @@ struct CreateEventScreen: View {
             }
             HStack {
                 Text("End")
-                    .frame(width: 35,height: 30, alignment: .leading)
+                    .frame(width: 35, height: 30, alignment: .leading)
                     .font(.nunitoRegular(size: 14))
                     .foregroundColor(Color("TextPrimary"))
                     .accessibilityIdentifier("txt_add_events_end")
                 
-                ZStack{
-                    if(!(suggestedEventState["isEventSaved"] as! Bool)){
+                ZStack {
+                    if !(suggestedEventState["isEventSaved"] as! Bool) {
                         DatePickerView(selectedDate: $endDate, onTap: {
                             createNoteScreenViewModel.setEventDataAttribute(id: suggestionId ?? "", attrKey: "isEndDateSelected", attrValue: true)
                         })
@@ -225,8 +222,8 @@ struct CreateEventScreen: View {
                         .accessibilityIdentifier("dp_add_event_select_end_date")
                     }
                     
-                    if(!(suggestedEventState["isEndDateSelected"] as! Bool)){
-                        HStack (spacing: 0) {
+                    if !(suggestedEventState["isEndDateSelected"] as! Bool) {
+                        HStack(spacing: 0) {
                             Text("Select Date")
                                 .foregroundColor(Color("TermsPrimary"))
                                 .font(.nunitoLight(size: 12))
@@ -243,9 +240,8 @@ struct CreateEventScreen: View {
                         .background(.white)
                         .userInteractionDisabled()
                         
-                    }
-                    else{
-                        HStack (spacing: 0) {
+                    } else {
+                        HStack(spacing: 0) {
                             Text(BasicHelper.getDateStringFromDate(from: endDate))
                                 .foregroundColor(Color("TermsPrimary"))
                                 .font(.nunitoBold(size: 12))
@@ -271,9 +267,8 @@ struct CreateEventScreen: View {
                         .stroke(Color("CardBorder"), lineWidth: 1)
                 )
                 
-                
-                ZStack{
-                    if(!(suggestedEventState["isEventSaved"] as! Bool)){
+                ZStack {
+                    if !(suggestedEventState["isEventSaved"] as! Bool) {
                         TimePickerView(selectedTime: $endTime, onTap: {
                             createNoteScreenViewModel.setEventDataAttribute(id: suggestionId ?? "", attrKey: "isEndTimeSelected", attrValue: true)
                         })
@@ -282,8 +277,8 @@ struct CreateEventScreen: View {
                         .accessibilityIdentifier("dp_add_event_select_end_time")
                     }
                     
-                    if(!(suggestedEventState["isEndTimeSelected"] as! Bool)){
-                        HStack (spacing: 0) {
+                    if !(suggestedEventState["isEndTimeSelected"] as! Bool) {
+                        HStack(spacing: 0) {
                             Text("Select Time")
                                 .foregroundColor(Color("TermsPrimary"))
                                 .font(.nunitoLight(size: 12))
@@ -300,9 +295,8 @@ struct CreateEventScreen: View {
                         .background(.white)
                         .userInteractionDisabled()
                         
-                    }
-                    else{
-                        HStack (spacing: 0) {
+                    } else {
+                        HStack(spacing: 0) {
                             Text(BasicHelper.getTimeStringFromDate(from: endTime))
                                 .foregroundColor(Color("TermsPrimary"))
                                 .font(.nunitoBold(size: 12))
@@ -329,9 +323,9 @@ struct CreateEventScreen: View {
                 )
                 Spacer()
             }
-            ScrollView{
-                if(!(suggestedEventState["isEventSaved"] as! Bool)){
-                    TextField("Add Event",text: $description, axis: .vertical)
+            ScrollView {
+                if !(suggestedEventState["isEventSaved"] as! Bool) {
+                    TextField("Add Event", text: $description, axis: .vertical)
                         .foregroundColor(Color("TextPrimary"))
                         .font(.nunitoSemiBold(size: 18))
                         .focused($focused)
@@ -341,7 +335,7 @@ struct CreateEventScreen: View {
                         }
                         .padding(.top)
                         .lineLimit(4...)
-                }else{
+                } else {
                     Text(description)
                         .foregroundColor(Color("TextPrimary"))
                         .font(.nunitoSemiBold(size: 18))
@@ -351,7 +345,7 @@ struct CreateEventScreen: View {
                 }
             }
         }
-        .onChange(of: description){_ in
+        .onChange(of: description) {_ in
             createNoteScreenViewModel.setEventDataAttribute(id: suggestionId ?? "", attrKey: "description", attrValue: self.description)
         }
         .onChange(of: startDate, perform: {_ in
@@ -368,7 +362,7 @@ struct CreateEventScreen: View {
         })
         .onAppear {
             // Adding a delay for view to render
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05){
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                 focused = true
             }
             self.description = ((suggestedEventState["description"] ?? "") as! String)

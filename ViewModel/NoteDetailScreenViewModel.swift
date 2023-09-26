@@ -13,7 +13,7 @@ struct NoteDetailRespStruct: Codable {
 }
 
 // A struct that represents the meta data of the note details
-struct NoteDetailStruct : Codable {
+struct NoteDetailStruct: Codable {
     var id: String
     var creator: String
     var text: String
@@ -28,12 +28,12 @@ class NoteDetailScreenViewModel: ObservableObject {
     var apiService = DependencyContainer.shared.apiService
     
     // A function to fetch note details using API.
-    func fetchNoteDetail(accountId: String, noteId: String){
+    func fetchNoteDetail(accountId: String, noteId: String) {
         let endPoint = "/v1/accounts/\(accountId)/notes/\(noteId)"
         isFetchNoteDetailInProgress = true
         
-        apiService.get(type: NoteDetailRespStruct.self, endpoint: endPoint){
-            [weak self] result, statusCode in
+        apiService.get(type: NoteDetailRespStruct.self, endpoint: endPoint) {
+            [weak self] result, _ in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let results):

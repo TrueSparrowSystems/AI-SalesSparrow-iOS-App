@@ -5,7 +5,6 @@
 //  Created by Mohit Charkha on 23/08/23.
 //
 
-
 import XCTest
 
 final class AccountDetailsUITests: XCTestCase {
@@ -62,7 +61,6 @@ final class AccountDetailsUITests: XCTestCase {
         let accountCard = app.buttons["account_card_\(rowIndex)"]
         XCTAssertTrue(accountCard.exists, "Account card should be present")
         accountCard.tap()
-        
         
         let timeout = 2
         // Check the contact icon

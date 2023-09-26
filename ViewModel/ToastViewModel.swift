@@ -10,12 +10,12 @@ import SwiftUI
 
 // A class that represents the view model of the toast.
 class ToastViewModel: ObservableObject {
-    @Published var toast: Toast? = nil
+    @Published var toast: Toast?
     static let shared = ToastViewModel()
     
-    private init(){}
+    private init() {}
     
-    func showToast(_toast: Toast){
+    func showToast(_toast: Toast) {
         self.toast = _toast
     }
     

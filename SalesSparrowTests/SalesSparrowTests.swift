@@ -33,7 +33,7 @@ final class SalesSparrowTests: XCTestCase {
         let double = 12.5
         let doubleToString = BasicHelper.toString(double)
         // Check if the value after conversion of double to string using util function is of type String
-        XCTAssertTrue(type(of:doubleToString!) == String.self)
+        XCTAssertTrue(type(of: doubleToString!) == String.self)
         
         // Check if the value after conversion of double to int using util function is nil
         XCTAssertNil(BasicHelper.toInt(double))
@@ -44,27 +44,27 @@ final class SalesSparrowTests: XCTestCase {
         
         let doubleToDouble = BasicHelper.toDouble(double)
         // Check if the value after conversion of double to double using util function is of type Double
-        XCTAssertTrue(type(of:doubleToDouble!) == Double.self)
+        XCTAssertTrue(type(of: doubleToDouble!) == Double.self)
         // Check if the value before and after conversion of double to double using util function is same
         XCTAssertTrue(doubleToDouble == double)
         
         let int = 10
         let intToString = BasicHelper.toString(int)
         // Check if the value after conversion of int to string using util function is of type String
-        XCTAssertTrue(type(of:intToString!) == String.self)
+        XCTAssertTrue(type(of: intToString!) == String.self)
         // Check if the value before and after conversion of int to string using util function is same
         XCTAssertTrue(intToString! == String(int))
         
         let intToInt = BasicHelper.toInt(int)
         // Check if the value after conversion of int to int using util function is of type Int
-        XCTAssertTrue(type(of:intToInt!) == Int.self)
+        XCTAssertTrue(type(of: intToInt!) == Int.self)
         // Check if the value before and after conversion of int to int using util function is same
         XCTAssertTrue(intToInt == int)
         
-        let float : Float = -10.2
+        let float: Float = -10.2
         let floatToString = BasicHelper.toString(float)
         // Check if the value after conversion of float to string using util function is of type String
-        XCTAssertTrue(type(of:floatToString!) == String.self)
+        XCTAssertTrue(type(of: floatToString!) == String.self)
         
         XCTAssertNil(BasicHelper.toDouble(float))
         
@@ -75,7 +75,7 @@ final class SalesSparrowTests: XCTestCase {
         let string = "string"
         let stringToString = BasicHelper.toString(string)
         // Check if the value after conversion of string to string using util function is of type String
-        XCTAssertTrue(type(of:stringToString!) == String.self)
+        XCTAssertTrue(type(of: stringToString!) == String.self)
         // Check if the value before and after conversion of string to string using util function is same
         XCTAssertTrue(stringToString! == string)
         
@@ -99,7 +99,6 @@ final class SalesSparrowTests: XCTestCase {
         XCTAssertNil(BasicHelper.toDouble(nilVariable))
         // Check if the value after conversion of nil to string using util function is nil
         XCTAssertNil(BasicHelper.toString(nilVariable))
-        
         
         let char: Character = "a"
         // Check if the value after conversion of char to string using util function is nil
@@ -182,15 +181,15 @@ final class SalesSparrowTests: XCTestCase {
     
     func testGetFormattedDateForDueDate() throws {
         
-        //Original dateString to be passed to the function
+        // Original dateString to be passed to the function
         var dateString = "2023-07-12"
-        //Formatted DateString expected as output from function
+        // Formatted DateString expected as output from function
         let expectedFormattedDateString = "12/07/2023"
         
         var formattedDateString = BasicHelper.getFormattedDateForDueDate(from: dateString)
         XCTAssertTrue(expectedFormattedDateString == formattedDateString)
         
-        //Invalid DateString for error case
+        // Invalid DateString for error case
         dateString = "2023.7"
         
         formattedDateString = BasicHelper.getFormattedDateForDueDate(from: dateString)
@@ -204,17 +203,17 @@ final class SalesSparrowTests: XCTestCase {
         var initials = BasicHelper.getInitials(from: name)
         XCTAssertTrue(initials == "AX")
         
-        //1 word name
+        // 1 word name
         name = "Abc"
         initials = BasicHelper.getInitials(from: name)
         XCTAssertTrue(initials == "A")
         
-        //No name
+        // No name
         name = ""
         initials = BasicHelper.getInitials(from: name)
         XCTAssertTrue(initials == "")
         
-        //Long Name
+        // Long Name
         name = "Abc def Ghi Jkl"
         initials = BasicHelper.getInitials(from: name)
         XCTAssertTrue(initials == "AD")

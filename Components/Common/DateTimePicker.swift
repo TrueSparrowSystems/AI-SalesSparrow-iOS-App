@@ -14,7 +14,7 @@ struct DatePickerView: View {
     var body: some View {
         
         // Date picker
-        DatePicker("", selection: $selectedDate, displayedComponents:  [.date])
+        DatePicker("", selection: $selectedDate, displayedComponents: [.date])
             .datePickerStyle(.compact)
             .labelsHidden()
             .accentColor(Color.blue)
@@ -36,7 +36,7 @@ struct TimePickerView: View {
     
     var body: some View {
         // Time picker
-        DatePicker("", selection: $selectedTime, displayedComponents:  [.hourAndMinute])
+        DatePicker("", selection: $selectedTime, displayedComponents: [.hourAndMinute])
             .datePickerStyle(.automatic)
             .accentColor(Color.blue)
             .foregroundColor(.blue)

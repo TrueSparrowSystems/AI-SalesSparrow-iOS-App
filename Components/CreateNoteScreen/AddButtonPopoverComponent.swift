@@ -7,11 +7,10 @@
 
 import SwiftUI
 
-
-struct AddButtonPopoverComponent: View{
-    @EnvironmentObject var createNoteScreenViewModel : CreateNoteScreenViewModel
+struct AddButtonPopoverComponent: View {
+    @EnvironmentObject var createNoteScreenViewModel: CreateNoteScreenViewModel
     
-    @Binding var isPopoverVisible : Bool
+    @Binding var isPopoverVisible: Bool
     var accountId: String
     
     @State var addTaskActivated = false
@@ -25,7 +24,7 @@ struct AddButtonPopoverComponent: View{
                 createNoteScreenViewModel.initTaskData(suggestion: TaskSuggestionStruct(id: suggestionId, description: ""))
                 addTaskActivated = true
             }, label: {
-                HStack{
+                HStack {
                     Image("TasksIcon")
                     Text("Add Tasks")
                         .font(.nunitoSemiBold(size: 16))
@@ -41,7 +40,7 @@ struct AddButtonPopoverComponent: View{
                 createNoteScreenViewModel.initEventData(suggestion: EventSuggestionStruct(id: suggestionId, description: ""))
                 addEventActivated = true
             }, label: {
-                HStack{
+                HStack {
                     Image("EventsIcon")
                     Text("Add Event")
                         .font(.nunitoSemiBold(size: 16))
@@ -60,7 +59,7 @@ struct AddButtonPopoverComponent: View{
                 .stroke(Color("CardBorder"), lineWidth: 1)
         )
         .frame(width: 200, height: 100)
-        .background{
+        .background {
             NavigationLink(destination:
                             CreateTaskScreen(accountId: accountId, suggestionId: suggestionId),
                            isActive: self.$addTaskActivated
@@ -69,7 +68,7 @@ struct AddButtonPopoverComponent: View{
             }
             .hidden()
         }
-        .background{
+        .background {
             NavigationLink(destination:
                             CreateEventScreen(accountId: accountId, suggestionId: suggestionId),
                            isActive: self.$addEventActivated

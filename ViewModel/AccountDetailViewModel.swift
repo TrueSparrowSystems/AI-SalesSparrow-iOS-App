@@ -13,10 +13,10 @@ struct AccountDetail: Codable {
 }
 
 // A struct that represents the meta data of the account details
-struct AccountDetailStruct : Codable {
+struct AccountDetailStruct: Codable {
     var id: String
     var name: String
-    var additional_fields: [String:String?]?
+    var additional_fields: [String: String?]?
     var account_contact_associations_id: String?
     var account_contact_associations_map_by_id: [String: AccountContactAssociation]?
     var contact_map_by_id: [String: Contact]?
@@ -43,12 +43,12 @@ class AccountDetailScreenViewModel: ObservableObject {
     ])
     
     // A function to fetch account details using API.
-    func fetchAccountDetail(accountId: String){
+    func fetchAccountDetail(accountId: String) {
         let endPoint = "/v1/accounts/\(accountId)"
         isFetchAccountDetailInProgress = true
         
-        apiService.get(type: AccountDetail.self, endpoint: endPoint){
-            [weak self] result, statusCode in
+        apiService.get(type: AccountDetail.self, endpoint: endPoint) {
+            [weak self] result, _ in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let results):
@@ -66,11 +66,11 @@ class AccountDetailScreenViewModel: ObservableObject {
                             "account_source": "Crunchbase",
                             "status": "Active",
                             "last_funding": "$4 million",
-                            "hq": "USA",
+                            "hq": "USA"
                         ],
                         account_contact_associations_id: "associationId",
                         account_contact_associations_map_by_id: [
-                            "associationId": AccountContactAssociation(contact_ids: ["contactId"]),
+                            "associationId": AccountContactAssociation(contact_ids: ["contactId"])
                         ],
                         contact_map_by_id: [
                             "contactId": Contact(
@@ -81,7 +81,7 @@ class AccountDetailScreenViewModel: ObservableObject {
                                     "email": "john.doe@example.com",
                                     "linkedin": "https://linkedin.com/Peter"
                                 ]
-                            ),
+                            )
                         ]
                     )
                     self?.isFetchAccountDetailInProgress = false
@@ -93,4 +93,3 @@ class AccountDetailScreenViewModel: ObservableObject {
     }
     
 }
-

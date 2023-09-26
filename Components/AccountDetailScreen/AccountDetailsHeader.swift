@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct AccountDetailsHeader: View {
-    @EnvironmentObject var accountDetailViewModelObject : AccountDetailScreenViewModel
+    @EnvironmentObject var accountDetailViewModelObject: AccountDetailScreenViewModel
     var accountId: String
     var accountName: String
     @State var expandAccountDetails: Bool = false
     
     var body: some View {
-        VStack{
-            HStack{
+        VStack {
+            HStack {
                 Image("Buildings")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
@@ -46,29 +46,27 @@ struct AccountDetailsHeader: View {
                             .font(.nunitoSemiBold(size: 18))
                             .foregroundColor(Color("TextPrimary"))
                         
-                        
                         Spacer()
                     }
                 }
                 // loop of additional fields
-                if(!expandAccountDetails){
+                if !expandAccountDetails {
                     let additionalFields = accountDetailViewModelObject.accountDetail.additional_fields
                     if let additionalFields = additionalFields {
                         ForEach(Array(additionalFields.keys.prefix(2)), id: \.self) { key in
-                            if let value = additionalFields[key], let _ = accountDetailViewModelObject.customFields.fields[key]{
+                            if let value = additionalFields[key], accountDetailViewModelObject.customFields.fields[key] != nil {
                                 RenderFields(fieldName: key, fieldValue: value ?? "")
                             }
                         }
                     }
                     
-                    if(additionalFields?.count ?? 0 > 2){
+                    if additionalFields?.count ?? 0 > 2 {
                         Divider()
-                        
                         
                         Button(action: {
                             expandAccountDetails = true
-                        }){
-                            HStack{
+                        }) {
+                            HStack {
                                 Text("More Details")
                                     .foregroundColor(Color("RedHighlight"))
                                     .font(.nunitoMedium(size: 14))
@@ -80,11 +78,11 @@ struct AccountDetailsHeader: View {
                     let additionalFields = accountDetailViewModelObject.accountDetail.additional_fields
                     if let additionalFields = additionalFields {
                         ForEach(Array(Array(additionalFields.keys).enumerated()), id: \.offset) { index, key in
-                            if let value = additionalFields[key], let _ = accountDetailViewModelObject.customFields.fields[key] {
-                                VStack(spacing: 0){
+                            if let value = additionalFields[key], accountDetailViewModelObject.customFields.fields[key] != nil {
+                                VStack(spacing: 0) {
                                     RenderFields(fieldName: key, fieldValue: value ?? "")
                                     
-                                    if(index+1 != additionalFields.keys.count){
+                                    if index+1 != additionalFields.keys.count {
                                         Divider()
                                             .frame(height: 1)
                                             .foregroundColor(Color("BorderColor"))
@@ -108,4 +106,3 @@ struct AccountDetailsHeader: View {
         .padding(.trailing)
     }
 }
-

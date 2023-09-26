@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct LaunchScreen: View{
-    var body: some View{
-        VStack{
+struct LaunchScreen: View {
+    var body: some View {
+        VStack {
             Image("SplashScreenImage")
                 .resizable()
         }

@@ -11,7 +11,6 @@ import SwiftUI
 struct TermsBottomStrip: View {
     @Environment(\.openURL) var openURL
     
-    
     var body: some View {
         let termsText = Text("Terms and Conditions")
             .font(.nunitoSemiBold(size: 12))
@@ -43,11 +42,11 @@ struct TermsBottomStrip: View {
             .foregroundColor(Color("TermsPrimary"))
             .font(.nunitoSemiBold(size: 12))
         
-        return ZStack{
-            HStack{
+        return ZStack {
+            HStack {
                 agreementText + termsText + andText + privacyText
             }
-            HStack{
+            HStack {
                 agreementText + termsTextWithLink + andText + privacyTextWithLink
             }
             .opacity(0.51)

@@ -11,11 +11,11 @@ struct AccountDetailsScreen: View {
     var accountId: String
     var accountName: String
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @EnvironmentObject var accountDetailViewModelObject : AccountDetailScreenViewModel
+    @EnvironmentObject var accountDetailViewModelObject: AccountDetailScreenViewModel
     @State var propagateClick = 0
     
     var body: some View {
-        ScrollView{
+        ScrollView {
             VStack(spacing: 20) {
                 
                 AccountDetailsHeader(accountId: accountId, accountName: accountName)
@@ -35,12 +35,12 @@ struct AccountDetailsScreen: View {
             accountDetailViewModelObject.fetchAccountDetail(accountId: accountId)
         }
         .simultaneousGesture(
-            TapGesture().onEnded(){
+            TapGesture().onEnded {
                 propagateClick += 1
             }
         )
         .simultaneousGesture(
-            DragGesture().onChanged{_ in
+            DragGesture().onChanged {_ in
                 propagateClick += 1
             }
         )
@@ -58,7 +58,7 @@ struct AccountDetailsScreen: View {
         }) {
             HStack {
                 Image("ArrowLeft")
-                    .frame(width: 24.14,height: 24.14)
+                    .frame(width: 24.14, height: 24.14)
                 Text("Details")
                     .font(.nunitoSemiBold(size: 16))
                     .foregroundColor(Color("SaveButtonBackground"))
@@ -68,4 +68,3 @@ struct AccountDetailsScreen: View {
         .accessibilityIdentifier("btn_account_detail_back")
     }
 }
-

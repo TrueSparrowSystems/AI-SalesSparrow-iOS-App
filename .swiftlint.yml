@@ -1,27 +1,28 @@
 disabled_rules:
-    - trailing_whitespace
-    - force_cast
-    - line_length
-    - function_body_length
-    - type_body_length
+  - trailing_whitespace
+  - force_cast
+  - line_length
+  - function_body_length
+  - type_body_length
+  - closure_parameter_position
 identifier_name:
-    allowed_symbols: "_"
+  allowed_symbols: "_"
 type_name:
-    allowed_symbols: "_"
+  allowed_symbols: "_"
 opt_in_rules:
-    - empty_string
+  - empty_string
 excluded:
-    - Carthage
-    - Pods
-    - SwiftLint/Common/3rdPartyLib
+  - Carthage
+  - Pods
+  - SwiftLint/Common/3rdPartyLib
 function_parameter_count:
-    warning: 6
-    error: 8
+  warning: 6
+  error: 8
 file_length:
-    warning: 1000
-    error: 1500
-    ignore_comment_only_lines: true
+  warning: 1000
+  error: 1500
+  ignore_comment_only_lines: true
 cyclomatic_complexity:
-    warning: 15
-    error: 25
+  warning: 15
+  error: 25
 reporter: "xcode"

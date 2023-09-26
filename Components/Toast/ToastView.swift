@@ -14,7 +14,7 @@ struct ToastView: View {
     var width = CGFloat.infinity
     
     var body: some View {
-        VStack{
+        VStack {
             HStack(alignment: .center, spacing: 12) {
                 Image(style.iconFileName)
                     .accessibilityIdentifier("toast_view_image")

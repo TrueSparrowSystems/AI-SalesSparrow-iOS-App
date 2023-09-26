@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct LoadingAccountRowView: View{
+struct LoadingAccountRowView: View {
     var body: some View {
-        VStack(alignment: .leading){
+        VStack(alignment: .leading) {
             ShimmerView(size: CGSize(width: 102, height: 13))
             ShimmerView(size: CGSize(width: 48, height: 16))
                 .padding(.top, 8)
@@ -38,7 +38,7 @@ struct LoadingAccountRowView: View{
 
 struct LoadingAccountRowView_Previews: PreviewProvider {
     static var previews: some View {
-        VStack{
+        VStack {
             LoadingAccountRowView()
         }
     }

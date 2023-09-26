@@ -9,8 +9,8 @@ import SwiftUI
 
 struct BottomBar: View {
     @State var createNoteScreenActivated = false
-    @State var selectedAccountId: String? = nil
-    @State var selectedAccountName: String? = nil
+    @State var selectedAccountId: String?
+    @State var selectedAccountName: String?
     
     var body: some View {
         ZStack {
@@ -42,7 +42,6 @@ struct BottomBar: View {
             }
                 .hidden()
         )
-        
         
     }
 }

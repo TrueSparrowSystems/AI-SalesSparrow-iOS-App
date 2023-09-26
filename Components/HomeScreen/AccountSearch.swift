@@ -15,7 +15,7 @@ struct AccountSearchView: View {
     
     var isCreateNoteFlow: Bool = false
     var onAccountSelected: ((String, String) -> Void)? // Callback function to handle account selection
-    var onNoteCreateSelected: ((String,String) -> Void)?  // Callback function to handle note creation selection
+    var onNoteCreateSelected: ((String, String) -> Void)?  // Callback function to handle note creation selection
     @FocusState private var focused: Bool
     
     var body: some View {
@@ -45,13 +45,12 @@ struct AccountSearchView: View {
                 .background(Color("SearchPrimary"))
                 .opacity(0.6)
             
-            if(accountSearchViewModel.isSearchAccountInProgress){
+            if accountSearchViewModel.isSearchAccountInProgress {
                 ProgressView()
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                     .tint(Color("LoginButtonSecondary"))
                     .controlSize(.large)
-            }
-            else if(!accountSearchViewModel.accountListData.account_ids.isEmpty){
+            } else if !accountSearchViewModel.accountListData.account_ids.isEmpty {
                 // List of Accounts
                 AccountListView(
                     listData: accountSearchViewModel.accountListData,
@@ -63,8 +62,7 @@ struct AccountSearchView: View {
                     removeSearchTextFocus: removeSearchTextFocus,
                     onScroll: onScroll
                 )
-            }
-            else{
+            } else {
                 Text("No Result Found")
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                     .accessibilityIdentifier("txt_search_no_result_found")
@@ -72,17 +70,17 @@ struct AccountSearchView: View {
         }
         .onAppear {
             accountSearchViewModel.fetchData("")
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05){
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                 focused = true
             }
         }
         .background(Color("Background"))
     }
     
-    func removeSearchTextFocus() -> Void {
+    func removeSearchTextFocus() {
         focused = false
     }
-    func onScroll(_: DragGesture.Value) -> Void {
+    func onScroll(_: DragGesture.Value) {
         focused = false
     }
 }
@@ -99,10 +97,10 @@ struct AccountListView: View {
     
     var body: some View {
         ScrollView {
-            VStack(spacing: 0){
+            VStack(spacing: 0) {
                 ForEach(accountIds, id: \.self) { accountId in
                     if let account = listData.account_map_by_id[accountId] {
-                        HStack (alignment: .center) {
+                        HStack(alignment: .center) {
                             HStack {
                                 Text(account.name)
                                     .font(.nunitoRegular(size: 16))

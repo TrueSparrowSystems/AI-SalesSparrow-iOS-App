@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 extension Font {
     static func nunitoLight(size: CGFloat) -> Font {
         return Font.custom("Nunito-Light", size: size)

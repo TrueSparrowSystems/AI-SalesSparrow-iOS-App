@@ -13,14 +13,14 @@ struct EventsList: View {
     
     @State var addEventActivated = false
     @State var suggestionId: String = ""
-    @EnvironmentObject var createNoteScreenViewModel : CreateNoteScreenViewModel
+    @EnvironmentObject var createNoteScreenViewModel: CreateNoteScreenViewModel
     
     @EnvironmentObject var acccountDetailScreenViewModelObject: AccountDetailViewScreenViewModel
-    @Binding var propagateClick : Int
+    @Binding var propagateClick: Int
     
     var body: some View {
         VStack(spacing: 0) {
-            HStack{
+            HStack {
                 Image("EventsIcon")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
@@ -39,8 +39,8 @@ struct EventsList: View {
                     createNoteScreenViewModel.initEventData(suggestion: EventSuggestionStruct(id: suggestionId, description: ""))
                     addEventActivated = true
                 }
-                ){
-                    HStack{
+                ) {
+                    HStack {
                         Image("AddIcon")
                             .resizable()
                             .frame(width: 20.0, height: 20.0)
@@ -56,8 +56,7 @@ struct EventsList: View {
             if acccountDetailScreenViewModelObject.isEventListLoading {
                 ProgressView()
                     .tint(Color("LoginButtonSecondary"))
-            }
-            else if acccountDetailScreenViewModelObject.eventData.event_ids.isEmpty {
+            } else if acccountDetailScreenViewModelObject.eventData.event_ids.isEmpty {
                 VStack(spacing: 0) {
                     HStack {
                         Spacer()
@@ -83,13 +82,12 @@ struct EventsList: View {
                 .frame(maxWidth: .infinity, alignment: .center)
                 Spacer()
             } else {
-                VStack{
+                VStack {
                     let eventIdsArray = self.acccountDetailScreenViewModelObject.eventData.event_ids
                     ForEach(Array(eventIdsArray.enumerated()), id: \.offset) { index, eventId in
-                        if ( self.acccountDetailScreenViewModelObject.eventData.event_map_by_id[eventId] != nil) {
+                        if self.acccountDetailScreenViewModelObject.eventData.event_map_by_id[eventId] != nil {
                             EventCardView(eventId: eventId, accountId: accountId, eventIndex: index, propagateClick: $propagateClick)
                         }
-                        
                         
                     }
                 }
@@ -97,7 +95,7 @@ struct EventsList: View {
             }
         }.onAppear {
             acccountDetailScreenViewModelObject.fetchEvents(accountId: accountId)
-        }.background{
+        }.background {
             NavigationLink(destination:
                             CreateEventScreen(accountId: accountId, suggestionId: suggestionId),
                            isActive: self.$addEventActivated
@@ -116,14 +114,14 @@ struct EventCardView: View {
     @EnvironmentObject var acccountDetailScreenViewModelObject: AccountDetailViewScreenViewModel
     var eventData: [String: Event] = [:]
     @State var isPopoverVisible: Bool = false
-    @Binding var propagateClick : Int
+    @Binding var propagateClick: Int
     @State var isSelfPopupTriggered = false
     
     var body: some View {
-        VStack(spacing: 0){
+        VStack(spacing: 0) {
             HStack {
                 Text("\(BasicHelper.getInitials(from: acccountDetailScreenViewModelObject.eventData.event_map_by_id[eventId]?.creator_name ?? ""))")
-                    .frame(width: 18, height:18)
+                    .frame(width: 18, height: 18)
                     .font(.nunitoBold(size: 6))
                     .foregroundColor(.black)
                     .background(Color("UserBubble"))
@@ -138,14 +136,14 @@ struct EventCardView: View {
                 
                 Spacer()
                 
-                HStack(spacing: 0){
+                HStack(spacing: 0) {
                     Text("\(BasicHelper.getFormattedDateForCard(from: acccountDetailScreenViewModelObject.eventData.event_map_by_id[eventId]?.last_modified_time ?? ""))")
                         .font(.nunitoLight(size: 12))
                         .tracking(0.5)
                         .foregroundColor(Color("TextPrimary"))
                         .accessibilityIdentifier("txt_account_detail_event_last_modified_time_\(eventIndex)")
                     
-                    Button{
+                    Button {
                         isSelfPopupTriggered = true
                         isPopoverVisible.toggle()
                     } label: {
@@ -165,8 +163,8 @@ struct EventCardView: View {
                 .accessibilityIdentifier("txt_account_detail_event_description_\(eventIndex)")
                 .padding(EdgeInsets(top: 6, leading: 0, bottom: 0, trailing: 10))
             
-            HStack(alignment: .center, spacing: 0){
-                if((acccountDetailScreenViewModelObject.eventData.event_map_by_id[eventId]?.start_datetime != nil)){
+            HStack(alignment: .center, spacing: 0) {
+                if acccountDetailScreenViewModelObject.eventData.event_map_by_id[eventId]?.start_datetime != nil {
                     Image("CalendarCheck")
                         .frame(width: 16, height: 16)
                         .padding(.trailing, 4)
@@ -204,7 +202,7 @@ struct EventCardView: View {
             RoundedRectangle(cornerRadius: 5)
                 .stroke(Color("CardBorder"), lineWidth: 1)
         )
-        .overlay(alignment: .topTrailing){
+        .overlay(alignment: .topTrailing) {
             if isPopoverVisible {
                 VStack {
                     Button(action: {
@@ -215,11 +213,11 @@ struct EventCardView: View {
                             message: Text("Are you sure you want to delete this event?"),
                             submitText: "Delete",
                             onSubmitPress: {
-                                acccountDetailScreenViewModelObject.deleteEvent(accountId: accountId, eventId: eventId){}
+                                acccountDetailScreenViewModelObject.deleteEvent(accountId: accountId, eventId: eventId) {}
                             }
                         ))
-                    }){
-                        HStack{
+                    }) {
+                        HStack {
                             Image("DeleteIcon")
                                 .frame(width: 20, height: 20)
                             Text("Delete")
@@ -240,13 +238,13 @@ struct EventCardView: View {
                 .offset(x: -14, y: 32)
             }
         }
-        .onChange(of: propagateClick){_ in
+        .onChange(of: propagateClick) {_ in
             // onChange to hide Popover for events triggered by other cards or screen
             
-            if(isSelfPopupTriggered){
+            if isSelfPopupTriggered {
                 // Don't hide popover if event trigged by self
                 isSelfPopupTriggered = false
-            }else{
+            } else {
                 isPopoverVisible = false
             }
         }

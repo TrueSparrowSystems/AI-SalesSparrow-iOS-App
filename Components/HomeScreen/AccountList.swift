@@ -8,15 +8,15 @@
 import SwiftUI
 
 struct AccountList: View {
-    @EnvironmentObject var acccountListViewModelObject : AccountListViewModel
+    @EnvironmentObject var acccountListViewModelObject: AccountListViewModel
     @State var accountDetailsScreenActivated = false
     @State var fetchFirstPage = true
     
     var body: some View {
-        VStack{
+        VStack {
             let accountIds = acccountListViewModelObject.accountListData.account_ids
-            if(acccountListViewModelObject.isFetchAccountInProgress && accountIds.isEmpty){
-                ScrollView{
+            if acccountListViewModelObject.isFetchAccountInProgress && accountIds.isEmpty {
+                ScrollView {
                     LoadingAccountRowView()
                     LoadingAccountRowView()
                     LoadingAccountRowView()
@@ -24,15 +24,14 @@ struct AccountList: View {
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
                 .padding(.horizontal, 20)
-            }
-            else{
+            } else {
                 List {
                     ForEach(Array(accountIds.enumerated()), id: \.offset) { index, accountId in
                         if let account = acccountListViewModelObject.accountListData.account_map_by_id[accountId] {
                             ZStack {
                                 AccountRowView(account: account, index: index)
-                                    .onAppear{
-                                        if(accountIds.count == index + 1){
+                                    .onAppear {
+                                        if accountIds.count == index + 1 {
                                             acccountListViewModelObject.fetchData()
                                         }
                                     }
@@ -49,8 +48,8 @@ struct AccountList: View {
                         }
                     }
                     
-                    if(acccountListViewModelObject.isFetchAccountInProgress && !accountIds.isEmpty){
-                        HStack(spacing: 0){
+                    if acccountListViewModelObject.isFetchAccountInProgress && !accountIds.isEmpty {
+                        HStack(spacing: 0) {
                             ProgressView()
                                 .tint(Color("LoginButtonSecondary"))
                                 .accessibilityAddTraits(.isImage)
@@ -68,8 +67,8 @@ struct AccountList: View {
                 .accessibilityIdentifier("account_list_scroll_view")
             }
         }
-        .onAppear{
-            if(self.fetchFirstPage){
+        .onAppear {
+            if self.fetchFirstPage {
                 self.fetchFirstPage = false
                 acccountListViewModelObject.fetchData()
             }
@@ -82,7 +81,7 @@ struct AccountRowView: View {
     var account: Account
     var index: Int
     @Environment(\.openURL) var openURL
-    @EnvironmentObject var acccountListViewModelObject : AccountListViewModel
+    @EnvironmentObject var acccountListViewModelObject: AccountListViewModel
     
     var body: some View {
         // Account Row
@@ -101,10 +100,9 @@ struct AccountRowView: View {
                 .accessibilityIdentifier("txt_account_list_account_name_index_\(index)")
                 .accessibilityElement()
             
-            
-            //TODO: On Field customization remove hardcoded values and show all additional_fields
-            if(!((account.additional_fields?["website"] ?? "") ?? "").isEmpty){
-                HStack{
+            // TODO: On Field customization remove hardcoded values and show all additional_fields
+            if !((account.additional_fields?["website"] ?? "") ?? "").isEmpty {
+                HStack {
                     Image("Link")
                         .resizable()
                         .frame(width: 16, height: 16)
@@ -124,12 +122,12 @@ struct AccountRowView: View {
             
             let accountContactAssociation = acccountListViewModelObject.accountListData.account_contact_associations_map_by_id[account.account_contact_associations_id ?? ""]
             
-            if((accountContactAssociation) != nil){
+            if (accountContactAssociation) != nil {
                 let contactIds = accountContactAssociation?.contact_ids
                 
                 let contact = acccountListViewModelObject.accountListData.contact_map_by_id[contactIds?.first ?? ""]
-                if(contact != nil){
-                    VStack(alignment: .leading, spacing: 0){
+                if contact != nil {
+                    VStack(alignment: .leading, spacing: 0) {
                         Text("CONTACT")
                             .font(.nunitoBold(size: 12))
                             .foregroundColor(Color("TermsPrimary").opacity(0.7))
@@ -143,7 +141,7 @@ struct AccountRowView: View {
                             .accessibilityIdentifier("txt_account_list_account_contact_name_index_\(index)")
                             .accessibilityElement()
                         
-                        if(!((contact?.additional_fields?["email"] ?? "") ?? "").isEmpty){
+                        if !((contact?.additional_fields?["email"] ?? "") ?? "").isEmpty {
                             Text((contact?.additional_fields?["email"])! ?? "")
                                 .font(.nunitoRegular(size: 14))
                                 .foregroundColor(Color("TermsPrimary"))

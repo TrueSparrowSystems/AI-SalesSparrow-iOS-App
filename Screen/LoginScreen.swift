@@ -5,17 +5,16 @@
 //  Created by Mohit Charkha on 31/07/23.
 //
 
-
 import SwiftUI
 
 struct LoginScreen: View {
-    @EnvironmentObject var loginScreenViewModel : LoginScreenViewModel
-    @EnvironmentObject var userStateViewModel : UserStateViewModel
+    @EnvironmentObject var loginScreenViewModel: LoginScreenViewModel
+    @EnvironmentObject var userStateViewModel: UserStateViewModel
     
     var body: some View {
-        VStack{
+        VStack {
             Spacer()
-            VStack{
+            VStack {
                 VStack {
                     Image("AppLogo")
                         .resizable()
@@ -30,7 +29,7 @@ struct LoginScreen: View {
                         .foregroundColor(Color("LoginScreenText"))
                         .accessibilityIdentifier("txt_login_app_description")
                     
-                    HStack{
+                    HStack {
                         Image("NoteIcon")
                             .resizable()
                             .frame(width: 15, height: 15)
@@ -82,12 +81,12 @@ struct LoginScreen: View {
                         loginScreenViewModel.fetchSalesforceConnectUrl(onSuccess: {url in
                             SafariWebViewModel.shared.showWebView(_url: url)
                         }, onFailure: {})
-                    }, label:{
-                        HStack(alignment: .center, spacing: 0){
-                            if(loginScreenViewModel.isLoginInProgress){
+                    }, label: {
+                        HStack(alignment: .center, spacing: 0) {
+                            if loginScreenViewModel.isLoginInProgress {
                                 ProgressView()
                                     .tint(Color("LoginButtonPrimary"))
-                            }else{
+                            } else {
                                 Image("SalesforceIcon")
                                     .resizable()
                                     .frame(width: 26, height: 18)
@@ -127,7 +126,6 @@ struct LoginScreen: View {
         .background(Color("Background"))
     }
 }
-
 
 struct LoginScreen_Previews: PreviewProvider {
     static var previews: some View {

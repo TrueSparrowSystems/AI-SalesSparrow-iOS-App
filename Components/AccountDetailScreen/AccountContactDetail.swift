@@ -5,18 +5,17 @@
 //  Created by Kartik Kapgate on 14/09/23.
 //
 
-
 import SwiftUI
 
 struct AccountContactDetail: View {
-    @EnvironmentObject var accountDetailViewModelObject : AccountDetailScreenViewModel
+    @EnvironmentObject var accountDetailViewModelObject: AccountDetailScreenViewModel
     var accountId: String
     var accountName: String
     @State var expandAccountDetails: Bool = false
 
     var body: some View {
-        VStack{
-            HStack{
+        VStack {
+            HStack {
                 Image("AddressBook")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
@@ -38,8 +37,8 @@ struct AccountContactDetail: View {
 
                 ForEach(Array(contactIds.enumerated()), id: \.offset) { index, contactId in
                     let contact = accountDetailViewModelObject.accountDetail.contact_map_by_id?[contactId]
-                    if (contact != nil) {
-                        VStack(spacing: 5){
+                    if contact != nil {
+                        VStack(spacing: 5) {
                             HStack(spacing: 0) {
                                 Text("CONTACT \(index + 1)")
                                     .font(.nunitoBold(size: 14))

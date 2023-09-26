@@ -13,14 +13,14 @@ struct TasksList: View {
     
     @State var addTaskActivated = false
     @State var suggestionId: String = ""
-    @EnvironmentObject var createNoteScreenViewModel : CreateNoteScreenViewModel
+    @EnvironmentObject var createNoteScreenViewModel: CreateNoteScreenViewModel
     
     @EnvironmentObject var acccountDetailScreenViewModelObject: AccountDetailViewScreenViewModel
-    @Binding var propagateClick : Int
+    @Binding var propagateClick: Int
     
     var body: some View {
         VStack(spacing: 0) {
-            HStack{
+            HStack {
                 Image("TasksIcon")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
@@ -39,8 +39,8 @@ struct TasksList: View {
                     createNoteScreenViewModel.initTaskData(suggestion: TaskSuggestionStruct(id: suggestionId, description: ""))
                     addTaskActivated = true
                 }
-                ){
-                    HStack{
+                ) {
+                    HStack {
                         Image("AddIcon")
                             .resizable()
                             .frame(width: 20.0, height: 20.0)
@@ -56,8 +56,7 @@ struct TasksList: View {
             if acccountDetailScreenViewModelObject.isTaskListLoading {
                 ProgressView()
                     .tint(Color("LoginButtonSecondary"))
-            }
-            else if acccountDetailScreenViewModelObject.taskData.task_ids.isEmpty {
+            } else if acccountDetailScreenViewModelObject.taskData.task_ids.isEmpty {
                 VStack(spacing: 0) {
                     HStack {
                         Spacer()
@@ -83,13 +82,12 @@ struct TasksList: View {
                 .frame(maxWidth: .infinity, alignment: .center)
                 Spacer()
             } else {
-                VStack{
+                VStack {
                     let taskIdsArray = self.acccountDetailScreenViewModelObject.taskData.task_ids
                     ForEach(Array(taskIdsArray.enumerated()), id: \.offset) { index, taskId in
-                        if ( self.acccountDetailScreenViewModelObject.taskData.task_map_by_id[taskId] != nil) {
+                        if  self.acccountDetailScreenViewModelObject.taskData.task_map_by_id[taskId] != nil {
                             TaskCardView(taskId: taskId, accountId: accountId, taskIndex: index, propagateClick: $propagateClick)
                         }
-                        
                         
                     }
                 }
@@ -97,7 +95,7 @@ struct TasksList: View {
             }
         }.onAppear {
             acccountDetailScreenViewModelObject.fetchTasks(accountId: accountId)
-        }.background{
+        }.background {
             NavigationLink(destination:
                             CreateTaskScreen(accountId: accountId, suggestionId: suggestionId),
                            isActive: self.$addTaskActivated
@@ -116,14 +114,14 @@ struct TaskCardView: View {
     @EnvironmentObject var acccountDetailScreenViewModelObject: AccountDetailViewScreenViewModel
     var taskData: [String: Task] = [:]
     @State var isPopoverVisible: Bool = false
-    @Binding var propagateClick : Int
+    @Binding var propagateClick: Int
     @State var isSelfPopupTriggered = false
     
     var body: some View {
-        VStack(spacing: 0){
+        VStack(spacing: 0) {
             HStack {
                 Text("\(BasicHelper.getInitials(from: acccountDetailScreenViewModelObject.taskData.task_map_by_id[taskId]?.creator_name ?? ""))")
-                    .frame(width: 18, height:18)
+                    .frame(width: 18, height: 18)
                     .font(.nunitoBold(size: 6))
                     .foregroundColor(.black)
                     .background(Color("UserBubble"))
@@ -138,14 +136,14 @@ struct TaskCardView: View {
                 
                 Spacer()
                 
-                HStack(spacing: 0){
+                HStack(spacing: 0) {
                     Text("\(BasicHelper.getFormattedDateForCard(from: acccountDetailScreenViewModelObject.taskData.task_map_by_id[taskId]?.last_modified_time ?? ""))")
                         .font(.nunitoLight(size: 12))
                         .tracking(0.5)
                         .foregroundColor(Color("TextPrimary"))
                         .accessibilityIdentifier("txt_account_detail_task_last_modified_time_\(taskIndex)")
                     
-                    Button{
+                    Button {
                         isSelfPopupTriggered = true
                         isPopoverVisible.toggle()
                     } label: {
@@ -165,7 +163,7 @@ struct TaskCardView: View {
                 .accessibilityIdentifier("txt_account_detail_task_description_\(taskIndex)")
                 .padding(EdgeInsets(top: 6, leading: 0, bottom: 0, trailing: 10))
             
-            HStack(alignment: .center){
+            HStack(alignment: .center) {
                 Text("Assign to")
                     .font(.nunitoRegular(size: 12))
                     .foregroundColor(Color("TermsPrimary"))
@@ -178,7 +176,7 @@ struct TaskCardView: View {
                     .tracking(0.5)
                     .accessibilityIdentifier("txt_account_detail_task_assignee_\(taskIndex)")
                 
-                if((acccountDetailScreenViewModelObject.taskData.task_map_by_id[taskId]?.due_date != nil)){
+                if acccountDetailScreenViewModelObject.taskData.task_map_by_id[taskId]?.due_date != nil {
                     Divider()
                         .frame(width: 0, height: 16)
                         .foregroundColor(Color("TermsPrimary").opacity(0.1))
@@ -205,7 +203,7 @@ struct TaskCardView: View {
             RoundedRectangle(cornerRadius: 5)
                 .stroke(Color("CardBorder"), lineWidth: 1)
         )
-        .overlay(alignment: .topTrailing){
+        .overlay(alignment: .topTrailing) {
             if isPopoverVisible {
                 VStack {
                     Button(action: {
@@ -216,11 +214,11 @@ struct TaskCardView: View {
                             message: Text("Are you sure you want to delete this task?"),
                             submitText: "Delete",
                             onSubmitPress: {
-                                acccountDetailScreenViewModelObject.deleteTask(accountId: accountId, taskId: taskId){}
+                                acccountDetailScreenViewModelObject.deleteTask(accountId: accountId, taskId: taskId) {}
                             }
                         ))
-                    }){
-                        HStack{
+                    }) {
+                        HStack {
                             Image("DeleteIcon")
                                 .frame(width: 20, height: 20)
                             Text("Delete")
@@ -241,13 +239,13 @@ struct TaskCardView: View {
                 .offset(x: -14, y: 32)
             }
         }
-        .onChange(of: propagateClick){_ in
+        .onChange(of: propagateClick) {_ in
             // onChange to hide Popover for events triggered by other cards or screen
             
-            if(isSelfPopupTriggered){
+            if isSelfPopupTriggered {
                 // Don't hide popover if event trigged by self
                 isSelfPopupTriggered = false
-            }else{
+            } else {
                 isPopoverVisible = false
             }
         }

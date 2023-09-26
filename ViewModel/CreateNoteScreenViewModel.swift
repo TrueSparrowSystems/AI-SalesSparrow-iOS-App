@@ -39,11 +39,11 @@ class CreateNoteScreenViewModel: ObservableObject {
     @Published var suggestedData = GenerateSuggestionStruct(add_task_suggestions: [], add_event_suggestions: [])
     @Published var isCreateNoteInProgress = false
     @Published var isSuggestionGenerationInProgress = false
-    @Published var suggestedTaskStates : [String: [String: Any]]  = [:]
-    @Published var suggestedEventStates : [String: [String: Any]]  = [:]
+    @Published var suggestedTaskStates: [String: [String: Any]]  = [:]
+    @Published var suggestedEventStates: [String: [String: Any]]  = [:]
     var apiService = DependencyContainer.shared.apiService
     
-    func initTaskData(suggestion: TaskSuggestionStruct){
+    func initTaskData(suggestion: TaskSuggestionStruct) {
         var dueDate: Date
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd" // Format of due_date
@@ -58,11 +58,11 @@ class CreateNoteScreenViewModel: ObservableObject {
             "assignedToUsername": "",
             "selectedUserId": "",
             "isDateSelected": suggestion.due_date?.isEmpty ?? true ?  false : true,
-            "isTaskSaved": false,
+            "isTaskSaved": false
         ]
     }
     
-    func initEventData(suggestion: EventSuggestionStruct){
+    func initEventData(suggestion: EventSuggestionStruct) {
         var startDate: Date
         var startTime: Date
         var endDate: Date
@@ -93,20 +93,20 @@ class CreateNoteScreenViewModel: ObservableObject {
             "isStartTimeSelected": suggestion.start_datetime?.isEmpty ?? true ? false : true,
             "isEndDateSelected": suggestion.end_datetime?.isEmpty ?? true ? false : true,
             "isEndTimeSelected": suggestion.end_datetime?.isEmpty ?? true ? false : true,
-            "isEventSaved": false,
+            "isEventSaved": false
         ]
     }
     
-    func setTaskDataAttribute(id: String, attrKey: String, attrValue: Any){
-        if(suggestedTaskStates[id] == nil){
+    func setTaskDataAttribute(id: String, attrKey: String, attrValue: Any) {
+        if suggestedTaskStates[id] == nil {
             suggestedTaskStates[id] = [:]
         }
         suggestedTaskStates[id]?[attrKey] = attrValue
         
     }
     
-    func setEventDataAttribute(id: String, attrKey: String, attrValue: Any){
-        if(suggestedEventStates[id] == nil){
+    func setEventDataAttribute(id: String, attrKey: String, attrValue: Any) {
+        if suggestedEventStates[id] == nil {
             suggestedEventStates[id] = [:]
         }
         suggestedEventStates[id]?[attrKey] = attrValue
@@ -114,7 +114,7 @@ class CreateNoteScreenViewModel: ObservableObject {
     }
     
     // A function to create note from given text and account id.
-    func createNote(text: String?, accountId: String, onSuccess : @escaping()-> Void, onFailure : @escaping()-> Void){
+    func createNote(text: String?, accountId: String, onSuccess: @escaping() -> Void, onFailure: @escaping() -> Void) {
         
         guard !self.isCreateNoteInProgress else {
             return
@@ -123,10 +123,10 @@ class CreateNoteScreenViewModel: ObservableObject {
         
         let params: [String: Any] = ["text": text ?? ""]
         
-        apiService.post(type: CreateNoteStruct.self, endpoint: "/v1/accounts/\(accountId)/notes", params: params){
-            [weak self]  result, statusCode in
+        apiService.post(type: CreateNoteStruct.self, endpoint: "/v1/accounts/\(accountId)/notes", params: params) {
+            [weak self]  result, _ in
             switch result {
-            case .success(_):
+            case .success:
                 DispatchQueue.main.async {
                     onSuccess()
                     self?.generateSuggestion(text: text!, onSuccess: {}, onFailure: {})
@@ -147,7 +147,7 @@ class CreateNoteScreenViewModel: ObservableObject {
     }
     
     // A function to generate suggestion note from given text.
-    func generateSuggestion(text: String, onSuccess : @escaping()-> Void, onFailure : @escaping()-> Void){
+    func generateSuggestion(text: String, onSuccess: @escaping() -> Void, onFailure: @escaping() -> Void) {
         guard !self.isSuggestionGenerationInProgress else {
             return
         }
@@ -155,8 +155,8 @@ class CreateNoteScreenViewModel: ObservableObject {
         
         let params: [String: Any] = ["text": text]
         
-        apiService.post(type: GenerateSuggestionStruct.self, endpoint: "/v1/suggestions/crm-actions", params: params){
-            [weak self]  result, statusCode in
+        apiService.post(type: GenerateSuggestionStruct.self, endpoint: "/v1/suggestions/crm-actions", params: params) {
+            [weak self]  result, _ in
             switch result {
             case .success(let results):
                 DispatchQueue.main.async {
@@ -165,13 +165,13 @@ class CreateNoteScreenViewModel: ObservableObject {
                     self?.suggestedData.add_event_suggestions = results.add_event_suggestions
                     self?.isSuggestionGenerationInProgress = false
                     
-                    for index in 0..<(results.add_task_suggestions?.count ?? 0){
+                    for index in 0..<(results.add_task_suggestions?.count ?? 0) {
                         
                         self?.suggestedData.add_task_suggestions?[index].id = UUID().uuidString
                         let suggestion = self?.suggestedData.add_task_suggestions?[index]
                         self?.initTaskData(suggestion: suggestion ?? TaskSuggestionStruct(description: ""))
                     }
-                    for index in 0..<(results.add_event_suggestions?.count ?? 0){
+                    for index in 0..<(results.add_event_suggestions?.count ?? 0) {
                         
                         self?.suggestedData.add_event_suggestions?[index].id = UUID().uuidString
                         let suggestion = self?.suggestedData.add_event_suggestions?[index]
@@ -192,12 +192,12 @@ class CreateNoteScreenViewModel: ObservableObject {
     }
     
     func removeTaskSuggestion(at index: Int) {
-        if ((suggestedData.add_task_suggestions?.indices.contains(index)) != nil) {
+        if (suggestedData.add_task_suggestions?.indices.contains(index)) != nil {
             suggestedData.add_task_suggestions?.remove(at: index)
         }
     }
     func removeEventSuggestion(at index: Int) {
-        if ((suggestedData.add_event_suggestions?.indices.contains(index)) != nil) {
+        if (suggestedData.add_event_suggestions?.indices.contains(index)) != nil {
             suggestedData.add_event_suggestions?.remove(at: index)
         }
     }

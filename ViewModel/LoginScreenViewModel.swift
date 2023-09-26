@@ -5,7 +5,6 @@
 //  Created by Mohit Charkha on 31/07/23.
 //
 
-
 import Foundation
 
 // A struct that represents the meta data of the redirect url API
@@ -25,7 +24,7 @@ class LoginScreenViewModel: ObservableObject {
     var apiService = DependencyContainer.shared.apiService
     
     // A function to get salesforce connect url from BE.
-    func fetchSalesforceConnectUrl(onSuccess : @escaping(String)-> Void, onFailure : @escaping()-> Void) {
+    func fetchSalesforceConnectUrl(onSuccess: @escaping(String) -> Void, onFailure: @escaping() -> Void) {
         guard !self.isLoginInProgress else {return}
         guard self.loginData.url == "" else {
             onSuccess(self.loginData.url)
@@ -33,8 +32,8 @@ class LoginScreenViewModel: ObservableObject {
         }
         self.isLoginInProgress = true
         let params: [String: Any] = ["redirect_uri": Environments.shared.vars["redirect_uri"] ?? ""]
-        apiService.get(type: RedirectUrlStruct.self, endpoint: "/v1/auth/salesforce/redirect-url", params: params){
-            [weak self]  result, statusCode in
+        apiService.get(type: RedirectUrlStruct.self, endpoint: "/v1/auth/salesforce/redirect-url", params: params) {
+            [weak self]  result, _ in
             switch result {
             case .success(let results):
                 DispatchQueue.main.async {
@@ -55,7 +54,7 @@ class LoginScreenViewModel: ObservableObject {
     }
     
     // A function to login user by calling BE API.
-    func salesforceConnect(authCode: String?, onSuccess : @escaping()-> Void, onFailure : @escaping()-> Void){
+    func salesforceConnect(authCode: String?, onSuccess: @escaping() -> Void, onFailure: @escaping() -> Void) {
         
         guard !self.isLoginInProgress else {
             return
@@ -66,8 +65,8 @@ class LoginScreenViewModel: ObservableObject {
             "code": authCode ?? "",
             "redirect_uri": Environments.shared.vars["redirect_uri"] ?? ""
         ]
-        apiService.post(type: SalesforceConnectStruct.self, endpoint: "/v1/auth/salesforce/connect", params: params){
-            [weak self]  result, statusCode in
+        apiService.post(type: SalesforceConnectStruct.self, endpoint: "/v1/auth/salesforce/connect", params: params) {
+            [weak self]  result, _ in
             switch result {
             case .success(let results):
                 DispatchQueue.main.async {
