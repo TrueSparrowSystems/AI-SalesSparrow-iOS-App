@@ -25,7 +25,7 @@ struct UserSearchView: View {
                 
                 TextField("", text: $searchText,
                           prompt: Text("Search Users").foregroundColor(Color("SearchPrimary").opacity(0.8)))
-                .font(.custom("Nunito-Regular", size: 16).weight(.regular))
+                .font(.nunitoRegular(size: 16))
                 .foregroundColor(Color("LuckyPoint"))
                 .accessibilityIdentifier("txt_search_user_field")
                 .focused($focused)
@@ -99,7 +99,7 @@ struct UserListView: View {
                         HStack (alignment: .center) {
                             Text("\(BasicHelper.getInitials(from: user.name))")
                                 .frame(width: 20, height: 20)
-                                .font(.custom("Nunito-Bold", size: 5.24))
+                                .font(.nunitoBold(size: 6))
                                 .foregroundColor(.black)
                                 .background(Color("UserBubble"))
                                 .clipShape(RoundedRectangle(cornerRadius: 26))
@@ -107,7 +107,7 @@ struct UserListView: View {
                             
                             HStack {
                                 Text(user.name)
-                                    .font(.custom("Nunito-Medium", size: 14))
+                                    .font(.nunitoMedium(size: 14))
                                     .foregroundColor(Color("SearchPrimary"))
                                     .accessibilityIdentifier("txt_search_user_user_name_\(user.name)")
                                 Spacer()

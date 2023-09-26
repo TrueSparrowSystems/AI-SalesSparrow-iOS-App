@@ -20,7 +20,7 @@ struct NoteDetailScreen : View {
         VStack{
             HStack(alignment: .center){
                 Text("Done")
-                    .font(.custom("Nunito-Bold", size: 14))
+                    .font(.nunitoBold(size: 14))
                     .padding(.vertical, 10)
                     .foregroundColor(Color("CancelText"))
                     .accessibilityIdentifier("btn_done_note_screen")
@@ -38,7 +38,7 @@ struct NoteDetailScreen : View {
                 //                            .padding(.trailing, 6)
                 //                        Text("Saved")
                 //                            .foregroundColor(.white)
-                //                            .font(.custom("Nunito-Medium", size: 12))
+                //                            .font(.nunitoMedium(size: 12))
                 //                    }
                 //                    .frame(width: 68, height: 32)
                 //                    .background(
@@ -70,14 +70,14 @@ struct NoteDetailScreen : View {
                         .accessibilityIdentifier("img_note_detail_account_icon")
                     Text("Account")
                         .foregroundColor(Color("TextPrimary"))
-                        .font(.custom("Nunito-Regular", size: 12))
+                        .font(.nunitoRegular(size: 12))
                         .accessibilityIdentifier("txt_note_detail_account_text")
                     HStack(alignment: .center){
                         Text(accountName)
                             .padding(.vertical, 8)
                             .padding(.horizontal, 6)
                             .foregroundColor(Color("RedHighlight"))
-                            .font(.custom("Nunito-Bold", size: 14))
+                            .font(.nunitoBold(size: 14))
                             .accessibilityIdentifier("txt_note_detail_account_name")
                     }
                     .background(Color("SelectAccountDropdownBG"))
@@ -89,7 +89,7 @@ struct NoteDetailScreen : View {
                 
                 HTMLTextView(htmlText: noteDetailScreenViewModel.noteDetail.text, textColor: UIColor(named: "TextPrimary") ?? .gray, font: UIFont(name: "Nunito-SemiBold", size: 18) ?? UIFont.systemFont(ofSize: 18), backgroundColor: UIColor(named: "Background") ?? .white)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .font(.custom("Nunito-SemiBold", size: 18))
+                    .font(.nunitoSemiBold(size: 18))
                     .accessibilityIdentifier("txt_note_detail_text")
                     .foregroundColor(Color("TextPrimary"))
                 

@@ -26,7 +26,7 @@ struct AccountContactDetail: View {
                 Text("Contact Details")
                     .accessibilityIdentifier("txt_account_detail_contact_details_title")
                     .foregroundColor(Color("TextPrimary"))
-                    .font(.custom("Nunito-SemiBold",size: 16))
+                    .font(.nunitoSemiBold(size: 16))
 
                 Spacer()
             }
@@ -42,7 +42,7 @@ struct AccountContactDetail: View {
                         VStack(spacing: 5){
                             HStack(spacing: 0) {
                                 Text("CONTACT \(index + 1)")
-                                    .font(.custom("Nunito-Bold", size: 14))
+                                    .font(.nunitoBold(size: 14))
                                     .foregroundColor(Color("TextPrimary"))
                                     .accessibilityIdentifier("txt_account_detail_contact_number_index_\(index)")
                                     .opacity(0.7)
@@ -51,7 +51,7 @@ struct AccountContactDetail: View {
                             }
                             HStack(spacing: 0) {
                                 Text(contact?.name ?? "")
-                                    .font(.custom("Nunito-SemiBold", size: 18))
+                                    .font(.nunitoSemiBold(size: 18))
                                     .foregroundColor(Color("TextPrimary"))
                                     .accessibilityIdentifier("txt_account_detail_contact_name_index_\(index)")
                                 

@@ -43,7 +43,7 @@ struct SuggestedTaskCardView: View {
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .multilineTextAlignment(.leading)
                             .foregroundColor(Color("TextPrimary"))
-                            .font(.custom("Nunito-SemiBold", size: 16))
+                            .font(.nunitoSemiBold(size: 16))
                             .fixedSize(horizontal: false, vertical: true)
                             .accessibilityIdentifier("txt_create_note_suggestion_title_index_\(index)")
                             .padding(EdgeInsets(top: 5, leading: 8, bottom: 5, trailing: 8))
@@ -61,7 +61,7 @@ struct SuggestedTaskCardView: View {
                         HStack {
                             Text("Assign to")
                                 .foregroundColor(Color("TextPrimary"))
-                                .font(.custom("Nunito-SemiBold", size: 12))
+                                .font(.nunitoSemiBold(size: 12))
                                 .tracking(0.5)
                             
                             // add verticle divider gray line
@@ -74,7 +74,7 @@ struct SuggestedTaskCardView: View {
                                 if(((suggestedTaskState["assignedToUsername"] ?? "") as! String).isEmpty){
                                     Text("Select")
                                         .foregroundColor(Color("RedHighlight"))
-                                        .font(.custom("Nunito-Bold", size: 12))
+                                        .font(.nunitoBold(size: 12))
                                         .tracking(0.5)
                                     
                                     Image("ArrowDown")
@@ -83,7 +83,7 @@ struct SuggestedTaskCardView: View {
                                 } else {
                                     Text(BasicHelper.getInitials(from: ((suggestedTaskState["assignedToUsername"] ?? "") as! String)))
                                         .frame(width: 18, height: 18)
-                                        .font(.custom("Nunito-Bold", size: 6))
+                                        .font(.nunitoBold(size: 6))
                                         .foregroundColor(Color.white)
                                         .background(Color("UserBubble"))
                                         .clipShape(RoundedRectangle(cornerRadius: 47))
@@ -91,7 +91,7 @@ struct SuggestedTaskCardView: View {
                                     
                                     Text(((suggestedTaskState["assignedToUsername"] ?? "") as! String))
                                         .foregroundColor(Color("RedHighlight"))
-                                        .font(.custom("Nunito-Bold", size: 12))
+                                        .font(.nunitoBold(size: 12))
                                         .accessibilityIdentifier("txt_create_note_suggestion_user_index_\(index)")
                                         .tracking(0.5)
                                     
@@ -122,7 +122,7 @@ struct SuggestedTaskCardView: View {
                         HStack{
                             Text("Due")
                                 .foregroundColor(Color("TextPrimary"))
-                                .font(.custom("Nunito-SemiBold", size: 12))
+                                .font(.nunitoSemiBold(size: 12))
                                 .tracking(0.5)
                             
                             // add verticle divider gray line
@@ -141,7 +141,7 @@ struct SuggestedTaskCardView: View {
                                     HStack (spacing: 0) {
                                         Text("Select Date")
                                             .foregroundColor(Color("TermsPrimary"))
-                                            .font(.custom("Nunito-Light", size: 12))
+                                            .font(.nunitoLight(size: 12))
                                             .tracking(0.5)
                                             .padding(0)
                                         
@@ -158,7 +158,7 @@ struct SuggestedTaskCardView: View {
                                     HStack (spacing: 0) {
                                         Text(BasicHelper.getDateStringFromDate(from: selectedDate))
                                             .foregroundColor(Color("TermsPrimary"))
-                                            .font(.custom("Nunito-Bold", size: 12))
+                                            .font(.nunitoBold(size: 12))
                                             .tracking(0.5)
                                             .padding(0)
                                         
@@ -199,13 +199,13 @@ struct SuggestedTaskCardView: View {
                                             .controlSize(.small)
                                         Text("Adding Task...")
                                             .foregroundColor(.white)
-                                            .font(.custom("Nunito-Medium", size: 12))
+                                            .font(.nunitoMedium(size: 12))
                                             .accessibilityIdentifier("txt_create_note_adding_task_index_\(index)")
                                         
                                     } else{
                                         Text("Add Task")
                                             .foregroundColor(.white)
-                                            .font(.custom("Nunito-Medium", size: 12))
+                                            .font(.nunitoMedium(size: 12))
                                             .accessibilityIdentifier("txt_create_note_add_task_index_\(index)")
                                     }
                                 }
@@ -235,7 +235,7 @@ struct SuggestedTaskCardView: View {
                                 HStack(alignment: .center, spacing: 0){
                                     Text("Cancel")
                                         .foregroundColor(Color("CancelText"))
-                                        .font(.custom("Nunito-Medium", size: 12))
+                                        .font(.nunitoMedium(size: 12))
                                         .accessibilityIdentifier("txt_create_note_cancel_\(index)")
                                 }
                                 .frame(width: 72, height: 32)
@@ -303,7 +303,7 @@ struct SavedTaskCard : View {
                 HStack{
                     Text(BasicHelper.getInitials(from: UserStateViewModel.shared.currentUser.name))
                         .frame(width: 18, height: 18)
-                        .font(.custom("Nunito-Bold", size: 6))
+                        .font(.nunitoBold(size: 6))
                         .foregroundColor(Color.white)
                         .background(Color("UserBubble"))
                         .clipShape(RoundedRectangle(cornerRadius: 47))
@@ -311,14 +311,14 @@ struct SavedTaskCard : View {
                     
                     Text(UserStateViewModel.shared.currentUser.name)
                         .foregroundColor(Color("TermsPrimary"))
-                        .font(.custom("Nunito-Medium", size: 14))
+                        .font(.nunitoMedium(size: 14))
                         .accessibilityIdentifier("txt_add_task_creator_user")
                         .tracking(0.5)
                     
                     Spacer()
                     Text("Just Now")
                         .foregroundColor(Color("TermsPrimary"))
-                        .font(.custom("Nunito-Light", size: 12))
+                        .font(.nunitoLight(size: 12))
                         .accessibilityIdentifier("txt_created_timestamp")
                         .tracking(0.5)
                     
@@ -337,7 +337,7 @@ struct SavedTaskCard : View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .multilineTextAlignment(.leading)
                     .foregroundColor(Color("PortGore"))
-                    .font(.custom("Nunito-SemiBold", size: 16))
+                    .font(.nunitoSemiBold(size: 16))
                     .fixedSize(horizontal: false, vertical: true)
                     .accessibilityIdentifier("txt_create_note_task_description")
                     .padding(6)
@@ -348,7 +348,7 @@ struct SavedTaskCard : View {
                     HStack {
                         Text("Assign to")
                             .foregroundColor(Color("PortGore"))
-                            .font(.custom("Nunito-SemiBold", size: 12))
+                            .font(.nunitoSemiBold(size: 12))
                             .tracking(0.5)
                         
                         // add verticle divider gray line
@@ -356,7 +356,7 @@ struct SavedTaskCard : View {
                         
                         Text(BasicHelper.getInitials(from: assignedToUsername))
                             .frame(width: 18, height: 18)
-                            .font(.custom("Nunito-Bold", size: 6))
+                            .font(.nunitoBold(size: 6))
                             .foregroundColor(Color.white)
                             .background(Color("UserBubble"))
                             .clipShape(RoundedRectangle(cornerRadius: 47))
@@ -364,7 +364,7 @@ struct SavedTaskCard : View {
                         
                         Text(assignedToUsername)
                             .foregroundColor(Color("RedHighlight"))
-                            .font(.custom("Nunito-Bold", size: 12))
+                            .font(.nunitoBold(size: 12))
                             .accessibilityIdentifier("txt_add_task_selected_user")
                             .tracking(0.5)
                         
@@ -382,7 +382,7 @@ struct SavedTaskCard : View {
                     HStack {
                         Text("Due")
                             .foregroundColor(Color("PortGore"))
-                            .font(.custom("Nunito-SemiBold", size: 12))
+                            .font(.nunitoSemiBold(size: 12))
                             .tracking(0.5)
                         
                         // add verticle divider gray line
@@ -391,7 +391,7 @@ struct SavedTaskCard : View {
                         
                         Text(BasicHelper.getDateStringFromDate(from: selectedDate))
                             .foregroundColor(Color("PortGore"))
-                            .font(.custom("Nunito-Bold", size: 12))
+                            .font(.nunitoBold(size: 12))
                             .tracking(0.5)
                             .padding(0)
                         
@@ -425,7 +425,7 @@ struct SavedTaskCard : View {
                                 Image("DeleteIcon")
                                     .frame(width: 20, height: 20)
                                 Text("Delete")
-                                    .font(.custom("Nunito-SemiBold",size: 16))
+                                    .font(.nunitoSemiBold(size: 16))
                                     .foregroundColor(Color("TextPrimary"))
                             }
                         }
@@ -451,7 +451,7 @@ struct SavedTaskCard : View {
                 
                 Text("Task Added")
                     .foregroundColor(Color("PortGore"))
-                    .font(.custom("Nunito-SemiBold", size: 12))
+                    .font(.nunitoSemiBold(size: 12))
                     .accessibilityIdentifier("txt_create_note_task_added_\(index)")
             }
             .frame(maxWidth: .infinity)

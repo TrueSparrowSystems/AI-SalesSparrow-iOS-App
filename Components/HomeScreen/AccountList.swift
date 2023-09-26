@@ -88,13 +88,13 @@ struct AccountRowView: View {
         // Account Row
         VStack(alignment: .leading, spacing: 0) {
             Text("ACCOUNT")
-                .font(.custom("Nunito-Bold",size: 12))
+                .font(.nunitoBold(size: 12))
                 .foregroundColor(Color("TermsPrimary").opacity(0.7))
                 .tracking(0.5)
                 .padding(.bottom, 6)
             
             Text(account.name)
-                .font(.custom("Nunito-SemiBold",size: 18))
+                .font(.nunitoSemiBold(size: 18))
                 .tracking(0.5)
                 .foregroundColor(Color("TermsPrimary"))
                 .lineLimit(1)
@@ -110,7 +110,7 @@ struct AccountRowView: View {
                         .frame(width: 16, height: 16)
                     
                     Text(account.additional_fields?["website"]! ?? "")
-                        .font(.custom("Nunito-Regular", size: 14))
+                        .font(.nunitoRegular(size: 14))
                         .foregroundColor(Color("TermsPrimary"))
                         .accessibilityIdentifier("txt_account_list_account_website_index_\(index)")
                         .accessibilityElement()
@@ -131,13 +131,13 @@ struct AccountRowView: View {
                 if(contact != nil){
                     VStack(alignment: .leading, spacing: 0){
                         Text("CONTACT")
-                            .font(.custom("Nunito-Bold",size: 12))
+                            .font(.nunitoBold(size: 12))
                             .foregroundColor(Color("TermsPrimary").opacity(0.7))
                             .tracking(0.5)
                             .padding(.bottom, 6)
                         
                         Text(contact?.name ?? "")
-                            .font(.custom("Nunito-SemiBold",size: 18))
+                            .font(.nunitoSemiBold(size: 18))
                             .tracking(0.5)
                             .foregroundColor(Color("TermsPrimary"))
                             .accessibilityIdentifier("txt_account_list_account_contact_name_index_\(index)")
@@ -145,7 +145,7 @@ struct AccountRowView: View {
                         
                         if(!((contact?.additional_fields?["email"] ?? "") ?? "").isEmpty){
                             Text((contact?.additional_fields?["email"])! ?? "")
-                                .font(.custom("Nunito-Regular",size: 14))
+                                .font(.nunitoRegular(size: 14))
                                 .foregroundColor(Color("TermsPrimary"))
                                 .accessibilityIdentifier("txt_account_list_account_email_index_\(index)")
                                 .accessibilityElement()

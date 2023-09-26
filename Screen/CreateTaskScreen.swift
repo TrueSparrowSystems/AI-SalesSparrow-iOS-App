@@ -25,7 +25,7 @@ struct CreateTaskScreen: View {
         VStack{
             HStack{
                 Text((suggestedTaskState["isTaskSaved"] as! Bool) ? "Done" : "Cancel")
-                    .font(.custom("Nunito-Bold", size: 14))
+                    .font(.nunitoBold(size: 14))
                     .padding(.vertical, 10)
                     .foregroundColor(Color("CancelText"))
                     .accessibilityIdentifier((suggestedTaskState["isTaskSaved"] as! Bool) ? "btn_add_task_done" : "btn_add_task_cancel")
@@ -52,7 +52,7 @@ struct CreateTaskScreen: View {
                                 .controlSize(.small)
                             Text("Adding Task...")
                                 .foregroundColor(.white)
-                                .font(.custom("Nunito-Medium", size: 12))
+                                .font(.nunitoMedium(size: 12))
                                 .accessibilityIdentifier("txt_create_task_saving")
                             
                         }else if((suggestedTaskState["isTaskSaved"] as! Bool)){
@@ -64,12 +64,12 @@ struct CreateTaskScreen: View {
                             
                             Text("Saved")
                                 .foregroundColor(.white)
-                                .font(.custom("Nunito-Medium", size: 12))
+                                .font(.nunitoMedium(size: 12))
                                 .accessibilityIdentifier("txt_create_task_saved")
                         }else{
                             Text("Add Task")
                                 .foregroundColor(.white)
-                                .font(.custom("Nunito-Medium", size: 12))
+                                .font(.nunitoMedium(size: 12))
                                 .accessibilityIdentifier("txt_create_task_save")
                         }
                     }
@@ -88,7 +88,7 @@ struct CreateTaskScreen: View {
             HStack {
                 Text("Assign to")
                     .frame(width: 75,height: 30, alignment: .leading)
-                    .font(.custom("Nunito-Regular",size: 14))
+                    .font(.nunitoRegular(size: 14))
                     .foregroundColor(Color("TextPrimary"))
                     .accessibilityIdentifier("txt_add_tasks_assign_to")
                 
@@ -98,12 +98,12 @@ struct CreateTaskScreen: View {
                     if(((suggestedTaskState["assignedToUsername"] ?? "") as! String).isEmpty){
                         Text("Select")
                             .foregroundColor(Color("TextPrimary"))
-                            .font(.custom("Nunito-Bold", size: 12))
+                            .font(.nunitoBold(size: 12))
                             .accessibilityIdentifier("txt_add_task_selected_user")
                     } else{
                         Text(BasicHelper.getInitials(from: ((suggestedTaskState["assignedToUsername"] ?? "") as! String)))
                             .frame(width: 18, height: 18)
-                            .font(.custom("Nunito-Bold", size: 6))
+                            .font(.nunitoBold(size: 6))
                             .foregroundColor(Color.white)
                             .background(Color("UserBubble"))
                             .clipShape(RoundedRectangle(cornerRadius: 47))
@@ -111,7 +111,7 @@ struct CreateTaskScreen: View {
                         
                         Text(((suggestedTaskState["assignedToUsername"] ?? "") as! String))
                             .foregroundColor(Color("RedHighlight"))
-                            .font(.custom("Nunito-Bold", size: 12))
+                            .font(.nunitoBold(size: 12))
                             .accessibilityIdentifier("txt_add_task_selected_user")
                     }
                     Spacer()
@@ -141,7 +141,7 @@ struct CreateTaskScreen: View {
             HStack {
                 Text("Due")
                     .frame(width: 75,height: 30, alignment: .leading)
-                    .font(.custom("Nunito-Regular",size: 14))
+                    .font(.nunitoRegular(size: 14))
                     .foregroundColor(Color("TextPrimary"))
                     .accessibilityIdentifier("txt_add_tasks_due")
                 
@@ -159,7 +159,7 @@ struct CreateTaskScreen: View {
                         HStack (spacing: 0) {
                             Text("Select")
                                 .foregroundColor(Color("TermsPrimary"))
-                                .font(.custom("Nunito-Light", size: 12))
+                                .font(.nunitoLight(size: 12))
                                 .tracking(0.5)
                                 .padding(0)
                             
@@ -178,7 +178,7 @@ struct CreateTaskScreen: View {
                         HStack (spacing: 0) {
                             Text(BasicHelper.getDateStringFromDate(from: dueDate))
                                 .foregroundColor(Color("TermsPrimary"))
-                                .font(.custom("Nunito-Bold", size: 12))
+                                .font(.nunitoBold(size: 12))
                                 .tracking(0.5)
                                 .padding(0)
                             
@@ -207,7 +207,7 @@ struct CreateTaskScreen: View {
                 if(!(suggestedTaskState["isTaskSaved"] as! Bool)){
                     TextField("Add Task",text: $description, axis: .vertical)
                         .foregroundColor(Color("TextPrimary"))
-                        .font(.custom("Nunito-SemiBold", size: 18))
+                        .font(.nunitoSemiBold(size: 18))
                         .focused($focused)
                         .accessibilityIdentifier("et_create_task")
                         .onTapGesture {
@@ -218,7 +218,7 @@ struct CreateTaskScreen: View {
                 }else{
                     Text(description)
                         .foregroundColor(Color("TextPrimary"))
-                        .font(.custom("Nunito-SemiBold", size: 18))
+                        .font(.nunitoSemiBold(size: 18))
                         .accessibilityIdentifier("txt_create_task_description")
                         .padding(.top)
                         .frame(maxWidth: .infinity, alignment: .leading)

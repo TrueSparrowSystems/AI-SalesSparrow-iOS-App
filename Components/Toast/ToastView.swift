@@ -19,7 +19,7 @@ struct ToastView: View {
                 Image(style.iconFileName)
                     .accessibilityIdentifier("toast_view_image")
                 Text(message)
-                    .font(.custom("Nunito-Medium", size: 16))
+                    .font(.nunitoMedium(size: 16))
                     .foregroundColor(Color(.white))
                     .accessibilityIdentifier("toast_view_text")
             }

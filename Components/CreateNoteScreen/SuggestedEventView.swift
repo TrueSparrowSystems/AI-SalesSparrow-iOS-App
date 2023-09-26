@@ -46,7 +46,7 @@ struct SuggestedEventCardView: View {
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .multilineTextAlignment(.leading)
                             .foregroundColor(Color("TextPrimary"))
-                            .font(.custom("Nunito-SemiBold", size: 16))
+                            .font(.nunitoSemiBold(size: 16))
                             .fixedSize(horizontal: false, vertical: true)
                             .accessibilityIdentifier("txt_create_note_event_suggestion_title_\(index)")
                             .padding(EdgeInsets(top: 5, leading: 8, bottom: 5, trailing: 8))
@@ -65,7 +65,7 @@ struct SuggestedEventCardView: View {
                         HStack {
                             Text("Start")
                                 .frame(width: 30,height: 30, alignment: .leading)
-                                .font(.custom("Nunito-Bold",size: 12))
+                                .font(.nunitoBold(size: 12))
                                 .foregroundColor(Color("TextPrimary"))
                                 .accessibilityIdentifier("txt_add_events_start")
                             
@@ -83,7 +83,7 @@ struct SuggestedEventCardView: View {
                                     HStack (spacing: 0) {
                                         Text("Select Date")
                                             .foregroundColor(Color("TermsPrimary"))
-                                            .font(.custom("Nunito-Light", size: 12))
+                                            .font(.nunitoLight(size: 12))
                                             .tracking(0.5)
                                             .padding(0)
                                         
@@ -102,7 +102,7 @@ struct SuggestedEventCardView: View {
                                     HStack (spacing: 0) {
                                         Text(BasicHelper.getDateStringFromDate(from: selectedStartDate))
                                             .foregroundColor(Color("TermsPrimary"))
-                                            .font(.custom("Nunito-Bold", size: 12))
+                                            .font(.nunitoBold(size: 12))
                                             .tracking(0.5)
                                             .padding(0)
                                         
@@ -140,7 +140,7 @@ struct SuggestedEventCardView: View {
                                     HStack (spacing: 0) {
                                         Text("Select Time")
                                             .foregroundColor(Color("TermsPrimary"))
-                                            .font(.custom("Nunito-Light", size: 12))
+                                            .font(.nunitoLight(size: 12))
                                             .tracking(0.5)
                                             .padding(0)
                                         
@@ -159,7 +159,7 @@ struct SuggestedEventCardView: View {
                                     HStack (spacing: 0) {
                                         Text(BasicHelper.getTimeStringFromDate(from: selectedStartTime))
                                             .foregroundColor(Color("TermsPrimary"))
-                                            .font(.custom("Nunito-Bold", size: 12))
+                                            .font(.nunitoBold(size: 12))
                                             .tracking(0.5)
                                             .padding(0)
                                         
@@ -191,7 +191,7 @@ struct SuggestedEventCardView: View {
                         HStack {
                             Text("End")
                                 .frame(width: 30,height: 30, alignment: .leading)
-                                .font(.custom("Nunito-Bold",size: 12))
+                                .font(.nunitoBold(size: 12))
                                 .foregroundColor(Color("TextPrimary"))
                                 .accessibilityIdentifier("txt_add_events_end")
                             
@@ -209,7 +209,7 @@ struct SuggestedEventCardView: View {
                                     HStack (spacing: 0) {
                                         Text("Select Date")
                                             .foregroundColor(Color("TermsPrimary"))
-                                            .font(.custom("Nunito-Light", size: 12))
+                                            .font(.nunitoLight(size: 12))
                                             .tracking(0.5)
                                             .padding(0)
                                         
@@ -228,7 +228,7 @@ struct SuggestedEventCardView: View {
                                     HStack (spacing: 0) {
                                         Text(BasicHelper.getDateStringFromDate(from: selectedEndDate))
                                             .foregroundColor(Color("TermsPrimary"))
-                                            .font(.custom("Nunito-Bold", size: 12))
+                                            .font(.nunitoBold(size: 12))
                                             .tracking(0.5)
                                             .padding(0)
                                         
@@ -268,7 +268,7 @@ struct SuggestedEventCardView: View {
                                     HStack (spacing: 0) {
                                         Text("Select Time")
                                             .foregroundColor(Color("TermsPrimary"))
-                                            .font(.custom("Nunito-Light", size: 12))
+                                            .font(.nunitoLight(size: 12))
                                             .tracking(0.5)
                                             .padding(0)
                                         
@@ -287,7 +287,7 @@ struct SuggestedEventCardView: View {
                                     HStack (spacing: 0) {
                                         Text(BasicHelper.getTimeStringFromDate(from: selectedEndTime))
                                             .foregroundColor(Color("TermsPrimary"))
-                                            .font(.custom("Nunito-Bold", size: 12))
+                                            .font(.nunitoBold(size: 12))
                                             .tracking(0.5)
                                             .padding(0)
                                         
@@ -340,13 +340,13 @@ struct SuggestedEventCardView: View {
                                             .controlSize(.small)
                                         Text("Adding Event...")
                                             .foregroundColor(.white)
-                                            .font(.custom("Nunito-Medium", size: 12))
+                                            .font(.nunitoMedium(size: 12))
                                             .accessibilityIdentifier("txt_create_note_adding_event_index_\(index)")
                                         
                                     } else{
                                         Text("Add Event")
                                             .foregroundColor(.white)
-                                            .font(.custom("Nunito-Medium", size: 12))
+                                            .font(.nunitoMedium(size: 12))
                                             .accessibilityIdentifier("txt_create_note_add_event_index_\(index)")
                                     }
                                 }
@@ -376,7 +376,7 @@ struct SuggestedEventCardView: View {
                                 HStack(alignment: .center, spacing: 0){
                                     Text("Cancel")
                                         .foregroundColor(Color("CancelText"))
-                                        .font(.custom("Nunito-Medium", size: 12))
+                                        .font(.nunitoMedium(size: 12))
                                         .accessibilityIdentifier("txt_create_note_cancel_\(index)")
                                 }
                                 .frame(width: 72, height: 32)
@@ -461,7 +461,7 @@ struct SavedEventCard : View {
                 HStack{
                     Text(BasicHelper.getInitials(from: UserStateViewModel.shared.currentUser.name))
                         .frame(width: 18, height: 18)
-                        .font(.custom("Nunito-Bold", size: 6))
+                        .font(.nunitoBold(size: 6))
                         .foregroundColor(Color.white)
                         .background(Color("UserBubble"))
                         .clipShape(RoundedRectangle(cornerRadius: 47))
@@ -469,14 +469,14 @@ struct SavedEventCard : View {
                     
                     Text(UserStateViewModel.shared.currentUser.name)
                         .foregroundColor(Color("TermsPrimary"))
-                        .font(.custom("Nunito-Medium", size: 14))
+                        .font(.nunitoMedium(size: 14))
                         .accessibilityIdentifier("txt_add_event_creator_user")
                         .tracking(0.5)
                     
                     Spacer()
                     Text("Just Now")
                         .foregroundColor(Color("TermsPrimary"))
-                        .font(.custom("Nunito-Light", size: 12))
+                        .font(.nunitoLight(size: 12))
                         .accessibilityIdentifier("txt_created_timestamp")
                         .tracking(0.5)
                     
@@ -495,7 +495,7 @@ struct SavedEventCard : View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .multilineTextAlignment(.leading)
                     .foregroundColor(Color("PortGore"))
-                    .font(.custom("Nunito-SemiBold", size: 16))
+                    .font(.nunitoSemiBold(size: 16))
                     .fixedSize(horizontal: false, vertical: true)
                     .accessibilityIdentifier("txt_create_note_event_description")
                     .padding(6)
@@ -510,7 +510,7 @@ struct SavedEventCard : View {
                             .padding(.trailing, 4)
                         
                         Text("From")
-                            .font(.custom("Nunito-Regular",size: 12))
+                            .font(.nunitoRegular(size: 12))
                             .foregroundColor(Color("TermsPrimary"))
                             .tracking(0.5)
                         
@@ -520,14 +520,14 @@ struct SavedEventCard : View {
                             .padding(.horizontal, 6)
                         
                         Text("\(BasicHelper.getFormattedDateForDateTime(from: BasicHelper.getFormattedDateTimeString(from: selectedStartDate, from: selectedStartTime)))")
-                            .font(.custom("Nunito-Regular",size: 12))
+                            .font(.nunitoRegular(size: 12))
                             .foregroundColor(Color("TermsPrimary"))
                             .tracking(0.5)
                             .accessibilityIdentifier("txt_create_note_event_start_date_\(index)")
                             .lineLimit(1)
                         
                         Text(" - \(BasicHelper.getFormattedDateForDateTime(from:BasicHelper.getFormattedDateTimeString(from: selectedEndDate, from: selectedEndTime)))")
-                            .font(.custom("Nunito-Regular",size: 12))
+                            .font(.nunitoRegular(size: 12))
                             .foregroundColor(Color("TermsPrimary"))
                             .tracking(0.5)
                             .accessibilityIdentifier("txt_create_note_event_end_date_\(index)")
@@ -560,7 +560,7 @@ struct SavedEventCard : View {
                                 Image("DeleteIcon")
                                     .frame(width: 20, height: 20)
                                 Text("Delete")
-                                    .font(.custom("Nunito-SemiBold",size: 16))
+                                    .font(.nunitoSemiBold(size: 16))
                                     .foregroundColor(Color("TextPrimary"))
                             }
                         }
@@ -586,7 +586,7 @@ struct SavedEventCard : View {
                 
                 Text("Event Added")
                     .foregroundColor(Color("PortGore"))
-                    .font(.custom("Nunito-SemiBold", size: 12))
+                    .font(.nunitoSemiBold(size: 12))
                     .accessibilityIdentifier("txt_create_note_event_added_\(index)")
             }
             .frame(maxWidth: .infinity)

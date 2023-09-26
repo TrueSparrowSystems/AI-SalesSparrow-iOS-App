@@ -14,34 +14,34 @@ struct TermsBottomStrip: View {
     
     var body: some View {
         let termsText = Text("Terms and Conditions")
-            .font(.custom("Nunito-SemiBold" ,size: 12))
+            .font(.nunitoSemiBold(size: 12))
             .underline()
             .foregroundColor(Color("RedHighlight"))
             .accessibilityLabel(Text("txt_login_terms"))
         
         let termsTextWithLink = Text("[Terms and Conditions](https://drive.google.com/file/d/1pOQOLw_yt1aF9QXHlJag2YgaFmwtMf3Y/view)")
-            .font(.custom("Nunito-SemiBold" ,size: 12))
+            .font(.nunitoSemiBold(size: 12))
             .foregroundColor(.clear)
             .accessibilityLabel(Text("txt_terms"))
         
         let privacyText = Text("Privacy Policy")
-            .font(.custom("Nunito-SemiBold" ,size: 12))
+            .font(.nunitoSemiBold(size: 12))
             .underline()
             .foregroundColor(Color("RedHighlight"))
             .accessibilityLabel(Text("txt_login_privacy"))
         
         let privacyTextWithLink = Text("[Privacy Policy](https://drive.google.com/file/d/1kccg9XL2D0QEtCV09Bn8icStNX1PAF5E/view)")
-            .font(.custom("Nunito-SemiBold" ,size: 12))
+            .font(.nunitoSemiBold(size: 12))
             .foregroundColor(.clear)
             .accessibilityLabel(Text("txt_privacy"))
         
         let agreementText = Text("By continuing, you're agreeing to the truesparrow's ")
             .foregroundColor(Color("TermsPrimary"))
-            .font(.custom("Nunito-SemiBold" ,size: 12))
+            .font(.nunitoSemiBold(size: 12))
         
         let andText = Text(" and ")
             .foregroundColor(Color("TermsPrimary"))
-            .font(.custom("Nunito-SemiBold" ,size: 12))
+            .font(.nunitoSemiBold(size: 12))
         
         return ZStack{
             HStack{

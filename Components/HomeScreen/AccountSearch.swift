@@ -27,7 +27,7 @@ struct AccountSearchView: View {
                 
                 TextField("", text: $searchText,
                           prompt: Text("Search Accounts").foregroundColor(Color("SearchPrimary").opacity(0.8)))
-                .font(.custom("Nunito-Regular", size: 16).weight(.regular))
+                .font(.nunitoRegular(size: 16))
                 .foregroundColor(Color("LuckyPoint"))
                 .accessibilityIdentifier("text_field_search_account")
                 .focused($focused)
@@ -105,7 +105,7 @@ struct AccountListView: View {
                         HStack (alignment: .center) {
                             HStack {
                                 Text(account.name)
-                                    .font(.custom("Nunito-Regular", size: 16))
+                                    .font(.nunitoRegular(size: 16))
                                     .foregroundColor(Color("SearchPrimary"))
                                     .accessibilityIdentifier("txt_search_account_name_\(account.name)")
                                 Spacer()
@@ -131,7 +131,7 @@ struct AccountListView: View {
                                         onNoteCreateSelected?(accountId, account.name)
                                     }) {
                                         Text("Add Note")
-                                            .font(.custom("Nunito-Regular", size: 16))
+                                            .font(.nunitoRegular(size: 16))
                                             .foregroundColor(Color("LoginButtonPrimary"))
                                             .accessibilityIdentifier("txt_search_add_note_\(account.name)")
                                     }
@@ -159,22 +159,3 @@ struct AccountListView: View {
         )
     }
 }
-
-
-//
-//struct CreateNoteView: View {
-//    @Binding var pushActive: Bool
-//    var accountId: Int
-//    var accountName: String
-//
-//    var body: some View {
-//        VStack {
-//            Text("Create note page for \(accountName) + \(accountId)")
-//                .font(.custom("Nunito-Regular", size: 24))
-//                .fontWeight(.bold)
-//                .padding()
-//
-//            // Add the rest of your content for the Create Note screen here...
-//        }
-//    }
-//}

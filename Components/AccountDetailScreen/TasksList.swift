@@ -28,7 +28,7 @@ struct TasksList: View {
                     .accessibilityIdentifier("img_account_detail_task_icon")
                 
                 Text("Tasks")
-                    .font(.custom("Nunito-SemiBold",size: 16))
+                    .font(.nunitoSemiBold(size: 16))
                     .foregroundColor(Color("TextPrimary"))
                     .accessibilityIdentifier("txt_account_detail_tasks_title")
                 
@@ -62,7 +62,7 @@ struct TasksList: View {
                     HStack {
                         Spacer()
                         Text("Add tasks, set due dates and assign to your team")
-                            .font(.custom("Nunito-Regular",size: 12))
+                            .font(.nunitoRegular(size: 12))
                             .foregroundColor(Color("TextPrimary"))
                             .padding(EdgeInsets(top: 12, leading: 14, bottom: 12, trailing: 14))
                             .accessibilityIdentifier("txt_account_detail_add_task")
@@ -124,14 +124,14 @@ struct TaskCardView: View {
             HStack {
                 Text("\(BasicHelper.getInitials(from: acccountDetailScreenViewModelObject.taskData.task_map_by_id[taskId]?.creator_name ?? ""))")
                     .frame(width: 18, height:18)
-                    .font(.custom("Nunito-Bold", size: 6))
+                    .font(.nunitoBold(size: 6))
                     .foregroundColor(.black)
                     .background(Color("UserBubble"))
                     .clipShape(RoundedRectangle(cornerRadius: 26))
                     .accessibilityIdentifier("txt_account_detail_task_creator_initials_\(taskIndex)")
                 
                 Text("\(acccountDetailScreenViewModelObject.taskData.task_map_by_id[taskId]?.creator_name ?? "")")
-                    .font(.custom("Nunito-Medium",size: 14))
+                    .font(.nunitoMedium(size: 14))
                     .tracking(0.6)
                     .foregroundColor(Color("TextPrimary"))
                     .accessibilityIdentifier("txt_account_detail_task_creator_\(taskIndex)")
@@ -140,7 +140,7 @@ struct TaskCardView: View {
                 
                 HStack(spacing: 0){
                     Text("\(BasicHelper.getFormattedDateForCard(from: acccountDetailScreenViewModelObject.taskData.task_map_by_id[taskId]?.last_modified_time ?? ""))")
-                        .font(.custom("Nunito-Light",size: 12))
+                        .font(.nunitoLight(size: 12))
                         .tracking(0.5)
                         .foregroundColor(Color("TextPrimary"))
                         .accessibilityIdentifier("txt_account_detail_task_last_modified_time_\(taskIndex)")
@@ -158,7 +158,7 @@ struct TaskCardView: View {
                 }
             }
             Text("\(acccountDetailScreenViewModelObject.taskData.task_map_by_id[taskId]?.description ?? "")")
-                .font(.custom("Nunito-Medium",size: 14))
+                .font(.nunitoMedium(size: 14))
                 .foregroundColor(Color("TextPrimary"))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .multilineTextAlignment(.leading)
@@ -167,13 +167,13 @@ struct TaskCardView: View {
             
             HStack(alignment: .center){
                 Text("Assign to")
-                    .font(.custom("Nunito-Regular",size: 12))
+                    .font(.nunitoRegular(size: 12))
                     .foregroundColor(Color("TermsPrimary"))
                     .tracking(0.5)
                     .accessibilityIdentifier("txt_account_detail_task_assign_to_title_\(taskIndex)")
                 
                 Text(acccountDetailScreenViewModelObject.taskData.task_map_by_id[taskId]?.crm_organization_user_name ?? "")
-                    .font(.custom("Nunito-Regular",size: 12))
+                    .font(.nunitoRegular(size: 12))
                     .foregroundColor(Color("RedHighlight"))
                     .tracking(0.5)
                     .accessibilityIdentifier("txt_account_detail_task_assignee_\(taskIndex)")
@@ -187,7 +187,7 @@ struct TaskCardView: View {
                         .frame(width: 16, height: 16)
                     
                     Text("Due \(BasicHelper.getFormattedDateForDueDate(from: acccountDetailScreenViewModelObject.taskData.task_map_by_id[taskId]?.due_date ?? ""))")
-                        .font(.custom("Nunito-Regular",size: 12))
+                        .font(.nunitoRegular(size: 12))
                         .foregroundColor(Color("TermsPrimary"))
                         .tracking(0.5)
                         .accessibilityIdentifier("txt_account_detail_task_due_date_\(taskIndex)")
@@ -224,7 +224,7 @@ struct TaskCardView: View {
                             Image("DeleteIcon")
                                 .frame(width: 20, height: 20)
                             Text("Delete")
-                                .font(.custom("Nunito-SemiBold",size: 16))
+                                .font(.nunitoSemiBold(size: 16))
                                 .foregroundColor(Color("TextPrimary"))
                         }
                     }

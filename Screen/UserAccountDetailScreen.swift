@@ -31,14 +31,14 @@ struct UserAccountDetailScreen: View {
                 HStack{
                     Text(BasicHelper.getInitials(from: userStateViewModel.currentUser.name))
                         .frame(width: 30, height: 30)
-                        .font(.custom("Nunito-Bold", size: 9))
+                        .font(.nunitoBold(size: 9))
                         .foregroundColor(Color.black)
                         .background(Color("UserBubble"))
                         .clipShape(Circle())
                         .accessibilityIdentifier("img_user_account_detail_user_initials")
                     
                     Text(userStateViewModel.currentUser.name)
-                        .font(.custom("Nunito-Medium", size: 14))
+                        .font(.nunitoMedium(size: 14))
                         .foregroundColor(Color("TextPrimary"))
                         .accessibilityIdentifier("txt_user_account_detail_user_name")
                     
@@ -64,7 +64,7 @@ struct UserAccountDetailScreen: View {
                             
                             
                             Text("Disconnect Salesforce")
-                                .font(.custom("Nunito-SemiBold", size: 16))
+                                .font(.nunitoSemiBold(size: 16))
                                 .foregroundColor(Color("TextPrimary"))
                                 .accessibilityIdentifier("txt_user_account_detail_salesforce_disconnect")
                             
@@ -93,7 +93,7 @@ struct UserAccountDetailScreen: View {
                         .accessibilityIdentifier("img_user_account_detail_logout")
                     
                     Text("Log Out")
-                        .font(.custom("Nunito-SemiBold", size: 16))
+                        .font(.nunitoSemiBold(size: 16))
                         .foregroundColor(Color("TextPrimary"))
                         .accessibilityIdentifier("btn_user_account_detail_logout")
                         .onTapGesture {
@@ -114,12 +114,12 @@ struct UserAccountDetailScreen: View {
             
             VStack{
                 Text("V\(appVersion)")
-                    .font(.custom("Nunito-SemiBold", size: 12))
+                    .font(.nunitoSemiBold(size: 12))
                     .foregroundColor(Color("TextPrimary"))
                     .accessibilityIdentifier("txt_user_account_detail_app_version")
                 
                 Text("Sales Sparrow by True Sparrow")
-                    .font(.custom("Nunito-SemiBold", size: 16))
+                    .font(.nunitoSemiBold(size: 16))
                     .foregroundColor(Color("TextPrimary"))
                     .accessibilityIdentifier("txt_user_account_detail_app_name")
             }
@@ -134,15 +134,15 @@ struct DisconnectDescription: View {
     
     var body: some View {
         let t1 = Text("Disconnecting Salesforce will also ")
-            .font(.custom("Nunito-SemiBold", size: 14))
+            .font(.nunitoSemiBold(size: 14))
             .foregroundColor(Color("TextPrimary"))
         
         let t2 = Text("delete your account")
-            .font(.custom("Nunito-SemiBold", size: 14))
+            .font(.nunitoSemiBold(size: 14))
             .foregroundColor(Color("RedHighlight"))
         
         let t3 = Text(" and all details associated with it.")
-            .font(.custom("Nunito-SemiBold", size: 14))
+            .font(.nunitoSemiBold(size: 14))
             .foregroundColor(Color("TextPrimary"))
         
         return t1 + t2 + t3

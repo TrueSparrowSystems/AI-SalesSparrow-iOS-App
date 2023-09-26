@@ -27,7 +27,7 @@ struct CreateEventScreen: View {
         VStack{
             HStack{
                 Text((suggestedEventState["isEventSaved"] as! Bool) ? "Done" : "Cancel")
-                    .font(.custom("Nunito-Bold", size: 14))
+                    .font(.nunitoBold(size: 14))
                     .padding(.vertical, 10)
                     .foregroundColor(Color("CancelText"))
                     .accessibilityIdentifier((suggestedEventState["isEventSaved"] as! Bool) ? "btn_add_event_done" : "btn_add_event_cancel")
@@ -54,7 +54,7 @@ struct CreateEventScreen: View {
                                 .controlSize(.small)
                             Text("Adding Event...")
                                 .foregroundColor(.white)
-                                .font(.custom("Nunito-Medium", size: 12))
+                                .font(.nunitoMedium(size: 12))
                                 .accessibilityIdentifier("txt_create_event_saving")
                             
                         }else if((suggestedEventState["isEventSaved"] as! Bool)){
@@ -66,12 +66,12 @@ struct CreateEventScreen: View {
                             
                             Text("Saved")
                                 .foregroundColor(.white)
-                                .font(.custom("Nunito-Medium", size: 12))
+                                .font(.nunitoMedium(size: 12))
                                 .accessibilityIdentifier("txt_create_event_saved")
                         }else{
                             Text("Add Event")
                                 .foregroundColor(.white)
-                                .font(.custom("Nunito-Medium", size: 12))
+                                .font(.nunitoMedium(size: 12))
                                 .accessibilityIdentifier("txt_create_event_save")
                         }
                     }
@@ -91,7 +91,7 @@ struct CreateEventScreen: View {
             HStack {
                 Text("Start")
                     .frame(width: 35,height: 30, alignment: .leading)
-                    .font(.custom("Nunito-Regular",size: 14))
+                    .font(.nunitoRegular(size: 14))
                     .foregroundColor(Color("TextPrimary"))
                     .accessibilityIdentifier("txt_add_events_start")
                 
@@ -109,7 +109,7 @@ struct CreateEventScreen: View {
                         HStack (spacing: 0) {
                             Text("Select Date")
                                 .foregroundColor(Color("TermsPrimary"))
-                                .font(.custom("Nunito-Light", size: 12))
+                                .font(.nunitoLight(size: 12))
                                 .tracking(0.5)
                                 .padding(0)
                             
@@ -128,7 +128,7 @@ struct CreateEventScreen: View {
                         HStack (spacing: 0) {
                             Text(BasicHelper.getDateStringFromDate(from: startDate))
                                 .foregroundColor(Color("TermsPrimary"))
-                                .font(.custom("Nunito-Bold", size: 12))
+                                .font(.nunitoBold(size: 12))
                                 .tracking(0.5)
                                 .padding(0)
                             
@@ -164,7 +164,7 @@ struct CreateEventScreen: View {
                         HStack (spacing: 0) {
                             Text("Select Time")
                                 .foregroundColor(Color("TermsPrimary"))
-                                .font(.custom("Nunito-Light", size: 12))
+                                .font(.nunitoLight(size: 12))
                                 .tracking(0.5)
                                 .padding(0)
                             
@@ -183,7 +183,7 @@ struct CreateEventScreen: View {
                         HStack (spacing: 0) {
                             Text(BasicHelper.getTimeStringFromDate(from: startTime))
                                 .foregroundColor(Color("TermsPrimary"))
-                                .font(.custom("Nunito-Bold", size: 12))
+                                .font(.nunitoBold(size: 12))
                                 .tracking(0.5)
                                 .padding(0)
                             
@@ -211,7 +211,7 @@ struct CreateEventScreen: View {
             HStack {
                 Text("End")
                     .frame(width: 35,height: 30, alignment: .leading)
-                    .font(.custom("Nunito-Regular",size: 14))
+                    .font(.nunitoRegular(size: 14))
                     .foregroundColor(Color("TextPrimary"))
                     .accessibilityIdentifier("txt_add_events_end")
                 
@@ -229,7 +229,7 @@ struct CreateEventScreen: View {
                         HStack (spacing: 0) {
                             Text("Select Date")
                                 .foregroundColor(Color("TermsPrimary"))
-                                .font(.custom("Nunito-Light", size: 12))
+                                .font(.nunitoLight(size: 12))
                                 .tracking(0.5)
                                 .padding(0)
                             
@@ -248,7 +248,7 @@ struct CreateEventScreen: View {
                         HStack (spacing: 0) {
                             Text(BasicHelper.getDateStringFromDate(from: endDate))
                                 .foregroundColor(Color("TermsPrimary"))
-                                .font(.custom("Nunito-Bold", size: 12))
+                                .font(.nunitoBold(size: 12))
                                 .tracking(0.5)
                                 .padding(0)
                             
@@ -286,7 +286,7 @@ struct CreateEventScreen: View {
                         HStack (spacing: 0) {
                             Text("Select Time")
                                 .foregroundColor(Color("TermsPrimary"))
-                                .font(.custom("Nunito-Light", size: 12))
+                                .font(.nunitoLight(size: 12))
                                 .tracking(0.5)
                                 .padding(0)
                             
@@ -305,7 +305,7 @@ struct CreateEventScreen: View {
                         HStack (spacing: 0) {
                             Text(BasicHelper.getTimeStringFromDate(from: endTime))
                                 .foregroundColor(Color("TermsPrimary"))
-                                .font(.custom("Nunito-Bold", size: 12))
+                                .font(.nunitoBold(size: 12))
                                 .tracking(0.5)
                                 .padding(0)
                             
@@ -333,7 +333,7 @@ struct CreateEventScreen: View {
                 if(!(suggestedEventState["isEventSaved"] as! Bool)){
                     TextField("Add Event",text: $description, axis: .vertical)
                         .foregroundColor(Color("TextPrimary"))
-                        .font(.custom("Nunito-SemiBold", size: 18))
+                        .font(.nunitoSemiBold(size: 18))
                         .focused($focused)
                         .accessibilityIdentifier("et_create_event")
                         .onTapGesture {
@@ -344,7 +344,7 @@ struct CreateEventScreen: View {
                 }else{
                     Text(description)
                         .foregroundColor(Color("TextPrimary"))
-                        .font(.custom("Nunito-SemiBold", size: 18))
+                        .font(.nunitoSemiBold(size: 18))
                         .accessibilityIdentifier("txt_create_event_description")
                         .padding(.top)
                         .frame(maxWidth: .infinity, alignment: .leading)

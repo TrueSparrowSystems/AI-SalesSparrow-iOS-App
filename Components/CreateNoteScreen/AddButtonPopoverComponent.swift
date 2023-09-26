@@ -28,7 +28,7 @@ struct AddButtonPopoverComponent: View{
                 HStack{
                     Image("TasksIcon")
                     Text("Add Tasks")
-                        .font(.custom("Nunito-SemiBold",size: 16))
+                        .font(.nunitoSemiBold(size: 16))
                         .foregroundColor(Color("TextPrimary"))
                         .accessibilityIdentifier("txt_create_note_popover_add_task")
                 }
@@ -44,7 +44,7 @@ struct AddButtonPopoverComponent: View{
                 HStack{
                     Image("EventsIcon")
                     Text("Add Event")
-                        .font(.custom("Nunito-SemiBold",size: 16))
+                        .font(.nunitoSemiBold(size: 16))
                         .foregroundColor(Color("TextPrimary"))
                         .accessibilityIdentifier("txt_create_note_popover_add_event")
                 }

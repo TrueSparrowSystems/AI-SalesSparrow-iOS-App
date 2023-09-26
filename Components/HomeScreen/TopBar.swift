@@ -23,7 +23,7 @@ struct TopBar: View {
                 .accessibilityIdentifier("img_home_screen_account_icon")
             
             Text("Accounts")
-                .font(.custom("Nunito-Regular",size: 24))
+                .font(.nunitoRegular(size: 24))
                 .fontWeight(.bold)
                 .frame(width: 103.0, height: 33.0)
                 .accessibilityIdentifier("txt_account_details_title")
@@ -54,7 +54,7 @@ struct TopBar: View {
                            isActive: self.$userAccountSettingScreenActivated) {
                 Text(BasicHelper.getInitials(from: userStateViewModel.currentUser.name))
                     .frame(width: 30, height:30)
-                    .font(.custom("Nunito-Bold", size: 9))
+                    .font(.nunitoBold(size: 9))
                     .foregroundColor(.black)
                     .accessibilityIdentifier("txt_user_account_icon")
             }

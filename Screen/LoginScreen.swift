@@ -25,7 +25,7 @@ struct LoginScreen: View {
                     
                     Text("Your Salesforce app with AI powered recommendations")
                         .padding(.bottom, 16)
-                        .font(.custom("Nunito-Regular", size: 16))
+                        .font(.nunitoRegular(size: 16))
                         .multilineTextAlignment(.center)
                         .foregroundColor(Color("LoginScreenText"))
                         .accessibilityIdentifier("txt_login_app_description")
@@ -38,7 +38,7 @@ struct LoginScreen: View {
                             .accessibilityIdentifier("img_login_note_icon")
                         
                         Text("Notes")
-                            .font(.custom("Nunito-Regular",size: 14))
+                            .font(.nunitoRegular(size: 14))
                             .foregroundColor(Color("TextPrimary"))
                             .accessibilityIdentifier("txt_login_note")
                         
@@ -49,7 +49,7 @@ struct LoginScreen: View {
                             .accessibilityIdentifier("img_login_tasks_icon")
                         
                         Text("Tasks")
-                            .font(.custom("Nunito-Regular",size: 14))
+                            .font(.nunitoRegular(size: 14))
                             .foregroundColor(Color("TextPrimary"))
                             .accessibilityIdentifier("txt_login_tasks")
                         
@@ -60,7 +60,7 @@ struct LoginScreen: View {
                             .accessibilityIdentifier("img_login_events_icon")
                         
                         Text("Events")
-                            .font(.custom("Nunito-Regular",size: 14))
+                            .font(.nunitoRegular(size: 14))
                             .foregroundColor(Color("TextPrimary"))
                             .accessibilityIdentifier("txt_login_events")
                         
@@ -71,7 +71,7 @@ struct LoginScreen: View {
                             .accessibilityIdentifier("img_login_opportunities_icon")
                         
                         Text("Opportunities")
-                            .font(.custom("Nunito-Regular",size: 14))
+                            .font(.nunitoRegular(size: 14))
                             .foregroundColor(Color("TextPrimary"))
                             .lineLimit(1)
                             .accessibilityIdentifier("txt_login_opportunities")
@@ -96,7 +96,7 @@ struct LoginScreen: View {
                                 Text("Continue with Salesforce")
                                     .padding()
                                     .foregroundStyle(.white)
-                                    .font(.custom("Nunito-Medium", size: 16))
+                                    .font(.nunitoMedium(size: 16))
                                     .accessibilityIdentifier("txt_login_continue_salesforce")
                             }
                             

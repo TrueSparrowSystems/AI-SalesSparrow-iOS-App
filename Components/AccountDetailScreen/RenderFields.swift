@@ -21,7 +21,7 @@ struct RenderFields: View {
         case .TITLE:
             HStack(spacing: 0){
                 Text(fieldValue)
-                    .font(.custom("Nunito-Regular",size: 14))
+                    .font(.nunitoRegular(size: 14))
                     .foregroundColor(Color("TextPrimary"))
                     .accessibilityIdentifier("txt_account_detail_field_type_\(fieldName)")
                 
@@ -30,7 +30,7 @@ struct RenderFields: View {
         case .EMAIL:
             HStack(spacing: 0){
                 Text(fieldValue)
-                    .font(.custom("Nunito-Regular",size: 12))
+                    .font(.nunitoRegular(size: 12))
                     .foregroundColor(Color("TextPrimary"))
                     .accessibilityIdentifier("txt_account_detail_field_type_\(fieldName)")
                 
@@ -39,12 +39,12 @@ struct RenderFields: View {
         case .STRING:
                 HStack(spacing: 0){
                     Text("\(fieldTitle!): ")
-                        .font(.custom("Nunito-Medium",size: 14))
+                        .font(.nunitoMedium(size: 14))
                         .foregroundColor(Color("TextPrimary"))
                         .accessibilityIdentifier("txt_account_detail_field_type_\(fieldName)")
                     
                     Text("\(fieldValue)")
-                        .font(.custom("Nunito-Medium",size: 14))
+                        .font(.nunitoMedium(size: 14))
                         .foregroundColor(Color("TextPrimary"))
                         .accessibilityIdentifier("txt_account_detail_field_value_\(fieldValue)")
                     
@@ -59,12 +59,12 @@ struct RenderFields: View {
                     .padding(.trailing, 4)
                 
                 Text("\(fieldTitle!): ")
-                    .font(.custom("Nunito-Medium",size: 14))
+                    .font(.nunitoMedium(size: 14))
                     .foregroundColor(Color("TextPrimary"))
                     .accessibilityIdentifier("txt_account_detail_field_type_\(fieldName)")
                 
                 Text("\(fieldValue)")
-                    .font(.custom("Nunito-Medium",size: 14))
+                    .font(.nunitoMedium(size: 14))
                     .foregroundColor(Color("TextPrimary"))
                     .underline(true, color: Color("TextPrimary"))
                     .accessibilityIdentifier("txt_account_detail_field_value_\(fieldValue)")

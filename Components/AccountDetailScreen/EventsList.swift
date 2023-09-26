@@ -28,7 +28,7 @@ struct EventsList: View {
                     .accessibilityIdentifier("img_account_detail_event_icon")
                 
                 Text("Events")
-                    .font(.custom("Nunito-SemiBold",size: 16))
+                    .font(.nunitoSemiBold(size: 16))
                     .foregroundColor(Color("TextPrimary"))
                     .accessibilityIdentifier("txt_account_detail_events_title")
                 
@@ -62,7 +62,7 @@ struct EventsList: View {
                     HStack {
                         Spacer()
                         Text("Add events, set due dates and assign to your team")
-                            .font(.custom("Nunito-Regular",size: 12))
+                            .font(.nunitoRegular(size: 12))
                             .foregroundColor(Color("TextPrimary"))
                             .padding(EdgeInsets(top: 12, leading: 14, bottom: 12, trailing: 14))
                             .accessibilityIdentifier("txt_account_detail_add_event")
@@ -124,14 +124,14 @@ struct EventCardView: View {
             HStack {
                 Text("\(BasicHelper.getInitials(from: acccountDetailScreenViewModelObject.eventData.event_map_by_id[eventId]?.creator_name ?? ""))")
                     .frame(width: 18, height:18)
-                    .font(.custom("Nunito-Bold", size: 6))
+                    .font(.nunitoBold(size: 6))
                     .foregroundColor(.black)
                     .background(Color("UserBubble"))
                     .clipShape(RoundedRectangle(cornerRadius: 26))
                     .accessibilityIdentifier("txt_account_detail_event_creator_initials_\(eventIndex)")
                 
                 Text("\(acccountDetailScreenViewModelObject.eventData.event_map_by_id[eventId]?.creator_name ?? "")")
-                    .font(.custom("Nunito-Medium",size: 14))
+                    .font(.nunitoMedium(size: 14))
                     .tracking(0.6)
                     .foregroundColor(Color("TextPrimary"))
                     .accessibilityIdentifier("txt_account_detail_event_creator_\(eventIndex)")
@@ -140,7 +140,7 @@ struct EventCardView: View {
                 
                 HStack(spacing: 0){
                     Text("\(BasicHelper.getFormattedDateForCard(from: acccountDetailScreenViewModelObject.eventData.event_map_by_id[eventId]?.last_modified_time ?? ""))")
-                        .font(.custom("Nunito-Light",size: 12))
+                        .font(.nunitoLight(size: 12))
                         .tracking(0.5)
                         .foregroundColor(Color("TextPrimary"))
                         .accessibilityIdentifier("txt_account_detail_event_last_modified_time_\(eventIndex)")
@@ -158,7 +158,7 @@ struct EventCardView: View {
                 }
             }
             Text("\(acccountDetailScreenViewModelObject.eventData.event_map_by_id[eventId]?.description ?? "")")
-                .font(.custom("Nunito-Medium",size: 14))
+                .font(.nunitoMedium(size: 14))
                 .foregroundColor(Color("TextPrimary"))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .multilineTextAlignment(.leading)
@@ -172,8 +172,7 @@ struct EventCardView: View {
                         .padding(.trailing, 4)
                     
                     Text("From")
-                        .font(.custom("Nunito-Regular",size: 12))
-                        .foregroundColor(Color("TermsPrimary"))
+                        .font(.nunitoRegular(size: 12))                        .foregroundColor(Color("TermsPrimary"))
                         .tracking(0.5)
                     
                     Divider()
@@ -182,14 +181,13 @@ struct EventCardView: View {
                         .padding(.horizontal, 6)
                     
                     Text("\(BasicHelper.getFormattedDateForDateTime(from: acccountDetailScreenViewModelObject.eventData.event_map_by_id[eventId]?.start_datetime ?? ""))")
-                        .font(.custom("Nunito-Regular",size: 12))
-                        .foregroundColor(Color("TermsPrimary"))
+                        .font(.nunitoRegular(size: 12))                        .foregroundColor(Color("TermsPrimary"))
                         .tracking(0.5)
                         .accessibilityIdentifier("txt_account_detail_event_start_date_\(eventIndex)")
                         .lineLimit(1)
                     
                     Text(" - \(BasicHelper.getFormattedDateForDateTime(from: acccountDetailScreenViewModelObject.eventData.event_map_by_id[eventId]?.end_datetime ?? ""))")
-                        .font(.custom("Nunito-Regular",size: 12))
+                        .font(.nunitoRegular(size: 12))
                         .foregroundColor(Color("TermsPrimary"))
                         .tracking(0.5)
                         .accessibilityIdentifier("txt_account_detail_event_end_date_\(eventIndex)")
@@ -225,7 +223,7 @@ struct EventCardView: View {
                             Image("DeleteIcon")
                                 .frame(width: 20, height: 20)
                             Text("Delete")
-                                .font(.custom("Nunito-SemiBold",size: 16))
+                                .font(.nunitoSemiBold(size: 16))
                                 .foregroundColor(Color("TextPrimary"))
                         }
                     }

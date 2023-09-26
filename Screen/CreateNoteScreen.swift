@@ -25,7 +25,7 @@ struct CreateNoteScreen : View {
         VStack{
             HStack(alignment: .center){
                 Text(isNoteSaved ? "Done" : "Cancel")
-                    .font(.custom("Nunito-Bold", size: 14))
+                    .font(.nunitoBold(size: 14))
                     .padding(.vertical, 10)
                     .foregroundColor(Color("CancelText"))
                     .accessibilityIdentifier(isNoteSaved ? "btn_done_create_note" : "btn_cancel_create_note")
@@ -51,7 +51,7 @@ struct CreateNoteScreen : View {
                                 .controlSize(.small)
                             Text("Saving")
                                 .foregroundColor(.white)
-                                .font(.custom("Nunito-Medium", size: 12))
+                                .font(.nunitoMedium(size: 12))
                                 .accessibilityIdentifier("txt_create_note_saving")
                             
                         }else if(isNoteSaved){
@@ -63,7 +63,7 @@ struct CreateNoteScreen : View {
                             
                             Text("Saved")
                                 .foregroundColor(.white)
-                                .font(.custom("Nunito-Medium", size: 12))
+                                .font(.nunitoMedium(size: 12))
                                 .accessibilityIdentifier("txt_create_note_saved")
                         }else{
                             Image("SalesforceIcon")
@@ -74,7 +74,7 @@ struct CreateNoteScreen : View {
                             
                             Text("Save")
                                 .foregroundColor(.white)
-                                .font(.custom("Nunito-Medium", size: 12))
+                                .font(.nunitoMedium(size: 12))
                                 .accessibilityIdentifier("txt_create_note_save")
                         }
                     }
@@ -98,7 +98,7 @@ struct CreateNoteScreen : View {
                 
                 Text("Account")
                     .foregroundColor(Color("TextPrimary"))
-                    .font(.custom("Nunito-Regular", size: 12))
+                    .font(.nunitoRegular(size: 12))
                     .accessibilityIdentifier("txt_create_note_account")
                 if(isAccountSelectable && !(isNoteSaved || isSaveInProgress)){
                     Button(action: {showAccountSearchView = true}){
@@ -107,7 +107,7 @@ struct CreateNoteScreen : View {
                                 .padding(.vertical, 8)
                                 .padding(.horizontal, 6)
                                 .foregroundColor(Color("RedHighlight"))
-                                .font(.custom("Nunito-Light", size: 14))
+                                .font(.nunitoLight(size: 14))
                                 .accessibilityIdentifier(accountId == "" ? "txt_create_note_select_account" : "txt_create_note_selected_account")
                             Image("ArrowDown")
                                 .frame(width: 7, height: 4)
@@ -133,7 +133,7 @@ struct CreateNoteScreen : View {
                             .padding(.vertical, 8)
                             .padding(.horizontal, 6)
                             .foregroundColor(Color("RedHighlight"))
-                            .font(.custom("Nunito-Bold", size: 14))
+                            .font(.nunitoBold(size: 14))
                             .accessibilityIdentifier("txt_create_note_selected_account")
                     }
                     .background(Color("SelectAccountDropdownBG"))
@@ -149,12 +149,12 @@ struct CreateNoteScreen : View {
                         Text(text)
                             .foregroundColor(Color("TextPrimary"))
                             .frame(maxWidth: .infinity, alignment: .leading)
-                            .font(.custom("Nunito-SemiBold", size: 18))
+                            .font(.nunitoSemiBold(size: 18))
                         
                     }else{
                         TextField("Add Note",text: $text, axis: .vertical)
                             .foregroundColor(Color("TextPrimary"))
-                            .font(.custom("Nunito-SemiBold", size: 18))
+                            .font(.nunitoSemiBold(size: 18))
                             .focused($focused)
                             .accessibilityIdentifier("et_create_note")
                             .onTapGesture {
@@ -173,7 +173,7 @@ struct CreateNoteScreen : View {
                                 Image("Sparkle")
                                 Text("Getting recommendations")
                                     .foregroundColor(Color("TextPrimary"))
-                                    .font(.custom("Nunito-SemiBold", size: 16))
+                                    .font(.nunitoSemiBold(size: 16))
                                 Spacer()
                             }
                             VStack(alignment: .leading, spacing: 10){
@@ -184,9 +184,8 @@ struct CreateNoteScreen : View {
                                     ShimmerView(size: CGSize(width: 72, height: 33))
                                 }
                             }
-                            
                         }
-                        else if(createNoteScreenViewModel.suggestedData.add_task_suggestions?.isEmpty && createNoteScreenViewModel.suggestedData.add_event_suggestions?.isEmpty){ // check for count of suggested task and event array
+                        else if((createNoteScreenViewModel.suggestedData.add_task_suggestions?.isEmpty != nil) && (createNoteScreenViewModel.suggestedData.add_event_suggestions?.isEmpty != nil)){ // check for count of suggested task and event array
                             // Show no recommendation message
                             VStack(spacing: 0) {
                                 Image("Check")
@@ -194,7 +193,7 @@ struct CreateNoteScreen : View {
                                 
                                 Text("You are all set, no recommendation for now!")
                                     .foregroundColor(Color("TermsPrimary"))
-                                    .font(.custom("Nunito-SemiBold" ,size: 14))
+                                    .font(.nunitoSemiBold(size: 14))
                                     .frame(alignment: .center)
                                     .padding(.top, 16)
                                     .accessibilityIdentifier("txt_create_note_no_recommendations")
@@ -211,7 +210,7 @@ struct CreateNoteScreen : View {
                                 Image("Sparkle")
                                 Text("We have some recommendations")
                                     .foregroundColor(Color("TextPrimary"))
-                                    .font(.custom("Nunito-SemiBold", size: 16))
+                                    .font(.nunitoSemiBold(size: 16))
                                     .accessibilityIdentifier("txt_create_note_recommendations")
                                 
                                 Spacer()
