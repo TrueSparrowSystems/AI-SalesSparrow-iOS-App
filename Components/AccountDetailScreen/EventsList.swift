@@ -92,7 +92,7 @@ struct EventsList: View {
                             }
                         }
                         .buttonStyle(.plain)
-                        .accessibilityIdentifier("note_card_\(eventId)")
+                        .accessibilityIdentifier("event_card_\(eventId)")
                     }
                 }
                 .padding(.trailing)

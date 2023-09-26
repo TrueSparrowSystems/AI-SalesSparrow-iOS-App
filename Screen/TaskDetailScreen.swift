@@ -13,7 +13,7 @@ struct TaskDetailScreen: View {
     
     var accountId: String
     var taskId: String
-    var isEditFlow: Bool = false
+    var isEditFlow: Bool = false 
     @State var crm_organization_user_id: String = ""
     @State var crm_organization_user_name: String = ""
     @State var description: String = ""
@@ -64,7 +64,7 @@ struct TaskDetailScreen: View {
                                 .font(.custom("Nunito-Medium", size: 12))
                                 .accessibilityIdentifier("txt_create_task_saved")
                         }else{
-                            Text("Add Task")
+                            Text("Edit Task")
                                 .foregroundColor(.white)
                                 .font(.custom("Nunito-Medium", size: 12))
                                 .accessibilityIdentifier("txt_create_task_save")
@@ -92,28 +92,24 @@ struct TaskDetailScreen: View {
                 Button(action:{
                     showUserSearchView = true
                 }){
-                    if(crm_organization_user_name.isEmpty){
-                        Text("Select")
-                            .foregroundColor(Color("TextPrimary"))
-                            .font(.custom("Nunito-Bold", size: 12))
-                            .accessibilityIdentifier("txt_add_task_selected_user")
-                    } else{
-                        Text(BasicHelper.getInitials(from: crm_organization_user_name))
-                            .frame(width: 18, height: 18)
-                            .font(.custom("Nunito-Bold", size: 6))
-                            .foregroundColor(Color.white)
-                            .background(Color("UserBubble"))
-                            .clipShape(RoundedRectangle(cornerRadius: 47))
-                        
-                        Text(crm_organization_user_name)
-                            .foregroundColor(Color("RedHighlight"))
-                            .font(.custom("Nunito-Bold", size: 12))
-                            .accessibilityIdentifier("txt_add_task_selected_user")
-                    }
+                    
+                    Text(BasicHelper.getInitials(from: crm_organization_user_name))
+                        .frame(width: 18, height: 18)
+                        .font(.custom("Nunito-Bold", size: 6))
+                        .foregroundColor(Color.white)
+                        .background(Color("UserBubble"))
+                        .clipShape(RoundedRectangle(cornerRadius: 47))
+                    
+                    Text(crm_organization_user_name)
+                        .foregroundColor(Color("RedHighlight"))
+                        .font(.custom("Nunito-Bold", size: 12))
+                        .accessibilityIdentifier("txt_add_task_selected_user")
+                    
                     Spacer()
                     
                     Image("ArrowDown")
                         .frame(width: 7, height: 4)
+                        .opacity(isEditFlow ? 1 : 0)
                 }
                 .disabled(isEditFlow ? false : true)
                 .accessibilityIdentifier("btn_create_task_search_user")
@@ -211,15 +207,26 @@ struct TaskDetailScreen: View {
         }
         .onAppear {
             // Adding a delay for view to render
+            print(accountId)
+            print(taskId)
             taskDetailScreenViewModel.fetchTaskDetail(accountId: accountId, taskId: taskId)
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.05){
                 focused = true
             }
         }
         .onChange(of: taskDetailScreenViewModel.currentTaskData){ currentTask  in
-            crm_organization_user_id = currentTask.crm_organization_user_id
-            crm_organization_user_name = currentTask.crm_organization_user_name
-            description = currentTask.description
+            print(currentTask)
+            self.crm_organization_user_id = currentTask.crm_organization_user_id
+            self.crm_organization_user_name = currentTask.crm_organization_user_name
+            self.description = currentTask.description
+            self.selectedDate = BasicHelper.getDateFromString(currentTask.due_date)
+            isDateSelected = true
+        }
+        .onReceive(taskDetailScreenViewModel.$currentTaskData){ currentTask  in
+            print(currentTask)
+            self.crm_organization_user_id = currentTask.crm_organization_user_id
+            self.crm_organization_user_name = currentTask.crm_organization_user_name
+            self.description = currentTask.description
             self.selectedDate = BasicHelper.getDateFromString(currentTask.due_date)
             isDateSelected = true
         }

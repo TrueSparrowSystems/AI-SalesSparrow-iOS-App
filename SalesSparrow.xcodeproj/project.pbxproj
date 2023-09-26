@@ -91,6 +91,7 @@
 		4B8B6E202AC1641F00F2B66E /* EventDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8B6E1E2AC1641F00F2B66E /* EventDetailScreen.swift */; };
 		4B8B6E222AC172C300F2B66E /* EventDetailScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8B6E212AC172C300F2B66E /* EventDetailScreenViewModel.swift */; };
 		4B8B6E232AC172C300F2B66E /* EventDetailScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8B6E212AC172C300F2B66E /* EventDetailScreenViewModel.swift */; };
+		4B98BE4C2AC3734500EE0158 /* EventsListUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B98BE4B2AC3734500EE0158 /* EventsListUITests.swift */; };
 		4B9E5DE02A8CD59900041D65 /* UserAccountDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9E5DDF2A8CD59900041D65 /* UserAccountDetailScreen.swift */; };
 		4B9E5DE12A8CD59900041D65 /* UserAccountDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9E5DDF2A8CD59900041D65 /* UserAccountDetailScreen.swift */; };
 		4B9E5DE42A8CE6AD00041D65 /* AlertModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9E5DE32A8CE6AD00041D65 /* AlertModal.swift */; };
@@ -253,6 +254,7 @@
 		4B819B502A9667C000CE6293 /* SuggestedTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestedTaskView.swift; sourceTree = "<group>"; };
 		4B8B6E1E2AC1641F00F2B66E /* EventDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailScreen.swift; sourceTree = "<group>"; };
 		4B8B6E212AC172C300F2B66E /* EventDetailScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailScreenViewModel.swift; sourceTree = "<group>"; };
+		4B98BE4B2AC3734500EE0158 /* EventsListUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListUITests.swift; sourceTree = "<group>"; };
 		4B9E5DDF2A8CD59900041D65 /* UserAccountDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAccountDetailScreen.swift; sourceTree = "<group>"; };
 		4B9E5DE32A8CE6AD00041D65 /* AlertModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertModal.swift; sourceTree = "<group>"; };
 		4BA0A1B02AB43D2900C4D58D /* RenderFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderFields.swift; sourceTree = "<group>"; };
@@ -664,6 +666,7 @@
 				6DD0BD552A95F0F8008B30E3 /* AccountDetailsUITests.swift */,
 				6DD0BD5A2A95F323008B30E3 /* NoteListUITests.swift */,
 				6DD0BD5C2A95F4A1008B30E3 /* TasksListUITests.swift */,
+				4B98BE4B2AC3734500EE0158 /* EventsListUITests.swift */,
 			);
 			path = AccountDetailScreen;
 			sourceTree = "<group>";
@@ -1142,6 +1145,7 @@
 				6DD0BD582A95F23B008B30E3 /* UserAccountDetailUITests.swift in Sources */,
 				6DD618B62A80EB11007FA929 /* Environments.swift in Sources */,
 				014E34A42A973C0000288602 /* CreateNoteUITests.swift in Sources */,
+				4B98BE4C2AC3734500EE0158 /* EventsListUITests.swift in Sources */,
 				6DD0BD5B2A95F323008B30E3 /* NoteListUITests.swift in Sources */,
 				4BA575292A9E2D56004E0ED7 /* CreateTaskUITests.swift in Sources */,
 				6DD0BD5D2A95F4A1008B30E3 /* TasksListUITests.swift in Sources */,

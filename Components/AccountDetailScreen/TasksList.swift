@@ -86,11 +86,11 @@ struct TasksList: View {
                     let taskIdsArray = self.acccountDetailScreenViewModelObject.taskData.task_ids
                     ForEach(Array(taskIdsArray.enumerated()), id: \.offset) { index, taskId in
                         NavigationLink(destination: TaskDetailScreen(accountId: accountId, taskId: taskId, isEditFlow: false)
-                        ){                        if ( self.acccountDetailScreenViewModelObject.taskData.task_map_by_id[taskId] != nil) {
+                        ){ if ( self.acccountDetailScreenViewModelObject.taskData.task_map_by_id[taskId] != nil) {
                             TaskCardView(taskId: taskId, accountId: accountId, taskIndex: index, propagateClick: $propagateClick)
                         }}
                         .buttonStyle(.plain)
-                        .accessibilityIdentifier("note_card_\(taskId)")
+                        .accessibilityIdentifier("task_card_\(index)")
                     }
                 }
                 .padding(.trailing)

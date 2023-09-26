@@ -105,6 +105,40 @@ final class AccountDetailTaskListUITests: XCTestCase {
         
     }
     
+    func testViewTask() throws {
+        let app = XCUIApplication()
+        app.launchArguments = ["isRunningUITests"]
+        app.launch()
+        
+        // Set the timeout duration
+        let timeout = 5
+        let accountIndex = 0
+        
+        let accountNavigationLink = app.buttons["account_card_\(accountIndex)"]
+        XCTAssertTrue(accountNavigationLink.waitForExistence(timeout: TimeInterval(timeout)))
+        accountNavigationLink.tap()
+        
+        app.swipeUp()
+        
+        let taskCard = app.buttons["task_card_0"]
+        XCTAssertTrue(taskCard.waitForExistence(timeout: TimeInterval(timeout)))
+        taskCard.tap()
+        
+        let cancelButton = app.buttons["btn_add_task_cancel"]
+        XCTAssertTrue(cancelButton.waitForExistence(timeout: TimeInterval(timeout)))
+        XCTAssertTrue(cancelButton.isEnabled)
+        
+        XCTAssertTrue(app.staticTexts["txt_add_tasks_assign_to"].waitForExistence(timeout: TimeInterval(timeout)))
+        XCTAssertTrue(app.staticTexts["txt_add_task_selected_user"].waitForExistence(timeout: TimeInterval(timeout)))
+        
+        XCTAssertTrue(app.staticTexts["txt_add_tasks_due"].waitForExistence(timeout: TimeInterval(timeout)))
+        XCTAssertTrue(app.staticTexts["txt_add_task_select_date"].waitForExistence(timeout: TimeInterval(timeout)))
+        
+        XCTAssertTrue(app.staticTexts["txt_create_task_description"].waitForExistence(timeout: TimeInterval(timeout)))
+        
+        cancelButton.tap()
+    }
+    
     func testDeleteTask() throws {
         // Launch the app with the specified launch arguments
         let app = XCUIApplication()
@@ -162,6 +196,33 @@ final class AccountDetailTaskListUITests: XCTestCase {
         XCTAssertTrue(descriptionForTask1 != descriptionForTask1AfterDelete)
         
         
+    }
+    
+    func testEditTask() throws {
+        // Launch the app with the specified launch arguments
+        let app = XCUIApplication()
+        app.launchArguments = ["isRunningUITests"]
+        app.launch()
+        
+        // Set the timeout duration
+        let timeout = 5
+        let accountIndex = 0
+        
+        let accountNavigationLink = app.buttons["account_card_\(accountIndex)"]
+        XCTAssertTrue(accountNavigationLink.waitForExistence(timeout: TimeInterval(timeout)))
+        accountNavigationLink.tap()
+        
+        app.swipeUp()
+
+        app.buttons["btn_account_detail_task_more_0"].tap()
+        
+        let addNoteTextField = app.textViews["et_create_task"]
+        XCTAssertTrue(addNoteTextField.waitForExistence(timeout: TimeInterval(timeout)))
+        addNoteTextField.tap()
+        //Type Text into the the text field
+        addNoteTextField.typeText("Create new task.\nTap on the save button to save it to salesforce.")
+        
+        app.buttons["btn_save_task"].tap()
     }
     
     func testDeleteTaskError() throws {

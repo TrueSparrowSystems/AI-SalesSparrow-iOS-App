@@ -29,7 +29,7 @@ struct EventDetailScreen: View {
                     .font(.custom("Nunito-Bold", size: 14))
                     .padding(.vertical, 10)
                     .foregroundColor(Color("CancelText"))
-                    .accessibilityIdentifier((isEventSaved) ? "btn_add_event_done" : "btn_add_event_cancel")
+                    .accessibilityIdentifier((isEventSaved) ? "btn_event_detail_done" : "btn_event_detail_cancel")
                     .onTapGesture {
                         self.presentationMode.wrappedValue.dismiss()
                     }
@@ -49,24 +49,24 @@ struct EventDetailScreen: View {
                             Text("Saving Event...")
                                 .foregroundColor(.white)
                                 .font(.custom("Nunito-Medium", size: 12))
-                                .accessibilityIdentifier("txt_create_event_saving")
+                                .accessibilityIdentifier("txt_event_detail_saving")
                             
                         }else if(isEventSaved){
                             Image("CheckMark")
                                 .resizable()
                                 .frame(width: 12, height: 12)
                                 .padding(.trailing, 6)
-                                .accessibilityIdentifier("img_create_event_checkmark")
+                                .accessibilityIdentifier("img_event_detail_checkmark")
                             
                             Text("Saved")
                                 .foregroundColor(.white)
                                 .font(.custom("Nunito-Medium", size: 12))
-                                .accessibilityIdentifier("txt_create_event_saved")
+                                .accessibilityIdentifier("txt_event_detail_saved")
                         }else{
                             Text("Save Event")
                                 .foregroundColor(.white)
                                 .font(.custom("Nunito-Medium", size: 12))
-                                .accessibilityIdentifier("txt_create_event_save")
+                                .accessibilityIdentifier("txt_event_detail_save")
                         }
                     }
                     .frame(width: eventDetailScreenViewModel.iseditEventInProgress ? 115 : 68, height: 32)
@@ -93,7 +93,7 @@ struct EventDetailScreen: View {
                         .frame(width: 35,height: 30, alignment: .leading)
                         .font(.custom("Nunito-Regular",size: 14))
                         .foregroundColor(Color("TextPrimary"))
-                        .accessibilityIdentifier("txt_add_events_due")
+                        .accessibilityIdentifier("txt_event_detail_due")
                     
                     ZStack{
                         DatePickerView(selectedDate: $startDate, onTap: {
@@ -102,7 +102,7 @@ struct EventDetailScreen: View {
                             .disabled(isEditFlow ? false : true)
                             .background(.white)
                             .cornerRadius(8)
-                            .accessibilityIdentifier("dp_add_event_select_date")
+                            .accessibilityIdentifier("dp_event_detail_select_date")
                         
                         HStack (spacing: 0) {
                             Text(BasicHelper.getDateStringFromDate(from: startDate))
@@ -110,6 +110,7 @@ struct EventDetailScreen: View {
                                 .font(.custom("Nunito-Bold", size: 12))
                                 .tracking(0.5)
                                 .padding(0)
+                                .accessibilityIdentifier("txt_event_detail_start_date")
                             
                             Spacer()
                             
@@ -117,7 +118,6 @@ struct EventDetailScreen: View {
                                 .frame(width: 15, height: 15)
                                 .padding(.leading, 10)
                         }
-                        .accessibilityIdentifier("txt_add_event_select_date")
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .background(.white)
                         .userInteractionDisabled()
@@ -134,7 +134,7 @@ struct EventDetailScreen: View {
                         .disabled(isEditFlow ? false : true)
                         .background(.white)
                         .cornerRadius(8)
-                        .accessibilityIdentifier("dp_add_event_select_time")
+                        .accessibilityIdentifier("dp_event_detail_select_time")
 
                         HStack (spacing: 0) {
                             Text(BasicHelper.getTimeStringFromDate(from: startTime))
@@ -142,6 +142,7 @@ struct EventDetailScreen: View {
                                 .font(.custom("Nunito-Bold", size: 12))
                                 .tracking(0.5)
                                 .padding(0)
+                                .accessibilityIdentifier("txt_event_detail_start_time")
                             
                             Spacer()
                             
@@ -149,7 +150,6 @@ struct EventDetailScreen: View {
                                 .frame(width: 15, height: 15)
                                 .padding(.leading, 10)
                         }
-                        .accessibilityIdentifier("txt_add_event_select_time")
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .background(.white)
                         .userInteractionDisabled()
@@ -168,14 +168,14 @@ struct EventDetailScreen: View {
                         .frame(width: 35,height: 30, alignment: .leading)
                         .font(.custom("Nunito-Regular",size: 14))
                         .foregroundColor(Color("TextPrimary"))
-                        .accessibilityIdentifier("txt_add_events_due")
+                        .accessibilityIdentifier("txt_event_detail_due")
                     
                     ZStack{
                         DatePickerView(selectedDate: $endDate, onTap: {})
                         .disabled(isEditFlow ? false : true)
                         .background(.white)
                         .cornerRadius(8)
-                        .accessibilityIdentifier("dp_add_event_select_date")
+                        .accessibilityIdentifier("dp_event_detail_select_date")
                         
                         HStack (spacing: 0) {
                             Text(BasicHelper.getDateStringFromDate(from: endDate))
@@ -183,6 +183,7 @@ struct EventDetailScreen: View {
                                 .font(.custom("Nunito-Bold", size: 12))
                                 .tracking(0.5)
                                 .padding(0)
+                                .accessibilityIdentifier("txt_event_detail_end_date")
                             
                             Spacer()
                             
@@ -190,7 +191,7 @@ struct EventDetailScreen: View {
                                 .frame(width: 15, height: 15)
                                 .padding(.leading, 10)
                         }
-                        .accessibilityIdentifier("txt_add_event_select_date")
+                        .accessibilityIdentifier("txt_event_detail_select_date")
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .background(.white)
                         .userInteractionDisabled()
@@ -208,7 +209,7 @@ struct EventDetailScreen: View {
                         .disabled(isEditFlow ? false : true)
                         .background(.white)
                         .cornerRadius(8)
-                        .accessibilityIdentifier("dp_add_event_select_end_time")
+                        .accessibilityIdentifier("dp_event_detail_select_end_time")
                         
                         HStack (spacing: 0) {
                             Text(BasicHelper.getTimeStringFromDate(from: endTime))
@@ -216,6 +217,7 @@ struct EventDetailScreen: View {
                                 .font(.custom("Nunito-Bold", size: 12))
                                 .tracking(0.5)
                                 .padding(0)
+                                .accessibilityIdentifier("txt_event_detail_end_time")
                             
                             Spacer()
                             
@@ -223,7 +225,7 @@ struct EventDetailScreen: View {
                                 .frame(width: 15, height: 15)
                                 .padding(.leading, 10)
                         }
-                        .accessibilityIdentifier("txt_add_event_select_time")
+                        .accessibilityIdentifier("txt_event_detail_select_time")
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .background(.white)
                         .userInteractionDisabled()
