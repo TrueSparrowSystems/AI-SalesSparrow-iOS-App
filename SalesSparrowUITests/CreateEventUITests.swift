@@ -184,7 +184,7 @@ final class CreateEventUITests: XCTestCase {
         let suggestedEventDescriptionAfterDelete = suggestedEventAfterDelete.label
         
         // Verify that the event description before and after delete is not same
-        XCTAssertTrue(suggestedEventDescription != suggestedEventDescriptionAfterDelete)
+        XCTAssertNotEqual(suggestedEventDescription, suggestedEventDescriptionAfterDelete)
     }
     
     func testCreateEventFromSuggestedCard() {

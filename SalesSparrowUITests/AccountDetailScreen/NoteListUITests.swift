@@ -228,7 +228,7 @@ final class AccountDetailNoteListUITests: XCTestCase {
         let textForNote1AfterDelete = app.staticTexts["txt_account_detail_note_text_0"].label
         
         // Verify the note text for 1st note before and after delete are not same
-        XCTAssertTrue(textForNote1 != textForNote1AfterDelete)
+        XCTAssertNotEqual(textForNote1, textForNote1AfterDelete)
     }
     
     func testDeleteNoteError() throws {
@@ -265,6 +265,6 @@ final class AccountDetailNoteListUITests: XCTestCase {
         let textForNote1AfterDelete = app.staticTexts["txt_account_detail_note_text_0"].label
         
         // Verify the note text for 1st note before and after delete are same
-        XCTAssertTrue(textForNote1 == textForNote1AfterDelete)
+        XCTAssertEqual(textForNote1, textForNote1AfterDelete)
     }
 }

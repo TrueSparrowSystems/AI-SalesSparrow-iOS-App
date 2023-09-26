@@ -46,20 +46,20 @@ final class SalesSparrowTests: XCTestCase {
         // Check if the value after conversion of double to double using util function is of type Double
         XCTAssertTrue(type(of: doubleToDouble!) == Double.self)
         // Check if the value before and after conversion of double to double using util function is same
-        XCTAssertTrue(doubleToDouble == double)
+        XCTAssertEqual(doubleToDouble, double)
         
         let int = 10
         let intToString = BasicHelper.toString(int)
         // Check if the value after conversion of int to string using util function is of type String
         XCTAssertTrue(type(of: intToString!) == String.self)
         // Check if the value before and after conversion of int to string using util function is same
-        XCTAssertTrue(intToString! == String(int))
+        XCTAssertEqual(intToString, String(int))
         
         let intToInt = BasicHelper.toInt(int)
         // Check if the value after conversion of int to int using util function is of type Int
         XCTAssertTrue(type(of: intToInt!) == Int.self)
         // Check if the value before and after conversion of int to int using util function is same
-        XCTAssertTrue(intToInt == int)
+        XCTAssertEqual(intToInt, int)
         
         let float: Float = -10.2
         let floatToString = BasicHelper.toString(float)
@@ -77,7 +77,7 @@ final class SalesSparrowTests: XCTestCase {
         // Check if the value after conversion of string to string using util function is of type String
         XCTAssertTrue(type(of: stringToString!) == String.self)
         // Check if the value before and after conversion of string to string using util function is same
-        XCTAssertTrue(stringToString! == string)
+        XCTAssertEqual(stringToString, string)
         
         let stringToBool = BasicHelper.toBool(string)
         // Check if the value after conversion of string to bool using util function is false
@@ -88,7 +88,7 @@ final class SalesSparrowTests: XCTestCase {
         // Check if the value after conversion of bool to bool using util function is of type Bool
         XCTAssertTrue(type(of: boolToBool) == Bool.self)
         // Check if the value before and after conversion of bool to bool using util function is same
-        XCTAssertTrue(boolToBool == bool)
+        XCTAssertEqual(boolToBool, bool)
         
         let nilVariable: Any? = nil
         // Check if the value after conversion of nil to bool using util function is false
@@ -112,42 +112,42 @@ final class SalesSparrowTests: XCTestCase {
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSZ"
         var timeString = dateFormatter.string(from: time)
         var formattedDateForCard = BasicHelper.getFormattedDateForCard(from: timeString)
-        XCTAssertTrue(formattedDateForCard == "1 year ago")
+        XCTAssertEqual(formattedDateForCard, "1 year ago")
         
         // 2 Years Ago
         time = Date(timeInterval: -(2*370*24*60*60), since: Date())
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSZ"
         timeString = dateFormatter.string(from: time)
         formattedDateForCard = BasicHelper.getFormattedDateForCard(from: timeString)
-        XCTAssertTrue(formattedDateForCard == "2 years ago")
+        XCTAssertEqual(formattedDateForCard, "2 years ago")
         
         // 1 Month Ago
         time = Date(timeInterval: -(31*24*60*60), since: Date())
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSZ"
         timeString = dateFormatter.string(from: time)
         formattedDateForCard = BasicHelper.getFormattedDateForCard(from: timeString)
-        XCTAssertTrue(formattedDateForCard == "1 month ago")
+        XCTAssertEqual(formattedDateForCard, "1 month ago")
         
         // 2 Months Ago
         time = Date(timeInterval: -(2*31*24*60*60), since: Date())
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSZ"
         timeString = dateFormatter.string(from: time)
         formattedDateForCard = BasicHelper.getFormattedDateForCard(from: timeString)
-        XCTAssertTrue(formattedDateForCard == "2 months ago")
+        XCTAssertEqual(formattedDateForCard, "2 months ago")
         
         // 1 week Ago
         time = Date(timeInterval: -(8*24*60*60), since: Date())
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSZ"
         timeString = dateFormatter.string(from: time)
         formattedDateForCard = BasicHelper.getFormattedDateForCard(from: timeString)
-        XCTAssertTrue(formattedDateForCard == "1 week ago")
+        XCTAssertEqual(formattedDateForCard, "1 week ago")
         
         // 2 weeks Ago
         time = Date(timeInterval: -(2*8*24*60*60), since: Date())
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSZ"
         timeString = dateFormatter.string(from: time)
         formattedDateForCard = BasicHelper.getFormattedDateForCard(from: timeString)
-        XCTAssertTrue(formattedDateForCard == "2 weeks ago")
+        XCTAssertEqual(formattedDateForCard, "2 weeks ago")
         
         // Less than a week Ago
         time = Date(timeInterval: -(24*60*60), since: Date())
@@ -158,14 +158,14 @@ final class SalesSparrowTests: XCTestCase {
         dateFormatter.pmSymbol = "pm"
         let dateString = dateFormatter.string(from: time)
         formattedDateForCard = BasicHelper.getFormattedDateForCard(from: timeString)
-        XCTAssertTrue(formattedDateForCard == dateString)
+        XCTAssertEqual(formattedDateForCard, dateString)
         
         // Just now
         time = Date(timeInterval: -(60), since: Date())
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSZ"
         timeString = dateFormatter.string(from: time)
         formattedDateForCard = BasicHelper.getFormattedDateForCard(from: timeString)
-        XCTAssertTrue(formattedDateForCard == "Just now")
+        XCTAssertEqual(formattedDateForCard, "Just now")
         
         // Invalid Date format case
         time = Date(timeInterval: -(31*24*60*60), since: Date())
@@ -187,7 +187,7 @@ final class SalesSparrowTests: XCTestCase {
         let expectedFormattedDateString = "12/07/2023"
         
         var formattedDateString = BasicHelper.getFormattedDateForDueDate(from: dateString)
-        XCTAssertTrue(expectedFormattedDateString == formattedDateString)
+        XCTAssertEqual(expectedFormattedDateString, formattedDateString)
         
         // Invalid DateString for error case
         dateString = "2023.7"
@@ -201,12 +201,12 @@ final class SalesSparrowTests: XCTestCase {
         // 2 word name
         var name = "Abc Xyz"
         var initials = BasicHelper.getInitials(from: name)
-        XCTAssertTrue(initials == "AX")
+        XCTAssertEqual(initials, "AX")
         
         // 1 word name
         name = "Abc"
         initials = BasicHelper.getInitials(from: name)
-        XCTAssertTrue(initials == "A")
+        XCTAssertEqual(initials, "A")
         
         // No name
         name = ""
@@ -216,7 +216,7 @@ final class SalesSparrowTests: XCTestCase {
         // Long Name
         name = "Abc def Ghi Jkl"
         initials = BasicHelper.getInitials(from: name)
-        XCTAssertTrue(initials == "AD")
+        XCTAssertEqual(initials, "AD")
     }
     
     func testNotificationIsPublishedWithExpectedTitle() throws {

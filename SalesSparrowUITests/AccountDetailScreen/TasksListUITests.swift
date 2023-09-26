@@ -158,7 +158,7 @@ final class AccountDetailTaskListUITests: XCTestCase {
         let descriptionForTask1AfterDelete = app.staticTexts["txt_account_detail_task_description_0"].label
         
         // Verify the task description for 1st task before and after delete are not same
-        XCTAssertTrue(descriptionForTask1 != descriptionForTask1AfterDelete)
+        XCTAssertNotEqual(descriptionForTask1, descriptionForTask1AfterDelete)
         
     }
     
@@ -198,6 +198,6 @@ final class AccountDetailTaskListUITests: XCTestCase {
         let descriptionForTask1AfterDelete = app.staticTexts["txt_account_detail_task_description_0"].label
         
         // Verify the task description for 1st task before and after delete are same
-        XCTAssertTrue(descriptionForTask1 == descriptionForTask1AfterDelete)
+        XCTAssertEqual(descriptionForTask1, descriptionForTask1AfterDelete)
     }
 }

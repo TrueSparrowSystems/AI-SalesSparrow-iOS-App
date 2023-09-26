@@ -49,7 +49,7 @@ final class SalesSparrowUITests: XCTestCase {
         let textFieldSearchAccount = app.textFields["text_field_search_account"]
         XCTAssertTrue(textFieldSearchAccount.waitForExistence(timeout: TimeInterval(timeout)))
         let textFieldSearchAccountVal = textFieldSearchAccount.value as? String
-        XCTAssertTrue(((textFieldSearchAccountVal?.isEmpty) != nil))
+        XCTAssertNotNil(textFieldSearchAccountVal?.isEmpty)
 
         // modal should open with default data
         let accountName = "Test Account 1"

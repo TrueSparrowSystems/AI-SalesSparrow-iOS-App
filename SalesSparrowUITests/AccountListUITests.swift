@@ -39,7 +39,7 @@ final class AccountListUITests: XCTestCase {
         let accountName = "Test Account \(rowIndex+1)"
         
         XCTAssertTrue(app.staticTexts["txt_account_list_account_name_index_\(rowIndex)"].exists, "Account name label should be present")
-        XCTAssertTrue(app.staticTexts["txt_account_list_account_name_index_\(rowIndex)"].label == accountName)
+        XCTAssertEqual(app.staticTexts["txt_account_list_account_name_index_\(rowIndex)"].label, accountName)
         
         XCTAssertTrue(app.staticTexts["txt_account_list_account_website_index_\(rowIndex)"].exists, "Website label should be present")
         

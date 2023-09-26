@@ -170,7 +170,7 @@ final class CreateNoteUITests: XCTestCase {
         let suggestedTaskDescriptionAfterDelete = suggestedTaskAfterDelete.label
 
         // Verify that the task description before and after cancel is not same
-        XCTAssertTrue(suggestedTaskDescription != suggestedTaskDescriptionAfterDelete)
+        XCTAssertNotEqual(suggestedTaskDescription, suggestedTaskDescriptionAfterDelete)
     }
 
     func testSearchUser() throws {
@@ -299,6 +299,6 @@ final class CreateNoteUITests: XCTestCase {
 
         print("before: \(suggestedEventDescription), after \(suggestedEventDescriptionAfterDelete)")
         // Verify that the event description before and after cancel is not same
-        XCTAssertTrue(suggestedEventDescription != suggestedEventDescriptionAfterDelete)
+        XCTAssertNotEqual(suggestedEventDescription, suggestedEventDescriptionAfterDelete)
     }
 }

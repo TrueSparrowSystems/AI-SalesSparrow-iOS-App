@@ -160,7 +160,7 @@ final class AccountDetailEventListUITests: XCTestCase {
         let descriptionForEvent1AfterDelete = app.staticTexts["txt_account_detail_event_description_0"].label
         
         // Verify the event description for 1st event before and after delete are not same
-        XCTAssertTrue(descriptionForEvent1 != descriptionForEvent1AfterDelete)
+        XCTAssertNotEqual(descriptionForEvent1, descriptionForEvent1AfterDelete)
         
     }
     
@@ -198,6 +198,6 @@ final class AccountDetailEventListUITests: XCTestCase {
         let descriptionForEvent1AfterDelete = app.staticTexts["txt_account_detail_event_description_0"].label
         
         // Verify the event description for 1st event before and after delete are same
-        XCTAssertTrue(descriptionForEvent1 == descriptionForEvent1AfterDelete)
+        XCTAssertEqual(descriptionForEvent1, descriptionForEvent1AfterDelete)
     }
 }

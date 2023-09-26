@@ -193,7 +193,7 @@ final class CreateTaskUITests: XCTestCase {
         let suggestedTaskDescriptionAfterDelete = suggestedTaskAfterDelete.label
         
         // Verify that the task description before and after delete is not same
-        XCTAssertTrue(suggestedTaskDescription != suggestedTaskDescriptionAfterDelete)
+        XCTAssertNotEqual(suggestedTaskDescription, suggestedTaskDescriptionAfterDelete)
     }
     
     func testCreateTaskFromSuggestedCard() {
