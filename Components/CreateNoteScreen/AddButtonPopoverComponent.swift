@@ -25,7 +25,7 @@ struct AddButtonPopoverComponent: View {
                 addTaskActivated = true
             }, label: {
                 HStack {
-                    Image("TasksIcon")
+                    Image(Asset.tasksIcon.name)
                     Text("Add Tasks")
                         .font(.nunitoSemiBold(size: 16))
                         .foregroundColor(Color("TextPrimary"))
@@ -41,7 +41,7 @@ struct AddButtonPopoverComponent: View {
                 addEventActivated = true
             }, label: {
                 HStack {
-                    Image("EventsIcon")
+                    Image(Asset.eventsIcon.name)
                     Text("Add Event")
                         .font(.nunitoSemiBold(size: 16))
                         .foregroundColor(Color("TextPrimary"))

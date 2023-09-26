@@ -53,7 +53,7 @@ struct RenderFields: View {
             
         case .LINK:
             HStack(spacing: 0) {
-                Image("Link")
+                Image(Asset.link.name)
                     .frame(width: 12, height: 12)
                     .padding(.leading, 2)
                     .padding(.trailing, 4)

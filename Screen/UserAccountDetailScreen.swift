@@ -16,7 +16,7 @@ struct UserAccountDetailScreen: View {
     var body: some View {
         VStack(spacing: 16) {
             HStack {
-                Image("ArrowLeft")
+                Image(Asset.arrowLeft.name)
                     .frame(width: 24, height: 24)
                     .accessibilityIdentifier("img_user_account_detail_dismiss")
                     .onTapGesture {
@@ -57,7 +57,7 @@ struct UserAccountDetailScreen: View {
                                     )
                                 )
                             }, label: {
-                                Image("ToggleButton")
+                                Image(Asset.toggleButton.name)
                             }
                             )
                             .accessibilityIdentifier("img_user_account_detail_salesforce_disconnect")
@@ -86,7 +86,7 @@ struct UserAccountDetailScreen: View {
                 .overlay(RoundedRectangle(cornerRadius: 4).stroke(Color("BorderColor"), lineWidth: 1))
                 
                 HStack {
-                    Image("SignOut")
+                    Image(Asset.signOut.name)
                         .padding(EdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 0))
                         .accessibilityIdentifier("img_user_account_detail_logout")
                     

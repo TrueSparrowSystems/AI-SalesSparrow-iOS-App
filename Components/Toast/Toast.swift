@@ -34,7 +34,7 @@ extension ToastStyle {
         switch self {
         case .info: return "info.circle.fill"
         case .warning: return "exclamationmark.triangle.fill"
-        case .success: return "CheckWithRoundedWhiteBG"
+        case .success: return Asset.checkWithRoundedWhiteBG.name
         case .error: return "xmark.circle.fill"
         }
     }

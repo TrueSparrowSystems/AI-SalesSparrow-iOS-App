@@ -24,7 +24,7 @@ struct BottomBar: View {
             Button(action: {
                 self.createNoteScreenActivated = true
             }, label: {
-                Image("AddIcon")
+                Image(Asset.addIcon.name)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 44.0, height: 44.0)

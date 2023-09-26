@@ -55,7 +55,7 @@ struct CreateNoteScreen: View {
                                 .accessibilityIdentifier("txt_create_note_saving")
                             
                         } else if isNoteSaved {
-                            Image("CheckMark")
+                            Image(Asset.checkMark.name)
                                 .resizable()
                                 .frame(width: 12, height: 12)
                                 .padding(.trailing, 6)
@@ -66,7 +66,7 @@ struct CreateNoteScreen: View {
                                 .font(.nunitoMedium(size: 12))
                                 .accessibilityIdentifier("txt_create_note_saved")
                         } else {
-                            Image("SalesforceIcon")
+                            Image(Asset.salesforceIcon.name)
                                 .resizable()
                                 .frame(width: 17, height: 12)
                                 .padding(.trailing, 6)
@@ -91,7 +91,7 @@ struct CreateNoteScreen: View {
             .padding(.vertical, 12)
             
             HStack {
-                Image("AccountIcon")
+                Image(Asset.accountIcon.name)
                     .resizable()
                     .frame(width: 14, height: 14)
                     .accessibilityIdentifier("img_create_note_account_icon")
@@ -109,7 +109,7 @@ struct CreateNoteScreen: View {
                                 .foregroundColor(Color("RedHighlight"))
                                 .font(.nunitoLight(size: 14))
                                 .accessibilityIdentifier(accountId.isEmpty ? "txt_create_note_select_account" : "txt_create_note_selected_account")
-                            Image("ArrowDown")
+                            Image(Asset.arrowDown.name)
                                 .frame(width: 7, height: 4)
                                 .padding(.trailing, 6)
                                 .accessibilityIdentifier( "img_create_note_select_account")
@@ -172,7 +172,7 @@ struct CreateNoteScreen: View {
                     VStack {
                         if createNoteScreenViewModel.isSuggestionGenerationInProgress {
                             HStack {
-                                Image("Sparkle")
+                                Image(Asset.sparkle.name)
                                 Text("Getting recommendations")
                                     .foregroundColor(Color("TextPrimary"))
                                     .font(.nunitoSemiBold(size: 16))
@@ -189,7 +189,7 @@ struct CreateNoteScreen: View {
                         } else if (createNoteScreenViewModel.suggestedData.add_task_suggestions?.isEmpty != nil) && (createNoteScreenViewModel.suggestedData.add_event_suggestions?.isEmpty != nil) { // check for count of suggested task and event array
                             // Show no recommendation message
                             VStack(spacing: 0) {
-                                Image("Check")
+                                Image(Asset.check.name)
                                     .frame(width: 28, height: 28, alignment: .center)
                                 
                                 Text("You are all set, no recommendation for now!")
@@ -208,7 +208,7 @@ struct CreateNoteScreen: View {
                             )
                         } else {
                             HStack {
-                                Image("Sparkle")
+                                Image(Asset.sparkle.name)
                                 Text("We have some recommendations")
                                     .foregroundColor(Color("TextPrimary"))
                                     .font(.nunitoSemiBold(size: 16))
@@ -218,7 +218,7 @@ struct CreateNoteScreen: View {
                                 Button {
                                     isPopoverVisible.toggle()
                                 } label: {
-                                    Image("AddIcon")
+                                    Image(Asset.addIcon.name)
                                         .frame(width: 20, height: 20)
                                 }
                                 .accessibilityIdentifier("btn_create_note_popover_add_recommendation")

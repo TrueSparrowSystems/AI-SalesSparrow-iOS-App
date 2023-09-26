@@ -20,7 +20,7 @@ struct UserSearchView: View {
         VStack(spacing: 0) {
             // Top Bar
             HStack {
-                Image(systemName: "magnifyingglass")
+                Image(Asset.magnifyingGlass.name)
                     .accessibilityIdentifier("img_search_magnifying_glass")
                 
                 TextField("", text: $searchText,

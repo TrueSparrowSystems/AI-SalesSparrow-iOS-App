@@ -21,7 +21,7 @@ struct TasksList: View {
     var body: some View {
         VStack(spacing: 0) {
             HStack {
-                Image("TasksIcon")
+                Image(Asset.tasksIcon.name)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 20.0, height: 20.0)
@@ -40,7 +40,7 @@ struct TasksList: View {
                     addTaskActivated = true
                 }, label: {
                     HStack {
-                        Image("AddIcon")
+                        Image(Asset.addIcon.name)
                             .resizable()
                             .frame(width: 20.0, height: 20.0)
                             .accessibilityIdentifier("img_account_detail_create_task_icon")
@@ -49,7 +49,7 @@ struct TasksList: View {
                     .padding(.bottom, 10)
                     
                 }
-                       )
+                )
                 .accessibilityIdentifier("btn_account_detail_add_task")
             }
             
@@ -147,7 +147,7 @@ struct TaskCardView: View {
                         isSelfPopupTriggered = true
                         isPopoverVisible.toggle()
                     } label: {
-                        Image("DotsThreeOutline")
+                        Image(Asset.dotsThreeOutline.name)
                             .frame(width: 16, height: 16)
                             .padding(10)
                             .foregroundColor(Color("TextPrimary"))
@@ -181,7 +181,7 @@ struct TaskCardView: View {
                         .frame(width: 0, height: 16)
                         .foregroundColor(Color("TermsPrimary").opacity(0.1))
                     
-                    Image("CalendarCheck")
+                    Image(Asset.calendarCheck.name)
                         .frame(width: 16, height: 16)
                     
                     Text("Due \(BasicHelper.getFormattedDateForDueDate(from: acccountDetailScreenViewModelObject.taskData.task_map_by_id[taskId]?.due_date ?? ""))")
@@ -219,7 +219,7 @@ struct TaskCardView: View {
                         ))
                     }, label: {
                         HStack {
-                            Image("DeleteIcon")
+                            Image(Asset.deleteIcon.name)
                                 .frame(width: 20, height: 20)
                             Text("Delete")
                                 .font(.nunitoSemiBold(size: 16))

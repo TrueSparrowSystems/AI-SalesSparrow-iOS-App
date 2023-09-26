@@ -58,7 +58,7 @@ struct CreateEventScreen: View {
                                 .accessibilityIdentifier("txt_create_event_saving")
                             
                         } else if suggestedEventState["isEventSaved"] as! Bool {
-                            Image("CheckMark")
+                            Image(Asset.checkMark.name)
                                 .resizable()
                                 .frame(width: 12, height: 12)
                                 .padding(.trailing, 6)
@@ -114,7 +114,7 @@ struct CreateEventScreen: View {
                             
                             Spacer()
                             
-                            Image("EmptyCalendar")
+                            Image(Asset.emptyCalendar.name)
                                 .frame(width: 15, height: 15)
                                 .padding(.leading, 6)
                         }
@@ -132,7 +132,7 @@ struct CreateEventScreen: View {
                             
                             Spacer()
                             
-                            Image("EmptyCalendar")
+                            Image(Asset.emptyCalendar.name)
                                 .frame(width: 15, height: 15)
                                 .padding(.leading, 10)
                         }
@@ -168,7 +168,7 @@ struct CreateEventScreen: View {
                             
                             Spacer()
                             
-                            Image("Clock")
+                            Image(Asset.clock.name)
                                 .frame(width: 15, height: 15)
                                 .padding(.leading, 6)
                         }
@@ -186,7 +186,7 @@ struct CreateEventScreen: View {
                             
                             Spacer()
                             
-                            Image("Clock")
+                            Image(Asset.clock.name)
                                 .frame(width: 15, height: 15)
                                 .padding(.leading, 10)
                         }
@@ -232,7 +232,7 @@ struct CreateEventScreen: View {
                             
                             Spacer()
                             
-                            Image("EmptyCalendar")
+                            Image(Asset.emptyCalendar.name)
                                 .frame(width: 15, height: 15)
                                 .padding(.leading, 6)
                         }
@@ -250,7 +250,7 @@ struct CreateEventScreen: View {
                             
                             Spacer()
                             
-                            Image("EmptyCalendar")
+                            Image(Asset.emptyCalendar.name)
                                 .frame(width: 15, height: 15)
                                 .padding(.leading, 10)
                         }
@@ -287,7 +287,7 @@ struct CreateEventScreen: View {
                             
                             Spacer()
                             
-                            Image("Clock")
+                            Image(Asset.clock.name)
                                 .frame(width: 15, height: 15)
                                 .padding(.leading, 6)
                         }
@@ -305,7 +305,7 @@ struct CreateEventScreen: View {
                             
                             Spacer()
                             
-                            Image("Clock")
+                            Image(Asset.clock.name)
                                 .frame(width: 15, height: 15)
                                 .padding(.leading, 10)
                         }

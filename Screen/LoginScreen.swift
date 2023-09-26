@@ -16,7 +16,7 @@ struct LoginScreen: View {
             Spacer()
             VStack {
                 VStack {
-                    Image("AppLogo")
+                    Image(Asset.appLogo.name)
                         .resizable()
                         .frame(width: 220, height: 50)
                         .padding(.bottom, 16)
@@ -30,7 +30,7 @@ struct LoginScreen: View {
                         .accessibilityIdentifier("txt_login_app_description")
                     
                     HStack {
-                        Image("NoteIcon")
+                        Image(Asset.noteIcon.name)
                             .resizable()
                             .frame(width: 15, height: 15)
                             .padding(.horizontal, 2)
@@ -41,7 +41,7 @@ struct LoginScreen: View {
                             .foregroundColor(Color("TextPrimary"))
                             .accessibilityIdentifier("txt_login_note")
                         
-                        Image("TasksIcon")
+                        Image(Asset.tasksIcon.name)
                             .resizable()
                             .frame(width: 15, height: 15)
                             .padding(.horizontal, 2)
@@ -52,7 +52,7 @@ struct LoginScreen: View {
                             .foregroundColor(Color("TextPrimary"))
                             .accessibilityIdentifier("txt_login_tasks")
                         
-                        Image("EventsIcon")
+                        Image(Asset.eventsIcon.name)
                             .resizable()
                             .frame(width: 15, height: 15)
                             .padding(.horizontal, 2)
@@ -63,7 +63,7 @@ struct LoginScreen: View {
                             .foregroundColor(Color("TextPrimary"))
                             .accessibilityIdentifier("txt_login_events")
                         
-                        Image("OpportunitiesIcon")
+                        Image(Asset.opportunitiesIcon.name)
                             .resizable()
                             .frame(width: 15, height: 15)
                             .padding(.horizontal, 2)
@@ -87,7 +87,7 @@ struct LoginScreen: View {
                                 ProgressView()
                                     .tint(Color("LoginButtonPrimary"))
                             } else {
-                                Image("SalesforceIcon")
+                                Image(Asset.salesforceIcon.name)
                                     .resizable()
                                     .frame(width: 26, height: 18)
                                     .accessibilityIdentifier("img_login_salesforce_icon")

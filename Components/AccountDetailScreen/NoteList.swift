@@ -19,7 +19,7 @@ struct NotesList: View {
     var body: some View {
         VStack(spacing: 0) {
             HStack {
-                Image("NoteIcon")
+                Image(Asset.noteIcon.name)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 20.0, height: 20.0)
@@ -35,7 +35,7 @@ struct NotesList: View {
                 NavigationLink(destination: CreateNoteScreen(accountId: accountId, accountName: accountName, isAccountSelectable: false)
                 ) {
                     HStack {
-                        Image("AddIcon")
+                        Image(Asset.addIcon.name)
                             .resizable()
                             .frame(width: 20.0, height: 20.0)
                             .accessibilityIdentifier("img_account_detail_create_note_icon")
@@ -136,7 +136,7 @@ struct NoteCardView: View {
                         isSelfPopupTriggered = true
                         isPopoverVisible.toggle()
                     } label: {
-                        Image("DotsThreeOutline")
+                        Image(Asset.dotsThreeOutline.name)
                             .frame(width: 16, height: 16)
                             .padding(10)
                             .foregroundColor(Color("TextPrimary"))
@@ -174,7 +174,7 @@ struct NoteCardView: View {
                         ))
                     }, label: {
                         HStack {
-                            Image("DeleteIcon")
+                            Image(Asset.deleteIcon.name)
                                 .frame(width: 20, height: 20)
                             Text("Delete")
                                 .font(.nunitoSemiBold(size: 16))

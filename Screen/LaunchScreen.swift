@@ -10,7 +10,7 @@ import SwiftUI
 struct LaunchScreen: View {
     var body: some View {
         VStack {
-            Image("SplashScreenImage")
+            Image(Asset.splashScreenImage.name)
                 .resizable()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)

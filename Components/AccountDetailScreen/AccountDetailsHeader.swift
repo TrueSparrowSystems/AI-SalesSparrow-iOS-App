@@ -16,7 +16,7 @@ struct AccountDetailsHeader: View {
     var body: some View {
         VStack {
             HStack {
-                Image("Buildings")
+                Image(Asset.buildings.name)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 25.0, height: 25.0)

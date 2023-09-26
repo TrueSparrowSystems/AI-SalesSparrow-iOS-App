@@ -32,7 +32,7 @@ struct NoteDetailScreen: View {
                 // TODO: uncomment this code once edit functionality is implemented
                 //                if(isEditing){
                 //                    HStack(alignment: .center, spacing: 0){
-                //                        Image("CheckMark")
+                //                        Image(Asset.checkMark.name)
                 //                            .resizable()
                 //                            .frame(width: 12, height: 12)
                 //                            .padding(.trailing, 6)
@@ -64,7 +64,7 @@ struct NoteDetailScreen: View {
                 
             } else {
                 HStack {
-                    Image("AccountIcon")
+                    Image(Asset.accountIcon.name)
                         .resizable()
                         .frame(width: 14, height: 14)
                         .accessibilityIdentifier("img_note_detail_account_icon")

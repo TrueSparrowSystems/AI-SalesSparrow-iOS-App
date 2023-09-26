@@ -16,7 +16,7 @@ struct AccountContactDetail: View {
     var body: some View {
         VStack {
             HStack {
-                Image("AddressBook")
+                Image(Asset.addressBook.name)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 25.0, height: 25.0)

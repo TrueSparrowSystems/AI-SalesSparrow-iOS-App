@@ -18,7 +18,7 @@ struct TopBar: View {
     
     var body: some View {
         HStack {
-            Image("Buildings")
+            Image(Asset.buildings.name)
                 .frame(width: 28.0, height: 28.0)
                 .accessibilityIdentifier("img_home_screen_account_icon")
             
@@ -30,7 +30,7 @@ struct TopBar: View {
             
             Spacer()
             
-            Image("MagnifyingGlass")
+            Image(Asset.magnifyingGlass.name)
                 .onTapGesture {
                     showAccountSearchView = true
                 }

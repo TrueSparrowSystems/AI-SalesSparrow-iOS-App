@@ -77,7 +77,7 @@ struct SuggestedTaskCardView: View {
                                         .font(.nunitoBold(size: 12))
                                         .tracking(0.5)
                                     
-                                    Image("ArrowDown")
+                                    Image(Asset.arrowDown.name)
                                         .frame(width: 6, height: 3)
                                         .padding(.trailing, 6)
                                 } else {
@@ -95,7 +95,7 @@ struct SuggestedTaskCardView: View {
                                         .accessibilityIdentifier("txt_create_note_suggestion_user_index_\(index)")
                                         .tracking(0.5)
                                     
-                                    Image("ArrowDown")
+                                    Image(Asset.arrowDown.name)
                                         .frame(width: 6, height: 3)
                                         .padding(.trailing, 6)
                                 }
@@ -145,7 +145,7 @@ struct SuggestedTaskCardView: View {
                                             .tracking(0.5)
                                             .padding(0)
                                         
-                                        Image("EmptyCalendar")
+                                        Image(Asset.emptyCalendar.name)
                                             .frame(width: 15, height: 15)
                                             .padding(.leading, 6)
                                     }
@@ -161,7 +161,7 @@ struct SuggestedTaskCardView: View {
                                             .tracking(0.5)
                                             .padding(0)
                                         
-                                        Image("EmptyCalendar")
+                                        Image(Asset.emptyCalendar.name)
                                             .frame(width: 15, height: 15)
                                             .padding(.leading, 10)
                                     }
@@ -323,7 +323,7 @@ struct SavedTaskCard: View {
                     Button {
                         isPopoverVisible.toggle()
                     } label: {
-                        Image("DotsThreeOutline")
+                        Image(Asset.dotsThreeOutline.name)
                             .frame(width: 16, height: 16)
                             .padding(10)
                             .foregroundColor(Color("TextPrimary"))
@@ -418,7 +418,7 @@ struct SavedTaskCard: View {
                             ))
                         }, label: {
                             HStack {
-                                Image("DeleteIcon")
+                                Image(Asset.deleteIcon.name)
                                     .frame(width: 20, height: 20)
                                 Text("Delete")
                                     .font(.nunitoSemiBold(size: 16))
@@ -442,7 +442,7 @@ struct SavedTaskCard: View {
             .background(.white)
             
             HStack {
-                Image("CheckWithGreenTick")
+                Image(Asset.checkWithGreenTick.name)
                     .scaledToFit()
                     .frame(width: 18, height: 18)
                 

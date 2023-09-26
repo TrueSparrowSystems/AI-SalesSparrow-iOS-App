@@ -56,7 +56,7 @@ struct CreateTaskScreen: View {
                                 .accessibilityIdentifier("txt_create_task_saving")
                             
                         } else if suggestedTaskState["isTaskSaved"] as! Bool {
-                            Image("CheckMark")
+                            Image(Asset.checkMark.name)
                                 .resizable()
                                 .frame(width: 12, height: 12)
                                 .padding(.trailing, 6)
@@ -116,7 +116,7 @@ struct CreateTaskScreen: View {
                     }
                     Spacer()
                     
-                    Image("ArrowDown")
+                    Image(Asset.arrowDown.name)
                         .frame(width: 7, height: 4)
                 }
                 )
@@ -166,7 +166,7 @@ struct CreateTaskScreen: View {
                             
                             Spacer()
                             
-                            Image("EmptyCalendar")
+                            Image(Asset.emptyCalendar.name)
                                 .frame(width: 15, height: 15)
                                 .padding(.leading, 6)
                         }
@@ -184,7 +184,7 @@ struct CreateTaskScreen: View {
                             
                             Spacer()
                             
-                            Image("EmptyCalendar")
+                            Image(Asset.emptyCalendar.name)
                                 .frame(width: 15, height: 15)
                                 .padding(.leading, 10)
                         }

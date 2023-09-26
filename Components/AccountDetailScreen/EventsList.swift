@@ -21,7 +21,7 @@ struct EventsList: View {
     var body: some View {
         VStack(spacing: 0) {
             HStack {
-                Image("EventsIcon")
+                Image(Asset.eventsIcon.name)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 20.0, height: 20.0)
@@ -29,7 +29,7 @@ struct EventsList: View {
                 
                 Text("Events")
                     .font(.nunitoSemiBold(size: 16))
-                    .foregroundColor(Color("TextPrimary"))
+                    .foregroundColor(Color(Asset.textPrimary.name))
                     .accessibilityIdentifier("txt_account_detail_events_title")
                 
                 Spacer()
@@ -40,7 +40,7 @@ struct EventsList: View {
                     addEventActivated = true
                 }, label: {
                     HStack {
-                        Image("AddIcon")
+                        Image(Asset.addIcon.name)
                             .resizable()
                             .frame(width: 20.0, height: 20.0)
                             .accessibilityIdentifier("img_account_detail_create_event_icon")
@@ -147,7 +147,7 @@ struct EventCardView: View {
                         isSelfPopupTriggered = true
                         isPopoverVisible.toggle()
                     } label: {
-                        Image("DotsThreeOutline")
+                        Image(Asset.dotsThreeOutline.name)
                             .frame(width: 16, height: 16)
                             .padding(10)
                             .foregroundColor(Color("TextPrimary"))
@@ -165,7 +165,7 @@ struct EventCardView: View {
             
             HStack(alignment: .center, spacing: 0) {
                 if acccountDetailScreenViewModelObject.eventData.event_map_by_id[eventId]?.start_datetime != nil {
-                    Image("CalendarCheck")
+                    Image(Asset.calendarCheck.name)
                         .frame(width: 16, height: 16)
                         .padding(.trailing, 4)
                     
@@ -218,7 +218,7 @@ struct EventCardView: View {
                         ))
                     }, label: {
                         HStack {
-                            Image("DeleteIcon")
+                            Image(Asset.deleteIcon.name)
                                 .frame(width: 20, height: 20)
                             Text("Delete")
                                 .font(.nunitoSemiBold(size: 16))

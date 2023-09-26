@@ -103,7 +103,7 @@ struct AccountRowView: View {
             // TODO: On Field customization remove hardcoded values and show all additional_fields
             if !((account.additional_fields?["website"] ?? "") ?? "").isEmpty {
                 HStack {
-                    Image("Link")
+                    Image(Asset.link.name)
                         .resizable()
                         .frame(width: 16, height: 16)
                     
