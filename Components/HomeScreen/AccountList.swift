@@ -42,7 +42,7 @@ struct AccountList: View {
                                 .opacity(0)
                                 .accessibilityIdentifier("account_card_\(index)")
                             }
-                            .listRowBackground(Color("Background"))
+                            .listRowBackground(Color(Asset.background.name))
                             .listRowSeparator(.hidden)
                             .accessibilityAddTraits(.isButton)
                         }
@@ -51,14 +51,14 @@ struct AccountList: View {
                     if acccountListViewModelObject.isFetchAccountInProgress && !accountIds.isEmpty {
                         HStack(spacing: 0) {
                             ProgressView()
-                                .tint(Color("LoginButtonSecondary"))
+                                .tint(Color(Asset.loginButtonSecondary.name))
                                 .accessibilityAddTraits(.isImage)
                                 .accessibilityIdentifier("next_page_loader")
                                 .frame(maxWidth: .infinity, alignment: .center)
                         }
                         .contentShape(Rectangle())
                         .padding(0)
-                        .listRowBackground(Color("Background"))
+                        .listRowBackground(Color(Asset.background.name))
                         .listRowSeparator(.hidden)
                     }
                 }
@@ -88,14 +88,14 @@ struct AccountRowView: View {
         VStack(alignment: .leading, spacing: 0) {
             Text("ACCOUNT")
                 .font(.nunitoBold(size: 12))
-                .foregroundColor(Color("TermsPrimary").opacity(0.7))
+                .foregroundColor(Color(Asset.termsPrimary.name).opacity(0.7))
                 .tracking(0.5)
                 .padding(.bottom, 6)
             
             Text(account.name)
                 .font(.nunitoSemiBold(size: 18))
                 .tracking(0.5)
-                .foregroundColor(Color("TermsPrimary"))
+                .foregroundColor(Color(Asset.termsPrimary.name))
                 .lineLimit(1)
                 .accessibilityIdentifier("txt_account_list_account_name_index_\(index)")
                 .accessibilityElement()
@@ -109,7 +109,7 @@ struct AccountRowView: View {
                     
                     Text(account.additional_fields?["website"]! ?? "")
                         .font(.nunitoRegular(size: 14))
-                        .foregroundColor(Color("TermsPrimary"))
+                        .foregroundColor(Color(Asset.termsPrimary.name))
                         .accessibilityIdentifier("txt_account_list_account_website_index_\(index)")
                         .accessibilityElement()
                     
@@ -130,21 +130,21 @@ struct AccountRowView: View {
                     VStack(alignment: .leading, spacing: 0) {
                         Text("CONTACT")
                             .font(.nunitoBold(size: 12))
-                            .foregroundColor(Color("TermsPrimary").opacity(0.7))
+                            .foregroundColor(Color(Asset.termsPrimary.name).opacity(0.7))
                             .tracking(0.5)
                             .padding(.bottom, 6)
                         
                         Text(contact?.name ?? "")
                             .font(.nunitoSemiBold(size: 18))
                             .tracking(0.5)
-                            .foregroundColor(Color("TermsPrimary"))
+                            .foregroundColor(Color(Asset.termsPrimary.name))
                             .accessibilityIdentifier("txt_account_list_account_contact_name_index_\(index)")
                             .accessibilityElement()
                         
                         if !((contact?.additional_fields?["email"] ?? "") ?? "").isEmpty {
                             Text((contact?.additional_fields?["email"])! ?? "")
                                 .font(.nunitoRegular(size: 14))
-                                .foregroundColor(Color("TermsPrimary"))
+                                .foregroundColor(Color(Asset.termsPrimary.name))
                                 .accessibilityIdentifier("txt_account_list_account_email_index_\(index)")
                                 .accessibilityElement()
                         }
@@ -157,11 +157,11 @@ struct AccountRowView: View {
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding()
-        .background(Color("CardBackground"))
+        .background(Color(Asset.cardBackground.name))
         .cornerRadius(5) /// make the background rounded
         .overlay( /// apply a rounded border
             RoundedRectangle(cornerRadius: 5)
-                .stroke(Color("CardBorder"), lineWidth: 1)
+                .stroke(Color(Asset.cardBorder.name), lineWidth: 1)
         )
     }
 }

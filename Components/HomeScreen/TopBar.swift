@@ -61,7 +61,7 @@ struct TopBar: View {
                            .background(Color(hex: "#C5B8FA"))
                            .clipShape(Circle())
         }
-        .foregroundColor(Color("TextPrimary"))
+        .foregroundColor(Color(Asset.textPrimary.name))
         .padding(EdgeInsets(top: 50, leading: 20, bottom: 0, trailing: 20))
         .background(Color.clear) // Make the top 23px transparent]
         .background(

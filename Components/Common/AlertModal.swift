@@ -44,7 +44,7 @@ struct AlertModal: View {
                     }, label: {
                         Text(AlertViewModel.shared.alert?.cancelText ?? "Cancel")
                             .font(.system(size: 17, weight: .regular))
-                            .foregroundColor(Color("CancelButtonForeground"))
+                            .foregroundColor(Color(Asset.cancelButtonForeground.name))
                             .accessibilityIdentifier("txt_alert_cancel")
                     }
                     )
@@ -63,7 +63,7 @@ struct AlertModal: View {
                     }, label: {
                         Text(AlertViewModel.shared.alert?.submitText ?? "Submit")
                             .font(.system(size: 17, weight: .semibold))
-                            .foregroundColor(Color("AlertSubmitButtonForeground"))
+                            .foregroundColor(Color(Asset.alertSubmitButtonForeground.name))
                             .accessibilityIdentifier("txt_alert_submit")
                     }
                     )
@@ -72,7 +72,7 @@ struct AlertModal: View {
                     .frame(maxWidth: .infinity)
                 }
             }
-            .background(Color("AlertModalBackground"))
+            .background(Color(Asset.alertModalBackground.name))
             .cornerRadius(14)
             .frame(width: 270)
         }

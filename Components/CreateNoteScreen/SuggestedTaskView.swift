@@ -42,12 +42,12 @@ struct SuggestedTaskCardView: View {
                         Text("\((suggestedTaskState["description"] ?? "") as! String)")
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .multilineTextAlignment(.leading)
-                            .foregroundColor(Color("TextPrimary"))
+                            .foregroundColor(Color(Asset.textPrimary.name))
                             .font(.nunitoSemiBold(size: 16))
                             .fixedSize(horizontal: false, vertical: true)
                             .accessibilityIdentifier("txt_create_note_suggestion_title_index_\(index)")
                             .padding(EdgeInsets(top: 5, leading: 8, bottom: 5, trailing: 8))
-                            .background(Color("GhostWhite").opacity(0.2))
+                            .background(Color(Asset.ghostWhite.name).opacity(0.2))
                             .overlay(RoundedRectangle(cornerRadius: 6).stroke(Color.black.opacity(0.1), lineWidth: 1))
                     }
                     .contentShape(Rectangle())
@@ -60,12 +60,12 @@ struct SuggestedTaskCardView: View {
                     HStack {
                         HStack {
                             Text("Assign to")
-                                .foregroundColor(Color("TextPrimary"))
+                                .foregroundColor(Color(Asset.textPrimary.name))
                                 .font(.nunitoSemiBold(size: 12))
                                 .tracking(0.5)
                             
                             // add verticle divider gray line
-                            VerticalDividerRectangleView(width: 1, color: Color("BorderColor"))
+                            VerticalDividerRectangleView(width: 1, color: Color(Asset.borderColor.name))
                             
                             Button(action: {
                                 // Toggle user search view
@@ -73,7 +73,7 @@ struct SuggestedTaskCardView: View {
                             }, label: {
                                 if ((suggestedTaskState["assignedToUsername"] ?? "") as! String).isEmpty {
                                     Text("Select")
-                                        .foregroundColor(Color("RedHighlight"))
+                                        .foregroundColor(Color(Asset.redHighlight.name))
                                         .font(.nunitoBold(size: 12))
                                         .tracking(0.5)
                                     
@@ -85,12 +85,12 @@ struct SuggestedTaskCardView: View {
                                         .frame(width: 18, height: 18)
                                         .font(.nunitoBold(size: 6))
                                         .foregroundColor(Color.white)
-                                        .background(Color("UserBubble"))
+                                        .background(Color(Asset.userBubble.name))
                                         .clipShape(RoundedRectangle(cornerRadius: 47))
                                         .accessibilityIdentifier("img_user_account_detail_user_initials_index_\(index)")
                                     
                                     Text(((suggestedTaskState["assignedToUsername"] ?? "") as! String))
-                                        .foregroundColor(Color("RedHighlight"))
+                                        .foregroundColor(Color(Asset.redHighlight.name))
                                         .font(.nunitoBold(size: 12))
                                         .accessibilityIdentifier("txt_create_note_suggestion_user_index_\(index)")
                                         .tracking(0.5)
@@ -113,7 +113,7 @@ struct SuggestedTaskCardView: View {
                             
                         }
                         .padding(EdgeInsets(top: 6, leading: 8, bottom: 6, trailing: 8))
-                        .overlay(RoundedRectangle(cornerRadius: 4).stroke(Color("BorderColor"), lineWidth: 1))
+                        .overlay(RoundedRectangle(cornerRadius: 4).stroke(Color(Asset.borderColor.name), lineWidth: 1))
                         
                         Spacer()
                     }
@@ -122,12 +122,12 @@ struct SuggestedTaskCardView: View {
                     HStack {
                         HStack {
                             Text("Due")
-                                .foregroundColor(Color("TextPrimary"))
+                                .foregroundColor(Color(Asset.textPrimary.name))
                                 .font(.nunitoSemiBold(size: 12))
                                 .tracking(0.5)
                             
                             // add verticle divider gray line
-                            VerticalDividerRectangleView(width: 1, color: Color("BorderColor"))
+                            VerticalDividerRectangleView(width: 1, color: Color(Asset.borderColor.name))
                             
                             ZStack {
                                 DatePickerView(selectedDate: $selectedDate, onTap: {
@@ -140,7 +140,7 @@ struct SuggestedTaskCardView: View {
                                 if !(suggestedTaskState["isDateSelected"] as! Bool) {
                                     HStack(spacing: 0) {
                                         Text("Select Date")
-                                            .foregroundColor(Color("TermsPrimary"))
+                                            .foregroundColor(Color(Asset.termsPrimary.name))
                                             .font(.nunitoLight(size: 12))
                                             .tracking(0.5)
                                             .padding(0)
@@ -156,7 +156,7 @@ struct SuggestedTaskCardView: View {
                                 } else {
                                     HStack(spacing: 0) {
                                         Text(BasicHelper.getDateStringFromDate(from: selectedDate))
-                                            .foregroundColor(Color("TermsPrimary"))
+                                            .foregroundColor(Color(Asset.termsPrimary.name))
                                             .font(.nunitoBold(size: 12))
                                             .tracking(0.5)
                                             .padding(0)
@@ -173,7 +173,7 @@ struct SuggestedTaskCardView: View {
                         }
                         .frame(width: 170, height: 20)
                         .padding(EdgeInsets(top: 6, leading: 8, bottom: 6, trailing: 0))
-                        .overlay(RoundedRectangle(cornerRadius: 4).stroke(Color("BorderColor"), lineWidth: 1))
+                        .overlay(RoundedRectangle(cornerRadius: 4).stroke(Color(Asset.borderColor.name), lineWidth: 1))
                         Spacer()
                     }
                     
@@ -194,7 +194,7 @@ struct SuggestedTaskCardView: View {
                                 HStack(alignment: .center, spacing: 0) {
                                     if isAddTaskInProgress {
                                         ProgressView()
-                                            .tint(Color("LoginButtonPrimary"))
+                                            .tint(Color(Asset.loginButtonPrimary.name))
                                             .controlSize(.small)
                                         Text("Adding Task...")
                                             .foregroundColor(.white)
@@ -232,7 +232,7 @@ struct SuggestedTaskCardView: View {
                             }, label: {
                                 HStack(alignment: .center, spacing: 0) {
                                     Text("Cancel")
-                                        .foregroundColor(Color("CancelText"))
+                                        .foregroundColor(Color(Asset.cancelText.name))
                                         .font(.nunitoMedium(size: 12))
                                         .accessibilityIdentifier("txt_create_note_cancel_\(index)")
                                 }
@@ -241,7 +241,7 @@ struct SuggestedTaskCardView: View {
                                 .clipShape(RoundedRectangle(cornerRadius: 5))
                             })
                             .accessibilityIdentifier("btn_create_note_cancel_\(index)")
-                            .overlay(RoundedRectangle(cornerRadius: 4).stroke(Color("CancelText"), lineWidth: 1))
+                            .overlay(RoundedRectangle(cornerRadius: 4).stroke(Color(Asset.cancelText.name), lineWidth: 1))
                             
                             Spacer()
                         }
@@ -252,7 +252,7 @@ struct SuggestedTaskCardView: View {
                 .overlay(
                     RoundedRectangle(cornerRadius: 4)
                         .stroke(style: StrokeStyle(lineWidth: 1.5, dash: [1, 5])) // Specify the dash pattern here
-                        .foregroundColor(Color("TextPrimary"))
+                        .foregroundColor(Color(Asset.textPrimary.name))
                 )
             }
         }
@@ -303,19 +303,19 @@ struct SavedTaskCard: View {
                         .frame(width: 18, height: 18)
                         .font(.nunitoBold(size: 6))
                         .foregroundColor(Color.white)
-                        .background(Color("UserBubble"))
+                        .background(Color(Asset.userBubble.name))
                         .clipShape(RoundedRectangle(cornerRadius: 47))
                         .accessibilityIdentifier("img_creator_user_initials")
                     
                     Text(UserStateViewModel.shared.currentUser.name)
-                        .foregroundColor(Color("TermsPrimary"))
+                        .foregroundColor(Color(Asset.termsPrimary.name))
                         .font(.nunitoMedium(size: 14))
                         .accessibilityIdentifier("txt_add_task_creator_user")
                         .tracking(0.5)
                     
                     Spacer()
                     Text("Just Now")
-                        .foregroundColor(Color("TermsPrimary"))
+                        .foregroundColor(Color(Asset.termsPrimary.name))
                         .font(.nunitoLight(size: 12))
                         .accessibilityIdentifier("txt_created_timestamp")
                         .tracking(0.5)
@@ -326,7 +326,7 @@ struct SavedTaskCard: View {
                         Image(Asset.dotsThreeOutline.name)
                             .frame(width: 16, height: 16)
                             .padding(10)
-                            .foregroundColor(Color("TextPrimary"))
+                            .foregroundColor(Color(Asset.textPrimary.name))
                     }
                     .accessibilityIdentifier("btn_create_note_task_more_\(index)")
                     
@@ -334,41 +334,41 @@ struct SavedTaskCard: View {
                 Text("\(recommendedText)")
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .multilineTextAlignment(.leading)
-                    .foregroundColor(Color("PortGore"))
+                    .foregroundColor(Color(Asset.portGore.name))
                     .font(.nunitoSemiBold(size: 16))
                     .fixedSize(horizontal: false, vertical: true)
                     .accessibilityIdentifier("txt_create_note_task_description")
                     .padding(6)
-                    .background(Color("AliceBlue"))
+                    .background(Color(Asset.aliceBlue.name))
                     .cornerRadius(6)
                 
                 HStack {
                     HStack {
                         Text("Assign to")
-                            .foregroundColor(Color("PortGore"))
+                            .foregroundColor(Color(Asset.portGore.name))
                             .font(.nunitoSemiBold(size: 12))
                             .tracking(0.5)
                         
                         // add verticle divider gray line
-                        VerticalDividerRectangleView(width: 1, color: Color("PortGore").opacity(0.5))
+                        VerticalDividerRectangleView(width: 1, color: Color(Asset.portGore.name).opacity(0.5))
                         
                         Text(BasicHelper.getInitials(from: assignedToUsername))
                             .frame(width: 18, height: 18)
                             .font(.nunitoBold(size: 6))
                             .foregroundColor(Color.white)
-                            .background(Color("UserBubble"))
+                            .background(Color(Asset.userBubble.name))
                             .clipShape(RoundedRectangle(cornerRadius: 47))
                             .accessibilityIdentifier("img_user_account_detail_user_initials")
                         
                         Text(assignedToUsername)
-                            .foregroundColor(Color("RedHighlight"))
+                            .foregroundColor(Color(Asset.redHighlight.name))
                             .font(.nunitoBold(size: 12))
                             .accessibilityIdentifier("txt_add_task_selected_user")
                             .tracking(0.5)
                         
                     }
                     .padding(EdgeInsets(top: 6, leading: 8, bottom: 6, trailing: 8))
-                    .background(Color("GhostWhite"))
+                    .background(Color(Asset.ghostWhite.name))
                     .cornerRadius(6)
                     
                     Spacer()
@@ -378,22 +378,22 @@ struct SavedTaskCard: View {
                 HStack {
                     HStack {
                         Text("Due")
-                            .foregroundColor(Color("PortGore"))
+                            .foregroundColor(Color(Asset.portGore.name))
                             .font(.nunitoSemiBold(size: 12))
                             .tracking(0.5)
                         
                         // add verticle divider gray line
-                        VerticalDividerRectangleView(width: 1, color: Color("PortGore").opacity(0.5))
+                        VerticalDividerRectangleView(width: 1, color: Color(Asset.portGore.name).opacity(0.5))
                         
                         Text(BasicHelper.getDateStringFromDate(from: selectedDate))
-                            .foregroundColor(Color("PortGore"))
+                            .foregroundColor(Color(Asset.portGore.name))
                             .font(.nunitoBold(size: 12))
                             .tracking(0.5)
                             .padding(0)
                         
                     }
                     .padding(EdgeInsets(top: 6, leading: 8, bottom: 6, trailing: 8))
-                    .background(Color("GhostWhite"))
+                    .background(Color(Asset.ghostWhite.name))
                     .cornerRadius(6)
                     
                     Spacer()
@@ -422,7 +422,7 @@ struct SavedTaskCard: View {
                                     .frame(width: 20, height: 20)
                                 Text("Delete")
                                     .font(.nunitoSemiBold(size: 16))
-                                    .foregroundColor(Color("TextPrimary"))
+                                    .foregroundColor(Color(Asset.textPrimary.name))
                             }
                         }
                                )
@@ -431,10 +431,10 @@ struct SavedTaskCard: View {
                     .padding(10)
                     .cornerRadius(4)
                     .frame(width: 100, height: 40)
-                    .background(Color("CardBackground"))
+                    .background(Color(Asset.cardBackground.name))
                     .overlay(
                         RoundedRectangle(cornerRadius: 4)
-                            .stroke(Color("CardBorder"), lineWidth: 1)
+                            .stroke(Color(Asset.cardBorder.name), lineWidth: 1)
                     )
                     .offset(x: -20, y: 42)
                 }
@@ -447,17 +447,17 @@ struct SavedTaskCard: View {
                     .frame(width: 18, height: 18)
                 
                 Text("Task Added")
-                    .foregroundColor(Color("PortGore"))
+                    .foregroundColor(Color(Asset.portGore.name))
                     .font(.nunitoSemiBold(size: 12))
                     .accessibilityIdentifier("txt_create_note_task_added_\(index)")
             }
             .frame(maxWidth: .infinity)
             .padding(8)
-            .overlay(Rectangle().frame(width: nil, height: 1, alignment: .top).foregroundColor(Color("BorderColor")), alignment: .top)
-            .background(Color("PastelGreen").opacity(0.2))
+            .overlay(Rectangle().frame(width: nil, height: 1, alignment: .top).foregroundColor(Color(Asset.borderColor.name)), alignment: .top)
+            .background(Color(Asset.pastelGreen.name).opacity(0.2))
         }
         .clipShape(RoundedRectangle(cornerRadius: 8))
-        .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color("BorderColor"), lineWidth: 1))
+        .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color(Asset.borderColor.name), lineWidth: 1))
         
     }
 }

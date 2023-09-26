@@ -24,7 +24,7 @@ struct AccountContactDetail: View {
 
                 Text("Contact Details")
                     .accessibilityIdentifier("txt_account_detail_contact_details_title")
-                    .foregroundColor(Color("TextPrimary"))
+                    .foregroundColor(Color(Asset.textPrimary.name))
                     .font(.nunitoSemiBold(size: 16))
 
                 Spacer()
@@ -42,7 +42,7 @@ struct AccountContactDetail: View {
                             HStack(spacing: 0) {
                                 Text("CONTACT \(index + 1)")
                                     .font(.nunitoBold(size: 14))
-                                    .foregroundColor(Color("TextPrimary"))
+                                    .foregroundColor(Color(Asset.textPrimary.name))
                                     .accessibilityIdentifier("txt_account_detail_contact_number_index_\(index)")
                                     .opacity(0.7)
                                 
@@ -51,7 +51,7 @@ struct AccountContactDetail: View {
                             HStack(spacing: 0) {
                                 Text(contact?.name ?? "")
                                     .font(.nunitoSemiBold(size: 18))
-                                    .foregroundColor(Color("TextPrimary"))
+                                    .foregroundColor(Color(Asset.textPrimary.name))
                                     .accessibilityIdentifier("txt_account_detail_contact_name_index_\(index)")
                                 
                                 Spacer()
@@ -69,7 +69,7 @@ struct AccountContactDetail: View {
                             if index != contactIds.indices.last {
                                 Divider()
                                     .frame(height: 1)
-                                    .foregroundColor(Color("BorderColor"))
+                                    .foregroundColor(Color(Asset.borderColor.name))
                                     .padding(.vertical, 12)
                             }
                         }
@@ -81,7 +81,7 @@ struct AccountContactDetail: View {
             .cornerRadius(5) /// make the background rounded
             .overlay( /// apply a rounded border
                 RoundedRectangle(cornerRadius: 5)
-                    .stroke(Color("BorderColor"), lineWidth: 1)
+                    .stroke(Color(Asset.borderColor.name), lineWidth: 1)
             )
         }
         .padding(.trailing)

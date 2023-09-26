@@ -46,7 +46,7 @@ struct AccountDetailsScreen: View {
         )
         .padding(.vertical)
         .padding(.leading)
-        .background(Color("Background"))
+        .background(Color(Asset.background.name))
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: backButton)
     }
@@ -61,9 +61,9 @@ struct AccountDetailsScreen: View {
                     .frame(width: 24, height: 24)
                 Text("Details")
                     .font(.nunitoSemiBold(size: 16))
-                    .foregroundColor(Color("SaveButtonBackground"))
+                    .foregroundColor(Color(Asset.saveButtonBackground.name))
             }
-            .foregroundColor(Color("SaveButtonBackground"))
+            .foregroundColor(Color(Asset.saveButtonBackground.name))
         }
         )
         .accessibilityIdentifier("btn_account_detail_back")

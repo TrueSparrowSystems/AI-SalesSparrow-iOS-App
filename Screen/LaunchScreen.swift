@@ -15,6 +15,6 @@ struct LaunchScreen: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea(.all)
-        .background(Color("LaunchScreenBackground"))
+        .background(Color(Asset.launchScreenBackground.name))
     }
 }

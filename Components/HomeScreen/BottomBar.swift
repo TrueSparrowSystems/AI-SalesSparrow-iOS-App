@@ -14,7 +14,7 @@ struct BottomBar: View {
     
     var body: some View {
         ZStack {
-            Color("Background")
+            Color(Asset.background.name)
                 .frame(height: 44)
                 .overlay(
                     Rectangle().frame(width: nil, height: 0.5, alignment: .top).foregroundColor(.black.opacity(0.2)), alignment: .top

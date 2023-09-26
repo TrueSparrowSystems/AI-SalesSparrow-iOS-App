@@ -32,13 +32,13 @@ struct UserAccountDetailScreen: View {
                         .frame(width: 30, height: 30)
                         .font(.nunitoBold(size: 9))
                         .foregroundColor(Color.black)
-                        .background(Color("UserBubble"))
+                        .background(Color(Asset.userBubble.name))
                         .clipShape(Circle())
                         .accessibilityIdentifier("img_user_account_detail_user_initials")
                     
                     Text(userStateViewModel.currentUser.name)
                         .font(.nunitoMedium(size: 14))
-                        .foregroundColor(Color("TextPrimary"))
+                        .foregroundColor(Color(Asset.textPrimary.name))
                         .accessibilityIdentifier("txt_user_account_detail_user_name")
                     
                     Spacer()
@@ -64,7 +64,7 @@ struct UserAccountDetailScreen: View {
                             
                             Text("Disconnect Salesforce")
                                 .font(.nunitoSemiBold(size: 16))
-                                .foregroundColor(Color("TextPrimary"))
+                                .foregroundColor(Color(Asset.textPrimary.name))
                                 .accessibilityIdentifier("txt_user_account_detail_salesforce_disconnect")
                             
                             Spacer()
@@ -76,14 +76,14 @@ struct UserAccountDetailScreen: View {
                         DisconnectDescription()
                     }
                     .padding()
-                    .background(Color("DisconnectBackground"))
+                    .background(Color(Asset.disconnectBackground.name))
                     .cornerRadius(4)
-                    .overlay(RoundedRectangle(cornerRadius: 4).stroke(Color("BorderColor"), lineWidth: 1))
+                    .overlay(RoundedRectangle(cornerRadius: 4).stroke(Color(Asset.borderColor.name), lineWidth: 1))
                 }
                 .padding()
                 .background(Color.white)
                 .cornerRadius(4)
-                .overlay(RoundedRectangle(cornerRadius: 4).stroke(Color("BorderColor"), lineWidth: 1))
+                .overlay(RoundedRectangle(cornerRadius: 4).stroke(Color(Asset.borderColor.name), lineWidth: 1))
                 
                 HStack {
                     Image(Asset.signOut.name)
@@ -92,7 +92,7 @@ struct UserAccountDetailScreen: View {
                     
                     Text("Log Out")
                         .font(.nunitoSemiBold(size: 16))
-                        .foregroundColor(Color("TextPrimary"))
+                        .foregroundColor(Color(Asset.textPrimary.name))
                         .accessibilityIdentifier("btn_user_account_detail_logout")
                         .onTapGesture {
                             userStateViewModel.logOut()
@@ -103,7 +103,7 @@ struct UserAccountDetailScreen: View {
                 .padding(10)
                 .background(Color.white)
                 .cornerRadius(4)
-                .overlay(RoundedRectangle(cornerRadius: 4).stroke(Color("BorderColor"), lineWidth: 1))
+                .overlay(RoundedRectangle(cornerRadius: 4).stroke(Color(Asset.borderColor.name), lineWidth: 1))
             }
             .padding()
             
@@ -112,18 +112,18 @@ struct UserAccountDetailScreen: View {
             VStack {
                 Text("V\(appVersion)")
                     .font(.nunitoSemiBold(size: 12))
-                    .foregroundColor(Color("TextPrimary"))
+                    .foregroundColor(Color(Asset.textPrimary.name))
                     .accessibilityIdentifier("txt_user_account_detail_app_version")
                 
                 Text("Sales Sparrow by True Sparrow")
                     .font(.nunitoSemiBold(size: 16))
-                    .foregroundColor(Color("TextPrimary"))
+                    .foregroundColor(Color(Asset.textPrimary.name))
                     .accessibilityIdentifier("txt_user_account_detail_app_name")
             }
         }
         .padding()
         
-        .background(Color("Background"))
+        .background(Color(Asset.background.name))
     }
 }
 
@@ -132,15 +132,15 @@ struct DisconnectDescription: View {
     var body: some View {
         let text1 = Text("Disconnecting Salesforce will also ")
             .font(.nunitoSemiBold(size: 14))
-            .foregroundColor(Color("TextPrimary"))
+            .foregroundColor(Color(Asset.textPrimary.name))
         
         let text2 = Text("delete your account")
             .font(.nunitoSemiBold(size: 14))
-            .foregroundColor(Color("RedHighlight"))
+            .foregroundColor(Color(Asset.redHighlight.name))
         
         let text3 = Text(" and all details associated with it.")
             .font(.nunitoSemiBold(size: 14))
-            .foregroundColor(Color("TextPrimary"))
+            .foregroundColor(Color(Asset.textPrimary.name))
         
         return text1 + text2 + text3
         

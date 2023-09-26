@@ -15,7 +15,7 @@ struct TermsBottomStrip: View {
         let termsText = Text("Terms and Conditions")
             .font(.nunitoSemiBold(size: 12))
             .underline()
-            .foregroundColor(Color("RedHighlight"))
+            .foregroundColor(Color(Asset.redHighlight.name))
             .accessibilityLabel(Text("txt_login_terms"))
         
         let termsTextWithLink = Text("[Terms and Conditions](https://drive.google.com/file/d/1pOQOLw_yt1aF9QXHlJag2YgaFmwtMf3Y/view)")
@@ -26,7 +26,7 @@ struct TermsBottomStrip: View {
         let privacyText = Text("Privacy Policy")
             .font(.nunitoSemiBold(size: 12))
             .underline()
-            .foregroundColor(Color("RedHighlight"))
+            .foregroundColor(Color(Asset.redHighlight.name))
             .accessibilityLabel(Text("txt_login_privacy"))
         
         let privacyTextWithLink = Text("[Privacy Policy](https://drive.google.com/file/d/1kccg9XL2D0QEtCV09Bn8icStNX1PAF5E/view)")
@@ -35,11 +35,11 @@ struct TermsBottomStrip: View {
             .accessibilityLabel(Text("txt_privacy"))
         
         let agreementText = Text("By continuing, you're agreeing to the truesparrow's ")
-            .foregroundColor(Color("TermsPrimary"))
+            .foregroundColor(Color(Asset.termsPrimary.name))
             .font(.nunitoSemiBold(size: 12))
         
         let andText = Text(" and ")
-            .foregroundColor(Color("TermsPrimary"))
+            .foregroundColor(Color(Asset.termsPrimary.name))
             .font(.nunitoSemiBold(size: 12))
         
         return ZStack {

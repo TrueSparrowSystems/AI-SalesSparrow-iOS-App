@@ -22,7 +22,7 @@ struct NoteDetailScreen: View {
                 Text("Done")
                     .font(.nunitoBold(size: 14))
                     .padding(.vertical, 10)
-                    .foregroundColor(Color("CancelText"))
+                    .foregroundColor(Color(Asset.cancelText.name))
                     .accessibilityIdentifier("btn_done_note_screen")
                     .onTapGesture {
                         self.presentationMode.wrappedValue.dismiss()
@@ -53,12 +53,12 @@ struct NoteDetailScreen: View {
                 ProgressView()
                     .accessibilityIdentifier("loader_note_detail")
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-                    .tint(Color("LoginButtonSecondary"))
+                    .tint(Color(Asset.loginButtonSecondary.name))
                     .controlSize(.large)
                 
             } else if !noteDetailScreenViewModel.errorMessage.isEmpty {
                 Text(noteDetailScreenViewModel.errorMessage)
-                    .foregroundColor(Color("TextPrimary"))
+                    .foregroundColor(Color(Asset.textPrimary.name))
                     .accessibilityIdentifier("txt_note_detail_error")
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                 
@@ -69,18 +69,18 @@ struct NoteDetailScreen: View {
                         .frame(width: 14, height: 14)
                         .accessibilityIdentifier("img_note_detail_account_icon")
                     Text("Account")
-                        .foregroundColor(Color("TextPrimary"))
+                        .foregroundColor(Color(Asset.textPrimary.name))
                         .font(.nunitoRegular(size: 12))
                         .accessibilityIdentifier("txt_note_detail_account_text")
                     HStack(alignment: .center) {
                         Text(accountName)
                             .padding(.vertical, 8)
                             .padding(.horizontal, 6)
-                            .foregroundColor(Color("RedHighlight"))
+                            .foregroundColor(Color(Asset.redHighlight.name))
                             .font(.nunitoBold(size: 14))
                             .accessibilityIdentifier("txt_note_detail_account_name")
                     }
-                    .background(Color("SelectAccountDropdownBG"))
+                    .background(Color(Asset.selectAccountDropdownBG.name))
                     .clipShape(RoundedRectangle(cornerRadius: 4))
                     
                     Spacer()
@@ -91,7 +91,7 @@ struct NoteDetailScreen: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .font(.nunitoSemiBold(size: 18))
                     .accessibilityIdentifier("txt_note_detail_text")
-                    .foregroundColor(Color("TextPrimary"))
+                    .foregroundColor(Color(Asset.textPrimary.name))
                 
                 Spacer()
             }
@@ -99,7 +99,7 @@ struct NoteDetailScreen: View {
         }
         .padding(.horizontal, 12)
         .navigationBarBackButtonHidden(true)
-        .background(Color("Background"))
+        .background(Color(Asset.background.name))
         .onAppear {
             noteDetailScreenViewModel.fetchNoteDetail(accountId: accountId, noteId: noteId)
         }

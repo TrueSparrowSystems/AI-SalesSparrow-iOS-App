@@ -26,9 +26,9 @@ struct AccountSearchView: View {
                     .accessibilityIdentifier("img_search_magnifying_glass")
                 
                 TextField("", text: $searchText,
-                          prompt: Text("Search Accounts").foregroundColor(Color("SearchPrimary").opacity(0.8)))
+                          prompt: Text("Search Accounts").foregroundColor(Color(Asset.searchPrimary.name).opacity(0.8)))
                 .font(.nunitoRegular(size: 16))
-                .foregroundColor(Color("LuckyPoint"))
+                .foregroundColor(Color(Asset.luckyPoint.name))
                 .accessibilityIdentifier("text_field_search_account")
                 .focused($focused)
             }
@@ -42,13 +42,13 @@ struct AccountSearchView: View {
             
             // Divider Line
             Divider()
-                .background(Color("SearchPrimary"))
+                .background(Color(Asset.searchPrimary.name))
                 .opacity(0.6)
             
             if accountSearchViewModel.isSearchAccountInProgress {
                 ProgressView()
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-                    .tint(Color("LoginButtonSecondary"))
+                    .tint(Color(Asset.loginButtonSecondary.name))
                     .controlSize(.large)
             } else if !accountSearchViewModel.accountListData.account_ids.isEmpty {
                 // List of Accounts
@@ -74,7 +74,7 @@ struct AccountSearchView: View {
                 focused = true
             }
         }
-        .background(Color("Background"))
+        .background(Color(Asset.background.name))
     }
     
     func removeSearchTextFocus() {
@@ -104,7 +104,7 @@ struct AccountListView: View {
                             HStack {
                                 Text(account.name)
                                     .font(.nunitoRegular(size: 16))
-                                    .foregroundColor(Color("SearchPrimary"))
+                                    .foregroundColor(Color(Asset.searchPrimary.name))
                                     .accessibilityIdentifier("txt_search_account_name_\(account.name)")
                                 Spacer()
                             }
@@ -130,7 +130,7 @@ struct AccountListView: View {
                                     }, label: {
                                         Text("Add Note")
                                             .font(.nunitoRegular(size: 16))
-                                            .foregroundColor(Color("LoginButtonPrimary"))
+                                            .foregroundColor(Color(Asset.loginButtonPrimary.name))
                                             .accessibilityIdentifier("txt_search_add_note_\(account.name)")
                                     }
                                     )
@@ -144,7 +144,7 @@ struct AccountListView: View {
                         
                         // Divider Line
                         Divider()
-                            .background(Color("SearchPrimary"))
+                            .background(Color(Asset.searchPrimary.name))
                             .opacity(0.6)
                         
                     }

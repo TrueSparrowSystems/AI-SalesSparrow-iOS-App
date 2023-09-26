@@ -24,9 +24,9 @@ struct UserSearchView: View {
                     .accessibilityIdentifier("img_search_magnifying_glass")
                 
                 TextField("", text: $searchText,
-                          prompt: Text("Search Users").foregroundColor(Color("SearchPrimary").opacity(0.8)))
+                          prompt: Text("Search Users").foregroundColor(Color(Asset.searchPrimary.name).opacity(0.8)))
                 .font(.nunitoRegular(size: 16))
-                .foregroundColor(Color("LuckyPoint"))
+                .foregroundColor(Color(Asset.luckyPoint.name))
                 .accessibilityIdentifier("txt_search_user_field")
                 .focused($focused)
             }
@@ -40,13 +40,13 @@ struct UserSearchView: View {
             
             // Divider Line
             Divider()
-                .background(Color("SearchPrimary"))
+                .background(Color(Asset.searchPrimary.name))
                 .opacity(0.6)
             
             if userSearchViewModel.isSearchUserInProgress {
                 ProgressView()
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-                    .tint(Color("LoginButtonSecondary"))
+                    .tint(Color(Asset.loginButtonSecondary.name))
                     .controlSize(.large)
             } else if userSearchViewModel.userListData.crm_organization_user_ids.count > 0 {
                 // List of users
@@ -70,7 +70,7 @@ struct UserSearchView: View {
                 focused = true
             }
         }
-        .background(Color("Background"))
+        .background(Color(Asset.background.name))
     }
     
     func removeSearchTextFocus() {
@@ -99,14 +99,14 @@ struct UserListView: View {
                                 .frame(width: 20, height: 20)
                                 .font(.nunitoBold(size: 6))
                                 .foregroundColor(.black)
-                                .background(Color("UserBubble"))
+                                .background(Color(Asset.userBubble.name))
                                 .clipShape(RoundedRectangle(cornerRadius: 26))
                                 .accessibilityIdentifier("txt_search_user_user_initials_\(user.name)")
                             
                             HStack {
                                 Text(user.name)
                                     .font(.nunitoMedium(size: 14))
-                                    .foregroundColor(Color("SearchPrimary"))
+                                    .foregroundColor(Color(Asset.searchPrimary.name))
                                     .accessibilityIdentifier("txt_search_user_user_name_\(user.name)")
                                 Spacer()
                             }
@@ -124,7 +124,7 @@ struct UserListView: View {
                         
                         // Divider Line
                         Divider()
-                            .background(Color("SearchPrimary"))
+                            .background(Color(Asset.searchPrimary.name))
                             .opacity(0.6)
                         
                     }

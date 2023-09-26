@@ -22,7 +22,7 @@ struct RenderFields: View {
             HStack(spacing: 0) {
                 Text(fieldValue)
                     .font(.nunitoRegular(size: 14))
-                    .foregroundColor(Color("TextPrimary"))
+                    .foregroundColor(Color(Asset.textPrimary.name))
                     .accessibilityIdentifier("txt_account_detail_field_type_\(fieldName)")
                 
                 Spacer()
@@ -31,7 +31,7 @@ struct RenderFields: View {
             HStack(spacing: 0) {
                 Text(fieldValue)
                     .font(.nunitoRegular(size: 12))
-                    .foregroundColor(Color("TextPrimary"))
+                    .foregroundColor(Color(Asset.textPrimary.name))
                     .accessibilityIdentifier("txt_account_detail_field_type_\(fieldName)")
                 
                 Spacer()
@@ -40,12 +40,12 @@ struct RenderFields: View {
                 HStack(spacing: 0) {
                     Text("\(fieldTitle!): ")
                         .font(.nunitoMedium(size: 14))
-                        .foregroundColor(Color("TextPrimary"))
+                        .foregroundColor(Color(Asset.textPrimary.name))
                         .accessibilityIdentifier("txt_account_detail_field_type_\(fieldName)")
                     
                     Text("\(fieldValue)")
                         .font(.nunitoMedium(size: 14))
-                        .foregroundColor(Color("TextPrimary"))
+                        .foregroundColor(Color(Asset.textPrimary.name))
                         .accessibilityIdentifier("txt_account_detail_field_value_\(fieldValue)")
                     
                     Spacer()
@@ -60,13 +60,13 @@ struct RenderFields: View {
                 
                 Text("\(fieldTitle!): ")
                     .font(.nunitoMedium(size: 14))
-                    .foregroundColor(Color("TextPrimary"))
+                    .foregroundColor(Color(Asset.textPrimary.name))
                     .accessibilityIdentifier("txt_account_detail_field_type_\(fieldName)")
                 
                 Text("\(fieldValue)")
                     .font(.nunitoMedium(size: 14))
-                    .foregroundColor(Color("TextPrimary"))
-                    .underline(true, color: Color("TextPrimary"))
+                    .foregroundColor(Color(Asset.textPrimary.name))
+                    .underline(true, color: Color(Asset.textPrimary.name))
                     .accessibilityIdentifier("txt_account_detail_field_value_\(fieldValue)")
                     .onTapGesture {
                         openURL(URL(string: fieldValue)!)

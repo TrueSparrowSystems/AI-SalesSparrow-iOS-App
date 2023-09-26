@@ -26,11 +26,11 @@ struct LoadingAccountRowView: View {
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding()
-        .background(Color("CardBackground"))
+        .background(Color(Asset.cardBackground.name))
         .cornerRadius(5) /// make the background rounded
         .overlay( /// apply a rounded border
             RoundedRectangle(cornerRadius: 5)
-                .stroke(Color("CardBorder"), lineWidth: 1)
+                .stroke(Color(Asset.cardBorder.name), lineWidth: 1)
         )
         .padding(.bottom, 10)
     }

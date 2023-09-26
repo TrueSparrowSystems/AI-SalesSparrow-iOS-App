@@ -21,7 +21,7 @@ struct ShimmerView: View {
     
     init(rotationAngle: Angle = Angle(degrees: 70),
          animationSpeed: CGFloat = 0.2,
-         primaryColor: Color =  Color("Gainsbro"),
+         primaryColor: Color =  Color(Asset.gainsbro.name),
          shimmerColor: Color = .white.opacity(0.6),
          size: CGSize = CGSize(width: 350, height: 200),
          cornerRadius: CGFloat = 10) {

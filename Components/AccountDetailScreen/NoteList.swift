@@ -27,7 +27,7 @@ struct NotesList: View {
                 
                 Text("Notes")
                     .font(.nunitoSemiBold(size: 16))
-                    .foregroundColor(Color("TextPrimary"))
+                    .foregroundColor(Color(Asset.textPrimary.name))
                     .accessibilityIdentifier("txt_account_detail_notes_title")
                 
                 Spacer()
@@ -48,14 +48,14 @@ struct NotesList: View {
             }
             if acccountDetailScreenViewModelObject.isNoteListLoading {
                 ProgressView()
-                    .tint(Color("LoginButtonSecondary"))
+                    .tint(Color(Asset.loginButtonSecondary.name))
             } else if acccountDetailScreenViewModelObject.noteData.note_ids.isEmpty {
                 VStack(spacing: 0) {
                     HStack {
                         Spacer()
                         Text("Add notes and sync with your salesforce account")
                             .font(.nunitoRegular(size: 12))
-                            .foregroundColor(Color("TextPrimary"))
+                            .foregroundColor(Color(Asset.textPrimary.name))
                             .padding(EdgeInsets(top: 12, leading: 14, bottom: 12, trailing: 14))
                             .accessibilityIdentifier("txt_account_detail_add_note_text")
                         
@@ -64,7 +64,7 @@ struct NotesList: View {
                     .background(
                         RoundedRectangle(cornerRadius: 4)
                             .strokeBorder(style: StrokeStyle(lineWidth: 2, dash: [2, 5], dashPhase: 10))
-                            .foregroundColor(Color("TextPrimary"))
+                            .foregroundColor(Color(Asset.textPrimary.name))
                             .background(
                                 Color.clear
                                     .frame(height: 2)
@@ -115,13 +115,13 @@ struct NoteCardView: View {
                     .frame(width: 18, height: 18)
                     .font(.nunitoBold(size: 6))
                     .foregroundColor(.black)
-                    .background(Color("UserBubble"))
+                    .background(Color(Asset.userBubble.name))
                     .clipShape(RoundedRectangle(cornerRadius: 26))
                     .accessibilityIdentifier("txt_account_detail_note_creator_initials_\(noteIndex)")
                 
                 Text("\(acccountDetailScreenViewModelObject.noteData.note_map_by_id[noteId]?.creator ?? "")")
                     .font(.nunitoMedium(size: 14))
-                    .foregroundColor(Color("TextPrimary"))
+                    .foregroundColor(Color(Asset.textPrimary.name))
                     .accessibilityIdentifier("txt_account_detail_note_creator_\(noteIndex)")
                 
                 Spacer()
@@ -129,7 +129,7 @@ struct NoteCardView: View {
                 HStack(spacing: 0) {
                     Text("\(BasicHelper.getFormattedDateForCard(from: acccountDetailScreenViewModelObject.noteData.note_map_by_id[noteId]?.last_modified_time ?? ""))")
                         .font(.nunitoLight(size: 12))
-                        .foregroundColor(Color("TextPrimary"))
+                        .foregroundColor(Color(Asset.textPrimary.name))
                         .accessibilityIdentifier("txt_account_detail_note_last_modified_time_\(noteIndex)")
                     
                     Button {
@@ -139,14 +139,14 @@ struct NoteCardView: View {
                         Image(Asset.dotsThreeOutline.name)
                             .frame(width: 16, height: 16)
                             .padding(10)
-                            .foregroundColor(Color("TextPrimary"))
+                            .foregroundColor(Color(Asset.textPrimary.name))
                     }
                     .accessibilityIdentifier("btn_account_detail_note_more_\(noteIndex)")
                 }
             }
             Text("\(acccountDetailScreenViewModelObject.noteData.note_map_by_id[noteId]?.text_preview ?? "")")
                 .font(.nunitoMedium(size: 14))
-                .foregroundColor(Color("TextPrimary"))
+                .foregroundColor(Color(Asset.textPrimary.name))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .multilineTextAlignment(.leading)
                 .accessibilityIdentifier("txt_account_detail_note_text_\(noteIndex)")
@@ -154,10 +154,10 @@ struct NoteCardView: View {
         }
         .padding(EdgeInsets(top: 5, leading: 15, bottom: 15, trailing: 5))
         .cornerRadius(5)
-        .background(Color("CardBackground"))
+        .background(Color(Asset.cardBackground.name))
         .overlay(
             RoundedRectangle(cornerRadius: 5)
-                .stroke(Color("CardBorder"), lineWidth: 1)
+                .stroke(Color(Asset.cardBorder.name), lineWidth: 1)
         )
         .overlay(alignment: .topTrailing) {
             if isPopoverVisible {
@@ -178,7 +178,7 @@ struct NoteCardView: View {
                                 .frame(width: 20, height: 20)
                             Text("Delete")
                                 .font(.nunitoSemiBold(size: 16))
-                                .foregroundColor(Color("TextPrimary"))
+                                .foregroundColor(Color(Asset.textPrimary.name))
                         }
                     }
                            )
@@ -187,10 +187,10 @@ struct NoteCardView: View {
                 .padding(10)
                 .cornerRadius(4)
                 .frame(width: 100, height: 40)
-                .background(Color("CardBackground"))
+                .background(Color(Asset.cardBackground.name))
                 .overlay(
                     RoundedRectangle(cornerRadius: 4)
-                        .stroke(Color("CardBorder"), lineWidth: 1)
+                        .stroke(Color(Asset.cardBorder.name), lineWidth: 1)
                 )
                 .offset(x: -14, y: 32)
             }

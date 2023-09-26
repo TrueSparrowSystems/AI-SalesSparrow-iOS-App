@@ -55,14 +55,14 @@ struct EventsList: View {
             
             if acccountDetailScreenViewModelObject.isEventListLoading {
                 ProgressView()
-                    .tint(Color("LoginButtonSecondary"))
+                    .tint(Color(Asset.loginButtonSecondary.name))
             } else if acccountDetailScreenViewModelObject.eventData.event_ids.isEmpty {
                 VStack(spacing: 0) {
                     HStack {
                         Spacer()
                         Text("Add events, set due dates and assign to your team")
                             .font(.nunitoRegular(size: 12))
-                            .foregroundColor(Color("TextPrimary"))
+                            .foregroundColor(Color(Asset.textPrimary.name))
                             .padding(EdgeInsets(top: 12, leading: 14, bottom: 12, trailing: 14))
                             .accessibilityIdentifier("txt_account_detail_add_event")
                         
@@ -71,7 +71,7 @@ struct EventsList: View {
                     .background(
                         RoundedRectangle(cornerRadius: 4)
                             .strokeBorder(style: StrokeStyle(lineWidth: 2, dash: [2, 5], dashPhase: 10))
-                            .foregroundColor(Color("TextPrimary"))
+                            .foregroundColor(Color(Asset.textPrimary.name))
                             .background(
                                 Color.clear
                                     .frame(height: 2)
@@ -124,14 +124,14 @@ struct EventCardView: View {
                     .frame(width: 18, height: 18)
                     .font(.nunitoBold(size: 6))
                     .foregroundColor(.black)
-                    .background(Color("UserBubble"))
+                    .background(Color(Asset.userBubble.name))
                     .clipShape(RoundedRectangle(cornerRadius: 26))
                     .accessibilityIdentifier("txt_account_detail_event_creator_initials_\(eventIndex)")
                 
                 Text("\(acccountDetailScreenViewModelObject.eventData.event_map_by_id[eventId]?.creator_name ?? "")")
                     .font(.nunitoMedium(size: 14))
                     .tracking(0.6)
-                    .foregroundColor(Color("TextPrimary"))
+                    .foregroundColor(Color(Asset.textPrimary.name))
                     .accessibilityIdentifier("txt_account_detail_event_creator_\(eventIndex)")
                 
                 Spacer()
@@ -140,7 +140,7 @@ struct EventCardView: View {
                     Text("\(BasicHelper.getFormattedDateForCard(from: acccountDetailScreenViewModelObject.eventData.event_map_by_id[eventId]?.last_modified_time ?? ""))")
                         .font(.nunitoLight(size: 12))
                         .tracking(0.5)
-                        .foregroundColor(Color("TextPrimary"))
+                        .foregroundColor(Color(Asset.textPrimary.name))
                         .accessibilityIdentifier("txt_account_detail_event_last_modified_time_\(eventIndex)")
                     
                     Button {
@@ -150,14 +150,14 @@ struct EventCardView: View {
                         Image(Asset.dotsThreeOutline.name)
                             .frame(width: 16, height: 16)
                             .padding(10)
-                            .foregroundColor(Color("TextPrimary"))
+                            .foregroundColor(Color(Asset.textPrimary.name))
                     }
                     .accessibilityIdentifier("btn_account_detail_event_more_\(eventIndex)")
                 }
             }
             Text("\(acccountDetailScreenViewModelObject.eventData.event_map_by_id[eventId]?.description ?? "")")
                 .font(.nunitoMedium(size: 14))
-                .foregroundColor(Color("TextPrimary"))
+                .foregroundColor(Color(Asset.textPrimary.name))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .multilineTextAlignment(.leading)
                 .accessibilityIdentifier("txt_account_detail_event_description_\(eventIndex)")
@@ -170,23 +170,23 @@ struct EventCardView: View {
                         .padding(.trailing, 4)
                     
                     Text("From")
-                        .font(.nunitoRegular(size: 12))                        .foregroundColor(Color("TermsPrimary"))
+                        .font(.nunitoRegular(size: 12))                        .foregroundColor(Color(Asset.termsPrimary.name))
                         .tracking(0.5)
                     
                     Divider()
                         .frame(width: 0, height: 16)
-                        .foregroundColor(Color("TermsPrimary").opacity(0.1))
+                        .foregroundColor(Color(Asset.termsPrimary.name).opacity(0.1))
                         .padding(.horizontal, 6)
                     
                     Text("\(BasicHelper.getFormattedDateForDateTime(from: acccountDetailScreenViewModelObject.eventData.event_map_by_id[eventId]?.start_datetime ?? ""))")
-                        .font(.nunitoRegular(size: 12))                        .foregroundColor(Color("TermsPrimary"))
+                        .font(.nunitoRegular(size: 12))                        .foregroundColor(Color(Asset.termsPrimary.name))
                         .tracking(0.5)
                         .accessibilityIdentifier("txt_account_detail_event_start_date_\(eventIndex)")
                         .lineLimit(1)
                     
                     Text(" - \(BasicHelper.getFormattedDateForDateTime(from: acccountDetailScreenViewModelObject.eventData.event_map_by_id[eventId]?.end_datetime ?? ""))")
                         .font(.nunitoRegular(size: 12))
-                        .foregroundColor(Color("TermsPrimary"))
+                        .foregroundColor(Color(Asset.termsPrimary.name))
                         .tracking(0.5)
                         .accessibilityIdentifier("txt_account_detail_event_end_date_\(eventIndex)")
                         .lineLimit(1)
@@ -197,10 +197,10 @@ struct EventCardView: View {
         }
         .padding(EdgeInsets(top: 5, leading: 15, bottom: 15, trailing: 5))
         .cornerRadius(5)
-        .background(Color("CardBackground"))
+        .background(Color(Asset.cardBackground.name))
         .overlay(
             RoundedRectangle(cornerRadius: 5)
-                .stroke(Color("CardBorder"), lineWidth: 1)
+                .stroke(Color(Asset.cardBorder.name), lineWidth: 1)
         )
         .overlay(alignment: .topTrailing) {
             if isPopoverVisible {
@@ -222,7 +222,7 @@ struct EventCardView: View {
                                 .frame(width: 20, height: 20)
                             Text("Delete")
                                 .font(.nunitoSemiBold(size: 16))
-                                .foregroundColor(Color("TextPrimary"))
+                                .foregroundColor(Color(Asset.textPrimary.name))
                         }
                     }
                     )
@@ -231,10 +231,10 @@ struct EventCardView: View {
                 .padding(10)
                 .cornerRadius(4)
                 .frame(width: 100, height: 40)
-                .background(Color("CardBackground"))
+                .background(Color(Asset.cardBackground.name))
                 .overlay(
                     RoundedRectangle(cornerRadius: 4)
-                        .stroke(Color("CardBorder"), lineWidth: 1)
+                        .stroke(Color(Asset.cardBorder.name), lineWidth: 1)
                 )
                 .offset(x: -14, y: 32)
             }

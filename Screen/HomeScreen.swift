@@ -34,7 +34,7 @@ struct HomeScreen: View {
                 BottomBar()
             }
             .navigationBarBackButtonHidden(true)
-            .background(Color("Background"))
+            .background(Color(Asset.background.name))
             
         }
         .navigationViewStyle(.stack)

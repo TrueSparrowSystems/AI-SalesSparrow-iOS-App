@@ -28,7 +28,7 @@ struct AddButtonPopoverComponent: View {
                     Image(Asset.tasksIcon.name)
                     Text("Add Tasks")
                         .font(.nunitoSemiBold(size: 16))
-                        .foregroundColor(Color("TextPrimary"))
+                        .foregroundColor(Color(Asset.textPrimary.name))
                         .accessibilityIdentifier("txt_create_note_popover_add_task")
                 }
             })
@@ -44,7 +44,7 @@ struct AddButtonPopoverComponent: View {
                     Image(Asset.eventsIcon.name)
                     Text("Add Event")
                         .font(.nunitoSemiBold(size: 16))
-                        .foregroundColor(Color("TextPrimary"))
+                        .foregroundColor(Color(Asset.textPrimary.name))
                         .accessibilityIdentifier("txt_create_note_popover_add_event")
                 }
             })
@@ -53,10 +53,10 @@ struct AddButtonPopoverComponent: View {
         }
         .padding(10)
         .cornerRadius(4)
-        .background(Color("CardBackground"))
+        .background(Color(Asset.cardBackground.name))
         .overlay(
             RoundedRectangle(cornerRadius: 4)
-                .stroke(Color("CardBorder"), lineWidth: 1)
+                .stroke(Color(Asset.cardBorder.name), lineWidth: 1)
         )
         .frame(width: 200, height: 100)
         .background {

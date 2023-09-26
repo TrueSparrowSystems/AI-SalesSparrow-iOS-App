@@ -29,7 +29,7 @@ struct CreateEventScreen: View {
                 Text((suggestedEventState["isEventSaved"] as! Bool) ? "Done" : "Cancel")
                     .font(.nunitoBold(size: 14))
                     .padding(.vertical, 10)
-                    .foregroundColor(Color("CancelText"))
+                    .foregroundColor(Color(Asset.cancelText.name))
                     .accessibilityIdentifier((suggestedEventState["isEventSaved"] as! Bool) ? "btn_add_event_done" : "btn_add_event_cancel")
                     .onTapGesture {
                         self.presentationMode.wrappedValue.dismiss()
@@ -50,7 +50,7 @@ struct CreateEventScreen: View {
                     HStack(alignment: .center, spacing: 0) {
                         if isAddEventInProgress {
                             ProgressView()
-                                .tint(Color("LoginButtonPrimary"))
+                                .tint(Color(Asset.loginButtonPrimary.name))
                                 .controlSize(.small)
                             Text("Adding Event...")
                                 .foregroundColor(.white)
@@ -91,7 +91,7 @@ struct CreateEventScreen: View {
                 Text("Start")
                     .frame(width: 35, height: 30, alignment: .leading)
                     .font(.nunitoRegular(size: 14))
-                    .foregroundColor(Color("TextPrimary"))
+                    .foregroundColor(Color(Asset.textPrimary.name))
                     .accessibilityIdentifier("txt_add_events_start")
                 
                 ZStack {
@@ -107,7 +107,7 @@ struct CreateEventScreen: View {
                     if !(suggestedEventState["isStartDateSelected"] as! Bool) {
                         HStack(spacing: 0) {
                             Text("Select Date")
-                                .foregroundColor(Color("TermsPrimary"))
+                                .foregroundColor(Color(Asset.termsPrimary.name))
                                 .font(.nunitoLight(size: 12))
                                 .tracking(0.5)
                                 .padding(0)
@@ -125,7 +125,7 @@ struct CreateEventScreen: View {
                     } else {
                         HStack(spacing: 0) {
                             Text(BasicHelper.getDateStringFromDate(from: startDate))
-                                .foregroundColor(Color("TermsPrimary"))
+                                .foregroundColor(Color(Asset.termsPrimary.name))
                                 .font(.nunitoBold(size: 12))
                                 .tracking(0.5)
                                 .padding(0)
@@ -146,7 +146,7 @@ struct CreateEventScreen: View {
                 .frame(width: 160, height: 30)
                 .overlay(
                     RoundedRectangle(cornerRadius: 4)
-                        .stroke(Color("CardBorder"), lineWidth: 1)
+                        .stroke(Color(Asset.cardBorder.name), lineWidth: 1)
                 )
                 ZStack {
                     if !(suggestedEventState["isEventSaved"] as! Bool) {
@@ -161,7 +161,7 @@ struct CreateEventScreen: View {
                     if !(suggestedEventState["isStartTimeSelected"] as! Bool) {
                         HStack(spacing: 0) {
                             Text("Select Time")
-                                .foregroundColor(Color("TermsPrimary"))
+                                .foregroundColor(Color(Asset.termsPrimary.name))
                                 .font(.nunitoLight(size: 12))
                                 .tracking(0.5)
                                 .padding(0)
@@ -179,7 +179,7 @@ struct CreateEventScreen: View {
                     } else {
                         HStack(spacing: 0) {
                             Text(BasicHelper.getTimeStringFromDate(from: startTime))
-                                .foregroundColor(Color("TermsPrimary"))
+                                .foregroundColor(Color(Asset.termsPrimary.name))
                                 .font(.nunitoBold(size: 12))
                                 .tracking(0.5)
                                 .padding(0)
@@ -200,7 +200,7 @@ struct CreateEventScreen: View {
                 .frame(width: 140, height: 30)
                 .overlay(
                     RoundedRectangle(cornerRadius: 4)
-                        .stroke(Color("CardBorder"), lineWidth: 1)
+                        .stroke(Color(Asset.cardBorder.name), lineWidth: 1)
                 )
                 
                 Spacer()
@@ -209,7 +209,7 @@ struct CreateEventScreen: View {
                 Text("End")
                     .frame(width: 35, height: 30, alignment: .leading)
                     .font(.nunitoRegular(size: 14))
-                    .foregroundColor(Color("TextPrimary"))
+                    .foregroundColor(Color(Asset.textPrimary.name))
                     .accessibilityIdentifier("txt_add_events_end")
                 
                 ZStack {
@@ -225,7 +225,7 @@ struct CreateEventScreen: View {
                     if !(suggestedEventState["isEndDateSelected"] as! Bool) {
                         HStack(spacing: 0) {
                             Text("Select Date")
-                                .foregroundColor(Color("TermsPrimary"))
+                                .foregroundColor(Color(Asset.termsPrimary.name))
                                 .font(.nunitoLight(size: 12))
                                 .tracking(0.5)
                                 .padding(0)
@@ -243,7 +243,7 @@ struct CreateEventScreen: View {
                     } else {
                         HStack(spacing: 0) {
                             Text(BasicHelper.getDateStringFromDate(from: endDate))
-                                .foregroundColor(Color("TermsPrimary"))
+                                .foregroundColor(Color(Asset.termsPrimary.name))
                                 .font(.nunitoBold(size: 12))
                                 .tracking(0.5)
                                 .padding(0)
@@ -264,7 +264,7 @@ struct CreateEventScreen: View {
                 .frame(width: 160, height: 30)
                 .overlay(
                     RoundedRectangle(cornerRadius: 4)
-                        .stroke(Color("CardBorder"), lineWidth: 1)
+                        .stroke(Color(Asset.cardBorder.name), lineWidth: 1)
                 )
                 
                 ZStack {
@@ -280,7 +280,7 @@ struct CreateEventScreen: View {
                     if !(suggestedEventState["isEndTimeSelected"] as! Bool) {
                         HStack(spacing: 0) {
                             Text("Select Time")
-                                .foregroundColor(Color("TermsPrimary"))
+                                .foregroundColor(Color(Asset.termsPrimary.name))
                                 .font(.nunitoLight(size: 12))
                                 .tracking(0.5)
                                 .padding(0)
@@ -298,7 +298,7 @@ struct CreateEventScreen: View {
                     } else {
                         HStack(spacing: 0) {
                             Text(BasicHelper.getTimeStringFromDate(from: endTime))
-                                .foregroundColor(Color("TermsPrimary"))
+                                .foregroundColor(Color(Asset.termsPrimary.name))
                                 .font(.nunitoBold(size: 12))
                                 .tracking(0.5)
                                 .padding(0)
@@ -319,14 +319,14 @@ struct CreateEventScreen: View {
                 .frame(width: 140, height: 30)
                 .overlay(
                     RoundedRectangle(cornerRadius: 4)
-                        .stroke(Color("CardBorder"), lineWidth: 1)
+                        .stroke(Color(Asset.cardBorder.name), lineWidth: 1)
                 )
                 Spacer()
             }
             ScrollView {
                 if !(suggestedEventState["isEventSaved"] as! Bool) {
                     TextField("Add Event", text: $description, axis: .vertical)
-                        .foregroundColor(Color("TextPrimary"))
+                        .foregroundColor(Color(Asset.textPrimary.name))
                         .font(.nunitoSemiBold(size: 18))
                         .focused($focused)
                         .accessibilityIdentifier("et_create_event")
@@ -337,7 +337,7 @@ struct CreateEventScreen: View {
                         .lineLimit(4...)
                 } else {
                     Text(description)
-                        .foregroundColor(Color("TextPrimary"))
+                        .foregroundColor(Color(Asset.textPrimary.name))
                         .font(.nunitoSemiBold(size: 18))
                         .accessibilityIdentifier("txt_create_event_description")
                         .padding(.top)

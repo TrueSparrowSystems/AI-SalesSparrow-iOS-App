@@ -4,7 +4,6 @@
 //
 //  Created by Mohit Charkha on 26/09/23.
 //
-// swiftlint:disable all
 
 #if os(macOS)
   import AppKit

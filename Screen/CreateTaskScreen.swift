@@ -27,7 +27,7 @@ struct CreateTaskScreen: View {
                 Text((suggestedTaskState["isTaskSaved"] as! Bool) ? "Done" : "Cancel")
                     .font(.nunitoBold(size: 14))
                     .padding(.vertical, 10)
-                    .foregroundColor(Color("CancelText"))
+                    .foregroundColor(Color(Asset.cancelText.name))
                     .accessibilityIdentifier((suggestedTaskState["isTaskSaved"] as! Bool) ? "btn_add_task_done" : "btn_add_task_cancel")
                     .onTapGesture {
                         self.presentationMode.wrappedValue.dismiss()
@@ -48,7 +48,7 @@ struct CreateTaskScreen: View {
                     HStack(alignment: .center, spacing: 0) {
                         if isAddTaskInProgress {
                             ProgressView()
-                                .tint(Color("LoginButtonPrimary"))
+                                .tint(Color(Asset.loginButtonPrimary.name))
                                 .controlSize(.small)
                             Text("Adding Task...")
                                 .foregroundColor(.white)
@@ -89,7 +89,7 @@ struct CreateTaskScreen: View {
                 Text("Assign to")
                     .frame(width: 75, height: 30, alignment: .leading)
                     .font(.nunitoRegular(size: 14))
-                    .foregroundColor(Color("TextPrimary"))
+                    .foregroundColor(Color(Asset.textPrimary.name))
                     .accessibilityIdentifier("txt_add_tasks_assign_to")
                 
                 Button(action: {
@@ -97,7 +97,7 @@ struct CreateTaskScreen: View {
                 }, label: {
                     if ((suggestedTaskState["assignedToUsername"] ?? "") as! String).isEmpty {
                         Text("Select")
-                            .foregroundColor(Color("TextPrimary"))
+                            .foregroundColor(Color(Asset.textPrimary.name))
                             .font(.nunitoBold(size: 12))
                             .accessibilityIdentifier("txt_add_task_selected_user")
                     } else {
@@ -105,12 +105,12 @@ struct CreateTaskScreen: View {
                             .frame(width: 18, height: 18)
                             .font(.nunitoBold(size: 6))
                             .foregroundColor(Color.white)
-                            .background(Color("UserBubble"))
+                            .background(Color(Asset.userBubble.name))
                             .clipShape(RoundedRectangle(cornerRadius: 47))
                             .accessibilityIdentifier("img_user_account_detail_user_initials")
                         
                         Text(((suggestedTaskState["assignedToUsername"] ?? "") as! String))
-                            .foregroundColor(Color("RedHighlight"))
+                            .foregroundColor(Color(Asset.redHighlight.name))
                             .font(.nunitoBold(size: 12))
                             .accessibilityIdentifier("txt_add_task_selected_user")
                     }
@@ -126,7 +126,7 @@ struct CreateTaskScreen: View {
                 .frame(width: 160, height: 30)
                 .overlay(
                     RoundedRectangle(cornerRadius: 4)
-                        .stroke(Color("CardBorder"), lineWidth: 1)
+                        .stroke(Color(Asset.cardBorder.name), lineWidth: 1)
                 )
                 .sheet(isPresented: $showUserSearchView) {
                     UserSearchView(isPresented: $showUserSearchView,
@@ -143,7 +143,7 @@ struct CreateTaskScreen: View {
                 Text("Due")
                     .frame(width: 75, height: 30, alignment: .leading)
                     .font(.nunitoRegular(size: 14))
-                    .foregroundColor(Color("TextPrimary"))
+                    .foregroundColor(Color(Asset.textPrimary.name))
                     .accessibilityIdentifier("txt_add_tasks_due")
                 
                 ZStack {
@@ -159,7 +159,7 @@ struct CreateTaskScreen: View {
                     if !(suggestedTaskState["isDateSelected"] as! Bool) {
                         HStack(spacing: 0) {
                             Text("Select")
-                                .foregroundColor(Color("TermsPrimary"))
+                                .foregroundColor(Color(Asset.termsPrimary.name))
                                 .font(.nunitoLight(size: 12))
                                 .tracking(0.5)
                                 .padding(0)
@@ -177,7 +177,7 @@ struct CreateTaskScreen: View {
                     } else {
                         HStack(spacing: 0) {
                             Text(BasicHelper.getDateStringFromDate(from: dueDate))
-                                .foregroundColor(Color("TermsPrimary"))
+                                .foregroundColor(Color(Asset.termsPrimary.name))
                                 .font(.nunitoBold(size: 12))
                                 .tracking(0.5)
                                 .padding(0)
@@ -198,7 +198,7 @@ struct CreateTaskScreen: View {
                 .frame(width: 160, height: 30)
                 .overlay(
                     RoundedRectangle(cornerRadius: 4)
-                        .stroke(Color("CardBorder"), lineWidth: 1)
+                        .stroke(Color(Asset.cardBorder.name), lineWidth: 1)
                 )
                 
                 Spacer()
@@ -206,7 +206,7 @@ struct CreateTaskScreen: View {
             ScrollView {
                 if !(suggestedTaskState["isTaskSaved"] as! Bool) {
                     TextField("Add Task", text: $description, axis: .vertical)
-                        .foregroundColor(Color("TextPrimary"))
+                        .foregroundColor(Color(Asset.textPrimary.name))
                         .font(.nunitoSemiBold(size: 18))
                         .focused($focused)
                         .accessibilityIdentifier("et_create_task")
@@ -217,7 +217,7 @@ struct CreateTaskScreen: View {
                         .lineLimit(4...)
                 } else {
                     Text(description)
-                        .foregroundColor(Color("TextPrimary"))
+                        .foregroundColor(Color(Asset.textPrimary.name))
                         .font(.nunitoSemiBold(size: 18))
                         .accessibilityIdentifier("txt_create_task_description")
                         .padding(.top)

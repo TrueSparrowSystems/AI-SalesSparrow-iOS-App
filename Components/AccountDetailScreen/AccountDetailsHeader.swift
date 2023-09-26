@@ -24,7 +24,7 @@ struct AccountDetailsHeader: View {
                 
                 Text("Account Details")
                     .accessibilityIdentifier("txt_account_detail_account_details_title")
-                    .foregroundColor(Color("TextPrimary"))
+                    .foregroundColor(Color(Asset.textPrimary.name))
                     .font(.nunitoSemiBold(size: 16))
                 
                 Spacer()
@@ -35,7 +35,7 @@ struct AccountDetailsHeader: View {
                         Text("ACCOUNT")
                             .accessibilityIdentifier("txt_account_detail_account_text")
                             .font(.nunitoBold(size: 12))
-                            .foregroundColor(Color("TextPrimary"))
+                            .foregroundColor(Color(Asset.textPrimary.name))
                             .opacity(0.7)
                         
                         Spacer()
@@ -44,7 +44,7 @@ struct AccountDetailsHeader: View {
                         Text(accountDetailViewModelObject.accountDetail.name)
                             .accessibilityIdentifier("txt_account_detail_account_name")
                             .font(.nunitoSemiBold(size: 18))
-                            .foregroundColor(Color("TextPrimary"))
+                            .foregroundColor(Color(Asset.textPrimary.name))
                         
                         Spacer()
                     }
@@ -68,7 +68,7 @@ struct AccountDetailsHeader: View {
                         }, label: {
                             HStack(alignment: .center) {
                                 Text("More Details")
-                                    .foregroundColor(Color("RedHighlight"))
+                                    .foregroundColor(Color(Asset.redHighlight.name))
                                     .font(.nunitoMedium(size: 14))
                             }
                         }
@@ -86,7 +86,7 @@ struct AccountDetailsHeader: View {
                                     if index+1 != additionalFields.keys.count {
                                         Divider()
                                             .frame(height: 1)
-                                            .foregroundColor(Color("BorderColor"))
+                                            .foregroundColor(Color(Asset.borderColor.name))
                                             .padding(.vertical, 8)
                                     }
                                 }
@@ -101,7 +101,7 @@ struct AccountDetailsHeader: View {
             .cornerRadius(5) /// make the background rounded
             .overlay( /// apply a rounded border
                 RoundedRectangle(cornerRadius: 5)
-                    .stroke(Color("BorderColor"), lineWidth: 1)
+                    .stroke(Color(Asset.borderColor.name), lineWidth: 1)
             )
         }
         .padding(.trailing)

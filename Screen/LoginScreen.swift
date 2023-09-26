@@ -26,7 +26,7 @@ struct LoginScreen: View {
                         .padding(.bottom, 16)
                         .font(.nunitoRegular(size: 16))
                         .multilineTextAlignment(.center)
-                        .foregroundColor(Color("LoginScreenText"))
+                        .foregroundColor(Color(Asset.loginScreenText.name))
                         .accessibilityIdentifier("txt_login_app_description")
                     
                     HStack {
@@ -38,7 +38,7 @@ struct LoginScreen: View {
                         
                         Text("Notes")
                             .font(.nunitoRegular(size: 14))
-                            .foregroundColor(Color("TextPrimary"))
+                            .foregroundColor(Color(Asset.textPrimary.name))
                             .accessibilityIdentifier("txt_login_note")
                         
                         Image(Asset.tasksIcon.name)
@@ -49,7 +49,7 @@ struct LoginScreen: View {
                         
                         Text("Tasks")
                             .font(.nunitoRegular(size: 14))
-                            .foregroundColor(Color("TextPrimary"))
+                            .foregroundColor(Color(Asset.textPrimary.name))
                             .accessibilityIdentifier("txt_login_tasks")
                         
                         Image(Asset.eventsIcon.name)
@@ -60,7 +60,7 @@ struct LoginScreen: View {
                         
                         Text("Events")
                             .font(.nunitoRegular(size: 14))
-                            .foregroundColor(Color("TextPrimary"))
+                            .foregroundColor(Color(Asset.textPrimary.name))
                             .accessibilityIdentifier("txt_login_events")
                         
                         Image(Asset.opportunitiesIcon.name)
@@ -71,7 +71,7 @@ struct LoginScreen: View {
                         
                         Text("Opportunities")
                             .font(.nunitoRegular(size: 14))
-                            .foregroundColor(Color("TextPrimary"))
+                            .foregroundColor(Color(Asset.textPrimary.name))
                             .lineLimit(1)
                             .accessibilityIdentifier("txt_login_opportunities")
                         
@@ -85,7 +85,7 @@ struct LoginScreen: View {
                         HStack(alignment: .center, spacing: 0) {
                             if loginScreenViewModel.isLoginInProgress {
                                 ProgressView()
-                                    .tint(Color("LoginButtonPrimary"))
+                                    .tint(Color(Asset.loginButtonPrimary.name))
                             } else {
                                 Image(Asset.salesforceIcon.name)
                                     .resizable()
@@ -102,7 +102,7 @@ struct LoginScreen: View {
                         }
                         .frame(maxWidth: .infinity, maxHeight: 46)
                         .background(
-                            LinearGradient(gradient: Gradient(stops: [.init(color: Color("LoginButtonSecondary"), location: 0), .init(color: Color("LoginButtonPrimary"), location: 4)]), startPoint: .top, endPoint: .bottom)
+                            LinearGradient(gradient: Gradient(stops: [.init(color: Color(Asset.loginButtonSecondary.name), location: 0), .init(color: Color(Asset.loginButtonPrimary.name), location: 4)]), startPoint: .top, endPoint: .bottom)
                         )
                         .clipShape(RoundedRectangle(cornerRadius: 5))
                         .padding(.top, 20)
@@ -123,7 +123,7 @@ struct LoginScreen: View {
                 .multilineTextAlignment(.center)
             
         }
-        .background(Color("Background"))
+        .background(Color(Asset.background.name))
     }
 }
 
