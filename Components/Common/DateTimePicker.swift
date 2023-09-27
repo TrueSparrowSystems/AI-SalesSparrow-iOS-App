@@ -43,7 +43,7 @@ struct TimePickerView: View {
             .onTapGesture {
                 onTap?()
             }
-            .scaleEffect(2)
+            .scaleEffect(1.75)
         
     }
     

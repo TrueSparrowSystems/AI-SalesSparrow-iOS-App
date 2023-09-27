@@ -304,9 +304,16 @@ class MockResponse {
                 "success": "true",
                 "statusCode": 200,
                 "data":[
-                    "add_task_suggestions": [["description":"This is suggested task text.","due_date":"2023-12-16"],
-                                             ["description":"This is recommended note description.","due_date":"2023-09-25"],
-                                             ["description":"Schedule meeting with John regarding software feedback","due_date":"2024-10-25"]],
+                    "add_task_suggestions": [
+                        ["description":"This is suggested task text.", "due_date":"2023-12-16"],
+                        ["description":"This is recommended note description.", "due_date":"2023-09-25"],
+                        ["description":"Schedule meeting with John regarding software feedback", "due_date":"2024-10-25"]
+                    ],
+                    "add_event_suggestions": [
+                        ["description": "Sync call", "start_datetime": "2023-07-22T13:15:00.000+0000", "end_datetime": "2023-07-22T13:45:00.000+0000"],
+                        ["description": "This is suggested event", "start_datetime": "2023-11-11T13:00:00.000+0000", "end_datetime": "2023-11-22T13:00:00.000+0000"],
+                        ["description": "Suggested event with start and end date time", "start_datetime": "2023-07-21T13:10:00.000+0000", "end_datetime": "2023-07-21T15:10:00.000+0000"],
+                    ],
                 ],
             ]
         ],

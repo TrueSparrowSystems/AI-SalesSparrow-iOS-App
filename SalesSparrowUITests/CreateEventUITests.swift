@@ -144,6 +144,69 @@ final class CreateEventUITests: XCTestCase {
         createEvent(app: app)
     }
     
+    
+    func testDeleteRecommendedandSavedEvent(){
+        let timeout = 5
+        let app = XCUIApplication()
+        app.launchArguments = ["isRunningUITests"]
+        app.launch()
+        
+        createNoteFromFloatingActionButton(app: app)
+        
+        let suggestionTitle = app.staticTexts["txt_create_note_recommendations"]
+        XCTAssertTrue(suggestionTitle.waitForExistence(timeout: TimeInterval(timeout)))
+
+        let eventIndex = 0
+        app.swipeUp()
+        let suggestedEvent = app.staticTexts["txt_create_note_event_suggestion_title_\(eventIndex)"]
+        XCTAssertTrue(suggestedEvent.waitForExistence(timeout: TimeInterval(timeout)))
+        let suggestedEventDescription = suggestedEvent.label
+
+        let addEventBtn = app.buttons["btn_create_note_add_event_\(eventIndex)"]
+        XCTAssertTrue(addEventBtn.waitForExistence(timeout: TimeInterval(timeout)))
+        XCTAssertTrue(addEventBtn.isEnabled)
+        
+        let cancelBtn = app.buttons["btn_create_note_event_cancel_\(eventIndex)"]
+        XCTAssertTrue(cancelBtn.waitForExistence(timeout: TimeInterval(timeout)))
+        XCTAssertTrue(cancelBtn.isEnabled)
+
+        addEventBtn.tap()
+
+        XCTAssertTrue(app.staticTexts["toast_view_text"].waitForExistence(timeout: TimeInterval(timeout)))
+        
+        
+        XCTAssertTrue(!app.buttons["btn_create_note_add_event_\(eventIndex)"].exists,"Suggest event add event button must be not visible")
+        
+        app.buttons["btn_create_note_event_more_\(eventIndex)"].tap()
+        app.buttons["btn_create_note_delete_event_\(eventIndex)"].tap()
+        
+        app.buttons["btn_alert_submit"].tap()
+        
+        
+        let suggestedEventAfterDelete = app.staticTexts["txt_create_note_event_suggestion_title_\(eventIndex)"]
+        XCTAssertTrue(suggestedEventAfterDelete.waitForExistence(timeout: TimeInterval(timeout)))
+        let suggestedEventDescriptionAfterDelete = suggestedEventAfterDelete.label
+        
+        //Verify that the event description before and after delete is not same
+        XCTAssertTrue(suggestedEventDescription != suggestedEventDescriptionAfterDelete)
+    }
+    
+    func testCreateEventFromSuggestedCard(){
+        let timeout = 5
+        let app = XCUIApplication()
+        app.launchArguments = ["isRunningUITests"]
+        app.launch()
+        
+        createNoteFromFloatingActionButton(app: app)
+        
+        let tileIndex = 0
+        
+        let suggestionTitle = app.staticTexts["txt_create_note_event_suggestion_title_\(tileIndex)"]
+        XCTAssertTrue(suggestionTitle.waitForExistence(timeout: TimeInterval(timeout)))
+        suggestionTitle.tap()
+        
+        createEvent(app: app)
+    }
    
 }
 

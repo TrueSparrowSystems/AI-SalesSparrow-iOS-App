@@ -224,4 +224,82 @@ final class CreateNoteUITests: XCTestCase {
         XCTAssertEqual(app.staticTexts["txt_create_note_suggestion_user_index_\(noteIndex)"].label,userName)
     }
 
+    
+    func testGenerateRecommendationAndAddEvent() throws {
+        // Launch the app with the specified launch arguments
+        let app = XCUIApplication()
+        app.launchArguments = ["isRunningUITests"]
+        app.launch()
+
+        // Set the timeout duration
+        let timeout = 5
+
+        // Open the account detail using the helper function
+        openAccountDetailUsingSearch(app: app)
+
+        createNoteFromAccountNotelist(app: app)
+
+        let suggestionTitle = app.staticTexts["txt_create_note_recommendations"]
+        XCTAssertTrue(suggestionTitle.waitForExistence(timeout: TimeInterval(timeout)))
+
+        let eventIndex = 0
+        let suggestedEvent = app.staticTexts["txt_create_note_event_suggestion_title_\(eventIndex)"]
+        XCTAssertTrue(suggestedEvent.waitForExistence(timeout: TimeInterval(timeout)))
+
+        let addEventBtn = app.buttons["btn_create_note_add_event_\(eventIndex)"]
+        XCTAssertTrue(addEventBtn.waitForExistence(timeout: TimeInterval(timeout)))
+        XCTAssertTrue(addEventBtn.isEnabled)
+        
+        let cancelBtn = app.buttons["btn_create_note_event_cancel_\(eventIndex)"]
+        XCTAssertTrue(cancelBtn.waitForExistence(timeout: TimeInterval(timeout)))
+        XCTAssertTrue(cancelBtn.isEnabled)
+
+        addEventBtn.tap()
+
+        XCTAssertTrue(app.staticTexts["toast_view_text"].waitForExistence(timeout: TimeInterval(timeout)))
+    }
+    
+    func testGenerateRecommendationAndCancelEvent() throws {
+        // Launch the app with the specified launch arguments
+        let app = XCUIApplication()
+        app.launchArguments = ["isRunningUITests"]
+        app.launch()
+
+        // Set the timeout duration
+        let timeout = 5
+
+        // Open the account detail using the helper function
+        openAccountDetailUsingSearch(app: app)
+
+        createNoteFromAccountNotelist(app: app)
+
+        let suggestionTitle = app.staticTexts["txt_create_note_recommendations"]
+        XCTAssertTrue(suggestionTitle.waitForExistence(timeout: TimeInterval(timeout)))
+
+        app.swipeUp()
+        let eventIndex = 0
+        let suggestedEvent = app.staticTexts["txt_create_note_event_suggestion_title_\(eventIndex)"]
+        XCTAssertTrue(suggestedEvent.waitForExistence(timeout: TimeInterval(timeout)))
+        let suggestedEventDescription = suggestedEvent.label
+        
+        let addEventBtn = app.buttons["btn_create_note_add_event_\(eventIndex)"]
+        XCTAssertTrue(addEventBtn.waitForExistence(timeout: TimeInterval(timeout)))
+        XCTAssertTrue(addEventBtn.isEnabled)
+        
+        let cancelBtn = app.buttons["btn_create_note_event_cancel_\(eventIndex)"]
+        XCTAssertTrue(cancelBtn.waitForExistence(timeout: TimeInterval(timeout)))
+        XCTAssertTrue(cancelBtn.isEnabled)
+        
+        cancelBtn.tap()
+        
+        app.buttons["btn_alert_submit"].tap()
+        
+        let suggestedEventAfterDelete = app.staticTexts["txt_create_note_event_suggestion_title_\(eventIndex)"]
+        XCTAssertTrue(suggestedEventAfterDelete.waitForExistence(timeout: TimeInterval(timeout)))
+        let suggestedEventDescriptionAfterDelete = suggestedEventAfterDelete.label
+
+        print("before: \(suggestedEventDescription), after \(suggestedEventDescriptionAfterDelete)")
+        //Verify that the event description before and after cancel is not same
+        XCTAssertTrue(suggestedEventDescription != suggestedEventDescriptionAfterDelete)
+    }
 }
