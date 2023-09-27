@@ -414,7 +414,7 @@ class MockResponse {
                 "data":[
                     "task_detail": [
                         "id":"task_100",
-                        "creator_name":"User1",
+                        "creator":"User1",
                         "crm_organization_user_id": "123Abc4",
                         "crm_organization_user_name": "Zaire",
                         "description":"This is Note text. This is Note long long text. this is Note long long text. this is Note long long text. This is for Task description",
@@ -541,7 +541,7 @@ class MockResponse {
                 "data":[
                     "event_detail": [
                         "id":"event_100",
-                        "creator_name":"User1",
+                        "creator":"User1",
                         "description":"This is Note text. This is Note long long text. this is Note long long text. this is Note long long text. This is for Event description",
                         "start_datetime":"2019-10-12T07:20:50.52Z",
                         "end_datetime":"2024-11-22T07:20:50.52Z",

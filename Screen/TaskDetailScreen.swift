@@ -216,7 +216,7 @@ struct TaskDetailScreen: View {
             }
         }
         .onChange(of: taskDetailScreenViewModel.currentTaskData){ currentTask  in
-            print(currentTask)
+            print("onchangeee \(currentTask)")
             self.crm_organization_user_id = currentTask.crm_organization_user_id
             self.crm_organization_user_name = currentTask.crm_organization_user_name
             self.description = currentTask.description
@@ -224,7 +224,6 @@ struct TaskDetailScreen: View {
             isDateSelected = true
         }
         .onReceive(taskDetailScreenViewModel.$currentTaskData){ currentTask  in
-            print(currentTask)
             self.crm_organization_user_id = currentTask.crm_organization_user_id
             self.crm_organization_user_name = currentTask.crm_organization_user_name
             self.description = currentTask.description
