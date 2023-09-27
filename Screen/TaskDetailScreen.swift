@@ -40,6 +40,7 @@ struct TaskDetailScreen: View {
                 Button(action: {
                     taskDetailScreenViewModel.EditTaskDetail(accountId: accountId, taskId: taskId, crm_organization_user_id: crm_organization_user_name, description: description, due_date: BasicHelper.getDateStringFromDate(from: selectedDate, dateFormat: "YYYY-MM-DD"), onSuccess: {
                         isTaskSaved = true
+                        self.presentationMode.wrappedValue.dismiss()
                     })
                 }, label:{
                     HStack(alignment: .center, spacing: 0){
@@ -77,7 +78,7 @@ struct TaskDetailScreen: View {
                     .clipShape(RoundedRectangle(cornerRadius: 5))
                 })
                 .accessibilityIdentifier("btn_save_task")
-                .disabled(accountId.isEmpty || taskId.isEmpty || description.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || crm_organization_user_name.isEmpty || crm_organization_user_id.isEmpty || !isDateSelected)
+                .disabled(calculateDisablity())
                 .opacity(calculateOpacity())
             }
             .padding(.vertical)
@@ -230,6 +231,27 @@ struct TaskDetailScreen: View {
             self.selectedDate = BasicHelper.getDateFromString(currentTask.due_date)
             isDateSelected = true
         }
+        .onChange(of: description) { newDescription  in
+            if  newDescription != taskDetailScreenViewModel.currentTaskData.description {
+                isTaskSaved = false
+            } else {
+                isTaskSaved = true
+            }
+        }
+        .onChange(of: selectedDate) { newDate  in
+            if  newDate != BasicHelper.getDateFromString(taskDetailScreenViewModel.currentTaskData.due_date) {
+                isTaskSaved = false
+            } else {
+                isTaskSaved = true
+            }
+        }
+        .onChange(of: crm_organization_user_id) { newCrmUserId  in
+            if  newCrmUserId != taskDetailScreenViewModel.currentTaskData.crm_organization_user_name {
+                isTaskSaved = false
+            } else {
+                isTaskSaved = true
+            }
+        }
         .onTapGesture {
             focused = false
         }
@@ -248,6 +270,10 @@ struct TaskDetailScreen: View {
         } else {
             return 0.0
         }
+    }
+    
+    func calculateDisablity() -> Bool {
+        return accountId.isEmpty || taskId.isEmpty || description.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || crm_organization_user_name.isEmpty || crm_organization_user_id.isEmpty || !isDateSelected || taskDetailScreenViewModel.currentTaskData.description == description || BasicHelper.getDateFromString(taskDetailScreenViewModel.currentTaskData.due_date) == selectedDate || taskDetailScreenViewModel.currentTaskData.crm_organization_user_id == crm_organization_user_id
     }
 }
 

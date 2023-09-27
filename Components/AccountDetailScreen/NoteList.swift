@@ -107,6 +107,7 @@ struct NoteCardView: View {
     @State var isPopoverVisible: Bool = false
     @Binding var propagateClick : Int
     @State var isSelfPopupTriggered = false
+    @State private var isEditFlowActive = false
     
     var body: some View {
         VStack(spacing: 0){
@@ -132,17 +133,47 @@ struct NoteCardView: View {
                         .foregroundColor(Color("TextPrimary"))
                         .accessibilityIdentifier("txt_account_detail_note_last_modified_time_\(noteIndex)")
                     
-                    
-                    Button{
-                        isSelfPopupTriggered = true
-                        isPopoverVisible.toggle()
+                    Menu {
+                        Button(action: {
+                            isEditFlowActive.toggle() // Toggle the state to activate/deactivate the link
+                        }) {
+                            HStack {
+                                Text("Edit")
+                                    .font(.custom("Nunito-SemiBold", size: 16))
+                                    .foregroundColor(Color("TextPrimary"))
+                                Image("EditIcon")
+                                    .frame(width: 20, height: 20)
+                            }
+                        }
+                        .accessibilityIdentifier("btn_account_detail_edit_note_\(noteIndex)")
+    
+                        Button(action: {
+                            isPopoverVisible = false
+                            AlertViewModel.shared.showAlert(_alert: Alert(
+                                title: "Delete Note",
+                                message: Text("Are you sure you want to delete this note?"),
+                                submitText: "Delete",
+                                onSubmitPress: {
+                                    acccountDetailScreenViewModelObject.deleteNote(accountId: accountId, noteId: noteId)
+                                }
+                            ))
+                        }){
+                            HStack{
+                                Image("DeleteIcon")
+                                    .frame(width: 20, height: 20)
+                                Text("Delete")
+                                    .font(.custom("Nunito-SemiBold",size: 16))
+                                    .foregroundColor(Color("TextPrimary"))
+                            }
+                        }
+                        .accessibilityIdentifier("btn_account_detail_delete_note_\(noteIndex)")
+                        // Additional menu items
                     } label: {
                         Image("DotsThreeOutline")
                             .frame(width: 16, height: 16)
                             .padding(10)
                             .foregroundColor(Color("TextPrimary"))
                     }
-                    .accessibilityIdentifier("btn_account_detail_note_more_\(noteIndex)")
                 }
             }
             Text("\(acccountDetailScreenViewModelObject.noteData.note_map_by_id[noteId]?.text_preview ?? "")")
@@ -160,53 +191,10 @@ struct NoteCardView: View {
             RoundedRectangle(cornerRadius: 5)
                 .stroke(Color("CardBorder"), lineWidth: 1)
         )
-        .overlay(alignment: .topTrailing){
-            if isPopoverVisible {
-                VStack (alignment: .leading) {
-                    NavigationLink(destination: NoteDetailScreen(accountId: accountId, accountName: accountName, noteId: noteId, isEditFlow: true, isNoteSaved: true)
-                    ){
-                        HStack{
-                            Image("EditIcon")
-                                .frame(width: 20, height: 20)
-                            Text("Edit")
-                                .font(.custom("Nunito-SemiBold",size: 16))
-                                .foregroundColor(Color("TextPrimary"))
-                        }
-                    }
-                    .accessibilityIdentifier("btn_account_detail_edit_note_\(noteIndex)")
-                    
-                    Button(action: {
-                        isPopoverVisible = false
-                        AlertViewModel.shared.showAlert(_alert: Alert(
-                            title: "Delete Note",
-                            message: Text("Are you sure you want to delete this note?"),
-                            submitText: "Delete",
-                            onSubmitPress: {
-                                acccountDetailScreenViewModelObject.deleteNote(accountId: accountId, noteId: noteId)
-                            }
-                        ))
-                    }){
-                        HStack{
-                            Image("DeleteIcon")
-                                .frame(width: 20, height: 20)
-                            Text("Delete")
-                                .font(.custom("Nunito-SemiBold",size: 16))
-                                .foregroundColor(Color("TextPrimary"))
-                        }
-                    }
-                    .accessibilityIdentifier("btn_account_detail_delete_note_\(noteIndex)")
-                }
-                .padding(10)
-                .cornerRadius(4)
-                .frame(width: 103, height: 88)
-                .background(Color("CardBackground"))
-                .overlay(
-                    RoundedRectangle(cornerRadius: 4)
-                        .stroke(Color("CardBorder"), lineWidth: 1)
-                )
-                .offset(x: -14, y: 32)
-            }
-        }
+        .background(
+            NavigationLink("",destination: NoteDetailScreen(accountId: accountId, accountName: accountName, noteId: noteId, isEditFlow: true, isNoteSaved: true),isActive: $isEditFlowActive)
+            .opacity(0)
+        )
         .onChange(of: propagateClick){_ in
             // onChange to hide Popover for events triggered by other cards or screen
             

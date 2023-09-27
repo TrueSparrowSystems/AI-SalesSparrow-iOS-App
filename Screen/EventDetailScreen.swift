@@ -39,6 +39,7 @@ struct EventDetailScreen: View {
                 Button(action: {
                     eventDetailScreenViewModel.editEvent(accountId: accountId, description: description, startDate: startDate, startTime: startTime, endDate: endDate, endTime: endTime, onSuccess: {_ in 
                         isEventSaved = true
+                        self.presentationMode.wrappedValue.dismiss()
                     }, onFailure: {})
                 }, label:{
                     HStack(alignment: .center, spacing: 0){
@@ -76,7 +77,7 @@ struct EventDetailScreen: View {
                     .clipShape(RoundedRectangle(cornerRadius: 5))
                 })
                 .accessibilityIdentifier("btn_save_event")
-                .disabled(accountId.isEmpty || eventId.isEmpty || description.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+                .disabled(calculateDisablity())
                 .opacity(isEditFlow ? ((accountId.isEmpty || eventId.isEmpty || description.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty) ? 0.7 : 1) : 0)
             }
             .padding(.vertical)
@@ -281,6 +282,10 @@ struct EventDetailScreen: View {
         .padding(.horizontal)
         .navigationBarBackButtonHidden(true)
         .background(Color.white)
+    }
+    
+    func calculateDisablity() -> Bool {
+        return accountId.isEmpty || eventId.isEmpty || description.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || eventDetailScreenViewModel.currentEventData.description == description || BasicHelper.getDateFromString(eventDetailScreenViewModel.currentEventData.start_datetime) == startDate || BasicHelper.getDateFromString(eventDetailScreenViewModel.currentEventData.end_datetime) == endDate || BasicHelper.getDateFromString(eventDetailScreenViewModel.currentEventData.start_datetime) == startTime || BasicHelper.getDateFromString(eventDetailScreenViewModel.currentEventData.end_datetime) == endTime
     }
 }
 
