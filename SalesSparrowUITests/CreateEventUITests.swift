@@ -1,13 +1,13 @@
 //
-//  CreateTaskUITests.swift
+//  CreateEventUITests.swift
 //  SalesSparrowUITests
 //
-//  Created by Kartik Kapgate on 29/08/23.
+//  Created by Mohit Charkha on 21/09/23.
 //
 
 import XCTest
 
-final class CreateTaskUITests: XCTestCase {
+final class CreateEventUITests: XCTestCase {
     let timeout = 5
     
     func openAccountDetailUsingSearch(app: XCUIApplication,accountName: String = "Test Account 1") throws {
@@ -21,44 +21,45 @@ final class CreateTaskUITests: XCTestCase {
         XCTAssertTrue(btnSearchAccountNameBtn.waitForExistence(timeout: TimeInterval(timeout)))
         btnSearchAccountNameBtn.tap()
     }
-    
-    func SearchUser(app: XCUIApplication) {
-        let timeout = 5
-        
-        let searchUserButton = app.buttons["btn_create_task_search_user"]
-        XCTAssertTrue(searchUserButton.waitForExistence(timeout: TimeInterval(timeout)))
-        XCTAssertTrue(searchUserButton.isEnabled)
-        searchUserButton.tap()
-        
-        let userName = "Test User"
-        let searchUserNameBtn = app.buttons["btn_search_user_user_name_\(userName)"]
-        XCTAssertTrue(searchUserNameBtn.waitForExistence(timeout: TimeInterval(timeout)))
-        // Account row should be clickable
-        searchUserNameBtn.tap()
-    }
 
-    func createTask(app: XCUIApplication){
+    func createEvent(app: XCUIApplication){
         //Check if cancel button exists
-        let cancelButton = app.staticTexts["btn_add_task_cancel"]
+        let cancelButton = app.staticTexts["btn_add_event_cancel"]
         XCTAssertTrue(cancelButton.waitForExistence(timeout: TimeInterval(timeout)))
         // cancel should be clickable
         XCTAssertTrue(cancelButton.isEnabled)
 
-        try? SearchUser(app: app)
-
-        let datePicker = app.datePickers["dp_add_task_select_date"]
-        datePicker.tap()
-        XCTAssertTrue(datePicker.exists, "Date picker should be open.")
+        let startDatePicker = app.datePickers["dp_add_event_select_start_date"]
+        startDatePicker.tap()
+        XCTAssertTrue(startDatePicker.exists, "Start Date picker should be open.")
 
         app.buttons["PopoverDismissRegion"].tap()
         
-        let addTaskTextField = app.textViews["et_create_task"]
-        XCTAssertTrue(addTaskTextField.waitForExistence(timeout: TimeInterval(timeout)))
-        addTaskTextField.tap()
-        //Type Text into the the text field
-        addTaskTextField.typeText("Create new task and assign it to a user.\nTap on the save button to save it to salesforce.")
+        let startTimePicker = app.datePickers["dp_add_event_select_start_time"]
+        startTimePicker.tap()
+        XCTAssertTrue(startTimePicker.exists, "Start Time picker should be open.")
+
+        app.buttons["PopoverDismissRegion"].tap()
         
-        let saveButton = app.buttons["btn_save_task"]
+        let endDatePicker = app.datePickers["dp_add_event_select_end_date"]
+        endDatePicker.tap()
+        XCTAssertTrue(endDatePicker.exists, "End Date picker should be open.")
+
+        app.buttons["PopoverDismissRegion"].tap()
+        
+        let endTimePicker = app.datePickers["dp_add_event_select_end_time"]
+        endTimePicker.tap()
+        XCTAssertTrue(endTimePicker.exists, "End Time picker should be open.")
+
+        app.buttons["PopoverDismissRegion"].tap()
+        
+        let addEventTextField = app.textViews["et_create_event"]
+        XCTAssertTrue(addEventTextField.waitForExistence(timeout: TimeInterval(timeout)))
+        addEventTextField.tap()
+        //Type Text into the the text field
+        addEventTextField.typeText("Create new event.\nTap on the save button to save it to salesforce.")
+        
+        let saveButton = app.buttons["btn_save_event"]
         XCTAssertTrue(saveButton.waitForExistence(timeout: TimeInterval(timeout)))
         //Check if the save button is enabled
         XCTAssertTrue(saveButton.isEnabled)
@@ -109,7 +110,7 @@ final class CreateTaskUITests: XCTestCase {
         saveButton.tap()
     }
     
-    func testCreateTaskFromAccountTasklist() {
+    func testCreateEventFromAccountEventlist() {
         let timeout = 5
         let app = XCUIApplication()
         app.launchArguments = ["isRunningUITests"]
@@ -117,16 +118,16 @@ final class CreateTaskUITests: XCTestCase {
 
         try? openAccountDetailUsingSearch(app: app)
         
-        // Check the Add Task button
-        let addTaskButton = app.buttons["btn_account_detail_add_task"]
-        XCTAssertTrue(addTaskButton.waitForExistence(timeout: TimeInterval(timeout)))
-        XCTAssertTrue(addTaskButton.isEnabled) // Ensure the button is enabled
-        addTaskButton.tap()
-
-        createTask(app: app)
+        app.swipeUp()
+        // Check the Add Event button
+        let addEventButton = app.buttons["btn_account_detail_add_event"]
+        XCTAssertTrue(addEventButton.waitForExistence(timeout: TimeInterval(timeout)))
+        XCTAssertTrue(addEventButton.isEnabled) // Ensure the button is enabled
+        addEventButton.tap()
+        createEvent(app: app)
     }
     
-    func testCreateTaskFromSuggestTasklistPopOver() {
+    func testCreateEventFromSuggestEventlistPopOver() {
         let app = XCUIApplication()
         app.launchArguments = ["isRunningUITests"]
         app.launch()
@@ -134,16 +135,17 @@ final class CreateTaskUITests: XCTestCase {
         let timeout = 5
         createNoteFromFloatingActionButton(app: app)
 
-        // Open Popover and navigate to create task screen
+        // Open Popover and navigate to create event screen
         app.buttons["btn_create_note_popover_add_recommendation"].tap()
-        XCTAssertTrue(app.staticTexts["txt_create_note_popover_add_task"].waitForExistence(timeout: TimeInterval(timeout)))
-        app.buttons["btn_create_note_popover_add_task"].tap()
+        XCTAssertTrue(app.staticTexts["txt_create_note_popover_add_event"].waitForExistence(timeout: TimeInterval(timeout)))
+        app.buttons["btn_create_note_popover_add_event"].tap()
         
 
-        createTask(app: app)
+        createEvent(app: app)
     }
     
-    func testDeleteRecommendedandSavedTask(){
+    
+    func testDeleteRecommendedandSavedEvent(){
         let timeout = 5
         let app = XCUIApplication()
         app.launchArguments = ["isRunningUITests"]
@@ -154,52 +156,42 @@ final class CreateTaskUITests: XCTestCase {
         let suggestionTitle = app.staticTexts["txt_create_note_recommendations"]
         XCTAssertTrue(suggestionTitle.waitForExistence(timeout: TimeInterval(timeout)))
 
-        let taskIndex = 0
-        let suggestedTask = app.staticTexts["txt_create_note_suggestion_title_index_\(taskIndex)"]
-        XCTAssertTrue(suggestedTask.waitForExistence(timeout: TimeInterval(timeout)))
-        let suggestedTaskDescription = suggestedTask.label
+        let eventIndex = 0
+        app.swipeUp()
+        let suggestedEvent = app.staticTexts["txt_create_note_event_suggestion_title_\(eventIndex)"]
+        XCTAssertTrue(suggestedEvent.waitForExistence(timeout: TimeInterval(timeout)))
+        let suggestedEventDescription = suggestedEvent.label
 
-        let assignToButton = app.buttons["btn_create_note_search_user_index_\(taskIndex)"]
-        XCTAssertTrue(assignToButton.waitForExistence(timeout: TimeInterval(timeout)))
-        XCTAssertTrue(assignToButton.isEnabled)
-        assignToButton.tap()
+        let addEventBtn = app.buttons["btn_create_note_add_event_\(eventIndex)"]
+        XCTAssertTrue(addEventBtn.waitForExistence(timeout: TimeInterval(timeout)))
+        XCTAssertTrue(addEventBtn.isEnabled)
         
-        let userName = "Test User"
-        let searchUserNameBtn = app.buttons["btn_search_user_user_name_\(userName)"]
-        XCTAssertTrue(searchUserNameBtn.waitForExistence(timeout: TimeInterval(timeout)))
-        // Account row should be clickable
-        searchUserNameBtn.tap()
-
-        let addTaskBtn = app.buttons["btn_create_note_add_task_\(taskIndex)"]
-        XCTAssertTrue(addTaskBtn.waitForExistence(timeout: TimeInterval(timeout)))
-        XCTAssertTrue(addTaskBtn.isEnabled)
-        
-        let cancelBtn = app.buttons["btn_create_note_cancel_\(taskIndex)"]
+        let cancelBtn = app.buttons["btn_create_note_event_cancel_\(eventIndex)"]
         XCTAssertTrue(cancelBtn.waitForExistence(timeout: TimeInterval(timeout)))
         XCTAssertTrue(cancelBtn.isEnabled)
 
-        addTaskBtn.tap()
+        addEventBtn.tap()
 
         XCTAssertTrue(app.staticTexts["toast_view_text"].waitForExistence(timeout: TimeInterval(timeout)))
         
         
-        XCTAssertTrue(!app.buttons["btn_create_note_add_task_\(taskIndex)"].exists,"Suggest task add task button must be not visible")
+        XCTAssertTrue(!app.buttons["btn_create_note_add_event_\(eventIndex)"].exists,"Suggest event add event button must be not visible")
         
-        app.buttons["btn_create_note_task_more_\(taskIndex)"].tap()
-        app.buttons["btn_create_note_delete_task_\(taskIndex)"].tap()
+        app.buttons["btn_create_note_event_more_\(eventIndex)"].tap()
+        app.buttons["btn_create_note_delete_event_\(eventIndex)"].tap()
         
         app.buttons["btn_alert_submit"].tap()
         
         
-        let suggestedTaskAfterDelete = app.staticTexts["txt_create_note_suggestion_title_index_\(taskIndex)"]
-        XCTAssertTrue(suggestedTaskAfterDelete.waitForExistence(timeout: TimeInterval(timeout)))
-        let suggestedTaskDescriptionAfterDelete = suggestedTaskAfterDelete.label
+        let suggestedEventAfterDelete = app.staticTexts["txt_create_note_event_suggestion_title_\(eventIndex)"]
+        XCTAssertTrue(suggestedEventAfterDelete.waitForExistence(timeout: TimeInterval(timeout)))
+        let suggestedEventDescriptionAfterDelete = suggestedEventAfterDelete.label
         
-        //Verify that the task description before and after delete is not same
-        XCTAssertTrue(suggestedTaskDescription != suggestedTaskDescriptionAfterDelete)
+        //Verify that the event description before and after delete is not same
+        XCTAssertTrue(suggestedEventDescription != suggestedEventDescriptionAfterDelete)
     }
     
-    func testCreateTaskFromSuggestedCard(){
+    func testCreateEventFromSuggestedCard(){
         let timeout = 5
         let app = XCUIApplication()
         app.launchArguments = ["isRunningUITests"]
@@ -209,11 +201,12 @@ final class CreateTaskUITests: XCTestCase {
         
         let tileIndex = 0
         
-        let suggestionTitle = app.staticTexts["txt_create_note_suggestion_title_index_\(tileIndex)"]
+        let suggestionTitle = app.staticTexts["txt_create_note_event_suggestion_title_\(tileIndex)"]
         XCTAssertTrue(suggestionTitle.waitForExistence(timeout: TimeInterval(timeout)))
         suggestionTitle.tap()
         
-        createTask(app: app)
+        createEvent(app: app)
     }
+   
 }
 

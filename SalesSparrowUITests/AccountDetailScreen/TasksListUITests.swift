@@ -150,7 +150,7 @@ final class AccountDetailTaskListUITests: XCTestCase {
         
         // Open the account detail using the helper function
         openAccountDetailUsingSearch(app: app)
-        
+        app.swipeUp()
         let threeDotButtonForTask2 = app.buttons["btn_account_detail_task_more_1"]
         XCTAssertTrue(threeDotButtonForTask2.waitForExistence(timeout: TimeInterval(timeout)))
         
@@ -237,12 +237,16 @@ final class AccountDetailTaskListUITests: XCTestCase {
         // Open the account detail using the helper function
         openAccountDetailUsingSearch(app: app)
      
+        let descriptionForTask1 = app.staticTexts["txt_account_detail_task_description_0"].label
+        
+        app.swipeUp()
+        
         let threeDotButtonForTask1 = app.buttons["btn_account_detail_task_more_0"]
         XCTAssertTrue(threeDotButtonForTask1.waitForExistence(timeout: TimeInterval(timeout)))
         
         threeDotButtonForTask1.tap()
         
-        let descriptionForTask1 = app.staticTexts["txt_account_detail_task_description_0"].label
+    
         
         let deleteButtonForTask1 = app.buttons["btn_account_detail_delete_task_0"]
         XCTAssertTrue(deleteButtonForTask1.waitForExistence(timeout: TimeInterval(timeout)))

@@ -147,7 +147,7 @@ final class AccountDetailNoteListUITests: XCTestCase {
         // cancel should be clickable
         XCTAssertTrue(cancelButton.isEnabled)
         
-        let saveButton = app.buttons["btn_create_note_save"]
+        let saveButton = app.buttons["btn_save_note"]
         XCTAssertTrue(saveButton.waitForExistence(timeout: TimeInterval(timeout)))
         // save should not be clickable
         XCTAssertTrue(!saveButton.isEnabled)

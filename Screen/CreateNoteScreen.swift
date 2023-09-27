@@ -20,7 +20,6 @@ struct CreateNoteScreen : View {
     @State var showAccountSearchView = false
     @State var isPopoverVisible = false
     @FocusState private var focused: Bool
-    @State var cancelSuggestedTask: Bool = false
     
     var body: some View {
         VStack{
@@ -187,7 +186,7 @@ struct CreateNoteScreen : View {
                             }
                             
                         }
-                        else if(createNoteScreenViewModel.suggestedTaskData.add_task_suggestions.count == 0){ // check for count of suggested task array
+                        else if(createNoteScreenViewModel.suggestedData.add_task_suggestions?.count == 0 && createNoteScreenViewModel.suggestedData.add_event_suggestions?.count == 0){ // check for count of suggested task array
                             // Show no recommendation message
                             VStack(spacing: 0) {
                                 Image("Check")
@@ -222,11 +221,16 @@ struct CreateNoteScreen : View {
                                     Image("AddIcon")
                                         .frame(width: 20, height: 20)
                                 }
-                                .accessibilityIdentifier("btn_create_note_popover_create_task")
+                                .accessibilityIdentifier("btn_create_note_popover_add_recommendation")
                             }
-                            let addTaskSuggestions = createNoteScreenViewModel.suggestedTaskData.add_task_suggestions
+                            let addTaskSuggestions = createNoteScreenViewModel.suggestedData.add_task_suggestions ?? []
                             ForEach(Array(addTaskSuggestions.enumerated()), id: \.offset) { index, suggestion in
                                 SuggestedTaskCardView(accountId: accountId, suggestion:suggestion, index: index)
+                            }
+                            
+                            let addEventSuggestions = createNoteScreenViewModel.suggestedData.add_event_suggestions ?? []
+                            ForEach(Array(addEventSuggestions.enumerated()), id: \.offset) { index, suggestion in
+                                SuggestedEventCardView(accountId: accountId, suggestion:suggestion, index: index)
                             }
                         }
                         

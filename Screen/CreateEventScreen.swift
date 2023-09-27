@@ -93,7 +93,7 @@ struct CreateEventScreen: View {
                     .frame(width: 35,height: 30, alignment: .leading)
                     .font(.custom("Nunito-Regular",size: 14))
                     .foregroundColor(Color("TextPrimary"))
-                    .accessibilityIdentifier("txt_add_events_due")
+                    .accessibilityIdentifier("txt_add_events_start")
                 
                 ZStack{
                     if(!(suggestedEventState["isEventSaved"] as! Bool)){
@@ -102,7 +102,7 @@ struct CreateEventScreen: View {
                         })
                         .background(.white)
                         .cornerRadius(8)
-                        .accessibilityIdentifier("dp_add_event_select_date")
+                        .accessibilityIdentifier("dp_add_event_select_start_date")
                     }
                     
                     if(!(suggestedEventState["isStartDateSelected"] as! Bool)){
@@ -138,7 +138,7 @@ struct CreateEventScreen: View {
                                 .frame(width: 15, height: 15)
                                 .padding(.leading, 10)
                         }
-                        .accessibilityIdentifier("txt_add_event_select_date")
+                        .accessibilityIdentifier("txt_add_event_select_start_date")
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .background(.white)
                         .userInteractionDisabled()
@@ -157,7 +157,7 @@ struct CreateEventScreen: View {
                         })
                         .background(.white)
                         .cornerRadius(8)
-                        .accessibilityIdentifier("dp_add_event_select_time")
+                        .accessibilityIdentifier("dp_add_event_select_start_time")
                     }
                     
                     if(!(suggestedEventState["isStartTimeSelected"] as! Bool)){
@@ -193,7 +193,7 @@ struct CreateEventScreen: View {
                                 .frame(width: 15, height: 15)
                                 .padding(.leading, 10)
                         }
-                        .accessibilityIdentifier("txt_add_event_select_time")
+                        .accessibilityIdentifier("txt_add_event_select_start_time")
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .background(.white)
                         .userInteractionDisabled()
@@ -213,7 +213,7 @@ struct CreateEventScreen: View {
                     .frame(width: 35,height: 30, alignment: .leading)
                     .font(.custom("Nunito-Regular",size: 14))
                     .foregroundColor(Color("TextPrimary"))
-                    .accessibilityIdentifier("txt_add_events_due")
+                    .accessibilityIdentifier("txt_add_events_end")
                 
                 ZStack{
                     if(!(suggestedEventState["isEventSaved"] as! Bool)){
@@ -222,7 +222,7 @@ struct CreateEventScreen: View {
                         })
                         .background(.white)
                         .cornerRadius(8)
-                        .accessibilityIdentifier("dp_add_event_select_date")
+                        .accessibilityIdentifier("dp_add_event_select_end_date")
                     }
                     
                     if(!(suggestedEventState["isEndDateSelected"] as! Bool)){
@@ -258,7 +258,7 @@ struct CreateEventScreen: View {
                                 .frame(width: 15, height: 15)
                                 .padding(.leading, 10)
                         }
-                        .accessibilityIdentifier("txt_add_event_select_date")
+                        .accessibilityIdentifier("txt_add_event_select_end_date")
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .background(.white)
                         .userInteractionDisabled()
@@ -315,7 +315,7 @@ struct CreateEventScreen: View {
                                 .frame(width: 15, height: 15)
                                 .padding(.leading, 10)
                         }
-                        .accessibilityIdentifier("txt_add_event_select_time")
+                        .accessibilityIdentifier("txt_add_event_select_end_time")
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .background(.white)
                         .userInteractionDisabled()
@@ -358,13 +358,13 @@ struct CreateEventScreen: View {
             createNoteScreenViewModel.setEventDataAttribute(id: suggestionId ?? "", attrKey: "startDate", attrValue: startDate)
         })
         .onChange(of: startTime, perform: {_ in
-            createNoteScreenViewModel.setEventDataAttribute(id: suggestionId ?? "", attrKey: "startTime", attrValue: startDate)
+            createNoteScreenViewModel.setEventDataAttribute(id: suggestionId ?? "", attrKey: "startTime", attrValue: startTime)
         })
         .onChange(of: endDate, perform: {_ in
             createNoteScreenViewModel.setEventDataAttribute(id: suggestionId ?? "", attrKey: "endDate", attrValue: endDate)
         })
         .onChange(of: endTime, perform: {_ in
-            createNoteScreenViewModel.setEventDataAttribute(id: suggestionId ?? "", attrKey: "endTime", attrValue: endDate)
+            createNoteScreenViewModel.setEventDataAttribute(id: suggestionId ?? "", attrKey: "endTime", attrValue: endTime)
         })
         .onAppear {
             // Adding a delay for view to render
@@ -375,7 +375,11 @@ struct CreateEventScreen: View {
             
             self.startDate = (suggestedEventState["startDate"] ?? Date()) as! Date
             
+            self.startTime = (suggestedEventState["startTime"] ?? Date()) as! Date
+            
             self.endDate = (suggestedEventState["endDate"] ?? Date()) as! Date
+            
+            self.endTime = (suggestedEventState["endTime"] ?? Date()) as! Date
             
         }
         .onTapGesture {
