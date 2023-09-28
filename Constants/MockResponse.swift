@@ -438,7 +438,7 @@ class MockResponse {
                 "data":[
                     "task_detail": [
                         "id":"task_100",
-                        "creator":"User1",
+                        "creator_name":"User1",
                         "crm_organization_user_id": "123Abc4",
                         "crm_organization_user_name": "Zaire",
                         "description":"This is Note text. This is Note long long text. this is Note long long text. this is Note long long text. This is for Task description",
@@ -609,7 +609,7 @@ class MockResponse {
                 "data":[
                     "event_detail": [
                         "id":"event_100",
-                        "creator":"User1",
+                        "creator_name":"User1",
                         "description":"This is Note text. This is Note long long text. this is Note long long text. this is Note long long text. This is for Event description",
                         "start_datetime":"2019-10-12T07:20:50.52Z",
                         "end_datetime":"2024-11-22T07:20:50.52Z",
@@ -630,6 +630,23 @@ class MockResponse {
                 "statusCode": 400,
                 "error": [
                     "message": "Event cannot be deleted.",
+                    "code": "",
+                    "internal_error_identifier": "",
+                ]as [String : Any]
+            ]
+        ],
+        
+        "PUT /v1/accounts/account_1/events/event_100": [
+            "default":[
+                "success": "true",
+                "statusCode": 200,
+                "data": [:],
+            ],
+            "deleteTaskError":[
+                "success": "false",
+                "statusCode": 400,
+                "error": [
+                    "message": "Event cannot be updated.",
                     "code": "",
                     "internal_error_identifier": "",
                 ]as [String : Any]

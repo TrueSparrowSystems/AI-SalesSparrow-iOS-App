@@ -15,7 +15,7 @@ struct EventDetailRespStruct: Codable {
 // A struct that represents the meta data of the note details
 struct EventDetailStruct: Equatable, Codable {
     var id: String
-    var creator: String
+    var creator_name: String
     var description: String
     var start_datetime: String
     var end_datetime: String
@@ -27,7 +27,7 @@ struct EditEventRespStruct: Codable {
 
 // A class that represents the view model of the create note
 class EventDetailScreenViewModel: ObservableObject {
-    @Published var currentEventData = EventDetailStruct(id: "", creator: "", description: "", start_datetime: "", end_datetime: "", last_modified_time: "")
+    @Published var currentEventData = EventDetailStruct(id: "", creator_name: "", description: "", start_datetime: "", end_datetime: "", last_modified_time: "")
     
     @Published var isFetchEventInProgress = false
     @Published var iseditEventInProgress = false
@@ -60,7 +60,7 @@ class EventDetailScreenViewModel: ObservableObject {
         }
     }
     
-    func editEvent(accountId: String, description: String, startDate: Date, startTime: Date, endDate: Date, endTime: Date, onSuccess : @escaping(String)-> Void, onFailure: (()-> Void)?){
+    func editEvent(accountId: String, eventId: String, description: String, startDate: Date, startTime: Date, endDate: Date, endTime: Date, onSuccess : (()-> Void)?, onFailure: (()-> Void)?){
         
         guard !self.iseditEventInProgress else {
             return
@@ -87,12 +87,12 @@ class EventDetailScreenViewModel: ObservableObject {
         let params: [String: Any] = ["description": description, "start_datetime": startDateTime, "end_datetime": endDateTime]
         
         
-        apiService.put(type: CreateEventStruct.self, endpoint: "/v1/accounts/\(accountId)/events", params: params){
+        apiService.put(type: EditEventRespStruct.self, endpoint: "/v1/accounts/\(accountId)/events/\(eventId)", params: params){
             [weak self]  result, statusCode in
             switch result {
-            case .success(let results):
+            case .success(_):
                 DispatchQueue.main.async {
-                    onSuccess(results.event_id)
+                    onSuccess?()
                     self?.iseditEventInProgress = false
                     ToastViewModel.shared.showToast(_toast: Toast(style: .success, message: "Event Updated."))
                 }

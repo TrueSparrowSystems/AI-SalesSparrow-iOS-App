@@ -57,33 +57,6 @@ class AccountDetailScreenViewModel: ObservableObject {
                     self?.isFetchAccountDetailInProgress = false
                     
                 case .failure(let error):
-                    self?.accountDetail = AccountDetailStruct(
-                        id: "1",
-                        name: "Sample Account",
-                        additional_fields: [
-                            "website": "https://www.example.com",
-                            "ppt": "https://www.ppt.com/sampleppt1",
-                            "account_source": "Crunchbase",
-                            "status": "Active",
-                            "last_funding": "$4 million",
-                            "hq": "USA",
-                        ],
-                        account_contact_associations_id: "associationId",
-                        account_contact_associations_map_by_id: [
-                            "associationId": AccountContactAssociation(contact_ids: ["contactId"]),
-                        ],
-                        contact_map_by_id: [
-                            "contactId": Contact(
-                                id: "contactId",
-                                name: "John Doe",
-                                additional_fields: [
-                                    "title": "Manager",
-                                    "email": "john.doe@example.com",
-                                    "linkedin": "https://linkedin.com/Peter"
-                                ]
-                            ),
-                        ]
-                    )
                     self?.isFetchAccountDetailInProgress = false
                     self?.errorMessage = error.message
                     ToastViewModel.shared.showToast(_toast: Toast(style: .error, message: error.message))

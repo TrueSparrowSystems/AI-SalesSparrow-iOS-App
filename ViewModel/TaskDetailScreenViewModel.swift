@@ -15,7 +15,7 @@ struct TaskDetailRespStruct: Codable {
 // A struct that represents the meta data of the note details
 struct TaskDetailStruct: Equatable, Codable {
     var id: String
-    var creator: String
+    var creator_name: String
     var crm_organization_user_id: String
     var crm_organization_user_name: String
     var description: String
@@ -28,7 +28,7 @@ struct EditTaskRespStruct: Codable {
 
 // A class that represents the view model of the create note
 class TaskDetailScreenViewModel: ObservableObject {
-    @Published var currentTaskData = TaskDetailStruct(id: "", creator: "", crm_organization_user_id: "", crm_organization_user_name: "", description: "", due_date: "", last_modified_time: "")
+    @Published var currentTaskData = TaskDetailStruct(id: "", creator_name: "", crm_organization_user_id: "", crm_organization_user_name: "", description: "", due_date: "", last_modified_time: "")
     @Published var isFetchTaskInProgress = false
     @Published var isSaveTaskInProgress = false
     var errorMessage: String = ""

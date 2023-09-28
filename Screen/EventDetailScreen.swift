@@ -21,6 +21,8 @@ struct EventDetailScreen: View {
     @State var endTime: Date = Date()
     @FocusState private var focused: Bool
     @State var isEventSaved: Bool = false
+    @State private var isInitialState = true
+    @State var parameterChanged: Bool = false
     
     var body: some View {
         VStack{
@@ -37,7 +39,7 @@ struct EventDetailScreen: View {
                 Spacer()
                 
                 Button(action: {
-                    eventDetailScreenViewModel.editEvent(accountId: accountId, description: description, startDate: startDate, startTime: startTime, endDate: endDate, endTime: endTime, onSuccess: {_ in 
+                    eventDetailScreenViewModel.editEvent(accountId: accountId, eventId: eventId, description: description, startDate: startDate, startTime: startTime, endDate: endDate, endTime: endTime, onSuccess: {
                         isEventSaved = true
                         self.presentationMode.wrappedValue.dismiss()
                     }, onFailure: {})
@@ -78,7 +80,7 @@ struct EventDetailScreen: View {
                 })
                 .accessibilityIdentifier("btn_save_event")
                 .disabled(calculateDisablity())
-                .opacity(isEditFlow ? ((accountId.isEmpty || eventId.isEmpty || description.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty) ? 0.7 : 1) : 0)
+                .opacity(isEditFlow ? ((accountId.isEmpty || eventId.isEmpty || description.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || !parameterChanged) ? 0.7 : 1) : 0)
             }
             .padding(.vertical)
             
@@ -262,18 +264,65 @@ struct EventDetailScreen: View {
                 }
             }
         }
-        .onChange(of: eventDetailScreenViewModel.currentEventData){ currentEvent in
+        .onAppear {
+            eventDetailScreenViewModel.fetchEventDetail(accountId: accountId, eventId: eventId, onSuccess: {_ in }, onFailure: {})
+        }
+        .onReceive(eventDetailScreenViewModel.$currentEventData){ currentEvent in
+            isEventSaved = true
             self.description = currentEvent.description
             self.startDate = BasicHelper.getDateFromString(currentEvent.start_datetime)
             self.startTime = BasicHelper.getDateFromString(currentEvent.start_datetime)
             self.endDate = BasicHelper.getDateFromString(currentEvent.end_datetime)
             self.endTime = BasicHelper.getDateFromString(currentEvent.end_datetime)
-        }
-        .onAppear {
-            eventDetailScreenViewModel.fetchEventDetail(accountId: accountId, eventId: eventId, onSuccess: {_ in }, onFailure: {})
-            // Adding a delay for view to render
+            
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.05){
                 focused = true
+                isInitialState = false
+            }
+        }
+        .onChange(of: description) { newDescription  in
+            if isParameterAltered() {
+                parameterChanged = true
+                isEventSaved = false
+            } else if areParameterSame() {
+                parameterChanged = false
+                isEventSaved = true
+            }
+        }
+        .onChange(of: startDate) { startDate  in
+            if isParameterAltered() {
+                parameterChanged = true
+                isEventSaved = false
+            } else if areParameterSame() {
+                parameterChanged = false
+                isEventSaved = true
+            }
+        }
+        .onChange(of: startTime) { startTime  in
+            if isParameterAltered() {
+                parameterChanged = true
+                isEventSaved = false
+            } else if areParameterSame() {
+                parameterChanged = false
+                isEventSaved = true
+            }
+        }
+        .onChange(of: endDate) { endDate  in
+            if isParameterAltered() {
+                parameterChanged = true
+                isEventSaved = false
+            } else if areParameterSame() {
+                parameterChanged = false
+                isEventSaved = true
+            }
+        }
+        .onChange(of: endTime) { endTime  in
+            if isParameterAltered() {
+                parameterChanged = true
+                isEventSaved = false
+            } else if areParameterSame() {
+                parameterChanged = false
+                isEventSaved = true
             }
         }
         .onTapGesture {
@@ -285,7 +334,15 @@ struct EventDetailScreen: View {
     }
     
     func calculateDisablity() -> Bool {
-        return accountId.isEmpty || eventId.isEmpty || description.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || eventDetailScreenViewModel.currentEventData.description == description || BasicHelper.getDateFromString(eventDetailScreenViewModel.currentEventData.start_datetime) == startDate || BasicHelper.getDateFromString(eventDetailScreenViewModel.currentEventData.end_datetime) == endDate || BasicHelper.getDateFromString(eventDetailScreenViewModel.currentEventData.start_datetime) == startTime || BasicHelper.getDateFromString(eventDetailScreenViewModel.currentEventData.end_datetime) == endTime
+        return accountId.isEmpty || eventId.isEmpty || description.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || !parameterChanged
+    }
+    
+    func isParameterAltered() -> Bool {
+        eventDetailScreenViewModel.currentEventData.description != description || BasicHelper.getDateFromString(eventDetailScreenViewModel.currentEventData.start_datetime) != startDate || BasicHelper.getDateFromString(eventDetailScreenViewModel.currentEventData.end_datetime) != endDate || BasicHelper.getDateFromString(eventDetailScreenViewModel.currentEventData.start_datetime) != startTime || BasicHelper.getDateFromString(eventDetailScreenViewModel.currentEventData.end_datetime) != endTime
+    }
+    
+    func areParameterSame() -> Bool {
+        eventDetailScreenViewModel.currentEventData.description == description || BasicHelper.getDateFromString(eventDetailScreenViewModel.currentEventData.start_datetime) == startDate || BasicHelper.getDateFromString(eventDetailScreenViewModel.currentEventData.end_datetime) == endDate || BasicHelper.getDateFromString(eventDetailScreenViewModel.currentEventData.start_datetime) == startTime || BasicHelper.getDateFromString(eventDetailScreenViewModel.currentEventData.end_datetime) == endTime
     }
 }
 

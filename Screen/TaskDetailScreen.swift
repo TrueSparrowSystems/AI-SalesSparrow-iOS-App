@@ -207,10 +207,6 @@ struct TaskDetailScreen: View {
         }
         .onAppear {
             taskDetailScreenViewModel.fetchTaskDetail(accountId: accountId, taskId: taskId)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05){
-                focused = true
-                isInitialState = false
-            }
         }
         .onReceive(taskDetailScreenViewModel.$currentTaskData){ currentTask  in
             isTaskSaved = true
@@ -218,38 +214,37 @@ struct TaskDetailScreen: View {
             self.crm_organization_user_name = currentTask.crm_organization_user_name
             self.description = currentTask.description
             self.selectedDate = BasicHelper.getDateFromString(currentTask.due_date)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05){
+                focused = true
+                isInitialState = false
+            }
         }
         .onChange(of: description) { newDescription  in
-            if !isInitialState {
-                if newDescription != taskDetailScreenViewModel.currentTaskData.description {
-                    parameterChanged = true
-                    isTaskSaved = false
-                } else {
-                    parameterChanged = false
-                    isTaskSaved = true
-                }
+            if isParameterAltered() {
+                parameterChanged = true
+                isTaskSaved = false
+            } else if areParameterSame() {
+                parameterChanged = false
+                isTaskSaved = true
             }
         }
         .onChange(of: selectedDate) { newDate  in
-            if !isInitialState {
-                if newDate != BasicHelper.getDateFromString(taskDetailScreenViewModel.currentTaskData.due_date) {
-                    parameterChanged = true
-                    isTaskSaved = false
-                } else {
-                    parameterChanged = false
-                    isTaskSaved = true
-                }
+            if isParameterAltered() {
+                parameterChanged = true
+                isTaskSaved = false
+            } else if areParameterSame() {
+                parameterChanged = false
+                isTaskSaved = true
             }
         }
         .onChange(of: crm_organization_user_id) { newCrmUserId  in
-            if !isInitialState {
-                if newCrmUserId != taskDetailScreenViewModel.currentTaskData.crm_organization_user_id {
-                    parameterChanged = true
-                    isTaskSaved = false
-                } else {
-                    parameterChanged = false
-                    isTaskSaved = true
-                }
+            if isParameterAltered() {
+                parameterChanged = true
+                isTaskSaved = false
+            } else if areParameterSame() {
+                parameterChanged = false
+                isTaskSaved = true
             }
         }
         .onTapGesture {
@@ -258,6 +253,14 @@ struct TaskDetailScreen: View {
         .padding(.horizontal)
         .navigationBarBackButtonHidden(true)
         .background(Color.white)
+    }
+    
+    func isParameterAltered() -> Bool {
+        description != taskDetailScreenViewModel.currentTaskData.description || selectedDate != BasicHelper.getDateFromString( taskDetailScreenViewModel.currentTaskData.due_date) || crm_organization_user_id != taskDetailScreenViewModel.currentTaskData.crm_organization_user_id
+    }
+    
+    func areParameterSame() -> Bool {
+        description == taskDetailScreenViewModel.currentTaskData.description || selectedDate == BasicHelper.getDateFromString( taskDetailScreenViewModel.currentTaskData.due_date) || crm_organization_user_id == taskDetailScreenViewModel.currentTaskData.crm_organization_user_id
     }
 }
 
