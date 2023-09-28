@@ -358,6 +358,23 @@ class MockResponse {
             ]
         ],
         
+        "PUT /v1/accounts/account_1/notes/note_100": [
+            "default":[
+                "success": "true",
+                "statusCode": 200,
+                "data": [:] as [String : Any]
+            ] as [String : Any],
+            "editNoteError":[
+                "success": "false",
+                "statusCode": 400,
+                "error": [
+                    "message": "Note cannot be deleted.",
+                    "code": "",
+                    "internal_error_identifier": "",
+                ]as [String : Any]
+            ]
+        ],
+    
         "GET /v1/accounts/account_1/tasks": [
             "default":[
                 "success": "true",
@@ -448,52 +465,24 @@ class MockResponse {
                 ]as [String : Any]
             ]
         ],
-        "GET /v1/accounts/account_1/events": [
+        
+        "PUT /v1/accounts/account_1/tasks/task_100": [
             "default":[
                 "success": "true",
                 "statusCode": 200,
-                "data":[
-                    "event_ids": [
-                        "event_1","event_2"
-                    ],
-                    "event_map_by_id": [
-                        "event_1":[
-                            "id":"event_1",
-                            "creator_name": "xyz",
-                            "description": "Morning Sync Call",
-                            "start_datetime": "2023-10-12T09:00:00.000+0000",
-                            "end_datetime": "2023-10-12T10:00:00.000+0000",
-                            "last_modified_time": "2019-10-12T07:20:50.52Z"
-                        ],
-                        "event_2":[
-                            "id":"event_2",
-                            "creator_name": "Jakob Adison",
-                            "description": "Sync with CTO",
-                            "start_datetime": "2023-10-12T13:12:17.000+0000",
-                            "end_datetime": "2023-10-12T14:12:17.000+0000",
-                            "last_modified_time": "2023-08-20T07:20:50.52Z"
-                        ]
-                    ]
-                ] as [String : Any],
+                "data": [:],
             ],
-            "emptyEventList":[
-                "success": "true",
-                "statusCode": 200,
-                "data":[
-                    "event_ids": [] as [String],
-                    "event_map_by_id": [:] as [String : Any],
-                ] as [String : Any],
-            ],
-            "eventListError":[
+            "deleteTaskError":[
                 "success": "false",
-                "statusCode": 500,
+                "statusCode": 400,
                 "error": [
-                    "message": "Something went wrong.",
+                    "message": "Task cannot be updated.",
                     "code": "",
                     "internal_error_identifier": "",
                 ]as [String : Any]
             ]
         ],
+        
         "POST /v1/accounts/account_1/events": [
             "default":[
                 "success": "true",

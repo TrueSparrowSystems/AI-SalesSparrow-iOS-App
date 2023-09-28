@@ -16,6 +16,7 @@ struct NoteDetailScreen : View {
     var noteId: String
     var isEditFlow = false
     @State var isNoteSaved = false
+    @State var parameterChanged = true
     @State var description: String = ""
     @FocusState private var focused: Bool
     
@@ -35,6 +36,7 @@ struct NoteDetailScreen : View {
                 Button(action: {
                     noteDetailScreenViewModel.EditNoteDetail(text: description, accountId: accountId, noteId: noteId, onSuccess: {
                         isNoteSaved = true
+                        self.presentationMode.wrappedValue.dismiss()
                     })
                     }, label:{
                     HStack(alignment: .center, spacing: 0){
@@ -72,8 +74,8 @@ struct NoteDetailScreen : View {
                     .clipShape(RoundedRectangle(cornerRadius: 5))
                 })
                 .accessibilityIdentifier("btn_save_task")
-                .disabled(shouldDisable())
-                .opacity(calculateOpacity())
+                .disabled((accountId.isEmpty || noteId.isEmpty || description.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || !parameterChanged) ? true : false)
+                .opacity((accountId.isEmpty || noteId.isEmpty || description.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || !parameterChanged) ? 0.7 : 1)
             }
             
             if(noteDetailScreenViewModel.isFetchNoteDetailInProgress){
@@ -146,13 +148,12 @@ struct NoteDetailScreen : View {
                 focused = true
             }
         }
-        .onChange(of: noteDetailScreenViewModel.noteDetail){ currentNote  in
-            description = currentNote.text
-        }
-        .onChange(of: description) { newDescription  in
-            if  newDescription != noteDetailScreenViewModel.noteDetail.text {
+        .onChange(of: description){ newDescription  in
+            if newDescription != noteDetailScreenViewModel.noteDetail.text{
+                parameterChanged = true
                 isNoteSaved = false
             } else {
+                parameterChanged = false
                 isNoteSaved = true
             }
         }
@@ -161,26 +162,6 @@ struct NoteDetailScreen : View {
         }
         .onTapGesture {
             focused = false
-        }
-    }
-    
-    func calculateOpacity() -> Double {
-        if isEditFlow {
-            if accountId.isEmpty || noteId.isEmpty || description.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                return 0.7
-            } else {
-                return 1.0
-            }
-        } else {
-            return 0.0
-        }
-    }
-    
-    func shouldDisable() -> Bool {
-        if (accountId.isEmpty || noteId.isEmpty || description.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || noteDetailScreenViewModel.noteDetail.text == description){
-            return true
-        } else {
-            return false
         }
     }
 }

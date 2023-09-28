@@ -18,8 +18,9 @@ struct TaskDetailScreen: View {
     @State var crm_organization_user_name: String = ""
     @State var description: String = ""
     @State var selectedDate: Date = Date()
-    @State var isDateSelected = false
     @State var isTaskSaved: Bool = false
+    @State var parameterChanged: Bool = false
+    @State private var isInitialState = true
     @FocusState private var focused: Bool
     @State private var showUserSearchView: Bool = false
     
@@ -78,8 +79,8 @@ struct TaskDetailScreen: View {
                     .clipShape(RoundedRectangle(cornerRadius: 5))
                 })
                 .accessibilityIdentifier("btn_save_task")
-                .disabled(calculateDisablity())
-                .opacity(calculateOpacity())
+                .disabled((accountId.isEmpty || taskId.isEmpty || description.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || crm_organization_user_name.isEmpty || crm_organization_user_id.isEmpty || !parameterChanged) ? true : false)
+                .opacity((isEditFlow) ? ((accountId.isEmpty || taskId.isEmpty || description.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || crm_organization_user_name.isEmpty || crm_organization_user_id.isEmpty || !parameterChanged) ? 0.7 : 1) : 0)
             }
             .padding(.vertical)
             
@@ -139,9 +140,7 @@ struct TaskDetailScreen: View {
                     .accessibilityIdentifier("txt_add_tasks_due")
                 
                 ZStack{
-                    DatePickerView(selectedDate: $selectedDate,onTap: {
-                        isDateSelected = true
-                    })
+                    DatePickerView(selectedDate: $selectedDate,onTap: {})
                     .disabled(isEditFlow ? false : true)
                     .background(.white)
                     .cornerRadius(8)
@@ -207,48 +206,50 @@ struct TaskDetailScreen: View {
             }
         }
         .onAppear {
-            // Adding a delay for view to render
-            print(accountId)
-            print(taskId)
             taskDetailScreenViewModel.fetchTaskDetail(accountId: accountId, taskId: taskId)
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.05){
                 focused = true
+                isInitialState = false
             }
         }
-        .onChange(of: taskDetailScreenViewModel.currentTaskData){ currentTask  in
-            print("onchangeee \(currentTask)")
-            self.crm_organization_user_id = currentTask.crm_organization_user_id
-            self.crm_organization_user_name = currentTask.crm_organization_user_name
-            self.description = currentTask.description
-            self.selectedDate = BasicHelper.getDateFromString(currentTask.due_date)
-            isDateSelected = true
-        }
         .onReceive(taskDetailScreenViewModel.$currentTaskData){ currentTask  in
+            isTaskSaved = true
             self.crm_organization_user_id = currentTask.crm_organization_user_id
             self.crm_organization_user_name = currentTask.crm_organization_user_name
             self.description = currentTask.description
             self.selectedDate = BasicHelper.getDateFromString(currentTask.due_date)
-            isDateSelected = true
         }
         .onChange(of: description) { newDescription  in
-            if  newDescription != taskDetailScreenViewModel.currentTaskData.description {
-                isTaskSaved = false
-            } else {
-                isTaskSaved = true
+            if !isInitialState {
+                if newDescription != taskDetailScreenViewModel.currentTaskData.description {
+                    parameterChanged = true
+                    isTaskSaved = false
+                } else {
+                    parameterChanged = false
+                    isTaskSaved = true
+                }
             }
         }
         .onChange(of: selectedDate) { newDate  in
-            if  newDate != BasicHelper.getDateFromString(taskDetailScreenViewModel.currentTaskData.due_date) {
-                isTaskSaved = false
-            } else {
-                isTaskSaved = true
+            if !isInitialState {
+                if newDate != BasicHelper.getDateFromString(taskDetailScreenViewModel.currentTaskData.due_date) {
+                    parameterChanged = true
+                    isTaskSaved = false
+                } else {
+                    parameterChanged = false
+                    isTaskSaved = true
+                }
             }
         }
         .onChange(of: crm_organization_user_id) { newCrmUserId  in
-            if  newCrmUserId != taskDetailScreenViewModel.currentTaskData.crm_organization_user_name {
-                isTaskSaved = false
-            } else {
-                isTaskSaved = true
+            if !isInitialState {
+                if newCrmUserId != taskDetailScreenViewModel.currentTaskData.crm_organization_user_id {
+                    parameterChanged = true
+                    isTaskSaved = false
+                } else {
+                    parameterChanged = false
+                    isTaskSaved = true
+                }
             }
         }
         .onTapGesture {
@@ -257,22 +258,6 @@ struct TaskDetailScreen: View {
         .padding(.horizontal)
         .navigationBarBackButtonHidden(true)
         .background(Color.white)
-    }
-    
-    func calculateOpacity() -> Double {
-        if isEditFlow {
-            if accountId.isEmpty || taskId.isEmpty || description.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || crm_organization_user_name.isEmpty || crm_organization_user_id.isEmpty || !isDateSelected {
-                return 0.7
-            } else {
-                return 1.0
-            }
-        } else {
-            return 0.0
-        }
-    }
-    
-    func calculateDisablity() -> Bool {
-        return accountId.isEmpty || taskId.isEmpty || description.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || crm_organization_user_name.isEmpty || crm_organization_user_id.isEmpty || !isDateSelected || taskDetailScreenViewModel.currentTaskData.description == description || BasicHelper.getDateFromString(taskDetailScreenViewModel.currentTaskData.due_date) == selectedDate || taskDetailScreenViewModel.currentTaskData.crm_organization_user_id == crm_organization_user_id
     }
 }
 
