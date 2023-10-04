@@ -21,18 +21,18 @@ struct AccountDetailsScreen: View {
                 AccountDetailsHeader(accountId: accountId, accountName: accountName)
                 
                 // Contact list component
-                AccountContactDetail(accountId: accountId, accountName: accountName)
+//                AccountContactDetail(accountId: accountId, accountName: accountName)
                 
                 NotesList(accountId: accountId, accountName: accountName, propagateClick: $propagateClick)
                 
-                TasksList(accountId: accountId, accountName: accountName, propagateClick: $propagateClick)
+//                TasksList(accountId: accountId, accountName: accountName, propagateClick: $propagateClick)
                 
                 EventsList(accountId: accountId, accountName: accountName, propagateClick: $propagateClick)
                 
             }
         }
         .onAppear {
-            accountDetailViewModelObject.fetchAccountDetail(accountId: accountId)
+//            accountDetailViewModelObject.fetchAccountDetail(accountId: accountId)
         }
         .simultaneousGesture(
             TapGesture().onEnded(){

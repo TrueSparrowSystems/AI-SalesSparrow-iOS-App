@@ -221,6 +221,7 @@ struct EventCardView: View {
                                 .font(.custom("Nunito-SemiBold",size: 16))
                                 .foregroundColor(Color("TextPrimary"))
                         }
+                        .frame(maxWidth: .infinity, alignment: .leading)
                     }
                     .accessibilityIdentifier("btn_account_detail_edit_note_\(eventIndex)")
                     
@@ -243,12 +244,13 @@ struct EventCardView: View {
                                 .font(.custom("Nunito-SemiBold",size: 16))
                                 .foregroundColor(Color("TextPrimary"))
                         }
+                        .frame(maxWidth: .infinity, alignment: .leading)
                     }
                     .accessibilityIdentifier("btn_account_detail_delete_event_\(eventIndex)")
                 }
                 .padding(10)
                 .cornerRadius(4)
-                .frame(width: 103, height: 88)
+                .frame(width: 103, height: 75)
                 .background(Color("CardBackground"))
                 .overlay(
                     RoundedRectangle(cornerRadius: 4)

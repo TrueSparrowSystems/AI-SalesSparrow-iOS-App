@@ -41,7 +41,7 @@ struct AccountDetailsHeader: View {
                         Spacer()
                     }
                     HStack {
-                        Text(accountDetailViewModelObject.accountDetail.name)
+                        Text(accountName)
                             .accessibilityIdentifier("txt_account_detail_account_name")
                             .font(.custom("Nunito-SemiBold",size: 18))
                             .foregroundColor(Color("TextPrimary"))
@@ -51,50 +51,50 @@ struct AccountDetailsHeader: View {
                     }
                 }
                 // loop of additional fields
-                if(!expandAccountDetails){
-                    let additionalFields = accountDetailViewModelObject.accountDetail.additional_fields
-                    if let additionalFields = additionalFields {
-                        ForEach(Array(additionalFields.keys.prefix(2)), id: \.self) { key in
-                            if let value = additionalFields[key], let _ = accountDetailViewModelObject.customFields.fields[key]{
-                                RenderFields(fieldName: key, fieldValue: value ?? "")
-                            }
-                        }
-                    }
-                    
-                    if(additionalFields?.count ?? 0 > 2){
-                        Divider()
-                        
-                        
-                        Button(action: {
-                            expandAccountDetails = true
-                        }){
-                            HStack{
-                                Text("More Details")
-                                    .foregroundColor(Color("RedHighlight"))
-                                    .font(.custom("Nunito-Medium", size: 14))
-                            }
-                        }
-                        .accessibilityIdentifier("btn_account_detail_more_details")
-                    }
-                } else {
-                    let additionalFields = accountDetailViewModelObject.accountDetail.additional_fields
-                    if let additionalFields = additionalFields {
-                        ForEach(Array(Array(additionalFields.keys).enumerated()), id: \.offset) { index, key in
-                            if let value = additionalFields[key], let _ = accountDetailViewModelObject.customFields.fields[key] {
-                                VStack(spacing: 0){
-                                    RenderFields(fieldName: key, fieldValue: value ?? "")
-                                    
-                                    if(index+1 != additionalFields.keys.count){
-                                        Divider()
-                                            .frame(height: 1)
-                                            .foregroundColor(Color("BorderColor"))
-                                            .padding(.vertical, 8)
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+//                if(!expandAccountDetails){
+//                    let additionalFields = accountDetailViewModelObject.accountDetail.additional_fields
+//                    if let additionalFields = additionalFields {
+//                        ForEach(Array(additionalFields.keys.prefix(2)), id: \.self) { key in
+//                            if let value = additionalFields[key], let _ = accountDetailViewModelObject.customFields.fields[key]{
+//                                RenderFields(fieldName: key, fieldValue: value ?? "")
+//                            }
+//                        }
+//                    }
+//                    
+//                    if(additionalFields?.count ?? 0 > 2){
+//                        Divider()
+//                        
+//                        
+//                        Button(action: {
+//                            expandAccountDetails = true
+//                        }){
+//                            HStack{
+//                                Text("More Details")
+//                                    .foregroundColor(Color("RedHighlight"))
+//                                    .font(.custom("Nunito-Medium", size: 14))
+//                            }
+//                        }
+//                        .accessibilityIdentifier("btn_account_detail_more_details")
+//                    }
+//                } else {
+//                    let additionalFields = accountDetailViewModelObject.accountDetail.additional_fields
+//                    if let additionalFields = additionalFields {
+//                        ForEach(Array(Array(additionalFields.keys).enumerated()), id: \.offset) { index, key in
+//                            if let value = additionalFields[key], let _ = accountDetailViewModelObject.customFields.fields[key] {
+//                                VStack(spacing: 0){
+//                                    RenderFields(fieldName: key, fieldValue: value ?? "")
+//                                    
+//                                    if(index+1 != additionalFields.keys.count){
+//                                        Divider()
+//                                            .frame(height: 1)
+//                                            .foregroundColor(Color("BorderColor"))
+//                                            .padding(.vertical, 8)
+//                                    }
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
 
             }
             .padding()
