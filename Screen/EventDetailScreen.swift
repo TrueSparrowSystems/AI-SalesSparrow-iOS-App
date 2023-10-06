@@ -264,7 +264,9 @@ struct EventDetailScreen: View {
             }
         }
         .onAppear {
-            eventDetailScreenViewModel.fetchEventDetail(accountId: accountId, eventId: eventId, onSuccess: {_ in }, onFailure: {})
+            eventDetailScreenViewModel.fetchEventDetail(accountId: accountId, eventId: eventId, onSuccess: {}, onFailure: {
+                self.presentationMode.wrappedValue.dismiss()
+            })
         }
         .onReceive(eventDetailScreenViewModel.$currentEventData){ currentEvent in
             isEventSaved = true

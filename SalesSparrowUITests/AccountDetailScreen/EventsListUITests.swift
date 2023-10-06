@@ -143,6 +143,28 @@ final class AccountDetailEventListUITests: XCTestCase {
         doneButton.tap()
     }
     
+    func testViewEventWithError() throws {
+        let app = XCUIApplication()
+        app.launchArguments = ["isRunningUITests","viewTaskError"]
+        app.launch()
+        
+        // Set the timeout duration
+        let timeout = 5
+        let accountIndex = 0
+        
+        let accountNavigationLink = app.buttons["account_card_\(accountIndex)"]
+        XCTAssertTrue(accountNavigationLink.waitForExistence(timeout: TimeInterval(timeout)))
+        accountNavigationLink.tap()
+        
+        app.swipeUp()
+        
+        let EventCard = app.buttons["event_card_0"]
+        XCTAssertTrue(EventCard.waitForExistence(timeout: TimeInterval(timeout)))
+        EventCard.tap()
+        
+        XCTAssertTrue(app.staticTexts["txt_account_detail_account_details_title"].waitForExistence(timeout: TimeInterval(timeout)))
+    }
+    
     func testDeleteEvent() throws {
         // Launch the app with the specified launch arguments
         let app = XCUIApplication()
@@ -235,6 +257,36 @@ final class AccountDetailEventListUITests: XCTestCase {
         addEventTextField.typeText("\nUpdate this eveny.\nTap on the save button to save it to salesforce.")
         
         app.buttons["btn_save_event"].tap()
+    }    
+    
+    func testEditEventWithError() throws {
+        // Launch the app with the specified launch arguments
+        let app = XCUIApplication()
+        app.launchArguments = ["isRunningUITests","deleteTaskError"]
+        app.launch()
+        
+        // Set the timeout duration
+        let timeout = 5
+        let accountIndex = 0
+        
+        let accountNavigationLink = app.buttons["account_card_\(accountIndex)"]
+        XCTAssertTrue(accountNavigationLink.waitForExistence(timeout: TimeInterval(timeout)))
+        accountNavigationLink.tap()
+        
+        app.swipeUp()
+        
+        app.buttons["btn_account_detail_event_more_0"].tap()
+        
+        app.buttons["btn_account_detail_edit_event_0"].tap()
+        
+        let addEventTextField = app.textViews["et_edit_event"]
+        XCTAssertTrue(addEventTextField.waitForExistence(timeout: TimeInterval(timeout)))
+        //Type Text into the the text field
+        addEventTextField.typeText("\nUpdate this eveny.\nTap on the save button to save it to salesforce.")
+        
+        app.buttons["btn_save_event"].tap()
+        
+        XCTAssertTrue(app.staticTexts["toast_view_text"].waitForExistence(timeout: TimeInterval(timeout)))
     }
     
     func testDeleteEventError() throws {

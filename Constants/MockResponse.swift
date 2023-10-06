@@ -611,11 +611,20 @@ class MockResponse {
                         "id":"event_100",
                         "creator_name":"User1",
                         "description":"This is Note text. This is Note long long text. this is Note long long text. this is Note long long text. This is for Event description",
-                        "start_datetime":"2019-10-12T07:20:50.52Z",
-                        "end_datetime":"2024-11-22T07:20:50.52Z",
+                        "start_datetime":"2024-11-20T07:20:50.52Z",
+                        "end_datetime":"2024-11-22T09:20:50.52Z",
                         "last_modified_time":"2019-10-12T07:20:50.52Z",
                     ]
                 ]
+            ] as [String : Any],
+            "viewTaskError":[
+                "success": "false",
+                "statusCode": 400,
+                "error": [
+                    "message": "Event cannot be fetched.",
+                    "code": "",
+                    "internal_error_identifier": "",
+                ]as [String : Any]
             ] as [String : Any],
         ],
         
@@ -639,7 +648,7 @@ class MockResponse {
         "PUT /v1/accounts/account_1/events/event_100": [
             "default":[
                 "success": "true",
-                "statusCode": 200,
+                "statusCode": 204,
                 "data": [:],
             ],
             "deleteTaskError":[

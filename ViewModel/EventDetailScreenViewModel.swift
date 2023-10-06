@@ -35,7 +35,7 @@ class EventDetailScreenViewModel: ObservableObject {
     var apiService = DependencyContainer.shared.apiService
     
     // A function to create note from given text and account id.
-    func fetchEventDetail(accountId: String, eventId: String, onSuccess : @escaping(String)-> Void, onFailure: (()-> Void)?){
+    func fetchEventDetail(accountId: String, eventId: String, onSuccess : (()->Void)?, onFailure: (()-> Void)?){
         let endPoint = "/v1/accounts/\(accountId)/events/\(eventId)"
         guard !self.isFetchEventInProgress else {
             return
@@ -48,10 +48,12 @@ class EventDetailScreenViewModel: ObservableObject {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let results):
+                    onSuccess?()
                     self?.errorMessage = ""
                     self?.currentEventData = results.event_detail
                     self?.isFetchEventInProgress = false
                 case .failure(let error):
+                    onFailure?()
                     self?.isFetchEventInProgress = false
                     self?.errorMessage = error.message
                     ToastViewModel.shared.showToast(_toast: Toast(style: .error, message: error.message))
