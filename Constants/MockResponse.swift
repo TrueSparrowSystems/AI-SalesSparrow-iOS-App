@@ -567,10 +567,10 @@ class MockResponse {
                         "event_100":[
                             "id":"event_100",
                             "creator_name": "xyz",
-                            "crm_organization_user_name": "abc",
                             "description": "Complete remaining task",
-                            "due_date": "2019-10-12",
-                            "last_modified_time": "2019-10-12T07:20:50.52Z"
+                            "start_datetime": "2023-08-20T07:20:50.52Z",
+                            "end_datetime": "2023-08-25T07:20:50.52Z",
+                            "last_modified_time": "2023-08-20T07:20:50.52Z"
                         ],
                         "event_200":[
                             "id":"event_200",
@@ -583,7 +583,7 @@ class MockResponse {
                     ]
                 ] as [String : Any],
             ],
-            "emptyTaskList":[
+            "emptyEventList":[
                 "success": "true",
                 "statusCode": 200,
                 "data":[
@@ -591,7 +591,7 @@ class MockResponse {
                     "event_map_by_id": [:] as [String : Any],
                 ] as [String : Any],
             ],
-            "taskListError":[
+            "eventListError":[
                 "success": "false",
                 "statusCode": 500,
                 "error": [

@@ -93,7 +93,7 @@ struct EventsList: View {
                             }
                         }
                         .buttonStyle(.plain)
-                        .accessibilityIdentifier("event_card_\(eventId)")
+                        .accessibilityIdentifier("event_card_\(index)")
                     }
                 }
                 .padding(.trailing)
@@ -223,7 +223,7 @@ struct EventCardView: View {
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
                     }
-                    .accessibilityIdentifier("btn_account_detail_edit_note_\(eventIndex)")
+                    .accessibilityIdentifier("btn_account_detail_edit_event_\(eventIndex)")
                     
                     Button(action: {
                         isPopoverVisible = false

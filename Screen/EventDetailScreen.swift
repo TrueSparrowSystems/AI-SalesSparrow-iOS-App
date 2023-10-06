@@ -27,14 +27,15 @@ struct EventDetailScreen: View {
     var body: some View {
         VStack{
             HStack{
-                Text((isEventSaved) ? "Done" : "Cancel")
-                    .font(.custom("Nunito-Bold", size: 14))
-                    .padding(.vertical, 10)
-                    .foregroundColor(Color("CancelText"))
-                    .accessibilityIdentifier((isEventSaved) ? "btn_event_detail_done" : "btn_event_detail_cancel")
-                    .onTapGesture {
-                        self.presentationMode.wrappedValue.dismiss()
-                    }
+                Button(action: {
+                    self.presentationMode.wrappedValue.dismiss()
+                }, label: {
+                    Text((isEventSaved) ? "Done" : "Cancel")
+                        .font(.custom("Nunito-Bold", size: 14))
+                        .padding(.vertical, 10)
+                        .foregroundColor(Color("CancelText"))
+                })
+                .accessibilityIdentifier(isEventSaved ? "btn_event_detail_done" : "btn_event_detail_cancel")
                 
                 Spacer()
                 
@@ -105,7 +106,7 @@ struct EventDetailScreen: View {
                             .disabled(isEditFlow ? false : true)
                             .background(.white)
                             .cornerRadius(8)
-                            .accessibilityIdentifier("dp_event_detail_select_date")
+                            .accessibilityIdentifier("dp_event_detail_select_start_date")
                         
                         HStack (spacing: 0) {
                             Text(BasicHelper.getDateStringFromDate(from: startDate))
@@ -178,7 +179,7 @@ struct EventDetailScreen: View {
                         .disabled(isEditFlow ? false : true)
                         .background(.white)
                         .cornerRadius(8)
-                        .accessibilityIdentifier("dp_event_detail_select_date")
+                        .accessibilityIdentifier("dp_event_detail_select_end_date")
                         
                         HStack (spacing: 0) {
                             Text(BasicHelper.getDateStringFromDate(from: endDate))
@@ -194,7 +195,6 @@ struct EventDetailScreen: View {
                                 .frame(width: 15, height: 15)
                                 .padding(.leading, 10)
                         }
-                        .accessibilityIdentifier("txt_event_detail_select_date")
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .background(.white)
                         .userInteractionDisabled()
@@ -228,7 +228,6 @@ struct EventDetailScreen: View {
                                 .frame(width: 15, height: 15)
                                 .padding(.leading, 10)
                         }
-                        .accessibilityIdentifier("txt_event_detail_select_time")
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .background(.white)
                         .userInteractionDisabled()
