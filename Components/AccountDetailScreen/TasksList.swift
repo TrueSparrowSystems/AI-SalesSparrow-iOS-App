@@ -220,6 +220,7 @@ struct TaskCardView: View {
                                 .foregroundColor(Color("TextPrimary"))
                         }
                     }
+                    .accessibilityIdentifier("btn_account_detail_edit_task_\(taskIndex)")
                     
                     Button(action: {
                         isPopoverVisible = false
@@ -240,7 +241,7 @@ struct TaskCardView: View {
                                 .foregroundColor(Color("TextPrimary"))
                         }
                     }
-                    .accessibilityIdentifier("btn_account_detail_delete_note_\(taskIndex)")
+                    .accessibilityIdentifier("btn_account_detail_delete_task_\(taskIndex)")
                 }
                 .padding(10)
                 .cornerRadius(4)

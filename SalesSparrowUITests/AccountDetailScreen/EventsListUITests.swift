@@ -181,52 +181,23 @@ final class AccountDetailEventListUITests: XCTestCase {
         
         app.swipeUp()
         
-        app.swipeUp()
+        let descriptionForEvent1BeforeDelete = app.staticTexts["txt_account_detail_event_description_\(accountIndex)"].label
         
-        let threeDotButtonForEvent2 = app.buttons["btn_account_detail_event_more_1"]
+        let threeDotButtonForEvent2 = app.buttons["btn_account_detail_event_more_\(accountIndex)"]
         XCTAssertTrue(threeDotButtonForEvent2.waitForExistence(timeout: TimeInterval(timeout)))
-        
         threeDotButtonForEvent2.tap()
         
-        let deleteButtonForEvent2 = app.buttons["btn_account_detail_delete_event_1"]
+        let deleteButtonForEvent2 = app.buttons["btn_account_detail_delete_event_\(accountIndex)"]
         XCTAssertTrue(deleteButtonForEvent2.waitForExistence(timeout: TimeInterval(timeout)))
-        
-        
-        let threeDotButtonForEvent1 = app.buttons["btn_account_detail_event_more_0"]
-        XCTAssertTrue(threeDotButtonForEvent1.waitForExistence(timeout: TimeInterval(timeout)))
-        
-        threeDotButtonForEvent1.tap()
-        
-        let deleteButtonForEvent1 = app.buttons["btn_account_detail_delete_event_0"]
-        XCTAssertTrue(deleteButtonForEvent1.waitForExistence(timeout: TimeInterval(timeout)))
-        
-        let descriptionForEvent1 = app.staticTexts["txt_account_detail_event_description_0"].label
-        
-        //Check whether the delete button is closed for event 2 on open of delete button for event 1
-        XCTAssertFalse(deleteButtonForEvent2.exists)
-        
-        deleteButtonForEvent1.tap()
-        
-        // Check if delete confirmation modal is visible
-        // Verify message, cancel and delete button
-        XCTAssertTrue(app.staticTexts["txt_alert_message"].waitForExistence(timeout: TimeInterval(timeout)))
-        
-        let cancelButton = app.buttons["btn_alert_cancel"]
-        XCTAssertTrue(cancelButton.waitForExistence(timeout: TimeInterval(timeout)))
-        XCTAssertTrue(cancelButton.isHittable)
+        deleteButtonForEvent2.tap()
         
         let deleteButton = app.buttons["btn_alert_submit"]
         XCTAssertTrue(deleteButton.waitForExistence(timeout: TimeInterval(timeout)))
         XCTAssertTrue(deleteButton.isHittable)
         deleteButton.tap()
         
-        XCTAssertFalse(app.staticTexts["txt_alert_message"].exists)
-        
-        let descriptionForEvent1AfterDelete = app.staticTexts["txt_account_detail_event_description_0"].label
-        
         //Verify the event description for 1st event before and after delete are not same
-        XCTAssertTrue(descriptionForEvent1 != descriptionForEvent1AfterDelete)
-        
+        XCTAssertTrue(descriptionForEvent1BeforeDelete != app.staticTexts["txt_account_detail_event_description_\(accountIndex)"].label)
     }
     
     

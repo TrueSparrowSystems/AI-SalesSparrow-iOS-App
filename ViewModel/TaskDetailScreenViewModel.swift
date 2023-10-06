@@ -35,7 +35,7 @@ class TaskDetailScreenViewModel: ObservableObject {
     var apiService = DependencyContainer.shared.apiService
     
     // A function to create note from given text and account id.
-    func fetchTaskDetail(accountId: String, taskId: String){
+    func fetchTaskDetail(accountId: String, taskId: String, onFailure: (()-> Void)?){
         let endPoint = "/v1/accounts/\(accountId)/tasks/\(taskId)"
         isFetchTaskInProgress = true
         
@@ -48,6 +48,7 @@ class TaskDetailScreenViewModel: ObservableObject {
                     self?.currentTaskData = results.task_detail
                     self?.isFetchTaskInProgress = false
                 case .failure(let error):
+                    onFailure?()
                     self?.isFetchTaskInProgress = false
                     self?.errorMessage = error.message
                     ToastViewModel.shared.showToast(_toast: Toast(style: .error, message: error.message))

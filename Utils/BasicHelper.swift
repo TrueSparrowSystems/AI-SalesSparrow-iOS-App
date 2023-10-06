@@ -172,6 +172,14 @@ struct BasicHelper {
         return formattedDateString
     }
     
+    static func formatDate(_ date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd" // Change this format to your desired format
+        dateFormatter.timeZone = TimeZone(abbreviation: "GMT") // Ensure you set the correct time zone
+
+        return dateFormatter.string(from: date)
+    }
+    
     static func getTimeStringFromDate(from date: Date, timeFormat: String = "hh:mm a" ) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = timeFormat

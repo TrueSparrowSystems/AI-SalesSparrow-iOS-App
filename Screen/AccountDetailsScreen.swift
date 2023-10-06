@@ -25,7 +25,7 @@ struct AccountDetailsScreen: View {
                 
                 NotesList(accountId: accountId, accountName: accountName, propagateClick: $propagateClick)
                 
-//                TasksList(accountId: accountId, accountName: accountName, propagateClick: $propagateClick)
+                TasksList(accountId: accountId, accountName: accountName, propagateClick: $propagateClick)
                 
                 EventsList(accountId: accountId, accountName: accountName, propagateClick: $propagateClick)
                 

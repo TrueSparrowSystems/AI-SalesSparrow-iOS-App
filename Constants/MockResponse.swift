@@ -453,7 +453,7 @@ class MockResponse {
             "default":[
                 "success": "true",
                 "statusCode": 200,
-                "data": [:] as [String : Any]
+                "data": [:],
             ],
             "deleteTaskError":[
                 "success": "false",
@@ -648,7 +648,7 @@ class MockResponse {
         "PUT /v1/accounts/account_1/events/event_100": [
             "default":[
                 "success": "true",
-                "statusCode": 204,
+                "statusCode": 200,
                 "data": [:],
             ],
             "deleteTaskError":[
