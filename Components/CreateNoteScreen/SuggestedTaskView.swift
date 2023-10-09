@@ -271,16 +271,9 @@ struct SuggestedTaskCardView: View {
             
         }
         )
-        .background(
-            NavigationLink(
-                destination: CreateTaskScreen(accountId: accountId,
-                                              suggestionId: suggestionId),
-                isActive: self.$showEditTaskView
-            ) {
-                EmptyView()
-            }
-                .hidden()
-        )
+        .navigationDestination(isPresented: self.$showEditTaskView, destination: {
+            CreateTaskScreen(accountId: accountId, suggestionId: suggestionId)
+        })
     }
     
 }

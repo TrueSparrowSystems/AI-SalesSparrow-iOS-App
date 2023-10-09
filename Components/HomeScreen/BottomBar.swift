@@ -33,17 +33,9 @@ struct BottomBar: View {
             .offset(y: -22)
             .accessibilityIdentifier("btn_create_note")
         }
-        .background(
-            NavigationLink(
-                destination: CreateNoteScreen(isAccountSelectable: true),
-                isActive: self.$createNoteScreenActivated
-            ) {
-                EmptyView()
-            }
-                .hidden()
-        )
-        
-        
+        .navigationDestination(isPresented: self.$createNoteScreenActivated, destination: {
+            CreateNoteScreen(isAccountSelectable: true)
+        })
     }
 }
 

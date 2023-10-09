@@ -162,10 +162,9 @@ struct NoteCardView: View {
             RoundedRectangle(cornerRadius: 5)
                 .stroke(Color("CardBorder"), lineWidth: 1)
         )
-        .background(
-            NavigationLink("",destination: NoteDetailScreen(accountId: accountId, accountName: accountName, noteId: noteId, isEditFlow: true, isNoteSaved: true),isActive: $isEditFlowActive)
-            .opacity(0)
-        )
+        .navigationDestination(isPresented: self.$isEditFlowActive, destination: {
+            NoteDetailScreen(accountId: accountId, accountName: accountName, noteId: noteId, isEditFlow: true, isNoteSaved: true)
+        })
         .overlay(alignment: .topTrailing){
             if isPopoverVisible {
                 VStack {

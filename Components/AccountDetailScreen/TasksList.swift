@@ -99,15 +99,9 @@ struct TasksList: View {
         }.onAppear {
             acccountDetailScreenViewModelObject.fetchTasks(accountId: accountId)
         }
-        .background{
-            NavigationLink(destination:
-                            CreateTaskScreen(accountId: accountId, suggestionId: suggestionId),
-                           isActive: self.$addTaskActivated
-            ) {
-                EmptyView()
-            }
-            .hidden()
-        }
+        .navigationDestination(isPresented: self.$addTaskActivated, destination: {
+            CreateTaskScreen(accountId: accountId, suggestionId: suggestionId)
+        })
     }
 }
 

@@ -427,16 +427,9 @@ struct SuggestedEventCardView: View {
             
         }
         )
-        .background(
-            NavigationLink(
-                destination: CreateEventScreen(accountId: accountId,
-                                               suggestionId: suggestionId),
-                isActive: self.$showEditEventView
-            ) {
-                EmptyView()
-            }
-                .hidden()
-        )
+        .navigationDestination(isPresented: self.$showEditEventView, destination: {
+            CreateEventScreen(accountId: accountId, suggestionId: suggestionId)
+        })
     }
     
 }

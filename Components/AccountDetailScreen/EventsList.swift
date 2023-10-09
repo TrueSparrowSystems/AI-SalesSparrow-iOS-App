@@ -100,15 +100,10 @@ struct EventsList: View {
             }
         }.onAppear {
             acccountDetailScreenViewModelObject.fetchEvents(accountId: accountId)
-        }.background{
-            NavigationLink(destination:
-                            CreateEventScreen(accountId: accountId, suggestionId: suggestionId),
-                           isActive: self.$addEventActivated
-            ) {
-                EmptyView()
-            }
-            .hidden()
         }
+        .navigationDestination(isPresented: self.$addEventActivated, destination: {
+            CreateEventScreen(accountId: accountId, suggestionId: suggestionId)
+        })
     }
 }
 
