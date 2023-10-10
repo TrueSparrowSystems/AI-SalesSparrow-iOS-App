@@ -103,17 +103,13 @@ struct AccountListView: View {
                 ForEach(accountIds, id: \.self) { accountId in
                     if let account = listData.account_map_by_id[accountId] {
                         HStack (alignment: .center) {
-                            NavigationLink(destination: {
-                                AccountDetailsScreen(accountId: accountId, accountName: "Test Account")
-                            }, label: {
-                                HStack {
-                                    Text(account.name)
-                                        .font(.custom("Nunito-Regular", size: 16))
-                                        .foregroundColor(Color("SearchPrimary"))
-                                        .accessibilityIdentifier("txt_search_account_name_\(account.name)")
-                                    Spacer()
-                                }
-                            })
+                            HStack {
+                                Text(account.name)
+                                    .font(.custom("Nunito-Regular", size: 16))
+                                    .foregroundColor(Color("SearchPrimary"))
+                                    .accessibilityIdentifier("txt_search_account_name_\(account.name)")
+                                Spacer()
+                            }
                             .contentShape(Rectangle())
                             .accessibility(addTraits: .isButton)
                             .accessibilityIdentifier("btn_search_account_name_\(account.name)")

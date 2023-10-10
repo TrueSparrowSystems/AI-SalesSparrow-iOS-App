@@ -180,7 +180,7 @@ struct NoteCardView: View {
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
                     }
-                    .accessibilityIdentifier("btn_account_detail_edit_note_\(noteIndex)")
+                    .accessibilityIdentifier("btn_account_detail_edit_\(noteIndex)")
 
                     Button(action: {
                         isPopoverVisible = false

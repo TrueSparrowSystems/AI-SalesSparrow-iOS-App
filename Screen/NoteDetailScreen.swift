@@ -27,7 +27,7 @@ struct NoteDetailScreen : View {
                     .font(.custom("Nunito-Bold", size: 14))
                     .padding(.vertical, 10)
                     .foregroundColor(Color("CancelText"))
-                    .accessibilityIdentifier((isNoteSaved) ? "btn_add_note_done" : "btn_add_note_cancel")
+                    .accessibilityIdentifier((isNoteSaved) ? "btn_note_screen_done" : "btn_note_screen_cancel")
                     .onTapGesture {
                         self.presentationMode.wrappedValue.dismiss()
                     }
@@ -121,7 +121,7 @@ struct NoteDetailScreen : View {
                         .foregroundColor(Color("TextPrimary"))
                         .font(.custom("Nunito-SemiBold", size: 18))
                         .focused($focused)
-                        .accessibilityIdentifier("et_create_note")
+                        .accessibilityIdentifier("et_edit_note")
                         .onTapGesture {
                             // Do nothing. Kept on tap here to override tap action over parent tap action
                         }
