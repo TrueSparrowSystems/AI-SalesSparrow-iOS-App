@@ -201,6 +201,8 @@ final class CreateEventUITests: XCTestCase {
         
         let tileIndex = 0
         
+        app.swipeUp()
+        
         let suggestionTitle = app.staticTexts["txt_create_note_event_suggestion_title_\(tileIndex)"]
         XCTAssertTrue(suggestionTitle.waitForExistence(timeout: TimeInterval(timeout)))
         suggestionTitle.tap()

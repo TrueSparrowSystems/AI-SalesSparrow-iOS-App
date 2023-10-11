@@ -202,7 +202,7 @@ final class AccountDetailNoteListUITests: XCTestCase {
         
         app.buttons["btn_save_task"].tap()
         
-        XCTAssertTrue(app.staticTexts["txt_alert_message"].waitForExistence(timeout: TimeInterval(timeout)))
+        XCTAssertTrue(app.staticTexts["toast_view_text"].waitForExistence(timeout: TimeInterval(timeout)))
     }
     
     func testDeleteNote() throws {
