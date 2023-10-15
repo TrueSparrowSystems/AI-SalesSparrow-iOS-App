@@ -192,6 +192,8 @@ struct EventCardView: View {
                         .tracking(0.5)
                         .accessibilityIdentifier("txt_account_detail_event_end_date_\(eventIndex)")
                         .lineLimit(1)
+                    
+                    Spacer()
                 }
             }
             .padding(.top, 12)

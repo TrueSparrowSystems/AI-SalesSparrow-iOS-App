@@ -338,6 +338,8 @@ struct SuggestedEventCardView: View {
                                         ProgressView()
                                             .tint(Color("LoginButtonPrimary"))
                                             .controlSize(.small)
+                                            .padding(.trailing, 3)
+                                        
                                         Text("Adding Event...")
                                             .foregroundColor(.white)
                                             .font(.custom("Nunito-Medium", size: 12))
@@ -350,7 +352,7 @@ struct SuggestedEventCardView: View {
                                             .accessibilityIdentifier("txt_create_note_add_event_index_\(index)")
                                     }
                                 }
-                                .frame(width: isAddEventInProgress ? 115 : 72, height: 32)
+                                .frame(width: isAddEventInProgress ? 130 : 72, height: 32)
                                 .background(
                                     Color(hex: "SaveButtonBackground")
                                 )

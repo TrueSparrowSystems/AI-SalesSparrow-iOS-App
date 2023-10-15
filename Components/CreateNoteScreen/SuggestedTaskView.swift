@@ -197,6 +197,8 @@ struct SuggestedTaskCardView: View {
                                         ProgressView()
                                             .tint(Color("LoginButtonPrimary"))
                                             .controlSize(.small)
+                                            .padding(.trailing, 3)
+                                        
                                         Text("Adding Task...")
                                             .foregroundColor(.white)
                                             .font(.custom("Nunito-Medium", size: 12))
@@ -209,7 +211,7 @@ struct SuggestedTaskCardView: View {
                                             .accessibilityIdentifier("txt_create_note_add_task_index_\(index)")
                                     }
                                 }
-                                .frame(width: isAddTaskInProgress ? 115 : 72, height: 32)
+                                .frame(width: isAddTaskInProgress ? 120 : 72, height: 32)
                                 .background(
                                     Color(hex: "SaveButtonBackground")
                                 )
