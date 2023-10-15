@@ -282,6 +282,12 @@ struct CreateEventScreen: View {
         }
         .onChange(of: startDate, perform: {_ in
             createNoteScreenViewModel.setEventDataAttribute(id: suggestionId ?? "", attrKey: "startDate", attrValue: startDate)
+            endDate = startDate
+            endTime = startTime
+            let calendar = Calendar.current
+            if let oneHourLater = calendar.date(byAdding: .hour, value: 1, to: endTime) {
+                endTime = oneHourLater
+            }
         })
         .onChange(of: startTime, perform: {_ in
             createNoteScreenViewModel.setEventDataAttribute(id: suggestionId ?? "", attrKey: "startTime", attrValue: startTime)

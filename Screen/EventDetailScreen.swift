@@ -298,6 +298,12 @@ struct EventDetailScreen: View {
                 parameterChanged = false
                 isEventSaved = true
             }
+            endDate = startDate
+            endTime = startTime
+            let calendar = Calendar.current
+            if let oneHourLater = calendar.date(byAdding: .hour, value: 1, to: endTime) {
+                endTime = oneHourLater
+            }
         }
         .onChange(of: startTime) { startTime  in
             if isParameterAltered() {
