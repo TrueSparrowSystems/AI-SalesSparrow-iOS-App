@@ -156,44 +156,24 @@ struct CreateTaskScreen: View {
                         .accessibilityIdentifier("dp_add_task_select_date")
                     }
                     
-                    if(!(suggestedTaskState["isDateSelected"] as! Bool)){
-                        HStack (spacing: 0) {
-                            Text("Select")
-                                .foregroundColor(Color("TermsPrimary"))
-                                .font(.custom("Nunito-Light", size: 12))
-                                .tracking(0.5)
-                                .padding(0)
-                            
-                            Spacer()
-                            
-                            Image("EmptyCalendar")
-                                .frame(width: 15, height: 15)
-                                .padding(.leading, 6)
-                        }
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .background(.white)
-                        .userInteractionDisabled()
+                    HStack (spacing: 0) {
+                        Text(BasicHelper.getDateStringFromDate(from: dueDate))
+                            .foregroundColor(Color("TermsPrimary"))
+                            .font(.custom("Nunito-Bold", size: 12))
+                            .tracking(0.5)
+                            .padding(0)
                         
+                        Spacer()
+                        
+                        Image("EmptyCalendar")
+                            .frame(width: 15, height: 15)
+                            .padding(.leading, 10)
                     }
-                    else{
-                        HStack (spacing: 0) {
-                            Text(BasicHelper.getDateStringFromDate(from: dueDate))
-                                .foregroundColor(Color("TermsPrimary"))
-                                .font(.custom("Nunito-Bold", size: 12))
-                                .tracking(0.5)
-                                .padding(0)
-                            
-                            Spacer()
-                            
-                            Image("EmptyCalendar")
-                                .frame(width: 15, height: 15)
-                                .padding(.leading, 10)
-                        }
-                        .accessibilityIdentifier("txt_add_task_select_date")
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .background(.white)
-                        .userInteractionDisabled()
-                    }
+                    .accessibilityIdentifier("txt_add_task_select_date")
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(.white)
+                    .userInteractionDisabled()
+                    
                 }
                 .padding(.horizontal, 10)
                 .frame(width: 160, height: 30)
@@ -237,6 +217,7 @@ struct CreateTaskScreen: View {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.05){
                 focused = true
             }
+            createNoteScreenViewModel.setTaskDataAttribute(id: suggestionId ?? "", attrKey: "isDateSelected", attrValue: true)
             self.description = ((suggestedTaskState["description"] ?? "") as! String)
             
             self.dueDate = (suggestedTaskState["dueDate"] ?? Date()) as! Date

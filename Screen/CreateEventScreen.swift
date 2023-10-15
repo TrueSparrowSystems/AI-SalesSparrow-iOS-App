@@ -4,7 +4,7 @@
 //
 //  Created by Mohit Charkha on 13/09/23.
 //
-
+import Foundation
 import SwiftUI
 
 struct CreateEventScreen: View {
@@ -105,26 +105,6 @@ struct CreateEventScreen: View {
                         .accessibilityIdentifier("dp_add_event_select_start_date")
                     }
                     
-                    if(!(suggestedEventState["isStartDateSelected"] as! Bool)){
-                        HStack (spacing: 0) {
-                            Text("Select Date")
-                                .foregroundColor(Color("TermsPrimary"))
-                                .font(.custom("Nunito-Light", size: 12))
-                                .tracking(0.5)
-                                .padding(0)
-                            
-                            Spacer()
-                            
-                            Image("EmptyCalendar")
-                                .frame(width: 15, height: 15)
-                                .padding(.leading, 6)
-                        }
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .background(.white)
-                        .userInteractionDisabled()
-                        
-                    }
-                    else{
                         HStack (spacing: 0) {
                             Text(BasicHelper.getDateStringFromDate(from: startDate))
                                 .foregroundColor(Color("TermsPrimary"))
@@ -142,7 +122,7 @@ struct CreateEventScreen: View {
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .background(.white)
                         .userInteractionDisabled()
-                    }
+                        
                 }
                 .padding(.horizontal, 10)
                 .frame(width: 160, height: 30)
@@ -160,26 +140,7 @@ struct CreateEventScreen: View {
                         .accessibilityIdentifier("dp_add_event_select_start_time")
                     }
                     
-                    if(!(suggestedEventState["isStartTimeSelected"] as! Bool)){
-                        HStack (spacing: 0) {
-                            Text("Select Time")
-                                .foregroundColor(Color("TermsPrimary"))
-                                .font(.custom("Nunito-Light", size: 12))
-                                .tracking(0.5)
-                                .padding(0)
-                            
-                            Spacer()
-                            
-                            Image("Clock")
-                                .frame(width: 15, height: 15)
-                                .padding(.leading, 6)
-                        }
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .background(.white)
-                        .userInteractionDisabled()
-                        
-                    }
-                    else{
+
                         HStack (spacing: 0) {
                             Text(BasicHelper.getTimeStringFromDate(from: startTime))
                                 .foregroundColor(Color("TermsPrimary"))
@@ -197,7 +158,8 @@ struct CreateEventScreen: View {
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .background(.white)
                         .userInteractionDisabled()
-                    }
+                        
+                    
                 }
                 .padding(.horizontal, 10)
                 .frame(width: 140, height: 30)
@@ -225,26 +187,7 @@ struct CreateEventScreen: View {
                         .accessibilityIdentifier("dp_add_event_select_end_date")
                     }
                     
-                    if(!(suggestedEventState["isEndDateSelected"] as! Bool)){
-                        HStack (spacing: 0) {
-                            Text("Select Date")
-                                .foregroundColor(Color("TermsPrimary"))
-                                .font(.custom("Nunito-Light", size: 12))
-                                .tracking(0.5)
-                                .padding(0)
-                            
-                            Spacer()
-                            
-                            Image("EmptyCalendar")
-                                .frame(width: 15, height: 15)
-                                .padding(.leading, 6)
-                        }
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .background(.white)
-                        .userInteractionDisabled()
-                        
-                    }
-                    else{
+  
                         HStack (spacing: 0) {
                             Text(BasicHelper.getDateStringFromDate(from: endDate))
                                 .foregroundColor(Color("TermsPrimary"))
@@ -262,7 +205,8 @@ struct CreateEventScreen: View {
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .background(.white)
                         .userInteractionDisabled()
-                    }
+                        
+             
                 }
                 .padding(.horizontal, 10)
                 .frame(width: 160, height: 30)
@@ -282,26 +226,7 @@ struct CreateEventScreen: View {
                         .accessibilityIdentifier("dp_add_event_select_end_time")
                     }
                     
-                    if(!(suggestedEventState["isEndTimeSelected"] as! Bool)){
-                        HStack (spacing: 0) {
-                            Text("Select Time")
-                                .foregroundColor(Color("TermsPrimary"))
-                                .font(.custom("Nunito-Light", size: 12))
-                                .tracking(0.5)
-                                .padding(0)
-                            
-                            Spacer()
-                            
-                            Image("Clock")
-                                .frame(width: 15, height: 15)
-                                .padding(.leading, 6)
-                        }
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .background(.white)
-                        .userInteractionDisabled()
-                        
-                    }
-                    else{
+
                         HStack (spacing: 0) {
                             Text(BasicHelper.getTimeStringFromDate(from: endTime))
                                 .foregroundColor(Color("TermsPrimary"))
@@ -319,7 +244,8 @@ struct CreateEventScreen: View {
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .background(.white)
                         .userInteractionDisabled()
-                    }
+                        
+                  
                 }
                 .padding(.horizontal, 10)
                 .frame(width: 140, height: 30)
@@ -381,6 +307,14 @@ struct CreateEventScreen: View {
             
             self.endTime = (suggestedEventState["endTime"] ?? Date()) as! Date
             
+            createNoteScreenViewModel.setEventDataAttribute(id: suggestionId ?? "", attrKey: "isStartDateSelected", attrValue: true)
+            createNoteScreenViewModel.setEventDataAttribute(id: suggestionId ?? "", attrKey: "isStartTimeSelected", attrValue: true)
+            createNoteScreenViewModel.setEventDataAttribute(id: suggestionId ?? "", attrKey: "isEndDateSelected", attrValue: true)
+            createNoteScreenViewModel.setEventDataAttribute(id: suggestionId ?? "", attrKey: "isEndTimeSelected", attrValue: true)
+            let calendar = Calendar.current
+            if let oneHourLater = calendar.date(byAdding: .hour, value: 1, to: endTime) {
+                endTime = oneHourLater
+            }
         }
         .onTapGesture {
             focused = false
