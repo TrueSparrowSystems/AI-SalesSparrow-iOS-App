@@ -23,6 +23,7 @@ struct CreateEventScreen: View {
     var suggestionId: String?
     
     var body: some View {
+        let calendar = Calendar.current
         let suggestedEventState = createNoteScreenViewModel.suggestedEventStates[suggestionId ?? ""] ?? [:]
         VStack{
             HStack{
@@ -283,14 +284,12 @@ struct CreateEventScreen: View {
         .onChange(of: startDate, perform: {_ in
             createNoteScreenViewModel.setEventDataAttribute(id: suggestionId ?? "", attrKey: "startDate", attrValue: startDate)
             endDate = startDate
-            endTime = startTime
-            let calendar = Calendar.current
-            if let oneHourLater = calendar.date(byAdding: .hour, value: 1, to: endTime) {
-                endTime = oneHourLater
-            }
         })
         .onChange(of: startTime, perform: {_ in
             createNoteScreenViewModel.setEventDataAttribute(id: suggestionId ?? "", attrKey: "startTime", attrValue: startTime)
+            if let oneHourLater = calendar.date(byAdding: .hour, value: 1, to: startTime) {
+                endTime = oneHourLater
+            }
         })
         .onChange(of: endDate, perform: {_ in
             createNoteScreenViewModel.setEventDataAttribute(id: suggestionId ?? "", attrKey: "endDate", attrValue: endDate)
@@ -317,7 +316,6 @@ struct CreateEventScreen: View {
             createNoteScreenViewModel.setEventDataAttribute(id: suggestionId ?? "", attrKey: "isStartTimeSelected", attrValue: true)
             createNoteScreenViewModel.setEventDataAttribute(id: suggestionId ?? "", attrKey: "isEndDateSelected", attrValue: true)
             createNoteScreenViewModel.setEventDataAttribute(id: suggestionId ?? "", attrKey: "isEndTimeSelected", attrValue: true)
-            let calendar = Calendar.current
             if let oneHourLater = calendar.date(byAdding: .hour, value: 1, to: endTime) {
                 endTime = oneHourLater
             }

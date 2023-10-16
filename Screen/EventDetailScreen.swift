@@ -25,6 +25,7 @@ struct EventDetailScreen: View {
     @State var parameterChanged: Bool = false
     
     var body: some View {
+        let calendar = Calendar.current
         VStack{
             HStack{
                 Button(action: {
@@ -299,11 +300,6 @@ struct EventDetailScreen: View {
                 isEventSaved = true
             }
             endDate = startDate
-            endTime = startTime
-            let calendar = Calendar.current
-            if let oneHourLater = calendar.date(byAdding: .hour, value: 1, to: endTime) {
-                endTime = oneHourLater
-            }
         }
         .onChange(of: startTime) { startTime  in
             if isParameterAltered() {
@@ -312,6 +308,9 @@ struct EventDetailScreen: View {
             } else if areParameterSame() {
                 parameterChanged = false
                 isEventSaved = true
+            }
+            if let oneHourLater = calendar.date(byAdding: .hour, value: 1, to: startTime) {
+                endTime = oneHourLater
             }
         }
         .onChange(of: endDate) { endDate  in
