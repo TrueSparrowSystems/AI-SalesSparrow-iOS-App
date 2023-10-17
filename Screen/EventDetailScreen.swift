@@ -108,6 +108,9 @@ struct EventDetailScreen: View {
                             .background(.white)
                             .cornerRadius(8)
                             .accessibilityIdentifier("dp_event_detail_select_start_date")
+                            .compositingGroup()
+                            .scaleEffect(x: 1.5, y: 1.5)
+                            .clipped()
                         
                         HStack (spacing: 0) {
                             Text(BasicHelper.getDateStringFromDate(from: startDate))
@@ -181,6 +184,9 @@ struct EventDetailScreen: View {
                         .background(.white)
                         .cornerRadius(8)
                         .accessibilityIdentifier("dp_event_detail_select_end_date")
+                        .compositingGroup()
+                        .scaleEffect(x: 1.5, y: 1.5)
+                        .clipped()
                         
                         HStack (spacing: 0) {
                             Text(BasicHelper.getDateStringFromDate(from: endDate))
@@ -214,6 +220,7 @@ struct EventDetailScreen: View {
                         .background(.white)
                         .cornerRadius(8)
                         .accessibilityIdentifier("dp_event_detail_select_end_time")
+
                         
                         HStack (spacing: 0) {
                             Text(BasicHelper.getTimeStringFromDate(from: endTime))

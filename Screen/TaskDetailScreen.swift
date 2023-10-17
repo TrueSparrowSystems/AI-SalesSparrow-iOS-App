@@ -155,7 +155,9 @@ struct TaskDetailScreen: View {
                             .background(.white)
                             .cornerRadius(8)
                             .accessibilityIdentifier("dp_add_task_select_date")
-                        
+                            .compositingGroup()
+                            .scaleEffect(x: 1.5, y: 1.5)
+                            .clipped()
                         
                         HStack (spacing: 0) {
                             Text(BasicHelper.getDateStringFromDate(from: selectedDate))

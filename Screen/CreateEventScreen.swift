@@ -110,6 +110,9 @@ struct CreateEventScreen: View {
                         .background(.white)
                         .cornerRadius(8)
                         .accessibilityIdentifier("dp_add_event_select_start_date")
+                        .compositingGroup()
+                        .scaleEffect(x: 1.5, y: 1.5)
+                        .clipped()
                     }
                     
                         HStack (spacing: 0) {
@@ -192,6 +195,9 @@ struct CreateEventScreen: View {
                         .background(.white)
                         .cornerRadius(8)
                         .accessibilityIdentifier("dp_add_event_select_end_date")
+                        .compositingGroup()
+                        .scaleEffect(x: 1.5, y: 1.5)
+                        .clipped()
                     }
                     
   
