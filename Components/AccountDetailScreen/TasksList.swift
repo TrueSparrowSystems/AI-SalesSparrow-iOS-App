@@ -173,6 +173,8 @@ struct TaskCardView: View {
                     .foregroundColor(Color("RedHighlight"))
                     .tracking(0.5)
                     .accessibilityIdentifier("txt_account_detail_task_assignee_\(taskIndex)")
+                    .lineLimit(1)
+                    .truncationMode(.tail)
                 
                 if((acccountDetailScreenViewModelObject.taskData.task_map_by_id[taskId]?.due_date != nil)){
                     Divider()

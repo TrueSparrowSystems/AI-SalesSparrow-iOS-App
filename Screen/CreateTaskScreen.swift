@@ -120,6 +120,8 @@ struct CreateTaskScreen: View {
                             .foregroundColor(Color("RedHighlight"))
                             .font(.custom("Nunito-Bold", size: 12))
                             .accessibilityIdentifier("txt_add_task_selected_user")
+                            .lineLimit(1)
+                            .truncationMode(.tail) 
                     }
                     Spacer()
                     

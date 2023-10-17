@@ -38,7 +38,9 @@ struct AccountDetailsScreen: View {
                 //            accountDetailViewModelObject.fetchAccountDetail(accountId: accountId)
                 if !accountDetailViewModelObject.scrollToSection.isEmpty {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                        proxy.scrollTo(accountDetailViewModelObject.scrollToSection)
+                        withAnimation(.linear(duration: 1)) {
+                            proxy.scrollTo(accountDetailViewModelObject.scrollToSection)
+                        }
                         accountDetailViewModelObject.scrollToSection = ""
                     }
                 }
