@@ -102,7 +102,7 @@ struct EventsList: View {
             acccountDetailScreenViewModelObject.fetchEvents(accountId: accountId)
         }
         .navigationDestination(isPresented: self.$addEventActivated, destination: {
-            CreateEventScreen(accountId: accountId, suggestionId: suggestionId)
+            CreateEventScreen(accountId: accountId, suggestionId: suggestionId, isAccountDetailFlow: true)
         })
     }
 }

@@ -11,6 +11,7 @@ struct CreateTaskScreen: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @EnvironmentObject var createTaskViewModel : CreateTaskViewModel
     @EnvironmentObject var createNoteScreenViewModel : CreateNoteScreenViewModel
+    @EnvironmentObject var accountDetailViewModelObject : AccountDetailScreenViewModel
     
     var accountId: String
     @State var description: String = ""
@@ -19,6 +20,7 @@ struct CreateTaskScreen: View {
     @State private var showUserSearchView: Bool = false
     @State var isAddTaskInProgress = false
     var suggestionId: String?
+    var isAccountDetailFlow: Bool = false
     
     var body: some View {
         let suggestedTaskState = createNoteScreenViewModel.suggestedTaskStates[suggestionId ?? ""] ?? [:]
@@ -42,6 +44,10 @@ struct CreateTaskScreen: View {
                         createNoteScreenViewModel.setTaskDataAttribute(id: suggestionId ?? "", attrKey: "taskId", attrValue: taskId)
                         createNoteScreenViewModel.setTaskDataAttribute(id: suggestionId ?? "", attrKey: "isTaskSaved", attrValue: true)
                         isAddTaskInProgress = false
+                        if isAccountDetailFlow {
+                            accountDetailViewModelObject.scrollToSection = "TasksList"
+                        }
+                        self.presentationMode.wrappedValue.dismiss()
                     }, onFailure: {
                         isAddTaskInProgress = false
                     })

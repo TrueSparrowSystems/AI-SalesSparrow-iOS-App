@@ -27,6 +27,7 @@ class AccountDetailScreenViewModel: ObservableObject {
     @Published var accountDetail = AccountDetailStruct(id: "", name: "")
     @Published var isFetchAccountDetailInProgress = false
     @Published var errorMessage = ""
+    var scrollToSection: String = ""
     var apiService = DependencyContainer.shared.apiService
     
     var customFields = FieldDefinition(fields: [

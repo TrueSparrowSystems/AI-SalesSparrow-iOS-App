@@ -100,7 +100,7 @@ struct TasksList: View {
             acccountDetailScreenViewModelObject.fetchTasks(accountId: accountId)
         }
         .navigationDestination(isPresented: self.$addTaskActivated, destination: {
-            CreateTaskScreen(accountId: accountId, suggestionId: suggestionId)
+            CreateTaskScreen(accountId: accountId, suggestionId: suggestionId, isAccountDetailFlow: true)
         })
     }
 }

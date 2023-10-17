@@ -11,6 +11,7 @@ struct CreateEventScreen: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @EnvironmentObject var createEventViewModel : CreateEventViewModel
     @EnvironmentObject var createNoteScreenViewModel : CreateNoteScreenViewModel
+    @EnvironmentObject var accountDetailViewModelObject : AccountDetailScreenViewModel
     
     var accountId: String
     @State var description: String = ""
@@ -21,6 +22,7 @@ struct CreateEventScreen: View {
     @FocusState private var focused: Bool
     @State var isAddEventInProgress = false
     var suggestionId: String?
+    var isAccountDetailFlow: Bool = false
     
     var body: some View {
         let calendar = Calendar.current
@@ -44,6 +46,10 @@ struct CreateEventScreen: View {
                         createNoteScreenViewModel.setEventDataAttribute(id: suggestionId ?? "", attrKey: "eventId", attrValue: eventId)
                         createNoteScreenViewModel.setEventDataAttribute(id: suggestionId ?? "", attrKey: "isEventSaved", attrValue: true)
                         isAddEventInProgress = false
+                        if isAccountDetailFlow {
+                            accountDetailViewModelObject.scrollToSection = "EventsList"
+                        }
+                        self.presentationMode.wrappedValue.dismiss()
                     }, onFailure: {
                         isAddEventInProgress = false
                     })
