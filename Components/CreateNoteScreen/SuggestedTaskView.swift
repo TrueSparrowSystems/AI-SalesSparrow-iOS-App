@@ -11,6 +11,7 @@ struct SuggestedTaskCardView: View {
     var accountId: String
     var suggestion: TaskSuggestionStruct
     var index: Int
+    @Binding var propagateClick : Int
     
     @EnvironmentObject var createNoteScreenViewModel : CreateNoteScreenViewModel
     @EnvironmentObject var createTaskViewModel : CreateTaskViewModel
@@ -21,10 +22,11 @@ struct SuggestedTaskCardView: View {
     @FocusState private var userSelected: Bool
     @State var isAddTaskInProgress = false
     
-    init(accountId: String,suggestion: TaskSuggestionStruct, index: Int) {
+    init(accountId: String,suggestion: TaskSuggestionStruct, index: Int, propagateClick: Binding<Int>) {
         self.accountId = accountId
         self.suggestion = suggestion
         self.index = index
+        self._propagateClick = propagateClick
     }
     
     var body: some View {
@@ -34,7 +36,7 @@ struct SuggestedTaskCardView: View {
             if ((suggestedTaskState["isTaskSaved"] as! Bool)){
                 SavedTaskCard(recommendedText: ((suggestedTaskState["description"] ?? "") as! String), selectedDate: selectedDate, assignedToUsername: (suggestedTaskState["assignedToUsername"] ?? "") as! String, index: index, accountId: accountId, taskId: (suggestedTaskState["taskId"] ?? "") as! String, onDeleteTask : {
                     createNoteScreenViewModel.removeTaskSuggestion(at: index)
-                })
+                }, propagateClick: $propagateClick)
             }else{
                 VStack{
                     // text editor component
@@ -291,6 +293,8 @@ struct SavedTaskCard : View {
     @State var isPopoverVisible: Bool = false
     @EnvironmentObject var acccountDetailScreenViewModelObject: AccountDetailViewScreenViewModel
     @EnvironmentObject var createNoteScreenViewModel: CreateNoteScreenViewModel
+    @Binding var propagateClick : Int
+    @State var isSelfPopupTriggered = false
     
     var body : some View {
         VStack {
@@ -318,6 +322,7 @@ struct SavedTaskCard : View {
                         .tracking(0.5)
                     
                     Button{
+                        isSelfPopupTriggered = true
                         isPopoverVisible.toggle()
                     } label: {
                         Image("DotsThreeOutline")
@@ -454,14 +459,18 @@ struct SavedTaskCard : View {
             .overlay(Rectangle().frame(width: nil, height: 1, alignment: .top).foregroundColor(Color("BorderColor")), alignment: .top)
             .background(Color("PastelGreen").opacity(0.2))
         }
+        .onChange(of: propagateClick){_ in
+            // onChange to hide Popover for events triggered by other cards or screen
+            
+            if(isSelfPopupTriggered){
+                // Don't hide popover if event trigged by self
+                isSelfPopupTriggered = false
+            }else{
+                isPopoverVisible = false
+            }
+        }
         .clipShape(RoundedRectangle(cornerRadius: 8))
         .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color("BorderColor"), lineWidth: 1))
         
-    }
-}
-
-struct SavedTaskCard_Previews: PreviewProvider {
-    static var previews: some View {
-        SavedTaskCard(recommendedText: "Hello text", selectedDate: Date(), assignedToUsername: "some user", index: 0, accountId: "sdfg34rf", taskId: "sdf234rtgv", onDeleteTask: {})
     }
 }

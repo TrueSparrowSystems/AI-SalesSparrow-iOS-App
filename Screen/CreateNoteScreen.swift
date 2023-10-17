@@ -20,6 +20,7 @@ struct CreateNoteScreen : View {
     @State var showAccountSearchView = false
     @State var isPopoverVisible = false
     @FocusState private var focused: Bool
+    @State var propagateClick = 0
     
     var body: some View {
         VStack{
@@ -225,12 +226,12 @@ struct CreateNoteScreen : View {
                             }
                             let addTaskSuggestions = createNoteScreenViewModel.suggestedData.add_task_suggestions ?? []
                             ForEach(Array(addTaskSuggestions.enumerated()), id: \.offset) { index, suggestion in
-                                SuggestedTaskCardView(accountId: accountId, suggestion:suggestion, index: index)
+                                SuggestedTaskCardView(accountId: accountId, suggestion:suggestion, index: index, propagateClick: $propagateClick)
                             }
                             
                             let addEventSuggestions = createNoteScreenViewModel.suggestedData.add_event_suggestions ?? []
                             ForEach(Array(addEventSuggestions.enumerated()), id: \.offset) { index, suggestion in
-                                SuggestedEventCardView(accountId: accountId, suggestion:suggestion, index: index)
+                                SuggestedEventCardView(accountId: accountId, suggestion:suggestion, index: index, propagateClick: $propagateClick)
                             }
                         }
                         
@@ -241,6 +242,16 @@ struct CreateNoteScreen : View {
                                 .offset(x: 35,y: 25)
                         }
                     }
+                    .simultaneousGesture(
+                        TapGesture().onEnded(){
+                            propagateClick += 1
+                        }
+                    )
+                    .simultaneousGesture(
+                        DragGesture().onChanged{_ in
+                            propagateClick += 1
+                        }
+                    )
                 }
             }
             .scrollIndicators(.hidden)
