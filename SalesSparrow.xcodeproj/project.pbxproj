@@ -91,7 +91,6 @@
 		4B8B6E202AC1641F00F2B66E /* EventDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8B6E1E2AC1641F00F2B66E /* EventDetailScreen.swift */; };
 		4B8B6E222AC172C300F2B66E /* EventDetailScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8B6E212AC172C300F2B66E /* EventDetailScreenViewModel.swift */; };
 		4B8B6E232AC172C300F2B66E /* EventDetailScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8B6E212AC172C300F2B66E /* EventDetailScreenViewModel.swift */; };
-		4B98BE4C2AC3734500EE0158 /* EventsListUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B98BE4B2AC3734500EE0158 /* EventsListUITests.swift */; };
 		4B9E5DE02A8CD59900041D65 /* UserAccountDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9E5DDF2A8CD59900041D65 /* UserAccountDetailScreen.swift */; };
 		4B9E5DE12A8CD59900041D65 /* UserAccountDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9E5DDF2A8CD59900041D65 /* UserAccountDetailScreen.swift */; };
 		4B9E5DE42A8CE6AD00041D65 /* AlertModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9E5DE32A8CE6AD00041D65 /* AlertModal.swift */; };
@@ -258,7 +257,6 @@
 		4B819B502A9667C000CE6293 /* SuggestedTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestedTaskView.swift; sourceTree = "<group>"; };
 		4B8B6E1E2AC1641F00F2B66E /* EventDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailScreen.swift; sourceTree = "<group>"; };
 		4B8B6E212AC172C300F2B66E /* EventDetailScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailScreenViewModel.swift; sourceTree = "<group>"; };
-		4B98BE4B2AC3734500EE0158 /* EventsListUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListUITests.swift; sourceTree = "<group>"; };
 		4B9E5DDF2A8CD59900041D65 /* UserAccountDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAccountDetailScreen.swift; sourceTree = "<group>"; };
 		4B9E5DE32A8CE6AD00041D65 /* AlertModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertModal.swift; sourceTree = "<group>"; };
 		4BA0A1B02AB43D2900C4D58D /* RenderFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderFields.swift; sourceTree = "<group>"; };
@@ -1196,6 +1194,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SalesSparrowDev/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Sales Sparrow Dev";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -1226,6 +1225,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SalesSparrowDev/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Sales Sparrow Dev";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -1372,6 +1372,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SalesSparrow/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Sales Sparrow";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -1404,6 +1405,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SalesSparrow/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Sales Sparrow";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
