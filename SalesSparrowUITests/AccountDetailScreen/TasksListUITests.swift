@@ -8,13 +8,7 @@
 import XCTest
 
 final class AccountDetailTaskListUITests: XCTestCase {
-    func testTasksSectionWithEmptyList() throws {
-        // Launch the app with the specified launch arguments
-        let app = XCUIApplication()
-        app.launchArguments = ["isRunningUITests","emptyTaskList"]
-        app.launch()
-        
-        // Set the timeout duration
+    func navigationToTaskSection(app: XCUIApplication) {
         let timeout = 5
         let accountIndex = 0
         
@@ -23,6 +17,18 @@ final class AccountDetailTaskListUITests: XCTestCase {
         accountNavigationLink.tap()
         
         app.swipeUp()
+    }
+    
+    func testTasksSectionWithEmptyList() throws {
+        // Launch the app with the specified launch arguments
+        let app = XCUIApplication()
+        app.launchArguments = ["isRunningUITests","emptyTaskList"]
+        app.launch()
+        
+        // Set the timeout duration
+        let timeout = 5
+        
+        navigationToTaskSection(app: app)
         
         // Check the Add Task button
         let addTaskButton = app.buttons["btn_account_detail_add_task"]
@@ -41,13 +47,8 @@ final class AccountDetailTaskListUITests: XCTestCase {
         
         // Set the timeout duration
         let timeout = 5
-        let accountIndex = 0
         
-        let accountNavigationLink = app.buttons["account_card_\(accountIndex)"]
-        XCTAssertTrue(accountNavigationLink.waitForExistence(timeout: TimeInterval(timeout)))
-        accountNavigationLink.tap()
-        
-        app.swipeUp()
+        navigationToTaskSection(app: app)
         
         // Check the Add Task button
         let addTaskButton = app.buttons["btn_account_detail_add_task"]
@@ -74,13 +75,8 @@ final class AccountDetailTaskListUITests: XCTestCase {
         
         // Set the timeout duration
         let timeout = 5
-        let accountIndex = 0
-        
-        let accountNavigationLink = app.buttons["account_card_\(accountIndex)"]
-        XCTAssertTrue(accountNavigationLink.waitForExistence(timeout: TimeInterval(timeout)))
-        accountNavigationLink.tap()
-        
-        app.swipeUp()
+       
+        navigationToTaskSection(app: app)
         
         XCTAssertTrue(app.staticTexts["toast_view_text"].waitForExistence(timeout: TimeInterval(timeout)))
         XCTAssertTrue(app.staticTexts["txt_account_detail_add_task"].waitForExistence(timeout: TimeInterval(timeout)))
@@ -95,13 +91,8 @@ final class AccountDetailTaskListUITests: XCTestCase {
         
         // Set the timeout duration
         let timeout = 5
-        let accountIndex = 0
-        
-        let accountNavigationLink = app.buttons["account_card_\(accountIndex)"]
-        XCTAssertTrue(accountNavigationLink.waitForExistence(timeout: TimeInterval(timeout)))
-        accountNavigationLink.tap()
-        
-        app.swipeUp()
+       
+        navigationToTaskSection(app: app)
         
         // Check the Add Task button
         let addTaskButton = app.buttons["btn_account_detail_add_task"]
@@ -117,13 +108,8 @@ final class AccountDetailTaskListUITests: XCTestCase {
         
         // Set the timeout duration
         let timeout = 5
-        let accountIndex = 0
         
-        let accountNavigationLink = app.buttons["account_card_\(accountIndex)"]
-        XCTAssertTrue(accountNavigationLink.waitForExistence(timeout: TimeInterval(timeout)))
-        accountNavigationLink.tap()
-        
-        app.swipeUp()
+        navigationToTaskSection(app: app)
         
         let taskCard = app.buttons["task_card_0"]
         XCTAssertTrue(taskCard.waitForExistence(timeout: TimeInterval(timeout)))
@@ -154,11 +140,7 @@ final class AccountDetailTaskListUITests: XCTestCase {
         let timeout = 5
         let accountIndex = 0
         
-        let accountNavigationLink = app.buttons["account_card_\(accountIndex)"]
-        XCTAssertTrue(accountNavigationLink.waitForExistence(timeout: TimeInterval(timeout)))
-        accountNavigationLink.tap()
-        
-        app.swipeUp()
+        navigationToTaskSection(app: app)
         
         let card1Description = app.staticTexts["txt_account_detail_task_description_\(accountIndex)"].label
         
@@ -187,11 +169,7 @@ final class AccountDetailTaskListUITests: XCTestCase {
         let timeout = 5
         let accountIndex = 0
         
-        let accountNavigationLink = app.buttons["account_card_\(accountIndex)"]
-        XCTAssertTrue(accountNavigationLink.waitForExistence(timeout: TimeInterval(timeout)))
-        accountNavigationLink.tap()
-        
-        app.swipeUp()
+        navigationToTaskSection(app: app)
 
         app.buttons["btn_account_detail_task_more_\(accountIndex)"].tap()
         
@@ -215,11 +193,7 @@ final class AccountDetailTaskListUITests: XCTestCase {
         let timeout = 5
         let accountIndex = 0
         
-        let accountNavigationLink = app.buttons["account_card_\(accountIndex)"]
-        XCTAssertTrue(accountNavigationLink.waitForExistence(timeout: TimeInterval(timeout)))
-        accountNavigationLink.tap()
-        
-        app.swipeUp()
+        navigationToTaskSection(app: app)
      
         let descriptionForTask1 = app.staticTexts["txt_account_detail_task_description_\(accountIndex)"].label
         

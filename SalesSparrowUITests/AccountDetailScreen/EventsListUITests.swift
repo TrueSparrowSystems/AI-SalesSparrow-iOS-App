@@ -8,13 +8,7 @@
 import XCTest
 
 final class AccountDetailEventListUITests: XCTestCase {
-    func testEventsSectionWithEmptyList() throws {
-        // Launch the app with the specified launch arguments
-        let app = XCUIApplication()
-        app.launchArguments = ["isRunningUITests","emptyEventList"]
-        app.launch()
-        
-        // Set the timeout duration
+    func navigationToEventSection(app: XCUIApplication) {
         let timeout = 5
         let accountIndex = 0
         
@@ -23,6 +17,18 @@ final class AccountDetailEventListUITests: XCTestCase {
         accountNavigationLink.tap()
         
         app.swipeUp()
+    }
+    
+    func testEventsSectionWithEmptyList() throws {
+        // Launch the app with the specified launch arguments
+        let app = XCUIApplication()
+        app.launchArguments = ["isRunningUITests","emptyEventList"]
+        app.launch()
+        
+        // Set the timeout duration
+        let timeout = 5
+        
+        navigationToEventSection(app: app)
         
         // Check the Add Event button
         let addEventButton = app.buttons["btn_account_detail_add_event"]
@@ -43,11 +49,7 @@ final class AccountDetailEventListUITests: XCTestCase {
         let timeout = 5
         let accountIndex = 0
         
-        let accountNavigationLink = app.buttons["account_card_\(accountIndex)"]
-        XCTAssertTrue(accountNavigationLink.waitForExistence(timeout: TimeInterval(timeout)))
-        accountNavigationLink.tap()
-        
-        app.swipeUp()
+        navigationToEventSection(app: app)
         
         // Check the Add Event button
         let addEventButton = app.buttons["btn_account_detail_add_event"]
@@ -77,12 +79,7 @@ final class AccountDetailEventListUITests: XCTestCase {
         // Set the timeout duration
         let timeout = 5
         
-        // Open the account detail using the helper function
-        let accountNavigationLink = app.buttons["account_card_\(0)"]
-        XCTAssertTrue(accountNavigationLink.waitForExistence(timeout: TimeInterval(timeout)))
-        accountNavigationLink.tap()
-        
-        app.swipeUp()
+        navigationToEventSection(app: app)
         
         XCTAssertTrue(app.staticTexts["toast_view_text"].waitForExistence(timeout: TimeInterval(timeout)))
     }
@@ -95,13 +92,8 @@ final class AccountDetailEventListUITests: XCTestCase {
         
         // Set the timeout duration
         let timeout = 5
-        let accountIndex = 0
         
-        let accountNavigationLink = app.buttons["account_card_\(accountIndex)"]
-        XCTAssertTrue(accountNavigationLink.waitForExistence(timeout: TimeInterval(timeout)))
-        accountNavigationLink.tap()
-        
-        app.swipeUp()
+        navigationToEventSection(app: app)
         
         // Check the Add Event button
         let addEventButton = app.buttons["btn_account_detail_add_event"]
@@ -117,13 +109,8 @@ final class AccountDetailEventListUITests: XCTestCase {
         
         // Set the timeout duration
         let timeout = 5
-        let accountIndex = 0
         
-        let accountNavigationLink = app.buttons["account_card_\(accountIndex)"]
-        XCTAssertTrue(accountNavigationLink.waitForExistence(timeout: TimeInterval(timeout)))
-        accountNavigationLink.tap()
-        
-        app.swipeUp()
+        navigationToEventSection(app: app)
         
         let EventCard = app.buttons["event_card_0"]
         XCTAssertTrue(EventCard.waitForExistence(timeout: TimeInterval(timeout)))
@@ -151,14 +138,10 @@ final class AccountDetailEventListUITests: XCTestCase {
         // Set the timeout duration
         let timeout = 5
         let accountIndex = 0
+        navigationToEventSection(app: app)
         
-        let accountNavigationLink = app.buttons["account_card_\(accountIndex)"]
-        XCTAssertTrue(accountNavigationLink.waitForExistence(timeout: TimeInterval(timeout)))
-        accountNavigationLink.tap()
+        let EventCard = app.buttons["event_card_\(accountIndex)"]
         
-        app.swipeUp()
-        
-        let EventCard = app.buttons["event_card_0"]
         XCTAssertTrue(EventCard.waitForExistence(timeout: TimeInterval(timeout)))
         EventCard.tap()
         
@@ -175,11 +158,7 @@ final class AccountDetailEventListUITests: XCTestCase {
         let timeout = 5
         let accountIndex = 0
         
-        let accountNavigationLink = app.buttons["account_card_\(accountIndex)"]
-        XCTAssertTrue(accountNavigationLink.waitForExistence(timeout: TimeInterval(timeout)))
-        accountNavigationLink.tap()
-        
-        app.swipeUp()
+        navigationToEventSection(app: app)
         
         let descriptionForEvent1BeforeDelete = app.staticTexts["txt_account_detail_event_description_\(accountIndex)"].label
         
@@ -211,11 +190,7 @@ final class AccountDetailEventListUITests: XCTestCase {
         let timeout = 5
         let accountIndex = 0
         
-        let accountNavigationLink = app.buttons["account_card_\(accountIndex)"]
-        XCTAssertTrue(accountNavigationLink.waitForExistence(timeout: TimeInterval(timeout)))
-        accountNavigationLink.tap()
-        
-        app.swipeUp()
+        navigationToEventSection(app: app)
         
         app.buttons["btn_account_detail_event_more_0"].tap()
         
@@ -240,11 +215,7 @@ final class AccountDetailEventListUITests: XCTestCase {
         let timeout = 5
         let accountIndex = 0
         
-        let accountNavigationLink = app.buttons["account_card_\(accountIndex)"]
-        XCTAssertTrue(accountNavigationLink.waitForExistence(timeout: TimeInterval(timeout)))
-        accountNavigationLink.tap()
-        
-        app.swipeUp()
+        navigationToEventSection(app: app)
         
         app.buttons["btn_account_detail_event_more_0"].tap()
         
@@ -270,11 +241,8 @@ final class AccountDetailEventListUITests: XCTestCase {
         let timeout = 5
         let accountIndex = 0
         
-        let accountNavigationLink = app.buttons["account_card_\(accountIndex)"]
-        XCTAssertTrue(accountNavigationLink.waitForExistence(timeout: TimeInterval(timeout)))
-        accountNavigationLink.tap()
+        navigationToEventSection(app: app)
         
-        app.swipeUp()
         let descriptionForEvent1 = app.staticTexts["txt_account_detail_event_description_0"].label
         
         app.swipeUp()
