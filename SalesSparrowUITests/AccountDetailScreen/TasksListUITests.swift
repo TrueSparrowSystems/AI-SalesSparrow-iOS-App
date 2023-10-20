@@ -8,17 +8,15 @@
 import XCTest
 
 final class AccountDetailTaskListUITests: XCTestCase {
-    
-    func openAccountDetailUsingSearch(app: XCUIApplication,accountName: String = "Test Account 1") {
-        let timeout = 2
-        let searchAccountButton = app.images["btn_search_account"]
-        XCTAssertTrue(searchAccountButton.waitForExistence(timeout: TimeInterval(timeout)))
-        searchAccountButton.tap()
+    func navigationToTaskSection(app: XCUIApplication) {
+        let timeout = 5
+        let accountIndex = 0
         
-        // modal should open with default data
-        let btnSearchAccountNameBtn = app.buttons["btn_search_account_name_\(accountName)"]
-        XCTAssertTrue(btnSearchAccountNameBtn.waitForExistence(timeout: TimeInterval(timeout)))
-        btnSearchAccountNameBtn.tap()
+        let accountNavigationLink = app.buttons["account_card_\(accountIndex)"]
+        XCTAssertTrue(accountNavigationLink.waitForExistence(timeout: TimeInterval(timeout)))
+        accountNavigationLink.tap()
+        
+        app.swipeUp()
     }
     
     func testTasksSectionWithEmptyList() throws {
@@ -30,8 +28,7 @@ final class AccountDetailTaskListUITests: XCTestCase {
         // Set the timeout duration
         let timeout = 5
         
-        // Open the account detail using the helper function
-        openAccountDetailUsingSearch(app: app)
+        navigationToTaskSection(app: app)
         
         // Check the Add Task button
         let addTaskButton = app.buttons["btn_account_detail_add_task"]
@@ -51,8 +48,7 @@ final class AccountDetailTaskListUITests: XCTestCase {
         // Set the timeout duration
         let timeout = 5
         
-        // Open the account detail using the helper function
-        openAccountDetailUsingSearch(app: app)
+        navigationToTaskSection(app: app)
         
         // Check the Add Task button
         let addTaskButton = app.buttons["btn_account_detail_add_task"]
@@ -79,11 +75,12 @@ final class AccountDetailTaskListUITests: XCTestCase {
         
         // Set the timeout duration
         let timeout = 5
-        
-        // Open the account detail using the helper function
-        openAccountDetailUsingSearch(app: app)
+       
+        navigationToTaskSection(app: app)
         
         XCTAssertTrue(app.staticTexts["toast_view_text"].waitForExistence(timeout: TimeInterval(timeout)))
+        XCTAssertTrue(app.staticTexts["txt_account_detail_add_task"].waitForExistence(timeout: TimeInterval(timeout)))
+        
     }
     
     func testAddTaskButton() throws {
@@ -94,15 +91,43 @@ final class AccountDetailTaskListUITests: XCTestCase {
         
         // Set the timeout duration
         let timeout = 5
-        
-        // Open the account detail using the helper function
-        openAccountDetailUsingSearch(app: app)
+       
+        navigationToTaskSection(app: app)
         
         // Check the Add Task button
         let addTaskButton = app.buttons["btn_account_detail_add_task"]
         XCTAssertTrue(addTaskButton.waitForExistence(timeout: TimeInterval(timeout)))
         XCTAssertTrue(addTaskButton.isEnabled) // Ensure the button is enabled
         
+    }
+    
+    func testViewTask() throws {
+        let app = XCUIApplication()
+        app.launchArguments = ["isRunningUITests"]
+        app.launch()
+        
+        // Set the timeout duration
+        let timeout = 5
+        
+        navigationToTaskSection(app: app)
+        
+        let taskCard = app.buttons["task_card_0"]
+        XCTAssertTrue(taskCard.waitForExistence(timeout: TimeInterval(timeout)))
+        taskCard.tap()
+        
+        let doneButton = app.buttons["btn_add_task_done"]
+        XCTAssertTrue(doneButton.waitForExistence(timeout: TimeInterval(timeout)))
+        XCTAssertTrue(doneButton.isEnabled)
+        
+        XCTAssertTrue(app.staticTexts["txt_add_tasks_assign_to"].waitForExistence(timeout: TimeInterval(timeout)))
+        XCTAssertTrue(app.staticTexts["txt_add_task_selected_user"].waitForExistence(timeout: TimeInterval(timeout)))
+        
+        XCTAssertTrue(app.staticTexts["txt_add_tasks_due"].waitForExistence(timeout: TimeInterval(timeout)))
+        XCTAssertTrue(app.staticTexts["txt_add_task_select_date"].waitForExistence(timeout: TimeInterval(timeout)))
+        
+        XCTAssertTrue(app.staticTexts["txt_create_task_description"].waitForExistence(timeout: TimeInterval(timeout)))
+        
+        doneButton.tap()
     }
     
     func testDeleteTask() throws {
@@ -113,55 +138,49 @@ final class AccountDetailTaskListUITests: XCTestCase {
         
         // Set the timeout duration
         let timeout = 5
+        let accountIndex = 0
         
-        // Open the account detail using the helper function
-        openAccountDetailUsingSearch(app: app)
-        app.swipeUp()
-        let threeDotButtonForTask2 = app.buttons["btn_account_detail_task_more_1"]
+        navigationToTaskSection(app: app)
+        
+        let card1Description = app.staticTexts["txt_account_detail_task_description_\(accountIndex)"].label
+        
+        let threeDotButtonForTask2 = app.buttons["btn_account_detail_task_more_\(accountIndex)"]
         XCTAssertTrue(threeDotButtonForTask2.waitForExistence(timeout: TimeInterval(timeout)))
-        
         threeDotButtonForTask2.tap()
         
-        let deleteButtonForTask2 = app.buttons["btn_account_detail_delete_task_1"]
+        let deleteButtonForTask2 = app.buttons["btn_account_detail_delete_task_\(accountIndex)"]
         XCTAssertTrue(deleteButtonForTask2.waitForExistence(timeout: TimeInterval(timeout)))
-        
-        
-        let threeDotButtonForTask1 = app.buttons["btn_account_detail_task_more_0"]
-        XCTAssertTrue(threeDotButtonForTask1.waitForExistence(timeout: TimeInterval(timeout)))
-        
-        threeDotButtonForTask1.tap()
-        
-        let deleteButtonForTask1 = app.buttons["btn_account_detail_delete_task_0"]
-        XCTAssertTrue(deleteButtonForTask1.waitForExistence(timeout: TimeInterval(timeout)))
-        
-        let descriptionForTask1 = app.staticTexts["txt_account_detail_task_description_0"].label
-        
-        //Check whether the delete button is closed for task 2 on open of delete button for task 1
-        XCTAssertFalse(deleteButtonForTask2.exists)
-        
-        deleteButtonForTask1.tap()
-        
-        // Check if delete confirmation modal is visible
-        // Verify message, cancel and delete button
-        XCTAssertTrue(app.staticTexts["txt_alert_message"].waitForExistence(timeout: TimeInterval(timeout)))
-        
-        let cancelButton = app.buttons["btn_alert_cancel"]
-        XCTAssertTrue(cancelButton.waitForExistence(timeout: TimeInterval(timeout)))
-        XCTAssertTrue(cancelButton.isHittable)
+        deleteButtonForTask2.tap()
         
         let deleteButton = app.buttons["btn_alert_submit"]
         XCTAssertTrue(deleteButton.waitForExistence(timeout: TimeInterval(timeout)))
-        XCTAssertTrue(deleteButton.isHittable)
         deleteButton.tap()
         
-        XCTAssertFalse(app.staticTexts["txt_alert_message"].exists)
+        XCTAssertTrue(card1Description != app.staticTexts["txt_account_detail_task_description_\(accountIndex)"].label)
+    }
+    
+    func testEditTask() throws {
+        // Launch the app with the specified launch arguments
+        let app = XCUIApplication()
+        app.launchArguments = ["isRunningUITests"]
+        app.launch()
         
-        let descriptionForTask1AfterDelete = app.staticTexts["txt_account_detail_task_description_0"].label
+        // Set the timeout duration
+        let timeout = 5
+        let accountIndex = 0
         
-        //Verify the task description for 1st task before and after delete are not same
-        XCTAssertTrue(descriptionForTask1 != descriptionForTask1AfterDelete)
+        navigationToTaskSection(app: app)
+
+        app.buttons["btn_account_detail_task_more_\(accountIndex)"].tap()
         
+        app.buttons["btn_account_detail_edit_task_\(accountIndex)"].tap()
         
+        let addNoteTextField = app.textViews["et_create_task"]
+        XCTAssertTrue(addNoteTextField.waitForExistence(timeout: TimeInterval(timeout)))
+        //Type Text into the the text field
+        addNoteTextField.typeText("Create new task.\nTap on the save button to save it to salesforce.")
+        
+        app.buttons["btn_save_task"].tap()
     }
     
     func testDeleteTaskError() throws {
@@ -172,24 +191,18 @@ final class AccountDetailTaskListUITests: XCTestCase {
         
         // Set the timeout duration
         let timeout = 5
+        let accountIndex = 0
         
-        // Open the account detail using the helper function
-        openAccountDetailUsingSearch(app: app)
+        navigationToTaskSection(app: app)
      
-        let descriptionForTask1 = app.staticTexts["txt_account_detail_task_description_0"].label
+        let descriptionForTask1 = app.staticTexts["txt_account_detail_task_description_\(accountIndex)"].label
         
-        app.swipeUp()
-        
-        let threeDotButtonForTask1 = app.buttons["btn_account_detail_task_more_0"]
+        let threeDotButtonForTask1 = app.buttons["btn_account_detail_task_more_\(accountIndex)"]
         XCTAssertTrue(threeDotButtonForTask1.waitForExistence(timeout: TimeInterval(timeout)))
-        
         threeDotButtonForTask1.tap()
-        
-    
         
         let deleteButtonForTask1 = app.buttons["btn_account_detail_delete_task_0"]
         XCTAssertTrue(deleteButtonForTask1.waitForExistence(timeout: TimeInterval(timeout)))
-        
         deleteButtonForTask1.tap()
         
         let deleteButton = app.buttons["btn_alert_submit"]

@@ -60,24 +60,11 @@ struct AddButtonPopoverComponent: View{
                 .stroke(Color("CardBorder"), lineWidth: 1)
         )
         .frame(width: 200, height: 100)
-        .background{
-            NavigationLink(destination:
-                            CreateTaskScreen(accountId: accountId, suggestionId: suggestionId),
-                           isActive: self.$addTaskActivated
-            ) {
-                EmptyView()
-            }
-            .hidden()
-        }
-        .background{
-            NavigationLink(destination:
-                            CreateEventScreen(accountId: accountId, suggestionId: suggestionId),
-                           isActive: self.$addEventActivated
-            ) {
-                EmptyView()
-            }
-            .hidden()
-        }
-        
+        .navigationDestination(isPresented: self.$addTaskActivated, destination: {
+            CreateTaskScreen(accountId: accountId, suggestionId: suggestionId)
+        })
+        .navigationDestination(isPresented: self.$addEventActivated, destination: {
+            CreateEventScreen(accountId: accountId, suggestionId: suggestionId)
+        })
     }
 }

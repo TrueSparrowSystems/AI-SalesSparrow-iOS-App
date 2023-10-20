@@ -141,11 +141,43 @@ struct BasicHelper {
         }
     }
     
+    static func getDateFromString(_ dateTimeString: String) -> Date {
+        let dateFormatter = DateFormatter()
+        var dateFormat: String = ""
+        
+        if dateTimeString.contains("/") {
+            // Input is in the "dd/MM/yyyy" format
+            dateFormat = "dd/MM/yyyy"
+        } else if dateTimeString.contains("T") && dateTimeString.contains(":") {
+            // Input is in the "yyyy-MM-dd'T'HH:mm:ss.SSSZ" format
+            dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        } else {
+            // Default format (e.g., "yyyy-MM-dd")
+            dateFormat = "yyyy-MM-dd"
+        }
+        
+        dateFormatter.dateFormat = dateFormat
+        
+        if let date = dateFormatter.date(from: dateTimeString) {
+            return date
+        } else {
+            return Date()
+        }
+    }
+    
     static func getDateStringFromDate(from date: Date, dateFormat: String = "dd/MM/yyyy" ) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = dateFormat
         let formattedDateString = dateFormatter.string(from: date)
         return formattedDateString
+    }
+    
+    static func formatDate(_ date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd" // Change this format to your desired format
+        dateFormatter.timeZone = TimeZone(abbreviation: "GMT") // Ensure you set the correct time zone
+
+        return dateFormatter.string(from: date)
     }
     
     static func getTimeStringFromDate(from date: Date, timeFormat: String = "hh:mm a" ) -> String {

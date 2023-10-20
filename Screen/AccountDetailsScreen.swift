@@ -15,40 +15,52 @@ struct AccountDetailsScreen: View {
     @State var propagateClick = 0
     
     var body: some View {
-        ScrollView{
-            VStack(spacing: 20) {
-                
-                AccountDetailsHeader(accountId: accountId, accountName: accountName)
-                
-                // Contact list component
-                AccountContactDetail(accountId: accountId, accountName: accountName)
-                
-                NotesList(accountId: accountId, accountName: accountName, propagateClick: $propagateClick)
-                
-                TasksList(accountId: accountId, accountName: accountName, propagateClick: $propagateClick)
-                
-                EventsList(accountId: accountId, accountName: accountName, propagateClick: $propagateClick)
-                
+        ScrollViewReader { proxy in
+            ScrollView{
+                VStack(spacing: 20) {
+                    
+                    AccountDetailsHeader(accountId: accountId, accountName: accountName)
+                    
+                    // Contact list component
+                    //                AccountContactDetail(accountId: accountId, accountName: accountName)
+                    
+                    NotesList(accountId: accountId, accountName: accountName, propagateClick: $propagateClick)
+                        .id("NotesList")
+                    
+                    TasksList(accountId: accountId, accountName: accountName, propagateClick: $propagateClick)
+                        .id("TasksList")
+                    
+                    EventsList(accountId: accountId, accountName: accountName, propagateClick: $propagateClick)
+                        .id("EventsList")
+                }
             }
+            .onAppear {
+                //            accountDetailViewModelObject.fetchAccountDetail(accountId: accountId)
+                if !accountDetailViewModelObject.scrollToSection.isEmpty {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                        withAnimation(.linear(duration: 1)) {
+                            proxy.scrollTo(accountDetailViewModelObject.scrollToSection)
+                        }
+                        accountDetailViewModelObject.scrollToSection = ""
+                    }
+                }
+            }
+            .simultaneousGesture(
+                TapGesture().onEnded(){
+                    propagateClick += 1
+                }
+            )
+            .simultaneousGesture(
+                DragGesture().onChanged{_ in
+                    propagateClick += 1
+                }
+            )
+            .padding(.vertical)
+            .padding(.leading)
+            .background(Color("Background"))
+            .navigationBarBackButtonHidden(true)
+            .navigationBarItems(leading: backButton)
         }
-        .onAppear {
-            accountDetailViewModelObject.fetchAccountDetail(accountId: accountId)
-        }
-        .simultaneousGesture(
-            TapGesture().onEnded(){
-                propagateClick += 1
-            }
-        )
-        .simultaneousGesture(
-            DragGesture().onChanged{_ in
-                propagateClick += 1
-            }
-        )
-        .padding(.vertical)
-        .padding(.leading)
-        .background(Color("Background"))
-        .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: backButton)
     }
     
     private var backButton: some View {
