@@ -30,7 +30,7 @@ struct TaskDetailScreen: View {
                 Button(action: {
                     self.presentationMode.wrappedValue.dismiss()
                 }, label: {
-                    Text(isTaskSaved ? "Done" : "Cancel")
+                    Text(isEditFlow ? (isTaskSaved ? "Done" : "Cancel") : "Done")
                         .font(.custom("Nunito-Bold", size: 14))
                         .padding(.vertical, 10)
                         .foregroundColor(Color("CancelText"))

@@ -23,7 +23,7 @@ struct NoteDetailScreen : View {
     var body: some View {
         VStack{
             HStack(alignment: .center){
-                Text((isNoteSaved) ? "Done" : "Cancel")
+                Text(isEditFlow ? (isNoteSaved ? "Done" : "Cancel") : "Done")
                     .font(.custom("Nunito-Bold", size: 14))
                     .padding(.vertical, 10)
                     .foregroundColor(Color("CancelText"))
@@ -81,7 +81,7 @@ struct NoteDetailScreen : View {
                 })
                 .accessibilityIdentifier("btn_save_task")
                 .disabled((accountId.isEmpty || noteId.isEmpty || description.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || !parameterChanged) ? true : false)
-                .opacity((accountId.isEmpty || noteId.isEmpty || description.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || !parameterChanged) ? 0.7 : 1)
+                .opacity(isEditFlow ? ((accountId.isEmpty || noteId.isEmpty || description.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || !parameterChanged) ? 0.7 : 1) : 0)
             }
             
             if(noteDetailScreenViewModel.isFetchNoteDetailInProgress){

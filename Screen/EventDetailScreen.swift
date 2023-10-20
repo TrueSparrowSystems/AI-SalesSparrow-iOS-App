@@ -30,7 +30,7 @@ struct EventDetailScreen: View {
                 Button(action: {
                     self.presentationMode.wrappedValue.dismiss()
                 }, label: {
-                    Text((isEventSaved) ? "Done" : "Cancel")
+                    Text(isEditFlow ? (isEventSaved ? "Done" : "Cancel") : "Done")
                         .font(.custom("Nunito-Bold", size: 14))
                         .padding(.vertical, 10)
                         .foregroundColor(Color("CancelText"))
