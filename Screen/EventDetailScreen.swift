@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct EventDetailScreen: View {
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var eventDetailScreenViewModel : EventDetailScreenViewModel
     
     var accountId: String
@@ -28,7 +28,7 @@ struct EventDetailScreen: View {
         VStack{
             HStack{
                 Button(action: {
-                    self.presentationMode.wrappedValue.dismiss()
+                    dismiss()
                 }, label: {
                     Text(isEditFlow ? (isEventSaved ? "Done" : "Cancel") : "Done")
                         .font(.custom("Nunito-Bold", size: 14))
@@ -42,7 +42,7 @@ struct EventDetailScreen: View {
                 Button(action: {
                     eventDetailScreenViewModel.editEvent(accountId: accountId, eventId: eventId, description: description, startDate: startDate, startTime: startTime, endDate: endDate, endTime: endTime, onSuccess: {
                         isEventSaved = true
-                        self.presentationMode.wrappedValue.dismiss()
+                        dismiss()
                     }, onFailure: {})
                 }, label:{
                     HStack(alignment: .center, spacing: 0){
@@ -278,7 +278,7 @@ struct EventDetailScreen: View {
         }
         .onAppear {
             eventDetailScreenViewModel.fetchEventDetail(accountId: accountId, eventId: eventId, onSuccess: {}, onFailure: {
-                self.presentationMode.wrappedValue.dismiss()
+                dismiss()
             })
         }
         .onReceive(eventDetailScreenViewModel.$currentEventData){ currentEvent in
@@ -312,7 +312,6 @@ struct EventDetailScreen: View {
                 parameterChanged = false
                 isEventSaved = true
             }
-            endDate = startDate
         }
         .onChange(of: startTime) { startTime  in
             if isParameterAltered() {
@@ -321,9 +320,6 @@ struct EventDetailScreen: View {
             } else if areParameterSame() {
                 parameterChanged = false
                 isEventSaved = true
-            }
-            if let oneHourLater = calendar.date(byAdding: .hour, value: 1, to: startTime) {
-                endTime = oneHourLater
             }
         }
         .onChange(of: endDate) { endDate  in

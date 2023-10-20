@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TaskDetailScreen: View {
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var taskDetailScreenViewModel : TaskDetailScreenViewModel
     
     var accountId: String
@@ -28,7 +28,7 @@ struct TaskDetailScreen: View {
         VStack{
             HStack{
                 Button(action: {
-                    self.presentationMode.wrappedValue.dismiss()
+                    dismiss()
                 }, label: {
                     Text(isEditFlow ? (isTaskSaved ? "Done" : "Cancel") : "Done")
                         .font(.custom("Nunito-Bold", size: 14))
@@ -42,7 +42,7 @@ struct TaskDetailScreen: View {
                 Button(action: {
                     taskDetailScreenViewModel.EditTaskDetail(accountId: accountId, taskId: taskId, crm_organization_user_id: crm_organization_user_id, description: description, due_date: BasicHelper.formatDate(selectedDate), onSuccess: {
                         isTaskSaved = true
-                        self.presentationMode.wrappedValue.dismiss()
+                        dismiss()
                     })
                 }, label:{
                     HStack(alignment: .center, spacing: 0){
@@ -218,7 +218,7 @@ struct TaskDetailScreen: View {
         }
         .onAppear {
             taskDetailScreenViewModel.fetchTaskDetail(accountId: accountId, taskId: taskId, onFailure: {
-                self.presentationMode.wrappedValue.dismiss()
+                dismiss()
             })
         }
         .onReceive(taskDetailScreenViewModel.$currentTaskData){ currentTask  in

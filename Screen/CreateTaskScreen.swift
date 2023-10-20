@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CreateTaskScreen: View {
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var createTaskViewModel : CreateTaskViewModel
     @EnvironmentObject var createNoteScreenViewModel : CreateNoteScreenViewModel
     @EnvironmentObject var accountDetailViewModelObject : AccountDetailScreenViewModel
@@ -33,7 +33,7 @@ struct CreateTaskScreen: View {
                     .foregroundColor(Color("CancelText"))
                     .accessibilityIdentifier((suggestedTaskState["isTaskSaved"] as! Bool) ? "btn_add_task_done" : "btn_add_task_cancel")
                     .onTapGesture {
-                        self.presentationMode.wrappedValue.dismiss()
+                        dismiss()
                     }
                 
                 Spacer()
@@ -47,7 +47,7 @@ struct CreateTaskScreen: View {
                         if isAccountDetailFlow {
                             accountDetailViewModelObject.scrollToSection = "TasksList"
                         }
-                        self.presentationMode.wrappedValue.dismiss()
+                        dismiss()
                     }, onFailure: {
                         isAddTaskInProgress = false
                     })

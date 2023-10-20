@@ -9,7 +9,7 @@ import SwiftUI
 
 struct NoteDetailScreen : View {
     @EnvironmentObject var noteDetailScreenViewModel : NoteDetailScreenViewModel
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+     @Environment(\.dismiss) private var dismiss
     
     var accountId: String
     var accountName: String
@@ -29,14 +29,14 @@ struct NoteDetailScreen : View {
                     .foregroundColor(Color("CancelText"))
                     .accessibilityIdentifier((isNoteSaved) ? "btn_note_screen_done" : "btn_note_screen_cancel")
                     .onTapGesture {
-                        self.presentationMode.wrappedValue.dismiss()
+                        dismiss()
                     }
                 
                 Spacer()
                 Button(action: {
                     noteDetailScreenViewModel.EditNoteDetail(text: description, accountId: accountId, noteId: noteId, onSuccess: {
                         isNoteSaved = true
-                        self.presentationMode.wrappedValue.dismiss()
+                        dismiss()
                     })
                     }, label:{
                     HStack(alignment: .center, spacing: 0){
