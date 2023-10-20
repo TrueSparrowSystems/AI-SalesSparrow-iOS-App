@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct EventDetailScreen: View {
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var eventDetailScreenViewModel : EventDetailScreenViewModel
     
     var accountId: String
@@ -28,7 +28,7 @@ struct EventDetailScreen: View {
         VStack{
             HStack{
                 Button(action: {
-                    self.presentationMode.wrappedValue.dismiss()
+                    dismiss()
                 }, label: {
                     Text((isEventSaved) ? "Done" : "Cancel")
                         .font(.custom("Nunito-Bold", size: 14))
@@ -42,7 +42,7 @@ struct EventDetailScreen: View {
                 Button(action: {
                     eventDetailScreenViewModel.editEvent(accountId: accountId, eventId: eventId, description: description, startDate: startDate, startTime: startTime, endDate: endDate, endTime: endTime, onSuccess: {
                         isEventSaved = true
-                        self.presentationMode.wrappedValue.dismiss()
+                        dismiss()
                     }, onFailure: {})
                 }, label:{
                     HStack(alignment: .center, spacing: 0){
@@ -278,7 +278,7 @@ struct EventDetailScreen: View {
         }
         .onAppear {
             eventDetailScreenViewModel.fetchEventDetail(accountId: accountId, eventId: eventId, onSuccess: {}, onFailure: {
-                self.presentationMode.wrappedValue.dismiss()
+                dismiss()
             })
         }
         .onReceive(eventDetailScreenViewModel.$currentEventData){ currentEvent in

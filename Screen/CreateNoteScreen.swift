@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CreateNoteScreen : View {
     @EnvironmentObject var createNoteScreenViewModel : CreateNoteScreenViewModel
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @Environment(\.dismiss) private var dismiss
     
     @State var text: String = ""
     @State var isSaveInProgress = false
@@ -31,7 +31,7 @@ struct CreateNoteScreen : View {
                     .foregroundColor(Color("CancelText"))
                     .accessibilityIdentifier(isNoteSaved ? "btn_done_create_note" : "btn_cancel_create_note")
                     .onTapGesture {
-                        self.presentationMode.wrappedValue.dismiss()
+                        dismiss()
                     }
                 
                 Spacer()

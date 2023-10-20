@@ -10,7 +10,7 @@ import SwiftUI
 struct AccountDetailsScreen: View {
     var accountId: String
     var accountName: String
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var accountDetailViewModelObject : AccountDetailScreenViewModel
     @State var propagateClick = 0
     
@@ -66,7 +66,7 @@ struct AccountDetailsScreen: View {
     private var backButton: some View {
         Button(action: {
             // This will dismiss the AccountDetailsScreen and go back to the previous view
-            self.presentationMode.wrappedValue.dismiss()
+            dismiss()
         }) {
             HStack {
                 Image("ArrowLeft")
