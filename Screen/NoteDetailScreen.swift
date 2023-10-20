@@ -9,7 +9,7 @@ import SwiftUI
 
 struct NoteDetailScreen : View {
     @EnvironmentObject var noteDetailScreenViewModel : NoteDetailScreenViewModel
-     @Environment(\.dismiss) private var dismiss
+    @Environment(\.dismiss) private var dismiss
     
     var accountId: String
     var accountName: String
@@ -23,7 +23,7 @@ struct NoteDetailScreen : View {
     var body: some View {
         VStack{
             HStack(alignment: .center){
-                Text((isNoteSaved) ? "Done" : "Cancel")
+                Text(isEditFlow ? (isNoteSaved ? "Done" : "Cancel") : "Done")
                     .font(.custom("Nunito-Bold", size: 14))
                     .padding(.vertical, 10)
                     .foregroundColor(Color("CancelText"))
@@ -33,55 +33,57 @@ struct NoteDetailScreen : View {
                     }
                 
                 Spacer()
-                Button(action: {
-                    noteDetailScreenViewModel.EditNoteDetail(text: description, accountId: accountId, noteId: noteId, onSuccess: {
-                        isNoteSaved = true
-                        dismiss()
-                    })
+                if(isEditFlow){
+                    Button(action: {
+                        noteDetailScreenViewModel.EditNoteDetail(text: description, accountId: accountId, noteId: noteId, onSuccess: {
+                            isNoteSaved = true
+                            dismiss()
+                        })
                     }, label:{
-                    HStack(alignment: .center, spacing: 0){
-                        if(noteDetailScreenViewModel.isEditNoteInProgress){
-                            ProgressView()
-                                .tint(Color("LoginButtonPrimary"))
-                                .controlSize(.small)
-                            
-                            Text("Saving...")
-                                .foregroundColor(.white)
-                                .font(.custom("Nunito-Medium", size: 12))
-                                .accessibilityIdentifier("txt_create_task_saving")
-                        }else if(isNoteSaved){
-                            Image("CheckMark")
-                                .resizable()
-                                .frame(width: 12, height: 12)
-                                .padding(.trailing, 6)
-                                .accessibilityIdentifier("img_create_task_checkmark")
-                            
-                            Text("Saved")
-                                .foregroundColor(.white)
-                                .font(.custom("Nunito-Medium", size: 12))
-                                .accessibilityIdentifier("txt_create_task_saved")
-                        }else{
-                            Image("SalesforceIcon")
-                                .resizable()
-                                .frame(width: 17, height: 12)
-                                .padding(.trailing, 6)
-                                .accessibilityIdentifier("img_create_note_salesforce_icon")
-                            
-                            Text("Save")
-                                .foregroundColor(.white)
-                                .font(.custom("Nunito-Medium", size: 12))
-                                .accessibilityIdentifier("txt_create_task_save")
+                        HStack(alignment: .center, spacing: 0){
+                            if(noteDetailScreenViewModel.isEditNoteInProgress){
+                                ProgressView()
+                                    .tint(Color("LoginButtonPrimary"))
+                                    .controlSize(.small)
+                                
+                                Text("Saving...")
+                                    .foregroundColor(.white)
+                                    .font(.custom("Nunito-Medium", size: 12))
+                                    .accessibilityIdentifier("txt_create_task_saving")
+                            }else if(isNoteSaved){
+                                Image("CheckMark")
+                                    .resizable()
+                                    .frame(width: 12, height: 12)
+                                    .padding(.trailing, 6)
+                                    .accessibilityIdentifier("img_create_task_checkmark")
+                                
+                                Text("Saved")
+                                    .foregroundColor(.white)
+                                    .font(.custom("Nunito-Medium", size: 12))
+                                    .accessibilityIdentifier("txt_create_task_saved")
+                            }else{
+                                Image("SalesforceIcon")
+                                    .resizable()
+                                    .frame(width: 17, height: 12)
+                                    .padding(.trailing, 6)
+                                    .accessibilityIdentifier("img_create_note_salesforce_icon")
+                                
+                                Text("Save")
+                                    .foregroundColor(.white)
+                                    .font(.custom("Nunito-Medium", size: 12))
+                                    .accessibilityIdentifier("txt_create_task_save")
+                            }
                         }
-                    }
-                    .frame(width: noteDetailScreenViewModel.isEditNoteInProgress ? 115 : 68, height: 32)
-                    .background(
-                        Color(hex: "SaveButtonBackground")
-                    )
-                    .clipShape(RoundedRectangle(cornerRadius: 5))
-                })
-                .accessibilityIdentifier("btn_save_task")
-                .disabled((accountId.isEmpty || noteId.isEmpty || description.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || !parameterChanged) ? true : false)
-                .opacity((accountId.isEmpty || noteId.isEmpty || description.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || !parameterChanged) ? 0.7 : 1)
+                        .frame(width: noteDetailScreenViewModel.isEditNoteInProgress ? 115 : 68, height: 32)
+                        .background(
+                            Color(hex: "SaveButtonBackground")
+                        )
+                        .clipShape(RoundedRectangle(cornerRadius: 5))
+                    })
+                    .accessibilityIdentifier("btn_save_task")
+                    .disabled((accountId.isEmpty || noteId.isEmpty || description.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || !parameterChanged) ? true : false)
+                    .opacity(((accountId.isEmpty || noteId.isEmpty || description.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || !parameterChanged) ? 0.7 : 1))
+                }
             }
             
             if(noteDetailScreenViewModel.isFetchNoteDetailInProgress){
@@ -134,11 +136,17 @@ struct NoteDetailScreen : View {
                         .padding(.top)
                         .lineLimit(4...)
                 } else {
-                    HTMLTextView(htmlText: noteDetailScreenViewModel.noteDetail.text, textColor: UIColor(named: "TextPrimary") ?? .gray, font: UIFont(name: "Nunito-SemiBold", size: 18) ?? UIFont.systemFont(ofSize: 18), backgroundColor: UIColor(named: "Background") ?? .white)
+                    Text(noteDetailScreenViewModel.noteDetail.text)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .font(.custom("Nunito-SemiBold", size: 18))
                         .accessibilityIdentifier("txt_note_detail_text")
                         .foregroundColor(Color("TextPrimary"))
+                    //                    HTMLTextView(htmlText: noteDetailScreenViewModel.noteDetail.text, textColor: UIColor(named: "TextPrimary") ?? .gray, font: UIFont(name: "Nunito-SemiBold", size: 18) ?? UIFont.systemFont(ofSize: 18), backgroundColor: UIColor(named: "Background") ?? .white)
+                    //                        .frame(maxWidth: .infinity,maxHeight: .infinity, alignment: .leading)
+                    //                        .font(.custom("Nunito-SemiBold", size: 18))
+                    //                        .accessibilityIdentifier("txt_note_detail_text")
+                    //                        .foregroundColor(Color("TextPrimary"))
+                    
                 }
                 
                 Spacer()
@@ -150,9 +158,6 @@ struct NoteDetailScreen : View {
         .background(Color("Background"))
         .onAppear{
             noteDetailScreenViewModel.fetchNoteDetail(accountId: accountId, noteId: noteId)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05){
-                focused = true
-            }
         }
         .onChange(of: description){ newDescription  in
             if newDescription != noteDetailScreenViewModel.noteDetail.text{
@@ -165,6 +170,9 @@ struct NoteDetailScreen : View {
         }
         .onReceive(noteDetailScreenViewModel.$noteDetail) { newCurrentNote in
             description = newCurrentNote.text
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05){
+                focused = true
+            }
         }
         .onTapGesture {
             focused = false
