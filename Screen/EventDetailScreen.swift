@@ -21,7 +21,6 @@ struct EventDetailScreen: View {
     @State var endTime: Date = Date()
     @FocusState private var focused: Bool
     @State var isEventSaved: Bool = false
-    @State private var isInitialState = true
     @State var parameterChanged: Bool = false
     
     var body: some View {
@@ -51,7 +50,7 @@ struct EventDetailScreen: View {
                             ProgressView()
                                 .tint(Color("LoginButtonPrimary"))
                                 .controlSize(.small)
-                            Text("Saving Event...")
+                            Text("Saving...")
                                 .foregroundColor(.white)
                                 .font(.custom("Nunito-Medium", size: 12))
                                 .accessibilityIdentifier("txt_event_detail_saving")
@@ -68,10 +67,16 @@ struct EventDetailScreen: View {
                                 .font(.custom("Nunito-Medium", size: 12))
                                 .accessibilityIdentifier("txt_event_detail_saved")
                         }else{
-                            Text("Save Event")
+                            Image("SalesforceIcon")
+                                .resizable()
+                                .frame(width: 17, height: 12)
+                                .padding(.trailing, 6)
+                                .accessibilityIdentifier("img_create_note_salesforce_icon")
+                            
+                            Text("Save")
                                 .foregroundColor(.white)
                                 .font(.custom("Nunito-Medium", size: 12))
-                                .accessibilityIdentifier("txt_event_detail_save")
+                                .accessibilityIdentifier("txt_create_task_save")
                         }
                     }
                     .frame(width: eventDetailScreenViewModel.iseditEventInProgress ? 115 : 68, height: 32)
@@ -277,16 +282,17 @@ struct EventDetailScreen: View {
             })
         }
         .onReceive(eventDetailScreenViewModel.$currentEventData){ currentEvent in
-            isEventSaved = true
             self.description = currentEvent.description
             self.startDate = BasicHelper.getDateFromString(currentEvent.start_datetime)
             self.startTime = BasicHelper.getDateFromString(currentEvent.start_datetime)
             self.endDate = BasicHelper.getDateFromString(currentEvent.end_datetime)
             self.endTime = BasicHelper.getDateFromString(currentEvent.end_datetime)
+            isEventSaved = true
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.05){
                 focused = true
-                isInitialState = false
+                isEventSaved = true
+                parameterChanged = false
             }
         }
         .onChange(of: description) { newDescription  in

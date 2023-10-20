@@ -57,7 +57,7 @@ struct CreateTaskScreen: View {
                             ProgressView()
                                 .tint(Color("LoginButtonPrimary"))
                                 .controlSize(.small)
-                            Text("Adding Task...")
+                            Text("Saving")
                                 .foregroundColor(.white)
                                 .font(.custom("Nunito-Medium", size: 12))
                                 .accessibilityIdentifier("txt_create_task_saving")
@@ -74,10 +74,16 @@ struct CreateTaskScreen: View {
                                 .font(.custom("Nunito-Medium", size: 12))
                                 .accessibilityIdentifier("txt_create_task_saved")
                         }else{
-                            Text("Add Task")
+                            Image("SalesforceIcon")
+                                .resizable()
+                                .frame(width: 17, height: 12)
+                                .padding(.trailing, 6)
+                                .accessibilityIdentifier("img_create_note_salesforce_icon")
+                            
+                            Text("Save")
                                 .foregroundColor(.white)
                                 .font(.custom("Nunito-Medium", size: 12))
-                                .accessibilityIdentifier("txt_create_task_save")
+                                .accessibilityIdentifier("txt_create_event_save")
                         }
                     }
                     .frame(width: isAddTaskInProgress ? 115 : 68, height: 32)

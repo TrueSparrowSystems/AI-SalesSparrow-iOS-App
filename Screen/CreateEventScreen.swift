@@ -59,7 +59,7 @@ struct CreateEventScreen: View {
                             ProgressView()
                                 .tint(Color("LoginButtonPrimary"))
                                 .controlSize(.small)
-                            Text("Adding Event...")
+                            Text("Saving")
                                 .foregroundColor(.white)
                                 .font(.custom("Nunito-Medium", size: 12))
                                 .accessibilityIdentifier("txt_create_event_saving")
@@ -76,7 +76,13 @@ struct CreateEventScreen: View {
                                 .font(.custom("Nunito-Medium", size: 12))
                                 .accessibilityIdentifier("txt_create_event_saved")
                         }else{
-                            Text("Add Event")
+                            Image("SalesforceIcon")
+                                .resizable()
+                                .frame(width: 17, height: 12)
+                                .padding(.trailing, 6)
+                                .accessibilityIdentifier("img_create_note_salesforce_icon")
+                            
+                            Text("Save")
                                 .foregroundColor(.white)
                                 .font(.custom("Nunito-Medium", size: 12))
                                 .accessibilityIdentifier("txt_create_event_save")

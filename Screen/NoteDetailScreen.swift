@@ -45,7 +45,7 @@ struct NoteDetailScreen : View {
                                 .tint(Color("LoginButtonPrimary"))
                                 .controlSize(.small)
                             
-                            Text("Editing Task...")
+                            Text("Saving...")
                                 .foregroundColor(.white)
                                 .font(.custom("Nunito-Medium", size: 12))
                                 .accessibilityIdentifier("txt_create_task_saving")
@@ -61,7 +61,13 @@ struct NoteDetailScreen : View {
                                 .font(.custom("Nunito-Medium", size: 12))
                                 .accessibilityIdentifier("txt_create_task_saved")
                         }else{
-                            Text("Add Note")
+                            Image("SalesforceIcon")
+                                .resizable()
+                                .frame(width: 17, height: 12)
+                                .padding(.trailing, 6)
+                                .accessibilityIdentifier("img_create_note_salesforce_icon")
+                            
+                            Text("Save")
                                 .foregroundColor(.white)
                                 .font(.custom("Nunito-Medium", size: 12))
                                 .accessibilityIdentifier("txt_create_task_save")
