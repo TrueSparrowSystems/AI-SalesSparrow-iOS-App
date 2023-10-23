@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TaskDetailScreen: View {
-     @Environment(\.dismiss) private var dismiss
+    @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var taskDetailScreenViewModel : TaskDetailScreenViewModel
     
     var accountId: String

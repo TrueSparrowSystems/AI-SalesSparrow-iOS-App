@@ -121,24 +121,24 @@ struct CreateEventScreen: View {
                         .clipped()
                     }
                     
-                        HStack (spacing: 0) {
-                            Text(BasicHelper.getDateStringFromDate(from: startDate))
-                                .foregroundColor(Color("TermsPrimary"))
-                                .font(.custom("Nunito-Bold", size: 12))
-                                .tracking(0.5)
-                                .padding(0)
-                            
-                            Spacer()
-                            
-                            Image("EmptyCalendar")
-                                .frame(width: 15, height: 15)
-                                .padding(.leading, 10)
-                        }
-                        .accessibilityIdentifier("txt_add_event_select_start_date")
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .background(.white)
-                        .userInteractionDisabled()
+                    HStack (spacing: 0) {
+                        Text(BasicHelper.getDateStringFromDate(from: startDate))
+                            .foregroundColor(Color("TermsPrimary"))
+                            .font(.custom("Nunito-Bold", size: 12))
+                            .tracking(0.5)
+                            .padding(0)
                         
+                        Spacer()
+                        
+                        Image("EmptyCalendar")
+                            .frame(width: 15, height: 15)
+                            .padding(.leading, 10)
+                    }
+                    .accessibilityIdentifier("txt_add_event_select_start_date")
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(.white)
+                    .userInteractionDisabled()
+                    
                 }
                 .padding(.horizontal, 10)
                 .frame(width: 160, height: 30)
@@ -156,25 +156,25 @@ struct CreateEventScreen: View {
                         .accessibilityIdentifier("dp_add_event_select_start_time")
                     }
                     
-
-                        HStack (spacing: 0) {
-                            Text(BasicHelper.getTimeStringFromDate(from: startTime))
-                                .foregroundColor(Color("TermsPrimary"))
-                                .font(.custom("Nunito-Bold", size: 12))
-                                .tracking(0.5)
-                                .padding(0)
-                            
-                            Spacer()
-                            
-                            Image("Clock")
-                                .frame(width: 15, height: 15)
-                                .padding(.leading, 10)
-                        }
-                        .accessibilityIdentifier("txt_add_event_select_start_time")
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .background(.white)
-                        .userInteractionDisabled()
+                    
+                    HStack (spacing: 0) {
+                        Text(BasicHelper.getTimeStringFromDate(from: startTime))
+                            .foregroundColor(Color("TermsPrimary"))
+                            .font(.custom("Nunito-Bold", size: 12))
+                            .tracking(0.5)
+                            .padding(0)
                         
+                        Spacer()
+                        
+                        Image("Clock")
+                            .frame(width: 15, height: 15)
+                            .padding(.leading, 10)
+                    }
+                    .accessibilityIdentifier("txt_add_event_select_start_time")
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(.white)
+                    .userInteractionDisabled()
+                    
                     
                 }
                 .padding(.horizontal, 10)
@@ -206,26 +206,26 @@ struct CreateEventScreen: View {
                         .clipped()
                     }
                     
-  
-                        HStack (spacing: 0) {
-                            Text(BasicHelper.getDateStringFromDate(from: endDate))
-                                .foregroundColor(Color("TermsPrimary"))
-                                .font(.custom("Nunito-Bold", size: 12))
-                                .tracking(0.5)
-                                .padding(0)
-                            
-                            Spacer()
-                            
-                            Image("EmptyCalendar")
-                                .frame(width: 15, height: 15)
-                                .padding(.leading, 10)
-                        }
-                        .accessibilityIdentifier("txt_add_event_select_end_date")
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .background(.white)
-                        .userInteractionDisabled()
+                    
+                    HStack (spacing: 0) {
+                        Text(BasicHelper.getDateStringFromDate(from: endDate))
+                            .foregroundColor(Color("TermsPrimary"))
+                            .font(.custom("Nunito-Bold", size: 12))
+                            .tracking(0.5)
+                            .padding(0)
                         
-             
+                        Spacer()
+                        
+                        Image("EmptyCalendar")
+                            .frame(width: 15, height: 15)
+                            .padding(.leading, 10)
+                    }
+                    .accessibilityIdentifier("txt_add_event_select_end_date")
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(.white)
+                    .userInteractionDisabled()
+                    
+                    
                 }
                 .padding(.horizontal, 10)
                 .frame(width: 160, height: 30)
@@ -245,26 +245,26 @@ struct CreateEventScreen: View {
                         .accessibilityIdentifier("dp_add_event_select_end_time")
                     }
                     
-
-                        HStack (spacing: 0) {
-                            Text(BasicHelper.getTimeStringFromDate(from: endTime))
-                                .foregroundColor(Color("TermsPrimary"))
-                                .font(.custom("Nunito-Bold", size: 12))
-                                .tracking(0.5)
-                                .padding(0)
-                            
-                            Spacer()
-                            
-                            Image("Clock")
-                                .frame(width: 15, height: 15)
-                                .padding(.leading, 10)
-                        }
-                        .accessibilityIdentifier("txt_add_event_select_end_time")
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .background(.white)
-                        .userInteractionDisabled()
+                    
+                    HStack (spacing: 0) {
+                        Text(BasicHelper.getTimeStringFromDate(from: endTime))
+                            .foregroundColor(Color("TermsPrimary"))
+                            .font(.custom("Nunito-Bold", size: 12))
+                            .tracking(0.5)
+                            .padding(0)
                         
-                  
+                        Spacer()
+                        
+                        Image("Clock")
+                            .frame(width: 15, height: 15)
+                            .padding(.leading, 10)
+                    }
+                    .accessibilityIdentifier("txt_add_event_select_end_time")
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(.white)
+                    .userInteractionDisabled()
+                    
+                    
                 }
                 .padding(.horizontal, 10)
                 .frame(width: 140, height: 30)

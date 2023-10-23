@@ -11,7 +11,7 @@ import SwiftUI
 struct UserAccountDetailScreen: View {
     let appVersion: String = DeviceSettingManager.shared.deviceHeaderParams["X-SalesSparrow-App-Version"] as! String
     
-     @Environment(\.dismiss) private var dismiss
+    @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var userStateViewModel : UserStateViewModel
     
     var body: some View {
