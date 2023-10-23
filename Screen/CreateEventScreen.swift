@@ -8,7 +8,7 @@ import Foundation
 import SwiftUI
 
 struct CreateEventScreen: View {
-    @Environment(\.dismiss) private var dismiss
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @EnvironmentObject var createEventViewModel : CreateEventViewModel
     @EnvironmentObject var createNoteScreenViewModel : CreateNoteScreenViewModel
     @EnvironmentObject var accountDetailViewModelObject : AccountDetailScreenViewModel
@@ -35,7 +35,7 @@ struct CreateEventScreen: View {
                     .foregroundColor(Color("CancelText"))
                     .accessibilityIdentifier((suggestedEventState["isEventSaved"] as! Bool) ? "btn_add_event_done" : "btn_add_event_cancel")
                     .onTapGesture {
-                        dismiss()
+                        self.presentationMode.wrappedValue.dismiss()
                     }
                 
                 Spacer()
@@ -49,7 +49,7 @@ struct CreateEventScreen: View {
                         if isAccountDetailFlow {
                             accountDetailViewModelObject.scrollToSection = "EventsList"
                         }
-                        dismiss()
+                        self.presentationMode.wrappedValue.dismiss()
                     }, onFailure: {
                         isAddEventInProgress = false
                     })
