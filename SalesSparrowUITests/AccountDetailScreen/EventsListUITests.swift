@@ -116,7 +116,7 @@ final class AccountDetailEventListUITests: XCTestCase {
         XCTAssertTrue(EventCard.waitForExistence(timeout: TimeInterval(timeout)))
         EventCard.tap()
         
-        let doneButton = app.buttons["btn_event_detail_cancel"]
+        let doneButton = app.buttons["btn_event_detail_done"]
         XCTAssertTrue(doneButton.waitForExistence(timeout: TimeInterval(timeout)))
         
         XCTAssertTrue(app.staticTexts["txt_event_detail_start_date"].waitForExistence(timeout: TimeInterval(timeout)))

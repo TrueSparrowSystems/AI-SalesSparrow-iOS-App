@@ -35,7 +35,7 @@ struct EventDetailScreen: View {
                         .padding(.vertical, 10)
                         .foregroundColor(Color("CancelText"))
                 })
-                .accessibilityIdentifier(isEventSaved ? "btn_event_detail_done" : "btn_event_detail_cancel")
+                .accessibilityIdentifier(isEditFlow ? (isEventSaved ? "btn_event_detail_done" : "btn_event_detail_cancel") : "btn_event_detail_done")
                 
                 Spacer()
                 
