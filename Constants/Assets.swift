@@ -79,6 +79,7 @@ internal enum Asset {
     internal static let magnifyingGlass = ImageAsset(name: "MagnifyingGlass")
     internal static let noteIcon = ImageAsset(name: "NoteIcon")
     internal static let opportunitiesIcon = ImageAsset(name: "OpportunitiesIcon")
+    internal static let plusIcon = ImageAsset(name: "PlusIcon")
     internal static let salesforceIcon = ImageAsset(name: "SalesforceIcon")
     internal static let signOut = ImageAsset(name: "SignOut")
     internal static let sparkle = ImageAsset(name: "Sparkle")
