@@ -22,7 +22,7 @@ final class AccountDetailEventListUITests: XCTestCase {
     func testEventsSectionWithEmptyList() throws {
         // Launch the app with the specified launch arguments
         let app = XCUIApplication()
-        app.launchArguments = ["isRunningUITests","emptyEventList"]
+        app.launchArguments = ["isRunningUITests", "emptyEventList"]
         app.launch()
         
         // Set the timeout duration
@@ -73,7 +73,7 @@ final class AccountDetailEventListUITests: XCTestCase {
     func testEventsSectionWithError() throws {
         // Launch the app with the specified launch arguments
         let app = XCUIApplication()
-        app.launchArguments = ["isRunningUITests","eventListError"]
+        app.launchArguments = ["isRunningUITests", "eventListError"]
         app.launch()
         
         // Set the timeout duration
@@ -112,9 +112,9 @@ final class AccountDetailEventListUITests: XCTestCase {
         
         navigationToEventSection(app: app)
         
-        let EventCard = app.buttons["event_card_0"]
-        XCTAssertTrue(EventCard.waitForExistence(timeout: TimeInterval(timeout)))
-        EventCard.tap()
+        let eventCard = app.buttons["event_card_0"]
+        XCTAssertTrue(eventCard.waitForExistence(timeout: TimeInterval(timeout)))
+        eventCard.tap()
         
         let doneButton = app.buttons["btn_event_detail_done"]
         XCTAssertTrue(doneButton.waitForExistence(timeout: TimeInterval(timeout)))
@@ -132,7 +132,7 @@ final class AccountDetailEventListUITests: XCTestCase {
     
     func testViewEventWithError() throws {
         let app = XCUIApplication()
-        app.launchArguments = ["isRunningUITests","viewTaskError"]
+        app.launchArguments = ["isRunningUITests", "viewTaskError"]
         app.launch()
         
         // Set the timeout duration
@@ -140,10 +140,10 @@ final class AccountDetailEventListUITests: XCTestCase {
         let accountIndex = 0
         navigationToEventSection(app: app)
         
-        let EventCard = app.buttons["event_card_\(accountIndex)"]
+        let eventCard = app.buttons["event_card_\(accountIndex)"]
         
-        XCTAssertTrue(EventCard.waitForExistence(timeout: TimeInterval(timeout)))
-        EventCard.tap()
+        XCTAssertTrue(eventCard.waitForExistence(timeout: TimeInterval(timeout)))
+        eventCard.tap()
         
         XCTAssertTrue(app.staticTexts["txt_account_detail_account_details_title"].waitForExistence(timeout: TimeInterval(timeout)))
     }
@@ -175,10 +175,9 @@ final class AccountDetailEventListUITests: XCTestCase {
         XCTAssertTrue(deleteButton.isHittable)
         deleteButton.tap()
         
-        //Verify the event description for 1st event before and after delete are not same
-        XCTAssertTrue(descriptionForEvent1BeforeDelete != app.staticTexts["txt_account_detail_event_description_\(accountIndex)"].label)
+        // Verify the event description for 1st event before and after delete are not same
+        XCTAssertNotEqual(descriptionForEvent1BeforeDelete, app.staticTexts["txt_account_detail_event_description_\(accountIndex)"].label)
     }
-    
     
     func testEditEvent() throws {
         // Launch the app with the specified launch arguments
@@ -199,7 +198,7 @@ final class AccountDetailEventListUITests: XCTestCase {
         let addEventTextField = app.textViews["et_edit_event"]
         XCTAssertTrue(addEventTextField.waitForExistence(timeout: TimeInterval(timeout)))
         addEventTextField.tap()
-        //Type Text into the the text field
+        // Type Text into the the text field
         addEventTextField.typeText("\nUpdate this eveny.\nTap on the save button to save it to salesforce.")
         
         app.buttons["btn_save_event"].tap()
@@ -208,7 +207,7 @@ final class AccountDetailEventListUITests: XCTestCase {
     func testEditEventWithError() throws {
         // Launch the app with the specified launch arguments
         let app = XCUIApplication()
-        app.launchArguments = ["isRunningUITests","deleteTaskError"]
+        app.launchArguments = ["isRunningUITests", "deleteTaskError"]
         app.launch()
         
         // Set the timeout duration
@@ -223,7 +222,7 @@ final class AccountDetailEventListUITests: XCTestCase {
         
         let addEventTextField = app.textViews["et_edit_event"]
         XCTAssertTrue(addEventTextField.waitForExistence(timeout: TimeInterval(timeout)))
-        //Type Text into the the text field
+        // Type Text into the the text field
         addEventTextField.typeText("\nUpdate this eveny.\nTap on the save button to save it to salesforce.")
         
         app.buttons["btn_save_event"].tap()
@@ -260,13 +259,12 @@ final class AccountDetailEventListUITests: XCTestCase {
         XCTAssertTrue(deleteButton.waitForExistence(timeout: TimeInterval(timeout)))
         deleteButton.tap()
         
-        
-        //Check whether on error the toast is received
+        // Check whether on error the toast is received
         XCTAssertTrue(app.staticTexts["toast_view_text"].waitForExistence(timeout: TimeInterval(timeout)))
         
         let descriptionForEvent1AfterDelete = app.staticTexts["txt_account_detail_event_description_0"].label
         
-        //Verify the event description for 1st event before and after delete are same
-        XCTAssertTrue(descriptionForEvent1 == descriptionForEvent1AfterDelete)
+        // Verify the event description for 1st event before and after delete are same
+        XCTAssertEqual(descriptionForEvent1, descriptionForEvent1AfterDelete)
     }
 }

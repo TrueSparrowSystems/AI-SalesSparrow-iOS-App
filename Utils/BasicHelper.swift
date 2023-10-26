@@ -18,13 +18,13 @@ struct BasicHelper {
             return nil
         }
         
-        if (val is String){
+        if val is String {
             return (val as! String)
-        } else if (val is Int){
+        } else if val is Int {
             return String(val as! Int)
-        } else if (val is Double ) {
+        } else if val is Double {
             return String(val as! Double)
-        } else if (val is Float ) {
+        } else if val is Float {
             return String(val as! Float)
         }
         return nil
@@ -35,9 +35,9 @@ struct BasicHelper {
         if val == nil {
             return nil
         }
-        if (val is Int){
+        if val is Int {
             return (val as! Int)
-        }else if (val is String){
+        } else if val is String {
             return Int(val as! String)
         }
         return nil
@@ -48,9 +48,9 @@ struct BasicHelper {
         if val == nil {
             return nil
         }
-        if (val is Double){
+        if val is Double {
             return (val as! Double)
-        }else if (val is String){
+        } else if val is String {
             return Double(val as! String)
         }
         return nil
@@ -61,7 +61,7 @@ struct BasicHelper {
         if val == nil {
             return false
         }
-        if (val is Bool){
+        if val is Bool {
             return (val as! Bool)
         }
         return false
@@ -70,13 +70,13 @@ struct BasicHelper {
     // A static function that returns initial from given name. Max 2 characters.
     static func getInitials(from name: String) -> String {
         let components = name.components(separatedBy: " ")
-        var initials : [String] = []
+        var initials: [String] = []
         for component in components {
             
             if let firstLetter = component.first {
                 initials.append(String(firstLetter))
             }
-            if(initials.count >= 2){
+            if initials.count >= 2 {
                 break
             }
         }
@@ -97,13 +97,12 @@ struct BasicHelper {
             } else if let month = components.month, month > 0 {
                 return "\(month) month\(month > 1 ? "s" : "") ago"
             } else if let day = components.day {
-                if(day > 7){
+                if day > 7 {
                     let week = day / 7
                     return "\(week) week\(week > 1 ? "s" : "") ago"
-                } else if(day == 0 && components.hour == 0 &&  (components.minute ?? 0) < 5){
+                } else if day == 0 && components.hour == 0 &&  (components.minute ?? 0) < 5 {
                     return "Just now"
-                }
-                else{
+                } else {
                     dateFormatter.dateFormat = "EEEE, hh:mma"
                     dateFormatter.amSymbol = "am"
                     dateFormatter.pmSymbol = "pm"
@@ -124,7 +123,7 @@ struct BasicHelper {
             dateFormatter.dateFormat = "dd/MM/yyyy"
             let formattedDateString = dateFormatter.string(from: date)
             return formattedDateString
-        }else{
+        } else {
             return ""
         }
     }
@@ -136,7 +135,7 @@ struct BasicHelper {
             dateFormatter.dateFormat = "dd/MM/yyyy hh:mm a"
             let formattedDateString = dateFormatter.string(from: date)
             return formattedDateString
-        }else{
+        } else {
             return ""
         }
     }
@@ -176,7 +175,7 @@ struct BasicHelper {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd" // Change this format to your desired format
         dateFormatter.timeZone = TimeZone(abbreviation: "GMT") // Ensure you set the correct time zone
-
+        
         return dateFormatter.string(from: date)
     }
     
@@ -187,7 +186,7 @@ struct BasicHelper {
         return formattedDateString
     }
     
-    static func getFormattedDateTimeString(from date: Date, from time: Date, dateTimeFormat: String = "yyyy-MM-dd'T'HH:mm:ss.SSSZ") -> String{
+    static func getFormattedDateTimeString(from date: Date, from time: Date, dateTimeFormat: String = "yyyy-MM-dd'T'HH:mm:ss.SSSZ") -> String {
         
         // Create a Calendar instance
         let calendar = Calendar.current
@@ -197,7 +196,7 @@ struct BasicHelper {
         
         // Create a new Date using the merged components
         if let mergedDate = calendar.date(bySettingHour: timeComponents.hour ?? 0, minute: timeComponents.minute ?? 0, second: timeComponents.second ?? 0, of: date) {
-            //Format and convert date in desired dateFormat
+            // Format and convert date in desired dateFormat
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = dateTimeFormat
             dateFormatter.timeZone = TimeZone(abbreviation: "UTC")

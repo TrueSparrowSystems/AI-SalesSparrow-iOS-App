@@ -11,26 +11,26 @@ struct TopBar: View {
     @State private var showAccountSearchView: Bool = false
     @State var accountDetailsScreenActivated = false
     @State var createNoteScreenActivated = false
-    @State var selectedAccountId: String? = nil
-    @State var selectedAccountName: String? = nil
-    @EnvironmentObject var userStateViewModel : UserStateViewModel
+    @State var selectedAccountId: String?
+    @State var selectedAccountName: String?
+    @EnvironmentObject var userStateViewModel: UserStateViewModel
     
     var body: some View {
         NavigationStack {
             HStack {
-                Image("Buildings")
+                Image(Asset.buildings.name)
                     .frame(width: 28.0, height: 28.0)
                     .accessibilityIdentifier("img_home_screen_account_icon")
                 
                 Text("Accounts")
-                    .font(.custom("Nunito-Regular",size: 24))
+                    .font(.nunitoRegular( size: 24))
                     .fontWeight(.bold)
                     .frame(width: 103.0, height: 33.0)
                     .accessibilityIdentifier("txt_account_details_title")
                 
                 Spacer()
                 
-                Image("MagnifyingGlass")
+                Image(Asset.magnifyingGlass.name)
                     .onTapGesture {
                         showAccountSearchView = true
                     }
@@ -51,16 +51,16 @@ struct TopBar: View {
                     }
                 NavigationLink(destination: UserAccountDetailScreen()
                     .navigationBarBackButtonHidden(true)) {
-                    Text(BasicHelper.getInitials(from: userStateViewModel.currentUser.name))
-                        .frame(width: 30, height:30)
-                        .font(.custom("Nunito-Bold", size: 9))
-                        .foregroundColor(.black)
-                        .accessibilityIdentifier("txt_user_account_icon")
-                }
-                               .background(Color(hex: "#C5B8FA"))
-                               .clipShape(Circle())
+                        Text(BasicHelper.getInitials(from: userStateViewModel.currentUser.name))
+                            .frame(width: 30, height: 30)
+                            .font(.nunitoBold( size: 9))
+                            .foregroundColor(.black)
+                            .accessibilityIdentifier("txt_user_account_icon")
+                    }
+                    .background(Color(hex: "#C5B8FA"))
+                    .clipShape(Circle())
             }
-            .foregroundColor(Color("TextPrimary"))
+            .foregroundColor(Color(Asset.textPrimary.name))
             .padding(EdgeInsets(top: 50, leading: 20, bottom: 0, trailing: 20))
             .background(Color.clear) // Make the top 23px transparent]
             .navigationDestination(isPresented: self.$accountDetailsScreenActivated, destination: {

@@ -35,12 +35,12 @@ class TaskDetailScreenViewModel: ObservableObject {
     var apiService = DependencyContainer.shared.apiService
     
     // A function to create note from given text and account id.
-    func fetchTaskDetail(accountId: String, taskId: String, onFailure: (()-> Void)?){
+    func fetchTaskDetail(accountId: String, taskId: String, onFailure: (() -> Void)?) {
         let endPoint = "/v1/accounts/\(accountId)/tasks/\(taskId)"
         isFetchTaskInProgress = true
         
-        apiService.get(type: TaskDetailRespStruct.self, endpoint: endPoint){
-            [weak self] result, statusCode in
+        apiService.get(type: TaskDetailRespStruct.self, endpoint: endPoint) {
+            [weak self] result, _ in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let results):
@@ -57,7 +57,7 @@ class TaskDetailScreenViewModel: ObservableObject {
         }
     }
     
-    func EditTaskDetail(accountId: String, taskId: String, crm_organization_user_id: String, description: String, due_date: String, onSuccess : @escaping()-> Void){
+    func editTaskDetail(accountId: String, taskId: String, crm_organization_user_id: String, description: String, due_date: String, onSuccess: @escaping() -> Void) {
         let endPoint = "/v1/accounts/\(accountId)/tasks/\(taskId)"
         isSaveTaskInProgress = true
         
@@ -65,11 +65,11 @@ class TaskDetailScreenViewModel: ObservableObject {
                                      "description": description,
                                      "due_date": due_date]
         
-        apiService.put(type: EditTaskRespStruct.self, endpoint: endPoint, params: params){
-            [weak self] result, statusCode in
+        apiService.put(type: EditTaskRespStruct.self, endpoint: endPoint, params: params) {
+            [weak self] result, _ in
             DispatchQueue.main.async {
                 switch result {
-                case .success(_):
+                case .success:
                     onSuccess()
                     self?.isSaveTaskInProgress = false
                     ToastViewModel.shared.showToast(_toast: Toast(style: .success, message: "Task is saved to your Salesforce Account"))
@@ -82,4 +82,3 @@ class TaskDetailScreenViewModel: ObservableObject {
         }
     }
 }
-

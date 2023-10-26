@@ -36,7 +36,7 @@ struct HomeScreen: View {
                 BottomBar()
             }
             .navigationBarBackButtonHidden(true)
-            .background(Color("Background"))
+            .background(Color(Asset.background.name))
             
         }
         .navigationViewStyle(.stack)
@@ -53,7 +53,6 @@ struct HomeScreen: View {
         .environmentObject(eventDetailScreenViewModel)
     }
 }
-
 
 struct HomeScreen_Previews: PreviewProvider {
     static var previews: some View {

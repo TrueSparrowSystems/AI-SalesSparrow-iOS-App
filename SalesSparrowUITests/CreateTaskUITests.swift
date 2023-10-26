@@ -10,7 +10,7 @@ import XCTest
 final class CreateTaskUITests: XCTestCase {
     let timeout = 5
     
-    func openAccountDetailUsingSearch(app: XCUIApplication,accountName: String = "Test Account 1") throws {
+    func openAccountDetailUsingSearch(app: XCUIApplication, accountName: String = "Test Account 1") throws {
         let timeout = 2
         let searchAccountButton = app.images["btn_search_account"]
         XCTAssertTrue(searchAccountButton.waitForExistence(timeout: TimeInterval(timeout)))
@@ -22,7 +22,7 @@ final class CreateTaskUITests: XCTestCase {
         btnSearchAccountNameBtn.tap()
     }
     
-    func SearchUser(app: XCUIApplication) {
+    func searchUser(app: XCUIApplication) {
         let timeout = 5
         
         let searchUserButton = app.buttons["btn_create_task_search_user"]
@@ -37,14 +37,14 @@ final class CreateTaskUITests: XCTestCase {
         searchUserNameBtn.tap()
     }
 
-    func createTask(app: XCUIApplication){
-        //Check if cancel button exists
+    func createTask(app: XCUIApplication) {
+        // Check if cancel button exists
         let cancelButton = app.staticTexts["btn_add_task_cancel"]
         XCTAssertTrue(cancelButton.waitForExistence(timeout: TimeInterval(timeout)))
         // cancel should be clickable
         XCTAssertTrue(cancelButton.isEnabled)
 
-        try? SearchUser(app: app)
+        searchUser(app: app)
 
         let datePicker = app.datePickers["dp_add_task_select_date"]
         datePicker.tap()
@@ -55,17 +55,17 @@ final class CreateTaskUITests: XCTestCase {
         let addTaskTextField = app.textViews["et_create_task"]
         XCTAssertTrue(addTaskTextField.waitForExistence(timeout: TimeInterval(timeout)))
         addTaskTextField.tap()
-        //Type Text into the the text field
+        // Type Text into the the text field
         addTaskTextField.typeText("Create new task and assign it to a user.\nTap on the save button to save it to salesforce.")
         
         let saveButton = app.buttons["btn_save_task"]
         XCTAssertTrue(saveButton.waitForExistence(timeout: TimeInterval(timeout)))
-        //Check if the save button is enabled
+        // Check if the save button is enabled
         XCTAssertTrue(saveButton.isEnabled)
         saveButton.tap()
     }
     
-    func createNoteFromFloatingActionButton(app: XCUIApplication){
+    func createNoteFromFloatingActionButton(app: XCUIApplication) {
         // there should be add note button in it
         let createNoteBtn = app.buttons["btn_create_note"]
         XCTAssertTrue(createNoteBtn.waitForExistence(timeout: TimeInterval(timeout)))
@@ -73,7 +73,7 @@ final class CreateTaskUITests: XCTestCase {
         XCTAssertTrue(createNoteBtn.isEnabled)
         createNoteBtn.tap()
 
-        //Check if cancel button exists
+        // Check if cancel button exists
         let cancelButton = app.staticTexts["btn_cancel_create_note"]
         XCTAssertTrue(cancelButton.waitForExistence(timeout: TimeInterval(timeout)))
         // cancel should be clickable
@@ -97,14 +97,14 @@ final class CreateTaskUITests: XCTestCase {
         XCTAssertTrue(searchAccountBtn.isEnabled)
         searchAccountBtn.tap()
 
-        //Check for Create Note text field
+        // Check for Create Note text field
         let addNoteTextField = app.textViews["et_create_note"]
         XCTAssertTrue(addNoteTextField.waitForExistence(timeout: TimeInterval(timeout)))
         addNoteTextField.tap()
-        //Type Text into the the text field
+        // Type Text into the the text field
         addNoteTextField.typeText("Create A New Note")
 
-        //Check if the save button is enabled
+        // Check if the save button is enabled
         XCTAssertTrue(saveButton.isEnabled)
         saveButton.tap()
     }
@@ -138,12 +138,11 @@ final class CreateTaskUITests: XCTestCase {
         app.buttons["btn_create_note_popover_add_recommendation"].tap()
         XCTAssertTrue(app.staticTexts["txt_create_note_popover_add_task"].waitForExistence(timeout: TimeInterval(timeout)))
         app.buttons["btn_create_note_popover_add_task"].tap()
-        
 
         createTask(app: app)
     }
     
-    func testDeleteRecommendedandSavedTask(){
+    func testDeleteRecommendedandSavedTask() {
         let timeout = 5
         let app = XCUIApplication()
         app.launchArguments = ["isRunningUITests"]
@@ -182,24 +181,22 @@ final class CreateTaskUITests: XCTestCase {
 
         XCTAssertTrue(app.staticTexts["toast_view_text"].waitForExistence(timeout: TimeInterval(timeout)))
         
-        
-        XCTAssertTrue(!app.buttons["btn_create_note_add_task_\(taskIndex)"].exists,"Suggest task add task button must be not visible")
+        XCTAssertTrue(!app.buttons["btn_create_note_add_task_\(taskIndex)"].exists, "Suggest task add task button must be not visible")
         
         app.buttons["btn_create_note_task_more_\(taskIndex)"].tap()
         app.buttons["btn_create_note_delete_task_\(taskIndex)"].tap()
         
         app.buttons["btn_alert_submit"].tap()
         
-        
         let suggestedTaskAfterDelete = app.staticTexts["txt_create_note_suggestion_title_index_\(taskIndex)"]
         XCTAssertTrue(suggestedTaskAfterDelete.waitForExistence(timeout: TimeInterval(timeout)))
         let suggestedTaskDescriptionAfterDelete = suggestedTaskAfterDelete.label
         
-        //Verify that the task description before and after delete is not same
-        XCTAssertTrue(suggestedTaskDescription != suggestedTaskDescriptionAfterDelete)
+        // Verify that the task description before and after delete is not same
+        XCTAssertNotEqual(suggestedTaskDescription, suggestedTaskDescriptionAfterDelete)
     }
     
-    func testCreateTaskFromSuggestedCard(){
+    func testCreateTaskFromSuggestedCard() {
         let timeout = 5
         let app = XCUIApplication()
         app.launchArguments = ["isRunningUITests"]
@@ -216,4 +213,3 @@ final class CreateTaskUITests: XCTestCase {
         createTask(app: app)
     }
 }
-

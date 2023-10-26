@@ -36,8 +36,8 @@ class UserSearchViewModel: ObservableObject {
             searchUsers(withText: "")
         } else {
             currentSearchText = searchText
-            DispatchQueue.main.asyncAfter(deadline: .now() + debounceTime){
-                if(searchText == self.currentSearchText){
+            DispatchQueue.main.asyncAfter(deadline: .now() + debounceTime) {
+                if searchText == self.currentSearchText {
                     self.searchUsers(withText: searchText)
                 }
             }
@@ -49,7 +49,7 @@ class UserSearchViewModel: ObservableObject {
         let searchUrl = "/v1/crm-organization-users"
         let params: [String: Any] = ["q": searchText]
         
-        apiService.get(type: SearchUserStruct.self, endpoint: searchUrl, params: params) { [weak self] result, statusCode in
+        apiService.get(type: SearchUserStruct.self, endpoint: searchUrl, params: params) { [weak self] result, _ in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let results):
@@ -67,5 +67,3 @@ class UserSearchViewModel: ObservableObject {
         }
     }
 }
-
-

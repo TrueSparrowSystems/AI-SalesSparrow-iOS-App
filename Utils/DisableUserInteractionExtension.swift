@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 struct NoHitTesting: ViewModifier {
     func body(content: Content) -> some View {
         SwiftUIWrapper { content }.allowsHitTesting(false)

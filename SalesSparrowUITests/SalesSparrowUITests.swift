@@ -24,7 +24,7 @@ final class SalesSparrowUITests: XCTestCase {
 
     func testLoginScreen() throws {
         let app = XCUIApplication()
-        app.launchArguments = ["isRunningUITests","loggedOutUser"]
+        app.launchArguments = ["isRunningUITests", "loggedOutUser"]
         app.launch()
 
         let timeout = 2
@@ -49,7 +49,7 @@ final class SalesSparrowUITests: XCTestCase {
         let textFieldSearchAccount = app.textFields["text_field_search_account"]
         XCTAssertTrue(textFieldSearchAccount.waitForExistence(timeout: TimeInterval(timeout)))
         let textFieldSearchAccountVal = textFieldSearchAccount.value as? String
-        XCTAssertTrue(((textFieldSearchAccountVal?.isEmpty) != nil))
+        XCTAssertNotNil(textFieldSearchAccountVal?.isEmpty)
 
         // modal should open with default data
         let accountName = "Test Account 1"
@@ -97,7 +97,7 @@ final class SalesSparrowUITests: XCTestCase {
         XCTAssertTrue(btnSearchAddNoteBtn.isEnabled)
     }
 
-    func testCreateNoteScreen(){
+    func testCreateNoteScreen() {
         let app = XCUIApplication()
         app.launchArguments = ["isRunningUITests"]
         app.launch()
@@ -110,7 +110,7 @@ final class SalesSparrowUITests: XCTestCase {
         XCTAssertTrue(createNoteBtn.isEnabled)
         createNoteBtn.tap()
 
-        //Check if cancel button exists
+        // Check if cancel button exists
         let cancelButton = app.staticTexts["btn_cancel_create_note"]
         XCTAssertTrue(cancelButton.waitForExistence(timeout: TimeInterval(timeout)))
         // cancel should be clickable
@@ -134,14 +134,14 @@ final class SalesSparrowUITests: XCTestCase {
         XCTAssertTrue(searchAccountBtn.isEnabled)
         searchAccountBtn.tap()
 
-        //Check for Create Note text field
+        // Check for Create Note text field
         let addNoteTextField = app.textViews["et_create_note"]
         XCTAssertTrue(addNoteTextField.waitForExistence(timeout: TimeInterval(timeout)))
         addNoteTextField.tap()
-        //Type Text into the the text field
+        // Type Text into the the text field
         addNoteTextField.typeText("Create A New Note")
 
-        //Check if the save button is enabled
+        // Check if the save button is enabled
         XCTAssertTrue(saveButton.isEnabled)
         saveButton.tap()
 

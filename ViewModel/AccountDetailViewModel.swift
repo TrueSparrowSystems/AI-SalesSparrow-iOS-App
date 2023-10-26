@@ -13,10 +13,10 @@ struct AccountDetail: Codable {
 }
 
 // A struct that represents the meta data of the account details
-struct AccountDetailStruct : Codable {
+struct AccountDetailStruct: Codable {
     var id: String
     var name: String
-    var additional_fields: [String:String?]?
+    var additional_fields: [String: String?]?
     var account_contact_associations_id: String?
     var account_contact_associations_map_by_id: [String: AccountContactAssociation]?
     var contact_map_by_id: [String: Contact]?
@@ -31,7 +31,7 @@ class AccountDetailScreenViewModel: ObservableObject {
     var apiService = DependencyContainer.shared.apiService
     
     var customFields = FieldDefinition(fields: [
-//        "email": FieldDefinition.FieldInfo(type: FieldType.EMAIL, title: ""),
+        //        "email": FieldDefinition.FieldInfo(type: FieldType.EMAIL, title: ""),
         "website": FieldDefinition.FieldInfo(type: FieldType.LINK, title: "Website"),
         "ppt": FieldDefinition.FieldInfo(type: FieldType.LINK, title: "PPT"),
         "title": FieldDefinition.FieldInfo(type: FieldType.TITLE, title: ""),
@@ -44,12 +44,12 @@ class AccountDetailScreenViewModel: ObservableObject {
     ])
     
     // A function to fetch account details using API.
-    func fetchAccountDetail(accountId: String){
+    func fetchAccountDetail(accountId: String) {
         let endPoint = "/v1/accounts/\(accountId)"
         isFetchAccountDetailInProgress = true
         
-        apiService.get(type: AccountDetail.self, endpoint: endPoint){
-            [weak self] result, statusCode in
+        apiService.get(type: AccountDetail.self, endpoint: endPoint) {
+            [weak self] result, _ in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let results):
@@ -67,4 +67,3 @@ class AccountDetailScreenViewModel: ObservableObject {
     }
     
 }
-

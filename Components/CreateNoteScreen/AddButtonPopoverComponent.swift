@@ -7,11 +7,10 @@
 
 import SwiftUI
 
-
-struct AddButtonPopoverComponent: View{
-    @EnvironmentObject var createNoteScreenViewModel : CreateNoteScreenViewModel
+struct AddButtonPopoverComponent: View {
+    @EnvironmentObject var createNoteScreenViewModel: CreateNoteScreenViewModel
     
-    @Binding var isPopoverVisible : Bool
+    @Binding var isPopoverVisible: Bool
     var accountId: String
     
     @State var addTaskActivated = false
@@ -25,11 +24,11 @@ struct AddButtonPopoverComponent: View{
                 createNoteScreenViewModel.initTaskData(suggestion: TaskSuggestionStruct(id: suggestionId, description: ""))
                 addTaskActivated = true
             }, label: {
-                HStack{
-                    Image("TasksIcon")
+                HStack {
+                    Image(Asset.tasksIcon.name)
                     Text("Add Tasks")
-                        .font(.custom("Nunito-SemiBold",size: 16))
-                        .foregroundColor(Color("TextPrimary"))
+                        .font(.nunitoSemiBold(size: 16))
+                        .foregroundColor(Color(Asset.textPrimary.name))
                         .accessibilityIdentifier("txt_create_note_popover_add_task")
                 }
             })
@@ -41,11 +40,11 @@ struct AddButtonPopoverComponent: View{
                 createNoteScreenViewModel.initEventData(suggestion: EventSuggestionStruct(id: suggestionId, description: ""))
                 addEventActivated = true
             }, label: {
-                HStack{
-                    Image("EventsIcon")
+                HStack {
+                    Image(Asset.eventsIcon.name)
                     Text("Add Event")
-                        .font(.custom("Nunito-SemiBold",size: 16))
-                        .foregroundColor(Color("TextPrimary"))
+                        .font(.nunitoSemiBold(size: 16))
+                        .foregroundColor(Color(Asset.textPrimary.name))
                         .accessibilityIdentifier("txt_create_note_popover_add_event")
                 }
             })
@@ -54,10 +53,10 @@ struct AddButtonPopoverComponent: View{
         }
         .padding(10)
         .cornerRadius(4)
-        .background(Color("CardBackground"))
+        .background(Color(Asset.cardBackground.name))
         .overlay(
             RoundedRectangle(cornerRadius: 4)
-                .stroke(Color("CardBorder"), lineWidth: 1)
+                .stroke(Color(Asset.cardBorder.name), lineWidth: 1)
         )
         .frame(width: 200, height: 100)
         .navigationDestination(isPresented: self.$addTaskActivated, destination: {

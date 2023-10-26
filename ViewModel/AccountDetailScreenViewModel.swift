@@ -72,14 +72,14 @@ class AccountDetailViewScreenViewModel: ObservableObject {
     var apiService = DependencyContainer.shared.apiService
     
     // A function that fetches the data for the note list
-    func fetchNotes(accountId: String){
+    func fetchNotes(accountId: String) {
         guard !self.isNoteListLoading else {
             return
         }
         self.isNoteListLoading = true
         
-        apiService.get(type: NotesListStruct.self, endpoint: "/v1/accounts/\(accountId)/notes"){
-            [weak self]  result, statusCode in
+        apiService.get(type: NotesListStruct.self, endpoint: "/v1/accounts/\(accountId)/notes") {
+            [weak self]  result, _ in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let results):
@@ -96,17 +96,17 @@ class AccountDetailViewScreenViewModel: ObservableObject {
         }
     }
     
-    //A function that deletes note in an account
-    func deleteNote(accountId: String, noteId: String){
+    // A function that deletes note in an account
+    func deleteNote(accountId: String, noteId: String) {
         
         LoaderViewModel.shared.showLoader()
-        apiService.delete(type: NoteDeleteStruct.self, endpoint: "/v1/accounts/\(accountId)/notes/\(noteId)"){
-            [weak self] result,statusCode  in
+        apiService.delete(type: NoteDeleteStruct.self, endpoint: "/v1/accounts/\(accountId)/notes/\(noteId)") {
+            [weak self] result, _  in
             
             DispatchQueue.main.async {
                 switch result {
-                case .success(_):
-                    self?.noteData.note_ids = self?.noteData.note_ids.filter(){$0 != noteId} ?? []
+                case .success:
+                    self?.noteData.note_ids = self?.noteData.note_ids.filter {$0 != noteId} ?? []
                     
                 case .failure(let error):
                     print("error deleting note: \(error)")
@@ -118,14 +118,14 @@ class AccountDetailViewScreenViewModel: ObservableObject {
     }
     
     // A function that fetches the data for the task list
-    func fetchTasks(accountId: String){
+    func fetchTasks(accountId: String) {
         guard !self.isTaskListLoading else {
             return
         }
         self.isTaskListLoading = true
         
-        apiService.get(type: TasksListStruct.self, endpoint: "/v1/accounts/\(accountId)/tasks"){
-            [weak self]  result, statusCode in
+        apiService.get(type: TasksListStruct.self, endpoint: "/v1/accounts/\(accountId)/tasks") {
+            [weak self]  result, _ in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let results):
@@ -142,18 +142,18 @@ class AccountDetailViewScreenViewModel: ObservableObject {
         }
     }
     
-    //A function that deletes task in an account
-    func deleteTask(accountId: String, taskId: String, onSuccess : @escaping() -> Void){
+    // A function that deletes task in an account
+    func deleteTask(accountId: String, taskId: String, onSuccess: @escaping() -> Void) {
         
         LoaderViewModel.shared.showLoader()
-        apiService.delete(type: TaskDeleteStruct.self, endpoint: "/v1/accounts/\(accountId)/tasks/\(taskId)"){
-            [weak self] result,statusCode  in
+        apiService.delete(type: TaskDeleteStruct.self, endpoint: "/v1/accounts/\(accountId)/tasks/\(taskId)") {
+            [weak self] result, _  in
             
             DispatchQueue.main.async {
                 switch result {
-                case .success(_):
+                case .success:
                     onSuccess()
-                    self?.taskData.task_ids = self?.taskData.task_ids.filter(){$0 != taskId} ?? []
+                    self?.taskData.task_ids = self?.taskData.task_ids.filter {$0 != taskId} ?? []
                     
                 case .failure(let error):
                     print("error deleting task: \(error)")
@@ -165,14 +165,14 @@ class AccountDetailViewScreenViewModel: ObservableObject {
     }
     
     // A function that fetches the data for the event list
-    func fetchEvents(accountId: String){
+    func fetchEvents(accountId: String) {
         guard !self.isEventListLoading else {
             return
         }
         self.isEventListLoading = true
         
-        apiService.get(type: EventsListStruct.self, endpoint: "/v1/accounts/\(accountId)/events"){
-            [weak self]  result, statusCode in
+        apiService.get(type: EventsListStruct.self, endpoint: "/v1/accounts/\(accountId)/events") {
+            [weak self]  result, _ in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let results):
@@ -189,19 +189,18 @@ class AccountDetailViewScreenViewModel: ObservableObject {
         }
     }
     
-    
-    //A function that deletes event in an account
-    func deleteEvent(accountId: String, eventId: String, onSuccess : @escaping() -> Void){
+    // A function that deletes event in an account
+    func deleteEvent(accountId: String, eventId: String, onSuccess: @escaping() -> Void) {
         
         LoaderViewModel.shared.showLoader()
-        apiService.delete(type: EventDeleteStruct.self, endpoint: "/v1/accounts/\(accountId)/events/\(eventId)"){
-            [weak self] result,statusCode  in
+        apiService.delete(type: EventDeleteStruct.self, endpoint: "/v1/accounts/\(accountId)/events/\(eventId)") {
+            [weak self] result, _  in
             
             DispatchQueue.main.async {
                 switch result {
-                case .success(_):
+                case .success:
                     onSuccess()
-                    self?.eventData.event_ids = self?.eventData.event_ids.filter(){$0 != eventId} ?? []
+                    self?.eventData.event_ids = self?.eventData.event_ids.filter {$0 != eventId} ?? []
                     
                 case .failure(let error):
                     print("error deleting event: \(error)")
@@ -213,7 +212,7 @@ class AccountDetailViewScreenViewModel: ObservableObject {
     }
     
     // A function that resets the data for the list
-    func resetData(){
+    func resetData() {
         self.noteData = NotesListStruct(note_ids: [], note_map_by_id: [:])
         self.taskData = TasksListStruct(task_ids: [], task_map_by_id: [:])
         self.eventData = EventsListStruct(event_ids: [], event_map_by_id: [:])

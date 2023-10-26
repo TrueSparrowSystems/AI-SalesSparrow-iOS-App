@@ -35,7 +35,7 @@ class EventDetailScreenViewModel: ObservableObject {
     var apiService = DependencyContainer.shared.apiService
     
     // A function to create note from given text and account id.
-    func fetchEventDetail(accountId: String, eventId: String, onSuccess : (()->Void)?, onFailure: (()-> Void)?){
+    func fetchEventDetail(accountId: String, eventId: String, onSuccess: (() -> Void)?, onFailure: (() -> Void)?) {
         let endPoint = "/v1/accounts/\(accountId)/events/\(eventId)"
         guard !self.isFetchEventInProgress else {
             return
@@ -43,8 +43,8 @@ class EventDetailScreenViewModel: ObservableObject {
         
         isFetchEventInProgress = true
         
-        apiService.get(type: EventDetailRespStruct.self, endpoint: endPoint){
-            [weak self] result, statusCode in
+        apiService.get(type: EventDetailRespStruct.self, endpoint: endPoint) {
+            [weak self] result, _ in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let results):
@@ -62,7 +62,7 @@ class EventDetailScreenViewModel: ObservableObject {
         }
     }
     
-    func editEvent(accountId: String, eventId: String, description: String, startDate: Date, startTime: Date, endDate: Date, endTime: Date, onSuccess : (()-> Void)?, onFailure: (()-> Void)?){
+    func editEvent(accountId: String, eventId: String, description: String, startDate: Date, startTime: Date, endDate: Date, endTime: Date, onSuccess: (() -> Void)?, onFailure: (() -> Void)?) {
         
         guard !self.iseditEventInProgress else {
             return
@@ -71,14 +71,14 @@ class EventDetailScreenViewModel: ObservableObject {
         let startDateTime = BasicHelper.getFormattedDateTimeString(from: startDate, from: startTime)
         let endDateTime = BasicHelper.getFormattedDateTimeString(from: endDate, from: endTime)
         
-        if(endDateTime < startDateTime){
+        if endDateTime < startDateTime {
             onFailure?()
             self.iseditEventInProgress = false
             ToastViewModel.shared.showToast(_toast: Toast(style: .error, message: "End Time cannot be shorter than or equal to Start Time"))
             return
-        } else{
+        } else {
             let fourteenDaysFromStartDateTime = BasicHelper.getFormattedDateTimeString(from: Calendar.current.date(byAdding: .day, value: 14, to: startDate)!, from: startTime)
-            if(endDateTime > fourteenDaysFromStartDateTime ){
+            if endDateTime > fourteenDaysFromStartDateTime {
                 onFailure?()
                 self.iseditEventInProgress = false
                 ToastViewModel.shared.showToast(_toast: Toast(style: .error, message: "An event can't last longer than 14 days."))
@@ -88,11 +88,10 @@ class EventDetailScreenViewModel: ObservableObject {
         
         let params: [String: Any] = ["description": description, "start_datetime": startDateTime, "end_datetime": endDateTime]
         
-        
-        apiService.put(type: EditEventRespStruct.self, endpoint: "/v1/accounts/\(accountId)/events/\(eventId)", params: params){
-            [weak self]  result, statusCode in
+        apiService.put(type: EditEventRespStruct.self, endpoint: "/v1/accounts/\(accountId)/events/\(eventId)", params: params) {
+            [weak self]  result, _ in
             switch result {
-            case .success(_):
+            case .success:
                 DispatchQueue.main.async {
                     onSuccess?()
                     self?.iseditEventInProgress = false

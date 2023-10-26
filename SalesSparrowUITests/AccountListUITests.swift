@@ -5,12 +5,11 @@
 //  Created by Mohit Charkha on 24/08/23.
 //
 
-
 import XCTest
 
 final class AccountListUITests: XCTestCase {
     
-    func testAccountListWithoutPagination(){
+    func testAccountListWithoutPagination() {
         let app = XCUIApplication()
         app.launchArguments = ["isRunningUITests"]
         app.launch()
@@ -23,7 +22,7 @@ final class AccountListUITests: XCTestCase {
         XCTAssertTrue(scrollView.waitForExistence(timeout: TimeInterval(timeout)))
         
         let lastCard = app.buttons["account_card_\(rowIndex)"]
-        while !lastCard.exists && availableScrollTries > 0{
+        while !lastCard.exists && availableScrollTries > 0 {
             availableScrollTries -= 1
             app.swipeUp()
         }
@@ -40,7 +39,7 @@ final class AccountListUITests: XCTestCase {
         let accountName = "Test Account \(rowIndex+1)"
         
         XCTAssertTrue(app.staticTexts["txt_account_list_account_name_index_\(rowIndex)"].exists, "Account name label should be present")
-        XCTAssertTrue(app.staticTexts["txt_account_list_account_name_index_\(rowIndex)"].label == accountName)
+        XCTAssertEqual(app.staticTexts["txt_account_list_account_name_index_\(rowIndex)"].label, accountName)
         
         XCTAssertTrue(app.staticTexts["txt_account_list_account_website_index_\(rowIndex)"].exists, "Website label should be present")
         

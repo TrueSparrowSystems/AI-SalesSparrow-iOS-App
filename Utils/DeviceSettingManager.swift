@@ -20,8 +20,8 @@ class DeviceSettingManager: ObservableObject {
     
     private func prepareDeviceHeaderParam() {
         self.deviceHeaderParams = [
-            "X-SalesSparrow-App-Version":  Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String,
-            "X-SalesSparrow-Build-Number":  Bundle.main.infoDictionary?["CFBundleVersion"] as! String,
+            "X-SalesSparrow-App-Version": Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String,
+            "X-SalesSparrow-Build-Number": Bundle.main.infoDictionary?["CFBundleVersion"] as! String,
             "X-SalesSparrow-Device-Os-Version": UIDevice.current.systemVersion,
             "X-SalesSparrow-Device-Uuid": UIDevice.current.identifierForVendor?.uuidString ?? "",
             "X-SalesSparrow-Device-Os": UIDevice.current.systemName,

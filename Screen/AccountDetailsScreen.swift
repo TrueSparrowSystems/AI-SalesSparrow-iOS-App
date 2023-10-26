@@ -11,12 +11,12 @@ struct AccountDetailsScreen: View {
     var accountId: String
     var accountName: String
     @Environment(\.dismiss) private var dismiss
-    @EnvironmentObject var accountDetailViewModelObject : AccountDetailScreenViewModel
+    @EnvironmentObject var accountDetailViewModelObject: AccountDetailScreenViewModel
     @State var propagateClick = 0
     
     var body: some View {
         ScrollViewReader { proxy in
-            ScrollView{
+            ScrollView {
                 VStack(spacing: 20) {
                     
                     AccountDetailsHeader(accountId: accountId, accountName: accountName)
@@ -46,18 +46,18 @@ struct AccountDetailsScreen: View {
                 }
             }
             .simultaneousGesture(
-                TapGesture().onEnded(){
+                TapGesture().onEnded {
                     propagateClick += 1
                 }
             )
             .simultaneousGesture(
-                DragGesture().onChanged{_ in
+                DragGesture().onChanged {_ in
                     propagateClick += 1
                 }
             )
             .padding(.vertical)
             .padding(.leading)
-            .background(Color("Background"))
+            .background(Color(Asset.background.name))
             .navigationBarBackButtonHidden(true)
             .navigationBarItems(leading: backButton)
         }
@@ -69,15 +69,14 @@ struct AccountDetailsScreen: View {
             dismiss()
         }) {
             HStack {
-                Image("ArrowLeft")
-                    .frame(width: 24.14,height: 24.14)
+                Image(Asset.arrowLeft.name)
+                    .frame(width: 24, height: 24)
                 Text("Details")
-                    .font(.custom("Nunito-SemiBold",size: 16))
-                    .foregroundColor(Color("SaveButtonBackground"))
+                    .font(.nunitoSemiBold(size: 16))
+                    .foregroundColor(Color(Asset.saveButtonBackground.name))
             }
-            .foregroundColor(Color("SaveButtonBackground"))
+            .foregroundColor(Color(Asset.saveButtonBackground.name))
         }
         .accessibilityIdentifier("btn_account_detail_back")
     }
 }
-

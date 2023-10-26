@@ -22,7 +22,7 @@ final class AccountDetailTaskListUITests: XCTestCase {
     func testTasksSectionWithEmptyList() throws {
         // Launch the app with the specified launch arguments
         let app = XCUIApplication()
-        app.launchArguments = ["isRunningUITests","emptyTaskList"]
+        app.launchArguments = ["isRunningUITests", "emptyTaskList"]
         app.launch()
         
         // Set the timeout duration
@@ -70,12 +70,12 @@ final class AccountDetailTaskListUITests: XCTestCase {
     func testTasksSectionWithError() throws {
         // Launch the app with the specified launch arguments
         let app = XCUIApplication()
-        app.launchArguments = ["isRunningUITests","taskListError"]
+        app.launchArguments = ["isRunningUITests", "taskListError"]
         app.launch()
         
         // Set the timeout duration
         let timeout = 5
-       
+        
         navigationToTaskSection(app: app)
         
         XCTAssertTrue(app.staticTexts["toast_view_text"].waitForExistence(timeout: TimeInterval(timeout)))
@@ -91,7 +91,7 @@ final class AccountDetailTaskListUITests: XCTestCase {
         
         // Set the timeout duration
         let timeout = 5
-       
+        
         navigationToTaskSection(app: app)
         
         // Check the Add Task button
@@ -156,7 +156,7 @@ final class AccountDetailTaskListUITests: XCTestCase {
         XCTAssertTrue(deleteButton.waitForExistence(timeout: TimeInterval(timeout)))
         deleteButton.tap()
         
-        XCTAssertTrue(card1Description != app.staticTexts["txt_account_detail_task_description_\(accountIndex)"].label)
+        XCTAssertNotEqual(card1Description, app.staticTexts["txt_account_detail_task_description_\(accountIndex)"].label)
     }
     
     func testEditTask() throws {
@@ -170,14 +170,14 @@ final class AccountDetailTaskListUITests: XCTestCase {
         let accountIndex = 0
         
         navigationToTaskSection(app: app)
-
+        
         app.buttons["btn_account_detail_task_more_\(accountIndex)"].tap()
         
         app.buttons["btn_account_detail_edit_task_\(accountIndex)"].tap()
         
         let addNoteTextField = app.textViews["et_create_task"]
         XCTAssertTrue(addNoteTextField.waitForExistence(timeout: TimeInterval(timeout)))
-        //Type Text into the the text field
+        // Type Text into the the text field
         addNoteTextField.typeText("Create new task.\nTap on the save button to save it to salesforce.")
         
         app.buttons["btn_save_task"].tap()
@@ -194,7 +194,7 @@ final class AccountDetailTaskListUITests: XCTestCase {
         let accountIndex = 0
         
         navigationToTaskSection(app: app)
-     
+        
         let descriptionForTask1 = app.staticTexts["txt_account_detail_task_description_\(accountIndex)"].label
         
         let threeDotButtonForTask1 = app.buttons["btn_account_detail_task_more_\(accountIndex)"]
@@ -209,13 +209,12 @@ final class AccountDetailTaskListUITests: XCTestCase {
         XCTAssertTrue(deleteButton.waitForExistence(timeout: TimeInterval(timeout)))
         deleteButton.tap()
         
-        
-        //Check whether on error the toast is received
+        // Check whether on error the toast is received
         XCTAssertTrue(app.staticTexts["toast_view_text"].waitForExistence(timeout: TimeInterval(timeout)))
         
         let descriptionForTask1AfterDelete = app.staticTexts["txt_account_detail_task_description_0"].label
         
-        //Verify the task description for 1st task before and after delete are same
-        XCTAssertTrue(descriptionForTask1 == descriptionForTask1AfterDelete)
+        // Verify the task description for 1st task before and after delete are same
+        XCTAssertEqual(descriptionForTask1, descriptionForTask1AfterDelete)
     }
 }

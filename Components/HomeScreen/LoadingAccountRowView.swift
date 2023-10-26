@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct LoadingAccountRowView: View{
+struct LoadingAccountRowView: View {
     var body: some View {
-        VStack(alignment: .leading){
+        VStack(alignment: .leading) {
             ShimmerView(size: CGSize(width: 102, height: 13))
             ShimmerView(size: CGSize(width: 48, height: 16))
                 .padding(.top, 8)
@@ -26,11 +26,11 @@ struct LoadingAccountRowView: View{
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding()
-        .background(Color("CardBackground"))
+        .background(Color(Asset.cardBackground.name))
         .cornerRadius(5) /// make the background rounded
         .overlay( /// apply a rounded border
             RoundedRectangle(cornerRadius: 5)
-                .stroke(Color("CardBorder"), lineWidth: 1)
+                .stroke(Color(Asset.cardBorder.name), lineWidth: 1)
         )
         .padding(.bottom, 10)
     }
@@ -38,7 +38,7 @@ struct LoadingAccountRowView: View{
 
 struct LoadingAccountRowView_Previews: PreviewProvider {
     static var previews: some View {
-        VStack{
+        VStack {
             LoadingAccountRowView()
         }
     }

@@ -30,8 +30,8 @@ class AccountSearchViewModel: ObservableObject {
             searchAccounts(withText: "")
         } else {
             currentSearchText = searchText
-            DispatchQueue.main.asyncAfter(deadline: .now() + debounceTime){
-                if(searchText == self.currentSearchText){
+            DispatchQueue.main.asyncAfter(deadline: .now() + debounceTime) {
+                if searchText == self.currentSearchText {
                     self.searchAccounts(withText: searchText)
                 }
             }
@@ -43,7 +43,7 @@ class AccountSearchViewModel: ObservableObject {
         let searchUrl = "/v1/accounts"
         let params: [String: Any] = ["q": searchText]
         
-        apiService.get(type: SearchAccountStruct.self, endpoint: searchUrl, params: params) { [weak self] result, statusCode in            
+        apiService.get(type: SearchAccountStruct.self, endpoint: searchUrl, params: params) { [weak self] result, _ in            
             DispatchQueue.main.async {
                 switch result {
                 case .success(let results):
@@ -61,4 +61,3 @@ class AccountSearchViewModel: ObservableObject {
         }
     }
 }
-

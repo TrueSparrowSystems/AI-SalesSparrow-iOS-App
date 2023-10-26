@@ -7,19 +7,19 @@
 
 import SwiftUI
 
-struct AlertModal : View{
+struct AlertModal: View {
     
     var body: some View {
         
-        ZStack{
+        ZStack {
             Color.black.opacity(0.7)
                 .edgesIgnoringSafeArea(.all)
                 .onTapGesture {
                     AlertViewModel.shared.dismissAlert()
                 }
             
-            VStack (spacing:0) {
-                VStack (spacing: 16) {
+            VStack(spacing: 0) {
+                VStack(spacing: 16) {
                     Text(AlertViewModel.shared.alert?.title ?? "")
                         .font(.system(size: 17, weight: .bold))
                         .foregroundColor(Color.black)
@@ -41,37 +41,38 @@ struct AlertModal : View{
                     Button(action: {
                         // Handle cancel action
                         AlertViewModel.shared.dismissAlert()
-                    }) {
+                    }, label: {
                         Text(AlertViewModel.shared.alert?.cancelText ?? "Cancel")
                             .font(.system(size: 17, weight: .regular))
-                            .foregroundColor(Color("CancelButtonForeground"))
+                            .foregroundColor(Color(Asset.cancelButtonForeground.name))
                             .accessibilityIdentifier("txt_alert_cancel")
                     }
+                    )
                     .accessibilityIdentifier("btn_alert_cancel")
                     .padding(.vertical)
                     .frame(maxWidth: .infinity)
                     .overlay(
                         Divider()
-                            .frame(maxWidth: 1, maxHeight: .infinity)
-                        ,alignment: .trailing
+                            .frame(maxWidth: 1, maxHeight: .infinity), alignment: .trailing
                     )
                     
                     Button(action: {
                         // handle alert submit action
                         AlertViewModel.shared.alert?.onSubmitPress()
                         AlertViewModel.shared.dismissAlert()
-                    }) {
+                    }, label: {
                         Text(AlertViewModel.shared.alert?.submitText ?? "Submit")
                             .font(.system(size: 17, weight: .semibold))
-                            .foregroundColor(Color("AlertSubmitButtonForeground"))
+                            .foregroundColor(Color(Asset.alertSubmitButtonForeground.name))
                             .accessibilityIdentifier("txt_alert_submit")
                     }
+                    )
                     .accessibilityIdentifier("btn_alert_submit")
                     .padding(.vertical)
                     .frame(maxWidth: .infinity)
                 }
             }
-            .background(Color("AlertModalBackground"))
+            .background(Color(Asset.alertModalBackground.name))
             .cornerRadius(14)
             .frame(width: 270)
         }

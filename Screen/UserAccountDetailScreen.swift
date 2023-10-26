@@ -5,19 +5,18 @@
 //  Created by Kartik Kapgate on 16/08/23.
 //
 
-
 import SwiftUI
 
 struct UserAccountDetailScreen: View {
     let appVersion: String = DeviceSettingManager.shared.deviceHeaderParams["X-SalesSparrow-App-Version"] as! String
     
     @Environment(\.dismiss) private var dismiss
-    @EnvironmentObject var userStateViewModel : UserStateViewModel
+    @EnvironmentObject var userStateViewModel: UserStateViewModel
     
     var body: some View {
-        VStack (spacing: 16) {
-            HStack{
-                Image("ArrowLeft")
+        VStack(spacing: 16) {
+            HStack {
+                Image(Asset.arrowLeft.name)
                     .frame(width: 24, height: 24)
                     .accessibilityIdentifier("img_user_account_detail_dismiss")
                     .onTapGesture {
@@ -27,19 +26,19 @@ struct UserAccountDetailScreen: View {
                 Spacer()
             }
             
-            VStack (spacing: 24) {
-                HStack{
+            VStack(spacing: 24) {
+                HStack {
                     Text(BasicHelper.getInitials(from: userStateViewModel.currentUser.name))
                         .frame(width: 30, height: 30)
-                        .font(.custom("Nunito-Bold", size: 9))
+                        .font(.nunitoBold(size: 9))
                         .foregroundColor(Color.black)
-                        .background(Color("UserBubble"))
+                        .background(Color(Asset.userBubble.name))
                         .clipShape(Circle())
                         .accessibilityIdentifier("img_user_account_detail_user_initials")
                     
                     Text(userStateViewModel.currentUser.name)
-                        .font(.custom("Nunito-Medium", size: 14))
-                        .foregroundColor(Color("TextPrimary"))
+                        .font(.nunitoMedium(size: 14))
+                        .foregroundColor(Color(Asset.textPrimary.name))
                         .accessibilityIdentifier("txt_user_account_detail_user_name")
                     
                     Spacer()
@@ -57,15 +56,15 @@ struct UserAccountDetailScreen: View {
                                         onSubmitPress: {userStateViewModel.disconnectUser()}
                                     )
                                 )
-                            }) {
-                                Image("ToggleButton")
+                            }, label: {
+                                Image(Asset.toggleButton.name)
                             }
+                            )
                             .accessibilityIdentifier("img_user_account_detail_salesforce_disconnect")
                             
-                            
                             Text("Disconnect Salesforce")
-                                .font(.custom("Nunito-SemiBold", size: 16))
-                                .foregroundColor(Color("TextPrimary"))
+                                .font(.nunitoSemiBold(size: 16))
+                                .foregroundColor(Color(Asset.textPrimary.name))
                                 .accessibilityIdentifier("txt_user_account_detail_salesforce_disconnect")
                             
                             Spacer()
@@ -74,78 +73,76 @@ struct UserAccountDetailScreen: View {
                         .cornerRadius(4)
                         .padding(EdgeInsets(top: 2, leading: 8, bottom: 2, trailing: 4))
                         
-                        
                         DisconnectDescription()
                     }
                     .padding()
-                    .background(Color("DisconnectBackground"))
+                    .background(Color(Asset.disconnectBackground.name))
                     .cornerRadius(4)
-                    .overlay(RoundedRectangle(cornerRadius: 4).stroke(Color("BorderColor"), lineWidth: 1))
+                    .overlay(RoundedRectangle(cornerRadius: 4).stroke(Color(Asset.borderColor.name), lineWidth: 1))
                 }
                 .padding()
                 .background(Color.white)
                 .cornerRadius(4)
-                .overlay(RoundedRectangle(cornerRadius: 4).stroke(Color("BorderColor"), lineWidth: 1))
+                .overlay(RoundedRectangle(cornerRadius: 4).stroke(Color(Asset.borderColor.name), lineWidth: 1))
                 
-                HStack{
-                    Image("SignOut")
+                HStack {
+                    Image(Asset.signOut.name)
                         .padding(EdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 0))
                         .accessibilityIdentifier("img_user_account_detail_logout")
                     
                     Text("Log Out")
-                        .font(.custom("Nunito-SemiBold", size: 16))
-                        .foregroundColor(Color("TextPrimary"))
+                        .font(.nunitoSemiBold(size: 16))
+                        .foregroundColor(Color(Asset.textPrimary.name))
                         .accessibilityIdentifier("btn_user_account_detail_logout")
                         .onTapGesture {
                             userStateViewModel.logOut()
                         }
-                    
                     
                     Spacer()
                 }
                 .padding(10)
                 .background(Color.white)
                 .cornerRadius(4)
-                .overlay(RoundedRectangle(cornerRadius: 4).stroke(Color("BorderColor"), lineWidth: 1))
+                .overlay(RoundedRectangle(cornerRadius: 4).stroke(Color(Asset.borderColor.name), lineWidth: 1))
             }
             .padding()
             
             Spacer()
             
-            VStack{
+            VStack {
                 Text("V\(appVersion)")
-                    .font(.custom("Nunito-SemiBold", size: 12))
-                    .foregroundColor(Color("TextPrimary"))
+                    .font(.nunitoSemiBold(size: 12))
+                    .foregroundColor(Color(Asset.textPrimary.name))
                     .accessibilityIdentifier("txt_user_account_detail_app_version")
                 
                 Text("Sales Sparrow by True Sparrow")
-                    .font(.custom("Nunito-SemiBold", size: 16))
-                    .foregroundColor(Color("TextPrimary"))
+                    .font(.nunitoSemiBold(size: 16))
+                    .foregroundColor(Color(Asset.textPrimary.name))
                     .accessibilityIdentifier("txt_user_account_detail_app_name")
             }
         }
         .padding()
         
-        .background(Color("Background"))
+        .background(Color(Asset.background.name))
     }
 }
 
 struct DisconnectDescription: View {
     
     var body: some View {
-        let t1 = Text("Disconnecting Salesforce will also ")
-            .font(.custom("Nunito-SemiBold", size: 14))
-            .foregroundColor(Color("TextPrimary"))
+        let text1 = Text("Disconnecting Salesforce will also ")
+            .font(.nunitoSemiBold(size: 14))
+            .foregroundColor(Color(Asset.textPrimary.name))
         
-        let t2 = Text("delete your account")
-            .font(.custom("Nunito-SemiBold", size: 14))
-            .foregroundColor(Color("RedHighlight"))
+        let text2 = Text("delete your account")
+            .font(.nunitoSemiBold(size: 14))
+            .foregroundColor(Color(Asset.redHighlight.name))
         
-        let t3 = Text(" and all details associated with it.")
-            .font(.custom("Nunito-SemiBold", size: 14))
-            .foregroundColor(Color("TextPrimary"))
+        let text3 = Text(" and all details associated with it.")
+            .font(.nunitoSemiBold(size: 14))
+            .foregroundColor(Color(Asset.textPrimary.name))
         
-        return t1 + t2 + t3
+        return text1 + text2 + text3
         
     }
 }

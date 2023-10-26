@@ -9,9 +9,9 @@ import SwiftUI
 
 struct CreateEventScreen: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @EnvironmentObject var createEventViewModel : CreateEventViewModel
-    @EnvironmentObject var createNoteScreenViewModel : CreateNoteScreenViewModel
-    @EnvironmentObject var accountDetailViewModelObject : AccountDetailScreenViewModel
+    @EnvironmentObject var createEventViewModel: CreateEventViewModel
+    @EnvironmentObject var createNoteScreenViewModel: CreateNoteScreenViewModel
+    @EnvironmentObject var accountDetailViewModelObject: AccountDetailScreenViewModel
     
     var accountId: String
     @State var description: String = ""
@@ -27,12 +27,12 @@ struct CreateEventScreen: View {
     var body: some View {
         let calendar = Calendar.current
         let suggestedEventState = createNoteScreenViewModel.suggestedEventStates[suggestionId ?? ""] ?? [:]
-        VStack{
-            HStack{
+        VStack {
+            HStack {
                 Text((suggestedEventState["isEventSaved"] as! Bool) ? "Done" : "Cancel")
-                    .font(.custom("Nunito-Bold", size: 14))
+                    .font(.nunitoBold(size: 14))
                     .padding(.vertical, 10)
-                    .foregroundColor(Color("CancelText"))
+                    .foregroundColor(Color(Asset.cancelText.name))
                     .accessibilityIdentifier((suggestedEventState["isEventSaved"] as! Bool) ? "btn_add_event_done" : "btn_add_event_cancel")
                     .onTapGesture {
                         self.presentationMode.wrappedValue.dismiss()
@@ -42,7 +42,7 @@ struct CreateEventScreen: View {
                 
                 Button(action: {
                     isAddEventInProgress = true
-                    createEventViewModel.createEvent(accountId: accountId, description: description, startDate: startDate, startTime: startTime, endDate:endDate, endTime: endTime, onSuccess: {eventId in
+                    createEventViewModel.createEvent(accountId: accountId, description: description, startDate: startDate, startTime: startTime, endDate: endDate, endTime: endTime, onSuccess: {eventId in
                         createNoteScreenViewModel.setEventDataAttribute(id: suggestionId ?? "", attrKey: "eventId", attrValue: eventId)
                         createNoteScreenViewModel.setEventDataAttribute(id: suggestionId ?? "", attrKey: "isEventSaved", attrValue: true)
                         isAddEventInProgress = false
@@ -53,19 +53,19 @@ struct CreateEventScreen: View {
                     }, onFailure: {
                         isAddEventInProgress = false
                     })
-                }, label:{
-                    HStack(alignment: .center, spacing: 0){
-                        if(isAddEventInProgress){
+                }, label: {
+                    HStack(alignment: .center, spacing: 0) {
+                        if isAddEventInProgress {
                             ProgressView()
-                                .tint(Color("LoginButtonPrimary"))
+                                .tint(Color(Asset.loginButtonPrimary.name))
                                 .controlSize(.small)
                             Text("Saving")
                                 .foregroundColor(.white)
-                                .font(.custom("Nunito-Medium", size: 12))
+                                .font(.nunitoMedium(size: 12))
                                 .accessibilityIdentifier("txt_create_event_saving")
                             
-                        }else if((suggestedEventState["isEventSaved"] as! Bool)){
-                            Image("CheckMark")
+                        } else if suggestedEventState["isEventSaved"] as! Bool {
+                            Image(Asset.checkMark.name)
                                 .resizable()
                                 .frame(width: 12, height: 12)
                                 .padding(.trailing, 6)
@@ -73,10 +73,10 @@ struct CreateEventScreen: View {
                             
                             Text("Saved")
                                 .foregroundColor(.white)
-                                .font(.custom("Nunito-Medium", size: 12))
+                                .font(.nunitoMedium(size: 12))
                                 .accessibilityIdentifier("txt_create_event_saved")
-                        }else{
-                            Image("SalesforceIcon")
+                        } else {
+                            Image(Asset.salesforceIcon.name)
                                 .resizable()
                                 .frame(width: 17, height: 12)
                                 .padding(.trailing, 6)
@@ -84,7 +84,7 @@ struct CreateEventScreen: View {
                             
                             Text("Save")
                                 .foregroundColor(.white)
-                                .font(.custom("Nunito-Medium", size: 12))
+                                .font(.nunitoMedium(size: 12))
                                 .accessibilityIdentifier("txt_create_event_save")
                         }
                     }
@@ -100,16 +100,15 @@ struct CreateEventScreen: View {
             }
             .padding(.vertical)
             
-            
             HStack {
                 Text("Start")
-                    .frame(width: 35,height: 30, alignment: .leading)
-                    .font(.custom("Nunito-Regular",size: 14))
-                    .foregroundColor(Color("TextPrimary"))
+                    .frame(width: 35, height: 30, alignment: .leading)
+                    .font(.nunitoRegular(size: 14))
+                    .foregroundColor(Color(Asset.textPrimary.name))
                     .accessibilityIdentifier("txt_add_events_start")
                 
-                ZStack{
-                    if(!(suggestedEventState["isEventSaved"] as! Bool)){
+                ZStack {
+                    if !(suggestedEventState["isEventSaved"] as! Bool) {
                         DatePickerView(selectedDate: $startDate, onTap: {
                             createNoteScreenViewModel.setEventDataAttribute(id: suggestionId ?? "", attrKey: "isStartDateSelected", attrValue: true)
                         })
@@ -121,16 +120,16 @@ struct CreateEventScreen: View {
                         .clipped()
                     }
                     
-                    HStack (spacing: 0) {
+                    HStack(spacing: 0) {
                         Text(BasicHelper.getDateStringFromDate(from: startDate))
-                            .foregroundColor(Color("TermsPrimary"))
-                            .font(.custom("Nunito-Bold", size: 12))
+                            .foregroundColor(Color(Asset.termsPrimary.name))
+                            .font(.nunitoBold( size: 12))
                             .tracking(0.5)
                             .padding(0)
                         
                         Spacer()
                         
-                        Image("EmptyCalendar")
+                        Image(Asset.emptyCalendar.name)
                             .frame(width: 15, height: 15)
                             .padding(.leading, 10)
                     }
@@ -144,10 +143,10 @@ struct CreateEventScreen: View {
                 .frame(width: 160, height: 30)
                 .overlay(
                     RoundedRectangle(cornerRadius: 4)
-                        .stroke(Color("CardBorder"), lineWidth: 1)
+                        .stroke(Color(Asset.cardBorder.name), lineWidth: 1)
                 )
-                ZStack{
-                    if(!(suggestedEventState["isEventSaved"] as! Bool)){
+                ZStack {
+                    if !(suggestedEventState["isEventSaved"] as! Bool) {
                         TimePickerView(selectedTime: $startTime, onTap: {
                             createNoteScreenViewModel.setEventDataAttribute(id: suggestionId ?? "", attrKey: "isStartTimeSelected", attrValue: true)
                         })
@@ -156,17 +155,16 @@ struct CreateEventScreen: View {
                         .accessibilityIdentifier("dp_add_event_select_start_time")
                     }
                     
-                    
-                    HStack (spacing: 0) {
+                    HStack(spacing: 0) {
                         Text(BasicHelper.getTimeStringFromDate(from: startTime))
-                            .foregroundColor(Color("TermsPrimary"))
-                            .font(.custom("Nunito-Bold", size: 12))
+                            .foregroundColor(Color(Asset.termsPrimary.name))
+                            .font(.nunitoBold( size: 12))
                             .tracking(0.5)
                             .padding(0)
                         
                         Spacer()
                         
-                        Image("Clock")
+                        Image(Asset.clock.name)
                             .frame(width: 15, height: 15)
                             .padding(.leading, 10)
                     }
@@ -175,26 +173,25 @@ struct CreateEventScreen: View {
                     .background(.white)
                     .userInteractionDisabled()
                     
-                    
                 }
                 .padding(.horizontal, 10)
                 .frame(width: 140, height: 30)
                 .overlay(
                     RoundedRectangle(cornerRadius: 4)
-                        .stroke(Color("CardBorder"), lineWidth: 1)
+                        .stroke(Color(Asset.cardBorder.name), lineWidth: 1)
                 )
                 
                 Spacer()
             }
             HStack {
                 Text("End")
-                    .frame(width: 35,height: 30, alignment: .leading)
-                    .font(.custom("Nunito-Regular",size: 14))
-                    .foregroundColor(Color("TextPrimary"))
+                    .frame(width: 35, height: 30, alignment: .leading)
+                    .font(.nunitoRegular(size: 14))
+                    .foregroundColor(Color(Asset.textPrimary.name))
                     .accessibilityIdentifier("txt_add_events_end")
                 
-                ZStack{
-                    if(!(suggestedEventState["isEventSaved"] as! Bool)){
+                ZStack {
+                    if !(suggestedEventState["isEventSaved"] as! Bool) {
                         DatePickerView(selectedDate: $endDate, onTap: {
                             createNoteScreenViewModel.setEventDataAttribute(id: suggestionId ?? "", attrKey: "isEndDateSelected", attrValue: true)
                         })
@@ -206,17 +203,16 @@ struct CreateEventScreen: View {
                         .clipped()
                     }
                     
-                    
-                    HStack (spacing: 0) {
+                    HStack(spacing: 0) {
                         Text(BasicHelper.getDateStringFromDate(from: endDate))
-                            .foregroundColor(Color("TermsPrimary"))
-                            .font(.custom("Nunito-Bold", size: 12))
+                            .foregroundColor(Color(Asset.termsPrimary.name))
+                            .font(.nunitoBold( size: 12))
                             .tracking(0.5)
                             .padding(0)
                         
                         Spacer()
                         
-                        Image("EmptyCalendar")
+                        Image(Asset.emptyCalendar.name)
                             .frame(width: 15, height: 15)
                             .padding(.leading, 10)
                     }
@@ -225,18 +221,16 @@ struct CreateEventScreen: View {
                     .background(.white)
                     .userInteractionDisabled()
                     
-                    
                 }
                 .padding(.horizontal, 10)
                 .frame(width: 160, height: 30)
                 .overlay(
                     RoundedRectangle(cornerRadius: 4)
-                        .stroke(Color("CardBorder"), lineWidth: 1)
+                        .stroke(Color(Asset.cardBorder.name), lineWidth: 1)
                 )
                 
-                
-                ZStack{
-                    if(!(suggestedEventState["isEventSaved"] as! Bool)){
+                ZStack {
+                    if !(suggestedEventState["isEventSaved"] as! Bool) {
                         TimePickerView(selectedTime: $endTime, onTap: {
                             createNoteScreenViewModel.setEventDataAttribute(id: suggestionId ?? "", attrKey: "isEndTimeSelected", attrValue: true)
                         })
@@ -245,17 +239,16 @@ struct CreateEventScreen: View {
                         .accessibilityIdentifier("dp_add_event_select_end_time")
                     }
                     
-                    
-                    HStack (spacing: 0) {
+                    HStack(spacing: 0) {
                         Text(BasicHelper.getTimeStringFromDate(from: endTime))
-                            .foregroundColor(Color("TermsPrimary"))
-                            .font(.custom("Nunito-Bold", size: 12))
+                            .foregroundColor(Color(Asset.termsPrimary.name))
+                            .font(.nunitoBold( size: 12))
                             .tracking(0.5)
                             .padding(0)
                         
                         Spacer()
                         
-                        Image("Clock")
+                        Image(Asset.clock.name)
                             .frame(width: 15, height: 15)
                             .padding(.leading, 10)
                     }
@@ -264,21 +257,20 @@ struct CreateEventScreen: View {
                     .background(.white)
                     .userInteractionDisabled()
                     
-                    
                 }
                 .padding(.horizontal, 10)
                 .frame(width: 140, height: 30)
                 .overlay(
                     RoundedRectangle(cornerRadius: 4)
-                        .stroke(Color("CardBorder"), lineWidth: 1)
+                        .stroke(Color(Asset.cardBorder.name), lineWidth: 1)
                 )
                 Spacer()
             }
-            ScrollView{
-                if(!(suggestedEventState["isEventSaved"] as! Bool)){
-                    TextField("Add Event",text: $description, axis: .vertical)
-                        .foregroundColor(Color("TextPrimary"))
-                        .font(.custom("Nunito-SemiBold", size: 18))
+            ScrollView {
+                if !(suggestedEventState["isEventSaved"] as! Bool) {
+                    TextField("Add Event", text: $description, axis: .vertical)
+                        .foregroundColor(Color(Asset.textPrimary.name))
+                        .font(.nunitoSemiBold(size: 18))
                         .focused($focused)
                         .accessibilityIdentifier("et_create_event")
                         .onTapGesture {
@@ -286,17 +278,17 @@ struct CreateEventScreen: View {
                         }
                         .padding(.top)
                         .lineLimit(4...)
-                }else{
+                } else {
                     Text(description)
-                        .foregroundColor(Color("TextPrimary"))
-                        .font(.custom("Nunito-SemiBold", size: 18))
+                        .foregroundColor(Color(Asset.textPrimary.name))
+                        .font(.nunitoSemiBold(size: 18))
                         .accessibilityIdentifier("txt_create_event_description")
                         .padding(.top)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
             }
         }
-        .onChange(of: description){_ in
+        .onChange(of: description) {_ in
             createNoteScreenViewModel.setEventDataAttribute(id: suggestionId ?? "", attrKey: "description", attrValue: self.description)
         }
         .onChange(of: startDate, perform: {_ in
@@ -317,7 +309,7 @@ struct CreateEventScreen: View {
         })
         .onAppear {
             // Adding a delay for view to render
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05){
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                 focused = true
             }
             self.description = ((suggestedEventState["description"] ?? "") as! String)

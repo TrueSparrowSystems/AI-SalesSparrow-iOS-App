@@ -9,7 +9,7 @@ import SwiftUI
 
 struct EventDetailScreen: View {
     @Environment(\.dismiss) private var dismiss
-    @EnvironmentObject var eventDetailScreenViewModel : EventDetailScreenViewModel
+    @EnvironmentObject var eventDetailScreenViewModel: EventDetailScreenViewModel
     
     var accountId: String
     var eventId: String
@@ -25,15 +25,15 @@ struct EventDetailScreen: View {
     
     var body: some View {
         let calendar = Calendar.current
-        VStack{
-            HStack{
+        VStack {
+            HStack {
                 Button(action: {
                     dismiss()
                 }, label: {
                     Text(isEditFlow ? (isEventSaved ? "Done" : "Cancel") : "Done")
-                        .font(.custom("Nunito-Bold", size: 14))
+                        .font(.nunitoBold( size: 14))
                         .padding(.vertical, 10)
-                        .foregroundColor(Color("CancelText"))
+                        .foregroundColor(Color(Asset.cancelText.name))
                 })
                 .accessibilityIdentifier(isEditFlow ? (isEventSaved ? "btn_event_detail_done" : "btn_event_detail_cancel") : "btn_event_detail_done")
                 
@@ -44,19 +44,19 @@ struct EventDetailScreen: View {
                         isEventSaved = true
                         dismiss()
                     }, onFailure: {})
-                }, label:{
-                    HStack(alignment: .center, spacing: 0){
-                        if(eventDetailScreenViewModel.iseditEventInProgress){
+                }, label: {
+                    HStack(alignment: .center, spacing: 0) {
+                        if eventDetailScreenViewModel.iseditEventInProgress {
                             ProgressView()
-                                .tint(Color("LoginButtonPrimary"))
+                                .tint(Color(Asset.loginButtonPrimary.name))
                                 .controlSize(.small)
                             Text("Saving...")
                                 .foregroundColor(.white)
-                                .font(.custom("Nunito-Medium", size: 12))
+                                .font(.nunitoMedium( size: 12))
                                 .accessibilityIdentifier("txt_event_detail_saving")
                             
-                        }else if(isEventSaved){
-                            Image("CheckMark")
+                        } else if isEventSaved {
+                            Image(Asset.checkMark.name)
                                 .resizable()
                                 .frame(width: 12, height: 12)
                                 .padding(.trailing, 6)
@@ -64,10 +64,10 @@ struct EventDetailScreen: View {
                             
                             Text("Saved")
                                 .foregroundColor(.white)
-                                .font(.custom("Nunito-Medium", size: 12))
+                                .font(.nunitoMedium( size: 12))
                                 .accessibilityIdentifier("txt_event_detail_saved")
-                        }else{
-                            Image("SalesforceIcon")
+                        } else {
+                            Image(Asset.salesforceIcon.name)
                                 .resizable()
                                 .frame(width: 17, height: 12)
                                 .padding(.trailing, 6)
@@ -75,7 +75,7 @@ struct EventDetailScreen: View {
                             
                             Text("Save")
                                 .foregroundColor(.white)
-                                .font(.custom("Nunito-Medium", size: 12))
+                                .font(.nunitoMedium( size: 12))
                                 .accessibilityIdentifier("txt_create_task_save")
                         }
                     }
@@ -95,17 +95,17 @@ struct EventDetailScreen: View {
                 ProgressView()
                     .accessibilityIdentifier("loader_note_detail")
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-                    .tint(Color("LoginButtonSecondary"))
+                    .tint(Color(Asset.loginButtonSecondary.name))
                     .controlSize(.large)
             } else {
                 HStack {
                     Text("Start")
-                        .frame(width: 35,height: 30, alignment: .leading)
-                        .font(.custom("Nunito-Regular",size: 14))
-                        .foregroundColor(Color("TextPrimary"))
+                        .frame(width: 35, height: 30, alignment: .leading)
+                        .font(.nunitoRegular( size: 14))
+                        .foregroundColor(Color(Asset.textPrimary.name))
                         .accessibilityIdentifier("txt_event_detail_due")
                     
-                    ZStack{
+                    ZStack {
                         DatePickerView(selectedDate: $startDate, onTap: {
                             /*Set isDateSelected = true?*/
                         })
@@ -117,17 +117,17 @@ struct EventDetailScreen: View {
                         .scaleEffect(x: 1.5, y: 1.5)
                         .clipped()
                         
-                        HStack (spacing: 0) {
+                        HStack(spacing: 0) {
                             Text(BasicHelper.getDateStringFromDate(from: startDate))
-                                .foregroundColor(Color("TermsPrimary"))
-                                .font(.custom("Nunito-Bold", size: 12))
+                                .foregroundColor(Color(Asset.termsPrimary.name))
+                                .font(.nunitoBold( size: 12))
                                 .tracking(0.5)
                                 .padding(0)
                                 .accessibilityIdentifier("txt_event_detail_start_date")
                             
                             Spacer()
                             
-                            Image("EmptyCalendar")
+                            Image(Asset.emptyCalendar.name)
                                 .frame(width: 15, height: 15)
                                 .padding(.leading, 10)
                         }
@@ -140,26 +140,26 @@ struct EventDetailScreen: View {
                     .frame(width: 160, height: 30)
                     .overlay(
                         RoundedRectangle(cornerRadius: 4)
-                            .stroke(Color("CardBorder"), lineWidth: 1)
+                            .stroke(Color(Asset.cardBorder.name), lineWidth: 1)
                     )
-                    ZStack{
+                    ZStack {
                         TimePickerView(selectedTime: $startTime, onTap: {})
                             .disabled(isEditFlow ? false : true)
                             .background(.white)
                             .cornerRadius(8)
                             .accessibilityIdentifier("dp_event_detail_select_time")
                         
-                        HStack (spacing: 0) {
+                        HStack(spacing: 0) {
                             Text(BasicHelper.getTimeStringFromDate(from: startTime))
-                                .foregroundColor(Color("TermsPrimary"))
-                                .font(.custom("Nunito-Bold", size: 12))
+                                .foregroundColor(Color(Asset.termsPrimary.name))
+                                .font(.nunitoBold( size: 12))
                                 .tracking(0.5)
                                 .padding(0)
                                 .accessibilityIdentifier("txt_event_detail_start_time")
                             
                             Spacer()
                             
-                            Image("Clock")
+                            Image(Asset.clock.name)
                                 .frame(width: 15, height: 15)
                                 .padding(.leading, 10)
                         }
@@ -171,19 +171,19 @@ struct EventDetailScreen: View {
                     .frame(width: 140, height: 30)
                     .overlay(
                         RoundedRectangle(cornerRadius: 4)
-                            .stroke(Color("CardBorder"), lineWidth: 1)
+                            .stroke(Color(Asset.cardBorder.name), lineWidth: 1)
                     )
                     
                     Spacer()
                 }
                 HStack {
                     Text("End")
-                        .frame(width: 35,height: 30, alignment: .leading)
-                        .font(.custom("Nunito-Regular",size: 14))
-                        .foregroundColor(Color("TextPrimary"))
+                        .frame(width: 35, height: 30, alignment: .leading)
+                        .font(.nunitoRegular( size: 14))
+                        .foregroundColor(Color(Asset.textPrimary.name))
                         .accessibilityIdentifier("txt_event_detail_due")
                     
-                    ZStack{
+                    ZStack {
                         DatePickerView(selectedDate: $endDate, onTap: {})
                             .disabled(isEditFlow ? false : true)
                             .background(.white)
@@ -193,17 +193,17 @@ struct EventDetailScreen: View {
                             .scaleEffect(x: 1.5, y: 1.5)
                             .clipped()
                         
-                        HStack (spacing: 0) {
+                        HStack(spacing: 0) {
                             Text(BasicHelper.getDateStringFromDate(from: endDate))
-                                .foregroundColor(Color("TermsPrimary"))
-                                .font(.custom("Nunito-Bold", size: 12))
+                                .foregroundColor(Color(Asset.termsPrimary.name))
+                                .font(.nunitoBold( size: 12))
                                 .tracking(0.5)
                                 .padding(0)
                                 .accessibilityIdentifier("txt_event_detail_end_date")
                             
                             Spacer()
                             
-                            Image("EmptyCalendar")
+                            Image(Asset.emptyCalendar.name)
                                 .frame(width: 15, height: 15)
                                 .padding(.leading, 10)
                         }
@@ -215,29 +215,27 @@ struct EventDetailScreen: View {
                     .frame(width: 160, height: 30)
                     .overlay(
                         RoundedRectangle(cornerRadius: 4)
-                            .stroke(Color("CardBorder"), lineWidth: 1)
+                            .stroke(Color(Asset.cardBorder.name), lineWidth: 1)
                     )
                     
-                    
-                    ZStack{
+                    ZStack {
                         TimePickerView(selectedTime: $endTime, onTap: {})
                             .disabled(isEditFlow ? false : true)
                             .background(.white)
                             .cornerRadius(8)
                             .accessibilityIdentifier("dp_event_detail_select_end_time")
                         
-                        
-                        HStack (spacing: 0) {
+                        HStack(spacing: 0) {
                             Text(BasicHelper.getTimeStringFromDate(from: endTime))
-                                .foregroundColor(Color("TermsPrimary"))
-                                .font(.custom("Nunito-Bold", size: 12))
+                                .foregroundColor(Color(Asset.termsPrimary.name))
+                                .font(.nunitoBold( size: 12))
                                 .tracking(0.5)
                                 .padding(0)
                                 .accessibilityIdentifier("txt_event_detail_end_time")
                             
                             Spacer()
                             
-                            Image("Clock")
+                            Image(Asset.clock.name)
                                 .frame(width: 15, height: 15)
                                 .padding(.leading, 10)
                         }
@@ -249,15 +247,15 @@ struct EventDetailScreen: View {
                     .frame(width: 140, height: 30)
                     .overlay(
                         RoundedRectangle(cornerRadius: 4)
-                            .stroke(Color("CardBorder"), lineWidth: 1)
+                            .stroke(Color(Asset.cardBorder.name), lineWidth: 1)
                     )
                     Spacer()
                 }
-                ScrollView{
-                    if(isEditFlow){
-                        TextField("Add Event",text: $description, axis: .vertical)
-                            .foregroundColor(Color("TextPrimary"))
-                            .font(.custom("Nunito-SemiBold", size: 18))
+                ScrollView {
+                    if isEditFlow {
+                        TextField("Add Event", text: $description, axis: .vertical)
+                            .foregroundColor(Color(Asset.textPrimary.name))
+                            .font(.nunitoSemiBold( size: 18))
                             .focused($focused)
                             .accessibilityIdentifier("et_edit_event")
                             .onTapGesture {
@@ -265,10 +263,10 @@ struct EventDetailScreen: View {
                             }
                             .padding(.top)
                             .lineLimit(4...)
-                    }else{
+                    } else {
                         Text(description)
-                            .foregroundColor(Color("TextPrimary"))
-                            .font(.custom("Nunito-SemiBold", size: 18))
+                            .foregroundColor(Color(Asset.textPrimary.name))
+                            .font(.nunitoSemiBold( size: 18))
                             .accessibilityIdentifier("txt_create_event_description")
                             .padding(.top)
                             .frame(maxWidth: .infinity, alignment: .leading)
@@ -281,7 +279,7 @@ struct EventDetailScreen: View {
                 dismiss()
             })
         }
-        .onReceive(eventDetailScreenViewModel.$currentEventData){ currentEvent in
+        .onReceive(eventDetailScreenViewModel.$currentEventData) { currentEvent in
             self.description = currentEvent.description
             self.startDate = BasicHelper.getDateFromString(currentEvent.start_datetime)
             self.startTime = BasicHelper.getDateFromString(currentEvent.start_datetime)
@@ -289,13 +287,13 @@ struct EventDetailScreen: View {
             self.endTime = BasicHelper.getDateFromString(currentEvent.end_datetime)
             isEventSaved = true
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05){
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                 focused = true
                 isEventSaved = true
                 parameterChanged = false
             }
         }
-        .onChange(of: description) { newDescription  in
+        .onChange(of: description) { _  in
             if isParameterAltered() {
                 parameterChanged = true
                 isEventSaved = false
@@ -304,7 +302,7 @@ struct EventDetailScreen: View {
                 isEventSaved = true
             }
         }
-        .onChange(of: startDate) { startDate  in
+        .onChange(of: startDate) { _  in
             if isParameterAltered() {
                 parameterChanged = true
                 isEventSaved = false
@@ -313,7 +311,7 @@ struct EventDetailScreen: View {
                 isEventSaved = true
             }
         }
-        .onChange(of: startTime) { startTime  in
+        .onChange(of: startTime) { _  in
             if isParameterAltered() {
                 parameterChanged = true
                 isEventSaved = false
@@ -322,7 +320,7 @@ struct EventDetailScreen: View {
                 isEventSaved = true
             }
         }
-        .onChange(of: endDate) { endDate  in
+        .onChange(of: endDate) { _  in
             if isParameterAltered() {
                 parameterChanged = true
                 isEventSaved = false
@@ -331,7 +329,7 @@ struct EventDetailScreen: View {
                 isEventSaved = true
             }
         }
-        .onChange(of: endTime) { endTime  in
+        .onChange(of: endTime) { _  in
             if isParameterAltered() {
                 parameterChanged = true
                 isEventSaved = false
@@ -360,4 +358,3 @@ struct EventDetailScreen: View {
         eventDetailScreenViewModel.currentEventData.description == description || BasicHelper.getDateFromString(eventDetailScreenViewModel.currentEventData.start_datetime) == startDate || BasicHelper.getDateFromString(eventDetailScreenViewModel.currentEventData.end_datetime) == endDate || BasicHelper.getDateFromString(eventDetailScreenViewModel.currentEventData.start_datetime) == startTime || BasicHelper.getDateFromString(eventDetailScreenViewModel.currentEventData.end_datetime) == endTime
     }
 }
-

@@ -5,12 +5,11 @@
 //  Created by Mohit Charkha on 23/08/23.
 //
 
-
 import XCTest
 
 final class AccountDetailNoteListUITests: XCTestCase {
     
-    func openAccountDetailUsingSearch(app: XCUIApplication,accountName: String = "Test Account 1") {
+    func openAccountDetailUsingSearch(app: XCUIApplication, accountName: String = "Test Account 1") {
         let timeout = 2
         let searchAccountButton = app.images["btn_search_account"]
         XCTAssertTrue(searchAccountButton.waitForExistence(timeout: TimeInterval(timeout)))
@@ -25,7 +24,7 @@ final class AccountDetailNoteListUITests: XCTestCase {
     func testNotesSectionWithEmptyList() throws {
         // Launch the app with the specified launch arguments
         let app = XCUIApplication()
-        app.launchArguments = ["isRunningUITests","emptyNoteList"]
+        app.launchArguments = ["isRunningUITests", "emptyNoteList"]
         app.launch()
         
         // Set the timeout duration
@@ -72,7 +71,7 @@ final class AccountDetailNoteListUITests: XCTestCase {
     func testNotesSectionWithError() throws {
         // Launch the app with the specified launch arguments
         let app = XCUIApplication()
-        app.launchArguments = ["isRunningUITests","noteListError"]
+        app.launchArguments = ["isRunningUITests", "noteListError"]
         app.launch()
         
         // Set the timeout duration
@@ -83,7 +82,6 @@ final class AccountDetailNoteListUITests: XCTestCase {
         
         XCTAssertTrue(app.staticTexts["toast_view_text"].waitForExistence(timeout: TimeInterval(timeout)))
     }
-    
     
     func testViewNoteButton() throws {
         // Launch the app with the specified launch arguments
@@ -142,7 +140,7 @@ final class AccountDetailNoteListUITests: XCTestCase {
         XCTAssertTrue(addNoteButton.isEnabled) // Ensure the button is enabled
         addNoteButton.tap()
         
-        //Check if cancel button exists
+        // Check if cancel button exists
         let cancelButton = app.staticTexts["btn_cancel_create_note"]
         XCTAssertTrue(cancelButton.waitForExistence(timeout: TimeInterval(timeout)))
         // cancel should be clickable
@@ -160,14 +158,14 @@ final class AccountDetailNoteListUITests: XCTestCase {
         let selectedAccountText = selectedAccount.label
         // Check if the selectedAccountText matches the accountName
         XCTAssertEqual(selectedAccountText, accountName)
-        //Check for Create Note text field
+        // Check for Create Note text field
         let addNoteTextField = app.textViews["et_create_note"]
         XCTAssertTrue(addNoteTextField.waitForExistence(timeout: TimeInterval(timeout)))
         addNoteTextField.tap()
-        //Type Text into the the text field
+        // Type Text into the the text field
         addNoteTextField.typeText("Create A New Note")
         
-        //Check if the save button is enabled
+        // Check if the save button is enabled
         XCTAssertTrue(saveButton.isEnabled)
         saveButton.tap()
         
@@ -177,7 +175,7 @@ final class AccountDetailNoteListUITests: XCTestCase {
         XCTAssertTrue(doneButton.isEnabled)
         
     }
-
+    
     func testEditNote() throws {
         // Launch the app with the specified launch arguments
         let app = XCUIApplication()
@@ -198,7 +196,7 @@ final class AccountDetailNoteListUITests: XCTestCase {
         
         let addNoteTextField = app.textViews["et_edit_note"]
         XCTAssertTrue(addNoteTextField.waitForExistence(timeout: TimeInterval(timeout)))
-        //Type Text into the the text field
+        // Type Text into the the text field
         addNoteTextField.typeText("Create new note.\nTap on the save button to save it to salesforce.")
         
         app.buttons["btn_save_task"].tap()
@@ -242,7 +240,7 @@ final class AccountDetailNoteListUITests: XCTestCase {
         XCTAssertTrue(deleteButton.isHittable)
         deleteButton.tap()
         
-        XCTAssertTrue(initialNote != app.staticTexts["txt_account_detail_note_text_\(noteIndex)"].label)
+        XCTAssertNotEqual(initialNote, app.staticTexts["txt_account_detail_note_text_\(noteIndex)"].label)
     }
     
     func testDeleteNoteError() throws {
@@ -256,7 +254,7 @@ final class AccountDetailNoteListUITests: XCTestCase {
         
         // Open the account detail using the helper function
         openAccountDetailUsingSearch(app: app)
-     
+        
         let noteIndex = 0
         
         let initialNote = app.staticTexts["txt_account_detail_note_text_\(noteIndex)"].label
@@ -281,13 +279,12 @@ final class AccountDetailNoteListUITests: XCTestCase {
         XCTAssertTrue(deleteButton.isHittable)
         deleteButton.tap()
         
-        
-        //Check whether on error the toast is received
+        // Check whether on error the toast is received
         XCTAssertTrue(app.staticTexts["toast_view_text"].waitForExistence(timeout: TimeInterval(timeout)))
         
         let textForNote1AfterDelete = app.staticTexts["txt_account_detail_note_text_\(noteIndex)"].label
         
-        //Verify the note text for 1st note before and after delete are same
-        XCTAssertTrue(initialNote == textForNote1AfterDelete)
+        // Verify the note text for 1st note before and after delete are same
+        XCTAssertEqual(initialNote, textForNote1AfterDelete)
     }
 }

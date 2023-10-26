@@ -12,7 +12,7 @@ import CoreData
 struct ContentView: View {
     
     @Environment(\.managedObjectContext) private var viewContext
-    @EnvironmentObject var userStateViewModel : UserStateViewModel
+    @EnvironmentObject var userStateViewModel: UserStateViewModel
     
     @StateObject var loginScreenViewModel = LoginScreenViewModel()
     @StateObject var toastViewModel = ToastViewModel.shared
@@ -22,13 +22,13 @@ struct ContentView: View {
     
     /// The body of the view
     var body: some View {
-        VStack{
-            if(userStateViewModel.isAppLaunchInProgress){
+        VStack {
+            if userStateViewModel.isAppLaunchInProgress {
                 LaunchScreen()
-            }else{
-                if(!userStateViewModel.isUserLoggedIn){
+            } else {
+                if !userStateViewModel.isUserLoggedIn {
                     LoginScreen()
-                }else {
+                } else {
                     HomeScreen()
                 }
             }
@@ -39,10 +39,10 @@ struct ContentView: View {
         .environmentObject(loginScreenViewModel)
         .toastView(toast: $toastViewModel.toast)
         .overlay(content: {
-            if(loaderViewModel.isLoaderVisible){
+            if loaderViewModel.isLoaderVisible {
                 AppLoader()
             }
-            if(alertViewModel.isAlertVisible){
+            if alertViewModel.isAlertVisible {
                 AlertModal()
             }
         })
@@ -51,7 +51,6 @@ struct ContentView: View {
                 .ignoresSafeArea()
         }
     }
-    
     
     /// Handle incoming URLs from deep links with the custom URL scheme registered in the app's Info.plist
     private func handleIncomingURL(_ url: URL) {
@@ -62,7 +61,7 @@ struct ContentView: View {
         }
         let authToken = components.queryItems?.first(where: { $0.name == "code" })?.value
         
-        if((authToken) != nil){
+        if (authToken) != nil {
             safariWebViewModel.hideWebView()
             loginScreenViewModel.salesforceConnect(authCode: authToken, onSuccess: {
             }, onFailure: {})

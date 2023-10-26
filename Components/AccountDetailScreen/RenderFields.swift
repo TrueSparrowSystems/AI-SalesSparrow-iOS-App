@@ -10,7 +10,7 @@ import SwiftUI
 struct RenderFields: View {
     var fieldName: String
     var fieldValue: String
-    @EnvironmentObject var accountDetailViewModelObject : AccountDetailScreenViewModel
+    @EnvironmentObject var accountDetailViewModelObject: AccountDetailScreenViewModel
     @Environment(\.openURL) var openURL
     
     var body: some View {
@@ -19,33 +19,33 @@ struct RenderFields: View {
         
         switch fieldInfo?.type {
         case .TITLE:
-            HStack(spacing: 0){
+            HStack(spacing: 0) {
                 Text(fieldValue)
-                    .font(.custom("Nunito-Regular",size: 14))
-                    .foregroundColor(Color("TextPrimary"))
+                    .font(.nunitoRegular(size: 14))
+                    .foregroundColor(Color(Asset.textPrimary.name))
                     .accessibilityIdentifier("txt_account_detail_field_type_\(fieldName)")
                 
                 Spacer()
             }
         case .EMAIL:
-            HStack(spacing: 0){
+            HStack(spacing: 0) {
                 Text(fieldValue)
-                    .font(.custom("Nunito-Regular",size: 12))
-                    .foregroundColor(Color("TextPrimary"))
+                    .font(.nunitoRegular(size: 12))
+                    .foregroundColor(Color(Asset.textPrimary.name))
                     .accessibilityIdentifier("txt_account_detail_field_type_\(fieldName)")
                 
                 Spacer()
             }
         case .STRING:
-                HStack(spacing: 0){
+                HStack(spacing: 0) {
                     Text("\(fieldTitle!): ")
-                        .font(.custom("Nunito-Medium",size: 14))
-                        .foregroundColor(Color("TextPrimary"))
+                        .font(.nunitoMedium(size: 14))
+                        .foregroundColor(Color(Asset.textPrimary.name))
                         .accessibilityIdentifier("txt_account_detail_field_type_\(fieldName)")
                     
                     Text("\(fieldValue)")
-                        .font(.custom("Nunito-Medium",size: 14))
-                        .foregroundColor(Color("TextPrimary"))
+                        .font(.nunitoMedium(size: 14))
+                        .foregroundColor(Color(Asset.textPrimary.name))
                         .accessibilityIdentifier("txt_account_detail_field_value_\(fieldValue)")
                     
                     Spacer()
@@ -53,20 +53,20 @@ struct RenderFields: View {
             
         case .LINK:
             HStack(spacing: 0) {
-                Image("Link")
-                    .frame(width: 12,height: 12)
+                Image(Asset.link.name)
+                    .frame(width: 12, height: 12)
                     .padding(.leading, 2)
                     .padding(.trailing, 4)
                 
                 Text("\(fieldTitle!): ")
-                    .font(.custom("Nunito-Medium",size: 14))
-                    .foregroundColor(Color("TextPrimary"))
+                    .font(.nunitoMedium(size: 14))
+                    .foregroundColor(Color(Asset.textPrimary.name))
                     .accessibilityIdentifier("txt_account_detail_field_type_\(fieldName)")
                 
                 Text("\(fieldValue)")
-                    .font(.custom("Nunito-Medium",size: 14))
-                    .foregroundColor(Color("TextPrimary"))
-                    .underline(true, color: Color("TextPrimary"))
+                    .font(.nunitoMedium(size: 14))
+                    .foregroundColor(Color(Asset.textPrimary.name))
+                    .underline(true, color: Color(Asset.textPrimary.name))
                     .accessibilityIdentifier("txt_account_detail_field_value_\(fieldValue)")
                     .onTapGesture {
                         openURL(URL(string: fieldValue)!)
