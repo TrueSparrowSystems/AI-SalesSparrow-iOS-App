@@ -11,6 +11,7 @@ struct SuggestedEventCardView: View {
     var accountId: String
     var suggestion: EventSuggestionStruct
     var index: Int
+    @Binding var propagateClick: Int
     
     @EnvironmentObject var createNoteScreenViewModel: CreateNoteScreenViewModel
     @EnvironmentObject var createEventViewModel: CreateEventViewModel
@@ -24,10 +25,11 @@ struct SuggestedEventCardView: View {
     @FocusState private var userSelected: Bool
     @State var isAddEventInProgress = false
     
-    init(accountId: String, suggestion: EventSuggestionStruct, index: Int) {
+    init(accountId: String, suggestion: EventSuggestionStruct, index: Int, propagateClick: Binding<Int>) {
         self.accountId = accountId
         self.suggestion = suggestion
         self.index = index
+        self._propagateClick = propagateClick
     }
     
     var body: some View {
@@ -37,7 +39,7 @@ struct SuggestedEventCardView: View {
             if suggestedEventState["isEventSaved"] as! Bool {
                 SavedEventCard(recommendedText: ((suggestedEventState["description"] ?? "") as! String), selectedStartDate: selectedStartDate, selectedStartTime: selectedStartTime, selectedEndDate: selectedEndDate, selectedEndTime: selectedEndTime, index: index, accountId: accountId, eventId: (suggestedEventState["eventId"] ?? "") as! String, onDeleteEvent: {
                     createNoteScreenViewModel.removeEventSuggestion(at: index)
-                })
+                }, propagateClick: $propagateClick)
             } else {
                 VStack {
                     // text editor component
@@ -331,6 +333,8 @@ struct SuggestedEventCardView: View {
                                         ProgressView()
                                             .tint(Color(Asset.loginButtonPrimary.name))
                                             .controlSize(.small)
+                                            .padding(.trailing, 3)
+                                        
                                         Text("Adding Event...")
                                             .foregroundColor(.white)
                                             .font(.nunitoMedium(size: 12))
@@ -343,7 +347,7 @@ struct SuggestedEventCardView: View {
                                             .accessibilityIdentifier("txt_create_note_add_event_index_\(index)")
                                     }
                                 }
-                                .frame(width: isAddEventInProgress ? 115 : 72, height: 32)
+                                .frame(width: isAddEventInProgress ? 130 : 72, height: 32)
                                 .background(
                                     Color(hex: "SaveButtonBackground")
                                 )
@@ -419,16 +423,9 @@ struct SuggestedEventCardView: View {
             
         }
         )
-        .background(
-            NavigationLink(
-                destination: CreateEventScreen(accountId: accountId,
-                                               suggestionId: suggestionId),
-                isActive: self.$showEditEventView
-            ) {
-                EmptyView()
-            }
-                .hidden()
-        )
+        .navigationDestination(isPresented: self.$showEditEventView, destination: {
+            CreateEventScreen(accountId: accountId, suggestionId: suggestionId)
+        })
     }
     
 }
@@ -446,6 +443,8 @@ struct SavedEventCard: View {
     @State var isPopoverVisible: Bool = false
     @EnvironmentObject var acccountDetailScreenViewModelObject: AccountDetailViewScreenViewModel
     @EnvironmentObject var createNoteScreenViewModel: CreateNoteScreenViewModel
+    @Binding var propagateClick: Int
+    @State var isSelfPopupTriggered = false
     
     var body: some View {
         VStack {
@@ -473,6 +472,7 @@ struct SavedEventCard: View {
                         .tracking(0.5)
                     
                     Button {
+                        isSelfPopupTriggered = true
                         isPopoverVisible.toggle()
                     } label: {
                         Image(Asset.dotsThreeOutline.name)
@@ -586,14 +586,18 @@ struct SavedEventCard: View {
             .overlay(Rectangle().frame(width: nil, height: 1, alignment: .top).foregroundColor(Color(Asset.borderColor.name)), alignment: .top)
             .background(Color(Asset.pastelGreen.name).opacity(0.2))
         }
+        .onChange(of: propagateClick) {_ in
+            // onChange to hide Popover for events triggered by other cards or screen
+            
+            if isSelfPopupTriggered {
+                // Don't hide popover if event trigged by self
+                isSelfPopupTriggered = false
+            } else {
+                isPopoverVisible = false
+            }
+        }
         .clipShape(RoundedRectangle(cornerRadius: 8))
         .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color(Asset.borderColor.name), lineWidth: 1))
         
-    }
-}
-
-struct SavedEventCard_Previews: PreviewProvider {
-    static var previews: some View {
-        SavedEventCard( recommendedText: "Hello text", selectedStartDate: Date(), selectedStartTime: Date(), selectedEndDate: Date(), selectedEndTime: Date(), index: 0, accountId: "sdfg34rf", eventId: "sdf234rtgv", onDeleteEvent: {})
     }
 }

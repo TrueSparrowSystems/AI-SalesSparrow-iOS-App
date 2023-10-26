@@ -168,6 +168,46 @@ class ApiService {
      - params: The body parameters to include in the request.
      - completion: A closure to call with the decoded response and the HTTP status code of the response.
      */
+    func put<T: Decodable>(type: T.Type, endpoint: String, params: [String: Any?] = [:], completion: @escaping (Result<T, ErrorStruct>, Int?) -> Void) {
+        let envVars = Environments.shared.getVars()
+        let apiBaseEndpoint: String = envVars["API_ENDPOINT"] ?? ""
+        
+        guard let urlApiEndpoint = URL(string: "\(apiBaseEndpoint)\(endpoint)") else {
+            let error = APIError().badURL()
+            completion(Result.failure(error), 0)
+            return
+        }
+        
+        if dev {
+            print("urlApiEndpoint: \(urlApiEndpoint)")
+        }
+        
+        var requestUrl = URLRequest(url: urlApiEndpoint)
+        requestUrl.httpMethod = "PUT"
+        
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: params)
+            requestUrl.httpBody = jsonData
+            if dev {
+                print("-------httpsBody = --------------\(jsonData)")
+            }
+        } catch let decodingError {
+            completion(Result.failure(APIError().decodingError(error: (decodingError as! DecodingError))), 0)
+            return
+        }
+        
+        callApi(type: type, requestUrl: requestUrl, endpoint: endpoint, completion: completion)
+    }
+    
+    /**
+     Makes a PUT request to the API with the specified endpoint and body parameters, and decodes the response into the specified type.
+     
+     - Parameters:
+     - type: The type to decode the response into.
+     - endpoint: The endpoint to append to the base API endpoint.
+     - params: The body parameters to include in the request.
+     - completion: A closure to call with the decoded response and the HTTP status code of the response.
+     */
     func callApi<T: Decodable>(type: T.Type, requestUrl: URLRequest, endpoint: String, completion: @escaping(Result<T, ErrorStruct>, Int?) -> Void) {
         
         var requestUrl = requestUrl

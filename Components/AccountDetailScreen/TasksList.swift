@@ -85,25 +85,22 @@ struct TasksList: View {
                 VStack {
                     let taskIdsArray = self.acccountDetailScreenViewModelObject.taskData.task_ids
                     ForEach(Array(taskIdsArray.enumerated()), id: \.offset) { index, taskId in
-                        if  self.acccountDetailScreenViewModelObject.taskData.task_map_by_id[taskId] != nil {
+                        NavigationLink(destination: TaskDetailScreen(accountId: accountId, taskId: taskId, isEditFlow: false)
+                        ) { if  self.acccountDetailScreenViewModelObject.taskData.task_map_by_id[taskId] != nil {
                             TaskCardView(taskId: taskId, accountId: accountId, taskIndex: index, propagateClick: $propagateClick)
-                        }
-                        
+                        }}
+                        .buttonStyle(.plain)
+                        .accessibilityIdentifier("task_card_\(index)")
                     }
                 }
                 .padding(.trailing)
             }
         }.onAppear {
             acccountDetailScreenViewModelObject.fetchTasks(accountId: accountId)
-        }.background {
-            NavigationLink(destination:
-                            CreateTaskScreen(accountId: accountId, suggestionId: suggestionId),
-                           isActive: self.$addTaskActivated
-            ) {
-                EmptyView()
-            }
-            .hidden()
         }
+        .navigationDestination(isPresented: self.$addTaskActivated, destination: {
+            CreateTaskScreen(accountId: accountId, suggestionId: suggestionId, isAccountDetailFlow: true)
+        })
     }
 }
 
@@ -175,6 +172,8 @@ struct TaskCardView: View {
                     .foregroundColor(Color(Asset.redHighlight.name))
                     .tracking(0.5)
                     .accessibilityIdentifier("txt_account_detail_task_assignee_\(taskIndex)")
+                    .lineLimit(1)
+                    .truncationMode(.tail)
                 
                 if acccountDetailScreenViewModelObject.taskData.task_map_by_id[taskId]?.due_date != nil {
                     Divider()
@@ -205,16 +204,27 @@ struct TaskCardView: View {
         )
         .overlay(alignment: .topTrailing) {
             if isPopoverVisible {
-                VStack {
+                VStack(alignment: .leading) {
+                    NavigationLink(destination: TaskDetailScreen(accountId: accountId, taskId: taskId, isEditFlow: true)
+                    ) {
+                        HStack {
+                            Image("EditIcon")
+                                .frame(width: 20, height: 20)
+                            Text("Edit")
+                                .font(.custom("Nunito-SemiBold", size: 16))
+                                .foregroundColor(Color(Asset.textPrimary.name))
+                        }
+                    }
+                    .accessibilityIdentifier("btn_account_detail_edit_task_\(taskIndex)")
+                    
                     Button(action: {
                         isPopoverVisible = false
-                        
                         AlertViewModel.shared.showAlert(_alert: Alert(
                             title: "Delete Task",
                             message: Text("Are you sure you want to delete this task?"),
                             submitText: "Delete",
                             onSubmitPress: {
-                                acccountDetailScreenViewModelObject.deleteTask(accountId: accountId, taskId: taskId) {}
+                                acccountDetailScreenViewModelObject.deleteTask(accountId: accountId, taskId: taskId, onSuccess: {})
                             }
                         ))
                     }, label: {
@@ -231,7 +241,7 @@ struct TaskCardView: View {
                 }
                 .padding(10)
                 .cornerRadius(4)
-                .frame(width: 100, height: 40)
+                .frame(width: 103, height: 88)
                 .background(Color(Asset.cardBackground.name))
                 .overlay(
                     RoundedRectangle(cornerRadius: 4)

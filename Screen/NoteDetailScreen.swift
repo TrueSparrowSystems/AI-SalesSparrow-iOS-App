@@ -9,44 +9,81 @@ import SwiftUI
 
 struct NoteDetailScreen: View {
     @EnvironmentObject var noteDetailScreenViewModel: NoteDetailScreenViewModel
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @Environment(\.dismiss) private var dismiss
     
-    @State var noteId: String = ""
-    @State var accountId = ""
-    @State var accountName = ""
-    @State var isEditing = false
+    var accountId: String
+    var accountName: String
+    var noteId: String
+    var isEditFlow = false
+    @State var isNoteSaved = false
+    @State var parameterChanged = true
+    @State var description: String = ""
+    @FocusState private var focused: Bool
     
     var body: some View {
         VStack {
             HStack(alignment: .center) {
-                Text("Done")
-                    .font(.nunitoBold(size: 14))
+                Text(isEditFlow ? (isNoteSaved ? "Done" : "Cancel") : "Done")
+                    .font(.custom("Nunito-Bold", size: 14))
                     .padding(.vertical, 10)
                     .foregroundColor(Color(Asset.cancelText.name))
-                    .accessibilityIdentifier("btn_done_note_screen")
+                    .accessibilityIdentifier((isNoteSaved) ? "btn_note_screen_done" : "btn_note_screen_cancel")
                     .onTapGesture {
-                        self.presentationMode.wrappedValue.dismiss()
+                        dismiss()
                     }
                 
                 Spacer()
-                // TODO: uncomment this code once edit functionality is implemented
-                //                if(isEditing){
-                //                    HStack(alignment: .center, spacing: 0){
-                //                        Image(Asset.checkMark.name)
-                //                            .resizable()
-                //                            .frame(width: 12, height: 12)
-                //                            .padding(.trailing, 6)
-                //                        Text("Saved")
-                //                            .foregroundColor(.white)
-                //                            .font(.nunitoMedium(size: 12))
-                //                    }
-                //                    .frame(width: 68, height: 32)
-                //                    .background(
-                //                        Color(hex: "SaveButtonBackground")
-                //                    )
-                //                    .clipShape(RoundedRectangle(cornerRadius: 5))
-                //                    .accessibilityIdentifier("btn_note_saved")
-                //                }
+                if isEditFlow {
+                    Button(action: {
+                        noteDetailScreenViewModel.EditNoteDetail(text: description, accountId: accountId, noteId: noteId, onSuccess: {
+                            isNoteSaved = true
+                            dismiss()
+                        })
+                    }, label: {
+                        HStack(alignment: .center, spacing: 0) {
+                            if noteDetailScreenViewModel.isEditNoteInProgress {
+                                ProgressView()
+                                    .tint(Color(Asset.loginButtonPrimary.name))
+                                    .controlSize(.small)
+                                
+                                Text("Saving...")
+                                    .foregroundColor(.white)
+                                    .font(.custom("Nunito-Medium", size: 12))
+                                    .accessibilityIdentifier("txt_create_task_saving")
+                            } else if isNoteSaved {
+                                Image("CheckMark")
+                                    .resizable()
+                                    .frame(width: 12, height: 12)
+                                    .padding(.trailing, 6)
+                                    .accessibilityIdentifier("img_create_task_checkmark")
+                                
+                                Text("Saved")
+                                    .foregroundColor(.white)
+                                    .font(.custom("Nunito-Medium", size: 12))
+                                    .accessibilityIdentifier("txt_create_task_saved")
+                            } else {
+                                Image("SalesforceIcon")
+                                    .resizable()
+                                    .frame(width: 17, height: 12)
+                                    .padding(.trailing, 6)
+                                    .accessibilityIdentifier("img_create_note_salesforce_icon")
+                                
+                                Text("Save")
+                                    .foregroundColor(.white)
+                                    .font(.custom("Nunito-Medium", size: 12))
+                                    .accessibilityIdentifier("txt_create_task_save")
+                            }
+                        }
+                        .frame(width: noteDetailScreenViewModel.isEditNoteInProgress ? 115 : 68, height: 32)
+                        .background(
+                            Color(hex: "SaveButtonBackground")
+                        )
+                        .clipShape(RoundedRectangle(cornerRadius: 5))
+                    })
+                    .accessibilityIdentifier("btn_save_task")
+                    .disabled((accountId.isEmpty || noteId.isEmpty || description.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || !parameterChanged) ? true : false)
+                    .opacity(((accountId.isEmpty || noteId.isEmpty || description.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || !parameterChanged) ? 0.7 : 1))
+                }
             }
             
             if noteDetailScreenViewModel.isFetchNoteDetailInProgress {
@@ -64,7 +101,7 @@ struct NoteDetailScreen: View {
                 
             } else {
                 HStack {
-                    Image(Asset.accountIcon.name)
+                    Image("AccountIcon")
                         .resizable()
                         .frame(width: 14, height: 14)
                         .accessibilityIdentifier("img_note_detail_account_icon")
@@ -87,11 +124,30 @@ struct NoteDetailScreen: View {
                 }
                 .padding(.top, 12)
                 
-                HTMLTextView(htmlText: noteDetailScreenViewModel.noteDetail.text, textColor: UIColor(named: "TextPrimary") ?? .gray, font: UIFont(name: "Nunito-SemiBold", size: 18) ?? UIFont.systemFont(ofSize: 18), backgroundColor: UIColor(named: "Background") ?? .white)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .font(.nunitoSemiBold(size: 18))
-                    .accessibilityIdentifier("txt_note_detail_text")
-                    .foregroundColor(Color(Asset.textPrimary.name))
+                if isEditFlow {
+                    TextField("Add Note", text: $description, axis: .vertical)
+                        .foregroundColor(Color(Asset.textPrimary.name))
+                        .font(.custom("Nunito-SemiBold", size: 18))
+                        .focused($focused)
+                        .accessibilityIdentifier("et_edit_note")
+                        .onTapGesture {
+                            // Do nothing. Kept on tap here to override tap action over parent tap action
+                        }
+                        .padding(.top)
+                        .lineLimit(4...)
+                } else {
+                    Text(noteDetailScreenViewModel.noteDetail.text)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .font(.custom("Nunito-SemiBold", size: 18))
+                        .accessibilityIdentifier("txt_note_detail_text")
+                        .foregroundColor(Color(Asset.textPrimary.name))
+                    //                    HTMLTextView(htmlText: noteDetailScreenViewModel.noteDetail.text, textColor: UIColor(named: Asset.textPrimary.name) ?? .gray, font: UIFont(name: "Nunito-SemiBold", size: 18) ?? UIFont.systemFont(ofSize: 18), backgroundColor: UIColor(named: "Background") ?? .white)
+                    //                        .frame(maxWidth: .infinity,maxHeight: .infinity, alignment: .leading)
+                    //                        .font(.custom("Nunito-SemiBold", size: 18))
+                    //                        .accessibilityIdentifier("txt_note_detail_text")
+                    //                        .foregroundColor(Color(Asset.textPrimary.name))
+                    
+                }
                 
                 Spacer()
             }
@@ -103,11 +159,23 @@ struct NoteDetailScreen: View {
         .onAppear {
             noteDetailScreenViewModel.fetchNoteDetail(accountId: accountId, noteId: noteId)
         }
-    }
-}
-
-struct NoteDetailScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        NoteDetailScreen()
+        .onChange(of: description) { newDescription  in
+            if newDescription != noteDetailScreenViewModel.noteDetail.text {
+                parameterChanged = true
+                isNoteSaved = false
+            } else {
+                parameterChanged = false
+                isNoteSaved = true
+            }
+        }
+        .onReceive(noteDetailScreenViewModel.$noteDetail) { newCurrentNote in
+            description = newCurrentNote.text
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+                focused = true
+            }
+        }
+        .onTapGesture {
+            focused = false
+        }
     }
 }

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct DatePickerView: View {
+    @State private var calendarId: Int = 0
     @Binding var selectedDate: Date
     var onTap: (() -> Void)?
     
@@ -17,6 +18,10 @@ struct DatePickerView: View {
         DatePicker("", selection: $selectedDate, displayedComponents: [.date])
             .datePickerStyle(.compact)
             .labelsHidden()
+            .id(calendarId)
+            .onChange(of: selectedDate, perform: { _ in
+                calendarId += 1
+            })
             .accentColor(Color.blue)
             .onTapGesture {
                 onTap?()

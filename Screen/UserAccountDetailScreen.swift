@@ -10,7 +10,7 @@ import SwiftUI
 struct UserAccountDetailScreen: View {
     let appVersion: String = DeviceSettingManager.shared.deviceHeaderParams["X-SalesSparrow-App-Version"] as! String
     
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var userStateViewModel: UserStateViewModel
     
     var body: some View {
@@ -20,7 +20,7 @@ struct UserAccountDetailScreen: View {
                     .frame(width: 24, height: 24)
                     .accessibilityIdentifier("img_user_account_detail_dismiss")
                     .onTapGesture {
-                        self.presentationMode.wrappedValue.dismiss()
+                        dismiss()
                     }
                 
                 Spacer()

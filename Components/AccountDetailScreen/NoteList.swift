@@ -78,11 +78,10 @@ struct NotesList: View {
                 VStack {
                     let noteIdsArray = self.acccountDetailScreenViewModelObject.noteData.note_ids
                     ForEach(Array(noteIdsArray.enumerated()), id: \.offset) { index, noteId in
-                        NavigationLink(destination: NoteDetailScreen(noteId: noteId, accountId: accountId, accountName: accountName)
+                        NavigationLink(destination: NoteDetailScreen(accountId: accountId, accountName: accountName, noteId: noteId, isEditFlow: false)
                         ) {
                             if self.acccountDetailScreenViewModelObject.noteData.note_map_by_id[noteId] != nil {
-                                NoteCardView(noteId: noteId, accountId: accountId,
-                                             noteIndex: index, propagateClick: $propagateClick)
+                                NoteCardView(noteId: noteId, accountId: accountId, accountName: accountName, noteIndex: index, propagateClick: $propagateClick)
                             }
                         }
                         .buttonStyle(.plain)
@@ -101,12 +100,14 @@ struct NotesList: View {
 struct NoteCardView: View {
     let noteId: String
     let accountId: String
+    let accountName: String
     let noteIndex: Int
     @EnvironmentObject var acccountDetailScreenViewModelObject: AccountDetailViewScreenViewModel
     var noteData: [String: Note] = [:]
     @State var isPopoverVisible: Bool = false
     @Binding var propagateClick: Int
     @State var isSelfPopupTriggered = false
+    @State private var isEditFlowActive = false
     
     var body: some View {
         VStack(spacing: 0) {
@@ -141,7 +142,7 @@ struct NoteCardView: View {
                             .padding(10)
                             .foregroundColor(Color(Asset.textPrimary.name))
                     }
-                    .accessibilityIdentifier("btn_account_detail_note_more_\(noteIndex)")
+                    .accessibilityIdentifier("btn_account_detail_edit_note_\(noteIndex)")
                 }
             }
             Text("\(acccountDetailScreenViewModelObject.noteData.note_map_by_id[noteId]?.text_preview ?? "")")
@@ -152,6 +153,7 @@ struct NoteCardView: View {
                 .accessibilityIdentifier("txt_account_detail_note_text_\(noteIndex)")
                 .padding(EdgeInsets(top: 6, leading: 0, bottom: 0, trailing: 10))
         }
+        .frame(minHeight: 80)
         .padding(EdgeInsets(top: 5, leading: 15, bottom: 15, trailing: 5))
         .cornerRadius(5)
         .background(Color(Asset.cardBackground.name))
@@ -159,9 +161,26 @@ struct NoteCardView: View {
             RoundedRectangle(cornerRadius: 5)
                 .stroke(Color(Asset.cardBorder.name), lineWidth: 1)
         )
+        .navigationDestination(isPresented: self.$isEditFlowActive, destination: {
+            NoteDetailScreen(accountId: accountId, accountName: accountName, noteId: noteId, isEditFlow: true, isNoteSaved: true)
+        })
         .overlay(alignment: .topTrailing) {
             if isPopoverVisible {
                 VStack {
+                    Button(action: {
+                        isEditFlowActive.toggle() // Toggle the state to activate/deactivate the link
+                    }) {
+                        HStack {
+                            Image("EditIcon")
+                                .frame(width: 20, height: 20)
+                            Text("Edit")
+                                .font(.custom("Nunito-SemiBold", size: 16))
+                                .foregroundColor(Color(Asset.textPrimary.name))
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                    .accessibilityIdentifier("btn_account_detail_edit_\(noteIndex)")
+                    
                     Button(action: {
                         isPopoverVisible = false
                         AlertViewModel.shared.showAlert(_alert: Alert(
@@ -180,19 +199,20 @@ struct NoteCardView: View {
                                 .font(.nunitoSemiBold(size: 16))
                                 .foregroundColor(Color(Asset.textPrimary.name))
                         }
+                        .frame(maxWidth: .infinity, alignment: .leading)
                     }
-                           )
+                    )
                     .accessibilityIdentifier("btn_account_detail_delete_note_\(noteIndex)")
                 }
                 .padding(10)
                 .cornerRadius(4)
-                .frame(width: 100, height: 40)
+                .frame(width: 103, height: 75)
                 .background(Color(Asset.cardBackground.name))
                 .overlay(
                     RoundedRectangle(cornerRadius: 4)
                         .stroke(Color(Asset.cardBorder.name), lineWidth: 1)
                 )
-                .offset(x: -14, y: 32)
+                .offset(x: -10, y: 35)
             }
         }
         .onChange(of: propagateClick) {_ in

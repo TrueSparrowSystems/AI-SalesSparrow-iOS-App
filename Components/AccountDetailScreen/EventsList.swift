@@ -85,25 +85,24 @@ struct EventsList: View {
                 VStack {
                     let eventIdsArray = self.acccountDetailScreenViewModelObject.eventData.event_ids
                     ForEach(Array(eventIdsArray.enumerated()), id: \.offset) { index, eventId in
-                        if self.acccountDetailScreenViewModelObject.eventData.event_map_by_id[eventId] != nil {
-                            EventCardView(eventId: eventId, accountId: accountId, eventIndex: index, propagateClick: $propagateClick)
+                        NavigationLink(destination: EventDetailScreen(accountId: accountId, eventId: eventId)
+                        ) {
+                            if  self.acccountDetailScreenViewModelObject.eventData.event_map_by_id[eventId] != nil {
+                                EventCardView(eventId: eventId, accountId: accountId, eventIndex: index, propagateClick: $propagateClick)
+                            }
                         }
-                        
+                        .buttonStyle(.plain)
+                        .accessibilityIdentifier("event_card_\(index)")
                     }
                 }
                 .padding(.trailing)
             }
         }.onAppear {
             acccountDetailScreenViewModelObject.fetchEvents(accountId: accountId)
-        }.background {
-            NavigationLink(destination:
-                            CreateEventScreen(accountId: accountId, suggestionId: suggestionId),
-                           isActive: self.$addEventActivated
-            ) {
-                EmptyView()
-            }
-            .hidden()
         }
+        .navigationDestination(isPresented: self.$addEventActivated, destination: {
+            CreateEventScreen(accountId: accountId, suggestionId: suggestionId, isAccountDetailFlow: true)
+        })
     }
 }
 
@@ -190,6 +189,8 @@ struct EventCardView: View {
                         .tracking(0.5)
                         .accessibilityIdentifier("txt_account_detail_event_end_date_\(eventIndex)")
                         .lineLimit(1)
+                    
+                    Spacer()
                 }
             }
             .padding(.top, 12)
@@ -205,6 +206,19 @@ struct EventCardView: View {
         .overlay(alignment: .topTrailing) {
             if isPopoverVisible {
                 VStack {
+                    NavigationLink(destination: EventDetailScreen(accountId: accountId, eventId: eventId, isEditFlow: true)
+                    ) {
+                        HStack {
+                            Image("EditIcon")
+                                .frame(width: 20, height: 20)
+                            Text("Edit")
+                                .font(.custom("Nunito-SemiBold", size: 16))
+                                .foregroundColor(Color(Asset.textPrimary.name))
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                    .accessibilityIdentifier("btn_account_detail_edit_event_\(eventIndex)")
+                    
                     Button(action: {
                         isPopoverVisible = false
                         
@@ -224,13 +238,14 @@ struct EventCardView: View {
                                 .font(.nunitoSemiBold(size: 16))
                                 .foregroundColor(Color(Asset.textPrimary.name))
                         }
+                        .frame(maxWidth: .infinity, alignment: .leading)
                     }
                     )
                     .accessibilityIdentifier("btn_account_detail_delete_event_\(eventIndex)")
                 }
                 .padding(10)
                 .cornerRadius(4)
-                .frame(width: 100, height: 40)
+                .frame(width: 103, height: 75)
                 .background(Color(Asset.cardBackground.name))
                 .overlay(
                     RoundedRectangle(cornerRadius: 4)

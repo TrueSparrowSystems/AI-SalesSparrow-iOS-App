@@ -11,6 +11,7 @@ struct CreateTaskScreen: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @EnvironmentObject var createTaskViewModel: CreateTaskViewModel
     @EnvironmentObject var createNoteScreenViewModel: CreateNoteScreenViewModel
+    @EnvironmentObject var accountDetailViewModelObject: AccountDetailScreenViewModel
     
     var accountId: String
     @State var description: String = ""
@@ -19,9 +20,11 @@ struct CreateTaskScreen: View {
     @State private var showUserSearchView: Bool = false
     @State var isAddTaskInProgress = false
     var suggestionId: String?
+    var isAccountDetailFlow: Bool = false
     
     var body: some View {
         let suggestedTaskState = createNoteScreenViewModel.suggestedTaskStates[suggestionId ?? ""] ?? [:]
+        
         VStack {
             HStack {
                 Text((suggestedTaskState["isTaskSaved"] as! Bool) ? "Done" : "Cancel")
@@ -41,6 +44,10 @@ struct CreateTaskScreen: View {
                         createNoteScreenViewModel.setTaskDataAttribute(id: suggestionId ?? "", attrKey: "taskId", attrValue: taskId)
                         createNoteScreenViewModel.setTaskDataAttribute(id: suggestionId ?? "", attrKey: "isTaskSaved", attrValue: true)
                         isAddTaskInProgress = false
+                        if isAccountDetailFlow {
+                            accountDetailViewModelObject.scrollToSection = "TasksList"
+                        }
+                        self.presentationMode.wrappedValue.dismiss()
                     }, onFailure: {
                         isAddTaskInProgress = false
                     })
@@ -50,7 +57,7 @@ struct CreateTaskScreen: View {
                             ProgressView()
                                 .tint(Color(Asset.loginButtonPrimary.name))
                                 .controlSize(.small)
-                            Text("Adding Task...")
+                            Text("Saving")
                                 .foregroundColor(.white)
                                 .font(.nunitoMedium(size: 12))
                                 .accessibilityIdentifier("txt_create_task_saving")
@@ -67,10 +74,16 @@ struct CreateTaskScreen: View {
                                 .font(.nunitoMedium(size: 12))
                                 .accessibilityIdentifier("txt_create_task_saved")
                         } else {
-                            Text("Add Task")
+                            Image("SalesforceIcon")
+                                .resizable()
+                                .frame(width: 17, height: 12)
+                                .padding(.trailing, 6)
+                                .accessibilityIdentifier("img_create_note_salesforce_icon")
+                            
+                            Text("Save")
                                 .foregroundColor(.white)
-                                .font(.nunitoMedium(size: 12))
-                                .accessibilityIdentifier("txt_create_task_save")
+                                .font(.custom("Nunito-Medium", size: 12))
+                                .accessibilityIdentifier("txt_create_event_save")
                         }
                     }
                     .frame(width: isAddTaskInProgress ? 115 : 68, height: 32)
@@ -113,6 +126,8 @@ struct CreateTaskScreen: View {
                             .foregroundColor(Color(Asset.redHighlight.name))
                             .font(.nunitoBold(size: 12))
                             .accessibilityIdentifier("txt_add_task_selected_user")
+                            .lineLimit(1)
+                            .truncationMode(.tail)
                     }
                     Spacer()
                     
@@ -154,45 +169,29 @@ struct CreateTaskScreen: View {
                         .background(.white)
                         .cornerRadius(8)
                         .accessibilityIdentifier("dp_add_task_select_date")
+                        .compositingGroup()
+                        .scaleEffect(x: 1.5, y: 1.5)
+                        .clipped()
                     }
                     
-                    if !(suggestedTaskState["isDateSelected"] as! Bool) {
-                        HStack(spacing: 0) {
-                            Text("Select")
-                                .foregroundColor(Color(Asset.termsPrimary.name))
-                                .font(.nunitoLight(size: 12))
-                                .tracking(0.5)
-                                .padding(0)
-                            
-                            Spacer()
-                            
-                            Image(Asset.emptyCalendar.name)
-                                .frame(width: 15, height: 15)
-                                .padding(.leading, 6)
-                        }
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .background(.white)
-                        .userInteractionDisabled()
+                    HStack(spacing: 0) {
+                        Text(BasicHelper.getDateStringFromDate(from: dueDate))
+                            .foregroundColor(Color(Asset.termsPrimary.name))
+                            .font(.custom("Nunito-Bold", size: 12))
+                            .tracking(0.5)
+                            .padding(0)
                         
-                    } else {
-                        HStack(spacing: 0) {
-                            Text(BasicHelper.getDateStringFromDate(from: dueDate))
-                                .foregroundColor(Color(Asset.termsPrimary.name))
-                                .font(.nunitoBold(size: 12))
-                                .tracking(0.5)
-                                .padding(0)
-                            
-                            Spacer()
-                            
-                            Image(Asset.emptyCalendar.name)
-                                .frame(width: 15, height: 15)
-                                .padding(.leading, 10)
-                        }
-                        .accessibilityIdentifier("txt_add_task_select_date")
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .background(.white)
-                        .userInteractionDisabled()
+                        Spacer()
+                        
+                        Image("EmptyCalendar")
+                            .frame(width: 15, height: 15)
+                            .padding(.leading, 10)
                     }
+                    .accessibilityIdentifier("txt_add_task_select_date")
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(.white)
+                    .userInteractionDisabled()
+                    
                 }
                 .padding(.horizontal, 10)
                 .frame(width: 160, height: 30)
@@ -236,6 +235,7 @@ struct CreateTaskScreen: View {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                 focused = true
             }
+            createNoteScreenViewModel.setTaskDataAttribute(id: suggestionId ?? "", attrKey: "isDateSelected", attrValue: true)
             self.description = ((suggestedTaskState["description"] ?? "") as! String)
             
             self.dueDate = (suggestedTaskState["dueDate"] ?? Date()) as! Date
