@@ -9,41 +9,34 @@ import SwiftUI
 
 struct BottomBar: View {
     @State var createNoteScreenActivated = false
-    @State var selectedAccountId: String? = nil
-    @State var selectedAccountName: String? = nil
+    @State var selectedAccountId: String?
+    @State var selectedAccountName: String?
     
     var body: some View {
         ZStack {
-            Color("Background")
+            Color(Asset.background.name)
                 .frame(height: 44)
                 .overlay(
                     Rectangle().frame(width: nil, height: 0.5, alignment: .top).foregroundColor(.black.opacity(0.2)), alignment: .top
                 )
-
+            
             // Button for headerIcon at the middle of the navbar
             Button(action: {
                 self.createNoteScreenActivated = true
-            }) {
-                Image("AddIcon")
+            }, label: {
+                Image(Asset.addIcon.name)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 44.0, height: 44.0)
-
+                
             }
+            )
             .offset(y: -22)
             .accessibilityIdentifier("btn_create_note")
         }
-        .background(
-            NavigationLink(
-                destination: CreateNoteScreen(isAccountSelectable: true),
-                isActive: self.$createNoteScreenActivated
-            ) {
-                EmptyView()
-            }
-                .hidden()
-        )
-        
-        
+        .navigationDestination(isPresented: self.$createNoteScreenActivated, destination: {
+            CreateNoteScreen(isAccountSelectable: true)
+        })
     }
 }
 

@@ -8,15 +8,20 @@
 import SwiftUI
 
 struct DatePickerView: View {
+    @State private var calendarId: Int = 0
     @Binding var selectedDate: Date
     var onTap: (() -> Void)?
     
     var body: some View {
         
-        // Date and time picker
-        DatePicker("", selection: $selectedDate, displayedComponents:  [.date])
+        // Date picker
+        DatePicker("", selection: $selectedDate, displayedComponents: [.date])
             .datePickerStyle(.compact)
             .labelsHidden()
+            .id(calendarId)
+            .onChange(of: selectedDate, perform: { _ in
+                calendarId += 1
+            })
             .accentColor(Color.blue)
             .onTapGesture {
                 onTap?()
@@ -31,22 +36,20 @@ struct DatePickerView: View {
 }
 
 struct TimePickerView: View {
-    @State private var selectedTime = Date()
+    @Binding var selectedTime: Date
+    var onTap: (() -> Void)?
     
     var body: some View {
-        VStack(spacing: 16) {
-            // Date and time picker
-            VStack(spacing: 8) {
-                HStack {
-                    DatePicker("", selection: $selectedTime, displayedComponents:  [.hourAndMinute])
-                        .datePickerStyle(.automatic)
-                        .accentColor(Color(hex: "#f5aa42"))
-                        .foregroundColor(.blue)
-                }
-                .frame(width: 324, height: 50)
-                .padding(8)
+        // Time picker
+        DatePicker("", selection: $selectedTime, displayedComponents: [.hourAndMinute])
+            .datePickerStyle(.automatic)
+            .accentColor(Color.blue)
+            .foregroundColor(.blue)
+            .onTapGesture {
+                onTap?()
             }
-        }
+            .scaleEffect(1.75)
+        
     }
     
     private var timeFormatter: DateFormatter {

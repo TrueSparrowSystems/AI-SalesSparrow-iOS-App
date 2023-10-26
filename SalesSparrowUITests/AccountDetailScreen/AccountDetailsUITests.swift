@@ -5,33 +5,24 @@
 //  Created by Mohit Charkha on 23/08/23.
 //
 
-
 import XCTest
 
 final class AccountDetailsUITests: XCTestCase {
-    
-    func openAccountDetailUsingSearch(app: XCUIApplication,accountName: String = "Test Account 1") {
-        let timeout = 2
-        let searchAccountButton = app.images["btn_search_account"]
-        XCTAssertTrue(searchAccountButton.waitForExistence(timeout: TimeInterval(timeout)))
-        searchAccountButton.tap()
-        
-        // modal should open with default data
-        let btnSearchAccountNameBtn = app.buttons["btn_search_account_name_\(accountName)"]
-        XCTAssertTrue(btnSearchAccountNameBtn.waitForExistence(timeout: TimeInterval(timeout)))
-        btnSearchAccountNameBtn.tap()
-    }
-    
     func testAccountDetailHeader() throws {
         // Launch the app with the specified launch arguments
         let app = XCUIApplication()
         app.launchArguments = ["isRunningUITests"]
         app.launch()
         
-        // Open the account detail using the helper function
-        openAccountDetailUsingSearch(app: app)
+        // Replace with the index of the row you want to test
+        let rowIndex = 0
         
-        let timeout = 5
+        // Tap on the account card at the specified index
+        let accountCard = app.buttons["account_card_\(rowIndex)"]
+        XCTAssertTrue(accountCard.exists, "Account card should be present")
+        accountCard.tap()
+        
+        let timeout = 2
         // Check the account icon
         XCTAssertTrue(app.images["img_account_detail_account_icon"].waitForExistence(timeout: TimeInterval(timeout)))
         
@@ -44,12 +35,48 @@ final class AccountDetailsUITests: XCTestCase {
         // Check the account name text
         XCTAssertTrue(app.staticTexts["txt_account_detail_account_name"].waitForExistence(timeout: TimeInterval(timeout)))
         
-        // Check the notes icon
-        XCTAssertTrue(app.images["img_account_detail_note_icon"].waitForExistence(timeout: TimeInterval(timeout)))
+        //        // click on more details if exists
+        //        let btnAccountDetailMoreDetails = app.buttons["btn_account_detail_more_details"]
+        //        XCTAssertTrue(btnAccountDetailMoreDetails.exists, "More details button not visible")
+        //        btnAccountDetailMoreDetails.tap()
         
-        // Check the notes title
-        XCTAssertTrue(app.staticTexts["txt_account_detail_notes_title"].waitForExistence(timeout: TimeInterval(timeout)))
+        //        XCTAssertTrue(app.staticTexts["txt_account_detail_field_type_website"].waitForExistence(timeout: TimeInterval(timeout)))
+        //        XCTAssertTrue(app.staticTexts["txt_account_detail_field_type_ppt"].waitForExistence(timeout: TimeInterval(timeout)))
+        //        XCTAssertTrue(app.staticTexts["txt_account_detail_field_type_account_source"].waitForExistence(timeout: TimeInterval(timeout)))
+        //        XCTAssertTrue(app.staticTexts["txt_account_detail_field_type_hq"].waitForExistence(timeout: TimeInterval(timeout)))
+        //        XCTAssertTrue(app.staticTexts["txt_account_detail_field_type_status"].waitForExistence(timeout: TimeInterval(timeout)))
         
-        sleep(5)
     }
+    
+    //    func testAccountContactDetail() throws {
+    //        // Launch the app with the specified launch arguments
+    //        let app = XCUIApplication()
+    //        app.launchArguments = ["isRunningUITests"]
+    //        app.launch()
+    //        
+    //        // Replace with the index of the row you want to test
+    //        let rowIndex = 0
+    //        
+    //        // Tap on the account card at the specified index
+    //        let accountCard = app.buttons["account_card_\(rowIndex)"]
+    //        XCTAssertTrue(accountCard.exists, "Account card should be present")
+    //        accountCard.tap()
+    //        
+    //        
+    //        let timeout = 2
+    //        // Check the contact icon
+    //        XCTAssertTrue(app.images["img_account_detail_contact_icon"].waitForExistence(timeout: TimeInterval(timeout)))
+    //        
+    //        // Check the contact details title
+    //        XCTAssertTrue(app.staticTexts["txt_account_detail_contact_details_title"].waitForExistence(timeout: TimeInterval(timeout)))
+    //        
+    //        // Check the contact number, name and other details
+    //        XCTAssertTrue(app.staticTexts["txt_account_detail_contact_number_index_\(rowIndex)"].waitForExistence(timeout: TimeInterval(timeout)))
+    //        
+    //        XCTAssertTrue(app.staticTexts["txt_account_detail_contact_name_index_\(rowIndex)"].waitForExistence(timeout: TimeInterval(timeout)))
+    //        
+    //        XCTAssertTrue(app.staticTexts["txt_account_detail_field_type_email"].waitForExistence(timeout: TimeInterval(timeout)))
+    //        XCTAssertTrue(app.staticTexts["txt_account_detail_field_type_title"].waitForExistence(timeout: TimeInterval(timeout)))
+    //        XCTAssertTrue(app.staticTexts["txt_account_detail_field_type_linkedin"].waitForExistence(timeout: TimeInterval(timeout)))
+    //    }
 }

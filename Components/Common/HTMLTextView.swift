@@ -41,7 +41,7 @@ extension String {
             .documentType: NSAttributedString.DocumentType.html,
             .characterEncoding: String.Encoding.utf8.rawValue
         ]
-        var attributes: [NSAttributedString.Key: Any] = [
+        let attributes: [NSAttributedString.Key: Any] = [
             .foregroundColor: textColor,
             .font: font
         ]
@@ -53,4 +53,3 @@ extension String {
         return nil
     }
 }
-

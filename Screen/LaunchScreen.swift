@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct LaunchScreen: View{
-    var body: some View{
-        VStack{
-            Image("SplashScreenImage")
+struct LaunchScreen: View {
+    var body: some View {
+        VStack {
+            Image(Asset.splashScreenImage.name)
                 .resizable()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea(.all)
-        .background(Color("LaunchScreenBackground"))
+        .background(Color(Asset.launchScreenBackground.name))
     }
 }

@@ -15,7 +15,7 @@ struct Account: Identifiable, Codable {
     var account_contact_associations_id: String?
 }
 
-struct Contact: Identifiable,Codable {
+struct Contact: Identifiable, Codable {
     var id: String
     var name: String
     var additional_fields: [String: String?]?
@@ -38,36 +38,53 @@ struct AccountListStruct: Codable {
     var next_page_payload: Pagination?
 }
 
+struct FieldDefinition: Codable {
+    let fields: [String: FieldInfo]
+
+    struct FieldInfo: Codable {
+        let type: FieldType
+        let title: String
+    }
+}
+
+enum FieldType: String, Codable {
+    case LINK
+    case TITLE
+    case STRING
+    case EMAIL
+}
+
 class AccountListViewModel: ObservableObject {
     @Published var accountListData = AccountListStruct(account_ids: [], account_map_by_id: [:], contact_map_by_id: [:], account_contact_associations_map_by_id: [:], next_page_payload: nil)
+    
     var apiService = DependencyContainer.shared.apiService
     @Published var isFetchAccountInProgress = false
     
-    func fetchData(){
+    func fetchData() {
         guard !self.isFetchAccountInProgress else {
             return
         }
         self.isFetchAccountInProgress = true
         
         var apiParams: [String: Any] = [:]
-        if((self.accountListData.next_page_payload?.pagination_identifier) != nil){
+        if (self.accountListData.next_page_payload?.pagination_identifier) != nil {
             apiParams["pagination_identifier"] = (self.accountListData.next_page_payload!.pagination_identifier!) as String
-        } else{
-            //If pagination identifier is not present and account list is already fetched then return
-            if(self.accountListData.account_ids.count != 0){
+        } else {
+            // If pagination identifier is not present and account list is already fetched then return
+            if !self.accountListData.account_ids.isEmpty {
                 isFetchAccountInProgress = false
                 return
             }
         }
         
-        apiService.get(type: AccountListStruct.self, endpoint: "/v1/accounts/feed", params: apiParams){
-            [weak self] result, statusCode in
+        apiService.get(type: AccountListStruct.self, endpoint: "/v1/accounts/feed", params: apiParams) {
+            [weak self] result, _ in
             
             DispatchQueue.main.async {
                 switch result {
                 case .success(let results):
                     let account_ids = (self?.accountListData.account_ids ?? []) + results.account_ids
-                    let orderedSet = NSOrderedSet(array:account_ids)
+                    let orderedSet = NSOrderedSet(array: account_ids)
                     self?.accountListData.account_ids = orderedSet.array as! [String]
                     self?.accountListData.account_map_by_id.merge(results.account_map_by_id) { (_, new) in new }
                     self?.accountListData.contact_map_by_id.merge(results.contact_map_by_id) { (_, new) in new }
@@ -80,14 +97,12 @@ class AccountListViewModel: ObservableObject {
                     print("Error loading data: \(error)")
                 }
                 
-                
-                
                 self?.isFetchAccountInProgress = false
             }
         }
     }
     
-    func resetData(){
+    func resetData() {
         self.accountListData = AccountListStruct(account_ids: [], account_map_by_id: [:], contact_map_by_id: [:], account_contact_associations_map_by_id: [:], next_page_payload: nil)
     }
 }

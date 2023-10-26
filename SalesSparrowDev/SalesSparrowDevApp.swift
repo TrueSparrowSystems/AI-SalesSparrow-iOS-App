@@ -41,4 +41,3 @@ class DependencyContainer: ObservableObject {
         apiService = isRunningUITests ? MockAPIService() : ApiService()
     }
 }
-

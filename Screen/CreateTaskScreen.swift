@@ -9,8 +9,9 @@ import SwiftUI
 
 struct CreateTaskScreen: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @EnvironmentObject var createTaskViewModel : CreateTaskViewModel
-    @EnvironmentObject var createNoteScreenViewModel : CreateNoteScreenViewModel
+    @EnvironmentObject var createTaskViewModel: CreateTaskViewModel
+    @EnvironmentObject var createNoteScreenViewModel: CreateNoteScreenViewModel
+    @EnvironmentObject var accountDetailViewModelObject: AccountDetailScreenViewModel
     
     var accountId: String
     @State var description: String = ""
@@ -19,15 +20,17 @@ struct CreateTaskScreen: View {
     @State private var showUserSearchView: Bool = false
     @State var isAddTaskInProgress = false
     var suggestionId: String?
+    var isAccountDetailFlow: Bool = false
     
     var body: some View {
         let suggestedTaskState = createNoteScreenViewModel.suggestedTaskStates[suggestionId ?? ""] ?? [:]
-        VStack{
-            HStack{
+        
+        VStack {
+            HStack {
                 Text((suggestedTaskState["isTaskSaved"] as! Bool) ? "Done" : "Cancel")
-                    .font(.custom("Nunito-Bold", size: 14))
+                    .font(.nunitoBold(size: 14))
                     .padding(.vertical, 10)
-                    .foregroundColor(Color("CancelText"))
+                    .foregroundColor(Color(Asset.cancelText.name))
                     .accessibilityIdentifier((suggestedTaskState["isTaskSaved"] as! Bool) ? "btn_add_task_done" : "btn_add_task_cancel")
                     .onTapGesture {
                         self.presentationMode.wrappedValue.dismiss()
@@ -41,22 +44,26 @@ struct CreateTaskScreen: View {
                         createNoteScreenViewModel.setTaskDataAttribute(id: suggestionId ?? "", attrKey: "taskId", attrValue: taskId)
                         createNoteScreenViewModel.setTaskDataAttribute(id: suggestionId ?? "", attrKey: "isTaskSaved", attrValue: true)
                         isAddTaskInProgress = false
+                        if isAccountDetailFlow {
+                            accountDetailViewModelObject.scrollToSection = "TasksList"
+                        }
+                        self.presentationMode.wrappedValue.dismiss()
                     }, onFailure: {
                         isAddTaskInProgress = false
                     })
-                }, label:{
-                    HStack(alignment: .center, spacing: 0){
-                        if(isAddTaskInProgress){
+                }, label: {
+                    HStack(alignment: .center, spacing: 0) {
+                        if isAddTaskInProgress {
                             ProgressView()
-                                .tint(Color("LoginButtonPrimary"))
+                                .tint(Color(Asset.loginButtonPrimary.name))
                                 .controlSize(.small)
-                            Text("Adding Task...")
+                            Text("Saving")
                                 .foregroundColor(.white)
-                                .font(.custom("Nunito-Medium", size: 12))
+                                .font(.nunitoMedium(size: 12))
                                 .accessibilityIdentifier("txt_create_task_saving")
                             
-                        }else if((suggestedTaskState["isTaskSaved"] as! Bool)){
-                            Image("CheckMark")
+                        } else if suggestedTaskState["isTaskSaved"] as! Bool {
+                            Image(Asset.checkMark.name)
                                 .resizable()
                                 .frame(width: 12, height: 12)
                                 .padding(.trailing, 6)
@@ -64,13 +71,19 @@ struct CreateTaskScreen: View {
                             
                             Text("Saved")
                                 .foregroundColor(.white)
-                                .font(.custom("Nunito-Medium", size: 12))
+                                .font(.nunitoMedium(size: 12))
                                 .accessibilityIdentifier("txt_create_task_saved")
-                        }else{
-                            Text("Add Task")
+                        } else {
+                            Image(Asset.salesforceIcon.name)
+                                .resizable()
+                                .frame(width: 17, height: 12)
+                                .padding(.trailing, 6)
+                                .accessibilityIdentifier("img_create_note_salesforce_icon")
+                            
+                            Text("Save")
                                 .foregroundColor(.white)
-                                .font(.custom("Nunito-Medium", size: 12))
-                                .accessibilityIdentifier("txt_create_task_save")
+                                .font(.nunitoMedium( size: 12))
+                                .accessibilityIdentifier("txt_create_event_save")
                         }
                     }
                     .frame(width: isAddTaskInProgress ? 115 : 68, height: 32)
@@ -80,54 +93,57 @@ struct CreateTaskScreen: View {
                     .clipShape(RoundedRectangle(cornerRadius: 5))
                 })
                 .accessibilityIdentifier("btn_save_task")
-                .disabled(accountId.isEmpty || description.isEmpty || ((suggestedTaskState["selectedUserId"] ?? "") as! String).isEmpty || !(suggestedTaskState["isDateSelected"] as! Bool) || isAddTaskInProgress || (suggestedTaskState["isTaskSaved"] as! Bool))
-                .opacity(accountId.isEmpty || description.isEmpty || ((suggestedTaskState["selectedUserId"] ?? "") as! String).isEmpty || !(suggestedTaskState["isDateSelected"] as! Bool) ? 0.7 : 1)
+                .disabled(accountId.isEmpty || description.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || ((suggestedTaskState["selectedUserId"] ?? "") as! String).isEmpty || !(suggestedTaskState["isDateSelected"] as! Bool) || isAddTaskInProgress || (suggestedTaskState["isTaskSaved"] as! Bool))
+                .opacity(accountId.isEmpty || description.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || ((suggestedTaskState["selectedUserId"] ?? "") as! String).isEmpty || !(suggestedTaskState["isDateSelected"] as! Bool) ? 0.7 : 1)
             }
             .padding(.vertical)
             
             HStack {
                 Text("Assign to")
-                    .frame(width: 75,height: 30, alignment: .leading)
-                    .font(.custom("Nunito-Regular",size: 14))
-                    .foregroundColor(Color("TextPrimary"))
+                    .frame(width: 75, height: 30, alignment: .leading)
+                    .font(.nunitoRegular(size: 14))
+                    .foregroundColor(Color(Asset.textPrimary.name))
                     .accessibilityIdentifier("txt_add_tasks_assign_to")
                 
-                Button(action:{
+                Button(action: {
                     showUserSearchView = true
-                }){
-                    if(((suggestedTaskState["assignedToUsername"] ?? "") as! String).isEmpty){
+                }, label: {
+                    if ((suggestedTaskState["assignedToUsername"] ?? "") as! String).isEmpty {
                         Text("Select")
-                            .foregroundColor(Color("TextPrimary"))
-                            .font(.custom("Nunito-Bold", size: 12))
+                            .foregroundColor(Color(Asset.textPrimary.name))
+                            .font(.nunitoBold(size: 12))
                             .accessibilityIdentifier("txt_add_task_selected_user")
-                    } else{
+                    } else {
                         Text(BasicHelper.getInitials(from: ((suggestedTaskState["assignedToUsername"] ?? "") as! String)))
                             .frame(width: 18, height: 18)
-                            .font(.custom("Nunito-Bold", size: 6))
+                            .font(.nunitoBold(size: 6))
                             .foregroundColor(Color.white)
-                            .background(Color("UserBubble"))
+                            .background(Color(Asset.userBubble.name))
                             .clipShape(RoundedRectangle(cornerRadius: 47))
                             .accessibilityIdentifier("img_user_account_detail_user_initials")
                         
                         Text(((suggestedTaskState["assignedToUsername"] ?? "") as! String))
-                            .foregroundColor(Color("RedHighlight"))
-                            .font(.custom("Nunito-Bold", size: 12))
+                            .foregroundColor(Color(Asset.redHighlight.name))
+                            .font(.nunitoBold(size: 12))
                             .accessibilityIdentifier("txt_add_task_selected_user")
+                            .lineLimit(1)
+                            .truncationMode(.tail)
                     }
                     Spacer()
                     
-                    Image("ArrowDown")
+                    Image(Asset.arrowDown.name)
                         .frame(width: 7, height: 4)
                 }
+                )
                 .disabled((suggestedTaskState["isTaskSaved"] as! Bool))
                 .accessibilityIdentifier("btn_create_task_search_user")
                 .padding(.horizontal, 10)
                 .frame(width: 160, height: 30)
                 .overlay(
                     RoundedRectangle(cornerRadius: 4)
-                        .stroke(Color("CardBorder"), lineWidth: 1)
+                        .stroke(Color(Asset.cardBorder.name), lineWidth: 1)
                 )
-                .sheet(isPresented: $showUserSearchView){
+                .sheet(isPresented: $showUserSearchView) {
                     UserSearchView(isPresented: $showUserSearchView,
                                    onUserSelect: { userId, userName in
                         createNoteScreenViewModel.setTaskDataAttribute(id: suggestionId ?? "", attrKey: "assignedToUsername", attrValue: userName)
@@ -140,74 +156,57 @@ struct CreateTaskScreen: View {
             
             HStack {
                 Text("Due")
-                    .frame(width: 75,height: 30, alignment: .leading)
-                    .font(.custom("Nunito-Regular",size: 14))
-                    .foregroundColor(Color("TextPrimary"))
+                    .frame(width: 75, height: 30, alignment: .leading)
+                    .font(.nunitoRegular(size: 14))
+                    .foregroundColor(Color(Asset.textPrimary.name))
                     .accessibilityIdentifier("txt_add_tasks_due")
                 
-                ZStack{
-                    if(!(suggestedTaskState["isTaskSaved"] as! Bool)){
+                ZStack {
+                    if !(suggestedTaskState["isTaskSaved"] as! Bool) {
                         DatePickerView(selectedDate: $dueDate, onTap: {
                             createNoteScreenViewModel.setTaskDataAttribute(id: suggestionId ?? "", attrKey: "isDateSelected", attrValue: true)
                         })
                         .background(.white)
                         .cornerRadius(8)
                         .accessibilityIdentifier("dp_add_task_select_date")
+                        .compositingGroup()
+                        .scaleEffect(x: 1.5, y: 1.5)
+                        .clipped()
                     }
                     
-                    if(!(suggestedTaskState["isDateSelected"] as! Bool)){
-                        HStack (spacing: 0) {
-                            Text("Select")
-                                .foregroundColor(Color("TermsPrimary"))
-                                .font(.custom("Nunito-Light", size: 12))
-                                .tracking(0.5)
-                                .padding(0)
-                            
-                            Spacer()
-                            
-                            Image("EmptyCalendar")
-                                .frame(width: 15, height: 15)
-                                .padding(.leading, 6)
-                        }
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .background(.white)
-                        .userInteractionDisabled()
+                    HStack(spacing: 0) {
+                        Text(BasicHelper.getDateStringFromDate(from: dueDate))
+                            .foregroundColor(Color(Asset.termsPrimary.name))
+                            .font(.nunitoBold( size: 12))
+                            .tracking(0.5)
+                            .padding(0)
                         
+                        Spacer()
+                        
+                        Image(Asset.emptyCalendar.name)
+                            .frame(width: 15, height: 15)
+                            .padding(.leading, 10)
                     }
-                    else{
-                        HStack (spacing: 0) {
-                            Text(BasicHelper.getDateStringFromDate(from: dueDate))
-                                .foregroundColor(Color("TermsPrimary"))
-                                .font(.custom("Nunito-Bold", size: 12))
-                                .tracking(0.5)
-                                .padding(0)
-                            
-                            Spacer()
-                            
-                            Image("EmptyCalendar")
-                                .frame(width: 15, height: 15)
-                                .padding(.leading, 10)
-                        }
-                        .accessibilityIdentifier("txt_add_task_select_date")
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .background(.white)
-                        .userInteractionDisabled()
-                    }
+                    .accessibilityIdentifier("txt_add_task_select_date")
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(.white)
+                    .userInteractionDisabled()
+                    
                 }
                 .padding(.horizontal, 10)
                 .frame(width: 160, height: 30)
                 .overlay(
                     RoundedRectangle(cornerRadius: 4)
-                        .stroke(Color("CardBorder"), lineWidth: 1)
+                        .stroke(Color(Asset.cardBorder.name), lineWidth: 1)
                 )
                 
                 Spacer()
             }
-            ScrollView{
-                if(!(suggestedTaskState["isTaskSaved"] as! Bool)){
-                    TextField("Add Task",text: $description, axis: .vertical)
-                        .foregroundColor(Color("TextPrimary"))
-                        .font(.custom("Nunito-SemiBold", size: 18))
+            ScrollView {
+                if !(suggestedTaskState["isTaskSaved"] as! Bool) {
+                    TextField("Add Task", text: $description, axis: .vertical)
+                        .foregroundColor(Color(Asset.textPrimary.name))
+                        .font(.nunitoSemiBold(size: 18))
                         .focused($focused)
                         .accessibilityIdentifier("et_create_task")
                         .onTapGesture {
@@ -215,17 +214,17 @@ struct CreateTaskScreen: View {
                         }
                         .padding(.top)
                         .lineLimit(4...)
-                }else{
+                } else {
                     Text(description)
-                        .foregroundColor(Color("TextPrimary"))
-                        .font(.custom("Nunito-SemiBold", size: 18))
+                        .foregroundColor(Color(Asset.textPrimary.name))
+                        .font(.nunitoSemiBold(size: 18))
                         .accessibilityIdentifier("txt_create_task_description")
                         .padding(.top)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
             }
         }
-        .onChange(of: description){_ in
+        .onChange(of: description) {_ in
             createNoteScreenViewModel.setTaskDataAttribute(id: suggestionId ?? "", attrKey: "description", attrValue: self.description)
         }
         .onChange(of: dueDate, perform: {_ in
@@ -233,9 +232,10 @@ struct CreateTaskScreen: View {
         })
         .onAppear {
             // Adding a delay for view to render
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05){
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                 focused = true
             }
+            createNoteScreenViewModel.setTaskDataAttribute(id: suggestionId ?? "", attrKey: "isDateSelected", attrValue: true)
             self.description = ((suggestedTaskState["description"] ?? "") as! String)
             
             self.dueDate = (suggestedTaskState["dueDate"] ?? Date()) as! Date

@@ -7,17 +7,17 @@
 
 import Foundation
 
-class LoaderViewModel : ObservableObject {
+class LoaderViewModel: ObservableObject {
     @Published var isLoaderVisible = false
     static let shared = LoaderViewModel()
     
-    private init(){}
+    private init() {}
     
-    func showLoader(){
+    func showLoader() {
         self.isLoaderVisible = true
     }
     
-    func hideLoader(){
+    func hideLoader() {
         self.isLoaderVisible = false
     }
 }

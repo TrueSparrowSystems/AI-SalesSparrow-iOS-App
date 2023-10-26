@@ -16,10 +16,14 @@ struct HomeScreen: View {
     @StateObject var createNoteViewModel = CreateNoteScreenViewModel()
     @StateObject var noteDetailScreenViewModel = NoteDetailScreenViewModel()
     @StateObject var createTaskViewModel = CreateTaskViewModel()
+    @StateObject var createEventViewModel = CreateEventViewModel()
+    @StateObject var accountDetailViewModel = AccountDetailScreenViewModel()
+    @StateObject var taskDetailScreenViewModel = TaskDetailScreenViewModel()
+    @StateObject var eventDetailScreenViewModel = EventDetailScreenViewModel()
     @State private var showUserSearchView: Bool = false
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack(spacing: 0) {
                 // Top Bar
                 TopBar()
@@ -32,7 +36,7 @@ struct HomeScreen: View {
                 BottomBar()
             }
             .navigationBarBackButtonHidden(true)
-            .background(Color("Background"))
+            .background(Color(Asset.background.name))
             
         }
         .navigationViewStyle(.stack)
@@ -43,9 +47,12 @@ struct HomeScreen: View {
         .environmentObject(noteDetailScreenViewModel)
         .environmentObject(acccountListViewModelObject)
         .environmentObject(createTaskViewModel)
+        .environmentObject(createEventViewModel)
+        .environmentObject(accountDetailViewModel)
+        .environmentObject(taskDetailScreenViewModel)
+        .environmentObject(eventDetailScreenViewModel)
     }
 }
-
 
 struct HomeScreen_Previews: PreviewProvider {
     static var previews: some View {
