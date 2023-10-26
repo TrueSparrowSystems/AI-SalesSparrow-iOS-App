@@ -156,7 +156,7 @@ final class AccountDetailTaskListUITests: XCTestCase {
         XCTAssertTrue(deleteButton.waitForExistence(timeout: TimeInterval(timeout)))
         deleteButton.tap()
         
-        XCTAssertTrue(card1Description != app.staticTexts["txt_account_detail_task_description_\(accountIndex)"].label)
+        XCTAssertNotEqual(card1Description, app.staticTexts["txt_account_detail_task_description_\(accountIndex)"].label)
     }
     
     func testEditTask() throws {

@@ -240,7 +240,7 @@ final class AccountDetailNoteListUITests: XCTestCase {
         XCTAssertTrue(deleteButton.isHittable)
         deleteButton.tap()
         
-        XCTAssertTrue(initialNote != app.staticTexts["txt_account_detail_note_text_\(noteIndex)"].label)
+        XCTAssertNotEqual(initialNote, app.staticTexts["txt_account_detail_note_text_\(noteIndex)"].label)
     }
     
     func testDeleteNoteError() throws {
@@ -285,6 +285,6 @@ final class AccountDetailNoteListUITests: XCTestCase {
         let textForNote1AfterDelete = app.staticTexts["txt_account_detail_note_text_\(noteIndex)"].label
         
         // Verify the note text for 1st note before and after delete are same
-        XCTAssertTrue(initialNote == textForNote1AfterDelete)
+        XCTAssertEqual(initialNote, textForNote1AfterDelete)
     }
 }

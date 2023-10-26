@@ -176,7 +176,7 @@ final class AccountDetailEventListUITests: XCTestCase {
         deleteButton.tap()
         
         // Verify the event description for 1st event before and after delete are not same
-        XCTAssertTrue(descriptionForEvent1BeforeDelete != app.staticTexts["txt_account_detail_event_description_\(accountIndex)"].label)
+        XCTAssertNotEqual(descriptionForEvent1BeforeDelete, app.staticTexts["txt_account_detail_event_description_\(accountIndex)"].label)
     }
     
     func testEditEvent() throws {
