@@ -54,7 +54,7 @@ class NoteDetailScreenViewModel: ObservableObject {
     }
     
     // A function to fetch note details using API.
-    func EditNoteDetail(text: String, accountId: String, noteId: String, onSuccess: @escaping() -> Void) {
+    func editNoteDetail(text: String, accountId: String, noteId: String, onSuccess: @escaping() -> Void) {
         let endPoint = "/v1/accounts/\(accountId)/notes/\(noteId)"
         isEditNoteInProgress = true
         

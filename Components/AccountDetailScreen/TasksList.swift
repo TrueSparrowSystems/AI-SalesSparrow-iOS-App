@@ -208,10 +208,10 @@ struct TaskCardView: View {
                     NavigationLink(destination: TaskDetailScreen(accountId: accountId, taskId: taskId, isEditFlow: true)
                     ) {
                         HStack {
-                            Image("EditIcon")
+                            Image(Asset.editIcon.name)
                                 .frame(width: 20, height: 20)
                             Text("Edit")
-                                .font(.custom("Nunito-SemiBold", size: 16))
+                                .font(.nunitoSemiBold( size: 16))
                                 .foregroundColor(Color(Asset.textPrimary.name))
                         }
                     }

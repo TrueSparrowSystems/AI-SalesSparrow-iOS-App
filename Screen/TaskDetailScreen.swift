@@ -31,7 +31,7 @@ struct TaskDetailScreen: View {
                     dismiss()
                 }, label: {
                     Text(isEditFlow ? (isTaskSaved ? "Done" : "Cancel") : "Done")
-                        .font(.custom("Nunito-Bold", size: 14))
+                        .font(.nunitoBold( size: 14))
                         .padding(.vertical, 10)
                         .foregroundColor(Color(Asset.cancelText.name))
                 })
@@ -40,7 +40,7 @@ struct TaskDetailScreen: View {
                 Spacer()
                 
                 Button(action: {
-                    taskDetailScreenViewModel.EditTaskDetail(accountId: accountId, taskId: taskId, crm_organization_user_id: crm_organization_user_id, description: description, due_date: BasicHelper.formatDate(selectedDate), onSuccess: {
+                    taskDetailScreenViewModel.editTaskDetail(accountId: accountId, taskId: taskId, crm_organization_user_id: crm_organization_user_id, description: description, due_date: BasicHelper.formatDate(selectedDate), onSuccess: {
                         isTaskSaved = true
                         dismiss()
                     })
@@ -53,10 +53,10 @@ struct TaskDetailScreen: View {
                             
                             Text("Saving...")
                                 .foregroundColor(.white)
-                                .font(.custom("Nunito-Medium", size: 12))
+                                .font(.nunitoMedium( size: 12))
                                 .accessibilityIdentifier("txt_create_task_saving")
                         } else if isTaskSaved {
-                            Image("CheckMark")
+                            Image(Asset.checkMark.name)
                                 .resizable()
                                 .frame(width: 12, height: 12)
                                 .padding(.trailing, 6)
@@ -64,10 +64,10 @@ struct TaskDetailScreen: View {
                             
                             Text("Saved")
                                 .foregroundColor(.white)
-                                .font(.custom("Nunito-Medium", size: 12))
+                                .font(.nunitoMedium( size: 12))
                                 .accessibilityIdentifier("txt_create_task_saved")
                         } else {
-                            Image("SalesforceIcon")
+                            Image(Asset.salesforceIcon.name)
                                 .resizable()
                                 .frame(width: 17, height: 12)
                                 .padding(.trailing, 6)
@@ -75,7 +75,7 @@ struct TaskDetailScreen: View {
                             
                             Text("Save")
                                 .foregroundColor(.white)
-                                .font(.custom("Nunito-Medium", size: 12))
+                                .font(.nunitoMedium( size: 12))
                                 .accessibilityIdentifier("txt_create_task_save")
                         }
                     }
@@ -103,7 +103,7 @@ struct TaskDetailScreen: View {
                 HStack {
                     Text("Assign to")
                         .frame(width: 75, height: 30, alignment: .leading) 
-                        .font(.custom("Nunito-Regular", size: 14))
+                        .font(.nunitoRegular( size: 14))
                         .foregroundColor(Color(Asset.textPrimary.name))
                         .accessibilityIdentifier("txt_add_tasks_assign_to")
                     
@@ -113,19 +113,19 @@ struct TaskDetailScreen: View {
                         
                         Text(BasicHelper.getInitials(from: crm_organization_user_name))
                             .frame(width: 18, height: 18)
-                            .font(.custom("Nunito-Bold", size: 6))
+                            .font(.nunitoBold( size: 6))
                             .foregroundColor(Color.white)
                             .background(Color(Asset.userBubble.name))
                             .clipShape(RoundedRectangle(cornerRadius: 47))
                         
                         Text(crm_organization_user_name)
                             .foregroundColor(Color(Asset.redHighlight.name))
-                            .font(.custom("Nunito-Bold", size: 12))
+                            .font(.nunitoBold( size: 12))
                             .accessibilityIdentifier("txt_add_task_selected_user")
                         
                         Spacer()
                         
-                        Image("ArrowDown")
+                        Image(Asset.arrowDown.name)
                             .frame(width: 7, height: 4)
                             .opacity(isEditFlow ? 1 : 0)
                     }
@@ -151,7 +151,7 @@ struct TaskDetailScreen: View {
                 HStack {
                     Text("Due")
                         .frame(width: 75, height: 30, alignment: .leading)
-                        .font(.custom("Nunito-Regular", size: 14))
+                        .font(.nunitoRegular( size: 14))
                         .foregroundColor(Color(Asset.textPrimary.name))
                         .accessibilityIdentifier("txt_add_tasks_due")
                     
@@ -168,13 +168,13 @@ struct TaskDetailScreen: View {
                         HStack(spacing: 0) {
                             Text(BasicHelper.getDateStringFromDate(from: selectedDate))
                                 .foregroundColor(Color(Asset.termsPrimary.name))
-                                .font(.custom("Nunito-Bold", size: 12))
+                                .font(.nunitoBold( size: 12))
                                 .tracking(0.5)
                                 .padding(0)
                             
                             Spacer()
                             
-                            Image("EmptyCalendar")
+                            Image(Asset.emptyCalendar.name)
                                 .frame(width: 15, height: 15)
                                 .padding(.leading, 10)
                         }
@@ -197,7 +197,7 @@ struct TaskDetailScreen: View {
                     if isEditFlow {
                         TextField("Add Task", text: $description, axis: .vertical)
                             .foregroundColor(Color(Asset.textPrimary.name))
-                            .font(.custom("Nunito-SemiBold", size: 18))
+                            .font(.nunitoSemiBold( size: 18))
                             .focused($focused)
                             .accessibilityIdentifier("et_create_task")
                             .onTapGesture {
@@ -208,7 +208,7 @@ struct TaskDetailScreen: View {
                     } else {
                         Text(description)
                             .foregroundColor(Color(Asset.textPrimary.name))
-                            .font(.custom("Nunito-SemiBold", size: 18))
+                            .font(.nunitoSemiBold( size: 18))
                             .accessibilityIdentifier("txt_create_task_description")
                             .padding(.top)
                             .frame(maxWidth: .infinity, alignment: .leading)

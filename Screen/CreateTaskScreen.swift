@@ -74,7 +74,7 @@ struct CreateTaskScreen: View {
                                 .font(.nunitoMedium(size: 12))
                                 .accessibilityIdentifier("txt_create_task_saved")
                         } else {
-                            Image("SalesforceIcon")
+                            Image(Asset.salesforceIcon.name)
                                 .resizable()
                                 .frame(width: 17, height: 12)
                                 .padding(.trailing, 6)
@@ -82,7 +82,7 @@ struct CreateTaskScreen: View {
                             
                             Text("Save")
                                 .foregroundColor(.white)
-                                .font(.custom("Nunito-Medium", size: 12))
+                                .font(.nunitoMedium( size: 12))
                                 .accessibilityIdentifier("txt_create_event_save")
                         }
                     }
@@ -177,13 +177,13 @@ struct CreateTaskScreen: View {
                     HStack(spacing: 0) {
                         Text(BasicHelper.getDateStringFromDate(from: dueDate))
                             .foregroundColor(Color(Asset.termsPrimary.name))
-                            .font(.custom("Nunito-Bold", size: 12))
+                            .font(.nunitoBold( size: 12))
                             .tracking(0.5)
                             .padding(0)
                         
                         Spacer()
                         
-                        Image("EmptyCalendar")
+                        Image(Asset.emptyCalendar.name)
                             .frame(width: 15, height: 15)
                             .padding(.leading, 10)
                     }

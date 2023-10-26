@@ -18,19 +18,19 @@ struct TopBar: View {
     var body: some View {
         NavigationStack {
             HStack {
-                Image("Buildings")
+                Image(Asset.buildings.name)
                     .frame(width: 28.0, height: 28.0)
                     .accessibilityIdentifier("img_home_screen_account_icon")
                 
                 Text("Accounts")
-                    .font(.custom("Nunito-Regular", size: 24))
+                    .font(.nunitoRegular( size: 24))
                     .fontWeight(.bold)
                     .frame(width: 103.0, height: 33.0)
                     .accessibilityIdentifier("txt_account_details_title")
                 
                 Spacer()
                 
-                Image("MagnifyingGlass")
+                Image(Asset.magnifyingGlass.name)
                     .onTapGesture {
                         showAccountSearchView = true
                     }
@@ -53,7 +53,7 @@ struct TopBar: View {
                     .navigationBarBackButtonHidden(true)) {
                         Text(BasicHelper.getInitials(from: userStateViewModel.currentUser.name))
                             .frame(width: 30, height: 30)
-                            .font(.custom("Nunito-Bold", size: 9))
+                            .font(.nunitoBold( size: 9))
                             .foregroundColor(.black)
                             .accessibilityIdentifier("txt_user_account_icon")
                     }

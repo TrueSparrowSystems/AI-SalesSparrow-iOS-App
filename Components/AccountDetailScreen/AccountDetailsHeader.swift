@@ -70,7 +70,7 @@ struct AccountDetailsHeader: View {
                 //                            HStack{
                 //                                Text("More Details")
                 //                                    .foregroundColor(Color(Asset.redHighlight.name))
-                //                                    .font(.custom("Nunito-Medium", size: 14))
+                //                                    .font(.nunitoMedium( size: 14))
                 //                            }
                 //                        }
                 //                        .accessibilityIdentifier("btn_account_detail_more_details")

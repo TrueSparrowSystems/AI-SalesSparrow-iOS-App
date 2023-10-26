@@ -11,12 +11,12 @@ struct AccountDetailsScreen: View {
     var accountId: String
     var accountName: String
     @Environment(\.dismiss) private var dismiss
-    @EnvironmentObject var accountDetailViewModelObject : AccountDetailScreenViewModel
+    @EnvironmentObject var accountDetailViewModelObject: AccountDetailScreenViewModel
     @State var propagateClick = 0
     
     var body: some View {
         ScrollViewReader { proxy in
-            ScrollView{
+            ScrollView {
                 VStack(spacing: 20) {
                     
                     AccountDetailsHeader(accountId: accountId, accountName: accountName)
@@ -46,12 +46,12 @@ struct AccountDetailsScreen: View {
                 }
             }
             .simultaneousGesture(
-                TapGesture().onEnded(){
+                TapGesture().onEnded {
                     propagateClick += 1
                 }
             )
             .simultaneousGesture(
-                DragGesture().onChanged{_ in
+                DragGesture().onChanged {_ in
                     propagateClick += 1
                 }
             )

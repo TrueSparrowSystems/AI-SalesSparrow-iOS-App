@@ -24,7 +24,7 @@ struct NoteDetailScreen: View {
         VStack {
             HStack(alignment: .center) {
                 Text(isEditFlow ? (isNoteSaved ? "Done" : "Cancel") : "Done")
-                    .font(.custom("Nunito-Bold", size: 14))
+                    .font(.nunitoBold( size: 14))
                     .padding(.vertical, 10)
                     .foregroundColor(Color(Asset.cancelText.name))
                     .accessibilityIdentifier((isNoteSaved) ? "btn_note_screen_done" : "btn_note_screen_cancel")
@@ -35,7 +35,7 @@ struct NoteDetailScreen: View {
                 Spacer()
                 if isEditFlow {
                     Button(action: {
-                        noteDetailScreenViewModel.EditNoteDetail(text: description, accountId: accountId, noteId: noteId, onSuccess: {
+                        noteDetailScreenViewModel.editNoteDetail(text: description, accountId: accountId, noteId: noteId, onSuccess: {
                             isNoteSaved = true
                             dismiss()
                         })
@@ -48,10 +48,10 @@ struct NoteDetailScreen: View {
                                 
                                 Text("Saving...")
                                     .foregroundColor(.white)
-                                    .font(.custom("Nunito-Medium", size: 12))
+                                    .font(.nunitoMedium( size: 12))
                                     .accessibilityIdentifier("txt_create_task_saving")
                             } else if isNoteSaved {
-                                Image("CheckMark")
+                                Image(Asset.checkMark.name)
                                     .resizable()
                                     .frame(width: 12, height: 12)
                                     .padding(.trailing, 6)
@@ -59,10 +59,10 @@ struct NoteDetailScreen: View {
                                 
                                 Text("Saved")
                                     .foregroundColor(.white)
-                                    .font(.custom("Nunito-Medium", size: 12))
+                                    .font(.nunitoMedium( size: 12))
                                     .accessibilityIdentifier("txt_create_task_saved")
                             } else {
-                                Image("SalesforceIcon")
+                                Image(Asset.salesforceIcon.name)
                                     .resizable()
                                     .frame(width: 17, height: 12)
                                     .padding(.trailing, 6)
@@ -70,7 +70,7 @@ struct NoteDetailScreen: View {
                                 
                                 Text("Save")
                                     .foregroundColor(.white)
-                                    .font(.custom("Nunito-Medium", size: 12))
+                                    .font(.nunitoMedium( size: 12))
                                     .accessibilityIdentifier("txt_create_task_save")
                             }
                         }
@@ -101,7 +101,7 @@ struct NoteDetailScreen: View {
                 
             } else {
                 HStack {
-                    Image("AccountIcon")
+                    Image(Asset.accountIcon.name)
                         .resizable()
                         .frame(width: 14, height: 14)
                         .accessibilityIdentifier("img_note_detail_account_icon")
@@ -127,7 +127,7 @@ struct NoteDetailScreen: View {
                 if isEditFlow {
                     TextField("Add Note", text: $description, axis: .vertical)
                         .foregroundColor(Color(Asset.textPrimary.name))
-                        .font(.custom("Nunito-SemiBold", size: 18))
+                        .font(.nunitoSemiBold( size: 18))
                         .focused($focused)
                         .accessibilityIdentifier("et_edit_note")
                         .onTapGesture {
@@ -138,12 +138,12 @@ struct NoteDetailScreen: View {
                 } else {
                     Text(noteDetailScreenViewModel.noteDetail.text)
                         .frame(maxWidth: .infinity, alignment: .leading)
-                        .font(.custom("Nunito-SemiBold", size: 18))
+                        .font(.nunitoSemiBold( size: 18))
                         .accessibilityIdentifier("txt_note_detail_text")
                         .foregroundColor(Color(Asset.textPrimary.name))
                     //                    HTMLTextView(htmlText: noteDetailScreenViewModel.noteDetail.text, textColor: UIColor(named: Asset.textPrimary.name) ?? .gray, font: UIFont(name: "Nunito-SemiBold", size: 18) ?? UIFont.systemFont(ofSize: 18), backgroundColor: UIColor(named: "Background") ?? .white)
                     //                        .frame(maxWidth: .infinity,maxHeight: .infinity, alignment: .leading)
-                    //                        .font(.custom("Nunito-SemiBold", size: 18))
+                    //                        .font(.nunitoSemiBold( size: 18))
                     //                        .accessibilityIdentifier("txt_note_detail_text")
                     //                        .foregroundColor(Color(Asset.textPrimary.name))
                     

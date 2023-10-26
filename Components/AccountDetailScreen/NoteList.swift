@@ -171,10 +171,10 @@ struct NoteCardView: View {
                         isEditFlowActive.toggle() // Toggle the state to activate/deactivate the link
                     }) {
                         HStack {
-                            Image("EditIcon")
+                            Image(Asset.editIcon.name)
                                 .frame(width: 20, height: 20)
                             Text("Edit")
-                                .font(.custom("Nunito-SemiBold", size: 16))
+                                .font(.nunitoSemiBold( size: 16))
                                 .foregroundColor(Color(Asset.textPrimary.name))
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)

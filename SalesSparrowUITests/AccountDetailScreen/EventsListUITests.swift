@@ -112,9 +112,9 @@ final class AccountDetailEventListUITests: XCTestCase {
         
         navigationToEventSection(app: app)
         
-        let EventCard = app.buttons["event_card_0"]
-        XCTAssertTrue(EventCard.waitForExistence(timeout: TimeInterval(timeout)))
-        EventCard.tap()
+        let eventCard = app.buttons["event_card_0"]
+        XCTAssertTrue(eventCard.waitForExistence(timeout: TimeInterval(timeout)))
+        eventCard.tap()
         
         let doneButton = app.buttons["btn_event_detail_done"]
         XCTAssertTrue(doneButton.waitForExistence(timeout: TimeInterval(timeout)))
@@ -140,10 +140,10 @@ final class AccountDetailEventListUITests: XCTestCase {
         let accountIndex = 0
         navigationToEventSection(app: app)
         
-        let EventCard = app.buttons["event_card_\(accountIndex)"]
+        let eventCard = app.buttons["event_card_\(accountIndex)"]
         
-        XCTAssertTrue(EventCard.waitForExistence(timeout: TimeInterval(timeout)))
-        EventCard.tap()
+        XCTAssertTrue(eventCard.waitForExistence(timeout: TimeInterval(timeout)))
+        eventCard.tap()
         
         XCTAssertTrue(app.staticTexts["txt_account_detail_account_details_title"].waitForExistence(timeout: TimeInterval(timeout)))
     }

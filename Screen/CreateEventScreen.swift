@@ -76,7 +76,7 @@ struct CreateEventScreen: View {
                                 .font(.nunitoMedium(size: 12))
                                 .accessibilityIdentifier("txt_create_event_saved")
                         } else {
-                            Image("SalesforceIcon")
+                            Image(Asset.salesforceIcon.name)
                                 .resizable()
                                 .frame(width: 17, height: 12)
                                 .padding(.trailing, 6)
@@ -123,13 +123,13 @@ struct CreateEventScreen: View {
                     HStack(spacing: 0) {
                         Text(BasicHelper.getDateStringFromDate(from: startDate))
                             .foregroundColor(Color(Asset.termsPrimary.name))
-                            .font(.custom("Nunito-Bold", size: 12))
+                            .font(.nunitoBold( size: 12))
                             .tracking(0.5)
                             .padding(0)
                         
                         Spacer()
                         
-                        Image("EmptyCalendar")
+                        Image(Asset.emptyCalendar.name)
                             .frame(width: 15, height: 15)
                             .padding(.leading, 10)
                     }
@@ -158,13 +158,13 @@ struct CreateEventScreen: View {
                     HStack(spacing: 0) {
                         Text(BasicHelper.getTimeStringFromDate(from: startTime))
                             .foregroundColor(Color(Asset.termsPrimary.name))
-                            .font(.custom("Nunito-Bold", size: 12))
+                            .font(.nunitoBold( size: 12))
                             .tracking(0.5)
                             .padding(0)
                         
                         Spacer()
                         
-                        Image("Clock")
+                        Image(Asset.clock.name)
                             .frame(width: 15, height: 15)
                             .padding(.leading, 10)
                     }
@@ -206,13 +206,13 @@ struct CreateEventScreen: View {
                     HStack(spacing: 0) {
                         Text(BasicHelper.getDateStringFromDate(from: endDate))
                             .foregroundColor(Color(Asset.termsPrimary.name))
-                            .font(.custom("Nunito-Bold", size: 12))
+                            .font(.nunitoBold( size: 12))
                             .tracking(0.5)
                             .padding(0)
                         
                         Spacer()
                         
-                        Image("EmptyCalendar")
+                        Image(Asset.emptyCalendar.name)
                             .frame(width: 15, height: 15)
                             .padding(.leading, 10)
                     }
@@ -242,13 +242,13 @@ struct CreateEventScreen: View {
                     HStack(spacing: 0) {
                         Text(BasicHelper.getTimeStringFromDate(from: endTime))
                             .foregroundColor(Color(Asset.termsPrimary.name))
-                            .font(.custom("Nunito-Bold", size: 12))
+                            .font(.nunitoBold( size: 12))
                             .tracking(0.5)
                             .padding(0)
                         
                         Spacer()
                         
-                        Image("Clock")
+                        Image(Asset.clock.name)
                             .frame(width: 15, height: 15)
                             .padding(.leading, 10)
                     }

@@ -31,7 +31,7 @@ struct EventDetailScreen: View {
                     dismiss()
                 }, label: {
                     Text(isEditFlow ? (isEventSaved ? "Done" : "Cancel") : "Done")
-                        .font(.custom("Nunito-Bold", size: 14))
+                        .font(.nunitoBold( size: 14))
                         .padding(.vertical, 10)
                         .foregroundColor(Color(Asset.cancelText.name))
                 })
@@ -52,11 +52,11 @@ struct EventDetailScreen: View {
                                 .controlSize(.small)
                             Text("Saving...")
                                 .foregroundColor(.white)
-                                .font(.custom("Nunito-Medium", size: 12))
+                                .font(.nunitoMedium( size: 12))
                                 .accessibilityIdentifier("txt_event_detail_saving")
                             
                         } else if isEventSaved {
-                            Image("CheckMark")
+                            Image(Asset.checkMark.name)
                                 .resizable()
                                 .frame(width: 12, height: 12)
                                 .padding(.trailing, 6)
@@ -64,10 +64,10 @@ struct EventDetailScreen: View {
                             
                             Text("Saved")
                                 .foregroundColor(.white)
-                                .font(.custom("Nunito-Medium", size: 12))
+                                .font(.nunitoMedium( size: 12))
                                 .accessibilityIdentifier("txt_event_detail_saved")
                         } else {
-                            Image("SalesforceIcon")
+                            Image(Asset.salesforceIcon.name)
                                 .resizable()
                                 .frame(width: 17, height: 12)
                                 .padding(.trailing, 6)
@@ -75,7 +75,7 @@ struct EventDetailScreen: View {
                             
                             Text("Save")
                                 .foregroundColor(.white)
-                                .font(.custom("Nunito-Medium", size: 12))
+                                .font(.nunitoMedium( size: 12))
                                 .accessibilityIdentifier("txt_create_task_save")
                         }
                     }
@@ -101,7 +101,7 @@ struct EventDetailScreen: View {
                 HStack {
                     Text("Start")
                         .frame(width: 35, height: 30, alignment: .leading)
-                        .font(.custom("Nunito-Regular", size: 14))
+                        .font(.nunitoRegular( size: 14))
                         .foregroundColor(Color(Asset.textPrimary.name))
                         .accessibilityIdentifier("txt_event_detail_due")
                     
@@ -120,14 +120,14 @@ struct EventDetailScreen: View {
                         HStack(spacing: 0) {
                             Text(BasicHelper.getDateStringFromDate(from: startDate))
                                 .foregroundColor(Color(Asset.termsPrimary.name))
-                                .font(.custom("Nunito-Bold", size: 12))
+                                .font(.nunitoBold( size: 12))
                                 .tracking(0.5)
                                 .padding(0)
                                 .accessibilityIdentifier("txt_event_detail_start_date")
                             
                             Spacer()
                             
-                            Image("EmptyCalendar")
+                            Image(Asset.emptyCalendar.name)
                                 .frame(width: 15, height: 15)
                                 .padding(.leading, 10)
                         }
@@ -152,14 +152,14 @@ struct EventDetailScreen: View {
                         HStack(spacing: 0) {
                             Text(BasicHelper.getTimeStringFromDate(from: startTime))
                                 .foregroundColor(Color(Asset.termsPrimary.name))
-                                .font(.custom("Nunito-Bold", size: 12))
+                                .font(.nunitoBold( size: 12))
                                 .tracking(0.5)
                                 .padding(0)
                                 .accessibilityIdentifier("txt_event_detail_start_time")
                             
                             Spacer()
                             
-                            Image("Clock")
+                            Image(Asset.clock.name)
                                 .frame(width: 15, height: 15)
                                 .padding(.leading, 10)
                         }
@@ -179,7 +179,7 @@ struct EventDetailScreen: View {
                 HStack {
                     Text("End")
                         .frame(width: 35, height: 30, alignment: .leading)
-                        .font(.custom("Nunito-Regular", size: 14))
+                        .font(.nunitoRegular( size: 14))
                         .foregroundColor(Color(Asset.textPrimary.name))
                         .accessibilityIdentifier("txt_event_detail_due")
                     
@@ -196,14 +196,14 @@ struct EventDetailScreen: View {
                         HStack(spacing: 0) {
                             Text(BasicHelper.getDateStringFromDate(from: endDate))
                                 .foregroundColor(Color(Asset.termsPrimary.name))
-                                .font(.custom("Nunito-Bold", size: 12))
+                                .font(.nunitoBold( size: 12))
                                 .tracking(0.5)
                                 .padding(0)
                                 .accessibilityIdentifier("txt_event_detail_end_date")
                             
                             Spacer()
                             
-                            Image("EmptyCalendar")
+                            Image(Asset.emptyCalendar.name)
                                 .frame(width: 15, height: 15)
                                 .padding(.leading, 10)
                         }
@@ -228,14 +228,14 @@ struct EventDetailScreen: View {
                         HStack(spacing: 0) {
                             Text(BasicHelper.getTimeStringFromDate(from: endTime))
                                 .foregroundColor(Color(Asset.termsPrimary.name))
-                                .font(.custom("Nunito-Bold", size: 12))
+                                .font(.nunitoBold( size: 12))
                                 .tracking(0.5)
                                 .padding(0)
                                 .accessibilityIdentifier("txt_event_detail_end_time")
                             
                             Spacer()
                             
-                            Image("Clock")
+                            Image(Asset.clock.name)
                                 .frame(width: 15, height: 15)
                                 .padding(.leading, 10)
                         }
@@ -255,7 +255,7 @@ struct EventDetailScreen: View {
                     if isEditFlow {
                         TextField("Add Event", text: $description, axis: .vertical)
                             .foregroundColor(Color(Asset.textPrimary.name))
-                            .font(.custom("Nunito-SemiBold", size: 18))
+                            .font(.nunitoSemiBold( size: 18))
                             .focused($focused)
                             .accessibilityIdentifier("et_edit_event")
                             .onTapGesture {
@@ -266,7 +266,7 @@ struct EventDetailScreen: View {
                     } else {
                         Text(description)
                             .foregroundColor(Color(Asset.textPrimary.name))
-                            .font(.custom("Nunito-SemiBold", size: 18))
+                            .font(.nunitoSemiBold( size: 18))
                             .accessibilityIdentifier("txt_create_event_description")
                             .padding(.top)
                             .frame(maxWidth: .infinity, alignment: .leading)

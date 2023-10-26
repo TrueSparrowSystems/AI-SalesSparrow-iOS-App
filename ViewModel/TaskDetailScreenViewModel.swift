@@ -57,7 +57,7 @@ class TaskDetailScreenViewModel: ObservableObject {
         }
     }
     
-    func EditTaskDetail(accountId: String, taskId: String, crm_organization_user_id: String, description: String, due_date: String, onSuccess: @escaping() -> Void) {
+    func editTaskDetail(accountId: String, taskId: String, crm_organization_user_id: String, description: String, due_date: String, onSuccess: @escaping() -> Void) {
         let endPoint = "/v1/accounts/\(accountId)/tasks/\(taskId)"
         isSaveTaskInProgress = true
         
