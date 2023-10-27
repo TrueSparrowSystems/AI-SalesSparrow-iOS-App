@@ -12,6 +12,7 @@ struct CreateAccountScreen: View {
     @EnvironmentObject var createAccountScreenViewModel: CreateAccountScreenViewModel
     @State private var accountDetailForm: [AccountField] = []
     @State private var selectedValues: [String] = []
+    @State var isAddAccountInProgress = false
     
     var body: some View {
         VStack {
@@ -79,8 +80,13 @@ struct CreateAccountScreen: View {
                 .padding(.trailing, 6)
                 
                 Button(action: {
-                    print("Call Create Account API")
+                    isAddAccountInProgress = true
                     print(selectedValues)
+                    createAccountScreenViewModel.createAccount(onSuccess: {accountId in
+                        isAddAccountInProgress = false
+                    }, onFailure: {
+                        isAddAccountInProgress = false
+                    })
                 }, label: {
                     Text("Create Account")
                         .font(.nunitoMedium(size: 12))

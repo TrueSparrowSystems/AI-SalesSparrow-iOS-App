@@ -26,8 +26,14 @@ struct PicklistValue: Codable {
     var value: String?
 }
 
+struct CreateAccountStruct: Codable {
+    var account_id: String
+}
+
+
 class CreateAccountScreenViewModel: ObservableObject {
     @Published var accountFields = AccountDescriptionStruct(fields: [])
+    @Published var isCreateAccountInProgress = false
     
     var apiService = DependencyContainer.shared.apiService
     
@@ -42,7 +48,6 @@ class CreateAccountScreenViewModel: ObservableObject {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let results):
-                    print(results)
                     self?.accountFields.fields = results.fields
                     onSuccess()
                     
@@ -81,7 +86,7 @@ class CreateAccountScreenViewModel: ObservableObject {
                             type: "picklist"
                         ),
                         AccountField(
-                            defaultValue: "Ready To Inspect",
+                            defaultValue: "Unsubscribed",
                             label: "Status",
                             length: 255,
                             name: "Status__c",
@@ -101,6 +106,37 @@ class CreateAccountScreenViewModel: ObservableObject {
                         )
                     ]
                     onSuccess()
+                }
+            }
+        }
+    }
+    
+    func createAccount(onSuccess: @escaping(String) -> Void, onFailure: (() -> Void)?){
+        
+        guard !self.isCreateAccountInProgress else {
+            return
+        }
+        self.isCreateAccountInProgress = true
+        
+        
+        let params: [String: Any] = [:]
+        
+        apiService.post(type: CreateAccountStruct.self, endpoint: "/v1/accounts", params: params) {
+            [weak self]  result, _ in
+            switch result {
+            case .success(let results):
+                DispatchQueue.main.async {
+                    onSuccess(results.account_id)
+                    self?.isCreateAccountInProgress = false
+                    ToastViewModel.shared.showToast(_toast: Toast(style: .success, message: "Account Saved"))
+                }
+                
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    onFailure?()
+                    print("error loading data: \(error)")
+                    self?.isCreateAccountInProgress = false
+                    ToastViewModel.shared.showToast(_toast: Toast(style: .error, message: error.message))
                 }
             }
         }
