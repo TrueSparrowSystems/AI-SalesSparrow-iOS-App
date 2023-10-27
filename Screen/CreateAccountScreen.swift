@@ -41,7 +41,7 @@ struct CreateAccountScreen: View {
                         } else if field.type == "picklist", let picklistValues = field.picklistValues {
                             Picker(field.label, selection: selectedValue) {
                                 ForEach(picklistValues, id: \.value) { picklistValue in
-                                    Text(picklistValue.label ?? "").tag(picklistValue.value)
+                                    Text(picklistValue.label ?? "").tag(picklistValue.value ?? "")
                                         .background(Color.white)
                                         .foregroundColor(Color(Asset.luckyPoint.name))
                                         .accessibilityIdentifier("picklist_value_" + (picklistValue.value ?? ""))
@@ -76,6 +76,7 @@ struct CreateAccountScreen: View {
                     RoundedRectangle(cornerRadius: 5)
                         .stroke(Color(Asset.cancelText.name), lineWidth: 1)
                 )
+                .padding(.trailing, 6)
                 
                 Button(action: {
                     print("Call Create Account API")
@@ -106,8 +107,8 @@ struct CreateAccountScreen: View {
                 selectedValues = Array(repeating: "", count: accountDetailForm.count)
                 
                 for (index, field) in accountDetailForm.enumerated() {
-                        selectedValues[index] = field.defaultValue ?? (field.picklistValues?.first?.value ?? "")
-                    }
+                    selectedValues[index] = field.defaultValue ?? (field.picklistValues?.first?.value ?? "")
+                }
             })
         }
     }
