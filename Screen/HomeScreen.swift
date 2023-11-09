@@ -38,7 +38,9 @@ struct HomeScreen: View {
             }
             .navigationBarBackButtonHidden(true)
             .background(Color(Asset.background.name))
-            
+            .onAppear {
+                createAccountScreenViewModel.fetchAccountFields(onSuccess: {})
+            }
         }
         .navigationViewStyle(.stack)
         .environmentObject(acccountSearchViewModelObject)

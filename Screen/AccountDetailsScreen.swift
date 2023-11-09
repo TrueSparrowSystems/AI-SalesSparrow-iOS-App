@@ -22,7 +22,7 @@ struct AccountDetailsScreen: View {
                     AccountDetailsHeader(accountId: accountId, accountName: accountName)
                     
                     // Contact list component
-                    //                AccountContactDetail(accountId: accountId, accountName: accountName)
+                    AccountContactDetail(accountId: accountId, accountName: accountName)
                     
                     NotesList(accountId: accountId, accountName: accountName, propagateClick: $propagateClick)
                         .id("NotesList")
@@ -35,7 +35,7 @@ struct AccountDetailsScreen: View {
                 }
             }
             .onAppear {
-                //            accountDetailViewModelObject.fetchAccountDetail(accountId: accountId)
+                accountDetailViewModelObject.fetchAccountDetail(accountId: accountId)
                 if !accountDetailViewModelObject.scrollToSection.isEmpty {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                         withAnimation(.linear(duration: 1)) {
@@ -66,6 +66,7 @@ struct AccountDetailsScreen: View {
     private var backButton: some View {
         Button(action: {
             // This will dismiss the AccountDetailsScreen and go back to the previous view
+            accountDetailViewModelObject.accountDetail = Account(id: "", name: "")
             dismiss()
         }) {
             HStack {

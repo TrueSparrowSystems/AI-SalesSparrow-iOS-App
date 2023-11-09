@@ -8,22 +8,24 @@
 import Foundation
 
 struct AccountDescriptionStruct: Codable {
-    var fields: [AccountField]
+    var fields: [String:AccountField]
 }
 
 struct AccountField: Codable {
-    var defaultValue: String?
     var label: String
-    var length: Int?
     var name: String
-    var picklistValues: [PicklistValue]?
-    var type: String?
+    var length: Int
+    var type: String
+    var defaultValue: String?
+    var precision: Int
+    var scale: Int
+    var picklistValues: [PicklistValue?]
 }
 
 struct PicklistValue: Codable {
-    var active: Bool
     var label: String?
     var value: String?
+    var active: Bool
 }
 
 struct CreateAccountStruct: Codable {
@@ -32,7 +34,7 @@ struct CreateAccountStruct: Codable {
 
 
 class CreateAccountScreenViewModel: ObservableObject {
-    @Published var accountFields = AccountDescriptionStruct(fields: [])
+    @Published var accountFields = AccountDescriptionStruct(fields: [:])
     @Published var isCreateAccountInProgress = false
     
     var apiService = DependencyContainer.shared.apiService
@@ -45,6 +47,7 @@ class CreateAccountScreenViewModel: ObservableObject {
         
         apiService.get(type: AccountDescriptionStruct.self, endpoint: "/v1/accounts/describe") {
             [weak self] result, _ in
+            print(result)
             DispatchQueue.main.async {
                 switch result {
                 case .success(let results):
@@ -53,65 +56,12 @@ class CreateAccountScreenViewModel: ObservableObject {
                     
                 case .failure(let error):
                     print(error)
-                    // TODO: remove the following hardcoding once api is deployed
-                    self?.accountFields.fields =  [
-                        AccountField(
-                            label: "Account Name",
-                            length: 255,
-                            name: "Name",
-                            type: "string"
-                        ),
-                        AccountField(
-                            label: "Website",
-                            length: 255,
-                            name: "Website",
-                            type: "url"
-                        ),
-                        AccountField(
-                            label: "Establishment Year",
-                            length: 255,
-                            name: "Establishment_Year__c",
-                            picklistValues: [
-                                PicklistValue(
-                                    active: true,
-                                    label: "2023",
-                                    value: "2023"
-                                ),
-                                PicklistValue(
-                                    active: true,
-                                    label: "Before 2020",
-                                    value: "Before 2020"
-                                )
-                            ],
-                            type: "picklist"
-                        ),
-                        AccountField(
-                            defaultValue: "Unsubscribed",
-                            label: "Status",
-                            length: 255,
-                            name: "Status__c",
-                            picklistValues: [
-                                PicklistValue(
-                                    active: true,
-                                    label: "Ready To Inspect",
-                                    value: "Ready To Inspect"
-                                ),
-                                PicklistValue(
-                                    active: true,
-                                    label: "Unsubscribed",
-                                    value: "Unsubscribed"
-                                )
-                            ],
-                            type: "picklist"
-                        )
-                    ]
-                    onSuccess()
                 }
             }
         }
     }
     
-    func createAccount(onSuccess: @escaping(String) -> Void, onFailure: (() -> Void)?){
+    func createAccount(selectedValues: [String: Any], onSuccess: @escaping(String) -> Void, onFailure: (() -> Void)?){
         
         guard !self.isCreateAccountInProgress else {
             return
@@ -119,7 +69,7 @@ class CreateAccountScreenViewModel: ObservableObject {
         self.isCreateAccountInProgress = true
         
         
-        let params: [String: Any] = [:]
+        let params: [String: Any] = selectedValues
         
         apiService.post(type: CreateAccountStruct.self, endpoint: "/v1/accounts", params: params) {
             [weak self]  result, _ in

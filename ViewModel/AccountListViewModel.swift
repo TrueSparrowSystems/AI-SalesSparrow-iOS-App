@@ -48,10 +48,11 @@ struct FieldDefinition: Codable {
 }
 
 enum FieldType: String, Codable {
-    case LINK
-    case TITLE
+    case URL
+    case PICKLIST
     case STRING
     case EMAIL
+    case TITLE
 }
 
 class AccountListViewModel: ObservableObject {

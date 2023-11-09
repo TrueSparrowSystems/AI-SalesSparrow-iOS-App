@@ -10,15 +10,15 @@ import SwiftUI
 struct RenderFields: View {
     var fieldName: String
     var fieldValue: String
-    @EnvironmentObject var accountDetailViewModelObject: AccountDetailScreenViewModel
+    @EnvironmentObject var createAccountScreenViewModel: CreateAccountScreenViewModel
     @Environment(\.openURL) var openURL
     
     var body: some View {
-        let fieldInfo = accountDetailViewModelObject.customFields.fields[fieldName]
-        let fieldTitle = fieldInfo?.title
+        let fieldInfo = createAccountScreenViewModel.accountFields.fields[fieldName]
+        let fieldTitle = fieldInfo?.label
         
-        switch fieldInfo?.type {
-        case .TITLE:
+        switch fieldInfo?.type.uppercased() {
+        case "TITLE":
             HStack(spacing: 0) {
                 Text(fieldValue)
                     .font(.nunitoRegular(size: 14))
@@ -27,7 +27,7 @@ struct RenderFields: View {
                 
                 Spacer()
             }
-        case .EMAIL:
+        case "EMAIL":
             HStack(spacing: 0) {
                 Text(fieldValue)
                     .font(.nunitoRegular(size: 12))
@@ -36,7 +36,21 @@ struct RenderFields: View {
                 
                 Spacer()
             }
-        case .STRING:
+        case "STRING":
+                HStack(spacing: 0) {
+                    Text("\(fieldTitle!): ")
+                        .font(.nunitoMedium(size: 14))
+                        .foregroundColor(Color(Asset.textPrimary.name))
+                        .accessibilityIdentifier("txt_account_detail_field_type_\(fieldName)")
+                    
+                    Text("\(fieldValue)")
+                        .font(.nunitoMedium(size: 14))
+                        .foregroundColor(Color(Asset.textPrimary.name))
+                        .accessibilityIdentifier("txt_account_detail_field_value_\(fieldValue)")
+                    
+                    Spacer()
+                }
+        case "PICKLIST":
                 HStack(spacing: 0) {
                     Text("\(fieldTitle!): ")
                         .font(.nunitoMedium(size: 14))
@@ -51,7 +65,7 @@ struct RenderFields: View {
                     Spacer()
                 }
             
-        case .LINK:
+        case "URL":
             HStack(spacing: 0) {
                 Image(Asset.link.name)
                     .frame(width: 12, height: 12)
