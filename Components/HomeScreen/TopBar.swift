@@ -29,7 +29,11 @@ struct TopBar: View {
                     .accessibilityIdentifier("txt_account_details_title")
                 
                 Spacer()
-                
+                NavigationLink(destination: CreateAccountScreen()
+                    .navigationBarBackButtonHidden(true)) {
+                        Image(Asset.plusIcon.name)
+                            .accessibilityIdentifier("btn_add_account")
+                    }
                 Image(Asset.magnifyingGlass.name)
                     .onTapGesture {
                         showAccountSearchView = true

@@ -20,6 +20,7 @@ struct HomeScreen: View {
     @StateObject var accountDetailViewModel = AccountDetailScreenViewModel()
     @StateObject var taskDetailScreenViewModel = TaskDetailScreenViewModel()
     @StateObject var eventDetailScreenViewModel = EventDetailScreenViewModel()
+    @StateObject var createAccountScreenViewModel = CreateAccountScreenViewModel()
     @State private var showUserSearchView: Bool = false
     
     var body: some View {
@@ -37,7 +38,9 @@ struct HomeScreen: View {
             }
             .navigationBarBackButtonHidden(true)
             .background(Color(Asset.background.name))
-            
+            .onAppear {
+                createAccountScreenViewModel.fetchAccountFields(onSuccess: {})
+            }
         }
         .navigationViewStyle(.stack)
         .environmentObject(acccountSearchViewModelObject)
@@ -51,6 +54,7 @@ struct HomeScreen: View {
         .environmentObject(accountDetailViewModel)
         .environmentObject(taskDetailScreenViewModel)
         .environmentObject(eventDetailScreenViewModel)
+        .environmentObject(createAccountScreenViewModel)
     }
 }
 
