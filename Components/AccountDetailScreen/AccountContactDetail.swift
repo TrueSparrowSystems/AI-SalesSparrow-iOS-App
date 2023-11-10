@@ -67,7 +67,7 @@ struct AccountContactDetail: View {
                                             Text((contact?.additional_fields?["Title"])! ?? "")
                                                 .font(.nunitoRegular(size: 14))
                                                 .foregroundColor(Color(Asset.textPrimary.name))
-                                                .accessibilityIdentifier("txt_account_list_account_email_index_\(index)")
+                                                .accessibilityIdentifier("txt_account_list_contact_title_index_\(index)")
                                                 .accessibilityElement()
                                             Spacer()
                                         }
@@ -86,7 +86,7 @@ struct AccountContactDetail: View {
                                     }
                                     
                                     
-                                    if index != contactIds.indices.last {
+                                    if index+1 != contactIds.indices.last {
                                         Divider()
                                             .frame(height: 1)
                                             .foregroundColor(Color(Asset.borderColor.name))

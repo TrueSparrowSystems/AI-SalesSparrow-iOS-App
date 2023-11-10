@@ -30,7 +30,7 @@ struct AccountDetailsHeader: View {
                 
                 Spacer()
                 
-//                NavigationLink(destination: CreateAccountScreen(isEditFlow: true)
+//                NavigationLink(destination: CreateAccountScreen(accountId: accountId, isEditFlow: true)
 //                ) {
 //                    Image(Asset.editIcon.name)
 //                        .frame(width: 20, height: 20)

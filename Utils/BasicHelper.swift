@@ -206,4 +206,13 @@ struct BasicHelper {
         
         return ""
     }
+    
+    static func convertDateToString(_ date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mmZ"
+        dateFormatter.timeZone = TimeZone.current // or specify the desired time zone
+        
+        let dateString = dateFormatter.string(from: date)
+        return dateString
+    }
 }

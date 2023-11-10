@@ -16,10 +16,10 @@ struct AccountField: Codable {
     var name: String
     var length: Int
     var type: String
-    var defaultValue: String?
+    var defaultValue: String? = "default"
     var precision: Int
     var scale: Int
-    var picklistValues: [PicklistValue?]
+    var picklistValues: [PicklistValue?] = []
 }
 
 struct PicklistValue: Codable {
@@ -32,6 +32,8 @@ struct CreateAccountStruct: Codable {
     var account_id: String
 }
 
+struct EditAccountRespStruct: Codable {
+}
 
 class CreateAccountScreenViewModel: ObservableObject {
     @Published var accountFields = AccountDescriptionStruct(fields: [:])
@@ -61,17 +63,14 @@ class CreateAccountScreenViewModel: ObservableObject {
         }
     }
     
-    func createAccount(selectedValues: [String: Any], onSuccess: @escaping(String) -> Void, onFailure: (() -> Void)?){
+    func createAccount(selectedValuesMap: [String: String], onSuccess: @escaping(String) -> Void, onFailure: (() -> Void)?){
         
         guard !self.isCreateAccountInProgress else {
             return
         }
         self.isCreateAccountInProgress = true
         
-        
-        let params: [String: Any] = selectedValues
-        
-        apiService.post(type: CreateAccountStruct.self, endpoint: "/v1/accounts", params: params) {
+        apiService.post(type: CreateAccountStruct.self, endpoint: "/v1/accounts", params: selectedValuesMap) {
             [weak self]  result, _ in
             switch result {
             case .success(let results):
@@ -79,6 +78,35 @@ class CreateAccountScreenViewModel: ObservableObject {
                     onSuccess(results.account_id)
                     self?.isCreateAccountInProgress = false
                     ToastViewModel.shared.showToast(_toast: Toast(style: .success, message: "Account Saved"))
+                }
+                
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    onFailure?()
+                    print("error loading data: \(error)")
+                    self?.isCreateAccountInProgress = false
+                    ToastViewModel.shared.showToast(_toast: Toast(style: .error, message: error.message))
+                }
+            }
+        }
+    }
+    
+    func editAccount(accountId: String, selectedValuesMap: [String: String], onSuccess: (() -> Void)?, onFailure: (() -> Void)?){
+        
+        guard !self.isCreateAccountInProgress else {
+            return
+        }
+        self.isCreateAccountInProgress = true
+        
+
+        apiService.put(type: EditAccountRespStruct.self, endpoint: "/v1/accounts/\(accountId)", params: selectedValuesMap) {
+            [weak self]  result, _ in
+            switch result {
+            case .success(let results):
+                DispatchQueue.main.async {
+                    onSuccess?()
+                    self?.isCreateAccountInProgress = false
+                    ToastViewModel.shared.showToast(_toast: Toast(style: .success, message: "Account Updated"))
                 }
                 
             case .failure(let error):

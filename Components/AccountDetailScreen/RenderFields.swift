@@ -81,7 +81,7 @@ struct RenderFields: View {
                     .font(.nunitoMedium(size: 14))
                     .foregroundColor(Color(Asset.textPrimary.name))
                     .underline(true, color: Color(Asset.textPrimary.name))
-                    .accessibilityIdentifier("txt_account_detail_field_value_\(fieldValue)")
+                    .accessibilityIdentifier("txt_account_detail_field_value_\(fieldName)")
                     .onTapGesture {
                         openURL(URL(string: fieldValue)!)
                         }

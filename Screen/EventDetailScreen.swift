@@ -24,7 +24,6 @@ struct EventDetailScreen: View {
     @State var parameterChanged: Bool = false
     
     var body: some View {
-        let calendar = Calendar.current
         VStack {
             HStack {
                 Button(action: {

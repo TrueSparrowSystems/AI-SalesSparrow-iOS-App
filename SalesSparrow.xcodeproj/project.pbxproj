@@ -107,7 +107,7 @@
 		4BF4C3CE2A97650A00983C2D /* CreateTaskScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF4C3CC2A97650A00983C2D /* CreateTaskScreen.swift */; };
 		4BF4C3D02A97689F00983C2D /* CreateTaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF4C3CF2A97689F00983C2D /* CreateTaskViewModel.swift */; };
 		4BF4C3D12A97689F00983C2D /* CreateTaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF4C3CF2A97689F00983C2D /* CreateTaskViewModel.swift */; };
-		6CCA3BABA0A693EB92C9B4C2 /* Pods_SalesSparrowTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCFD66DA5D9BD43B8402F504 /* Pods_SalesSparrowTests.framework */; };
+		4EEF6B78DD81876B7178A1E1 /* Pods_SalesSparrow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED5F39E2EB936EBC2E27653A /* Pods_SalesSparrow.framework */; };
 		6D0BC8A32AB18961004D1E83 /* ShimmerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0BC8A22AB18961004D1E83 /* ShimmerView.swift */; };
 		6D0BC8A42AB18961004D1E83 /* ShimmerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0BC8A22AB18961004D1E83 /* ShimmerView.swift */; };
 		6D0BC8A62AB1A6D0004D1E83 /* LoadingAccountRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0BC8A52AB1A6D0004D1E83 /* LoadingAccountRowView.swift */; };
@@ -218,8 +218,8 @@
 		6DE11C8A2A82845B00D27006 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE11C892A82845B00D27006 /* ViewExtension.swift */; };
 		6DE11C8C2A8361F000D27006 /* UIScreenExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE11C8B2A8361F000D27006 /* UIScreenExtension.swift */; };
 		6DE11C8E2A836E5900D27006 /* ToastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE11C8D2A836E5900D27006 /* ToastViewModel.swift */; };
-		A97561513E5508D62A2D5E4C /* Pods_SalesSparrow_SalesSparrowUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A561769BF628419998C917E /* Pods_SalesSparrow_SalesSparrowUITests.framework */; };
-		C437CE5A3DFBB0B0D45D330A /* Pods_SalesSparrow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 216D9F06D488828BC1022AFD /* Pods_SalesSparrow.framework */; };
+		A3F4EB9F89457E5BFF542EE5 /* Pods_SalesSparrow_SalesSparrowUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 236957789B10BA56715AFBF4 /* Pods_SalesSparrow_SalesSparrowUITests.framework */; };
+		AF912E9AD1933592B84050DF /* Pods_SalesSparrowTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D40BB9BEEF6648477C4573D /* Pods_SalesSparrowTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -248,9 +248,9 @@
 		019595BA2A83CD76008425AD /* SalesSparrowDevApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalesSparrowDevApp.swift; sourceTree = "<group>"; };
 		019596052A83CF97008425AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		019596172A83DDB9008425AD /* SalesSparrowDev.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SalesSparrowDev.entitlements; sourceTree = "<group>"; };
-		11C28B9A7C622812E3FDFC07 /* Pods-SalesSparrowTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SalesSparrowTests.debug.xcconfig"; path = "Target Support Files/Pods-SalesSparrowTests/Pods-SalesSparrowTests.debug.xcconfig"; sourceTree = "<group>"; };
-		216D9F06D488828BC1022AFD /* Pods_SalesSparrow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SalesSparrow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2B4F1FDE360243CED55CFB69 /* Pods-SalesSparrow.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SalesSparrow.release.xcconfig"; path = "Target Support Files/Pods-SalesSparrow/Pods-SalesSparrow.release.xcconfig"; sourceTree = "<group>"; };
+		10EAF2D0F41266AA789FF6A7 /* Pods-SalesSparrowTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SalesSparrowTests.debug.xcconfig"; path = "Target Support Files/Pods-SalesSparrowTests/Pods-SalesSparrowTests.debug.xcconfig"; sourceTree = "<group>"; };
+		1DB1D3B434F544040270A747 /* Pods-SalesSparrow-SalesSparrowUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SalesSparrow-SalesSparrowUITests.debug.xcconfig"; path = "Target Support Files/Pods-SalesSparrow-SalesSparrowUITests/Pods-SalesSparrow-SalesSparrowUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		236957789B10BA56715AFBF4 /* Pods_SalesSparrow_SalesSparrowUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SalesSparrow_SalesSparrowUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B13E4EC2A93821300CB24E4 /* UserSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchView.swift; sourceTree = "<group>"; };
 		4B13E4EF2A93836700CB24E4 /* UserSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchViewModel.swift; sourceTree = "<group>"; };
 		4B393FF12A7AAA2D00572F66 /* AccountSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSearch.swift; sourceTree = "<group>"; wrapsLines = 1; };
@@ -275,8 +275,8 @@
 		4BDB87262A850B5A000CC1B9 /* AccountDetailScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailScreenViewModel.swift; sourceTree = "<group>"; };
 		4BF4C3CC2A97650A00983C2D /* CreateTaskScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTaskScreen.swift; sourceTree = "<group>"; };
 		4BF4C3CF2A97689F00983C2D /* CreateTaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTaskViewModel.swift; sourceTree = "<group>"; };
-		53DA3CE34E5D5B9A7563E443 /* Pods-SalesSparrow-SalesSparrowUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SalesSparrow-SalesSparrowUITests.debug.xcconfig"; path = "Target Support Files/Pods-SalesSparrow-SalesSparrowUITests/Pods-SalesSparrow-SalesSparrowUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		6A561769BF628419998C917E /* Pods_SalesSparrow_SalesSparrowUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SalesSparrow_SalesSparrowUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5561DB3C4F860456F14B8146 /* Pods-SalesSparrow.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SalesSparrow.release.xcconfig"; path = "Target Support Files/Pods-SalesSparrow/Pods-SalesSparrow.release.xcconfig"; sourceTree = "<group>"; };
+		69A75D10C09DC0122AF1234C /* Pods-SalesSparrow.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SalesSparrow.debug.xcconfig"; path = "Target Support Files/Pods-SalesSparrow/Pods-SalesSparrow.debug.xcconfig"; sourceTree = "<group>"; };
 		6D0BC8A22AB18961004D1E83 /* ShimmerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerView.swift; sourceTree = "<group>"; };
 		6D0BC8A52AB1A6D0004D1E83 /* LoadingAccountRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingAccountRowView.swift; sourceTree = "<group>"; };
 		6D0BC8A82AB1D852004D1E83 /* CreateEventScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEventScreen.swift; sourceTree = "<group>"; };
@@ -363,10 +363,10 @@
 		6DE11C892A82845B00D27006 /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
 		6DE11C8B2A8361F000D27006 /* UIScreenExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScreenExtension.swift; sourceTree = "<group>"; };
 		6DE11C8D2A836E5900D27006 /* ToastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastViewModel.swift; sourceTree = "<group>"; };
-		884DE3337F29F734C43B6ED4 /* Pods-SalesSparrowTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SalesSparrowTests.release.xcconfig"; path = "Target Support Files/Pods-SalesSparrowTests/Pods-SalesSparrowTests.release.xcconfig"; sourceTree = "<group>"; };
-		AD2704B5DE5C503B42A9F4E3 /* Pods-SalesSparrow.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SalesSparrow.debug.xcconfig"; path = "Target Support Files/Pods-SalesSparrow/Pods-SalesSparrow.debug.xcconfig"; sourceTree = "<group>"; };
-		CCFD66DA5D9BD43B8402F504 /* Pods_SalesSparrowTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SalesSparrowTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D89257A2A4E11A7F0C6785D9 /* Pods-SalesSparrow-SalesSparrowUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SalesSparrow-SalesSparrowUITests.release.xcconfig"; path = "Target Support Files/Pods-SalesSparrow-SalesSparrowUITests/Pods-SalesSparrow-SalesSparrowUITests.release.xcconfig"; sourceTree = "<group>"; };
+		8D40BB9BEEF6648477C4573D /* Pods_SalesSparrowTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SalesSparrowTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9BD94F45ED38B37D625CA3CD /* Pods-SalesSparrowTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SalesSparrowTests.release.xcconfig"; path = "Target Support Files/Pods-SalesSparrowTests/Pods-SalesSparrowTests.release.xcconfig"; sourceTree = "<group>"; };
+		E3F10B78E5B9F06C464718EC /* Pods-SalesSparrow-SalesSparrowUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SalesSparrow-SalesSparrowUITests.release.xcconfig"; path = "Target Support Files/Pods-SalesSparrow-SalesSparrowUITests/Pods-SalesSparrow-SalesSparrowUITests.release.xcconfig"; sourceTree = "<group>"; };
+		ED5F39E2EB936EBC2E27653A /* Pods_SalesSparrow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SalesSparrow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -382,8 +382,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C437CE5A3DFBB0B0D45D330A /* Pods_SalesSparrow.framework in Frameworks */,
 				019596122A83D7B4008425AD /* FirebaseCrashlytics in Frameworks */,
+				4EEF6B78DD81876B7178A1E1 /* Pods_SalesSparrow.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -391,8 +391,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6CCA3BABA0A693EB92C9B4C2 /* Pods_SalesSparrowTests.framework in Frameworks */,
 				0195961F2A84CBE5008425AD /* FirebaseCrashlytics in Frameworks */,
+				AF912E9AD1933592B84050DF /* Pods_SalesSparrowTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,8 +400,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A97561513E5508D62A2D5E4C /* Pods_SalesSparrow_SalesSparrowUITests.framework in Frameworks */,
 				0195961D2A84CBD9008425AD /* FirebaseCrashlytics in Frameworks */,
+				A3F4EB9F89457E5BFF542EE5 /* Pods_SalesSparrow_SalesSparrowUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,12 +422,12 @@
 		28E3D4ECA8B04D775986C988 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				AD2704B5DE5C503B42A9F4E3 /* Pods-SalesSparrow.debug.xcconfig */,
-				2B4F1FDE360243CED55CFB69 /* Pods-SalesSparrow.release.xcconfig */,
-				53DA3CE34E5D5B9A7563E443 /* Pods-SalesSparrow-SalesSparrowUITests.debug.xcconfig */,
-				D89257A2A4E11A7F0C6785D9 /* Pods-SalesSparrow-SalesSparrowUITests.release.xcconfig */,
-				11C28B9A7C622812E3FDFC07 /* Pods-SalesSparrowTests.debug.xcconfig */,
-				884DE3337F29F734C43B6ED4 /* Pods-SalesSparrowTests.release.xcconfig */,
+				69A75D10C09DC0122AF1234C /* Pods-SalesSparrow.debug.xcconfig */,
+				5561DB3C4F860456F14B8146 /* Pods-SalesSparrow.release.xcconfig */,
+				1DB1D3B434F544040270A747 /* Pods-SalesSparrow-SalesSparrowUITests.debug.xcconfig */,
+				E3F10B78E5B9F06C464718EC /* Pods-SalesSparrow-SalesSparrowUITests.release.xcconfig */,
+				10EAF2D0F41266AA789FF6A7 /* Pods-SalesSparrowTests.debug.xcconfig */,
+				9BD94F45ED38B37D625CA3CD /* Pods-SalesSparrowTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -515,7 +515,7 @@
 				6D8C7CF82A779A9A005D597E /* SalesSparrowUITests */,
 				6D8C7CD72A779A97005D597E /* Products */,
 				28E3D4ECA8B04D775986C988 /* Pods */,
-				DD0CC12E1C80EEB530D405BD /* Frameworks */,
+				8B5FAA6AFA3A442C984FE722 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -707,12 +707,12 @@
 			path = Toast;
 			sourceTree = "<group>";
 		};
-		DD0CC12E1C80EEB530D405BD /* Frameworks */ = {
+		8B5FAA6AFA3A442C984FE722 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				216D9F06D488828BC1022AFD /* Pods_SalesSparrow.framework */,
-				6A561769BF628419998C917E /* Pods_SalesSparrow_SalesSparrowUITests.framework */,
-				CCFD66DA5D9BD43B8402F504 /* Pods_SalesSparrowTests.framework */,
+				ED5F39E2EB936EBC2E27653A /* Pods_SalesSparrow.framework */,
+				236957789B10BA56715AFBF4 /* Pods_SalesSparrow_SalesSparrowUITests.framework */,
+				8D40BB9BEEF6648477C4573D /* Pods_SalesSparrowTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -745,7 +745,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6D8C7CFF2A779A9A005D597E /* Build configuration list for PBXNativeTarget "SalesSparrow" */;
 			buildPhases = (
-				8DE90EB4EA8984FABAC2AF78 /* [CP] Check Pods Manifest.lock */,
+				27BFCDFA4F34BD2EAC02B0C2 /* [CP] Check Pods Manifest.lock */,
 				6D8C7CD22A779A97005D597E /* Sources */,
 				6D8C7CD32A779A97005D597E /* Frameworks */,
 				6D8C7CD42A779A97005D597E /* Resources */,
@@ -767,7 +767,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6D8C7D022A779A9A005D597E /* Build configuration list for PBXNativeTarget "SalesSparrowTests" */;
 			buildPhases = (
-				F1917FE59022B4E97CCF6CF8 /* [CP] Check Pods Manifest.lock */,
+				D604A5ECEB3057B670B16B66 /* [CP] Check Pods Manifest.lock */,
 				6D8C7CE72A779A9A005D597E /* Sources */,
 				6D8C7CE82A779A9A005D597E /* Frameworks */,
 				6D8C7CE92A779A9A005D597E /* Resources */,
@@ -789,7 +789,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6D8C7D052A779A9A005D597E /* Build configuration list for PBXNativeTarget "SalesSparrowUITests" */;
 			buildPhases = (
-				1BF7F22E3CB5ABA0EFF19672 /* [CP] Check Pods Manifest.lock */,
+				657626ABCA1C7F6E30B47997 /* [CP] Check Pods Manifest.lock */,
 				6D8C7CF12A779A9A005D597E /* Sources */,
 				6D8C7CF22A779A9A005D597E /* Frameworks */,
 				6D8C7CF32A779A9A005D597E /* Resources */,
@@ -931,7 +931,29 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1BF7F22E3CB5ABA0EFF19672 /* [CP] Check Pods Manifest.lock */ = {
+		27BFCDFA4F34BD2EAC02B0C2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SalesSparrow-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		657626ABCA1C7F6E30B47997 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -987,29 +1009,7 @@
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
-		8DE90EB4EA8984FABAC2AF78 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-SalesSparrow-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F1917FE59022B4E97CCF6CF8 /* [CP] Check Pods Manifest.lock */ = {
+		D604A5ECEB3057B670B16B66 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1422,7 +1422,7 @@
 		};
 		6D8C7D002A779A9A005D597E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AD2704B5DE5C503B42A9F4E3 /* Pods-SalesSparrow.debug.xcconfig */;
+			baseConfigurationReference = 69A75D10C09DC0122AF1234C /* Pods-SalesSparrow.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1455,7 +1455,7 @@
 		};
 		6D8C7D012A779A9A005D597E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2B4F1FDE360243CED55CFB69 /* Pods-SalesSparrow.release.xcconfig */;
+			baseConfigurationReference = 5561DB3C4F860456F14B8146 /* Pods-SalesSparrow.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1488,7 +1488,7 @@
 		};
 		6D8C7D032A779A9A005D597E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 11C28B9A7C622812E3FDFC07 /* Pods-SalesSparrowTests.debug.xcconfig */;
+			baseConfigurationReference = 10EAF2D0F41266AA789FF6A7 /* Pods-SalesSparrowTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1509,7 +1509,7 @@
 		};
 		6D8C7D042A779A9A005D597E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 884DE3337F29F734C43B6ED4 /* Pods-SalesSparrowTests.release.xcconfig */;
+			baseConfigurationReference = 9BD94F45ED38B37D625CA3CD /* Pods-SalesSparrowTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1530,7 +1530,7 @@
 		};
 		6D8C7D062A779A9A005D597E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 53DA3CE34E5D5B9A7563E443 /* Pods-SalesSparrow-SalesSparrowUITests.debug.xcconfig */;
+			baseConfigurationReference = 1DB1D3B434F544040270A747 /* Pods-SalesSparrow-SalesSparrowUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -1550,7 +1550,7 @@
 		};
 		6D8C7D072A779A9A005D597E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D89257A2A4E11A7F0C6785D9 /* Pods-SalesSparrow-SalesSparrowUITests.release.xcconfig */;
+			baseConfigurationReference = E3F10B78E5B9F06C464718EC /* Pods-SalesSparrow-SalesSparrowUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

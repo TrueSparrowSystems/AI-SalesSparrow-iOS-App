@@ -215,37 +215,96 @@ class MockResponse {
                 "success": "true",
                 "statusCode": 200,
                 "data": [
-                    "account_detail": [
+                    "account": [
                         "id": "account_1",
                         "name": "Mock Account 1",
                         "additional_fields": [
-                            "website": "https://www.example.com",
-                            "ppt": "https://www.ppt.com/sampleppt1",
-                            "account_source": "Crunchbase",
-                            "status": "Active",
-                            "last_funding": "$4 million",
-                            "hq": "USA",
-                            "last_modified_time": "2019-10-12T07:20:50.52Z"
+                            "Website": "https://www.example.com",
+                            "Status__c": "Active",
                         ],
                         "account_contact_associations_id": "account_contact_association_1",
-                        "account_contact_associations_map_by_id": [
-                            "account_contact_association_1": [
-                                "contact_ids": ["contact_1", "contact_2"]
+                    ] as [String: Any],
+                    "account_contact_associations_map_by_id": [
+                        "account_contact_association_1": [
+                            "contact_ids": ["contact_1", "contact_2"]
+                        ]
+                    ],
+                    "contact_map_by_id": [
+                        "contact_1": [
+                            "id": "contact_1",
+                            "name": "Test Contact 1",
+                            "additional_fields": [
+                                "Title": "CTO and Co Founder",
+                                "Email": "contact_1@truesparrow.com"
+                            ]
+                        ] as [String: Any] as [String: Any]
+                    ]
+                ] as [String: Any]
+            ]
+        ],
+        "GET /v1/accounts/describe": [
+            "default": [
+                "success": "true",
+                "statusCode": 200,
+                "data":[
+                    "fields": [
+                        "Website": [
+                            "label": "Website",
+                            "name": "Website",
+                            "length": 255,
+                            "type": "url",
+                            "defaultValue": "",
+                            "precision": 0,
+                            "scale": 0,
+                            "picklistValues": []
+                        ],
+                        "Establishment_Year__c": [
+                            "label": "Establishment Year",
+                            "name": "Establishment_Year__c",
+                            "length": 255,
+                            "type": "picklist",
+                            "defaultValue": "null",
+                            "precision": 0,
+                            "scale": 0,
+                            "picklistValues": [
+                                [
+                                    "label": "2023",
+                                    "value": "2023",
+                                    "active": true
+                                ],
+                                [
+                                    "label": "2022",
+                                    "value": "2022",
+                                    "active": true
+                                ],
+                                [
+                                    "label": "2021",
+                                    "value": "2021",
+                                    "active": true
+                                ],
+                                [
+                                    "label": "2020",
+                                    "value": "2020",
+                                    "active": true
+                                ],
+                                [
+                                    "label": "Before 2020",
+                                    "value": "Before 2020",
+                                    "active": true
+                                ]
                             ]
                         ],
-                        "contact_map_by_id": [
-                            "contact_1": [
-                                "id": "contact_1",
-                                "name": "Test Contact 1",
-                                "additional_fields": [
-                                    "title": "CTO and Co Founder",
-                                    "email": "contact_1@truesparrow.com",
-                                    "linkedin": "https://www.linkedin.com/peter"
-                                ]
-                            ] as [String: Any] as [String: Any]
+                        "Name": [
+                            "label": "Account Name",
+                            "name": "Name",
+                            "length": 255,
+                            "type": "string",
+                            "defaultValue": "",
+                            "precision": 0,
+                            "scale": 0,
+                            "picklistValues": [],
                         ]
-                    ] as [String: Any]
-                ] as [String: Any]
+                    ],]
             ]
         ],
         "GET /v1/accounts/account_1/notes": [
